@@ -5,9 +5,6 @@
     <link rel="stylesheet" href="../assets/css/index.css">
     <script src="../assets/js/index.js" defer></script>
 
-
-    
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Africaine des Finances - Formation, Bourse BRVM &amp; Conseil Financier</title>
@@ -59,29 +56,64 @@
                                 des Finances</span>
                         </a>
                         <div class="hidden md:flex items-center gap-1"><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
-                                href="{{ route('home') }}">Accueil</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('services') }}">Services</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('formations') }}">Formations</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('bourse') }}">Bourse BRVM</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('actualites') }}">Actualités</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('about') }}">À Propos</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('newsletter') }}">Newsletter</a><a
-                                class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="{{ route('contact') }}">Contact</a></div>
-                        <div class="hidden md:flex items-center gap-2"><a href="{{ route('connexion') }}">
-                            <button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow transition-smooth font-semibold h-11 px-6 py-3">
-                                Se Connecter
-                            </button></a>
+                            class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
+                            href="{{ route('home') }}">Accueil</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('services') }}">Services</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('formations') }}">Formations</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('bourse') }}">Bourse BRVM</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('actualites') }}">Actualités</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('about') }}">À Propos</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('newsletter') }}">Newsletter</a><a
+                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            href="{{ route('contact') }}">Contact</a>
+                        </div>
+                        @if (Route::has('login'))
+                            @auth
+                                <div class="hidden md:flex items-center gap-2">
+                                    <a href="{{ route('dashboard') }}">
+                                        <button
+                                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
+                                            transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow 
+                                            transition-smooth font-semibold h-11 px-6 py-3">
+                                            Dashboard
+                                        </button>
+                                    </a>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
+                                            transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-elegant hover:shadow-glow 
+                                            transition-smooth font-semibold h-11 px-6 py-3">
+                                            Déconnexion
+                                        </button>
+                                    </form>
                                 </div>
-                                <button
+                            @else
+                                <div class="hidden md:flex items-center gap-2">
+                                    <a href="{{ route('connexion') }}">
+                                        <button
+                                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
+                                            transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow 
+                                            transition-smooth font-semibold h-11 px-6 py-3">
+                                            Se Connecter
+                                        </button>
+                                    </a>
+                                </div>
+                            @endauth
+                        @endif
+                        <button
                             class="md:hidden p-2 rounded-md hover:bg-muted transition-smooth"
                             aria-label="Toggle menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

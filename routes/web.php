@@ -32,7 +32,7 @@ Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
 Route::view('login', 'livewire.pages.login')->middleware('guest')->name('login');
 Route::view('register', 'livewire.pages.register')->middleware('guest')->name('register');
 
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', \App\Livewire\Pages\Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
