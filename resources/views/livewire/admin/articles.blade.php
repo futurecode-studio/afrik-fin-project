@@ -182,12 +182,70 @@
                                 @error('extrait') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Contenu --}}
-                            <div>
+                            {{-- Contenu avec éditeur riche --}}
+                            <div
+                                wire:ignore
+                                x-data
+                                x-init="
+                                    let quill;
+
+                                    const initQuill = () => {
+                                        if (quill) return;
+
+                                        quill = new Quill($refs.quillEditor, {
+                                            theme: 'snow',
+                                            placeholder: 'Contenu complet de l\'article...',
+                                            modules: {
+                                                toolbar: [
+                                                    ['bold', 'italic', 'underline', 'strike'],
+                                                    [{ 'header': 1 }, { 'header': 2 }],
+                                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                                                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                                                    [{ 'direction': 'rtl' }],
+                                                    [{ 'size': ['small', false, 'large', 'huge'] }],
+                                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                                    [{ 'color': [] }, { 'background': [] }],
+                                                    [{ 'font': [] }],
+                                                    [{ 'align': [] }],
+                                                    ['link', 'image'],
+                                                    ['clean']
+                                                ]
+                                            }
+                                        });
+
+                                        // Valeur initiale depuis Livewire (create + edit)
+                                        quill.root.innerHTML = @js($contenu);
+
+                                        // Sync Livewire à chaque changement de contenu
+                                        quill.on('text-change', function () {
+                                            $wire.set('contenu', quill.root.innerHTML);
+                                        });
+                                    };
+
+                                    initQuill();
+
+                                    // Ré-initialiser proprement après chaque navigation Livewire
+                                    document.addEventListener('livewire:navigated', () => {
+                                        quill = null;
+                                        initQuill();
+                                    });
+                                "
+                            >
                                 <label class="block text-sm font-medium mb-2">Contenu <span class="text-red-500">*</span></label>
-                                <textarea wire:model="contenu" rows="8"
-                                    class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="Contenu complet de l'article..."></textarea>
+
+                                {{-- Zone d'édition Quill --}}
+                                <div
+                                    x-ref="quillEditor"
+                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
+                                ></div>
+
+                                {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
+                                <textarea
+                                    wire:model="contenu"
+                                    class="hidden"
+                                ></textarea>
+
                                 @error('contenu') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
