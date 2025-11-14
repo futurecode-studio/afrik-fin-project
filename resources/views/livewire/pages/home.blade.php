@@ -787,122 +787,133 @@
                     <p class="text-lg text-muted-foreground">Trouvez rapidement des réponses à vos questions
                     </p>
                 </div>
-                <div class="space-y-4" data-orientation="vertical">
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:r3:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:r1:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Comment investir sur la BRVM avec Africaine
-                                des Finances ?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:r3:" hidden="" role="region"
-                            aria-labelledby="radix-:r1:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+                <div class="space-y-4" id="faq-accordion">
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Comment investir sur la BRVM avec Africaine des Finances ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Pour investir sur la BRVM avec nous, il vous suffit de créer un compte et de suivre nos formations gratuites pour comprendre les bases. Ensuite, nos conseillers vous accompagnent dans la sélection des meilleures opportunités d'investissement selon votre profil de risque. Nous proposons également un service de gestion de portefeuille pour optimiser vos placements.
+                            </div>
                         </div>
                     </div>
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:r7:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:r5:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Quelles sont les 45 valeurs cotées à la BRVM
-                                que vous couvrez ?<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:r7:" hidden="" role="region"
-                            aria-labelledby="radix-:r5:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Quelles sont les 45 valeurs cotées à la BRVM que vous couvrez ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Nous suivons l'ensemble des 45 valeurs cotées à la BRVM, réparties dans différents secteurs : banques (BOA, Ecobank, SGCI...), télécoms (Orange CI, Sonatel...), industrie, agriculture, distribution et services. Chaque jour, nous publions des analyses détaillées sur les valeurs les plus actives et les opportunités d'investissement. Nos rapports incluent les données financières, les ratios clés et nos recommandations d'achat ou de vente.
+                            </div>
                         </div>
                     </div>
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:rb:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:r9:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Vos formations sont-elles reconnues
-                                professionnellement ?<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:rb:" hidden="" role="region"
-                            aria-labelledby="radix-:r9:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Vos formations sont-elles reconnues professionnellement ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Oui, toutes nos formations sont certifiées et reconnues par les institutions financières de la zone UEMOA. Nos formateurs sont des experts agréés avec plus de 15 ans d'expérience dans la finance africaine. À l'issue de chaque formation, vous recevez un certificat attestant de vos compétences, valorisable dans votre parcours professionnel. Nos programmes sont également éligibles au CPF dans certains pays.
+                            </div>
                         </div>
                     </div>
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:rf:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:rd:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Quels sont vos tarifs pour le conseil en
-                                investissement ?<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:rf:" hidden="" role="region"
-                            aria-labelledby="radix-:rd:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Quels sont vos tarifs pour le conseil en investissement ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Nos tarifs varient selon le type de service : consultation ponctuelle (50 000 FCFA), abonnement mensuel avec analyses quotidiennes (75 000 FCFA/mois), ou gestion de portefeuille (1% de l'actif sous gestion par an avec un minimum de 5 millions FCFA). La première consultation d'évaluation est gratuite et sans engagement. Nous proposons également des forfaits sur mesure pour les entreprises et investisseurs institutionnels.
+                            </div>
                         </div>
                     </div>
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:rj:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:rh:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Comment accédez-vous aux données BRVM en temps
-                                réel ?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:rj:" hidden="" role="region"
-                            aria-labelledby="radix-:rh:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Comment accédez-vous aux données BRVM en temps réel ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Nous sommes partenaire officiel de la BRVM et disposons d'un accès direct à leur flux de données en temps réel. Cela nous permet de vous fournir les cotations, volumes et transactions instantanément. Notre plateforme affiche les cours avec un délai de moins de 5 secondes. Vous pouvez suivre l'évolution du marché via notre site web ou notre application mobile disponible sur iOS et Android.
+                            </div>
                         </div>
                     </div>
-                    <div data-state="closed" data-orientation="vertical"
-                        class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth">
-                        <h3 data-orientation="vertical" data-state="closed" class="flex"><button
-                                type="button" aria-controls="radix-:rn:" aria-expanded="false"
-                                data-state="closed" data-orientation="vertical" id="radix-:rl:"
-                                class="flex flex-1 items-center justify-between py-4 transition-all hover:underline [&amp;[data-state=open]&gt;svg]:rotate-180 text-left font-semibold hover:text-primary"
-                                data-radix-collection-item="">Accompagnez-vous les investisseurs
-                                institutionnels ?<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200">
-                                    <path d="m6 9 6 6 6-6"></path>
-                                </svg></button></h3>
-                        <div data-state="closed" id="radix-:rn:" hidden="" role="region"
-                            aria-labelledby="radix-:rl:" data-orientation="vertical"
-                            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-                            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);">
+
+                    <div class="border border-border rounded-lg px-6 hover:border-primary/30 transition-smooth accordion-item">
+                        <button type="button" class="flex w-full items-center justify-between py-4 text-left font-semibold hover:text-primary accordion-trigger">
+                            Accompagnez-vous les investisseurs institutionnels ?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 shrink-0 transition-transform duration-200 accordion-icon">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="pb-4 text-muted-foreground leading-relaxed">
+                                Absolument ! Nous accompagnons de nombreux investisseurs institutionnels (fonds de pension, compagnies d'assurance, family offices) dans leurs stratégies d'allocation d'actifs en Afrique de l'Ouest. Nous proposons des analyses sectorielles approfondies, du conseil en gouvernance d'entreprise et un accès privilégié à des opportunités d'investissement pré-IPO. Notre équipe dédiée aux clients institutionnels garantit un service personnalisé et confidentiel.
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const accordionItems = document.querySelectorAll('.accordion-item');
+                        
+                        // Initialiser tous les accordéons en état fermé
+                        accordionItems.forEach(item => {
+                            const content = item.querySelector('.accordion-content');
+                            const icon = item.querySelector('.accordion-icon');
+                            content.style.maxHeight = '0px';
+                            icon.style.transform = 'rotate(0deg)';
+                        });
+                        
+                        // Gérer les clics sur les accordéons
+                        accordionItems.forEach(item => {
+                            const trigger = item.querySelector('.accordion-trigger');
+                            const content = item.querySelector('.accordion-content');
+                            const icon = item.querySelector('.accordion-icon');
+                            
+                            trigger.addEventListener('click', function() {
+                                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                                
+                                // Fermer tous les autres accordéons
+                                accordionItems.forEach(otherItem => {
+                                    const otherContent = otherItem.querySelector('.accordion-content');
+                                    const otherIcon = otherItem.querySelector('.accordion-icon');
+                                    otherContent.style.maxHeight = '0px';
+                                    otherIcon.style.transform = 'rotate(0deg)';
+                                });
+                                
+                                // Ouvrir ou fermer l'accordéon actuel
+                                if (!isOpen) {
+                                    content.style.maxHeight = content.scrollHeight + 'px';
+                                    icon.style.transform = 'rotate(180deg)';
+                                } else {
+                                    content.style.maxHeight = '0px';
+                                    icon.style.transform = 'rotate(0deg)';
+                                }
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
     </section>
