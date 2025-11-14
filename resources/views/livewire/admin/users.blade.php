@@ -1,4 +1,9 @@
 <div>
+    {{-- Indicateur de chargement Livewire --}}
+    <div wire:loading class="fixed top-0 left-0 right-0 bg-blue-500 text-white text-center py-2 z-50">
+        Chargement en cours...
+    </div>
+
     <main class="container mx-auto px-4 py-8">
         {{-- Message de succès --}}
         @if (session()->has('message'))
@@ -72,7 +77,7 @@
                                     <td class="p-4 align-middle text-right">
                                         <div class="flex justify-end gap-2">
                                             @if($user->trashed())
-                                                <button wire:click="restore({{ $user->id }})"
+                                                <button type="button" wire:click="restore({{ $user->id }})"
                                                     class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
                                                     title="Restaurer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -83,7 +88,7 @@
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button wire:click="edit({{ $user->id }})"
+                                                <button type="button" wire:click="edit({{ $user->id }})"
                                                     class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
                                                     title="Modifier">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -91,7 +96,7 @@
                                                         <path d="m15 5 4 4"/>
                                                     </svg>
                                                 </button>
-                                                <button wire:click="confirmDelete({{ $user->id }})"
+                                                <button type="button" wire:click="confirmDelete({{ $user->id }})"
                                                     class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-red-200 bg-background hover:bg-red-50 text-red-600 h-9 px-3"
                                                     title="Supprimer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
