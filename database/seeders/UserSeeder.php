@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         // Administrateur
         User::create([
             'name' => 'Administrateur Afri-Fin',
-            'email' => 'admin@afrifin.com',
+            'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'phone' => '+229 97 12 34 56',
@@ -32,10 +32,10 @@ class UserSeeder extends Seeder
 
         // Utilisateur simple
         User::create([
-            'name' => 'Jean Dupont',
-            'email' => 'jean.dupont@example.com',
+            'name' => 'codi anselme',
+            'email' => 'codianselme@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('codianselme@gmail.com'),
             'phone' => '+229 96 45 67 89',
             'address' => 'Quartier Akpakpa',
             'city' => 'Cotonou',
