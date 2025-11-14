@@ -40,4 +40,17 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+// Admin Routes
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles');
+    Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations');
+    Route::get('/users', \App\Livewire\Admin\Users::class)->name('users');
+    Route::get('/stock-data', \App\Livewire\Admin\StockData::class)->name('stock-data');
+    Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions');
+    Route::get('/appointments', \App\Livewire\Admin\Appointments::class)->name('appointments');
+    Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters');
+    Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics');
+    Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config');
+});
+
 require __DIR__.'/auth.php';

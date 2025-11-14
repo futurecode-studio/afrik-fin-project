@@ -4,7 +4,7 @@
         <p class="text-muted-foreground">Gérez l'ensemble de votre site depuis cette interface
             d'administration</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><a href="/admin/articles">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><a href="{{ route('admin.articles') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -26,7 +26,7 @@
                     <p class="text-sm text-muted-foreground">Gérer les articles et actualités</p>
                 </div>
             </div>
-        </a><a href="/admin/formations">
+        </a><a href="{{ route('admin.formations') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -48,7 +48,7 @@
                     <p class="text-sm text-muted-foreground">Gérer les formations e-learning</p>
                 </div>
             </div>
-        </a><a href="/admin/users">
+        </a><a href="{{ route('admin.users') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -69,7 +69,7 @@
                     <p class="text-sm text-muted-foreground">Gérer les utilisateurs et rôles</p>
                 </div>
             </div>
-        </a><a href="/admin/stock-data">
+        </a><a href="{{ route('admin.stock-data') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -88,7 +88,7 @@
                     <p class="text-sm text-muted-foreground">Configuration API BRVM</p>
                 </div>
             </div>
-        </a><a href="/admin/transactions">
+        </a><a href="{{ route('admin.transactions') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -107,7 +107,7 @@
                     <p class="text-sm text-muted-foreground">Suivre les paiements</p>
                 </div>
             </div>
-        </a><a href="/admin/appointments">
+        </a><a href="{{ route('admin.appointments') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -128,7 +128,7 @@
                     <p class="text-sm text-muted-foreground">Gérer les rendez-vous</p>
                 </div>
             </div>
-        </a><a href="/admin/newsletters">
+        </a><a href="{{ route('admin.newsletters') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -147,7 +147,7 @@
                     <p class="text-sm text-muted-foreground">Créer et envoyer newsletters</p>
                 </div>
             </div>
-        </a><a href="/admin/statistics">
+        </a><a href="{{ route('admin.statistics') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -168,7 +168,7 @@
                     <p class="text-sm text-muted-foreground">Statistiques avancées</p>
                 </div>
             </div>
-        </a><a href="/admin/api-config">
+        </a><a href="{{ route('admin.api-config') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -196,10 +196,10 @@
         </div>
         <div class="p-6 pt-0 flex flex-wrap gap-2"><a
                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground transition-smooth h-11 px-6 py-3"
-                href="/">Retour au site</a><a
+                href="{{ route('home') }}">Retour au site</a><a
                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground transition-smooth h-11 px-6 py-3"
-                href="/admin/articles">Nouvel article</a><a
+                href="{{ route('admin.articles') }}">Nouvel article</a><a
                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground transition-smooth h-11 px-6 py-3"
-                href="/admin/formations">Nouvelle formation</a></div>
+                href="{{ route('admin.formations') }}">Nouvelle formation</a></div>
     </div>
 </main>
