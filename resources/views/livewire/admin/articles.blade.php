@@ -1,8 +1,8 @@
  <div>
     {{-- Indicateur de chargement Livewire --}}
-    <div wire:loading class="fixed top-0 left-0 right-0 bg-blue-500 text-white text-center py-2 z-50">
+    <!-- <div wire:loading class="fixed top-0 left-0 right-0 bg-blue-500 text-white text-center py-2 z-50">
         Chargement en cours...
-    </div>
+    </div> -->
 
     <main class="container mx-auto px-4 py-8">
         {{-- Message de succès --}}
