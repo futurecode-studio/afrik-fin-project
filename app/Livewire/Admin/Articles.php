@@ -4,13 +4,14 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Articles extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $search = '';
     public $showModal = false;
@@ -23,7 +24,9 @@ class Articles extends Component
     public $slug;
     public $extrait;
     public $contenu;
-    public $image_url;
+    // public $image_url;
+    public $image;      // nouveau fichier uploadé
+    public $image_url;  // chemin/URL déjà stocké en base
     public $categorie;
     public $statut = 'brouillon';
 
@@ -36,6 +39,7 @@ class Articles extends Component
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . ($this->articleId ?? 'NULL'),
             'extrait' => 'nullable|string|max:500',
             'contenu' => 'required|string',
+            'image' => $this->editMode ? 'nullable|image|max:2048' : 'required|image|max:2048',
             'image_url' => 'nullable|url|max:255',
             'categorie' => 'nullable|string|max:100',
             'statut' => 'required|in:brouillon,publie,archive',
@@ -108,15 +112,22 @@ class Articles extends Component
     {
         $this->validate();
 
+        // Gestion de l'image uploadée (nouvelle image éventuelle)
+        if ($this->image) {
+            $path = $this->image->store('articles', 'public');
+            $this->image_url = asset('storage/'.$path);
+        }
+
+        // Construire les données de l'article avec l'URL finale de l'image
         $articleData = [
-            'titre' => $this->titre,
-            'slug' => $this->slug ?: Str::slug($this->titre),
-            'extrait' => $this->extrait,
-            'contenu' => $this->contenu,
+            'titre'     => $this->titre,
+            'slug'      => $this->slug ?: Str::slug($this->titre),
+            'extrait'   => $this->extrait,
+            'contenu'   => $this->contenu,
             'image_url' => $this->image_url,
             'categorie' => $this->categorie,
-            'statut' => $this->statut,
-            'user_id' => Auth::id(),
+            'statut'    => $this->statut,
+            'user_id'   => Auth::id(),
         ];
 
         // Si on publie l'article et qu'il n'a pas encore de date de publication

@@ -297,13 +297,23 @@
                                 @error('contenu') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- URL de l'image --}}
+                            {{-- Image (upload de fichier) --}}
                             <div>
-                                <label class="block text-sm font-medium mb-2">URL de l'image</label>
-                                <input wire:model="image_url" type="url"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="https://example.com/image.jpg">
-                                @error('image_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                <label class="block text-sm font-medium mb-2">Image de l'article</label>
+                                <input
+                                    type="file"
+                                    wire:model="image"
+                                    accept="image/*"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                >
+
+                                {{-- Prévisualisation si une image existe déjà (édition) --}}
+                                @if($editMode && $image_url)
+                                    <p class="text-xs text-gray-500 mt-2">Image actuelle :</p>
+                                    <img src="{{ $image_url }}" alt="Image actuelle" class="mt-1 h-20 rounded-md object-cover border">
+                                @endif
+
+                                @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             {{-- Catégorie et Statut --}}
