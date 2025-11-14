@@ -51,7 +51,7 @@
                             <rect width="7" height="9" x="14" y="12" rx="1"></rect>
                             <rect width="7" height="5" x="3" y="16" rx="1"></rect>
                         </svg>
-                        <h1 class="text-2xl font-bold">Dashboard Admin</h1>
+                        <h1 class="text-2xl font-bold">Tableau de Bord Admin</h1>
                     </a>
                     <div class="flex items-center gap-4">
                         <a href="{{ route('admin.profile') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">

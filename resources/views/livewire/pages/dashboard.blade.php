@@ -1,6 +1,6 @@
 <main class="container mx-auto px-4 py-8">
     <div class="mb-8">
-        <h2 class="text-3xl font-bold mb-2">Bienvenue sur votre Dashboard</h2>
+        <h2 class="text-3xl font-bold mb-2">Bienvenue sur votre Tableau de Bord</h2>
         <p class="text-muted-foreground">Gérez l'ensemble de votre site depuis cette interface
             d'administration</p>
     </div>
