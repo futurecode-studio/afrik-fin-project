@@ -173,12 +173,60 @@
                                 @error('slug') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Extrait --}}
-                            <div>
+                            {{-- Extrait avec éditeur riche (version simplifiée) --}}
+                            <div
+                                wire:ignore
+                                x-data
+                                x-init="
+                                    let quillExtrait;
+
+                                    const initQuillExtrait = () => {
+                                        if (quillExtrait) return;
+
+                                        quillExtrait = new Quill($refs.quillExtraitEditor, {
+                                            theme: 'snow',
+                                            placeholder: 'Résumé court de l\'article',
+                                            modules: {
+                                                toolbar: [
+                                                    ['bold', 'italic', 'underline'],
+                                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                                    [{ 'align': [] }],
+                                                    ['clean']
+                                                ]
+                                            }
+                                        });
+
+                                        // Valeur initiale depuis Livewire (create + edit)
+                                        quillExtrait.root.innerHTML = @js($extrait);
+
+                                        // Sync Livewire à chaque changement de contenu
+                                        quillExtrait.on('text-change', function () {
+                                            $wire.set('extrait', quillExtrait.root.innerHTML);
+                                        });
+                                    };
+
+                                    initQuillExtrait();
+
+                                    document.addEventListener('livewire:navigated', () => {
+                                        quillExtrait = null;
+                                        initQuillExtrait();
+                                    });
+                                "
+                            >
                                 <label class="block text-sm font-medium mb-2">Extrait</label>
-                                <textarea wire:model="extrait" rows="3"
-                                    class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="Résumé court de l'article"></textarea>
+
+                                {{-- Zone d'édition Quill pour l'extrait --}}
+                                <div
+                                    x-ref="quillExtraitEditor"
+                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px]"
+                                ></div>
+
+                                {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
+                                <textarea
+                                    wire:model="extrait"
+                                    class="hidden"
+                                ></textarea>
+
                                 @error('extrait') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
