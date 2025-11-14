@@ -112,7 +112,7 @@ class Articles extends Component
     {
         $this->validate();
 
-        // Gestion de l'image uploadée (nouvelle image éventuelle)
+        // Gestion de l'image uploadée (nouvelle image éventuelle) 
         if ($this->image) {
             $path = $this->image->store('articles', 'public');
             $this->image_url = asset('storage/'.$path);
@@ -146,10 +146,15 @@ class Articles extends Component
         } else {
             Article::create($articleData);
             session()->flash('message', 'Article créé avec succès');
-            $this->resetPage();
         }
 
-        $this->closeModal();
+        // Fermer la modale et réinitialiser
+        $this->showModal = false;
+        $this->resetForm();
+        $this->resetValidation();
+        $this->resetPage();
+        
+        // Envoyer l'événement pour fermer proprement la modale
         $this->dispatch('article-saved');
     }
 
@@ -167,6 +172,7 @@ class Articles extends Component
         session()->flash('message', 'Article supprimé avec succès');
         $this->showDeleteModal = false;
         $this->articleId = null;
+        
         $this->dispatch('article-saved');
     }
 
@@ -176,6 +182,7 @@ class Articles extends Component
         $article->restore();
         
         session()->flash('message', 'Article restauré avec succès');
+        
         $this->dispatch('article-saved');
     }
 
@@ -186,6 +193,7 @@ class Articles extends Component
         $this->slug = '';
         $this->extrait = '';
         $this->contenu = '';
+        $this->image = null;
         $this->image_url = '';
         $this->categorie = '';
         $this->statut = 'brouillon';
