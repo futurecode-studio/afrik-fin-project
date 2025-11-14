@@ -1,10 +1,11 @@
 <main class="container mx-auto px-4 py-8">
-    <div class="mb-8">
-        <h2 class="text-3xl font-bold mb-2">Configuration des APIs</h2>
-        <p class="text-muted-foreground">Gérer les APIs externes et les clés d'accès</p>
-    </div>
-    
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-        <p class="text-center text-muted-foreground">Section en cours de développement...</p>
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+        <div class="flex flex-col space-y-1.5 p-6">
+            <h3 class="text-2xl font-semibold leading-none tracking-tight">APIs Configurées</h3>
+            <p class="text-sm text-muted-foreground">0 API(s) configurée(s)</p>
+        </div>
+        <div class="p-6 pt-0">
+            <p class="text-muted-foreground text-center py-8">Aucune API configurée</p>
+        </div>
     </div>
 </main>
