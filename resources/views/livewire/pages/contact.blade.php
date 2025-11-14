@@ -135,19 +135,7 @@
         <div class="container mx-auto px-4">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border">
-                <div class="h-96 bg-muted/50 flex items-center justify-center">
-                    <div class="text-center space-y-2"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-map-pin w-16 h-16 mx-auto text-primary/30">
-                            <path
-                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                            </path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        <p class="text-muted-foreground">Carte Google Maps à intégrer</p>
-                    </div>
-                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31720.498358941124!2d2.3588901758194023!3d6.3859622322039105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023560981120879%3A0xa8c510dd35428f36!2sStade%20de%20l&#39;Amiti%C3%A9%20G%C3%A9n%C3%A9ral%20Mathieu%20Kerekou!5e0!3m2!1sfr!2sbj!4v1763119601143!5m2!1sfr!2sbj" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
