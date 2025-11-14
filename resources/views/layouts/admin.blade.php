@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../assets/css/admin-dashboard.css">
-    <script src="../assets/js/admin-dashboard.js" defer></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Africaine des Finances - Formation, Bourse BRVM &amp; Conseil Financier</title>
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="../assets/css/admin-dashboard.css">
+    <script src="../assets/js/admin-dashboard.js" defer></script>
     <meta name="description"
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
     <meta name="author" content="Africaine des Finances">
