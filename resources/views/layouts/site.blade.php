@@ -45,7 +45,7 @@
                 class="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-card">
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-20"><a class="flex items-center gap-2 group"
-                            href="/">
+                            href="{{ route('home') }}">
                             <div
                                 class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-elegant group-hover:shadow-glow transition-smooth">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -60,24 +60,28 @@
                         </a>
                         <div class="hidden md:flex items-center gap-1"><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
-                                href="/">Accueil</a><a
+                                href="{{ route('home') }}">Accueil</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/services">Services</a><a
+                                href="{{ route('services') }}">Services</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/formations">Formations</a><a
+                                href="{{ route('formations') }}">Formations</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/bourse">Bourse BRVM</a><a
+                                href="{{ route('bourse') }}">Bourse BRVM</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/actualites">Actualités</a><a
+                                href="{{ route('actualites') }}">Actualités</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/about">À Propos</a><a
+                                href="{{ route('about') }}">À Propos</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/newsletter">Newsletter</a><a
+                                href="{{ route('newsletter') }}">Newsletter</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                                href="/contact">Contact</a></div>
-                        <div class="hidden md:flex items-center gap-2"><a href="/admin/dashboard"><button
-                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow transition-smooth font-semibold h-11 px-6 py-3">Se
-                                    Connecter</button></a></div><button
+                                href="{{ route('contact') }}">Contact</a></div>
+                        <div class="hidden md:flex items-center gap-2"><a href="/admin/dashboard">
+                            <button
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow transition-smooth font-semibold h-11 px-6 py-3">
+                                Se Connecter
+                            </button></a>
+                                </div>
+                                <button
                             class="md:hidden p-2 rounded-md hover:bg-muted transition-smooth"
                             aria-label="Toggle menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -140,13 +144,13 @@
                             <h3 class="text-lg font-semibold text-secondary">Liens Rapides</h3>
                             <ul class="space-y-2">
                                 <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="/">Accueil</a></li>
+                                        href="{{ route('home') }}">Accueil</a></li>
                                 <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="/actualites">Actualités</a></li>
+                                        href="{{ route('actualites') }}">Actualités</a></li>
                                 <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="/formations">Formations</a></li>
+                                        href="{{ route('formations') }}">Formations</a></li>
                                 <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="/bourse">Bourse BRVM</a></li>
+                                        href="{{ route('bourse') }}">Bourse BRVM</a></li>
                             </ul>
                         </div>
                         <div class="space-y-4">

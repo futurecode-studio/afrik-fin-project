@@ -63,7 +63,7 @@
                     <div class="pt-6 border-t border-border">
                         <p class="text-sm text-muted-foreground mb-2">Tarif</p>
                         <p class="text-2xl font-bold text-primary mb-4">À partir de 29,000 FCFA</p><a
-                            href="/formations"><button
+                            href="{{ route('formations') }}"><button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3 w-full group">En
                                 savoir plus<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -123,7 +123,7 @@
                     <div class="pt-6 border-t border-border">
                         <p class="text-sm text-muted-foreground mb-2">Tarif</p>
                         <p class="text-2xl font-bold text-primary mb-4">À partir de 15,000 FCFA/mois</p><a
-                            href="/bourse"><button
+                            href="{{ route('formations') }}"><button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3 w-full group">En
                                 savoir plus<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -247,7 +247,7 @@
                     <div class="pt-6 border-t border-border">
                         <p class="text-sm text-muted-foreground mb-2">Tarif</p>
                         <p class="text-2xl font-bold text-primary mb-4">À partir de 25,000 FCFA/mois</p><a
-                            href="/actualites"><button
+                            href="{{ route('formations') }}"><button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3 w-full group">En
                                 savoir plus<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -310,7 +310,7 @@
                     <div class="pt-6 border-t border-border">
                         <p class="text-sm text-muted-foreground mb-2">Tarif</p>
                         <p class="text-2xl font-bold text-primary mb-4">Gratuit avec abonnement</p><a
-                            href="/actualites"><button
+                            href="{{ route('formations') }}"><button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3 w-full group">En
                                 savoir plus<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -372,7 +372,7 @@
                     <div class="pt-6 border-t border-border">
                         <p class="text-sm text-muted-foreground mb-2">Tarif</p>
                         <p class="text-2xl font-bold text-primary mb-4">Gratuit pour membres</p><a
-                            href="/contact"><button
+                            href="{{ route('formations') }}"><button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3 w-full group">En
                                 savoir plus<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -445,7 +445,7 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center"><a href="/contact"><button
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base">Nous
-                            contacter</button></a><a href="/formations"><button
+                            contacter</button></a><a href="{{ route('formations') }}"><button
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 bg-background transition-smooth h-14 rounded-lg px-10 text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary">Voir
                             les formations</button></a></div>
             </div>
