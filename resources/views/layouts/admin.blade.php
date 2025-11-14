@@ -41,7 +41,8 @@
         <div class="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
             <header class="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
                 <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-                    <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-layout-dashboard h-6 w-6 text-primary">
@@ -51,9 +52,11 @@
                             <rect width="7" height="5" x="3" y="16" rx="1"></rect>
                         </svg>
                         <h1 class="text-2xl font-bold">Dashboard Admin</h1>
-                    </div>
+                    </a>
                     <div class="flex items-center gap-4">
-                        <span class="text-sm text-muted-foreground">{{ Auth::user()->name }}</span>
+                        <a href="{{ route('admin.profile') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                            {{ Auth::user()->name }}
+                        </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"

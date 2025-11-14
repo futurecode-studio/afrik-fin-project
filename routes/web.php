@@ -42,6 +42,8 @@ Route::view('profile', 'profile')
 
 // Admin Routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', \App\Livewire\Pages\Dashboard::class)->name('dashboard');
+    Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile');
     Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles');
     Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations');
     Route::get('/users', \App\Livewire\Admin\Users::class)->name('users');
