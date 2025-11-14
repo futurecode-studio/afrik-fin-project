@@ -75,7 +75,7 @@
                                 href="{{ route('newsletter') }}">Newsletter</a><a
                                 class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
                                 href="{{ route('contact') }}">Contact</a></div>
-                        <div class="hidden md:flex items-center gap-2"><a href="/admin/dashboard">
+                        <div class="hidden md:flex items-center gap-2"><a href="{{ route('connexion') }}">
                             <button
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow transition-smooth font-semibold h-11 px-6 py-3">
                                 Se Connecter

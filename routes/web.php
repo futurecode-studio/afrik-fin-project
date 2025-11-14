@@ -26,6 +26,12 @@ Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
 
+Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
+
+// Auth routes
+Route::view('login', 'livewire.pages.login')->middleware('guest')->name('login');
+Route::view('register', 'livewire.pages.register')->middleware('guest')->name('register');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
