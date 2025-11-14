@@ -127,9 +127,11 @@ class Users extends Component
         } else {
             User::create($userData);
             session()->flash('message', 'Utilisateur créé avec succès');
+            $this->resetPage(); // Retour à la première page
         }
 
         $this->closeModal();
+        $this->dispatch('user-saved'); // Événement pour actualisation
     }
 
     public function confirmDelete($id)
@@ -142,6 +144,7 @@ class Users extends Component
     {
         $user = User::findOrFail($this->userId);
         $user->delete();
+        $this->dispatch('user-saved'); // Événement pour actualisation
         
         session()->flash('message', 'Utilisateur supprimé avec succès');
         $this->showDeleteModal = false;
@@ -154,6 +157,7 @@ class Users extends Component
         $user->restore();
         
         session()->flash('message', 'Utilisateur restauré avec succès');
+        $this->dispatch('user-saved'); // Événement pour actualisation
     }
 
     private function resetForm()
