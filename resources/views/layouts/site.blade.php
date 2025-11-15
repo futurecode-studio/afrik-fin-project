@@ -198,11 +198,7 @@
                             <h3 class="text-lg font-semibold text-secondary">Newsletter</h3>
                             <p class="text-sm text-primary-foreground/80">Restez informé des dernières actualités
                                 financières</p>
-                            <div class="flex gap-2"><input type="email"
-                                    class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60"
-                                    placeholder="Votre email"><button
-                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-11 px-6 py-3">S'abonner</button>
-                            </div>
+                            @livewire('newsletter-subscribe')
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-primary-foreground/20">
