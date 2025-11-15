@@ -11,7 +11,7 @@ class Newsletters extends Component
 {
     use WithPagination;
 
-    public $activeTab = 'campaigns';
+    public $activeTab = 'subscribers';
     
     // Pour la création de campagnes
     public $showCampaignModal = false;

@@ -10,13 +10,13 @@
         <div role="tablist" aria-orientation="horizontal"
             class="inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground"
             tabindex="0" data-orientation="horizontal" style="outline: none;">
-            <button type="button" wire:click="setActiveTab('campaigns')"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 {{ $activeTab === 'campaigns' ? 'bg-background text-foreground shadow-sm' : '' }}">
-                Campagnes
-            </button>
             <button type="button" wire:click="setActiveTab('subscribers')"
                 class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 {{ $activeTab === 'subscribers' ? 'bg-background text-foreground shadow-sm' : '' }}">
                 Abonnés
+            </button>
+            <button type="button" wire:click="setActiveTab('campaigns')"
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 {{ $activeTab === 'campaigns' ? 'bg-background text-foreground shadow-sm' : '' }}">
+                Campagnes
             </button>
         </div>
 
