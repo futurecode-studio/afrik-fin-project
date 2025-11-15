@@ -147,6 +147,24 @@
                     <p class="text-sm text-muted-foreground">Créer et envoyer newsletters</p>
                 </div>
             </div>
+        </a><a href="{{ route('admin.contacts') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-message-square h-6 w-6 text-primary">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Messages Contact</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les messages de contact</p>
+                </div>
+            </div>
         </a><a href="{{ route('admin.statistics') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

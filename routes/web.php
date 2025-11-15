@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions');
     Route::get('/appointments', \App\Livewire\Admin\Appointments::class)->name('appointments');
     Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters');
+    Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts');
     Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics');
     Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config');
 });

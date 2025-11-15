@@ -16,32 +16,69 @@
                     <div
                         class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 border-border shadow-card">
                         <h2 class="text-2xl font-bold mb-6">Envoyez-nous un message</h2>
-                        <form class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div><label class="block text-sm font-medium mb-2">Prénom</label><input
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                        placeholder="Votre prénom"></div>
-                                <div><label class="block text-sm font-medium mb-2">Nom</label><input
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                        placeholder="Votre nom"></div>
+                        
+                        @if (session()->has('success'))
+                            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
+                                {{ session('success') }}
                             </div>
-                            <div><label class="block text-sm font-medium mb-2">Email</label><input
-                                    type="email"
+                        @endif
+
+                        @if (session()->has('error'))
+                            <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        <form wire:submit.prevent="submit" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Prénom <span class="text-red-500">*</span></label>
+                                    <input wire:model="first_name" type="text"
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                        placeholder="Votre prénom">
+                                    @error('first_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Nom <span class="text-red-500">*</span></label>
+                                    <input wire:model="last_name" type="text"
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                        placeholder="Votre nom">
+                                    @error('last_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
+                                <input wire:model="email" type="email"
                                     class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="votre.email@exemple.com"></div>
-                            <div><label class="block text-sm font-medium mb-2">Téléphone</label><input
-                                    type="tel"
+                                    placeholder="votre.email@exemple.com">
+                                @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Téléphone <span class="text-red-500">*</span></label>
+                                <input wire:model="phone" type="tel"
                                     class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="+229 XX XX XX XX"></div>
-                            <div><label class="block text-sm font-medium mb-2">Sujet</label><input
+                                    placeholder="+229 XX XX XX XX">
+                                @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Sujet <span class="text-red-500">*</span></label>
+                                <input wire:model="subject" type="text"
                                     class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="Objet de votre message"></div>
-                            <div><label class="block text-sm font-medium mb-2">Message</label><textarea
+                                    placeholder="Objet de votre message">
+                                @error('subject') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Message <span class="text-red-500">*</span></label>
+                                <textarea wire:model="message"
                                     class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-32"
-                                    placeholder="Décrivez votre demande en détail..."></textarea></div>
-                            <button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base w-full">Envoyer
-                                le message</button>
+                                    placeholder="Décrivez votre demande en détail..."></textarea>
+                                @error('message') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <button type="submit" wire:loading.attr="disabled"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base w-full">
+                                <span wire:loading.remove>Envoyer le message</span>
+                                <span wire:loading>Envoi en cours...</span>
+                            </button>
                         </form>
                     </div>
                 </div>
