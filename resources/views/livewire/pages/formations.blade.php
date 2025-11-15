@@ -97,7 +97,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">49,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(1, 'Introduction aux Marchés Financiers Africains')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">79,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(2, 'Analyse Technique et Trading')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -217,7 +217,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">99,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(3, 'Gestion de Portefeuille')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">129,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(4, 'Finance d\'Entreprise et Valorisation')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -338,7 +338,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">69,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(5, 'Cryptomonnaies et Blockchain')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                             <div>
                                 <p class="text-sm text-muted-foreground">Prix</p>
                                 <p class="text-2xl font-bold text-primary">89,000 FCFA</p>
-                            </div><button
+                            </div><button wire:click="openModal(6, 'Immobilier et Investissement')"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base">S'inscrire</button>
                         </div>
                     </div>
@@ -416,4 +416,95 @@
                 toutes les formations</button>
         </div>
     </section>
+
+    <!-- Modale d'inscription -->
+    @if($showModal)
+    <div wire:click.self="closeModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100] p-4">
+        <div class="bg-card rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold">Inscription à la formation</h2>
+                    @if($selectedFormation)
+                        <p class="text-sm text-muted-foreground mt-1">{{ $selectedFormation['title'] }}</p>
+                    @endif
+                </div>
+                <button wire:click="closeModal" class="text-muted-foreground hover:text-foreground transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6">
+                @if (session()->has('success'))
+                    <div class="mb-6 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session()->has('error'))
+                    <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <form wire:submit.prevent="submitInscription" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Prénom *</label>
+                            <input wire:model="first_name" type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                placeholder="Votre prénom">
+                            @error('first_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Nom *</label>
+                            <input wire:model="last_name" type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                placeholder="Votre nom">
+                            @error('last_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email *</label>
+                        <input wire:model="email" type="email"
+                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                            placeholder="votre.email@exemple.com">
+                        @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Téléphone *</label>
+                        <input wire:model="phone" type="tel"
+                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                            placeholder="+225 XX XX XX XX XX">
+                        @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="bg-muted/30 rounded-lg p-4">
+                        <p class="text-sm text-muted-foreground">
+                            <strong>Note :</strong> Après validation de votre demande, notre équipe vous contactera dans les 24h pour finaliser votre inscription et vous communiquer les modalités de paiement.
+                        </p>
+                    </div>
+
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" wire:click="closeModal"
+                            class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-12 rounded-lg px-6">
+                            Annuler
+                        </button>
+                        <button type="submit" wire:loading.attr="disabled"
+                            class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-12 rounded-lg px-6">
+                            <span wire:loading.remove>Envoyer ma demande</span>
+                            <span wire:loading>Envoi en cours...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
 </main>
