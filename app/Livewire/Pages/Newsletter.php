@@ -49,6 +49,7 @@ class Newsletter extends Component
             // Réinitialiser le formulaire
             $this->reset(['first_name', 'last_name', 'email', 'topics', 'consent']);
         } catch (\Exception $e) {
+            dd($e);
             session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
         }
     }

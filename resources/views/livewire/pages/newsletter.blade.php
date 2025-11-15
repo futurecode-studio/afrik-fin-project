@@ -158,69 +158,51 @@
                                 placeholder="votre.email@exemple.com">
                             @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
-                        <div><label class="block text-sm font-medium mb-3">Sujets qui vous
-                                intéressent</label>
+                        <div>
+                            <label class="block text-sm font-medium mb-3">Sujets qui vous intéressent</label>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-0"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-0"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Analyses
-                                        BRVM</label></div>
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-1"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-1"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Stratégies
-                                        d'investissement</label></div>
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-2"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-2"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Actualités
-                                        économiques</label></div>
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-3"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-3"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Nouveautés
-                                        formations</label></div>
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-4"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-4"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Conseils
-                                        d'experts</label></div>
-                                <div class="flex items-center space-x-2"><button type="button"
-                                        role="checkbox" aria-checked="false" data-state="unchecked"
-                                        value="on"
-                                        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                        id="topic-5"></button><input type="checkbox" aria-hidden="true"
-                                        tabindex="-1" value="on"
-                                        style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                        for="topic-5"
-                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">Événements
-                                        et webinaires</label></div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Analyses BRVM" id="topic-0"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-0" class="text-sm font-medium leading-none cursor-pointer">
+                                        Analyses BRVM
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Stratégies d'investissement" id="topic-1"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-1" class="text-sm font-medium leading-none cursor-pointer">
+                                        Stratégies d'investissement
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Actualités économiques" id="topic-2"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-2" class="text-sm font-medium leading-none cursor-pointer">
+                                        Actualités économiques
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Nouveautés formations" id="topic-3"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-3" class="text-sm font-medium leading-none cursor-pointer">
+                                        Nouveautés formations
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Conseils d'experts" id="topic-4"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-4" class="text-sm font-medium leading-none cursor-pointer">
+                                        Conseils d'experts
+                                    </label>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input wire:model="topics" type="checkbox" value="Événements et webinaires" id="topic-5"
+                                        class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                    <label for="topic-5" class="text-sm font-medium leading-none cursor-pointer">
+                                        Événements et webinaires
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="flex items-start space-x-2 pt-2">
