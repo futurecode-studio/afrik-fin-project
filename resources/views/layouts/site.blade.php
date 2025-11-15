@@ -7,7 +7,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Africaine des Finances - Formation, Bourse BRVM &amp; Conseil Financier</title>
+    <title>Africaine des Finances</title>
     <meta name="description"
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
     <meta name="author" content="Africaine des Finances">
@@ -18,11 +18,6 @@
     <meta property="og:description"
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@FinanceAfricaine">
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
 
     <!-- Livewire Styles -->
     @livewireStyles
@@ -55,23 +50,23 @@
                                 class="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">Africaine
                                 des Finances</span>
                         </a>
-                        <div class="hidden md:flex items-center gap-1"><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
-                            href="{{ route('home') }}">Accueil</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('services') }}">Services</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('formations') }}">Formations</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('bourse') }}">Bourse BRVM</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('actualites') }}">Actualités</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('about') }}">À Propos</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('newsletter') }}">Newsletter</a><a
-                            class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
-                            href="{{ route('contact') }}">Contact</a>
+                        <div class="hidden md:flex items-center gap-1">
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
+                                href="{{ route('home') }}">Accueil</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('services') }}">Services</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('formations') }}">Formations</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('bourse') }}">Bourse BRVM</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('actualites') }}">Actualités</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('about') }}">À Propos</a>
+                            <!-- <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('newsletter') }}">Newsletter</a> -->
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                                href="{{ route('contact') }}">Contact</a>
                         </div>
                         @if (Route::has('login'))
                             @auth
@@ -175,14 +170,26 @@
                         <div class="space-y-4">
                             <h3 class="text-lg font-semibold text-secondary">Liens Rapides</h3>
                             <ul class="space-y-2">
-                                <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="{{ route('home') }}">Accueil</a></li>
-                                <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="{{ route('actualites') }}">Actualités</a></li>
-                                <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="{{ route('formations') }}">Formations</a></li>
-                                <li><a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="{{ route('bourse') }}">Bourse BRVM</a></li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('home') }}">Accueil</a>
+                                </li>
+                                <!-- <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('actualites') }}">Actualités</a>
+                                </li> -->
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('formations') }}">Formations</a>
+                                </li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('bourse') }}">Bourse BRVM</a>
+                                </li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('newsletter') }}">Newsletter</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="space-y-4">
