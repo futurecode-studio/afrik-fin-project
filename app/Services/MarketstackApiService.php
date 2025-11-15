@@ -42,8 +42,10 @@ class MarketstackApiService
                 // Récupérer les symboles des actions depuis la base de données
                 $symbols = Stock::where('is_active', true)->pluck('symbol')->toArray();
                 
+                // Si pas de symboles en base, utiliser des symboles par défaut BRVM
                 if (empty($symbols)) {
-                    return $this->getStocksFromDatabase();
+                    $symbols = ['SNTS', 'BOAB', 'ORAC', 'ETIT', 'SIVC', 'SPHC', 'SGBC', 'PALC'];
+                    Log::info('Using default BRVM symbols as database is empty');
                 }
 
                 // Marketstack utilise une limite de symboles par requête
@@ -205,11 +207,25 @@ class MarketstackApiService
      */
     private function formatApiStocks($apiStocks)
     {
+        // Noms par défaut des entreprises BRVM
+        $defaultNames = [
+            'SNTS' => 'Sonatel',
+            'BOAB' => 'BOA Bénin',
+            'ORAC' => 'Orange CI',
+            'ETIT' => 'Ecobank TG',
+            'SIVC' => 'SIVOM',
+            'SPHC' => 'SAPH Côte d\'Ivoire',
+            'SGBC' => 'Société Générale',
+            'PALC' => 'Palm CI',
+        ];
+        
         $formattedStocks = [];
         
         foreach ($apiStocks as $stockData) {
+            $symbol = $stockData['symbol'];
+            
             // Récupérer les infos complémentaires depuis la base de données
-            $dbStock = Stock::where('symbol', $stockData['symbol'])->first();
+            $dbStock = Stock::where('symbol', $symbol)->first();
             
             $currentPrice = $stockData['close'] ?? $stockData['adj_close'] ?? 0;
             $previousPrice = $stockData['open'] ?? $stockData['adj_open'] ?? $currentPrice;
@@ -221,8 +237,8 @@ class MarketstackApiService
             }
             
             $formattedStocks[] = [
-                'symbol' => $stockData['symbol'],
-                'company_name' => $dbStock->company_name ?? $stockData['symbol'],
+                'symbol' => $symbol,
+                'company_name' => $dbStock->company_name ?? ($defaultNames[$symbol] ?? $symbol),
                 'current_price' => $currentPrice,
                 'previous_price' => $previousPrice,
                 'variation_percent' => round($variationPercent, 2),
