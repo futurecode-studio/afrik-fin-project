@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             FormationSeeder::class,
             StockSeeder::class,
+            TransactionSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
