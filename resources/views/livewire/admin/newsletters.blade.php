@@ -150,71 +150,100 @@
 
     <!-- Modal pour créer une campagne -->
     @if($showCampaignModal)
-        <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
-                <h2 class="text-xl font-semibold mb-4">Nouvelle Campagne Newsletter</h2>
-                <form wire:submit.prevent="createCampaign">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium mb-1">Titre</label>
-                            <input type="text" wire:model="title" class="w-full px-3 py-2 border rounded-md" required>
-                            @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-1">Sujet</label>
-                            <input type="text" wire:model="subject" class="w-full px-3 py-2 border rounded-md" required>
-                            @error('subject') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-1">Contenu</label>
-                            <textarea wire:model="content" rows="6" class="w-full px-3 py-2 border rounded-md" required></textarea>
-                            @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="flex justify-end space-x-2 mt-6">
-                        <button type="button" wire:click="$set('showCampaignModal', false)"
-                            class="px-4 py-2 border rounded-md hover:bg-gray-50">
-                            Annuler
-                        </button>
-                        <button type="submit"
-                            class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90">
-                            Créer
+        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="$set('showCampaignModal', false)">
+            <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">Nouvelle Campagne Newsletter</h2>
+                        <button wire:click="$set('showCampaignModal', false)" class="text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"/>
+                                <path d="m6 6 12 12"/>
+                            </svg>
                         </button>
                     </div>
-                </form>
+
+                    <form wire:submit.prevent="createCampaign">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Titre <span class="text-red-500">*</span></label>
+                                <input type="text" wire:model="title" 
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Sujet <span class="text-red-500">*</span></label>
+                                <input type="text" wire:model="subject" 
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                @error('subject') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Contenu <span class="text-red-500">*</span></label>
+                                <textarea wire:model="content" rows="6" 
+                                    class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"></textarea>
+                                @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-3 mt-6">
+                            <button type="button" wire:click="$set('showCampaignModal', false)"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                                Annuler
+                            </button>
+                            <button type="submit"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                                Créer
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     @endif
 
     <!-- Modal pour ajouter un abonné -->
     @if($showSubscriberModal)
-        <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                <h2 class="text-xl font-semibold mb-4">Ajouter un Abonné</h2>
-                <form wire:submit.prevent="addSubscriber">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium mb-1">Email</label>
-                            <input type="email" wire:model="subscriberEmail" class="w-full px-3 py-2 border rounded-md" required>
-                            @error('subscriberEmail') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-1">Nom (optionnel)</label>
-                            <input type="text" wire:model="subscriberName" class="w-full px-3 py-2 border rounded-md">
-                            @error('subscriberName') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="flex justify-end space-x-2 mt-6">
-                        <button type="button" wire:click="$set('showSubscriberModal', false)"
-                            class="px-4 py-2 border rounded-md hover:bg-gray-50">
-                            Annuler
-                        </button>
-                        <button type="submit"
-                            class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90">
-                            Ajouter
+        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="$set('showSubscriberModal', false)">
+            <div class="bg-white rounded-lg shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto relative">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">Ajouter un Abonné</h2>
+                        <button wire:click="$set('showSubscriberModal', false)" class="text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"/>
+                                <path d="m6 6 12 12"/>
+                            </svg>
                         </button>
                     </div>
-                </form>
+
+                    <form wire:submit.prevent="addSubscriber">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
+                                <input type="email" wire:model="subscriberEmail" 
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                @error('subscriberEmail') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nom (optionnel)</label>
+                                <input type="text" wire:model="subscriberName" 
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                @error('subscriberName') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-3 mt-6">
+                            <button type="button" wire:click="$set('showSubscriberModal', false)"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                                Annuler
+                            </button>
+                            <button type="submit"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     @endif
