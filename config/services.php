@@ -31,4 +31,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Marketstack API Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration pour l'API Marketstack
+    | Permet de récupérer les données boursières en temps réel
+    |
+    */
+
+    'marketstack' => [
+        'api_url' => env('MARKETSTACK_API_URL', 'http://api.marketstack.com/v1'),
+        'api_key' => env('MARKETSTACK_API_KEY'),
+        'cache_duration' => env('MARKETSTACK_CACHE_DURATION', 300), // 5 minutes par défaut
+    ],
+
 ];
