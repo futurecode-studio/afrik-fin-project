@@ -51,21 +51,21 @@
                                 des Finances</span>
                         </a>
                         <div class="hidden md:flex items-center gap-1">
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth bg-primary text-primary-foreground shadow-elegant"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('home') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('home') }}">Accueil</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('services*') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('services') }}">Services</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('formations') }}">Formations</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('bourse') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('bourse') }}">Bourse BRVM</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('actualites') }}">Actualités</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('about') }}">À Propos</a>
-                            <!-- <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <!-- <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('newsletter') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('newsletter') }}">Newsletter</a> -->
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth text-foreground hover:bg-muted hover:text-primary"
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('contact') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('contact') }}">Contact</a>
                         </div>
                         @if (Route::has('login'))
