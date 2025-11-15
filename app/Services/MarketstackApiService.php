@@ -57,14 +57,15 @@ class MarketstackApiService
 
                 if ($response->successful()) {
                     $data = $response->json();
-                    $stocks = $data['data'] ?? [];
+                    $apiStocks = $data['data'] ?? [];
                     
-                    // Synchroniser avec la base de données
-                    if (!empty($stocks)) {
-                        $this->syncStocksWithDatabase($stocks);
+                    if (!empty($apiStocks)) {
+                        // Synchroniser avec la base de données (backup)
+                        $this->syncStocksWithDatabase($apiStocks);
+                        
+                        // Formater et retourner les données de l'API directement
+                        return $this->formatApiStocks($apiStocks);
                     }
-                    
-                    return $this->getStocksFromDatabase();
                 }
 
                 Log::warning('Marketstack API responded with error', [
@@ -200,7 +201,44 @@ class MarketstackApiService
     }
 
     /**
-     * Récupérer les données depuis la base de données
+     * Formater les données de l'API Marketstack pour l'affichage
+     */
+    private function formatApiStocks($apiStocks)
+    {
+        $formattedStocks = [];
+        
+        foreach ($apiStocks as $stockData) {
+            // Récupérer les infos complémentaires depuis la base de données
+            $dbStock = Stock::where('symbol', $stockData['symbol'])->first();
+            
+            $currentPrice = $stockData['close'] ?? $stockData['adj_close'] ?? 0;
+            $previousPrice = $stockData['open'] ?? $stockData['adj_open'] ?? $currentPrice;
+            
+            // Calculer la variation
+            $variationPercent = 0;
+            if ($previousPrice > 0 && $currentPrice != $previousPrice) {
+                $variationPercent = (($currentPrice - $previousPrice) / $previousPrice) * 100;
+            }
+            
+            $formattedStocks[] = [
+                'symbol' => $stockData['symbol'],
+                'company_name' => $dbStock->company_name ?? $stockData['symbol'],
+                'current_price' => $currentPrice,
+                'previous_price' => $previousPrice,
+                'variation_percent' => round($variationPercent, 2),
+                'volume' => $stockData['volume'] ?? $stockData['adj_volume'] ?? 0,
+                'market_cap' => $dbStock->market_cap ?? null,
+                'sector' => $dbStock->sector ?? null,
+                'high_price' => $stockData['high'] ?? $stockData['adj_high'] ?? null,
+                'low_price' => $stockData['low'] ?? $stockData['adj_low'] ?? null,
+            ];
+        }
+        
+        return $formattedStocks;
+    }
+
+    /**
+     * Récupérer les données depuis la base de données (fallback)
      */
     private function getStocksFromDatabase()
     {
