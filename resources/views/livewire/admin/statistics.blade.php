@@ -297,13 +297,21 @@
     </main>
 </div>
 
-@script
 <script>
     let revenueChart = null;
     let transactionsChart = null;
 
     function createCharts() {
+        // Vérifier que Chart.js est chargé
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js is not loaded!');
+            setTimeout(createCharts, 100);
+            return;
+        }
+
         const chartData = @json($chartData);
+        
+        console.log('Creating charts with data:', chartData);
         
         // Détruire les graphiques existants s'ils existent
         if (revenueChart) {
@@ -316,6 +324,7 @@
         // Graphique des revenus
         const revenueCtx = document.getElementById('revenueChart');
         if (revenueCtx) {
+            console.log('Creating revenue chart...');
             revenueChart = new Chart(revenueCtx, {
                 type: 'line',
                 data: {
@@ -358,11 +367,14 @@
                     }
                 }
             });
+        } else {
+            console.error('revenueChart canvas not found!');
         }
 
         // Graphique des transactions
         const transactionsCtx = document.getElementById('transactionsChart');
         if (transactionsCtx) {
+            console.log('Creating transactions chart...');
             transactionsChart = new Chart(transactionsCtx, {
                 type: 'bar',
                 data: {
@@ -395,19 +407,25 @@
                 }
             });
         }
+        } else {
+            console.error('transactionsChart canvas not found!');
+        }
+        
+        console.log('Charts created successfully');
     }
 
     // Créer les graphiques au chargement
-    document.addEventListener('DOMContentLoaded', createCharts);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', createCharts);
+    } else {
+        // DOM already loaded
+        createCharts();
+    }
 
     // Recréer les graphiques après une mise à jour Livewire
-    Livewire.hook('morph.updated', () => {
-        createCharts();
-    });
-
-    // Écouter les événements Livewire
-    $wire.on('statistics-updated', () => {
-        createCharts();
+    document.addEventListener('livewire:init', () => {
+        Livewire.hook('morph.updated', () => {
+            setTimeout(createCharts, 100);
+        });
     });
 </script>
-@endscript

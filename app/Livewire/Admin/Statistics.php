@@ -170,7 +170,12 @@ class Statistics extends Component
 
     public function render()
     {
-        return view('livewire.admin.statistics')
+        return view('livewire.admin.statistics', [
+            'stats' => $this->stats,
+            'recentTransactions' => $this->recentTransactions,
+            'recentUsers' => $this->recentUsers,
+            'chartData' => $this->chartData,
+        ])
             ->extends('layouts.admin', ['title' => 'Statistiques'])
             ->section('content');
     }
