@@ -25,6 +25,9 @@
     <meta name="twitter:site" content="@FinanceAfricaine">
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
