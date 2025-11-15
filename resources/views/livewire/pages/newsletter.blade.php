@@ -121,19 +121,43 @@
                         <p class="text-muted-foreground">Recevez notre newsletter hebdomadaire et ne manquez
                             aucune opportunité</p>
                     </div>
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="block text-sm font-medium mb-2">Prénom *</label><input
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="Votre prénom" required=""></div>
-                            <div><label class="block text-sm font-medium mb-2">Nom *</label><input
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                    placeholder="Votre nom" required=""></div>
+
+                    @if (session()->has('success'))
+                        <div class="mb-6 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
+                            {{ session('success') }}
                         </div>
-                        <div><label class="block text-sm font-medium mb-2">Email *</label><input
-                                type="email"
+                    @endif
+
+                    @if (session()->has('error'))
+                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    <form wire:submit.prevent="subscribe" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Prénom *</label>
+                                <input wire:model="first_name" type="text"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    placeholder="Votre prénom">
+                                @error('first_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nom *</label>
+                                <input wire:model="last_name" type="text"
+                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    placeholder="Votre nom">
+                                @error('last_name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email *</label>
+                            <input wire:model="email" type="email"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                placeholder="votre.email@exemple.com" required=""></div>
+                                placeholder="votre.email@exemple.com">
+                            @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
                         <div><label class="block text-sm font-medium mb-3">Sujets qui vous
                                 intéressent</label>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -199,18 +223,21 @@
                                         et webinaires</label></div>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-2 pt-2"><button type="button" role="checkbox"
-                                aria-checked="false" aria-required="true" data-state="unchecked" value="on"
-                                class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                id="terms"></button><input type="checkbox" aria-hidden="true" required=""
-                                tabindex="-1" value="on"
-                                style="position: absolute; pointer-events: none; opacity: 0; margin: 0px; transform: translateX(-100%); width: 16px; height: 16px;"><label
-                                for="terms"
-                                class="text-sm text-muted-foreground leading-relaxed cursor-pointer">J'accepte
-                                de recevoir la newsletter de Africaine des Finances et je confirme avoir
-                                pris connaissance de la politique de confidentialité.</label></div><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base w-full"
-                            type="submit">S'abonner à la newsletter</button>
+                        <div class="flex items-start space-x-2 pt-2">
+                            <input wire:model="consent" type="checkbox" id="terms"
+                                class="h-4 w-4 shrink-0 rounded border border-primary text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                            <label for="terms" class="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                                J'accepte de recevoir la newsletter de Africaine des Finances et je confirme avoir
+                                pris connaissance de la politique de confidentialité.
+                            </label>
+                        </div>
+                        @error('consent') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        
+                        <button type="submit" wire:loading.attr="disabled"
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base w-full">
+                            <span wire:loading.remove>S'abonner à la newsletter</span>
+                            <span wire:loading>Inscription en cours...</span>
+                        </button>
                     </form>
                 </div>
             </div>
