@@ -19,7 +19,7 @@
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
     <meta property="og:type" content="website">
 
-    <!-- Livewire Styles -->
+    <!-- Livewire Styles --> 
     @livewireStyles
 </head>
 
@@ -38,17 +38,14 @@
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-20"><a class="flex items-center gap-2 group"
                             href="{{ route('home') }}">
-                            <div
-                                class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-elegant group-hover:shadow-glow transition-smooth">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-trending-up w-6 h-6 text-primary-foreground">
-                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                                    <polyline points="16 7 22 7 22 13"></polyline>
-                                </svg></div><span
-                                class="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">Africaine
-                                des Finances</span>
+                            <img 
+                                src="{{ asset('assets/logo.png') }}" 
+                                alt="Africaine des Finances" 
+                                class="h-12 w-auto object-contain transition-smooth group-hover:scale-105"
+                            />
+                            <span
+                                class="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">Africaine des Finances
+                            </span>
                         </a>
                         <div class="hidden md:flex items-center gap-1">
                             <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('home') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"

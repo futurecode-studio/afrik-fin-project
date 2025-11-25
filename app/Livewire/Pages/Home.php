@@ -10,6 +10,6 @@ class Home extends Component
     {
         return view('livewire.pages.home')
             ->extends('layouts.site', ['title' => 'Accueil'])
-            ->section('content');
+            ->section('content'); 
     }
 }

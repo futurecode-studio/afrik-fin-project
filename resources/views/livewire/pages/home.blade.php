@@ -73,7 +73,7 @@
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-primary-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
                                 <div
                                     class="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                                    <img src="/src/assets/elearning-icon.png"
+                                    <img src="{{ asset('assets/elearning-icon.png') }}"
                                         alt="Formation Professionnelle" class="w-16 h-16 object-contain">
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent to-accent-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
                                 <div
                                     class="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                                    <img src="/src/assets/market-data-icon.png"
+                                    <img src="{{ asset('assets/market-data-icon.png') }}"
                                         alt="Données &amp; Cotations BRVM" class="w-16 h-16 object-contain">
                                 </div>
                             </div>
@@ -117,7 +117,8 @@
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-secondary to-secondary-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
                                 <div
                                     class="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                                    <img src="/src/assets/consulting-icon.png" alt="Conseil &amp; Gestion"
+                                    <img src="{{ asset('assets/consulting-icon.png') }}"
+                                        alt="Conseil &amp; Gestion"
                                         class="w-16 h-16 object-contain"></div>
                             </div>
                             <h3 class="text-xl font-bold group-hover:text-primary transition-smooth">Conseil
