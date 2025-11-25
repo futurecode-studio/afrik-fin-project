@@ -55,7 +55,9 @@
                             <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('formations') }}">Formations</a>
                             <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('bourse') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('bourse') }}">Bourse BRVM</a>
+                                href="{{ route('bourse') }}">BRVM</a>
+                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('vl-fcp') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                                href="{{ route('vl-fcp') }}">VL / FCP</a>
                             <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('actualites') }}">Actualités</a>
                             <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"

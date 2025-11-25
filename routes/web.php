@@ -22,6 +22,7 @@ Route::get('/actualites/{slug}', \App\Livewire\Pages\ActualiteDetail::class)->na
 Route::get('/formations', \App\Livewire\Pages\Formations::class)->name('formations');
 Route::get('/formations/{slug}', \App\Livewire\Pages\FormationDetail::class)->name('formation-detail');
 Route::get('/bourse', \App\Livewire\Pages\Bourse::class)->name('bourse');
+Route::get('/vl-fcp', \App\Livewire\Pages\VlFcp::class)->name('vl-fcp');
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');

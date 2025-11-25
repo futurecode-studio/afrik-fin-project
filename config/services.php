@@ -47,4 +47,19 @@ return [
         'cache_duration' => env('MARKETSTACK_CACHE_DURATION', 300), // 5 minutes par défaut
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Mutual Funds API Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration pour récupérer les valeurs liquidatives des fonds
+    | en temps réel depuis des sources fiables gratuites
+    |
+    */
+
+    'mutual_funds' => [
+        'cache_duration' => env('MUTUAL_FUNDS_CACHE_DURATION', 3600), // 1 heure par défaut
+        'timeout' => env('MUTUAL_FUNDS_TIMEOUT', 15), // timeout en secondes
+    ],
+
 ];
