@@ -98,8 +98,8 @@
                             <div>
                                 <h3 class="font-semibold text-lg mb-1">Email</h3>
                                 <p class="text-muted-foreground mb-2">Envoyez-nous un email, nous répondons
-                                    sous 24h</p><a href="mailto:contact@financeafricaine.com"
-                                    class="text-primary font-medium hover:underline">contact@financeafricaine.com</a>
+                                    sous 24h</p><a href="mailto:african.finances@gmail.com"
+                                    class="text-primary font-medium hover:underline">african.finances@gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -119,8 +119,14 @@
                             <div>
                                 <h3 class="font-semibold text-lg mb-1">Téléphone</h3>
                                 <p class="text-muted-foreground mb-2">Appelez-nous du lundi au vendredi</p>
-                                <a href="tel:+229XXXXXXXX"
-                                    class="text-primary font-medium hover:underline">+229 XX XX XX XX</a>
+                                <a href="tel:+2290144217889"
+                                    class="text-primary font-medium hover:underline block">+229 01 44 21 78 89</a>
+                                <a href="tel:+2290166555121"
+                                    class="text-primary font-medium hover:underline block">+229 01 66 55 51 21</a>
+                                <a href="tel:+2290144218209"
+                                    class="text-primary font-medium hover:underline block">+229 01 44 21 82 09</a>
+                                <a href="tel:+2290148718851"
+                                    class="text-primary font-medium hover:underline block">+229 01 48 71 88 51</a>
                             </div>
                         </div>
                     </div>
@@ -141,7 +147,7 @@
                             <div>
                                 <h3 class="font-semibold text-lg mb-1">Adresse</h3>
                                 <p class="text-muted-foreground mb-2">Visitez notre bureau</p>
-                                <p class="text-foreground">Cotonou, Bénin<br>Zone administrative</p>
+                                <p class="text-foreground">Cot Agla c/3881<br>Cotonou, Bénin</p>
                             </div>
                         </div>
                     </div>

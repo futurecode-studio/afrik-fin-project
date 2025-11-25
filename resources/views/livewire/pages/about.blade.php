@@ -77,6 +77,63 @@
             </div>
         </div>
     </section>
+    <section class="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 backdrop-blur-sm rounded-full mb-4 border border-secondary/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-shield-check w-5 h-5 text-secondary">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        <span class="text-sm font-medium text-secondary">Entreprise Agréée</span>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Agrément <span class="text-primary">Officiel</span></h2>
+                    <p class="text-lg text-muted-foreground">Opérateur régulé et agréé par l'Autorité des Marchés Financiers</p>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground shadow-elegant p-8 border-primary/20">
+                    <div class="text-center mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-full mb-4 shadow-glow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-award w-8 h-8 text-primary-foreground">
+                                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
+                                <circle cx="12" cy="8" r="6"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Agrément N° AA/2022-03</h3>
+                        <p class="text-primary font-medium mb-4">Autorité des Marchés Financiers de l'UMOA (AMF-UMOA)</p>
+                    </div>
+                    <div class="space-y-4 text-muted-foreground leading-relaxed">
+                        <p class="text-center">
+                            <span class="font-semibold text-foreground">Décision N°CREFMPF/22/143</span> en date du <span class="font-semibold text-foreground">05 Septembre 2022</span>
+                        </p>
+                        <div class="bg-primary/5 rounded-lg p-6 border border-primary/10">
+                            <p class="text-lg font-semibold text-primary text-center mb-3">
+                                AGRÉÉE EN QUALITÉ D'APPORTEUR D'AFFAIRES SUR LE MARCHÉ FINANCIER RÉGIONAL (BRVM)
+                            </p>
+                            <p class="text-sm text-center text-muted-foreground">
+                                Cette certification officielle de l'AMF-UMOA (ex CREPMF) nous autorise à exercer en tant qu'apporteur d'affaires
+                                sur le marché financier régional de l'Union Économique et Monétaire Ouest Africaine.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-muted/30 rounded-lg p-4 border border-border">
+                        <p class="text-xs text-muted-foreground mb-1">N° RCCM</p>
+                        <p class="font-semibold">RB/COT/21 B 31296</p>
+                    </div>
+                    <div class="bg-muted/30 rounded-lg p-4 border border-border">
+                        <p class="text-xs text-muted-foreground mb-1">N° IFU</p>
+                        <p class="font-semibold">3202113721309</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
