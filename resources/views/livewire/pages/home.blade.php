@@ -15,13 +15,13 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
                 <div
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-secondary/20 backdrop-blur-sm rounded-full mb-6 border border-secondary/30">
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary/10 backdrop-blur-md rounded-full mb-8 border border-secondary/20 shadow-sm hover:bg-secondary/20 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-shield-check w-4 h-4 text-secondary">
+                        stroke-linejoin="round" class="lucide lucide-shield-check w-5 h-5 text-secondary">
                         <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                         <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="text-sm font-medium text-primary-foreground">Agréé AMF-UMOA N° AA/2022-03</span></div>
+                    </svg><span class="text-sm font-semibold text-primary-foreground tracking-wide">Agréé AMF-UMOA N° AA/2022-03</span></div>
                 <h1
                     class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
                     Maîtrisez les Marchés Financiers <span class="text-secondary">Africains</span></h1>
@@ -29,16 +29,19 @@
                     professionnelle, données BRVM en temps réel, analyses de marché et conseil en
                     investissement pour particuliers et entreprises de la zone UEMOA.</p>
                 <div class="flex flex-col sm:flex-row gap-4"><a href="/formations"><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base group">Découvrir
-                            nos formations<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-smooth">
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                            </svg></button></a><a href="/bourse"><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 bg-background transition-smooth h-14 rounded-lg px-10 text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary">Données
-                            BRVM</button></a></div>
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base group">
+                    Découvrir nos formations<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-smooth">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg></button></a><a href="/bourse">
+                        <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 bg-background transition-smooth h-14 rounded-lg px-10 text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                    Données BRVM
+                    </button>
+                </a>
+                </div>
                 <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-primary-foreground/20">
                     <div>
                         <p class="text-3xl md:text-4xl font-bold text-secondary">8+</p>
@@ -64,9 +67,10 @@
                 <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Solutions professionnelles pour
                     investisseurs, traders et entreprises de la zone UEMOA</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8"><a class="group" href="/services/formations">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <a class="group" href="{{ route('services-formation') }}">
                     <div
-                        class="rounded-lg border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant transition-smooth border-border hover:border-primary/30">
+                        class="rounded-2xl border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant hover:-translate-y-2 transition-all duration-300 border-border hover:border-primary/30 group-hover:bg-accent/5">
                         <div class="flex flex-col items-center text-center space-y-4">
                             <div
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-primary-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
@@ -86,9 +90,10 @@
                                     class="group-hover:translate-x-1 transition-smooth">→</span></span>
                         </div>
                     </div>
-                </a><a class="group" href="/services/bourse">
+                </a>
+                <a class="group" href="{{ route('services-bourse') }}">
                     <div
-                        class="rounded-lg border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant transition-smooth border-border hover:border-primary/30">
+                        class="rounded-2xl border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant hover:-translate-y-2 transition-all duration-300 border-border hover:border-primary/30 group-hover:bg-accent/5">
                         <div class="flex flex-col items-center text-center space-y-4">
                             <div
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent to-accent-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
@@ -108,9 +113,9 @@
                                     class="group-hover:translate-x-1 transition-smooth">→</span></span>
                         </div>
                     </div>
-                </a><a class="group" href="/services/conseil">
+                </a><a class="group" href="{{ route('services-conseil') }}">
                     <div
-                        class="rounded-lg border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant transition-smooth border-border hover:border-primary/30">
+                        class="rounded-2xl border bg-card text-card-foreground shadow-sm h-full p-8 hover:shadow-elegant hover:-translate-y-2 transition-all duration-300 border-border hover:border-primary/30 group-hover:bg-accent/5">
                         <div class="flex flex-col items-center text-center space-y-4">
                             <div
                                 class="w-24 h-24 rounded-2xl bg-gradient-to-br from-secondary to-secondary-light p-1 shadow-card group-hover:shadow-glow transition-smooth">
@@ -261,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div
+                <!-- <div
                     class="rounded-lg border text-card-foreground shadow-sm p-6 bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground/20 hover:bg-primary-foreground/20 transition-smooth group">
                     <div class="flex items-start gap-4">
                         <div
@@ -328,7 +333,7 @@
                             <p class="text-sm text-primary-foreground/70">Volume mensuel moyen</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -484,47 +489,66 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 <!-- SGO -->
                 <div>
-                    <h3 class="text-lg font-bold text-center mb-6 text-secondary">Sociétés de Gestion d'OPCVM (SGO)</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">Africabourse Asset Mgt</span>
+                    <h3 class="text-xl font-bold text-center mb-8 text-secondary flex items-center justify-center gap-2">
+                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
+                        Sociétés de Gestion d'OPCVM (SGO)
+                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africabourse Asset Mgt</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SAPHIR Asset Mgt</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SAPHIR Asset Mgt</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">NSIA Asset Mgt</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">NSIA Asset Mgt</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SOAGA</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SOAGA</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth col-span-2 md:col-span-1 md:col-start-1 md:col-end-3 lg:col-auto">
-                            <span class="font-semibold text-sm text-primary-foreground/80">Africaine de Gestion d'Actifs</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 col-span-2 md:col-span-1 md:col-start-1 md:col-end-3 lg:col-auto">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africaine de Gestion d'Actifs</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- SGI -->
                 <div>
-                    <h3 class="text-lg font-bold text-center mb-6 text-secondary">Sociétés de Gestion et d'Intermédiation (SGI)</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">Africabourse</span>
+                    <h3 class="text-xl font-bold text-center mb-8 text-secondary flex items-center justify-center gap-2">
+                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
+                        Sociétés de Gestion et d'Intermédiation (SGI)
+                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africabourse</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BENIN</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BENIN</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SGI UCA</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI UCA</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BFS</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BFS</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SGI AGI</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI AGI</span>
                         </div>
-                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
-                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BOA CAPITAL</span>
+                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BOA CAPITAL</span>
                         </div>
                     </div>
                 </div>
@@ -865,7 +889,7 @@
             </div>
         </div>
     </section>
-    <section class="py-20 relative overflow-hidden">
+    <!-- <section class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-hero">
             <div
                 class="absolute top-10 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse">
@@ -928,5 +952,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 </main>
