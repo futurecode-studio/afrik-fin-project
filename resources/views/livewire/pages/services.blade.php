@@ -523,8 +523,73 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-bold mb-2">Épargne & Investissement</h3>
-                            <p class="text-sm text-muted-foreground leading-relaxed">Ouverture de compte titre pour épargner à votre rythme selon votre capacité</p>
+                            <p class="text-sm text-muted-foreground leading-relaxed mb-3">Ouverture de compte titre pour épargner à votre rythme selon votre capacité.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">Actions</span>
+                                <span class="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">Obligations</span>
+                                <span class="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">FCP / FCTC</span>
+                                <span class="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">BAT / OAT</span>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Comment <span class="text-primary">Épargner</span> ?</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Un processus simple et sécurisé pour commencer à investir sur le marché financier</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
+                <!-- Ligne de connexion (visible sur desktop) -->
+                <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 -z-10"></div>
+
+                <!-- Étape 1 -->
+                <div class="relative bg-card rounded-xl p-6 border border-border shadow-sm hover:shadow-elegant transition-smooth text-center group">
+                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 group-hover:scale-110 transition-smooth shadow-lg ring-4 ring-background">1</div>
+                    <h3 class="text-xl font-bold mb-3">Ouvrir un Compte Titre</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+                        Souscrivez auprès d'une SGI partenaire recommandée. Fournissez simplement vos pièces d'identité (CNI, Photos, IFU) et signez la convention.
+                    </p>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="relative bg-card rounded-xl p-6 border border-border shadow-sm hover:shadow-elegant transition-smooth text-center group">
+                    <div class="w-12 h-12 bg-secondary text-secondary-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 group-hover:scale-110 transition-smooth shadow-lg ring-4 ring-background">2</div>
+                    <h3 class="text-xl font-bold mb-3">Alimenter votre Compte</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+                        Effectuez vos versements par chèque, virement bancaire ou simplement via Mobile Money (Moov Money, Celtiis Cash, etc.).
+                    </p>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="relative bg-card rounded-xl p-6 border border-border shadow-sm hover:shadow-elegant transition-smooth text-center group">
+                    <div class="w-12 h-12 bg-accent text-accent-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6 group-hover:scale-110 transition-smooth shadow-lg ring-4 ring-background">3</div>
+                    <h3 class="text-xl font-bold mb-3">Gérer vos Investissements</h3>
+                    <p class="text-muted-foreground text-sm leading-relaxed mb-4">
+                        Choisissez entre la <strong>Gestion Directe</strong> (vous gérez vous-même) ou la <strong>Gestion sous Mandat</strong> (déléguée à des experts). Suivez votre portefeuille via l'application dédiée.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-primary/5 rounded-2xl p-8 max-w-4xl mx-auto border border-primary/10">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-8 h-8 text-primary">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2 text-primary">Sécurité & Régulation</h4>
+                        <p class="text-muted-foreground text-sm">
+                            Votre épargne est sécurisée car l'activité est strictement réglementée par l'<strong>AMF-UMOA</strong>. Profitez d'une fiscalité avantageuse avec des plus-values et intérêts défiscalisés.
+                        </p>
                     </div>
                 </div>
             </div>

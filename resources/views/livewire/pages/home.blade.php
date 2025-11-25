@@ -133,6 +133,61 @@
                 </a></div>
         </div>
     </section>
+    <section class="py-20 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Pourquoi <span class="text-primary">Investir</span> ?</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Préparez votre avenir et réalisez vos projets grâce à l'investissement financier</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-card p-6 rounded-xl border border-border shadow-sm hover:shadow-elegant transition-smooth group">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap w-6 h-6 text-primary">
+                            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path>
+                            <path d="M22 10v6"></path>
+                            <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Éducation & Avenir</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">Garantissez les meilleures études supérieures et formations professionnelles pour vos enfants.</p>
+                </div>
+                <div class="bg-card p-6 rounded-xl border border-border shadow-sm hover:shadow-elegant transition-smooth group">
+                    <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palmtree w-6 h-6 text-secondary">
+                            <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4"></path>
+                            <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3"></path>
+                            <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.81-7.42.35z"></path>
+                            <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Retraite Paisible</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">Constituez un capital pour vous offrir une retraite confortable et augmenter votre rente.</p>
+                </div>
+                <div class="bg-card p-6 rounded-xl border border-border shadow-sm hover:shadow-elegant transition-smooth group">
+                    <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-6 h-6 text-accent">
+                            <rect width="20" height="14" x="2" y="6" rx="2" ry="2"></rect>
+                            <path d="M16 2v4"></path>
+                            <path d="M8 2v4"></path>
+                            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Entrepreneuriat</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">Disposez du capital nécessaire pour démarrer votre propre business ou activité.</p>
+                </div>
+                <div class="bg-card p-6 rounded-xl border border-border shadow-sm hover:shadow-elegant transition-smooth group">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-6 h-6 text-primary">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Projets de Vie</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">Financez vos projets immobiliers, mariages, voyages et autres événements marquants.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="py-20 bg-gradient-hero">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -419,165 +474,58 @@
             </div>
         </div>
     </section>
-    <section class="py-16 border-y border-border">
+    <section class="py-16 border-y border-border bg-muted/30">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <p class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">Ils
-                    nous font confiance</p>
-                <h2 class="text-2xl md:text-3xl font-bold">Nos <span class="text-primary">Partenaires</span>
-                </h2>
+                <p class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">Ils nous font confiance</p>
+                <h2 class="text-2xl md:text-3xl font-bold">Nos <span class="text-primary">Partenaires Officiels</span></h2>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Bourse Régionale des Valeurs Mobilières</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- SGO -->
+                <div>
+                    <h3 class="text-lg font-bold text-center mb-6 text-secondary">Sociétés de Gestion d'OPCVM (SGO)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">Africabourse Asset Mgt</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SAPHIR Asset Mgt</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">NSIA Asset Mgt</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SOAGA</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth col-span-2 md:col-span-1 md:col-start-1 md:col-end-3 lg:col-auto">
+                            <span class="font-semibold text-sm text-primary-foreground/80">Africaine de Gestion d'Actifs</span>
+                        </div>
                     </div>
                 </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Ecobank</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Bank of Africa</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Société Générale</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            BRVM</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Orabank</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            Coris Bank</p>
-                    </div>
-                </div>
-                <div
-                    class="flex items-center justify-center p-6 bg-muted/50 rounded-lg hover:bg-muted transition-smooth group">
-                    <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-building2 w-8 h-8 mx-auto mb-2 text-primary/60 group-hover:text-primary transition-smooth">
-                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                            <path d="M10 6h4"></path>
-                            <path d="M10 10h4"></path>
-                            <path d="M10 14h4"></path>
-                            <path d="M10 18h4"></path>
-                        </svg>
-                        <p
-                            class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-smooth">
-                            UBA</p>
+
+                <!-- SGI -->
+                <div>
+                    <h3 class="text-lg font-bold text-center mb-6 text-secondary">Sociétés de Gestion et d'Intermédiation (SGI)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">Africabourse</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BENIN</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SGI UCA</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BFS</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SGI AGI</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-lg shadow-sm border border-border text-center flex items-center justify-center h-20 hover:shadow-md transition-smooth">
+                            <span class="font-semibold text-sm text-primary-foreground/80">SGI BOA CAPITAL</span>
+                        </div>
                     </div>
                 </div>
             </div>

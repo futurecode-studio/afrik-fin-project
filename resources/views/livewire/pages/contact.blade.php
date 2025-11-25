@@ -147,7 +147,7 @@
                             <div>
                                 <h3 class="font-semibold text-lg mb-1">Adresse</h3>
                                 <p class="text-muted-foreground mb-2">Visitez notre bureau</p>
-                                <p class="text-foreground">Cot Agla c/3881<br>Cotonou, Bénin</p>
+                                <p class="text-foreground">Cot Agla c/3881<br>Agla, 4ème maison à étage après la pharmacie Agla en quittant le stade de l'amitié<br>Cotonou, Bénin</p>
                             </div>
                         </div>
                     </div>

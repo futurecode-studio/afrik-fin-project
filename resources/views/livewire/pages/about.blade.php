@@ -23,11 +23,7 @@
                             <circle cx="12" cy="12" r="2"></circle>
                         </svg></div>
                     <h2 class="text-2xl font-bold mb-4">Notre Mission</h2>
-                    <p class="text-muted-foreground leading-relaxed">Fournir aux investisseurs et
-                        professionnels de la finance les outils, données et formations nécessaires pour
-                        comprendre et tirer profit des opportunités offertes par la BRVM et les marchés
-                        financiers africains. Nous démocratisons l'accès à une information financière de
-                        qualité institutionnelle pour tous les acteurs de la zone UEMOA.</p>
+                    <p class="text-muted-foreground leading-relaxed">Vulgariser l’investissement sur le marché financier régional.</p>
                 </div>
                 <div
                     class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 border-border hover:shadow-elegant transition-smooth">
@@ -42,11 +38,7 @@
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg></div>
                     <h2 class="text-2xl font-bold mb-4">Notre Vision</h2>
-                    <p class="text-muted-foreground leading-relaxed">Devenir la plateforme de référence pour
-                        l'analyse et l'investissement sur les marchés financiers africains. Nous visons à
-                        accompagner le développement du marché des capitaux en Afrique de l'Ouest en formant
-                        une nouvelle génération d'investisseurs et d'analystes financiers qualifiés,
-                        contribuant ainsi à la croissance économique de la région.</p>
+                    <p class="text-muted-foreground leading-relaxed">Etre un intervenant stratégique dans la mobilisation des ressources pour l’animation du marché financier régional.</p>
                 </div>
             </div>
         </div>
@@ -311,6 +303,61 @@
                         </svg>
                         <h3 class="text-3xl font-bold text-primary mb-2">15</h3>
                         <p class="text-muted-foreground">Pays couverts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 bg-muted/30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nos <span class="text-primary">Partenaires</span></h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Nous collaborons avec les acteurs majeurs du marché financier régional</p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold text-center mb-8 text-secondary">Sociétés de Gestion d'OPCVM (SGO)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">Africabourse Asset Management</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SAPHIR Asset Management</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">NSIA Asset Management</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SOAGA</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">Africaine de Gestion d'Actifs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-center mb-8 text-secondary">Sociétés de Gestion et d'Intermédiation (SGI)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">Africabourse</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SGI BENIN</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SGI UCA</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SGI BFS</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SGI AGI</span>
+                        </div>
+                        <div class="bg-card p-4 rounded-xl shadow-sm border border-border text-center flex items-center justify-center h-28 hover:shadow-elegant hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+                            <span class="font-bold text-base md:text-lg text-muted-foreground group-hover:text-primary transition-colors">SGI BOA CAPITAL SECURITIES</span>
+                        </div>
                     </div>
                 </div>
             </div>
