@@ -25,37 +25,56 @@ class MutualFundsApiService
     {
         return Cache::remember('mutual_funds_data', $this->cacheDuration, function () {
             try {
+                // Respect config/env flags
+                $useDefaultFallback = filter_var(env('MUTUAL_FUNDS_USE_DEFAULT_FALLBACK', true), FILTER_VALIDATE_BOOLEAN);
+                $useMockData = filter_var(env('MUTUAL_FUNDS_USE_MOCK', false), FILTER_VALIDATE_BOOLEAN);
+
                 // 1. Essayer Alpha Vantage API (très fiable, gratuite)
                 $funds = $this->fetchFromAlphaVantage();
-                
                 if (!empty($funds)) {
                     Log::info('Mutual Funds: Alpha Vantage data loaded successfully');
                     return $funds;
                 }
-                
+
                 // 2. Essayer Yahoo Finance (ETFs mondiaux)
                 $funds = $this->fetchFromYahooFinance();
-                
                 if (!empty($funds)) {
                     Log::info('Mutual Funds: Yahoo Finance data loaded successfully');
                     return $funds;
                 }
-                
+
                 // 3. Fallback: API BRVM (Bourses africaines)
                 $funds = $this->fetchUEMOAFunds();
-                
                 if (!empty($funds)) {
                     Log::info('Mutual Funds: BRVM/UEMOA data loaded successfully');
                     return $funds;
                 }
-                
-                // 4. Fallback final: données réalistes
-                Log::warning('Mutual Funds: Using default data - all APIs failed');
-                return $this->getDefaultMutualFunds();
-                
+
+                // 4. Si mock mode forcé, utiliser les données mock (avec variations réalistes)
+                if ($useMockData) {
+                    Log::warning('Mutual Funds: Using mock data (MUTUAL_FUNDS_USE_MOCK=true)');
+                    return $this->getMockMutualFunds();
+                }
+
+                // 5. Si le fallback statique est autorisé, le retourner. Sinon, retourner tableau vide
+                if ($useDefaultFallback) {
+                    Log::warning('Mutual Funds: Using default data - all APIs failed');
+                    return $this->getDefaultMutualFunds();
+                }
+
+                Log::warning('Mutual Funds: All APIs failed and default fallback is disabled; returning empty dataset');
+                return [];
+
             } catch (\Exception $e) {
                 Log::error('Mutual Funds API Exception: ' . $e->getMessage());
-                return $this->getDefaultMutualFunds();
+                $useMockData = filter_var(env('MUTUAL_FUNDS_USE_MOCK', false), FILTER_VALIDATE_BOOLEAN);
+                if ($useMockData) {
+                    return $this->getMockMutualFunds();
+                }
+                if (filter_var(env('MUTUAL_FUNDS_USE_DEFAULT_FALLBACK', true), FILTER_VALIDATE_BOOLEAN)) {
+                    return $this->getDefaultMutualFunds();
+                }
+                return [];
             }
         });
     }
@@ -170,6 +189,9 @@ class MutualFundsApiService
     }
 
     /**
+     * Récupérer les données de Yahoo Finance (ETFs mondiaux)
+     */
+    public function getYahooFinanceFunds(): array
     {
         try {
             // Liste d'ETFs et indices africains/internationaux représentant des fonds
@@ -543,112 +565,221 @@ class MutualFundsApiService
     }
 
     /**
-     * Parser les données UEMOA (legacy - backward compatibility)
+     * Générer des données mock réalistes avec variations quotidiennes
+     * Utilisé quand l'internet est inaccessible (environnements offline)
+     * Les variations changent chaque jour basées sur la date du jour
      */
-
-    /**
-     * Récupérer les données de fonds par défaut (données réalistes)
-     */
-    public function getDefaultMutualFunds(): array
+    public function getMockMutualFunds(): array
     {
         $today = now();
-        $yesterday = now()->subDay();
+        // Générer une variation pseudo-aléatoire déterministe basée sur le jour
+        // Variation entre -2% et +2%
+        $dayHash = (int)$today->format('d'); // 1-31
+        $seedOffset = ($dayHash % 5) - 2; // -2 à +2
 
-        // Données réalistes de fonds africains/UEMOA
         return [
             [
-                'id' => 'SOGEF001',
-                'name' => 'Sogéfidev Actions',
-                'company' => 'SOGÉ GESTION',
-                'nav_value' => $this->formatCurrency(8542.50),
-                'nav_numeric' => 8542.50,
-                'variation' => $this->formatVariation(125.30, 1.49),
-                'variation_percentage' => 1.49,
-                'currency' => 'FCFA',
+                'id' => 'MOCK-IDX-GSPC',
+                'name' => 'S&P 500 Index (Mock)',
+                'company' => 'S&P Global',
+                'nav_numeric' => 5234.56 + ($seedOffset * 50),
+                'nav_value' => $this->formatCurrency(5234.56 + ($seedOffset * 50), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 50, $seedOffset * 0.95),
+                'variation_percentage' => round($seedOffset * 0.95, 2),
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Actions',
             ],
             [
-                'id' => 'SOGEF002',
-                'name' => 'Sogéfidev Obligations',
-                'company' => 'SOGÉ GESTION',
-                'nav_value' => $this->formatCurrency(5234.75),
-                'nav_numeric' => 5234.75,
-                'variation' => $this->formatVariation(-15.20, -0.29),
-                'variation_percentage' => -0.29,
-                'currency' => 'FCFA',
+                'id' => 'MOCK-IDX-IXIC',
+                'name' => 'NASDAQ Composite (Mock)',
+                'company' => 'Nasdaq',
+                'nav_numeric' => 16542.34 + ($seedOffset * 120),
+                'nav_value' => $this->formatCurrency(16542.34 + ($seedOffset * 120), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 120, $seedOffset * 0.73),
+                'variation_percentage' => round($seedOffset * 0.73, 2),
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Actions',
+            ],
+            [
+                'id' => 'MOCK-VTI',
+                'name' => 'Vanguard Total Market (Mock)',
+                'company' => 'Vanguard Group',
+                'nav_numeric' => 245.67 + ($seedOffset * 1.5),
+                'nav_value' => $this->formatCurrency(245.67 + ($seedOffset * 1.5), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 1.5, $seedOffset * 0.61),
+                'variation_percentage' => round($seedOffset * 0.61, 2),
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Actions',
+            ],
+            [
+                'id' => 'MOCK-IDX-TNX',
+                'name' => 'US 10-Year Bond Yield (Mock)',
+                'company' => 'US Treasury',
+                'nav_numeric' => 4.25 + ($seedOffset * 0.15),
+                'nav_value' => $this->formatCurrency(4.25 + ($seedOffset * 0.15), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 0.15, $seedOffset * -1.84),
+                'variation_percentage' => round($seedOffset * -1.84, 2),
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Obligations',
             ],
             [
-                'id' => 'SOGEF003',
-                'name' => 'Sogéfidev Monétaire',
-                'company' => 'SOGÉ GESTION',
-                'nav_value' => $this->formatCurrency(3812.00),
-                'nav_numeric' => 3812.00,
-                'variation' => $this->formatVariation(28.50, 0.75),
-                'variation_percentage' => 0.75,
-                'currency' => 'FCFA',
+                'id' => 'MOCK-BND',
+                'name' => 'Vanguard Total Bond (Mock)',
+                'company' => 'Vanguard Group',
+                'nav_numeric' => 74.23 + ($seedOffset * 0.8),
+                'nav_value' => $this->formatCurrency(74.23 + ($seedOffset * 0.8), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 0.8, $seedOffset * 0.70),
+                'variation_percentage' => round($seedOffset * 0.70, 2),
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Obligations',
+            ],
+            [
+                'id' => 'MOCK-IDX-VIX',
+                'name' => 'Volatility Index (Mock)',
+                'company' => 'CBOE',
+                'nav_numeric' => 16.45 + ($seedOffset * 1.2),
+                'nav_value' => $this->formatCurrency(16.45 + ($seedOffset * 1.2), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 1.2, $seedOffset * -5.63),
+                'variation_percentage' => round($seedOffset * -5.63, 2),
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Obligations',
+            ],
+            [
+                'id' => 'MOCK-IDX-FTSE',
+                'name' => 'FTSE 100 Index (Mock)',
+                'company' => 'London Exchange',
+                'nav_numeric' => 7542.30 + ($seedOffset * 35),
+                'nav_value' => $this->formatCurrency(7542.30 + ($seedOffset * 35), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 35, $seedOffset * 0.46),
+                'variation_percentage' => round($seedOffset * 0.46, 2),
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Monétaire',
             ],
             [
-                'id' => 'CFAO001',
-                'name' => 'CFAO Fund Equity',
-                'company' => 'CFAO INVEST',
-                'nav_value' => $this->formatCurrency(12156.25),
-                'nav_numeric' => 12156.25,
-                'variation' => $this->formatVariation(320.45, 2.71),
-                'variation_percentage' => 2.71,
-                'currency' => 'FCFA',
-                'date' => $today->format('Y-m-d'),
-                'category' => 'Actions',
-            ],
-            [
-                'id' => 'ARION001',
-                'name' => 'Arion Multi-Assets',
-                'company' => 'ARION GESTION',
-                'nav_value' => $this->formatCurrency(6789.50),
-                'nav_numeric' => 6789.50,
-                'variation' => $this->formatVariation(-85.10, -1.23),
-                'variation_percentage' => -1.23,
-                'currency' => 'FCFA',
+                'id' => 'MOCK-IDX-N225',
+                'name' => 'Nikkei 225 (Mock)',
+                'company' => 'Japan Exchange',
+                'nav_numeric' => 33454.67 + ($seedOffset * 200),
+                'nav_value' => $this->formatCurrency(33454.67 + ($seedOffset * 200), 'USD'),
+                'variation' => $this->formatVariation($seedOffset * 200, $seedOffset * 1.64),
+                'variation_percentage' => round($seedOffset * 1.64, 2),
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Mixte',
             ],
+        ];
+    }
+
+    /**
+     * Récupérer les données de fonds par défaut (données statiques, fallback final)
+     * Affichées uniquement si tous les APIs ont échoué ET mock mode désactivé
+     */
+    public function getDefaultMutualFunds(): array
+    {
+        $today = now();
+
+        // Données statiques de fonds réalistes (ne changent jamais)
+        return [
             [
-                'id' => 'CAPITAL001',
-                'name' => 'Capital Afrique Actions',
-                'company' => 'CAPITAL GESTION',
-                'nav_value' => $this->formatCurrency(9234.80),
-                'nav_numeric' => 9234.80,
-                'variation' => $this->formatVariation(215.60, 2.38),
-                'variation_percentage' => 2.38,
-                'currency' => 'FCFA',
+                'id' => 'IDX-GSPC',
+                'name' => 'S&P 500 Index',
+                'company' => 'S&P Global',
+                'nav_numeric' => 5234.56,
+                'nav_value' => $this->formatCurrency(5234.56, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Actions',
             ],
             [
-                'id' => 'NSIA001',
-                'name' => 'NSIA Rendement Plus',
-                'company' => 'NSIA INVESTISSEMENTS',
-                'nav_value' => $this->formatCurrency(4567.25),
-                'nav_numeric' => 4567.25,
-                'variation' => $this->formatVariation(45.30, 1.00),
-                'variation_percentage' => 1.00,
-                'currency' => 'FCFA',
+                'id' => 'IDX-IXIC',
+                'name' => 'NASDAQ Composite',
+                'company' => 'Nasdaq',
+                'nav_numeric' => 16542.34,
+                'nav_value' => $this->formatCurrency(16542.34, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Actions',
+            ],
+            [
+                'id' => 'VTI',
+                'name' => 'Vanguard Total Market',
+                'company' => 'Vanguard Group',
+                'nav_numeric' => 245.67,
+                'nav_value' => $this->formatCurrency(245.67, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Actions',
+            ],
+            [
+                'id' => 'IDX-TNX',
+                'name' => 'US 10-Year Bond Yield',
+                'company' => 'US Treasury',
+                'nav_numeric' => 4.25,
+                'nav_value' => $this->formatCurrency(4.25, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Obligations',
             ],
             [
-                'id' => 'ECOBANK001',
-                'name' => 'Ecobank Fonds Mixte',
-                'company' => 'ECOBANK GESTION',
-                'nav_value' => $this->formatCurrency(7834.10),
-                'nav_numeric' => 7834.10,
-                'variation' => $this->formatVariation(-120.50, -1.51),
-                'variation_percentage' => -1.51,
-                'currency' => 'FCFA',
+                'id' => 'BND',
+                'name' => 'Vanguard Total Bond',
+                'company' => 'Vanguard Group',
+                'nav_numeric' => 74.23,
+                'nav_value' => $this->formatCurrency(74.23, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Obligations',
+            ],
+            [
+                'id' => 'IDX-VIX',
+                'name' => 'Volatility Index',
+                'company' => 'CBOE',
+                'nav_numeric' => 16.45,
+                'nav_value' => $this->formatCurrency(16.45, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Obligations',
+            ],
+            [
+                'id' => 'IDX-FTSE',
+                'name' => 'FTSE 100 Index',
+                'company' => 'London Exchange',
+                'nav_numeric' => 7542.30,
+                'nav_value' => $this->formatCurrency(7542.30, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
+                'date' => $today->format('Y-m-d'),
+                'category' => 'Monétaire',
+            ],
+            [
+                'id' => 'IDX-N225',
+                'name' => 'Nikkei 225',
+                'company' => 'Japan Exchange',
+                'nav_numeric' => 33454.67,
+                'nav_value' => $this->formatCurrency(33454.67, 'USD'),
+                'variation' => $this->formatVariation(0, 0),
+                'variation_percentage' => 0.00,
+                'currency' => 'USD',
                 'date' => $today->format('Y-m-d'),
                 'category' => 'Mixte',
             ],
