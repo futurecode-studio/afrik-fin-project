@@ -31,16 +31,17 @@ class Formations extends Component
             return;
         }
 
+        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
+        if (!Auth::check()) {
+            // Stocker l'ID de la formation pour après connexion
+            session(['intended_formation' => $formationId]);
+            return $this->redirect(route('connexion'), navigate: true);
+        }
+
         // Si la formation est gratuite, inscrire directement
         if ($this->selectedFormation->isFree()) {
             $this->enrollFree();
             return;
-        }
-
-        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
-        if (!Auth::check()) {
-            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
-            return redirect()->route('login', ['redirect' => route('formations')]);
         }
 
         // Vérifier si déjà inscrit

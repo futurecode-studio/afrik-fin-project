@@ -36,14 +36,15 @@ class FormationDetail extends Component
 
     public function openPaymentModal()
     {
+        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
+        if (!Auth::check()) {
+            session(['intended_formation' => $this->formation->id]);
+            return $this->redirect(route('connexion'), navigate: true);
+        }
+
         if ($this->formation->isFree()) {
             $this->enrollFree();
             return;
-        }
-
-        if (!Auth::check()) {
-            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
-            return redirect()->route('login', ['redirect' => route('formation-detail', $this->formation->slug)]);
         }
 
         if ($this->isEnrolled) {
@@ -63,8 +64,8 @@ class FormationDetail extends Component
     public function enrollFree()
     {
         if (!Auth::check()) {
-            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
-            return redirect()->route('login', ['redirect' => route('formation-detail', $this->formation->slug)]);
+            session(['intended_formation' => $this->formation->id]);
+            return $this->redirect(route('connexion'), navigate: true);
         }
 
         $paymentService = new PaymentService();
