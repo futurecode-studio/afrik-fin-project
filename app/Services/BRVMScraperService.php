@@ -19,68 +19,67 @@ class BRVMScraperService
     private $brvm_url = 'https://www.brvm.org';
 
     /**
-     * Liste complète des symboles BRVM avec leurs informations
+     * Liste complète des symboles BRVM avec leurs informations et capitalisations estimées (en millions FCFA)
      */
     private $brvmSymbols = [
         // Secteur Finance
-        'BOAB' => ['name' => 'BOA Bénin', 'sector' => 'Finance', 'country' => 'Bénin'],
-        'BOABF' => ['name' => 'BOA Burkina Faso', 'sector' => 'Finance', 'country' => 'Burkina Faso'],
-        'BOAC' => ['name' => 'BOA Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'BOAM' => ['name' => 'BOA Mali', 'sector' => 'Finance', 'country' => 'Mali'],
-        'BOAN' => ['name' => 'BOA Niger', 'sector' => 'Finance', 'country' => 'Niger'],
-        'BOAS' => ['name' => 'BOA Sénégal', 'sector' => 'Finance', 'country' => 'Sénégal'],
-        'CBIBF' => ['name' => 'Coris Bank International', 'sector' => 'Finance', 'country' => 'Burkina Faso'],
-        'ECOC' => ['name' => 'Ecobank Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'ETIT' => ['name' => 'Ecobank Transnational Inc.', 'sector' => 'Finance', 'country' => 'Togo'],
-        'NSBC' => ['name' => 'NSIA Banque Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'ORGT' => ['name' => 'Oragroup', 'sector' => 'Finance', 'country' => 'Togo'],
-        'SAFC' => ['name' => 'SAFCA', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'SGBC' => ['name' => 'Société Générale CI', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'SIBC' => ['name' => 'SIB Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
-        'BICC' => ['name' => 'BICICI', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire'],
+        'BOAB' => ['name' => 'BOA Bénin', 'sector' => 'Finance', 'country' => 'Bénin', 'market_cap' => 185000],
+        'BOABF' => ['name' => 'BOA Burkina Faso', 'sector' => 'Finance', 'country' => 'Burkina Faso', 'market_cap' => 142000],
+        'BOAC' => ['name' => 'BOA Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 198000],
+        'BOAM' => ['name' => 'BOA Mali', 'sector' => 'Finance', 'country' => 'Mali', 'market_cap' => 95000],
+        'BOAN' => ['name' => 'BOA Niger', 'sector' => 'Finance', 'country' => 'Niger', 'market_cap' => 78000],
+        'BOAS' => ['name' => 'BOA Sénégal', 'sector' => 'Finance', 'country' => 'Sénégal', 'market_cap' => 165000],
+        'CBIBF' => ['name' => 'Coris Bank International', 'sector' => 'Finance', 'country' => 'Burkina Faso', 'market_cap' => 245000],
+        'ECOC' => ['name' => 'Ecobank Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 125000],
+        'ETIT' => ['name' => 'Ecobank Transnational Inc.', 'sector' => 'Finance', 'country' => 'Togo', 'market_cap' => 890000],
+        'NSBC' => ['name' => 'NSIA Banque Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 156000],
+        'ORGT' => ['name' => 'Oragroup', 'sector' => 'Finance', 'country' => 'Togo', 'market_cap' => 98000],
+        'SAFC' => ['name' => 'SAFCA', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 45000],
+        'SGBC' => ['name' => 'Société Générale CI', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 425000],
+        'SIBC' => ['name' => 'SIB Côte d\'Ivoire', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 178000],
+        'BICC' => ['name' => 'BICICI', 'sector' => 'Finance', 'country' => 'Côte d\'Ivoire', 'market_cap' => 210000],
 
         // Secteur Télécommunications
-        'SNTS' => ['name' => 'Sonatel', 'sector' => 'Télécommunications', 'country' => 'Sénégal'],
-        'ONTBF' => ['name' => 'Onatel Burkina Faso', 'sector' => 'Télécommunications', 'country' => 'Burkina Faso'],
-        'ORAC' => ['name' => 'Orange Côte d\'Ivoire', 'sector' => 'Télécommunications', 'country' => 'Côte d\'Ivoire'],
+        'SNTS' => ['name' => 'Sonatel', 'sector' => 'Télécommunications', 'country' => 'Sénégal', 'market_cap' => 2850000],
+        'ONTBF' => ['name' => 'Onatel Burkina Faso', 'sector' => 'Télécommunications', 'country' => 'Burkina Faso', 'market_cap' => 385000],
+        'ORAC' => ['name' => 'Orange Côte d\'Ivoire', 'sector' => 'Télécommunications', 'country' => 'Côte d\'Ivoire', 'market_cap' => 1250000],
 
         // Secteur Industrie
-        'CABC' => ['name' => 'Sicable', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'FTSC' => ['name' => 'Filtisac', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'NEIC' => ['name' => 'NEI-CEDA', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'SEMC' => ['name' => 'Crown SIEM', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'SLBC' => ['name' => 'Solibra', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'SMBC' => ['name' => 'SMB', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'STBC' => ['name' => 'SITAB', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'TTLC' => ['name' => 'Total CI', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'TTLS' => ['name' => 'Total Sénégal', 'sector' => 'Industrie', 'country' => 'Sénégal'],
-        'UNLC' => ['name' => 'Unilever CI', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
-        'UNXC' => ['name' => 'Uniwax', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire'],
+        'CABC' => ['name' => 'Sicable', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 32000],
+        'FTSC' => ['name' => 'Filtisac', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 28000],
+        'NEIC' => ['name' => 'NEI-CEDA', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 18500],
+        'SEMC' => ['name' => 'Crown SIEM', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 42000],
+        'SLBC' => ['name' => 'Solibra', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 485000],
+        'SMBC' => ['name' => 'SMB', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 25000],
+        'STBC' => ['name' => 'SITAB', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 35000],
+        'TTLC' => ['name' => 'Total CI', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 320000],
+        'TTLS' => ['name' => 'Total Sénégal', 'sector' => 'Industrie', 'country' => 'Sénégal', 'market_cap' => 185000],
+        'UNLC' => ['name' => 'Unilever CI', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 145000],
+        'UNXC' => ['name' => 'Uniwax', 'sector' => 'Industrie', 'country' => 'Côte d\'Ivoire', 'market_cap' => 38000],
 
         // Secteur Agriculture
-        'PALC' => ['name' => 'Palm CI', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
-        'PRSC' => ['name' => 'Sucrivoire', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
-        'SCRC' => ['name' => 'SUCAF CI', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
-        'SICC' => ['name' => 'SICOR', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
-        'SOGC' => ['name' => 'SOGB', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
-        'SPHC' => ['name' => 'SAPH', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire'],
+        'PALC' => ['name' => 'Palm CI', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 285000],
+        'PRSC' => ['name' => 'Sucrivoire', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 65000],
+        'SCRC' => ['name' => 'SUCAF CI', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 48000],
+        'SICC' => ['name' => 'SICOR', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 52000],
+        'SOGC' => ['name' => 'SOGB', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 125000],
+        'SPHC' => ['name' => 'SAPH', 'sector' => 'Agriculture', 'country' => 'Côte d\'Ivoire', 'market_cap' => 195000],
 
         // Secteur Distribution
-        'APTS' => ['name' => 'Vivo Energy CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
-        'BNBC' => ['name' => 'Bernabé CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
-        'CFAC' => ['name' => 'CFAO Motors CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
-        'PRSC' => ['name' => 'Tractafric Motors CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
-        'SHEC' => ['name' => 'Vivo Energy CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
-        'TTRC' => ['name' => 'Trituraf', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire'],
+        'APTS' => ['name' => 'Vivo Energy CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire', 'market_cap' => 165000],
+        'BNBC' => ['name' => 'Bernabé CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire', 'market_cap' => 28000],
+        'CFAC' => ['name' => 'CFAO Motors CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire', 'market_cap' => 85000],
+        'SHEC' => ['name' => 'Vivo Energy CI', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire', 'market_cap' => 165000],
+        'TTRC' => ['name' => 'Trituraf', 'sector' => 'Distribution', 'country' => 'Côte d\'Ivoire', 'market_cap' => 22000],
 
         // Secteur Services Publics
-        'CIEC' => ['name' => 'CIE', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire'],
-        'SDCC' => ['name' => 'SODECI', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire'],
-        'SDSC' => ['name' => 'SDS', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire'],
+        'CIEC' => ['name' => 'CIE', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire', 'market_cap' => 245000],
+        'SDCC' => ['name' => 'SODECI', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire', 'market_cap' => 185000],
+        'SDSC' => ['name' => 'SDS', 'sector' => 'Services Publics', 'country' => 'Côte d\'Ivoire', 'market_cap' => 42000],
 
         // Secteur Transport
-        'SVOC' => ['name' => 'Movis', 'sector' => 'Transport', 'country' => 'Côte d\'Ivoire'],
-        'STAC' => ['name' => 'SETAO', 'sector' => 'Transport', 'country' => 'Côte d\'Ivoire'],
+        'SVOC' => ['name' => 'Movis', 'sector' => 'Transport', 'country' => 'Côte d\'Ivoire', 'market_cap' => 35000],
+        'STAC' => ['name' => 'SETAO', 'sector' => 'Transport', 'country' => 'Côte d\'Ivoire', 'market_cap' => 28000],
     ];
 
     public function __construct()
@@ -208,6 +207,7 @@ class BRVMScraperService
                             'previous_price' => $price / (1 + ($variation / 100)),
                             'variation_percent' => round($variation, 2),
                             'volume' => 0,
+                            'market_cap' => $info['market_cap'] ?? 0,
                             'sector' => $info['sector'],
                             'country' => $info['country'],
                             'source' => 'richbourse',
@@ -251,6 +251,7 @@ class BRVMScraperService
                                 'previous_price' => $item['previous'] ?? $item['open'] ?? 0,
                                 'variation_percent' => $item['change'] ?? $item['variation'] ?? 0,
                                 'volume' => $item['volume'] ?? 0,
+                                'market_cap' => $info['market_cap'] ?? 0,
                                 'sector' => $info['sector'],
                                 'country' => $info['country'],
                                 'source' => 'richbourse',
@@ -316,7 +317,8 @@ class BRVMScraperService
                         $info = $this->brvmSymbols[$symbol] ?? [
                             'name' => $symbol,
                             'sector' => 'Autre',
-                            'country' => 'UEMOA'
+                            'country' => 'UEMOA',
+                            'market_cap' => 0
                         ];
 
                         $stocks[] = [
@@ -326,6 +328,7 @@ class BRVMScraperService
                             'previous_price' => $previousPrice > 0 ? $previousPrice : $currentPrice,
                             'variation_percent' => round($variation, 2),
                             'volume' => 0,
+                            'market_cap' => $info['market_cap'] ?? 0,
                             'sector' => $info['sector'],
                             'country' => $info['country'],
                             'source' => 'brvm',
@@ -560,7 +563,12 @@ class BRVMScraperService
             return $this->getDefaultStocks();
         }
 
-        return $dbStocks->map(function ($stock) {
+        $brvmSymbols = $this->brvmSymbols;
+
+        return $dbStocks->map(function ($stock) use ($brvmSymbols) {
+            // Enrichir avec les données de référence BRVM
+            $info = $brvmSymbols[$stock->symbol] ?? null;
+            
             return [
                 'symbol' => $stock->symbol,
                 'company_name' => $stock->company_name,
@@ -568,7 +576,8 @@ class BRVMScraperService
                 'previous_price' => $stock->previous_price,
                 'variation_percent' => $stock->variation_percent,
                 'volume' => $stock->volume,
-                'sector' => $stock->sector,
+                'market_cap' => $stock->market_cap ?? ($info['market_cap'] ?? 0),
+                'sector' => $stock->sector ?? ($info['sector'] ?? 'Autre'),
                 'source' => 'database',
             ];
         })->toArray();
@@ -591,6 +600,7 @@ class BRVMScraperService
                 'previous_price' => 15200,
                 'variation_percent' => round($seedOffset * 0.66, 2),
                 'volume' => 12500,
+                'market_cap' => 2850000,
                 'sector' => 'Télécommunications',
                 'source' => 'default',
             ],
@@ -601,6 +611,7 @@ class BRVMScraperService
                 'previous_price' => 12500,
                 'variation_percent' => round($seedOffset * 0.64, 2),
                 'volume' => 8900,
+                'market_cap' => 1250000,
                 'sector' => 'Télécommunications',
                 'source' => 'default',
             ],
@@ -611,6 +622,7 @@ class BRVMScraperService
                 'previous_price' => 11800,
                 'variation_percent' => round($seedOffset * 0.76, 2),
                 'volume' => 5600,
+                'market_cap' => 425000,
                 'sector' => 'Finance',
                 'source' => 'default',
             ],
@@ -621,6 +633,7 @@ class BRVMScraperService
                 'previous_price' => 5950,
                 'variation_percent' => round($seedOffset * 0.67, 2),
                 'volume' => 3200,
+                'market_cap' => 185000,
                 'sector' => 'Finance',
                 'source' => 'default',
             ],
@@ -631,6 +644,7 @@ class BRVMScraperService
                 'previous_price' => 18,
                 'variation_percent' => round($seedOffset * 2.78, 2),
                 'volume' => 45000,
+                'market_cap' => 890000,
                 'sector' => 'Finance',
                 'source' => 'default',
             ],
@@ -641,6 +655,7 @@ class BRVMScraperService
                 'previous_price' => 6200,
                 'variation_percent' => round($seedOffset * 0.81, 2),
                 'volume' => 2100,
+                'market_cap' => 285000,
                 'sector' => 'Agriculture',
                 'source' => 'default',
             ],
@@ -651,6 +666,7 @@ class BRVMScraperService
                 'previous_price' => 89000,
                 'variation_percent' => round($seedOffset * 0.56, 2),
                 'volume' => 450,
+                'market_cap' => 485000,
                 'sector' => 'Industrie',
                 'source' => 'default',
             ],
@@ -661,6 +677,7 @@ class BRVMScraperService
                 'previous_price' => 3800,
                 'variation_percent' => round($seedOffset * 0.79, 2),
                 'volume' => 1800,
+                'market_cap' => 385000,
                 'sector' => 'Télécommunications',
                 'source' => 'default',
             ],
@@ -671,6 +688,7 @@ class BRVMScraperService
                 'previous_price' => 9500,
                 'variation_percent' => round($seedOffset * 0.74, 2),
                 'volume' => 2800,
+                'market_cap' => 245000,
                 'sector' => 'Finance',
                 'source' => 'default',
             ],
@@ -681,6 +699,7 @@ class BRVMScraperService
                 'previous_price' => 2100,
                 'variation_percent' => round($seedOffset * 0.95, 2),
                 'volume' => 4500,
+                'market_cap' => 245000,
                 'sector' => 'Services Publics',
                 'source' => 'default',
             ],

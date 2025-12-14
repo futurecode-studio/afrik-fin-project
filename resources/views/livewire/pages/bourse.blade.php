@@ -121,9 +121,10 @@
                             <tr>
                                 <th class="text-left p-4 font-semibold">Symbole</th>
                                 <th class="text-left p-4 font-semibold">Nom</th>
+                                <th class="text-left p-4 font-semibold">Secteur</th>
                                 <th class="text-right p-4 font-semibold">Cours (FCFA)</th>
                                 <th class="text-right p-4 font-semibold">Volume</th>
-                                <th class="text-right p-4 font-semibold">Cap. (M)</th>
+                                <th class="text-right p-4 font-semibold">Cap. (Mrd)</th>
                                 <th class="text-right p-4 font-semibold">Variation</th>
                                 <th class="text-right p-4 font-semibold">Action</th>
                             </tr>
@@ -135,17 +136,38 @@
                                     <span class="font-bold text-primary">{{ $stock['symbol'] ?? 'N/A' }}</span>
                                 </td>
                                 <td class="p-4">{{ $stock['company_name'] ?? 'N/A' }}</td>
+                                <td class="p-4">
+                                    @php
+                                        $sector = $stock['sector'] ?? 'Autre';
+                                        $sectorColors = [
+                                            'Finance' => 'bg-blue-100 text-blue-800',
+                                            'Banque' => 'bg-blue-100 text-blue-800',
+                                            'Télécommunications' => 'bg-purple-100 text-purple-800',
+                                            'Agriculture' => 'bg-green-100 text-green-800',
+                                            'Industrie' => 'bg-orange-100 text-orange-800',
+                                            'Distribution' => 'bg-yellow-100 text-yellow-800',
+                                            'Services Publics' => 'bg-cyan-100 text-cyan-800',
+                                            'Transport' => 'bg-indigo-100 text-indigo-800',
+                                        ];
+                                        $sectorColor = $sectorColors[$sector] ?? 'bg-gray-100 text-gray-800';
+                                    @endphp
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium {{ $sectorColor }}">
+                                        {{ $sector }}
+                                    </span>
+                                </td>
                                 <td class="p-4 text-right font-semibold">
                                     {{ number_format($stock['current_price'] ?? 0, 0, ',', ' ') }}
                                 </td>
                                 <td class="p-4 text-right text-muted-foreground">
-                                    {{ number_format($stock['volume'] ?? 0) }}
+                                    {{ number_format($stock['volume'] ?? 0, 0, ',', ' ') }}
                                 </td>
                                 <td class="p-4 text-right text-muted-foreground">
-                                    @if(isset($stock['market_cap']) && $stock['market_cap'] >= 1000)
-                                        {{ number_format($stock['market_cap'] / 1000, 1) }}B
-                                    @elseif(isset($stock['market_cap']))
-                                        {{ number_format($stock['market_cap'], 0) }}M
+                                    @if(isset($stock['market_cap']) && $stock['market_cap'] > 0)
+                                        @if($stock['market_cap'] >= 1000)
+                                            {{ number_format($stock['market_cap'] / 1000, 1, ',', ' ') }} B
+                                        @else
+                                            {{ number_format($stock['market_cap'], 0, ',', ' ') }} M
+                                        @endif
                                     @else
                                         -
                                     @endif
@@ -182,7 +204,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="p-8 text-center text-muted-foreground">
+                                <td colspan="8" class="p-8 text-center text-muted-foreground">
                                     @if($isLoading)
                                         <div class="flex items-center justify-center gap-2">
                                             <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
