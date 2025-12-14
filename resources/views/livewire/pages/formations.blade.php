@@ -239,24 +239,60 @@
                     <label class="block text-sm font-medium text-foreground mb-3">Choisissez votre moyen de paiement</label>
                     <div class="grid grid-cols-2 gap-4">
                         <!-- KKiaPay -->
-                        <label class="relative cursor-pointer">
-                            <input type="radio" wire:model="paymentProvider" value="kkiapay" class="peer sr-only">
-                            <div class="border-2 border-border rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-muted-foreground bg-card">
-                                <img src="https://kkiapay.me/favicon.ico" alt="KKiaPay" class="w-10 h-10 mx-auto mb-2">
+                        <label class="relative cursor-pointer block">
+                            <input type="radio" wire:model.live="paymentProvider" value="kkiapay" class="sr-only">
+                            <div class="border-2 rounded-lg p-4 text-center transition-all {{ $paymentProvider === 'kkiapay' ? 'border-primary bg-primary/10 ring-2 ring-primary ring-offset-2' : 'border-border hover:border-muted-foreground bg-card' }}">
+                                <div class="w-12 h-12 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 font-bold">KK</span>
+                                </div>
                                 <span class="font-medium text-foreground">KKiaPay</span>
                                 <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
+                                @if($paymentProvider === 'kkiapay')
+                                    <div class="mt-2">
+                                        <span class="inline-flex items-center gap-1 text-xs text-primary font-medium">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                            Sélectionné
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
                         </label>
                         
                         <!-- FedaPay -->
-                        <label class="relative cursor-pointer">
-                            <input type="radio" wire:model="paymentProvider" value="fedapay" class="peer sr-only">
-                            <div class="border-2 border-border rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-muted-foreground bg-card">
-                                <img src="https://fedapay.com/favicon.ico" alt="FedaPay" class="w-10 h-10 mx-auto mb-2">
+                        <label class="relative cursor-pointer block">
+                            <input type="radio" wire:model.live="paymentProvider" value="fedapay" class="sr-only">
+                            <div class="border-2 rounded-lg p-4 text-center transition-all {{ $paymentProvider === 'fedapay' ? 'border-primary bg-primary/10 ring-2 ring-primary ring-offset-2' : 'border-border hover:border-muted-foreground bg-card' }}">
+                                <div class="w-12 h-12 mx-auto mb-2 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600 font-bold">FP</span>
+                                </div>
                                 <span class="font-medium text-foreground">FedaPay</span>
                                 <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
+                                @if($paymentProvider === 'fedapay')
+                                    <div class="mt-2">
+                                        <span class="inline-flex items-center gap-1 text-xs text-primary font-medium">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                            Sélectionné
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
                         </label>
+                    </div>
+                    
+                    <!-- Affichage du moyen sélectionné -->
+                    <div class="mt-3 p-3 bg-muted/50 rounded-lg">
+                        <p class="text-sm text-center">
+                            <span class="text-muted-foreground">Moyen de paiement :</span>
+                            <span class="font-semibold text-foreground ml-1">
+                                @if($paymentProvider === 'kkiapay')
+                                    KKiaPay
+                                @elseif($paymentProvider === 'fedapay')
+                                    FedaPay
+                                @else
+                                    Non sélectionné
+                                @endif
+                            </span>
+                        </p>
                     </div>
                 </div>
 
@@ -269,10 +305,19 @@
                 </div>
 
                 <!-- Bouton de paiement -->
-                <button wire:click="initiatePayment" wire:loading.attr="disabled"
+                <button wire:click="initiatePayment" wire:loading.attr="disabled" wire:target="initiatePayment"
                     class="w-full bg-primary text-primary-foreground font-semibold py-4 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
-                    <span wire:loading.remove>Payer {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA</span>
-                    <span wire:loading class="flex items-center gap-2">
+                    <span wire:loading.remove wire:target="initiatePayment">
+                        <span class="flex items-center gap-2">
+                            @if($paymentProvider === 'kkiapay')
+                                <span class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600">K</span>
+                            @else
+                                <span class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs font-bold text-green-600">F</span>
+                            @endif
+                            Payer {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA via {{ $paymentProvider === 'kkiapay' ? 'KKiaPay' : 'FedaPay' }}
+                        </span>
+                    </span>
+                    <span wire:loading wire:target="initiatePayment" class="flex items-center gap-2">
                         <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -308,35 +353,55 @@
             const paymentData = data[0];
             
             if (paymentData.provider === 'kkiapay') {
-                openKkiapayWidget(paymentData);
+                initKkiapayPayment(paymentData);
             } else if (paymentData.provider === 'fedapay') {
-                openFedapayWidget(paymentData);
+                initFedapayPayment(paymentData);
             }
         });
     });
 
-    function openKkiapayWidget(data) {
-        openKkiapayWidget({
-            amount: data.amount,
-            position: "center",
-            callback: "",
-            data: data.reference,
-            theme: "#1e40af",
-            key: "{{ config('services.kkiapay.public_key') }}",
-            sandbox: {{ config('services.kkiapay.sandbox') ? 'true' : 'false' }},
-        });
+    function initKkiapayPayment(data) {
+        try {
+            // Vérifier que le SDK KKiaPay est chargé
+            if (typeof openKkiapayWidget === 'undefined') {
+                console.error('SDK KKiaPay non chargé');
+                alert('Le service de paiement KKiaPay n\'est pas disponible. Veuillez rafraîchir la page.');
+                return;
+            }
+            
+            openKkiapayWidget({
+                amount: data.amount,
+                position: "center",
+                callback: "",
+                data: data.reference,
+                theme: "#1e40af",
+                key: "{{ config('services.kkiapay.public_key') }}",
+                sandbox: {{ config('services.kkiapay.sandbox') ? 'true' : 'false' }},
+            });
 
-        addSuccessListener(response => {
-            Livewire.dispatch('paymentSuccess', [{
-                transactionId: response.transactionId,
-                reference: data.reference,
-                status: 'SUCCESS'
-            }]);
-        });
+            addSuccessListener(response => {
+                Livewire.dispatch('paymentSuccess', [{
+                    transactionId: response.transactionId,
+                    reference: data.reference,
+                    status: 'SUCCESS'
+                }]);
+            });
+        } catch (error) {
+            console.error('Erreur KKiaPay:', error);
+            alert('Erreur lors de l\'ouverture du widget de paiement KKiaPay. Veuillez réessayer.');
+        }
     }
 
-    function openFedapayWidget(data) {
-        FedaPay.init({
+    function initFedapayPayment(data) {
+        try {
+            // Vérifier que le SDK FedaPay est chargé
+            if (typeof FedaPay === 'undefined') {
+                console.error('SDK FedaPay non chargé');
+                alert('Le service de paiement FedaPay n\'est pas disponible. Veuillez rafraîchir la page.');
+                return;
+            }
+            
+            FedaPay.init({
             public_key: "{{ config('services.fedapay.public_key') }}",
             transaction: {
                 amount: data.amount,
@@ -356,6 +421,10 @@
                 }
             }
         }).open();
+        } catch (error) {
+            console.error('Erreur FedaPay:', error);
+            alert('Erreur lors de l\'ouverture du widget de paiement FedaPay. Veuillez réessayer.');
+        }
     }
 </script>
 @endpush
