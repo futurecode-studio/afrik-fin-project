@@ -276,9 +276,12 @@ class BRVMScraperService
             $response = Http::timeout($this->timeout)
                 ->withOptions(['verify' => false])
                 ->withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                    'Accept-Language' => 'fr-FR,fr;q=0.9',
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Language' => 'fr-FR,fr;q=0.9,en;q=0.8',
+                    'Accept-Encoding' => 'gzip, deflate, br',
+                    'Connection' => 'keep-alive',
+                    'Cache-Control' => 'max-age=0',
                 ])
                 ->get($this->brvm_url . '/fr/cours-actions/0');
 
@@ -296,41 +299,111 @@ class BRVMScraperService
     }
 
     /**
-     * Parser la page BRVM.org
+     * Parser la page BRVM.org - Format réel du tableau
+     * Structure: <tr><td>SYMBOL</td><td>NOM</td><td>VOLUME</td><td>COURS</td><td>OUVERTURE</td><td>CLOTURE</td><td>VARIATION</td></tr>
      */
     private function parseBRVMPage(string $html): array
     {
         $stocks = [];
 
         try {
-            // Pattern pour le tableau des cours BRVM
-            $pattern = '/<tr[^>]*>.*?<td[^>]*>.*?<a[^>]*>([A-Z]{2,6})<\/a>.*?<\/td>.*?<td[^>]*>([\d\s,\.]+)<\/td>.*?<td[^>]*>([\d\s,\.]+)<\/td>.*?<td[^>]*class="[^"]*"[^>]*>([+-]?[\d,\.]+)/is';
+            // Pattern pour extraire les lignes du tableau principal des cours BRVM
+            // Format: <tr><td>SNTS</td><td>SONATEL SENEGAL</td><td class="text-right">1 119</td><td class="text-right">25 600</td>...
+            $pattern = '/<tr>\s*<td>([A-Z]{3,5})<\/td>\s*<td>([^<]+)<\/td>\s*<td[^>]*>([\d\s]+)<\/td>\s*<td[^>]*>([\d\s]+)<\/td>\s*<td[^>]*>([\d\s]+)<\/td>\s*<td[^>]*>([\d\s]+)<\/td>\s*<td[^>]*>.*?([+-]?[\d,\.]+).*?<\/td>/is';
 
             if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
                     $symbol = strtoupper(trim($match[1]));
-                    $currentPrice = $this->parseNumber($match[2]);
-                    $previousPrice = $this->parseNumber($match[3]);
-                    $variation = $this->parseNumber($match[4]);
+                    $companyName = trim($match[2]);
+                    $volume = $this->parseNumber($match[3]);
+                    $currentPrice = $this->parseNumber($match[4]);
+                    $openPrice = $this->parseNumber($match[5]);
+                    $closePrice = $this->parseNumber($match[6]);
+                    $variation = $this->parseNumber($match[7]);
 
                     if ($currentPrice > 0) {
                         $info = $this->brvmSymbols[$symbol] ?? [
-                            'name' => $symbol,
+                            'name' => $companyName,
                             'sector' => 'Autre',
                             'country' => 'UEMOA',
                             'market_cap' => 0
                         ];
 
+                        // Utiliser le nom du site si disponible, sinon celui de notre référence
+                        $displayName = !empty($companyName) ? $this->formatCompanyName($companyName) : $info['name'];
+
                         $stocks[] = [
                             'symbol' => $symbol,
-                            'company_name' => $info['name'],
+                            'company_name' => $displayName,
                             'current_price' => $currentPrice,
-                            'previous_price' => $previousPrice > 0 ? $previousPrice : $currentPrice,
+                            'previous_price' => $closePrice > 0 ? $closePrice : $currentPrice,
                             'variation_percent' => round($variation, 2),
-                            'volume' => 0,
+                            'volume' => (int) $volume,
                             'market_cap' => $info['market_cap'] ?? 0,
                             'sector' => $info['sector'],
-                            'country' => $info['country'],
+                            'country' => $info['country'] ?? 'UEMOA',
+                            'source' => 'brvm',
+                        ];
+                    }
+                }
+            }
+
+            // Si le premier pattern ne fonctionne pas, essayer un pattern alternatif
+            if (empty($stocks)) {
+                $stocks = $this->parseBRVMAlternative($html);
+            }
+
+            Log::info('BRVM.org parsing: ' . count($stocks) . ' stocks found');
+
+        } catch (\Exception $e) {
+            Log::debug('Parse BRVM.org failed: ' . $e->getMessage());
+        }
+
+        return $stocks;
+    }
+
+    /**
+     * Parser alternatif pour BRVM.org
+     */
+    private function parseBRVMAlternative(string $html): array
+    {
+        $stocks = [];
+
+        try {
+            // Pattern plus flexible pour capturer les données
+            // Recherche: <td>SYMBOL</td><td>NOM</td> suivi de plusieurs <td> avec des chiffres
+            $pattern = '/<td>([A-Z]{3,5})<\/td>\s*<td>([A-Z\s\'\-\.]+)<\/td>.*?<td[^>]*>([\d\s]+)<\/td>.*?<td[^>]*>([\d\s]+)<\/td>.*?<td[^>]*>([\d\s]+)<\/td>.*?<td[^>]*>([\d\s]+)<\/td>.*?<td[^>]*>.*?<span[^>]*>([+-]?[\d,\.]+)<\/span>/is';
+
+            if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
+                foreach ($matches as $match) {
+                    $symbol = strtoupper(trim($match[1]));
+                    $companyName = trim($match[2]);
+                    $volume = $this->parseNumber($match[3]);
+                    $currentPrice = $this->parseNumber($match[4]);
+                    $openPrice = $this->parseNumber($match[5]);
+                    $closePrice = $this->parseNumber($match[6]);
+                    $variation = $this->parseNumber($match[7]);
+
+                    if ($currentPrice > 0 && strlen($symbol) >= 3 && strlen($symbol) <= 5) {
+                        $info = $this->brvmSymbols[$symbol] ?? [
+                            'name' => $companyName,
+                            'sector' => 'Autre',
+                            'country' => 'UEMOA',
+                            'market_cap' => 0
+                        ];
+
+                        $displayName = !empty($companyName) ? $this->formatCompanyName($companyName) : $info['name'];
+
+                        $stocks[] = [
+                            'symbol' => $symbol,
+                            'company_name' => $displayName,
+                            'current_price' => $currentPrice,
+                            'previous_price' => $closePrice > 0 ? $closePrice : $currentPrice,
+                            'variation_percent' => round($variation, 2),
+                            'volume' => (int) $volume,
+                            'market_cap' => $info['market_cap'] ?? 0,
+                            'sector' => $info['sector'],
+                            'country' => $info['country'] ?? 'UEMOA',
                             'source' => 'brvm',
                         ];
                     }
@@ -338,10 +411,39 @@ class BRVMScraperService
             }
 
         } catch (\Exception $e) {
-            Log::debug('Parse BRVM.org failed: ' . $e->getMessage());
+            Log::debug('Parse BRVM.org alternative failed: ' . $e->getMessage());
         }
 
         return $stocks;
+    }
+
+    /**
+     * Formater le nom de l'entreprise (capitalisation correcte)
+     */
+    private function formatCompanyName(string $name): string
+    {
+        // Nettoyer et formater le nom
+        $name = trim($name);
+        $name = mb_convert_case($name, MB_CASE_TITLE, 'UTF-8');
+        
+        // Corrections spécifiques
+        $replacements = [
+            "Cote D'ivoire" => "Côte d'Ivoire",
+            "D'ivoire" => "d'Ivoire",
+            "Cote D'Ivoire" => "Côte d'Ivoire",
+            "Senegal" => "Sénégal",
+            "Benin" => "Bénin",
+            "Togo" => "Togo",
+            "Mali" => "Mali",
+            "Niger" => "Niger",
+            "Burkina" => "Burkina Faso",
+        ];
+
+        foreach ($replacements as $search => $replace) {
+            $name = str_ireplace($search, $replace, $name);
+        }
+
+        return $name;
     }
 
     /**
@@ -423,12 +525,14 @@ class BRVMScraperService
             $response = Http::timeout($this->timeout)
                 ->withOptions(['verify' => false])
                 ->withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Accept-Language' => 'fr-FR,fr;q=0.9,en;q=0.8',
                 ])
                 ->get($this->brvm_url . '/fr/indices');
 
             if (!$response->successful()) {
+                Log::debug('BRVM.org indices: HTTP ' . $response->status());
                 return [];
             }
 
@@ -442,31 +546,94 @@ class BRVMScraperService
 
     /**
      * Parser les indices depuis BRVM.org
+     * Format: <tr><td>BRVM - COMPOSITE</td><td class="text-right">347,37</td><td class="text-right">347,81</td><td>...<span>0,13</span>...</td>
      */
     private function parseBRVMIndices(string $html): array
     {
         $indices = [];
 
         try {
-            // Pattern pour les indices BRVM
-            $pattern = '/(BRVM\s*(?:10|Composite|Prestige))[^<]*<[^>]*>[\s\S]*?<td[^>]*>([\d\s,\.]+)<\/td>[\s\S]*?<td[^>]*>([+-]?[\d,\.]+)/i';
+            // Pattern pour les indices principaux BRVM
+            // Format: <td>BRVM - COMPOSITE</td><td>VALEUR_PRECEDENTE</td><td>VALEUR_ACTUELLE</td><td>...<span>VARIATION</span>...</td>
+            $pattern = '/<td>(BRVM\s*-?\s*(?:COMPOSITE|PRINCIPAL|PRESTIGE|30|C|PRES))<\/td>\s*<td[^>]*>([\d\s,\.]+)<\/td>\s*<td[^>]*>([\d\s,\.]+)<\/td>\s*<td[^>]*>.*?<span[^>]*>([+-]?[\d,\.]+)<\/span>/is';
 
             if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
-                    $indices[] = [
-                        'name' => trim($match[1]),
-                        'value' => $this->parseNumber($match[2]),
-                        'variation_percent' => $this->parseNumber($match[3]),
-                        'source' => 'brvm',
-                    ];
+                    $name = $this->formatIndexName(trim($match[1]));
+                    $previousValue = $this->parseNumber($match[2]);
+                    $currentValue = $this->parseNumber($match[3]);
+                    $variation = $this->parseNumber($match[4]);
+
+                    // Éviter les doublons
+                    $exists = false;
+                    foreach ($indices as $idx) {
+                        if ($idx['name'] === $name) {
+                            $exists = true;
+                            break;
+                        }
+                    }
+
+                    if (!$exists && $currentValue > 0) {
+                        $indices[] = [
+                            'name' => $name,
+                            'value' => $currentValue,
+                            'previous_value' => $previousValue,
+                            'variation_percent' => round($variation, 2),
+                            'source' => 'brvm',
+                        ];
+                    }
                 }
             }
+
+            // Pattern alternatif pour les indices en haut de page
+            if (empty($indices)) {
+                $pattern2 = '/<td>(BRVM-[A-Z0-9]+)<\/td>\s*<td[^>]*>([\d\s,\.]+)<\/td>\s*<td[^>]*>([+-]?[\d,\.]+)%?\s*<span/is';
+                
+                if (preg_match_all($pattern2, $html, $matches, PREG_SET_ORDER)) {
+                    foreach ($matches as $match) {
+                        $name = $this->formatIndexName(trim($match[1]));
+                        $value = $this->parseNumber($match[2]);
+                        $variation = $this->parseNumber($match[3]);
+
+                        if ($value > 0) {
+                            $indices[] = [
+                                'name' => $name,
+                                'value' => $value,
+                                'previous_value' => $value / (1 + ($variation / 100)),
+                                'variation_percent' => round($variation, 2),
+                                'source' => 'brvm',
+                            ];
+                        }
+                    }
+                }
+            }
+
+            Log::info('BRVM.org indices parsing: ' . count($indices) . ' indices found');
 
         } catch (\Exception $e) {
             Log::debug('Parse BRVM.org indices failed: ' . $e->getMessage());
         }
 
         return $indices;
+    }
+
+    /**
+     * Formater le nom de l'indice
+     */
+    private function formatIndexName(string $name): string
+    {
+        $name = strtoupper(trim($name));
+        
+        $replacements = [
+            'BRVM-C' => 'BRVM Composite',
+            'BRVM - COMPOSITE' => 'BRVM Composite',
+            'BRVM-30' => 'BRVM 30',
+            'BRVM - PRINCIPAL' => 'BRVM Principal',
+            'BRVM-PRES' => 'BRVM Prestige',
+            'BRVM - PRESTIGE' => 'BRVM Prestige',
+        ];
+
+        return $replacements[$name] ?? $name;
     }
 
     /**

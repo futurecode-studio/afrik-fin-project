@@ -127,6 +127,7 @@ class MutualFundsApiService
 
     /**
      * Parser une page Sikafinance pour extraire les données VL
+     * Structure HTML réelle: <div class="cot_v1b">5&#xA0;694&nbsp;FCFA</div>
      */
     private function parseSikafinancePage(string $html, array $opcvm): ?array
     {
@@ -135,27 +136,50 @@ class MutualFundsApiService
             $variation = 0;
             $date = now()->format('Y-m-d');
 
-            // Rechercher la valeur liquidative
-            if (preg_match('/(?:VL|Valeur\s*liquidative|NAV)[^\d]*(\d[\d\s,\.]+)/i', $html, $matches)) {
+            // Décoder les entités HTML d'abord
+            $decodedHtml = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+            // Pattern principal: <div class="cot_v1b">5 694 FCFA</div>
+            // Capture tout ce qui est entre la balise et FCFA
+            if (preg_match('/<div[^>]*class=["\']cot_v1b["\'][^>]*>([^<]+)FCFA/i', $decodedHtml, $matches)) {
                 $navValue = $this->parseNumber($matches[1]);
             }
 
-            // Pattern alternatif pour les tableaux
-            if (!$navValue && preg_match('/<td[^>]*class="[^"]*vl[^"]*"[^>]*>(\d[\d\s,\.]+)/i', $html, $matches)) {
+            // Pattern alternatif sur HTML brut avec entités
+            if (!$navValue && preg_match('/<div[^>]*class=["\']cot_v1b["\'][^>]*>([^<]+)/i', $html, $matches)) {
+                $rawValue = html_entity_decode($matches[1], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $navValue = $this->parseNumber($rawValue);
+            }
+
+            // Pattern pour VALEUR LIQUIDATIVE
+            if (!$navValue && preg_match('/VALEUR\s*LIQUIDATIVE[^<]*<[^>]*>([^<]+)/is', $decodedHtml, $matches)) {
                 $navValue = $this->parseNumber($matches[1]);
             }
 
-            // Rechercher la variation/performance
-            if (preg_match('/(?:variation|performance|rendement)[^\d-]*([+-]?\d[\d,\.]*)\s*%/i', $html, $matches)) {
+            // Rechercher la variation quotidienne: <div class="quote_down4">-1,37%</div>
+            if (preg_match('/<div[^>]*class=["\']quote_(?:up|down)\d*["\'][^>]*>([+-]?[\d,\.]+)%/i', $decodedHtml, $matches)) {
                 $variation = $this->parseNumber($matches[1]);
             }
 
-            // Rechercher la date
+            // Pattern alternatif pour la variation sur HTML brut
+            if ($variation == 0 && preg_match('/<div[^>]*class=["\']quote_(?:up|down)\d*["\'][^>]*>([^<]+)/i', $html, $matches)) {
+                $rawVar = html_entity_decode($matches[1], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $variation = $this->parseNumber($rawVar);
+            }
+
+            // Rechercher la performance 1 an: <td class="quote_up2">+29,94%</td>
+            if ($variation == 0 && preg_match('/<td[^>]*class=["\']quote_(?:up|down)2?["\'][^>]*>([+-]?[\d,\.]+)%/i', $decodedHtml, $matches)) {
+                $variation = $this->parseNumber($matches[1]);
+            }
+
+            // Rechercher la date au format DD/MM/YYYY
             if (preg_match('/(\d{2})[\/\-](\d{2})[\/\-](\d{4})/', $html, $matches)) {
                 $date = "{$matches[3]}-{$matches[2]}-{$matches[1]}";
             }
 
             if ($navValue && $navValue > 0) {
+                Log::info("Sikafinance parsed: {$opcvm['name']} - VL: {$navValue} FCFA, Var: {$variation}%");
+                
                 return [
                     'id' => $opcvm['id'],
                     'name' => $opcvm['name'],
@@ -172,9 +196,10 @@ class MutualFundsApiService
                 ];
             }
 
+            Log::debug("Sikafinance: No VL found for {$opcvm['name']}");
             return null;
         } catch (\Exception $e) {
-            Log::debug("Parse Sikafinance page failed: " . $e->getMessage());
+            Log::debug("Parse Sikafinance page failed for {$opcvm['name']}: " . $e->getMessage());
             return null;
         }
     }
@@ -599,13 +624,31 @@ class MutualFundsApiService
 
     /**
      * Parser un nombre depuis une chaîne
+     * Gère les espaces, espaces insécables, entités HTML, et formats européens
      */
     private function parseNumber(string $value): float
     {
         $value = trim($value);
-        $value = str_replace([' ', "\u{00A0}"], '', $value); // Espaces normaux et insécables
+        
+        // Décoder les entités HTML (&#xA0; = espace insécable, etc.)
+        $value = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        
+        // Supprimer tous les types d'espaces (normaux, insécables, etc.)
+        $value = str_replace([' ', "\u{00A0}", "\xc2\xa0", "\t", "\n", "\r"], '', $value);
+        
+        // Remplacer la virgule par un point (format européen)
         $value = str_replace(',', '.', $value);
-        $value = preg_replace('/[^\d.]/', '', $value);
+        
+        // Ne garder que les chiffres, le point et le signe moins
+        $value = preg_replace('/[^\d.\-]/', '', $value);
+        
+        // Gérer le cas où il y a plusieurs points (ex: 1.234.567 -> 1234567)
+        if (substr_count($value, '.') > 1) {
+            $parts = explode('.', $value);
+            $lastPart = array_pop($parts);
+            $value = implode('', $parts) . '.' . $lastPart;
+        }
+        
         return (float) $value;
     }
 
