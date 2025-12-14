@@ -39,21 +39,26 @@ Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newslett
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
+Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
 
-// Auth routes
-Route::view('login', 'livewire.pages.login')->middleware('guest')->name('login');
-Route::view('register', 'livewire.pages.register')->middleware('guest')->name('register');
+// Certificats
+Route::middleware('auth')->group(function () {
+    Route::get('/certificate/{enrollment}/download', [\App\Http\Controllers\CertificateController::class, 'download'])->name('certificate.download');
+    Route::get('/certificate/{enrollment}/view', [\App\Http\Controllers\CertificateController::class, 'view'])->name('certificate.view');
+});
+Route::post('/certificate/verify', [\App\Http\Controllers\CertificateController::class, 'verify'])->name('certificate.verify');
 
-Route::get('dashboard', \App\Livewire\Pages\Dashboard::class)
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+// Client Routes
+Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->group(function () {
+    Route::get('/dashboard', \App\Livewire\Client\Dashboard::class)->name('dashboard');
+    Route::get('/formations', \App\Livewire\Client\Formations::class)->name('formations');
+    Route::get('/formations/{slug}', \App\Livewire\Client\Formation::class)->name('formation');
+    Route::get('/certificates', \App\Livewire\Client\Certificates::class)->name('certificates');
+    Route::get('/profile', \App\Livewire\Client\Profile::class)->name('profile');
+});
 
 // Admin Routes
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', \App\Livewire\Pages\Dashboard::class)->name('dashboard');
     Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile');
     Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles');

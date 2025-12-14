@@ -47,8 +47,8 @@
                             <tr class="border-b transition-colors hover:bg-muted/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Nom</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Email</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Rôle</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Téléphone</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Ville</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
                                 <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">Actions</th>
@@ -64,8 +64,14 @@
                                         @endif
                                     </td>
                                     <td class="p-4 align-middle">{{ $user->email }}</td>
+                                    <td class="p-4 align-middle">
+                                        @if($user->role === 'admin')
+                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-purple-100 text-purple-800">Admin</span>
+                                        @else
+                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800">Client</span>
+                                        @endif
+                                    </td>
                                     <td class="p-4 align-middle">{{ $user->phone ?? '-' }}</td>
-                                    <td class="p-4 align-middle">{{ $user->city ?? '-' }}</td>
                                     <td class="p-4 align-middle">
                                         @if($user->is_active)
                                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-800">Actif</span>
@@ -155,12 +161,23 @@
                                 @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Email --}}
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
-                                <input wire:model="email" type="email"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
-                                @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            {{-- Email et Rôle --}}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
+                                    <input wire:model="email" type="email"
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                    @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Rôle <span class="text-red-500">*</span></label>
+                                    <select wire:model="role"
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                        <option value="admin">Administrateur</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                    @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
                             </div>
 
                             {{-- Mot de passe --}}

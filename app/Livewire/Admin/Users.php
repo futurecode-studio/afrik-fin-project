@@ -22,6 +22,7 @@ class Users extends Component
     public $email;
     public $password;
     public $password_confirmation;
+    public $role = 'admin';
     public $phone;
     public $address;
     public $city;
@@ -39,6 +40,7 @@ class Users extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->userId,
             'password' => $this->editMode ? 'nullable|min:8|confirmed' : 'required|min:8|confirmed',
+            'role' => 'required|in:admin,client',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:100',
@@ -86,6 +88,7 @@ class Users extends Component
         $this->userId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->role = $user->role;
         $this->phone = $user->phone;
         $this->address = $user->address;
         $this->city = $user->city;
@@ -106,6 +109,7 @@ class Users extends Component
         $userData = [
             'name' => $this->name,
             'email' => $this->email,
+            'role' => $this->role,
             'phone' => $this->phone,
             'address' => $this->address,
             'city' => $this->city,
@@ -167,6 +171,7 @@ class Users extends Component
         $this->email = '';
         $this->password = '';
         $this->password_confirmation = '';
+        $this->role = 'admin';
         $this->phone = '';
         $this->address = '';
         $this->city = '';

@@ -68,14 +68,14 @@
                         @if (Route::has('login'))
                             @auth
                                 <div class="hidden md:flex items-center gap-2">
-                                    <a href="{{ route('dashboard') }}">
+                                    <a href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('client.dashboard') }}">
                                         <button
                                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
                                             transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
                                             disabled:pointer-events-none disabled:opacity-50
                                             bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow 
                                             transition-smooth font-semibold h-9 px-4">
-                                            Dashboard
+                                            {{ Auth::user()->isAdmin() ? 'Administration' : 'Mon Espace' }}
                                         </button>
                                     </a>
                                     <form method="POST" action="{{ route('logout') }}">

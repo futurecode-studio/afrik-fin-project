@@ -30,10 +30,12 @@ class RoleAndPermissionSeeder extends Seeder
         // Créer les rôles
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $userRole = Role::firstOrCreate(['name' => 'user']);
+        $clientRole = Role::firstOrCreate(['name' => 'client']);
 
         // Assigner les permissions aux rôles
         $adminRole->givePermissionTo(Permission::all());
         $userRole->givePermissionTo(['view-dashboard', 'edit-profile']);
+        $clientRole->givePermissionTo(['view-dashboard', 'edit-profile']);
 
         $this->command->info('Rôles et permissions créés avec succès!');
     }

@@ -64,6 +64,15 @@
                         Se connecter
                     </button>
                 </div>
+
+                <div class="mt-6 pt-6 border-t border-border text-center">
+                    <p class="text-sm text-muted-foreground">
+                        Pas encore de compte ?
+                        <a href="{{ route('inscription') }}" class="text-primary font-medium hover:underline" wire:navigate>
+                            Créer un compte
+                        </a>
+                    </p>
+                </div>
             </form>
 
         </div>

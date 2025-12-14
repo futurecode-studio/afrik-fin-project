@@ -22,7 +22,14 @@ class Login extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $user = auth()->user();
+
+        // Rediriger selon le rôle
+        if ($user->isAdmin()) {
+            $this->redirect(route('admin.dashboard'), navigate: true);
+        } else {
+            $this->redirect(route('client.dashboard'), navigate: true);
+        }
     }
 
     public function render()

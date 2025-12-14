@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'phone',
         'address',
         'city',
@@ -126,5 +127,21 @@ class User extends Authenticatable
         return $this->enrollments()
             ->where('formation_id', $formation->id)
             ->first();
+    }
+
+    /**
+     * Vérifier si l'utilisateur est admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Vérifier si l'utilisateur est client
+     */
+    public function isClient(): bool
+    {
+        return $this->role === 'client';
     }
 }

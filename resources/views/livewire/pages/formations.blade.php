@@ -119,7 +119,7 @@
                                     </h3>
                                 </a>
                                 <p class="text-muted-foreground leading-relaxed line-clamp-2">
-                                    {{ $formation->description_courte }}
+                                    {{ strip_tags($formation->description_courte) }}
                                 </p>
                                 <div class="grid grid-cols-3 gap-4 py-4 border-y border-border">
                                     <div class="text-center">
@@ -195,33 +195,38 @@
 
     <!-- Modale de paiement -->
     @if($showPaymentModal && $selectedFormation)
-    <div wire:click.self="closePaymentModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4">
-        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" wire:click.stop>
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" wire:click="closePaymentModal"></div>
+
+        <!-- Modal -->
+        <div class="relative bg-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
             <!-- Header -->
-            <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-xl">
-                <div>
-                    <h2 class="text-xl font-bold text-gray-900">Inscription à la formation</h2>
-                    <p class="text-sm text-gray-500 mt-1">{{ $selectedFormation->titre }}</p>
+            <div class="bg-primary px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white" id="modal-title">Inscription à la formation</h3>
+                        <p class="text-primary-foreground/80 text-sm">{{ $selectedFormation->titre }}</p>
+                    </div>
+                    <button wire:click="closePaymentModal" class="text-white hover:text-gray-200 transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-                <button wire:click="closePaymentModal" class="text-gray-400 hover:text-gray-600 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
             </div>
 
             <!-- Body -->
-            <div class="p-6 space-y-6">
+            <div class="px-6 py-5 bg-card space-y-6">
                 <!-- Résumé de la formation -->
-                <div class="bg-gray-50 rounded-lg p-4">
+                <div class="bg-muted rounded-lg p-4">
                     <div class="flex items-start gap-4">
                         <img src="{{ $selectedFormation->image_url ?: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop' }}" 
                             alt="{{ $selectedFormation->titre }}" 
                             class="w-20 h-20 rounded-lg object-cover">
                         <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">{{ $selectedFormation->titre }}</h3>
-                            <p class="text-sm text-gray-500">{{ $selectedFormation->duree }} • {{ $selectedFormation->modules_count }} modules</p>
+                            <h3 class="font-semibold text-foreground">{{ $selectedFormation->titre }}</h3>
+                            <p class="text-sm text-muted-foreground">{{ $selectedFormation->duree }} • {{ $selectedFormation->modules_count }} modules</p>
                             <p class="text-lg font-bold text-primary mt-2">
                                 {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA
                             </p>
@@ -231,25 +236,25 @@
 
                 <!-- Choix du moyen de paiement -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-3">Choisissez votre moyen de paiement</label>
+                    <label class="block text-sm font-medium text-foreground mb-3">Choisissez votre moyen de paiement</label>
                     <div class="grid grid-cols-2 gap-4">
                         <!-- KKiaPay -->
                         <label class="relative cursor-pointer">
                             <input type="radio" wire:model="paymentProvider" value="kkiapay" class="peer sr-only">
-                            <div class="border-2 rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-gray-300">
+                            <div class="border-2 border-border rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-muted-foreground bg-card">
                                 <img src="https://kkiapay.me/favicon.ico" alt="KKiaPay" class="w-10 h-10 mx-auto mb-2">
-                                <span class="font-medium text-gray-900">KKiaPay</span>
-                                <p class="text-xs text-gray-500 mt-1">Mobile Money, Carte</p>
+                                <span class="font-medium text-foreground">KKiaPay</span>
+                                <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
                             </div>
                         </label>
                         
                         <!-- FedaPay -->
                         <label class="relative cursor-pointer">
                             <input type="radio" wire:model="paymentProvider" value="fedapay" class="peer sr-only">
-                            <div class="border-2 rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-gray-300">
+                            <div class="border-2 border-border rounded-lg p-4 text-center transition-all peer-checked:border-primary peer-checked:bg-primary/5 hover:border-muted-foreground bg-card">
                                 <img src="https://fedapay.com/favicon.ico" alt="FedaPay" class="w-10 h-10 mx-auto mb-2">
-                                <span class="font-medium text-gray-900">FedaPay</span>
-                                <p class="text-xs text-gray-500 mt-1">Mobile Money, Carte</p>
+                                <span class="font-medium text-foreground">FedaPay</span>
+                                <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
                             </div>
                         </label>
                     </div>
@@ -257,17 +262,17 @@
 
                 <!-- Numéro de téléphone (optionnel) -->
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Numéro de téléphone (Mobile Money)</label>
+                    <label for="phone" class="block text-sm font-medium text-foreground mb-2">Numéro de téléphone (Mobile Money)</label>
                     <input type="tel" id="phone" wire:model="phone" placeholder="+229 XX XX XX XX"
-                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                    <p class="text-xs text-gray-500 mt-1">Optionnel - Pour les paiements Mobile Money</p>
+                        class="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <p class="text-xs text-muted-foreground mt-1">Optionnel - Pour les paiements Mobile Money</p>
                 </div>
 
                 <!-- Bouton de paiement -->
                 <button wire:click="initiatePayment" wire:loading.attr="disabled"
-                    class="w-full bg-primary text-white font-semibold py-4 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                    class="w-full bg-primary text-primary-foreground font-semibold py-4 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                     <span wire:loading.remove>Payer {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA</span>
-                    <span wire:loading>
+                    <span wire:loading class="flex items-center gap-2">
                         <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -277,7 +282,7 @@
                 </button>
 
                 <!-- Sécurité -->
-                <div class="flex items-center justify-center gap-2 text-sm text-gray-500">
+                <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>

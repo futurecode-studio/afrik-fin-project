@@ -18,11 +18,14 @@ class Enrollment extends Model
         'enrolled_at',
         'completed_at',
         'progress',
+        'certificate_number',
+        'certificate_issued_at',
     ];
 
     protected $casts = [
         'enrolled_at' => 'datetime',
         'completed_at' => 'datetime',
+        'certificate_issued_at' => 'datetime',
         'amount_paid' => 'decimal:2',
         'progress' => 'integer',
     ];
@@ -92,5 +95,55 @@ class Enrollment extends Model
             'status' => 'active',
             'enrolled_at' => now(),
         ]);
+    }
+
+    /**
+     * Vérifier si la formation est terminée
+     */
+    public function isCompleted()
+    {
+        return $this->progress >= 100 && $this->completed_at !== null;
+    }
+
+    /**
+     * Vérifier si le certificat a été délivré
+     */
+    public function hasCertificate()
+    {
+        return $this->certificate_number !== null && $this->certificate_issued_at !== null;
+    }
+
+    /**
+     * Marquer la formation comme terminée et générer le certificat
+     */
+    public function complete()
+    {
+        $this->update([
+            'progress' => 100,
+            'completed_at' => now(),
+            'certificate_number' => $this->generateCertificateNumber(),
+            'certificate_issued_at' => now(),
+        ]);
+    }
+
+    /**
+     * Générer un numéro de certificat unique
+     */
+    protected function generateCertificateNumber()
+    {
+        $prefix = 'CERT';
+        $year = date('Y');
+        $formationCode = strtoupper(substr(preg_replace('/[^a-zA-Z]/', '', $this->formation->titre), 0, 3));
+        $uniqueId = str_pad($this->id, 6, '0', STR_PAD_LEFT);
+        
+        return "{$prefix}-{$year}-{$formationCode}-{$uniqueId}";
+    }
+
+    /**
+     * Scope pour les formations terminées
+     */
+    public function scopeCompleted($query)
+    {
+        return $query->whereNotNull('completed_at')->where('progress', 100);
     }
 }

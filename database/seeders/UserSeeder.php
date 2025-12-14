@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
+            'role' => 'admin',
             'phone' => '+229 97 12 34 56',
             'address' => 'Zone administrative',
             'city' => 'Cotonou',
@@ -30,12 +31,13 @@ class UserSeeder extends Seeder
             'last_login_at' => now(),
         ]);
 
-        // Utilisateur simple
+        // Utilisateur admin
         User::create([
             'name' => 'codi anselme',
             'email' => 'codianselme@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('codianselme@gmail.com'),
+            'role' => 'admin',
             'phone' => '+229 96 45 67 89',
             'address' => 'Quartier Akpakpa',
             'city' => 'Cotonou',
