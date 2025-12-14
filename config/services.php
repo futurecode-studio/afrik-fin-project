@@ -49,17 +49,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Mutual Funds API Configuration
+    | Mutual Funds API Configuration (VL/FCP)
     |--------------------------------------------------------------------------
     |
-    | Configuration pour récupérer les valeurs liquidatives des fonds
-    | en temps réel depuis des sources fiables gratuites
+    | Configuration pour récupérer les valeurs liquidatives des FCP/OPCVM
+    | Sources: Sikafinance, RichBourse, BRVM (données africaines UEMOA)
     |
     */
 
     'mutual_funds' => [
         'cache_duration' => env('MUTUAL_FUNDS_CACHE_DURATION', 3600), // 1 heure par défaut
-        'timeout' => env('MUTUAL_FUNDS_TIMEOUT', 15), // timeout en secondes
+        'timeout' => env('MUTUAL_FUNDS_TIMEOUT', 30), // timeout en secondes
+        'use_default_fallback' => env('MUTUAL_FUNDS_USE_DEFAULT_FALLBACK', true),
+        'use_mock' => env('MUTUAL_FUNDS_USE_MOCK', false),
+        'sources' => [
+            'sikafinance' => 'https://www.sikafinance.com',
+            'richbourse' => 'https://www.richbourse.com',
+            'brvm' => 'https://www.brvm.org',
+        ],
     ],
 
 ];

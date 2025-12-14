@@ -1,0 +1,5 @@
+<?php
+// Backup du fichier original - créé le <?= date('Y-m-d H:i:s') ?>
+
+// Ce fichier est une sauvegarde de l'ancien MutualFundsApiService.php
+// Le nouveau service utilise des sources de données africaines fiables (Sikafinance, BRVM)

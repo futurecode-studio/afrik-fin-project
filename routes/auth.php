@@ -15,8 +15,8 @@ Route::middleware('guest')->group(function () {
 
     // Redirection de /login vers /connexion
     Route::get('login', function () {
-        return redirect()->route('login');
-    });
+        return redirect()->route('connexion');
+    })->name('login');
 
     // Volt::route('connexion', 'pages.auth.login')
     //     ->name('login');
