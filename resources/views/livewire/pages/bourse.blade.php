@@ -16,20 +16,29 @@
         </div>
     @endif
 
-    @if (!$apiConfigured)
-        <div class="container mx-auto px-4 pt-4">
-            <div class="mb-4 rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 border border-yellow-200">
-                <strong>⚠️ Mode hors ligne :</strong> L'API Marketstack n'est pas configurée. Les données affichées proviennent de la base de données locale.
-                <br>Pour activer les données en temps réel depuis l'API, configurez les variables MARKETSTACK_API_URL et MARKETSTACK_API_KEY dans votre fichier .env
-            </div>
-        </div>
-    @else
-        <div class="container mx-auto px-4 pt-4">
+    <div class="container mx-auto px-4 pt-4">
+        @if ($dataSource === 'richbourse')
             <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-                <strong>✅ Mode API activé :</strong> Les données affichées proviennent directement de l'API Marketstack en temps réel (cache: 5 minutes).
+                <strong>✅ Données en temps réel :</strong> Les cours BRVM proviennent de RichBourse.com (cache: 5 minutes).
             </div>
-        </div>
-    @endif
+        @elseif ($dataSource === 'brvm')
+            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
+                <strong>✅ Données en temps réel :</strong> Les cours BRVM proviennent directement de BRVM.org (cache: 5 minutes).
+            </div>
+        @elseif ($dataSource === 'database')
+            <div class="mb-4 rounded-lg bg-blue-50 p-4 text-sm text-blue-800 border border-blue-200">
+                <strong>📊 Données locales :</strong> Les cours BRVM proviennent de la base de données locale. Les sources en ligne ne sont pas accessibles actuellement.
+            </div>
+        @elseif ($dataSource === 'default')
+            <div class="mb-4 rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 border border-yellow-200">
+                <strong>⚠️ Données par défaut :</strong> Les cours BRVM affichés sont des données de démonstration. Les sources en ligne ne sont pas accessibles.
+            </div>
+        @else
+            <div class="mb-4 rounded-lg bg-gray-50 p-4 text-sm text-gray-800 border border-gray-200">
+                <strong>ℹ️ Source :</strong> Données BRVM chargées avec succès.
+            </div>
+        @endif
+    </div>
 
     <section class="bg-gradient-hero text-primary-foreground py-20">
         <div class="container mx-auto px-4">

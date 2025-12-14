@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages;
 
-use App\Services\MarketstackApiService;
+use App\Services\BRVMScraperService;
 use App\Models\Stock;
 use Livewire\Component;
 use Carbon\Carbon;
@@ -16,17 +16,18 @@ class Bourse extends Component
     public $isLoading = false;
     public $errorMessage = null;
     public $apiConfigured = false;
+    public $dataSource = null;
 
-    protected $marketstackService;
+    protected $brvmService;
 
-    public function boot(MarketstackApiService $marketstackService)
+    public function boot(BRVMScraperService $brvmService)
     {
-        $this->marketstackService = $marketstackService;
+        $this->brvmService = $brvmService;
     }
 
     public function mount()
     {
-        $this->apiConfigured = $this->marketstackService->isConfigured();
+        $this->apiConfigured = $this->brvmService->isConfigured();
         $this->loadData();
         $this->loadChartData();
     }
@@ -37,11 +38,15 @@ class Bourse extends Component
         $this->errorMessage = null;
 
         try {
-            // Charger les données depuis l'API ou la base de données
-            $this->stocks = $this->marketstackService->getStocks();
-            // dd($this->stocks);
-            $this->indices = $this->marketstackService->getIndices();
+            // Charger les données depuis RichBourse/BRVM.org ou la base de données
+            $this->stocks = $this->brvmService->getStocks();
+            $this->indices = $this->brvmService->getIndices();
             $this->lastUpdate = now()->format('d/m/Y à H:i');
+            
+            // Identifier la source des données
+            if (!empty($this->stocks)) {
+                $this->dataSource = $this->stocks[0]['source'] ?? 'unknown';
+            }
         } catch (\Exception $e) {
             $this->errorMessage = "Erreur lors du chargement des données : " . $e->getMessage();
             $this->lastUpdate = "Erreur";
@@ -87,7 +92,7 @@ class Bourse extends Component
      */
     public function refresh()
     {
-        $this->marketstackService->refreshData();
+        $this->brvmService->refreshData();
         $this->loadData();
         $this->loadChartData();
         session()->flash('success', 'Données actualisées avec succès.');

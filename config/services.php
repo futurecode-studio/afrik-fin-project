@@ -33,18 +33,37 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Marketstack API Configuration
+    | BRVM Scraper Configuration
     |--------------------------------------------------------------------------
     |
-    | Configuration pour l'API Marketstack
-    | Permet de récupérer les données boursières en temps réel
+    | Configuration pour le scraping des données BRVM en temps réel
+    | Sources: RichBourse.com, BRVM.org (données africaines gratuites)
+    |
+    */
+
+    'brvm' => [
+        'cache_duration' => env('BRVM_CACHE_DURATION', 300), // 5 minutes par défaut
+        'timeout' => env('BRVM_TIMEOUT', 30), // timeout en secondes
+        'sources' => [
+            'richbourse' => 'https://www.richbourse.com',
+            'brvm' => 'https://www.brvm.org',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Marketstack API Configuration (Legacy - optionnel)
+    |--------------------------------------------------------------------------
+    |
+    | Configuration pour l'API Marketstack (alternative payante)
+    | Obtenez une clé API sur https://marketstack.com
     |
     */
 
     'marketstack' => [
         'api_url' => env('MARKETSTACK_API_URL', 'http://api.marketstack.com/v1'),
         'api_key' => env('MARKETSTACK_API_KEY'),
-        'cache_duration' => env('MARKETSTACK_CACHE_DURATION', 300), // 5 minutes par défaut
+        'cache_duration' => env('MARKETSTACK_CACHE_DURATION', 300),
     ],
 
     /*
