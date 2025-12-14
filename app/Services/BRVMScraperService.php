@@ -111,13 +111,28 @@ class BRVMScraperService
                     return $stocks;
                 }
 
-                // 3. Fallback: données de la base de données
-                Log::warning('BRVM Stocks: All sources failed, using database fallback');
-                return $this->getStocksFromDatabase();
+                // 3. Fallback: données de la base de données ou par défaut
+                Log::warning('BRVM Stocks: All scraping sources failed, trying database fallback');
+                $dbStocks = $this->getStocksFromDatabase();
+                
+                // Si la base de données a moins de 40 stocks, utiliser les données par défaut
+                if (count($dbStocks) < 40) {
+                    Log::warning('BRVM Stocks: Database has only ' . count($dbStocks) . ' stocks, using default data');
+                    return $this->getDefaultStocks();
+                }
+                
+                return $dbStocks;
 
             } catch (\Exception $e) {
                 Log::error('BRVM Scraper Exception: ' . $e->getMessage());
-                return $this->getStocksFromDatabase();
+                $dbStocks = $this->getStocksFromDatabase();
+                
+                // Si la base de données a moins de 40 stocks, utiliser les données par défaut
+                if (count($dbStocks) < 40) {
+                    return $this->getDefaultStocks();
+                }
+                
+                return $dbStocks;
             }
         });
     }
@@ -751,126 +766,72 @@ class BRVMScraperService
     }
 
     /**
-     * Données par défaut des actions BRVM
+     * Données par défaut des actions BRVM (47 symboles)
+     * Génère automatiquement à partir de la liste brvmSymbols
      */
     private function getDefaultStocks(): array
     {
         $today = now();
         $dayHash = (int)$today->format('d');
-        $seedOffset = ($dayHash % 5) - 2;
+        
+        // Utiliser un seed basé sur la date pour des variations cohérentes
+        mt_srand($dayHash);
+        
+        $stocks = [];
+        
+        foreach ($this->brvmSymbols as $symbol => $info) {
+            // Générer une variation réaliste basée sur le symbole
+            $symbolHash = crc32($symbol) % 100;
+            $variation = (mt_rand(-200, 200) / 100); // -2% à +2%
+            
+            // Prix de base estimé selon le secteur et la capitalisation
+            $basePrice = $this->estimateBasePrice($info);
+            $priceVariation = $basePrice * ($variation / 100);
+            $currentPrice = round($basePrice + $priceVariation);
+            
+            // Volume estimé
+            $volume = mt_rand(100, 50000);
+            
+            $stocks[] = [
+                'symbol' => $symbol,
+                'company_name' => $info['name'],
+                'current_price' => $currentPrice,
+                'previous_price' => $basePrice,
+                'variation_percent' => round($variation, 2),
+                'volume' => $volume,
+                'market_cap' => $info['market_cap'] ?? 0,
+                'sector' => $info['sector'] ?? 'Autre',
+                'country' => $info['country'] ?? 'UEMOA',
+                'source' => 'default',
+            ];
+        }
+        
+        // Réinitialiser le générateur aléatoire
+        mt_srand();
+        
+        // Trier par symbole
+        usort($stocks, fn($a, $b) => strcmp($a['symbol'], $b['symbol']));
+        
+        return $stocks;
+    }
 
-        return [
-            [
-                'symbol' => 'SNTS',
-                'company_name' => 'Sonatel',
-                'current_price' => 15200 + ($seedOffset * 100),
-                'previous_price' => 15200,
-                'variation_percent' => round($seedOffset * 0.66, 2),
-                'volume' => 12500,
-                'market_cap' => 2850000,
-                'sector' => 'Télécommunications',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'ORAC',
-                'company_name' => 'Orange Côte d\'Ivoire',
-                'current_price' => 12500 + ($seedOffset * 80),
-                'previous_price' => 12500,
-                'variation_percent' => round($seedOffset * 0.64, 2),
-                'volume' => 8900,
-                'market_cap' => 1250000,
-                'sector' => 'Télécommunications',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'SGBC',
-                'company_name' => 'Société Générale CI',
-                'current_price' => 11800 + ($seedOffset * 90),
-                'previous_price' => 11800,
-                'variation_percent' => round($seedOffset * 0.76, 2),
-                'volume' => 5600,
-                'market_cap' => 425000,
-                'sector' => 'Finance',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'BOAB',
-                'company_name' => 'BOA Bénin',
-                'current_price' => 5950 + ($seedOffset * 40),
-                'previous_price' => 5950,
-                'variation_percent' => round($seedOffset * 0.67, 2),
-                'volume' => 3200,
-                'market_cap' => 185000,
-                'sector' => 'Finance',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'ETIT',
-                'company_name' => 'Ecobank Transnational Inc.',
-                'current_price' => 18 + ($seedOffset * 0.5),
-                'previous_price' => 18,
-                'variation_percent' => round($seedOffset * 2.78, 2),
-                'volume' => 45000,
-                'market_cap' => 890000,
-                'sector' => 'Finance',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'PALC',
-                'company_name' => 'Palm CI',
-                'current_price' => 6200 + ($seedOffset * 50),
-                'previous_price' => 6200,
-                'variation_percent' => round($seedOffset * 0.81, 2),
-                'volume' => 2100,
-                'market_cap' => 285000,
-                'sector' => 'Agriculture',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'SLBC',
-                'company_name' => 'Solibra',
-                'current_price' => 89000 + ($seedOffset * 500),
-                'previous_price' => 89000,
-                'variation_percent' => round($seedOffset * 0.56, 2),
-                'volume' => 450,
-                'market_cap' => 485000,
-                'sector' => 'Industrie',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'ONTBF',
-                'company_name' => 'Onatel Burkina Faso',
-                'current_price' => 3800 + ($seedOffset * 30),
-                'previous_price' => 3800,
-                'variation_percent' => round($seedOffset * 0.79, 2),
-                'volume' => 1800,
-                'market_cap' => 385000,
-                'sector' => 'Télécommunications',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'CBIBF',
-                'company_name' => 'Coris Bank International',
-                'current_price' => 9500 + ($seedOffset * 70),
-                'previous_price' => 9500,
-                'variation_percent' => round($seedOffset * 0.74, 2),
-                'volume' => 2800,
-                'market_cap' => 245000,
-                'sector' => 'Finance',
-                'source' => 'default',
-            ],
-            [
-                'symbol' => 'CIEC',
-                'company_name' => 'CIE',
-                'current_price' => 2100 + ($seedOffset * 20),
-                'previous_price' => 2100,
-                'variation_percent' => round($seedOffset * 0.95, 2),
-                'volume' => 4500,
-                'market_cap' => 245000,
-                'sector' => 'Services Publics',
-                'source' => 'default',
-            ],
-        ];
+    /**
+     * Estimer le prix de base d'une action selon sa capitalisation
+     */
+    private function estimateBasePrice(array $info): int
+    {
+        $marketCap = $info['market_cap'] ?? 0;
+        
+        // Estimation basée sur la capitalisation boursière
+        if ($marketCap >= 1000000) {
+            return mt_rand(15000, 45000); // Grandes caps
+        } elseif ($marketCap >= 500000) {
+            return mt_rand(8000, 20000); // Moyennes caps
+        } elseif ($marketCap >= 100000) {
+            return mt_rand(2000, 10000); // Petites caps
+        } else {
+            return mt_rand(100, 5000); // Micro caps
+        }
     }
 
     /**
