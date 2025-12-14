@@ -103,7 +103,7 @@
     </section>
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <h2 class="text-2xl font-bold">Principales Valeurs</h2>
                 <span class="text-sm text-muted-foreground">
                     @if($lastUpdate)
@@ -113,19 +113,148 @@
                     @endif
                 </span>
             </div>
+
+            <!-- Filtres -->
+            <div class="rounded-lg border bg-card p-4 mb-6 border-border">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- Recherche -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-muted-foreground mb-1">Rechercher</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                wire:model.live.debounce.300ms="searchTerm" 
+                                placeholder="Symbole ou nom..."
+                                class="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent"
+                            >
+                            <svg class="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Filtre par secteur -->
+                    <div>
+                        <label class="block text-sm font-medium text-muted-foreground mb-1">Secteur</label>
+                        <select 
+                            wire:model.live="sectorFilter"
+                            class="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                            <option value="">Tous les secteurs</option>
+                            @foreach($this->sectors as $sector)
+                                <option value="{{ $sector }}">{{ $sector }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Filtre par variation -->
+                    <div>
+                        <label class="block text-sm font-medium text-muted-foreground mb-1">Variation</label>
+                        <select 
+                            wire:model.live="variationFilter"
+                            class="w-full px-4 py-2 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary focus:border-transparent"
+                        >
+                            <option value="">Toutes</option>
+                            <option value="up">📈 Hausse</option>
+                            <option value="down">📉 Baisse</option>
+                            <option value="stable">➡️ Stable</option>
+                        </select>
+                    </div>
+
+                    <!-- Bouton réinitialiser -->
+                    <div class="flex items-end">
+                        <button 
+                            wire:click="resetFilters"
+                            class="w-full px-4 py-2 border border-border rounded-lg bg-muted hover:bg-muted/80 text-foreground transition-colors flex items-center justify-center gap-2"
+                        >
+                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Réinitialiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Résumé des filtres -->
+                <div class="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+                    <span>
+                        <strong class="text-foreground">{{ count($stocks) }}</strong> valeur(s) affichée(s)
+                        @if(count($allStocks) > 0)
+                            sur <strong class="text-foreground">{{ count($allStocks) }}</strong>
+                        @endif
+                    </span>
+                    @if($searchTerm || $sectorFilter || $variationFilter)
+                        <span class="text-primary">• Filtres actifs</span>
+                    @endif
+                </div>
+            </div>
             
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border">
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-muted">
                             <tr>
-                                <th class="text-left p-4 font-semibold">Symbole</th>
-                                <th class="text-left p-4 font-semibold">Nom</th>
-                                <th class="text-left p-4 font-semibold">Secteur</th>
-                                <th class="text-right p-4 font-semibold">Cours (FCFA)</th>
-                                <th class="text-right p-4 font-semibold">Volume</th>
+                                <th class="text-left p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('symbol')">
+                                    <div class="flex items-center gap-1">
+                                        Symbole
+                                        @if($sortBy === 'symbol')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th class="text-left p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('company_name')">
+                                    <div class="flex items-center gap-1">
+                                        Nom
+                                        @if($sortBy === 'company_name')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th class="text-left p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('sector')">
+                                    <div class="flex items-center gap-1">
+                                        Secteur
+                                        @if($sortBy === 'sector')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th class="text-right p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('current_price')">
+                                    <div class="flex items-center justify-end gap-1">
+                                        Cours (FCFA)
+                                        @if($sortBy === 'current_price')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th class="text-right p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('volume')">
+                                    <div class="flex items-center justify-end gap-1">
+                                        Volume
+                                        @if($sortBy === 'volume')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
                                 <th class="text-right p-4 font-semibold">Cap. (Mrd)</th>
-                                <th class="text-right p-4 font-semibold">Variation</th>
+                                <th class="text-right p-4 font-semibold cursor-pointer hover:bg-muted/80 transition-colors" wire:click="sortByColumn('variation_percent')">
+                                    <div class="flex items-center justify-end gap-1">
+                                        Variation
+                                        @if($sortBy === 'variation_percent')
+                                            <svg class="w-4 h-4 {{ $sortDirection === 'desc' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                                            </svg>
+                                        @endif
+                                    </div>
+                                </th>
                                 <th class="text-right p-4 font-semibold">Action</th>
                             </tr>
                         </thead>

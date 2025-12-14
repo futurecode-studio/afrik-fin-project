@@ -10,6 +10,7 @@ use Carbon\Carbon;
 class Bourse extends Component
 {
     public $stocks = [];
+    public $allStocks = [];
     public $indices = [];
     public $chartData = [];
     public $lastUpdate;
@@ -18,7 +19,22 @@ class Bourse extends Component
     public $apiConfigured = false;
     public $dataSource = null;
 
+    // Filtres
+    public $searchTerm = '';
+    public $sectorFilter = '';
+    public $variationFilter = '';
+    public $sortBy = 'symbol';
+    public $sortDirection = 'asc';
+
     protected $brvmService;
+
+    protected $queryString = [
+        'searchTerm' => ['except' => ''],
+        'sectorFilter' => ['except' => ''],
+        'variationFilter' => ['except' => ''],
+        'sortBy' => ['except' => 'symbol'],
+        'sortDirection' => ['except' => 'asc'],
+    ];
 
     public function boot(BRVMScraperService $brvmService)
     {
@@ -39,14 +55,17 @@ class Bourse extends Component
 
         try {
             // Charger les données depuis RichBourse/BRVM.org ou la base de données
-            $this->stocks = $this->brvmService->getStocks();
+            $this->allStocks = $this->brvmService->getStocks();
             $this->indices = $this->brvmService->getIndices();
             $this->lastUpdate = now()->format('d/m/Y à H:i');
             
             // Identifier la source des données
-            if (!empty($this->stocks)) {
-                $this->dataSource = $this->stocks[0]['source'] ?? 'unknown';
+            if (!empty($this->allStocks)) {
+                $this->dataSource = $this->allStocks[0]['source'] ?? 'unknown';
             }
+            
+            // Appliquer les filtres
+            $this->applyFilters();
         } catch (\Exception $e) {
             $this->errorMessage = "Erreur lors du chargement des données : " . $e->getMessage();
             $this->lastUpdate = "Erreur";
@@ -56,34 +75,174 @@ class Bourse extends Component
     }
 
     /**
+     * Appliquer les filtres sur les stocks
+     */
+    public function applyFilters()
+    {
+        $stocks = collect($this->allStocks);
+
+        // Filtre par recherche (symbole ou nom)
+        if (!empty($this->searchTerm)) {
+            $search = strtolower($this->searchTerm);
+            $stocks = $stocks->filter(function ($stock) use ($search) {
+                return str_contains(strtolower($stock['symbol'] ?? ''), $search) ||
+                       str_contains(strtolower($stock['company_name'] ?? ''), $search);
+            });
+        }
+
+        // Filtre par secteur
+        if (!empty($this->sectorFilter)) {
+            $stocks = $stocks->filter(function ($stock) {
+                return ($stock['sector'] ?? '') === $this->sectorFilter;
+            });
+        }
+
+        // Filtre par variation
+        if (!empty($this->variationFilter)) {
+            $stocks = $stocks->filter(function ($stock) {
+                $variation = $stock['variation_percent'] ?? 0;
+                return match ($this->variationFilter) {
+                    'up' => $variation > 0,
+                    'down' => $variation < 0,
+                    'stable' => $variation == 0,
+                    default => true,
+                };
+            });
+        }
+
+        // Tri
+        $stocks = $stocks->sortBy(function ($stock) {
+            return match ($this->sortBy) {
+                'symbol' => $stock['symbol'] ?? '',
+                'company_name' => $stock['company_name'] ?? '',
+                'current_price' => $stock['current_price'] ?? 0,
+                'variation_percent' => $stock['variation_percent'] ?? 0,
+                'volume' => $stock['volume'] ?? 0,
+                'sector' => $stock['sector'] ?? '',
+                default => $stock['symbol'] ?? '',
+            };
+        }, SORT_REGULAR, $this->sortDirection === 'desc');
+
+        $this->stocks = $stocks->values()->toArray();
+    }
+
+    /**
+     * Mettre à jour les filtres (appelé automatiquement par Livewire)
+     */
+    public function updatedSearchTerm()
+    {
+        $this->applyFilters();
+    }
+
+    public function updatedSectorFilter()
+    {
+        $this->applyFilters();
+    }
+
+    public function updatedVariationFilter()
+    {
+        $this->applyFilters();
+    }
+
+    /**
+     * Trier par colonne
+     */
+    public function sortByColumn($column)
+    {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
+        $this->applyFilters();
+    }
+
+    /**
+     * Réinitialiser les filtres
+     */
+    public function resetFilters()
+    {
+        $this->searchTerm = '';
+        $this->sectorFilter = '';
+        $this->variationFilter = '';
+        $this->sortBy = 'symbol';
+        $this->sortDirection = 'asc';
+        $this->applyFilters();
+    }
+
+    /**
+     * Obtenir la liste des secteurs uniques
+     */
+    public function getSectorsProperty()
+    {
+        return collect($this->allStocks)
+            ->pluck('sector')
+            ->filter()
+            ->unique()
+            ->sort()
+            ->values()
+            ->toArray();
+    }
+
+    /**
      * Charger les données pour le graphique
+     * Utilise l'indice BRVM Composite actuel et génère un historique réaliste
      */
     public function loadChartData()
     {
-        // Générer des données pour les 30 derniers jours
         $days = 30;
         $labels = [];
         $data = [];
         
-        // Récupérer la moyenne de capitalisation actuelle
-        $currentValue = Stock::where('is_active', true)->avg('market_cap') ?? 1000;
+        // Récupérer la valeur actuelle de l'indice BRVM Composite
+        $currentIndexValue = 347.81; // Valeur par défaut
         
-        // Générer des valeurs simulées avec une tendance
-        $baseValue = $currentValue * 0.9; // Commencer à 90% de la valeur actuelle
+        foreach ($this->indices as $index) {
+            $name = strtolower($index['name'] ?? '');
+            if (str_contains($name, 'composite') || str_contains($name, 'brvm-c')) {
+                $currentIndexValue = $index['value'] ?? $currentIndexValue;
+                break;
+            }
+        }
+        
+        // Générer un historique réaliste basé sur la valeur actuelle
+        // On utilise un seed basé sur la date pour avoir des données cohérentes
+        $seed = (int) date('Ymd');
+        mt_srand($seed);
+        
+        // Calculer la valeur de départ (environ -5% à +5% sur 30 jours)
+        $totalVariation = (mt_rand(-500, 500) / 100); // -5% à +5%
+        $dailyVariation = $totalVariation / $days;
+        
+        // Valeur de départ
+        $startValue = $currentIndexValue / (1 + ($totalVariation / 100));
+        $baseValue = $startValue;
         
         for ($i = $days - 1; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i);
             $labels[] = $date->format('d/m');
             
-            // Générer une variation aléatoire mais réaliste (-2% à +2% par jour)
-            $variation = (mt_rand(-200, 200) / 100);
-            $baseValue = $baseValue * (1 + ($variation / 100));
+            // Variation quotidienne avec un peu de bruit
+            $noise = (mt_rand(-50, 50) / 100); // -0.5% à +0.5% de bruit
+            $dayVariation = $dailyVariation + $noise;
+            $baseValue = $baseValue * (1 + ($dayVariation / 100));
+            
+            // S'assurer que la dernière valeur est proche de la valeur actuelle
+            if ($i === 0) {
+                $baseValue = $currentIndexValue;
+            }
+            
             $data[] = round($baseValue, 2);
         }
+        
+        // Réinitialiser le générateur aléatoire
+        mt_srand();
         
         $this->chartData = [
             'labels' => $labels,
             'data' => $data,
+            'currentValue' => $currentIndexValue,
         ];
     }
 
