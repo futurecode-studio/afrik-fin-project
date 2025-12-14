@@ -2,129 +2,141 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Formation;
+use App\Models\Enrollment;
+use App\Services\PaymentService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class FormationDetail extends Component
 {
     public $formation;
+    public $showPaymentModal = false;
+    public $paymentProvider = 'kkiapay';
+    public $phone = '';
+    public $isEnrolled = false;
+    public $enrollment = null;
+
+    protected $listeners = ['paymentSuccess' => 'handlePaymentSuccess'];
     
     public function mount($slug = null)
     {
-        // Données de démonstration pour les formations
-        $formations = [
-            'gestion-budgetaire' => [
-                'title' => 'Gestion Budgétaire et Épargne',
-                'category' => 'Finance Personnelle',
-                'description' => 'Apprenez à gérer efficacement vos finances personnelles et à constituer une épargne solide.',
-                'fullDescription' => 'Cette formation complète vous enseignera les fondamentaux de la gestion budgétaire, les techniques d\'épargne efficaces et les stratégies pour atteindre vos objectifs financiers. Adaptée au contexte africain, elle intègre des exemples concrets et des études de cas locales.',
-                'duration' => '8 semaines',
-                'level' => 'Débutant',
-                'price' => '75 000 XOF',
-                'instructor' => 'Dr. Amina Konaté',
-                'instructorTitle' => 'Expert en finance personnelle',
-                'students' => 1234,
-                'rating' => 4.8,
-                'modules' => [
-                    'Introduction à la finance personnelle',
-                    'Création et suivi d\'un budget',
-                    'Techniques d\'épargne',
-                    'Gestion des dettes',
-                    'Planification d\'objectifs financiers',
-                    'Investissements de base',
-                    'Fiscalité et optimisation'
-                ],
-                'objectives' => [
-                    'Maîtriser les principes de base de la finance personnelle',
-                    'Créer et maintenir un budget équilibré',
-                    'Développer des habitudes d\'épargne efficaces',
-                    'Comprendre les différents types d\'investissements',
-                    'Planifier vos objectifs financiers à long terme'
-                ],
-                'prerequisites' => [
-                    'Aucun prérequis nécessaire',
-                    'Accès à internet et un ordinateur',
-                    'Motivation à apprendre'
-                ]
-            ],
-            'initiation-bourse' => [
-                'title' => 'Initiation à la Bourse',
-                'category' => 'Investissement',
-                'description' => 'Découvrez les fondamentaux de l\'investissement en bourse et les stratégies pour débuter.',
-                'fullDescription' => 'Plongez dans l\'univers des marchés financiers avec cette formation d\'initiation. Vous apprendrez à analyser les actions, comprendre les indices boursiers africains et développer des stratégies d\'investissement adaptées à votre profil de risque.',
-                'duration' => '12 semaines',
-                'level' => 'Débutant',
-                'price' => '120 000 XOF',
-                'instructor' => 'Jean-Paul Mbemba',
-                'instructorTitle' => 'Analyste financier',
-                'students' => 856,
-                'rating' => 4.9,
-                'modules' => [
-                    'Introduction aux marchés financiers',
-                    'Analyse fondamentale',
-                    'Analyse technique',
-                    'Gestion de portefeuille',
-                    'Risque et diversification',
-                    'Marchés africains (BRVM, JSE, etc.)',
-                    'Stratégies d\'investissement',
-                    'Psychologie du trading'
-                ],
-                'objectives' => [
-                    'Comprendre le fonctionnement des marchés boursiers',
-                    'Analyser les entreprises et leurs actions',
-                    'Construire un portefeuille diversifié',
-                    'Gérer le risque efficacement',
-                    'Développer une stratégie d\'investissement personnelle'
-                ],
-                'prerequisites' => [
-                    'Connaissances de base en finance',
-                    'Calculatrice et accès à internet',
-                    'Notions de mathématiques financières'
-                ]
-            ],
-            'blockchain-crypto' => [
-                'title' => 'Blockchain et Crypto-actifs',
-                'category' => 'Crypto-monnaies',
-                'description' => 'Comprendre la technologie blockchain et les opportunités des crypto-monnaies.',
-                'fullDescription' => 'Explorez le monde révolutionnaire de la blockchain et des crypto-monnaies. Cette formation couvre les aspects techniques, économiques et pratiques des actifs numériques, avec un focus particulier sur les opportunités en Afrique.',
-                'duration' => '6 semaines',
-                'level' => 'Intermédiaire',
-                'price' => '95 000 XOF',
-                'instructor' => 'Dr. Youssef Alami',
-                'instructorTitle' => 'Expert en blockchain',
-                'students' => 623,
-                'rating' => 4.7,
-                'modules' => [
-                    'Introduction à la blockchain',
-                    'Bitcoin et crypto-monnaies majeures',
-                    'DeFi (Finance Décentralisée)',
-                    'NFTs et tokens',
-                    'Sécurité et stockage',
-                    'Réglementation en Afrique',
-                    'Opportunités d\'investissement',
-                    'Cas d\'usage pratiques'
-                ],
-                'objectives' => [
-                    'Comprendre la technologie blockchain',
-                    'Identifier les opportunités d\'investissement',
-                    'Sécuriser ses actifs numériques',
-                    'Naviguer dans l\'écosystème DeFi',
-                    'Évaluer les projets blockchain'
-                ],
-                'prerequisites' => [
-                    'Connaissances informatiques de base',
-                    'Compréhension des concepts financiers',
-                    'Curiosité pour la technologie'
-                ]
-            ]
-        ];
+        $this->formation = Formation::where('slug', $slug)
+            ->orWhere('id', $slug)
+            ->publie()
+            ->with(['modules.lessons', 'user'])
+            ->firstOrFail();
+
+        // Vérifier si l'utilisateur est inscrit
+        if (Auth::check()) {
+            $this->enrollment = Auth::user()->getEnrollment($this->formation);
+            $this->isEnrolled = $this->enrollment && $this->enrollment->isActive();
+        }
+    }
+
+    public function openPaymentModal()
+    {
+        if ($this->formation->isFree()) {
+            $this->enrollFree();
+            return;
+        }
+
+        if (!Auth::check()) {
+            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
+            return redirect()->route('login', ['redirect' => route('formation-detail', $this->formation->slug)]);
+        }
+
+        if ($this->isEnrolled) {
+            session()->flash('info', 'Vous êtes déjà inscrit à cette formation.');
+            return;
+        }
+
+        $this->showPaymentModal = true;
+    }
+
+    public function closePaymentModal()
+    {
+        $this->showPaymentModal = false;
+        $this->reset(['paymentProvider', 'phone']);
+    }
+
+    public function enrollFree()
+    {
+        if (!Auth::check()) {
+            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
+            return redirect()->route('login', ['redirect' => route('formation-detail', $this->formation->slug)]);
+        }
+
+        $paymentService = new PaymentService();
+        $result = $paymentService->enrollForFree(Auth::user(), $this->formation);
+
+        if ($result['success']) {
+            $this->isEnrolled = true;
+            $this->enrollment = $result['enrollment'];
+            session()->flash('success', $result['message']);
+        } else {
+            session()->flash('error', $result['message'] ?? 'Une erreur est survenue.');
+        }
+
+        $this->closePaymentModal();
+    }
+
+    public function initiatePayment()
+    {
+        if (!Auth::check()) {
+            session()->flash('error', 'Veuillez vous connecter.');
+            return;
+        }
+
+        $paymentService = new PaymentService();
+        $result = $paymentService->initiatePayment(
+            Auth::user(),
+            $this->formation,
+            $this->paymentProvider,
+            $this->phone
+        );
+
+        if (!$result['success']) {
+            session()->flash('error', $result['message']);
+            return;
+        }
+
+        $this->dispatch('openPaymentWidget', [
+            'provider' => $this->paymentProvider,
+            'amount' => $result['amount'],
+            'reference' => $result['reference'],
+            'email' => Auth::user()->email,
+            'name' => Auth::user()->name,
+            'phone' => $this->phone,
+            'formation' => $this->formation->titre,
+        ]);
+    }
+
+    public function handlePaymentSuccess($data)
+    {
+        $paymentService = new PaymentService();
         
-        $this->formation = $formations[$slug] ?? $formations['gestion-budgetaire'];
+        if ($this->paymentProvider === 'kkiapay') {
+            $result = $paymentService->handleKkiapayCallback($data);
+        } else {
+            $result = $paymentService->handleFedapayCallback($data);
+        }
+
+        if ($result['success']) {
+            $this->isEnrolled = true;
+            $this->enrollment = $result['enrollment'];
+            session()->flash('success', 'Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
+        } else {
+            session()->flash('error', $result['message'] ?? 'Le paiement a échoué.');
+        }
+
+        $this->closePaymentModal();
     }
     
     public function render()
     {
         return view('livewire.pages.formation-detail')
-            ->extends('layouts.site', ['title' => 'Accueil'])
+            ->extends('layouts.site', ['title' => $this->formation->titre])
             ->section('content');
     }
 }

@@ -26,6 +26,12 @@ Route::get('/actualites/{slug}', \App\Livewire\Pages\ActualiteDetail::class)->na
 
 Route::get('/formations', \App\Livewire\Pages\Formations::class)->name('formations');
 Route::get('/formations/{slug}', \App\Livewire\Pages\FormationDetail::class)->name('formation-detail');
+
+// Payment callbacks
+Route::post('/payment/kkiapay/callback', [\App\Http\Controllers\PaymentController::class, 'kkiapayCallback'])->name('payment.kkiapay.callback');
+Route::post('/payment/fedapay/callback', [\App\Http\Controllers\PaymentController::class, 'fedapayCallback'])->name('payment.fedapay.callback');
+Route::get('/payment/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/cancel', [\App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.cancel');
 Route::get('/bourse', \App\Livewire\Pages\Bourse::class)->name('bourse');
 Route::get('/vl-fcp', \App\Livewire\Pages\VlFcp::class)->name('vl-fcp');
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');

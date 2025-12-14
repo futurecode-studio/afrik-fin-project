@@ -69,4 +69,62 @@ class User extends Authenticatable
     {
         $this->notify(new CustomResetPasswordNotification($token));
     }
+
+    /**
+     * Relation avec les inscriptions aux formations
+     */
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    /**
+     * Relation avec les formations (via enrollments)
+     */
+    public function formations()
+    {
+        return $this->belongsToMany(Formation::class, 'enrollments')
+            ->withPivot(['status', 'amount_paid', 'enrolled_at', 'completed_at', 'progress'])
+            ->withTimestamps();
+    }
+
+    /**
+     * Relation avec les paiements
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * Vérifier si l'utilisateur est inscrit à une formation
+     */
+    public function isEnrolledIn(Formation $formation)
+    {
+        return $this->enrollments()
+            ->where('formation_id', $formation->id)
+            ->whereIn('status', ['active', 'completed'])
+            ->exists();
+    }
+
+    /**
+     * Vérifier si l'utilisateur a une inscription en attente
+     */
+    public function hasPendingEnrollment(Formation $formation)
+    {
+        return $this->enrollments()
+            ->where('formation_id', $formation->id)
+            ->where('status', 'pending')
+            ->exists();
+    }
+
+    /**
+     * Obtenir l'inscription à une formation
+     */
+    public function getEnrollment(Formation $formation)
+    {
+        return $this->enrollments()
+            ->where('formation_id', $formation->id)
+            ->first();
+    }
 }

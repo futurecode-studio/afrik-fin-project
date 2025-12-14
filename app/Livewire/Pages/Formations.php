@@ -2,66 +2,161 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Formation;
+use App\Models\Enrollment;
+use App\Services\PaymentService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Formations extends Component
 {
-    public $showModal = false;
+    public $showPaymentModal = false;
     public $selectedFormation = null;
-    public $first_name = '';
-    public $last_name = '';
-    public $email = '';
+    public $paymentProvider = 'kkiapay';
     public $phone = '';
-    
-    protected $rules = [
-        'first_name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'email' => 'required|email',
-        'phone' => 'required|string|max:20',
-    ];
+    public $search = '';
+    public $filterNiveau = '';
+    public $filterType = ''; // 'gratuit' ou 'payant'
 
-    protected $messages = [
-        'first_name.required' => 'Le prénom est requis.',
-        'last_name.required' => 'Le nom est requis.',
-        'email.required' => 'L\'email est requis.',
-        'email.email' => 'Veuillez entrer une adresse email valide.',
-        'phone.required' => 'Le téléphone est requis.',
-    ];
+    protected $queryString = ['search', 'filterNiveau', 'filterType'];
 
-    public function openModal($formationId, $formationTitle)
+    protected $listeners = ['paymentSuccess' => 'handlePaymentSuccess'];
+
+    public function openPaymentModal($formationId)
     {
-        $this->selectedFormation = [
-            'id' => $formationId,
-            'title' => $formationTitle
-        ];
-        $this->showModal = true;
-    }
-
-    public function closeModal()
-    {
-        $this->showModal = false;
-        $this->reset(['first_name', 'last_name', 'email', 'phone', 'selectedFormation']);
-        $this->resetValidation();
-    }
-
-    public function submitInscription()
-    {
-        $this->validate();
+        $this->selectedFormation = Formation::find($formationId);
         
-        try {
-            // Ici vous pouvez enregistrer l'inscription en base de données
-            // Par exemple : Inscription::create([...])
-            
-            session()->flash('success', 'Votre demande d\'inscription a été envoyée avec succès ! Nous vous contactons sous peu.');
-            $this->closeModal();
-        } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+        if (!$this->selectedFormation) {
+            session()->flash('error', 'Formation non trouvée.');
+            return;
         }
+
+        // Si la formation est gratuite, inscrire directement
+        if ($this->selectedFormation->isFree()) {
+            $this->enrollFree();
+            return;
+        }
+
+        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
+        if (!Auth::check()) {
+            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
+            return redirect()->route('login', ['redirect' => route('formations')]);
+        }
+
+        // Vérifier si déjà inscrit
+        if (Auth::user()->isEnrolledIn($this->selectedFormation)) {
+            session()->flash('info', 'Vous êtes déjà inscrit à cette formation.');
+            return;
+        }
+
+        $this->showPaymentModal = true;
+    }
+
+    public function closePaymentModal()
+    {
+        $this->showPaymentModal = false;
+        $this->reset(['selectedFormation', 'paymentProvider', 'phone']);
+    }
+
+    public function enrollFree()
+    {
+        if (!Auth::check()) {
+            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
+            return redirect()->route('login', ['redirect' => route('formations')]);
+        }
+
+        $paymentService = new PaymentService();
+        $result = $paymentService->enrollForFree(Auth::user(), $this->selectedFormation);
+
+        if ($result['success']) {
+            session()->flash('success', $result['message']);
+        } else {
+            session()->flash('error', $result['message'] ?? 'Une erreur est survenue.');
+        }
+
+        $this->closePaymentModal();
+    }
+
+    public function initiatePayment()
+    {
+        if (!Auth::check()) {
+            session()->flash('error', 'Veuillez vous connecter.');
+            return;
+        }
+
+        if (!$this->selectedFormation) {
+            session()->flash('error', 'Veuillez sélectionner une formation.');
+            return;
+        }
+
+        $paymentService = new PaymentService();
+        $result = $paymentService->initiatePayment(
+            Auth::user(),
+            $this->selectedFormation,
+            $this->paymentProvider,
+            $this->phone
+        );
+
+        if (!$result['success']) {
+            session()->flash('error', $result['message']);
+            return;
+        }
+
+        // Émettre l'événement pour déclencher le paiement côté client
+        $this->dispatch('openPaymentWidget', [
+            'provider' => $this->paymentProvider,
+            'amount' => $result['amount'],
+            'reference' => $result['reference'],
+            'email' => Auth::user()->email,
+            'name' => Auth::user()->name,
+            'phone' => $this->phone,
+            'formation' => $this->selectedFormation->titre,
+        ]);
+    }
+
+    public function handlePaymentSuccess($data)
+    {
+        $paymentService = new PaymentService();
+        
+        if ($this->paymentProvider === 'kkiapay') {
+            $result = $paymentService->handleKkiapayCallback($data);
+        } else {
+            $result = $paymentService->handleFedapayCallback($data);
+        }
+
+        if ($result['success']) {
+            session()->flash('success', 'Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
+        } else {
+            session()->flash('error', $result['message'] ?? 'Le paiement a échoué.');
+        }
+
+        $this->closePaymentModal();
     }
 
     public function render()
     {
-        return view('livewire.pages.formations')
+        $formations = Formation::publie()
+            ->when($this->search, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('titre', 'like', '%' . $this->search . '%')
+                      ->orWhere('description_courte', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->when($this->filterNiveau, function ($query) {
+                $query->where('niveau', $this->filterNiveau);
+            })
+            ->when($this->filterType === 'gratuit', function ($query) {
+                $query->gratuite();
+            })
+            ->when($this->filterType === 'payant', function ($query) {
+                $query->payante();
+            })
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        return view('livewire.pages.formations', [
+            'formations' => $formations,
+        ])
             ->extends('layouts.site', ['title' => 'Formations'])
             ->section('content');
     }

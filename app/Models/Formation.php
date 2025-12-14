@@ -104,4 +104,38 @@ class Formation extends Model
     {
         return $query->where('is_free', false)->where('prix', '>', 0);
     }
+
+    /**
+     * Relation avec les inscriptions
+     */
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    /**
+     * Relation avec les utilisateurs inscrits (via enrollments)
+     */
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'enrollments')
+            ->withPivot(['status', 'amount_paid', 'enrolled_at', 'completed_at', 'progress'])
+            ->withTimestamps();
+    }
+
+    /**
+     * Nombre d'étudiants inscrits (actifs)
+     */
+    public function getStudentsCountAttribute()
+    {
+        return $this->enrollments()->whereIn('status', ['active', 'completed'])->count();
+    }
+
+    /**
+     * Relation avec les paiements
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

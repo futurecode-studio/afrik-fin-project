@@ -88,4 +88,38 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | KKiaPay Payment Gateway
+    |--------------------------------------------------------------------------
+    |
+    | Configuration pour l'agrégateur de paiement KKiaPay
+    | Obtenez vos clés sur https://kkiapay.me
+    |
+    */
+
+    'kkiapay' => [
+        'public_key' => env('KKIAPAY_PUBLIC_KEY', ''),
+        'private_key' => env('KKIAPAY_PRIVATE_KEY', ''),
+        'secret' => env('KKIAPAY_SECRET', ''),
+        'sandbox' => env('KKIAPAY_SANDBOX', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | FedaPay Payment Gateway
+    |--------------------------------------------------------------------------
+    |
+    | Configuration pour l'agrégateur de paiement FedaPay
+    | Obtenez vos clés sur https://fedapay.com
+    |
+    */
+
+    'fedapay' => [
+        'public_key' => env('FEDAPAY_PUBLIC_KEY', ''),
+        'secret_key' => env('FEDAPAY_SECRET_KEY', ''),
+        'api_url' => env('FEDAPAY_API_URL', 'https://sandbox-api.fedapay.com/v1'),
+        'sandbox' => env('FEDAPAY_SANDBOX', true),
+    ],
+
 ];

@@ -48,23 +48,21 @@
                             </span>
                         </a>
                         <div class="hidden md:flex items-center gap-1">
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('home') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('home') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('home') }}">Accueil</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('services*') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('services*') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('services') }}">Services</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('formations') }}">Formations</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('bourse') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('bourse') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('bourse') }}">BRVM</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('vl-fcp') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('vl-fcp') }}">VL / FCP</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('vl-fcp') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                                href="{{ route('vl-fcp') }}">VL/FCP</a>
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('actualites') }}">Actualités</a>
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('about') }}">À Propos</a>
-                            <!-- <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('newsletter') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('newsletter') }}">Newsletter</a> -->
-                            <a class="px-4 py-2 rounded-md font-medium transition-smooth {{ request()->routeIs('contact') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('contact') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('contact') }}">Contact</a>
                         </div>
                         @if (Route::has('login'))
@@ -74,9 +72,9 @@
                                         <button
                                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
                                             transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
-                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            disabled:pointer-events-none disabled:opacity-50
                                             bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow 
-                                            transition-smooth font-semibold h-11 px-6 py-3">
+                                            transition-smooth font-semibold h-9 px-4">
                                             Dashboard
                                         </button>
                                     </a>
@@ -85,9 +83,9 @@
                                         <button type="submit"
                                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
                                             transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
-                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            disabled:pointer-events-none disabled:opacity-50
                                             bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-elegant hover:shadow-glow 
-                                            transition-smooth font-semibold h-11 px-6 py-3">
+                                            transition-smooth font-semibold h-9 px-4">
                                             Déconnexion
                                         </button>
                                     </form>
@@ -98,10 +96,10 @@
                                         <button
                                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background 
                                             transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
-                                            disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 
+                                            disabled:pointer-events-none disabled:opacity-50
                                             bg-gradient-hero text-primary-foreground border-2 border-secondary/30 hover:border-secondary shadow-elegant hover:shadow-glow 
-                                            transition-smooth font-semibold h-11 px-6 py-3">
-                                            Se Connecter
+                                            transition-smooth font-semibold h-9 px-4">
+                                            Connexion
                                         </button>
                                     </a>
                                 </div>
