@@ -548,10 +548,18 @@
                 return;
             }
             
+            // S'assurer que le montant est un entier
+            const amount = parseInt(data.amount, 10);
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Montant invalide. Veuillez réessayer.');
+                return;
+            }
+            
             FedaPay.init({
                 public_key: "{{ config('services.fedapay.public_key') }}",
                 transaction: {
-                    amount: data.amount,
+                    amount: amount,
                     description: 'Formation: ' + data.formation + ' - REF:' + data.reference
                 },
                 customer: {

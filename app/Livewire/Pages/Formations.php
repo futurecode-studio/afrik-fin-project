@@ -106,7 +106,7 @@ class Formations extends Component
         // Émettre l'événement pour déclencher le paiement côté client
         $this->dispatch('openPaymentWidget', [
             'provider' => $this->paymentProvider,
-            'amount' => $result['amount'],
+            'amount' => (int) $result['amount'],
             'reference' => $result['reference'],
             'email' => Auth::user()->email,
             'name' => Auth::user()->name,

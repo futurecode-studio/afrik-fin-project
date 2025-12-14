@@ -401,26 +401,34 @@
                 return;
             }
             
-            FedaPay.init({
-            public_key: "{{ config('services.fedapay.public_key') }}",
-            transaction: {
-                amount: data.amount,
-                description: 'Formation: ' + data.formation + ' - REF:' + data.reference
-            },
-            customer: {
-                email: data.email,
-                firstname: data.name
-            },
-            onComplete: function(response) {
-                if (response.reason === 'SUCCESSFUL') {
-                    Livewire.dispatch('paymentSuccess', [{
-                        transactionId: response.id,
-                        reference: data.reference,
-                        status: 'approved'
-                    }]);
-                }
+            // S'assurer que le montant est un entier
+            const amount = parseInt(data.amount, 10);
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Montant invalide. Veuillez réessayer.');
+                return;
             }
-        }).open();
+            
+            FedaPay.init({
+                public_key: "{{ config('services.fedapay.public_key') }}",
+                transaction: {
+                    amount: amount,
+                    description: 'Formation: ' + data.formation + ' - REF:' + data.reference
+                },
+                customer: {
+                    email: data.email,
+                    firstname: data.name
+                },
+                onComplete: function(response) {
+                    if (response.reason === 'SUCCESSFUL') {
+                        Livewire.dispatch('paymentSuccess', [{
+                            transactionId: response.id,
+                            reference: data.reference,
+                            status: 'approved'
+                        }]);
+                    }
+                }
+            }).open();
         } catch (error) {
             console.error('Erreur FedaPay:', error);
             alert('Erreur lors de l\'ouverture du widget de paiement FedaPay. Veuillez réessayer.');

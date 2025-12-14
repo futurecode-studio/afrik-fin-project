@@ -104,7 +104,7 @@ class FormationDetail extends Component
 
         $this->dispatch('openPaymentWidget', [
             'provider' => $this->paymentProvider,
-            'amount' => $result['amount'],
+            'amount' => (int) $result['amount'],
             'reference' => $result['reference'],
             'email' => Auth::user()->email,
             'name' => Auth::user()->name,
