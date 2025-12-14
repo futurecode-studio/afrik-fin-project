@@ -26,6 +26,10 @@ class Bourse extends Component
     public $sortBy = 'symbol';
     public $sortDirection = 'asc';
 
+    // Modal détails
+    public $showModal = false;
+    public $selectedStock = null;
+
     protected $brvmService;
 
     protected $queryString = [
@@ -255,6 +259,29 @@ class Bourse extends Component
         $this->loadData();
         $this->loadChartData();
         session()->flash('success', 'Données actualisées avec succès.');
+    }
+
+    /**
+     * Afficher les détails d'une action
+     */
+    public function showStockDetails(string $symbol)
+    {
+        foreach ($this->allStocks as $stock) {
+            if ($stock['symbol'] === $symbol) {
+                $this->selectedStock = $stock;
+                $this->showModal = true;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Fermer la modal
+     */
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->selectedStock = null;
     }
 
     public function render()

@@ -1,4 +1,132 @@
 <main class="flex-1 pt-20">
+    <!-- Modal Détails Stock -->
+    @if($showModal && $selectedStock)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Overlay -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" wire:click="closeModal"></div>
+
+        <!-- Modal -->
+        <div class="relative bg-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
+                <!-- Header -->
+                <div class="bg-primary px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white" id="modal-title">
+                                {{ $selectedStock['symbol'] }}
+                            </h3>
+                            <p class="text-primary-foreground/80 text-sm">{{ $selectedStock['company_name'] }}</p>
+                        </div>
+                        <button wire:click="closeModal" class="text-white hover:text-gray-200 transition-colors">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="px-6 py-5 bg-card">
+                    <!-- Prix et Variation -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <p class="text-sm text-muted-foreground">Cours actuel</p>
+                            <p class="text-3xl font-bold text-foreground">
+                                {{ number_format($selectedStock['current_price'] ?? 0, 0, ',', ' ') }} <span class="text-lg">FCFA</span>
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            @php
+                                $variation = $selectedStock['variation_percent'] ?? 0;
+                            @endphp
+                            <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg {{ $variation >= 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                @if($variation >= 0)
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                    </svg>
+                                    <span class="text-lg font-bold">+{{ number_format($variation, 2) }}%</span>
+                                @else
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"/>
+                                    </svg>
+                                    <span class="text-lg font-bold">{{ number_format($variation, 2) }}%</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations détaillées -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-muted rounded-lg p-4">
+                            <p class="text-sm text-muted-foreground">Cours précédent</p>
+                            <p class="text-lg font-semibold text-foreground">
+                                {{ number_format($selectedStock['previous_price'] ?? 0, 0, ',', ' ') }} FCFA
+                            </p>
+                        </div>
+                        <div class="bg-muted rounded-lg p-4">
+                            <p class="text-sm text-muted-foreground">Volume</p>
+                            <p class="text-lg font-semibold text-foreground">
+                                {{ number_format($selectedStock['volume'] ?? 0, 0, ',', ' ') }}
+                            </p>
+                        </div>
+                        <div class="bg-muted rounded-lg p-4">
+                            <p class="text-sm text-muted-foreground">Secteur</p>
+                            <p class="text-lg font-semibold text-foreground">
+                                {{ $selectedStock['sector'] ?? 'N/A' }}
+                            </p>
+                        </div>
+                        <div class="bg-muted rounded-lg p-4">
+                            <p class="text-sm text-muted-foreground">Capitalisation</p>
+                            <p class="text-lg font-semibold text-foreground">
+                                @if(isset($selectedStock['market_cap']) && $selectedStock['market_cap'] > 0)
+                                    @if($selectedStock['market_cap'] >= 1000)
+                                        {{ number_format($selectedStock['market_cap'] / 1000, 1, ',', ' ') }} Mrd FCFA
+                                    @else
+                                        {{ number_format($selectedStock['market_cap'], 0, ',', ' ') }} M FCFA
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pays/Région -->
+                    @if(isset($selectedStock['country']))
+                    <div class="mt-4 bg-muted rounded-lg p-4">
+                        <p class="text-sm text-muted-foreground">Pays / Région</p>
+                        <p class="text-lg font-semibold text-foreground">{{ $selectedStock['country'] }}</p>
+                    </div>
+                    @endif
+
+                    <!-- Source -->
+                    <div class="mt-4 text-center text-sm text-muted-foreground">
+                        Source: {{ ucfirst($selectedStock['source'] ?? 'N/A') }}
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-muted px-6 py-4 flex justify-end gap-3">
+                    <button 
+                        wire:click="closeModal"
+                        class="px-4 py-2 bg-background border border-border rounded-lg text-foreground hover:bg-muted transition-colors"
+                    >
+                        Fermer
+                    </button>
+                    <a 
+                        href="https://www.brvm.org/fr/cours-actions/0/status/0" 
+                        target="_blank"
+                        class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
+                    >
+                        Voir sur BRVM.org
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Messages -->
     @if (session()->has('success'))
         <div class="container mx-auto px-4 pt-4">
@@ -322,7 +450,10 @@
                                     </div>
                                 </td>
                                 <td class="p-4 text-right">
-                                    <button class="text-primary hover:text-primary-light transition-smooth inline-flex items-center gap-1 text-sm font-medium">
+                                    <button 
+                                        wire:click="showStockDetails('{{ $stock['symbol'] }}')"
+                                        class="text-primary hover:text-primary-light transition-smooth inline-flex items-center gap-1 text-sm font-medium"
+                                    >
                                         Détails
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3">
                                             <path d="M5 12h14"></path>

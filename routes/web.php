@@ -52,6 +52,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile');
     Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles');
     Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations');
+    Route::get('/formations/{formation}/modules', \App\Livewire\Admin\FormationModules::class)->name('formations.modules');
+    Route::get('/formations/{formation}/modules/{module}/lessons', \App\Livewire\Admin\ModuleLessons::class)->name('formations.modules.lessons');
+    Route::get('/formations/{formation}/modules/{module}/quiz', \App\Livewire\Admin\ModuleQuizManager::class)->name('formations.modules.quiz');
     Route::get('/users', \App\Livewire\Admin\Users::class)->name('users');
     Route::get('/stock-data', \App\Livewire\Admin\StockData::class)->name('stock-data');
     Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions');

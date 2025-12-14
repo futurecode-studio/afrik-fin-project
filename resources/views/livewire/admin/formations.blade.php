@@ -42,8 +42,8 @@
                             <tr class="border-b transition-colors hover:bg-muted/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Titre</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Niveau</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Durée</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Prix (XOF)</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Modules</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Prix</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
                                 <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">Actions</th>
@@ -64,8 +64,23 @@
                                             {{ ucfirst($formation->niveau) }}
                                         </span>
                                     </td>
-                                    <td class="p-4 align-middle text-sm">{{ $formation->duree ?? 'Non définie' }}</td>
-                                    <td class="p-4 align-middle text-sm font-medium">{{ number_format($formation->prix, 0, ',', ' ') }}</td>
+                                    <td class="p-4 align-middle text-sm">
+                                        <span class="inline-flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                            </svg>
+                                            {{ $formation->modules_count ?? 0 }}
+                                        </span>
+                                    </td>
+                                    <td class="p-4 align-middle text-sm font-medium">
+                                        @if($formation->is_free)
+                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">
+                                                Gratuit
+                                            </span>
+                                        @else
+                                            {{ number_format($formation->prix, 0, ',', ' ') }} XOF
+                                        @endif
+                                    </td>
                                     <td class="p-4 align-middle">
                                         <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
                                             {{ $formation->statut === 'brouillon' ? 'bg-gray-100 text-gray-800' : '' }}
@@ -78,6 +93,14 @@
                                     <td class="p-4 align-middle text-right">
                                         <div class="flex justify-end gap-2">
                                             @if(!$formation->trashed())
+                                                <a href="{{ route('admin.formations.modules', $formation->id) }}"
+                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-primary bg-primary/10 hover:bg-primary/20 text-primary h-9 px-3"
+                                                    title="Gérer les modules">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                    </svg>
+                                                    Modules
+                                                </a>
                                                 <button wire:click="edit({{ $formation->id }})" 
                                                     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
@@ -303,8 +326,8 @@
                                 @error('image_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Niveau, Durée et Prix --}}
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {{-- Niveau et Durée --}}
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Niveau <span class="text-red-500">*</span></label>
                                     <select wire:model="niveau"
@@ -322,6 +345,19 @@
                                         placeholder="ex: 8 semaines">
                                     @error('duree') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
+                            </div>
+
+                            {{-- Tarification --}}
+                            <div class="p-4 rounded-lg border bg-muted/30">
+                                <label class="block text-sm font-medium mb-3">Tarification</label>
+                                <div class="flex items-center gap-4 mb-3">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input wire:model.live="is_free" type="checkbox" 
+                                            class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="text-sm font-medium">Formation gratuite</span>
+                                    </label>
+                                </div>
+                                @if(!$is_free)
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Prix (XOF) <span class="text-red-500">*</span></label>
                                     <input wire:model="prix" type="number" min="0" step="1"
@@ -329,6 +365,9 @@
                                         placeholder="0">
                                     @error('prix') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
+                                @else
+                                <p class="text-sm text-green-600">Cette formation sera accessible gratuitement.</p>
+                                @endif
                             </div>
 
                             {{-- Statut --}}

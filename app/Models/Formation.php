@@ -18,6 +18,7 @@ class Formation extends Model
         'niveau',
         'duree',
         'prix',
+        'is_free',
         'image_url',
         'statut',
         'published_at',
@@ -27,6 +28,7 @@ class Formation extends Model
     protected $casts = [
         'published_at' => 'datetime',
         'prix' => 'decimal:2',
+        'is_free' => 'boolean',
     ];
 
     /**
@@ -35,6 +37,38 @@ class Formation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relation avec les modules
+     */
+    public function modules()
+    {
+        return $this->hasMany(FormationModule::class)->orderBy('ordre');
+    }
+
+    /**
+     * Nombre total de modules
+     */
+    public function getModulesCountAttribute()
+    {
+        return $this->modules()->count();
+    }
+
+    /**
+     * Nombre total de leçons dans tous les modules
+     */
+    public function getTotalLessonsAttribute()
+    {
+        return $this->modules()->withCount('lessons')->get()->sum('lessons_count');
+    }
+
+    /**
+     * Vérifier si la formation est gratuite
+     */
+    public function isFree()
+    {
+        return $this->is_free || $this->prix == 0;
     }
 
     /**
@@ -51,5 +85,23 @@ class Formation extends Model
     public function scopeNiveau($query, $niveau)
     {
         return $query->where('niveau', $niveau);
+    }
+
+    /**
+     * Scope pour les formations gratuites
+     */
+    public function scopeGratuite($query)
+    {
+        return $query->where(function ($q) {
+            $q->where('is_free', true)->orWhere('prix', 0);
+        });
+    }
+
+    /**
+     * Scope pour les formations payantes
+     */
+    public function scopePayante($query)
+    {
+        return $query->where('is_free', false)->where('prix', '>', 0);
     }
 }

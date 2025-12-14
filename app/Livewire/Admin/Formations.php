@@ -29,6 +29,7 @@ class Formations extends Component
     public $niveau = 'debutant';
     public $duree;
     public $prix = 0;
+    public $is_free = false;
     public $statut = 'brouillon';
 
     protected $paginationTheme = 'tailwind';
@@ -111,6 +112,7 @@ class Formations extends Component
         $this->niveau = $formation->niveau;
         $this->duree = $formation->duree;
         $this->prix = $formation->prix;
+        $this->is_free = $formation->is_free;
         $this->statut = $formation->statut;
         
         $this->editMode = true;
@@ -136,7 +138,8 @@ class Formations extends Component
             'image_url'            => $this->image_url,
             'niveau'               => $this->niveau,
             'duree'                => $this->duree,
-            'prix'                 => $this->prix,
+            'prix'                 => $this->is_free ? 0 : $this->prix,
+            'is_free'              => $this->is_free,
             'statut'               => $this->statut,
             'user_id'              => Auth::id(),
         ];
@@ -209,6 +212,7 @@ class Formations extends Component
         $this->niveau = 'debutant';
         $this->duree = '';
         $this->prix = 0;
+        $this->is_free = false;
         $this->statut = 'brouillon';
     }
 
@@ -216,6 +220,7 @@ class Formations extends Component
     {
         $formations = Formation::query()
             ->with('user')
+            ->withCount('modules')
             ->when($this->search, function ($query) {
                 $query->where('titre', 'like', '%' . $this->search . '%')
                     ->orWhere('niveau', 'like', '%' . $this->search . '%')
