@@ -10,7 +10,7 @@ class ArticleSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::where('email', 'admin@admin.com')->first();
+        $admin = User::where('email', 'contact@africainedesfinances.com')->first();
         
         if (!$admin) {
             $this->command->warn('Admin user not found. Please run UserSeeder first.');

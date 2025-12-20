@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
         // Administrateur
         User::create([
             'name' => 'Administrateur Afri-Fin',
-            'email' => 'admin@admin.com',
+            'email' => 'contact@africainedesfinances.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('contact@africainedesfinances.com'),
             'role' => 'admin',
             'phone' => '+229 97 12 34 56',
             'address' => 'Zone administrative',

@@ -69,7 +69,8 @@
                     <p class="text-sm text-muted-foreground">Gérer les utilisateurs et rôles</p>
                 </div>
             </div>
-        </a><a href="{{ route('admin.stock-data') }}">
+        </a>
+        <!-- <a href="{{ route('admin.stock-data') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -88,7 +89,8 @@
                     <p class="text-sm text-muted-foreground">Configuration API BRVM</p>
                 </div>
             </div>
-        </a><a href="{{ route('admin.transactions') }}">
+        </a> -->
+        <a href="{{ route('admin.transactions') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -107,7 +109,8 @@
                     <p class="text-sm text-muted-foreground">Suivre les paiements</p>
                 </div>
             </div>
-        </a><a href="{{ route('admin.appointments') }}">
+        </a>
+        <!-- <a href="{{ route('admin.appointments') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -128,7 +131,8 @@
                     <p class="text-sm text-muted-foreground">Gérer les rendez-vous</p>
                 </div>
             </div>
-        </a><a href="{{ route('admin.newsletters') }}">
+        </a> -->
+        <a href="{{ route('admin.newsletters') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -186,7 +190,8 @@
                     <p class="text-sm text-muted-foreground">Statistiques avancées</p>
                 </div>
             </div>
-        </a><a href="{{ route('admin.api-config') }}">
+        </a>
+        <!-- <a href="{{ route('admin.api-config') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -207,8 +212,9 @@
                     <p class="text-sm text-muted-foreground">Gérer les APIs externes</p>
                 </div>
             </div>
-        </a></div>
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm mt-8">
+        </a> -->
+    </div>
+    <!-- <div class="rounded-lg border bg-card text-card-foreground shadow-sm mt-8">
         <div class="flex flex-col space-y-1.5 p-6">
             <h3 class="text-2xl font-semibold leading-none tracking-tight">Accès rapide</h3>
         </div>
@@ -219,5 +225,5 @@
                 href="{{ route('admin.articles') }}">Nouvel article</a><a
                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground transition-smooth h-11 px-6 py-3"
                 href="{{ route('admin.formations') }}">Nouvelle formation</a></div>
-    </div>
+    </div> -->
 </main>
