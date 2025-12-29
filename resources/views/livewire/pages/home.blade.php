@@ -4,7 +4,7 @@
             currentSlide: 0,
             slides: [
                 {
-                    image: '{{ asset('assets/hero-banner.jpg') }}',
+                    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
                     title: 'Mikwabo, Africaine des Finances',
                     subtitle: 'Votre allié financier pour une prospérité durable',
                     cta: 'Découvrir nos services',
