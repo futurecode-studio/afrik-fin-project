@@ -1,7 +1,14 @@
 <main class="flex-1 pt-20">
     <!-- Hero Section -->
-    <section class="bg-gradient-hero text-primary-foreground py-20">
-        <div class="container mx-auto px-4">
+    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" 
+                 alt="À propos" 
+                 class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Qui <span class="text-secondary">sommes-nous ?</span></h1>
                 <p class="text-lg text-primary-foreground/90">Découvrez qui nous sommes, notre vision et notre engagement pour le développement du marché financier régional</p>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\InvestmentAppointment;
+use App\Models\GovernmentBond;
 use App\Mail\InvestmentAppointmentNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +16,8 @@ class InvestirObligations extends Component
     public $phone = '';
     public $company = '';
     public $message = '';
+
+    public $bonds = [];
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -30,6 +33,13 @@ class InvestirObligations extends Component
             $this->name = Auth::user()->name;
             $this->email = Auth::user()->email;
         }
+
+        $this->loadBonds();
+    }
+
+    public function loadBonds()
+    {
+        $this->bonds = GovernmentBond::active()->ordered()->get();
     }
 
     public function submit()

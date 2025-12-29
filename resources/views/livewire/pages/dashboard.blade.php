@@ -70,7 +70,7 @@
                 </div>
             </div>
         </a>
-        <!-- <a href="{{ route('admin.stock-data') }}">
+        <a href="{{ route('admin.government-bonds') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -80,16 +80,36 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-trending-up h-6 w-6 text-primary">
-                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                                <polyline points="16 7 22 7 22 13"></polyline>
+                                class="lucide lucide-landmark h-6 w-6 text-primary">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             </svg></div>
-                        <h3 class="font-semibold tracking-tight text-lg">Données Boursières</h3>
+                        <h3 class="font-semibold tracking-tight text-lg">Obligations d'États</h3>
                     </div>
-                    <p class="text-sm text-muted-foreground">Configuration API BRVM</p>
+                    <p class="text-sm text-muted-foreground">Gérer les obligations d'États</p>
                 </div>
             </div>
-        </a> -->
+        </a>
+        <a href="{{ route('admin.job-applications') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-briefcase h-6 w-6 text-primary">
+                                <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Candidatures</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les candidatures reçues</p>
+                </div>
+            </div>
+        </a>
         <a href="{{ route('admin.transactions') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

@@ -39,6 +39,7 @@ Route::get('/investir/obligations', \App\Livewire\Pages\InvestirObligations::cla
 Route::get('/investir/fcp', \App\Livewire\Pages\InvestirFcp::class)->name('investir.fcp');
 
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
+Route::get('/carriere', \App\Livewire\Pages\Carriere::class)->name('carriere');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
 
@@ -72,6 +73,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/formations/{formation}/modules/{module}/quiz', \App\Livewire\Admin\ModuleQuizManager::class)->name('formations.modules.quiz');
     Route::get('/users', \App\Livewire\Admin\Users::class)->name('users');
     Route::get('/stock-data', \App\Livewire\Admin\StockData::class)->name('stock-data');
+    Route::get('/government-bonds', \App\Livewire\Admin\GovernmentBonds::class)->name('government-bonds');
+    Route::get('/job-applications', \App\Livewire\Admin\JobApplications::class)->name('job-applications');
     Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions');
     Route::get('/appointments', \App\Livewire\Admin\Appointments::class)->name('appointments');
     Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters');

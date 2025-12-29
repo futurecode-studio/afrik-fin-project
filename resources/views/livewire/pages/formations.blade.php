@@ -17,8 +17,15 @@
     @endif
 
     <!-- Hero Section -->
-    <section class="bg-gradient-hero text-primary-foreground py-20">
-        <div class="container mx-auto px-4">
+    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Formations" 
+                 class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Formations <span class="text-secondary">E-Learning</span></h1>
                 <p class="text-lg text-primary-foreground/90 mb-6">Développez vos compétences financières avec nos formations certifiées, conçues par des experts du secteur</p>

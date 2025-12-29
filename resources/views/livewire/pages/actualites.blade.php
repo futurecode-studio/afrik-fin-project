@@ -1,6 +1,13 @@
 <main class="flex-1 pt-20">
-    <section class="bg-gradient-hero text-primary-foreground py-20">
-        <div class="container mx-auto px-4">
+    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Actualités" 
+                 class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Actualités <span
                         class="text-secondary">Financières</span></h1>

@@ -23,6 +23,98 @@
         </div>
     </section>
 
+    <!-- Section des obligations disponibles -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Obligations <span class="text-primary">Disponibles</span></h2>
+                    <p class="text-lg text-muted-foreground">Découvrez notre sélection d'obligations d'États de la zone UEMOA</p>
+                </div>
+
+                @if(count($bonds) > 0)
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                        @foreach($bonds as $bond)
+                            <div class="bg-card rounded-xl border border-border shadow-sm hover:shadow-elegant transition-smooth overflow-hidden">
+                                <div class="p-6">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-foreground mb-1">{{ $bond->name }}</h3>
+                                            <p class="text-sm text-muted-foreground">{{ $bond->issuer }} • {{ $bond->country }}</p>
+                                        </div>
+                                        @if($bond->rating)
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                                {{ $bond->rating }}
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4 mb-4">
+                                        <div class="bg-muted/50 rounded-lg p-3">
+                                            <p class="text-xs text-muted-foreground mb-1">Taux d'intérêt</p>
+                                            <p class="text-lg font-bold text-primary">{{ number_format($bond->interest_rate, 2) }}%</p>
+                                            <p class="text-xs text-muted-foreground">{{ $bond->interest_type_label }}</p>
+                                        </div>
+                                        <div class="bg-muted/50 rounded-lg p-3">
+                                            <p class="text-xs text-muted-foreground mb-1">Maturité</p>
+                                            <p class="text-lg font-bold text-foreground">{{ $bond->maturity_years }} ans</p>
+                                            <p class="text-xs text-muted-foreground">{{ $bond->maturity_date->format('d/m/Y') }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-xs text-muted-foreground mb-1">Valeur nominale</p>
+                                            <p class="text-sm font-semibold text-foreground">{{ number_format($bond->nominal_value, 0, ',', ' ') }} {{ $bond->currency }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-muted-foreground mb-1">Paiement</p>
+                                            <p class="text-sm font-semibold text-foreground">{{ $bond->payment_frequency_label }}</p>
+                                        </div>
+                                    </div>
+
+                                    @if($bond->yield_to_maturity)
+                                        <div class="mb-4">
+                                            <p class="text-xs text-muted-foreground mb-1">Rendement à l'échéance</p>
+                                            <p class="text-sm font-semibold text-green-600">{{ number_format($bond->yield_to_maturity, 2) }}%</p>
+                                        </div>
+                                    @endif
+
+                                    <div class="flex items-center justify-between pt-4 border-t border-border">
+                                        <div class="flex items-center gap-2">
+                                            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium {{ $bond->risk_level === 'low' ? 'bg-green-100 text-green-800' : ($bond->risk_level === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
+                                                Risque: {{ $bond->risk_level_label }}
+                                            </span>
+                                        </div>
+                                        @if($bond->remaining_years > 0)
+                                            <span class="text-xs text-muted-foreground">
+                                                {{ $bond->remaining_years }} ans restants
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    @if($bond->description)
+                                        <div class="mt-4 pt-4 border-t border-border">
+                                            <p class="text-sm text-muted-foreground">{{ Str::limit($bond->description, 150) }}</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-12 bg-muted/30 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-muted-foreground opacity-50">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <p class="text-muted-foreground">Aucune obligation disponible pour le moment</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+
     <section class="py-16 bg-muted/30">
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
