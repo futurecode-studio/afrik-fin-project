@@ -18,12 +18,6 @@
     <meta property="og:title" content="Africaine des Finances - Formation, Bourse BRVM &amp; Conseil Financier">
     <meta property="og:description"
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@FinanceAfricaine">
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

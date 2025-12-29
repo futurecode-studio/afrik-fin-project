@@ -61,7 +61,7 @@
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('actualites') }}">Actualités</a>
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('about') }}">À Propos</a>
+                                href="{{ route('about') }}">Qui sommes-nous ?</a>
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('contact') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('contact') }}">Contact</a>
                         </div>

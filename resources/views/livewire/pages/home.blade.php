@@ -1,62 +1,122 @@
 <main class="flex-1 pt-20">
-    <section class="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
-        <div class="absolute inset-0 z-0"><img src="/src/assets/hero-banner.jpg"
-                alt="Africaine des Finances" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-hero opacity-90"></div>
-        </div>
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <div
-                class="absolute top-20 left-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl animate-pulse">
+    <section class="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden" 
+        x-data="{
+            currentSlide: 0,
+            slides: [
+                {
+                    image: '{{ asset('assets/hero-banner.jpg') }}',
+                    title: 'Mikwabo, Africaine des Finances',
+                    subtitle: 'Votre allié financier pour une prospérité durable',
+                    cta: 'Découvrir nos services',
+                    link: '{{ route('services') }}'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop',
+                    title: 'Investissement Stratégique',
+                    subtitle: 'Maximisez vos rendements sur le marché de la BRVM',
+                    cta: 'Données Bourse',
+                    link: '{{ route('bourse') }}'
+                },
+                {
+                    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop',
+                    title: 'Formation d\'Excellence',
+                    subtitle: 'Maîtrisez les rouages de la finance et du trading',
+                    cta: 'Nos Formations',
+                    link: '{{ route('formations') }}'
+                }
+            ],
+            init() {
+                setInterval(() => {
+                    this.next();
+                }, 6000);
+            },
+            next() {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            },
+            prev() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+            }
+        }">
+        
+        <!-- Background Slides -->
+        <template x-for="(slide, index) in slides" :key="index">
+            <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                x-show="currentSlide === index"
+                x-transition:enter="transition ease-out duration-1000"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-1000"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0">
+                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
             </div>
-            <div
-                class="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000">
-            </div>
+        </template>
+
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-secondary/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
+
+        <!-- Content -->
         <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl">
-                <div
-                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary/10 backdrop-blur-md rounded-full mb-8 border border-secondary/20 shadow-sm hover:bg-secondary/20 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-shield-check w-5 h-5 text-secondary">
-                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                        <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="text-sm font-semibold text-primary-foreground tracking-wide">Agréé AMF-UMOA N° AA/2022-03</span></div>
-                <h1
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
-                    Maîtrisez les Marchés Financiers <span class="text-secondary">Africains</span></h1>
-                <p class="text-lg md:text-xl text-primary-foreground/90 mb-8 leading-relaxed">Formation
-                    professionnelle, données BRVM en temps réel, analyses de marché et conseil en
-                    investissement pour particuliers et entreprises de la zone UEMOA.</p>
-                <div class="flex flex-col sm:flex-row gap-4"><a href="/formations"><button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base group">
-                    Découvrir nos formations<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-smooth">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                    </svg></button></a><a href="/bourse">
-                        <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border-2 bg-background transition-smooth h-14 rounded-lg px-10 text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                    Données BRVM
-                    </button>
-                </a>
-                </div>
-                <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-primary-foreground/20">
-                    <div>
-                        <p class="text-3xl md:text-4xl font-bold text-secondary">8+</p>
-                        <p class="text-sm text-primary-foreground/80 mt-1">Années d'expertise BRVM</p>
+            <template x-for="(slide, index) in slides" :key="index">
+                <div class="max-w-3xl" x-show="currentSlide === index"
+                    x-transition:enter="transition ease-out duration-700 delay-300"
+                    x-transition:enter-start="opacity-0 translate-y-8"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 translate-y-(-8)">
+                    
+                    <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary/20 backdrop-blur-md rounded-full mb-8 border border-secondary/30 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-5 h-5 text-secondary">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        <span class="text-sm font-semibold text-primary-foreground tracking-wide">Agréé AMF-UMOA N° AA/2022-03</span>
                     </div>
-                    <div>
-                        <p class="text-3xl md:text-4xl font-bold text-secondary">2500+</p>
-                        <p class="text-sm text-primary-foreground/80 mt-1">Professionnels formés</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl md:text-4xl font-bold text-secondary">15</p>
-                        <p class="text-sm text-primary-foreground/80 mt-1">Pays d'Afrique couverts</p>
+
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight" x-text="slide.title"></h1>
+                    
+                    <p class="text-lg md:text-2xl text-primary-foreground/90 mb-10 leading-relaxed max-w-2xl font-light" x-text="slide.subtitle"></p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a :href="slide.link">
+                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base group">
+                                <span x-text="slide.cta"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-smooth">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </template>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button @click="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all hidden md:flex group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-6 h-6 group-hover:-translate-x-0.5 transition-transform">
+                <path d="m15 18-6-6 6-6"/>
+            </svg>
+        </button>
+        <button @click="next()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all hidden md:flex group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-6 h-6 group-hover:translate-x-0.5 transition-transform">
+                <path d="m9 18 6-6-6-6"/>
+            </svg>
+        </button>
+
+        <!-- Dots -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button @click="currentSlide = index" 
+                    class="h-1.5 rounded-full transition-all duration-300"
+                    :class="currentSlide === index ? 'w-8 bg-secondary' : 'w-2 bg-white/50 hover:bg-white/80'">
+                </button>
+            </template>
         </div>
     </section>
     <section class="py-20 bg-muted/30">
