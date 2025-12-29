@@ -14,8 +14,8 @@
                     image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop',
                     title: 'Investissement Stratégique',
                     subtitle: 'Maximisez vos rendements sur le marché de la BRVM',
-                    cta: 'Données Bourse',
-                    link: '{{ route('bourse') }}'
+                    cta: 'Investir Maintenant',
+                    link: '{{ route('investir.actions-brvm') }}'
                 },
                 {
                     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop',

@@ -54,10 +54,63 @@
                                 href="{{ route('services') }}">Services</a>
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('formations') }}">Formations</a>
-                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('bourse') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('bourse') }}">BRVM</a>
-                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('vl-fcp') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
-                                href="{{ route('vl-fcp') }}">VL/FCP</a>
+                            
+                            <!-- Menu Investir avec dropdown -->
+                            <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                                <button class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap flex items-center gap-1 {{ request()->routeIs('investir.*') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}">
+                                    Investir
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform" :class="open ? 'rotate-180' : ''">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <div x-show="open" 
+                                     x-transition:enter="transition ease-out duration-200"
+                                     x-transition:enter-start="opacity-0 transform scale-95"
+                                     x-transition:enter-end="opacity-100 transform scale-100"
+                                     x-transition:leave="transition ease-in duration-150"
+                                     x-transition:leave-start="opacity-100 transform scale-100"
+                                     x-transition:leave-end="opacity-0 transform scale-95"
+                                     class="absolute left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-elegant overflow-hidden z-50"
+                                     style="display: none;">
+                                    <a href="{{ route('investir.actions-brvm') }}" class="block px-4 py-3 text-sm hover:bg-muted transition-smooth {{ request()->routeIs('investir.actions-brvm') ? 'bg-primary/10 text-primary font-semibold' : 'text-foreground' }}">
+                                        <div class="flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                                <polyline points="16 7 22 7 22 13"></polyline>
+                                            </svg>
+                                            <div>
+                                                <p class="font-medium">Actions BRVM</p>
+                                                <p class="text-xs text-muted-foreground">Marché boursier régional</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('investir.obligations') }}" class="block px-4 py-3 text-sm hover:bg-muted transition-smooth {{ request()->routeIs('investir.obligations') ? 'bg-primary/10 text-primary font-semibold' : 'text-foreground' }}">
+                                        <div class="flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-secondary">
+                                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                            </svg>
+                                            <div>
+                                                <p class="font-medium">Obligations d'États</p>
+                                                <p class="text-xs text-muted-foreground">Titres souverains UEMOA</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('investir.fcp') }}" class="block px-4 py-3 text-sm hover:bg-muted transition-smooth {{ request()->routeIs('investir.fcp') ? 'bg-primary/10 text-primary font-semibold' : 'text-foreground' }}">
+                                        <div class="flex items-center gap-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent">
+                                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                                            </svg>
+                                            <div>
+                                                <p class="font-medium">Fonds Communs de Placement</p>
+                                                <p class="text-xs text-muted-foreground">FCP diversifiés</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('actualites*', 'actualite-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('actualites') }}">Actualités</a>
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('about') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
@@ -181,7 +234,7 @@
                                 </li>
                                 <li>
                                     <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
-                                        href="{{ route('bourse') }}">Bourse BRVM</a>
+                                        href="{{ route('investir.actions-brvm') }}">Investir - Actions BRVM</a>
                                 </li>
                                 <li>
                                     <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"

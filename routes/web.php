@@ -32,8 +32,12 @@ Route::post('/payment/kkiapay/callback', [\App\Http\Controllers\PaymentControlle
 Route::post('/payment/fedapay/callback', [\App\Http\Controllers\PaymentController::class, 'fedapayCallback'])->name('payment.fedapay.callback');
 Route::get('/payment/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
 Route::get('/payment/cancel', [\App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.cancel');
-Route::get('/bourse', \App\Livewire\Pages\Bourse::class)->name('bourse');
-Route::get('/vl-fcp', \App\Livewire\Pages\VlFcp::class)->name('vl-fcp');
+
+// Routes d'investissement
+Route::get('/investir/actions-brvm', \App\Livewire\Pages\InvestirActionsBrvm::class)->name('investir.actions-brvm');
+Route::get('/investir/obligations', \App\Livewire\Pages\InvestirObligations::class)->name('investir.obligations');
+Route::get('/investir/fcp', \App\Livewire\Pages\InvestirFcp::class)->name('investir.fcp');
+
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
