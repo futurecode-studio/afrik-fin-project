@@ -130,7 +130,7 @@
                 </div>
             </div>
         </a>
-        <!-- <a href="{{ route('admin.appointments') }}">
+        <a href="{{ route('admin.appointments') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">
@@ -148,10 +148,10 @@
                             </svg></div>
                         <h3 class="font-semibold tracking-tight text-lg">Rendez-vous</h3>
                     </div>
-                    <p class="text-sm text-muted-foreground">Gérer les rendez-vous</p>
+                    <p class="text-sm text-muted-foreground">Gérer les rendez-vous d'investissement</p>
                 </div>
             </div>
-        </a> -->
+        </a>
         <a href="{{ route('admin.newsletters') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

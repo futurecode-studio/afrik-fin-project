@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             FormationCompleteSeeder::class,
             StockSeeder::class,
             TransactionSeeder::class,
+            GovernmentBondSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
