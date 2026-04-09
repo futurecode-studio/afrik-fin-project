@@ -48,20 +48,26 @@ class Formation extends Component
 
     public function completeLesson()
     {
-        // Logique pour marquer une leçon comme terminée
-        // À implémenter selon les besoins
-        
-        // Mettre à jour la progression
+        if (!$this->currentLesson) {
+            return;
+        }
+
         $totalLessons = $this->formation->modules->sum(fn($m) => $m->lessons->count());
-        if ($totalLessons > 0) {
-            // Simuler la progression (à améliorer avec un vrai suivi)
-            $newProgress = min(100, $this->enrollment->progress + (100 / $totalLessons));
-            $this->enrollment->update(['progress' => round($newProgress)]);
-            
-            // Si la progression atteint 100%, marquer comme terminé
-            if ($newProgress >= 100) {
-                $this->enrollment->complete();
+
+        if ($totalLessons === 0) {
+            return;
+        }
+
+        $alreadyCompleted = $this->enrollment->hasCompletedLesson($this->currentLesson->id);
+
+        $this->enrollment->markLessonCompleted($this->currentLesson->id, $totalLessons);
+        $this->enrollment->refresh();
+
+        if (!$alreadyCompleted) {
+            if ($this->enrollment->isCompleted()) {
                 session()->flash('success', 'Félicitations ! Vous avez terminé la formation. Votre certificat est disponible.');
+            } else {
+                session()->flash('success', 'Leçon marquée comme terminée. Progression : ' . $this->enrollment->progress . '%');
             }
         }
     }

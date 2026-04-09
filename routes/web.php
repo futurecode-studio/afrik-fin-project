@@ -37,6 +37,7 @@ Route::get('/payment/cancel', [\App\Http\Controllers\PaymentController::class, '
 Route::get('/investir/actions-brvm', \App\Livewire\Pages\InvestirActionsBrvm::class)->name('investir.actions-brvm');
 Route::get('/investir/obligations', \App\Livewire\Pages\InvestirObligations::class)->name('investir.obligations');
 Route::get('/investir/fcp', \App\Livewire\Pages\InvestirFcp::class)->name('investir.fcp');
+Route::get('/investir/vl-fcp', \App\Livewire\Pages\VlFcp::class)->name('investir.vl-fcp');
 
 Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/carriere', \App\Livewire\Pages\Carriere::class)->name('carriere');

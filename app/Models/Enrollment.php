@@ -20,6 +20,7 @@ class Enrollment extends Model
         'progress',
         'certificate_number',
         'certificate_issued_at',
+        'completed_lessons',
     ];
 
     protected $casts = [
@@ -28,6 +29,7 @@ class Enrollment extends Model
         'certificate_issued_at' => 'datetime',
         'amount_paid' => 'decimal:2',
         'progress' => 'integer',
+        'completed_lessons' => 'array',
     ];
 
     /**
@@ -95,6 +97,38 @@ class Enrollment extends Model
             'status' => 'active',
             'enrolled_at' => now(),
         ]);
+    }
+
+    /**
+     * Vérifier si une leçon spécifique a été complétée
+     */
+    public function hasCompletedLesson(int $lessonId): bool
+    {
+        return in_array($lessonId, $this->completed_lessons ?? []);
+    }
+
+    /**
+     * Marquer une leçon comme complétée et recalculer la progression
+     */
+    public function markLessonCompleted(int $lessonId, int $totalLessons): void
+    {
+        $completed = $this->completed_lessons ?? [];
+
+        if (!in_array($lessonId, $completed)) {
+            $completed[] = $lessonId;
+            $progress = $totalLessons > 0 ? round((count($completed) / $totalLessons) * 100) : 0;
+
+            $data = ['completed_lessons' => $completed, 'progress' => $progress];
+
+            if ($progress >= 100 && !$this->completed_at) {
+                $data['completed_at'] = now();
+                $data['certificate_number'] = $this->generateCertificateNumber();
+                $data['certificate_issued_at'] = now();
+                $data['status'] = 'completed';
+            }
+
+            $this->update($data);
+        }
     }
 
     /**

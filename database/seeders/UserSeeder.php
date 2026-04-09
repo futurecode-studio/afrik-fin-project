@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Administrateur
-        User::create([
+        $admin1 = User::create([
             'name' => 'Administrateur Afri-Fin',
             'email' => 'contact@africainedesfinances.com',
             'email_verified_at' => now(),
@@ -30,9 +30,10 @@ class UserSeeder extends Seeder
             'is_active' => true,
             'last_login_at' => now(),
         ]);
+        $admin1->assignRole('admin');
 
         // Utilisateur admin
-        User::create([
+        $admin2 = User::create([
             'name' => 'codi anselme',
             'email' => 'codianselme@gmail.com',
             'email_verified_at' => now(),
@@ -48,5 +49,6 @@ class UserSeeder extends Seeder
             'is_active' => true,
             'last_login_at' => now()->subDays(2),
         ]);
+        $admin2->assignRole('admin');
     }
 }

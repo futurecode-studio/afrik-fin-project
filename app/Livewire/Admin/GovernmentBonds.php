@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\GovernmentBond;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -39,28 +40,34 @@ class GovernmentBonds extends Component
     public $search = '';
     public $filterStatus = '';
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'issuer' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
-        'isin_code' => 'nullable|string|max:255|unique:government_bonds,isin_code',
-        'nominal_value' => 'required|numeric|min:0',
-        'currency' => 'required|string|max:10',
-        'interest_rate' => 'required|numeric|min:0|max:100',
-        'interest_type' => 'required|string',
-        'payment_frequency' => 'required|string',
-        'issue_date' => 'required|date',
-        'maturity_date' => 'required|date|after:issue_date',
-        'maturity_years' => 'required|integer|min:1',
-        'current_price' => 'nullable|numeric|min:0',
-        'yield_to_maturity' => 'nullable|numeric|min:0|max:100',
-        'rating' => 'nullable|string|max:50',
-        'description' => 'nullable|string',
-        'risk_level' => 'required|string',
-        'minimum_investment' => 'nullable|numeric|min:0',
-        'is_active' => 'boolean',
-        'display_order' => 'integer|min:0',
-    ];
+    protected function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'issuer' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'isin_code' => [
+                'nullable', 'string', 'max:255',
+                Rule::unique('government_bonds', 'isin_code')->ignore($this->bondId),
+            ],
+            'nominal_value' => 'required|numeric|min:0',
+            'currency' => 'required|string|max:10',
+            'interest_rate' => 'required|numeric|min:0|max:100',
+            'interest_type' => 'required|string',
+            'payment_frequency' => 'required|string',
+            'issue_date' => 'required|date',
+            'maturity_date' => 'required|date|after:issue_date',
+            'maturity_years' => 'required|integer|min:1',
+            'current_price' => 'nullable|numeric|min:0',
+            'yield_to_maturity' => 'nullable|numeric|min:0|max:100',
+            'rating' => 'nullable|string|max:50',
+            'description' => 'nullable|string',
+            'risk_level' => 'required|string',
+            'minimum_investment' => 'nullable|numeric|min:0',
+            'is_active' => 'boolean',
+            'display_order' => 'integer|min:0',
+        ];
+    }
 
     public function openModal()
     {

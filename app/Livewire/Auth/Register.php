@@ -31,6 +31,7 @@ class Register extends Component
         $validated['role'] = 'client'; // Les inscriptions depuis le site sont des clients
 
         $user = User::create($validated);
+        $user->assignRole('client');
 
         event(new Registered($user));
 

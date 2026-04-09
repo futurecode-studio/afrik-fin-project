@@ -1,24 +1,24 @@
-<main class="flex-1 pt-20">
-    <section class="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden" 
+<main class="flex-1">
+    <section class="relative w-full flex items-center overflow-hidden" style="height:100vh; min-height:100vh;" 
         x-data="{
             currentSlide: 0,
             slides: [
                 {
-                    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
+                    image: '{{ asset('assets/images/img_1.png') }}',
                     title: 'Mikwabo, Africaine des Finances',
                     subtitle: 'Votre allié financier pour une prospérité durable',
                     cta: 'Découvrir nos services',
                     link: '{{ route('services') }}'
                 },
                 {
-                    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop',
+                    image: '{{ asset('assets/images/img_2.png') }}',
                     title: 'Investissement Stratégique',
                     subtitle: 'Maximisez vos rendements sur le marché de la BRVM',
                     cta: 'Investir Maintenant',
                     link: '{{ route('investir.actions-brvm') }}'
                 },
                 {
-                    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop',
+                    image: '{{ asset('assets/images/img_3.png') }}',
                     title: 'Formation d\'Excellence',
                     subtitle: 'Maîtrisez les rouages de la finance et du trading',
                     cta: 'Nos Formations',
@@ -48,7 +48,7 @@
                 x-transition:leave="transition ease-in duration-1000"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0">
-                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
+                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover" style="filter: contrast(1.08) saturate(1.15) brightness(0.97); transform: translateZ(0); image-rendering: -webkit-optimize-contrast;">
                 <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
             </div>
         </template>
@@ -60,7 +60,8 @@
         </div>
 
         <!-- Content -->
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="absolute inset-0 z-10 flex items-center" style="padding-top:80px;">
+            <div class="container mx-auto px-4 lg:px-16">
             <template x-for="(slide, index) in slides" :key="index">
                 <div class="max-w-3xl" x-show="currentSlide === index"
                     x-transition:enter="transition ease-out duration-700 delay-300"
@@ -78,9 +79,9 @@
                         <span class="text-sm font-semibold text-primary-foreground tracking-wide">Agréé AMF-UMOA N° AA/2022-03</span>
                     </div>
 
-                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight" x-text="slide.title"></h1>
+                    <h1 class="text-5xl md:text-6xl lg:text-8xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg" x-text="slide.title"></h1>
                     
-                    <p class="text-lg md:text-2xl text-primary-foreground/90 mb-10 leading-relaxed max-w-2xl font-light" x-text="slide.subtitle"></p>
+                    <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-2xl font-light drop-shadow" x-text="slide.subtitle"></p>
                     
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a :href="slide.link">
@@ -95,6 +96,7 @@
                     </div>
                 </div>
             </template>
+            </div>
         </div>
 
         <!-- Navigation Buttons -->

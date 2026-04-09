@@ -68,7 +68,7 @@ class FormationDetail extends Component
             return $this->redirect(route('connexion'), navigate: true);
         }
 
-        $paymentService = new PaymentService();
+        $paymentService = app(PaymentService::class);
         $result = $paymentService->enrollForFree(Auth::user(), $this->formation);
 
         if ($result['success']) {
@@ -89,7 +89,7 @@ class FormationDetail extends Component
             return;
         }
 
-        $paymentService = new PaymentService();
+        $paymentService = app(PaymentService::class);
         $result = $paymentService->initiatePayment(
             Auth::user(),
             $this->formation,
@@ -115,8 +115,8 @@ class FormationDetail extends Component
 
     public function handlePaymentSuccess($data)
     {
-        $paymentService = new PaymentService();
-        
+        $paymentService = app(PaymentService::class);
+
         if ($this->paymentProvider === 'kkiapay') {
             $result = $paymentService->handleKkiapayCallback($data);
         } else {

@@ -34,12 +34,14 @@ class Articles extends Component
 
     public function rules()
     {
+        $imageRequired = !$this->editMode && empty($this->image_url) ? 'required' : 'nullable';
+
         $rules = [
             'titre' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . ($this->articleId ?? 'NULL'),
             'extrait' => 'nullable|string|max:500',
             'contenu' => 'required|string',
-            'image' => $this->editMode ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'image' => $imageRequired . '|image|max:2048',
             'image_url' => 'nullable|url|max:255',
             'categorie' => 'nullable|string|max:100',
             'statut' => 'required|in:brouillon,publie,archive',

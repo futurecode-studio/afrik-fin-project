@@ -63,10 +63,10 @@ class Formations extends Component
     {
         if (!Auth::check()) {
             session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
-            return redirect()->route('login', ['redirect' => route('formations')]);
+            return $this->redirect(route('connexion'), navigate: true);
         }
 
-        $paymentService = new PaymentService();
+        $paymentService = app(PaymentService::class);
         $result = $paymentService->enrollForFree(Auth::user(), $this->selectedFormation);
 
         if ($result['success']) {
@@ -90,7 +90,7 @@ class Formations extends Component
             return;
         }
 
-        $paymentService = new PaymentService();
+        $paymentService = app(PaymentService::class);
         $result = $paymentService->initiatePayment(
             Auth::user(),
             $this->selectedFormation,
@@ -117,7 +117,7 @@ class Formations extends Component
 
     public function handlePaymentSuccess($data)
     {
-        $paymentService = new PaymentService();
+        $paymentService = app(PaymentService::class);
         
         if ($this->paymentProvider === 'kkiapay') {
             $result = $paymentService->handleKkiapayCallback($data);
