@@ -12,7 +12,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Snapshot quotidien des indices BRVM à 19h (après clôture du marché UEMOA),
+        // du lundi au vendredi. Alimente l'historique utilisé par le graphique.
+        $schedule->command('brvm:snapshot --force')
+            ->weekdays()
+            ->at('19:00')
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('brvm:snapshot : échec de l\'exécution planifiée.');
+            });
     }
 
     /**

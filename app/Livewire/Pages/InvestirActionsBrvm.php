@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
-use Carbon\Carbon;
 
 class InvestirActionsBrvm extends Component
 {
@@ -243,53 +242,58 @@ class InvestirActionsBrvm extends Component
         ];
     }
 
+    /**
+     * Charge les données du graphique depuis l'historique réel (table market_index_history).
+     * Tente de trouver un indice "Composite" parmi ceux disponibles, sinon prend le premier.
+     * Si l'historique est vide ou contient 1 seul point, on enregistre au moins le snapshot
+     * du jour afin que l'historique commence à se constituer.
+     */
     public function loadChartData()
     {
-        $days = 30;
-        $labels = [];
-        $data = [];
-        
-        $currentIndexValue = 347.81;
-        
+        // 1. Trouver l'indice cible (Composite de préférence)
+        $targetIndex = null;
+        $currentIndexValue = 0;
+
         foreach ($this->indices as $index) {
             $name = strtolower($index['name'] ?? '');
             if (str_contains($name, 'composite') || str_contains($name, 'brvm-c')) {
-                $currentIndexValue = $index['value'] ?? $currentIndexValue;
+                $targetIndex = $index;
                 break;
             }
         }
-        
-        $seed = (int) date('Ymd');
-        mt_srand($seed);
-        
-        $totalVariation = (mt_rand(-500, 500) / 100);
-        $dailyVariation = $totalVariation / $days;
-        
-        $startValue = $currentIndexValue / (1 + ($totalVariation / 100));
-        $baseValue = $startValue;
-        
-        for ($i = $days - 1; $i >= 0; $i--) {
-            $date = Carbon::now()->subDays($i);
-            $labels[] = $date->format('d/m');
-            
-            $noise = (mt_rand(-50, 50) / 100);
-            $dayVariation = $dailyVariation + $noise;
-            $baseValue = $baseValue * (1 + ($dayVariation / 100));
-            
-            if ($i === 0) {
-                $baseValue = $currentIndexValue;
-            }
-            
-            $data[] = round($baseValue, 2);
+        if (!$targetIndex && !empty($this->indices)) {
+            $targetIndex = $this->indices[0];
         }
-        
-        mt_srand();
-        
+
+        if (!$targetIndex) {
+            $this->chartData = ['labels' => [], 'data' => [], 'currentValue' => 0, 'source' => null, 'index_name' => null];
+            return;
+        }
+
+        $indexName = $targetIndex['name'];
+        $currentIndexValue = (float) ($targetIndex['value'] ?? 0);
+
+        // 2. Enregistrer le snapshot du jour (idempotent) pour que l'historique se construise
+        try {
+            $this->brvmService->recordDailySnapshot();
+        } catch (\Throwable $e) {
+            \Log::warning('Snapshot BRVM on-demand échoué: ' . $e->getMessage());
+        }
+
+        // 3. Lire l'historique réel en base
+        $history = $this->brvmService->getIndexHistory($indexName, 30);
+
+        $labels = array_column($history, 'date');
+        $data = array_column($history, 'value');
+        $source = $history[0]['source'] ?? null;
+
         $this->chartData = [
             'labels' => $labels,
             'data' => $data,
             'currentValue' => $currentIndexValue,
-            'is_simulated' => true, // Les données historiques affichées sont une simulation tant qu'un flux officiel n'est pas branché.
+            'source' => $source,
+            'index_name' => $indexName,
+            'points_count' => count($data),
         ];
     }
 

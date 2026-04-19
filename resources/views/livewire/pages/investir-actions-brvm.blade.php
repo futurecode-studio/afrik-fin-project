@@ -570,22 +570,55 @@
     <!-- Graphique -->
     <section class="py-12 bg-muted/30">
         <div class="container mx-auto px-4">
+            @php
+                $chartPoints = $chartData['points_count'] ?? 0;
+                $chartSource = $chartData['source'] ?? null;
+                $chartIndex = $chartData['index_name'] ?? 'BRVM Composite';
+                $sourceLabels = [
+                    'richbourse' => 'RichBourse.com',
+                    'brvm' => 'BRVM.org',
+                    'manual' => 'Saisie manuelle',
+                ];
+                $sourceLabel = $sourceLabels[$chartSource] ?? ucfirst($chartSource ?? 'inconnue');
+            @endphp
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
-                <h2 class="text-2xl font-bold">Évolution de l'indice BRVM Composite</h2>
-                @if(!empty($chartData['is_simulated']))
-                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-yellow-50 text-yellow-800 border border-yellow-200" title="Les données historiques présentées sont une simulation à titre illustratif. Le cours actuel affiché reste réel.">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.71-3L13.71 4a2 2 0 00-3.42 0L3.22 16a2 2 0 001.71 3z"/></svg>
-                        Données illustratives
+                <div>
+                    <h2 class="text-2xl font-bold">Évolution de l'indice {{ $chartIndex }}</h2>
+                    @if($chartSource)
+                        <p class="text-sm text-muted-foreground mt-1">
+                            Source : <span class="font-semibold text-foreground">{{ $sourceLabel }}</span>
+                            · Historique local sur {{ $chartPoints }} jour{{ $chartPoints > 1 ? 's' : '' }}
+                        </p>
+                    @endif
+                </div>
+                @if($chartPoints === 0)
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Historique en cours de constitution
+                    </span>
+                @elseif($chartPoints < 5)
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Historique court ({{ $chartPoints }} jour{{ $chartPoints > 1 ? 's' : '' }})
                     </span>
                 @endif
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 border-border">
-                <div class="h-80">
-                    <canvas id="brvmChart"></canvas>
-                </div>
-                @if(!empty($chartData['is_simulated']))
-                    <p class="text-xs text-muted-foreground mt-4 italic">
-                        ⚠️ Les valeurs historiques sur 30 jours sont générées à titre indicatif. Seul le cours actuel provient des sources officielles.
+                @if($chartPoints === 0)
+                    <div class="h-80 flex flex-col items-center justify-center text-center px-4">
+                        <svg class="w-12 h-12 text-muted-foreground mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        <h3 class="text-lg font-semibold text-foreground">Historique en cours de constitution</h3>
+                        <p class="text-sm text-muted-foreground mt-2 max-w-md">
+                            Les snapshots quotidiens de l'indice {{ $chartIndex }} s'accumulent automatiquement.
+                            Le graphique sera disponible dès que plusieurs jours de données seront collectés.
+                        </p>
+                    </div>
+                @else
+                    <div class="h-80">
+                        <canvas id="brvmChart"></canvas>
+                    </div>
+                    <p class="text-xs text-muted-foreground mt-4">
+                        📊 Données issues des snapshots quotidiens (sources : RichBourse.com / BRVM.org — gratuites, sans API).
                     </p>
                 @endif
             </div>

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Stock;
+use App\Models\MarketIndexHistory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -876,6 +877,68 @@ class BRVMScraperService
             }
         }
 
+        return null;
+    }
+
+    /**
+     * Enregistre un snapshot quotidien des indices BRVM dans la base.
+     * Idempotent grâce à la contrainte unique (index_name, snapshot_date) :
+     * ré-exécuter la commande le même jour met à jour la valeur sans créer de doublon.
+     *
+     * @return int Nombre d'indices persistés.
+     */
+    public function recordDailySnapshot(): int
+    {
+        $indices = $this->getIndices();
+        $count = 0;
+        $today = now()->toDateString();
+
+        foreach ($indices as $index) {
+            $name = $index['name'] ?? null;
+            $value = $index['value'] ?? null;
+            if (!$name || $value === null) {
+                continue;
+            }
+
+            MarketIndexHistory::updateOrCreate(
+                ['index_name' => $name, 'snapshot_date' => $today],
+                [
+                    'value' => $value,
+                    'variation_percent' => $index['variation_percent'] ?? null,
+                    'source' => $index['source'] ?? ($this->currentDataSource() ?? 'unknown'),
+                ]
+            );
+            $count++;
+        }
+
+        Log::info("BRVM snapshot: {$count} indice(s) enregistré(s) pour {$today}");
+        return $count;
+    }
+
+    /**
+     * Récupère l'historique d'un indice (série temporelle) depuis la base.
+     * Retourne un tableau ordonné chronologiquement compatible avec Chart.js.
+     */
+    public function getIndexHistory(string $indexName = 'BRVM Composite', int $days = 30): array
+    {
+        $rows = MarketIndexHistory::forIndex($indexName, $days)->get();
+
+        return $rows->map(fn ($r) => [
+            'date' => $r->snapshot_date->format('d/m'),
+            'value' => (float) $r->value,
+            'source' => $r->source,
+        ])->toArray();
+    }
+
+    /**
+     * Déduit la source principale des stocks actuellement en cache.
+     */
+    private function currentDataSource(): ?string
+    {
+        $stocks = Cache::get('brvm_stocks');
+        if (is_array($stocks) && !empty($stocks)) {
+            return $stocks[0]['source'] ?? null;
+        }
         return null;
     }
 }
