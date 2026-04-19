@@ -265,6 +265,7 @@ class InvestirActionsBrvm extends Component
             'labels' => $labels,
             'data' => $data,
             'currentValue' => $currentIndexValue,
+            'currentVariation' => (float) ($targetIndex['variation_percent'] ?? 0),
             'source' => $source,
             'index_name' => $indexName,
             'points_count' => count($data),

@@ -1,3 +1,14 @@
+@php
+    // Libellés humains des sources de données utilisées sur toute la page
+    $sourceLabels = [
+        'richbourse' => ['label' => 'RichBourse.com', 'url' => 'https://www.richbourse.com', 'badge' => 'bg-emerald-50 text-emerald-800 border-emerald-200'],
+        'brvm' => ['label' => 'BRVM.org', 'url' => 'https://www.brvm.org', 'badge' => 'bg-emerald-50 text-emerald-800 border-emerald-200'],
+        'database' => ['label' => 'Base locale', 'url' => null, 'badge' => 'bg-blue-50 text-blue-800 border-blue-200'],
+        'default' => ['label' => 'Données de démonstration', 'url' => null, 'badge' => 'bg-amber-50 text-amber-800 border-amber-200'],
+    ];
+    $currentSource = $sourceLabels[$dataSource] ?? ['label' => 'Source inconnue', 'url' => null, 'badge' => 'bg-gray-50 text-gray-800 border-gray-200'];
+@endphp
+
 <main class="flex-1 pt-20">
     <!-- Modal Détails Stock (ESC ferme + scroll-lock du body) -->
     @if($showModal && $selectedStock)
@@ -205,8 +216,16 @@
     <!-- Indices BRVM -->
     <section class="py-12 bg-muted/30">
         <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold">Indices BRVM</h2>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h2 class="text-2xl font-bold">Indices BRVM</h2>
+                    @if($dataSource)
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border {{ $currentSource['badge'] }}">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                            Source : {{ $currentSource['label'] }}
+                        </span>
+                    @endif
+                </div>
                 <button wire:click="refresh" wire:loading.attr="disabled"
                     class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary-light transition-smooth text-sm font-medium">
                     <svg wire:loading.remove xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -258,10 +277,18 @@
     <section class="py-12">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <h2 class="text-2xl font-bold">Principales Valeurs</h2>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h2 class="text-2xl font-bold">Principales Valeurs</h2>
+                    @if($dataSource)
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border {{ $currentSource['badge'] }}">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                            Source : {{ $currentSource['label'] }}
+                        </span>
+                    @endif
+                </div>
                 <span class="text-sm text-muted-foreground">
                     @if($lastUpdate)
-                        Dernière mise à jour: {{ $lastUpdate }}
+                        Dernière mise à jour : {{ $lastUpdate }}
                     @else
                         Chargement...
                     @endif
@@ -604,23 +631,152 @@
                 @endif
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 border-border">
-                @if($chartPoints === 0)
-                    <div class="h-80 flex flex-col items-center justify-center text-center px-4">
-                        <svg class="w-12 h-12 text-muted-foreground mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                        <h3 class="text-lg font-semibold text-foreground">Historique en cours de constitution</h3>
-                        <p class="text-sm text-muted-foreground mt-2 max-w-md">
-                            Les snapshots quotidiens de l'indice {{ $chartIndex }} s'accumulent automatiquement.
-                            Le graphique sera disponible dès que plusieurs jours de données seront collectés.
+                @if($chartPoints < 2)
+                    @php
+                        $currentValue = $chartData['currentValue'] ?? 0;
+                        $currentVariation = $chartData['currentVariation'] ?? 0;
+                        $isUp = $currentVariation >= 0;
+                    @endphp
+                    <div class="min-h-80 flex flex-col items-center justify-center text-center px-4 py-10">
+                        <p class="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">Valeur actuelle</p>
+                        <p class="text-6xl md:text-7xl font-bold text-foreground mb-3 tabular-nums">
+                            {{ number_format($currentValue, 2, ',', ' ') }}
                         </p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full {{ $isUp ? 'bg-accent/10 text-accent' : 'bg-destructive/10 text-destructive' }} font-semibold text-lg mb-6">
+                            @if($isUp)
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                                +{{ number_format($currentVariation, 2, ',', ' ') }} %
+                            @else
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"/></svg>
+                                {{ number_format($currentVariation, 2, ',', ' ') }} %
+                            @endif
+                        </div>
+                        <div class="max-w-lg border-t border-border pt-6">
+                            <div class="flex items-center justify-center gap-2 mb-3">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <h4 class="font-semibold text-foreground">Graphique en cours de constitution</h4>
+                            </div>
+                            <p class="text-sm text-muted-foreground">
+                                Un snapshot quotidien de l'indice <strong>{{ $chartIndex }}</strong> est enregistré automatiquement
+                                chaque jour ouvré à <strong>19h00 (heure d'Abidjan)</strong>, juste après la clôture du marché.
+                                La courbe s'affichera dès que <strong>2 journées de cotation</strong> auront été collectées.
+                            </p>
+                        </div>
                     </div>
                 @else
                     <div class="h-80">
                         <canvas id="brvmChart"></canvas>
                     </div>
                     <p class="text-xs text-muted-foreground mt-4">
-                        📊 Données issues des snapshots quotidiens (sources : RichBourse.com / BRVM.org — gratuites, sans API).
+                        📊 {{ $chartPoints }} point{{ $chartPoints > 1 ? 's' : '' }} d'historique local · Source :
+                        @if($chartSource && ($sourceLabels[$chartSource]['url'] ?? null))
+                            <a href="{{ $sourceLabels[$chartSource]['url'] }}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">{{ $sourceLabel }}</a>
+                        @else
+                            <span class="font-medium">{{ $sourceLabel }}</span>
+                        @endif
+                        (gratuit, sans API)
                     </p>
                 @endif
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment ça marche (transparence des données) -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3">Comment fonctionnent ces données ?</h2>
+                    <p class="text-muted-foreground max-w-2xl mx-auto">
+                        Toutes les informations boursières affichées sont collectées en temps quasi-réel depuis des
+                        <strong>sources publiques gratuites</strong>, sans abonnement ni clé API, et stockées localement.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Étape 1 -->
+                    <div class="rounded-lg border bg-card p-6 border-border">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-primary uppercase tracking-wide">Étape 1</span>
+                        </div>
+                        <h3 class="font-bold text-foreground mb-2">Collecte temps réel</h3>
+                        <p class="text-sm text-muted-foreground">
+                            Le service interroge <a href="https://www.richbourse.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">RichBourse.com</a>
+                            puis, en cas d'indisponibilité, bascule automatiquement sur
+                            <a href="https://www.brvm.org" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">BRVM.org</a>.
+                            Les cours sont <strong>mis en cache 5 minutes</strong> pour réduire la charge.
+                        </p>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="rounded-lg border bg-card p-6 border-border">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-primary uppercase tracking-wide">Étape 2</span>
+                        </div>
+                        <h3 class="font-bold text-foreground mb-2">Snapshot quotidien</h3>
+                        <p class="text-sm text-muted-foreground">
+                            Chaque jour ouvré à <strong>19h00 (heure d'Abidjan)</strong>, juste après la clôture du marché,
+                            une tâche planifiée enregistre la valeur de clôture des indices
+                            dans une table locale <code class="text-xs bg-muted px-1.5 py-0.5 rounded">market_index_history</code>.
+                        </p>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="rounded-lg border bg-card p-6 border-border">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-primary uppercase tracking-wide">Étape 3</span>
+                        </div>
+                        <h3 class="font-bold text-foreground mb-2">Historique & visualisation</h3>
+                        <p class="text-sm text-muted-foreground">
+                            Au fur et à mesure que les snapshots s'accumulent, le graphique d'évolution se construit
+                            <strong>sans génération artificielle</strong> : chaque point correspond à une valeur de clôture réelle.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sources utilisées -->
+                <div class="rounded-lg border border-border bg-muted/30 p-6">
+                    <h3 class="font-bold text-foreground mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                        Sources utilisées (gratuites, sans clé API)
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs shrink-0">1</span>
+                            <div>
+                                <a href="https://www.richbourse.com/cours/brvm" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">RichBourse.com</a>
+                                <span class="text-muted-foreground"> — agrégateur financier africain, cours BRVM actualisés (source principale)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs shrink-0">2</span>
+                            <div>
+                                <a href="https://www.brvm.org/fr/cours-actions/0" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">BRVM.org</a>
+                                <span class="text-muted-foreground"> — site officiel de la Bourse Régionale des Valeurs Mobilières (source de secours)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold text-xs shrink-0">3</span>
+                            <div>
+                                <span class="font-semibold text-foreground">Base locale</span>
+                                <span class="text-muted-foreground"> — dernier jeu de cours connu, utilisé si les deux sources ci-dessus sont indisponibles</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="text-xs text-muted-foreground mt-4 italic">
+                        ⚠️ Les cours affichés sont fournis à titre informatif et peuvent présenter un délai de quelques minutes
+                        par rapport aux transactions en cours. Pour toute décision d'investissement, référez-vous à votre SGI.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
