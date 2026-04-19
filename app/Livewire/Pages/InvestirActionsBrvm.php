@@ -200,6 +200,49 @@ class InvestirActionsBrvm extends Component
             ->toArray();
     }
 
+    /**
+     * Statistiques globales du marché : nombre de valeurs en hausse / baisse / stable
+     * et volume total échangé. Utilisé pour la synthèse en en-tête du tableau.
+     */
+    public function getMarketSummaryProperty(): array
+    {
+        $up = $down = $stable = 0;
+        $totalVolume = 0;
+
+        foreach ($this->allStocks as $stock) {
+            $variation = $stock['variation_percent'] ?? 0;
+            if ($variation > 0) $up++;
+            elseif ($variation < 0) $down++;
+            else $stable++;
+            $totalVolume += (int) ($stock['volume'] ?? 0);
+        }
+
+        return [
+            'total' => count($this->allStocks),
+            'up' => $up,
+            'down' => $down,
+            'stable' => $stable,
+            'total_volume' => $totalVolume,
+        ];
+    }
+
+    /**
+     * Mapping statique secteur → classes Tailwind (évite la duplication en vue).
+     */
+    public function getSectorColorsProperty(): array
+    {
+        return [
+            'Finance' => 'bg-blue-100 text-blue-800',
+            'Banque' => 'bg-blue-100 text-blue-800',
+            'Télécommunications' => 'bg-purple-100 text-purple-800',
+            'Agriculture' => 'bg-green-100 text-green-800',
+            'Industrie' => 'bg-orange-100 text-orange-800',
+            'Distribution' => 'bg-yellow-100 text-yellow-800',
+            'Services Publics' => 'bg-cyan-100 text-cyan-800',
+            'Transport' => 'bg-indigo-100 text-indigo-800',
+        ];
+    }
+
     public function loadChartData()
     {
         $days = 30;

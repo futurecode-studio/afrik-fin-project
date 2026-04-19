@@ -1,9 +1,15 @@
 <main class="flex-1 pt-20">
-    <!-- Modal Détails Stock -->
+    <!-- Modal Détails Stock (ESC ferme + scroll-lock du body) -->
     @if($showModal && $selectedStock)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4"
+         x-data="{ open: true }"
+         x-init="document.body.style.overflow = 'hidden'"
+         @keydown.escape.window="$wire.closeModal()"
+         x-effect="if (!open) document.body.style.overflow = ''"
+         @close-modal.window="document.body.style.overflow = ''"
+         aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!-- Overlay -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" wire:click="closeModal"></div>
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" wire:click="closeModal"></div>
 
         <!-- Modal -->
         <div class="relative bg-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
@@ -79,7 +85,7 @@
                             <p class="text-lg font-semibold text-foreground">
                                 @if(isset($selectedStock['market_cap']) && $selectedStock['market_cap'] > 0)
                                     @if($selectedStock['market_cap'] >= 1000)
-                                        {{ number_format($selectedStock['market_cap'] / 1000, 1, ',', ' ') }} Mrd FCFA
+                                        {{ number_format($selectedStock['market_cap'] / 1000, 2, ',', ' ') }} Mrd FCFA
                                     @else
                                         {{ number_format($selectedStock['market_cap'], 0, ',', ' ') }} M FCFA
                                     @endif
@@ -153,29 +159,28 @@
         </div>
     @endif
 
-    <div class="container mx-auto px-4 pt-4">
-        @if ($dataSource === 'richbourse')
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-                <strong>✅ Données en temps réel :</strong> Les cours BRVM proviennent de RichBourse.com (cache: 5 minutes).
+    @if($dataSource)
+    <div class="container mx-auto px-4 pt-4" x-data="{ show: true }" x-show="show">
+        @php
+            $sourceMap = [
+                'richbourse' => ['classes' => 'bg-green-50 text-green-800 border-green-200', 'icon' => '✅', 'label' => 'Données en temps réel', 'text' => 'Cours BRVM via RichBourse.com (cache 5 min).'],
+                'brvm' => ['classes' => 'bg-green-50 text-green-800 border-green-200', 'icon' => '✅', 'label' => 'Données en temps réel', 'text' => 'Cours BRVM via BRVM.org (cache 5 min).'],
+                'database' => ['classes' => 'bg-blue-50 text-blue-800 border-blue-200', 'icon' => '📊', 'label' => 'Données locales', 'text' => 'Sources en ligne indisponibles — affichage depuis la base locale.'],
+                'default' => ['classes' => 'bg-yellow-50 text-yellow-800 border-yellow-200', 'icon' => '⚠️', 'label' => 'Données de démonstration', 'text' => 'Sources en ligne indisponibles — affichage de valeurs par défaut.'],
+            ];
+            $info = $sourceMap[$dataSource] ?? ['classes' => 'bg-gray-50 text-gray-800 border-gray-200', 'icon' => 'ℹ️', 'label' => 'Source', 'text' => 'Données BRVM chargées.'];
+        @endphp
+        <div class="mb-4 rounded-lg p-3 text-sm border {{ $info['classes'] }} flex items-start gap-3">
+            <span class="text-base">{{ $info['icon'] }}</span>
+            <div class="flex-1">
+                <strong>{{ $info['label'] }} :</strong> {{ $info['text'] }}
             </div>
-        @elseif ($dataSource === 'brvm')
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-                <strong>✅ Données en temps réel :</strong> Les cours BRVM proviennent directement de BRVM.org (cache: 5 minutes).
-            </div>
-        @elseif ($dataSource === 'database')
-            <div class="mb-4 rounded-lg bg-blue-50 p-4 text-sm text-blue-800 border border-blue-200">
-                <strong>📊 Données locales :</strong> Les cours BRVM proviennent de la base de données locale. Les sources en ligne ne sont pas accessibles actuellement.
-            </div>
-        @elseif ($dataSource === 'default')
-            <div class="mb-4 rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 border border-yellow-200">
-                <strong>⚠️ Données par défaut :</strong> Les cours BRVM affichés sont des données de démonstration. Les sources en ligne ne sont pas accessibles.
-            </div>
-        @else
-            <div class="mb-4 rounded-lg bg-gray-50 p-4 text-sm text-gray-800 border border-gray-200">
-                <strong>ℹ️ Source :</strong> Données BRVM chargées avec succès.
-            </div>
-        @endif
+            <button @click="show = false" class="opacity-60 hover:opacity-100 transition" aria-label="Fermer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
     </div>
+    @endif
 
     <!-- Hero Section -->
     <section class="relative text-primary-foreground py-20 overflow-hidden" style="background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 60%, #1E4AB8 100%);">
@@ -263,6 +268,35 @@
                 </span>
             </div>
 
+            <!-- Résumé du marché -->
+            @if(count($allStocks) > 0)
+            @php $summary = $this->marketSummary; @endphp
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+                <div class="rounded-lg border bg-card p-4 border-border">
+                    <p class="text-xs text-muted-foreground uppercase tracking-wide font-medium">Valeurs cotées</p>
+                    <p class="text-2xl font-bold text-foreground mt-1">{{ number_format($summary['total'], 0, ',', ' ') }}</p>
+                </div>
+                <div class="rounded-lg border bg-card p-4 border-border">
+                    <p class="text-xs text-accent uppercase tracking-wide font-semibold">En hausse</p>
+                    <p class="text-2xl font-bold text-accent mt-1 flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                        {{ $summary['up'] }}
+                    </p>
+                </div>
+                <div class="rounded-lg border bg-card p-4 border-border">
+                    <p class="text-xs text-destructive uppercase tracking-wide font-semibold">En baisse</p>
+                    <p class="text-2xl font-bold text-destructive mt-1 flex items-center gap-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"/></svg>
+                        {{ $summary['down'] }}
+                    </p>
+                </div>
+                <div class="rounded-lg border bg-card p-4 border-border">
+                    <p class="text-xs text-muted-foreground uppercase tracking-wide font-medium">Volume total</p>
+                    <p class="text-2xl font-bold text-foreground mt-1">{{ number_format($summary['total_volume'], 0, ',', ' ') }}</p>
+                </div>
+            </div>
+            @endif
+
             <!-- Filtres -->
             <div class="rounded-lg border bg-card p-4 mb-6 border-border">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -338,7 +372,43 @@
                 </div>
             </div>
             
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border">
+            <!-- Vue mobile : cartes -->
+            <div class="md:hidden space-y-3">
+                @forelse($stocks as $stock)
+                    @php
+                        $sector = $stock['sector'] ?? 'Autre';
+                        $sectorColor = $this->sectorColors[$sector] ?? 'bg-gray-100 text-gray-800';
+                        $variation = $stock['variation_percent'] ?? 0;
+                    @endphp
+                    <button wire:click="showStockDetails('{{ $stock['symbol'] }}')"
+                            class="w-full text-left rounded-lg border bg-card p-4 border-border hover:border-primary/40 hover:shadow-elegant transition-all">
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <p class="font-bold text-primary text-lg">{{ $stock['symbol'] ?? 'N/A' }}</p>
+                                <p class="text-sm text-muted-foreground line-clamp-1">{{ $stock['company_name'] ?? 'N/A' }}</p>
+                            </div>
+                            <div class="inline-flex items-center gap-1 px-2 py-1 rounded {{ $variation >= 0 ? 'bg-accent/10 text-accent' : 'bg-destructive/10 text-destructive' }}">
+                                <span class="font-semibold text-sm">{{ ($variation >= 0 ? '+' : '') . number_format($variation, 2) }}%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded-full text-xs font-medium {{ $sectorColor }}">{{ $sector }}</span>
+                            <p class="font-bold text-foreground">{{ number_format($stock['current_price'] ?? 0, 0, ',', ' ') }} <span class="text-xs text-muted-foreground">FCFA</span></p>
+                        </div>
+                    </button>
+                @empty
+                    <div class="rounded-lg border bg-card p-8 text-center text-muted-foreground border-border">
+                        @if($isLoading)
+                            Chargement des données...
+                        @else
+                            Aucune donnée boursière disponible.
+                        @endif
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Vue desktop : tableau -->
+            <div class="hidden md:block rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border">
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-muted">
@@ -417,17 +487,7 @@
                                 <td class="p-4">
                                     @php
                                         $sector = $stock['sector'] ?? 'Autre';
-                                        $sectorColors = [
-                                            'Finance' => 'bg-blue-100 text-blue-800',
-                                            'Banque' => 'bg-blue-100 text-blue-800',
-                                            'Télécommunications' => 'bg-purple-100 text-purple-800',
-                                            'Agriculture' => 'bg-green-100 text-green-800',
-                                            'Industrie' => 'bg-orange-100 text-orange-800',
-                                            'Distribution' => 'bg-yellow-100 text-yellow-800',
-                                            'Services Publics' => 'bg-cyan-100 text-cyan-800',
-                                            'Transport' => 'bg-indigo-100 text-indigo-800',
-                                        ];
-                                        $sectorColor = $sectorColors[$sector] ?? 'bg-gray-100 text-gray-800';
+                                        $sectorColor = $this->sectorColors[$sector] ?? 'bg-gray-100 text-gray-800';
                                     @endphp
                                     <span class="px-2 py-1 rounded-full text-xs font-medium {{ $sectorColor }}">
                                         {{ $sector }}
@@ -442,7 +502,7 @@
                                 <td class="p-4 text-right text-muted-foreground">
                                     @if(isset($stock['market_cap']) && $stock['market_cap'] > 0)
                                         @if($stock['market_cap'] >= 1000)
-                                            {{ number_format($stock['market_cap'] / 1000, 1, ',', ' ') }} B
+                                            {{ number_format($stock['market_cap'] / 1000, 2, ',', ' ') }} Mrd
                                         @else
                                             {{ number_format($stock['market_cap'], 0, ',', ' ') }} M
                                         @endif
