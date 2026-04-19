@@ -34,6 +34,17 @@ class Kernel extends ConsoleKernel
             ->onFailure(function () {
                 \Log::error('umoa:sync : échec de l\'exécution planifiée.');
             });
+
+        // Synchronisation des valeurs liquidatives FCP depuis Sikafinance.
+        // Réchauffe le cache 3 fois par jour ouvré pour des VL toujours fraîches.
+        $schedule->command('fcp:sync')
+            ->weekdays()
+            ->cron('0 7,13,19 * * *')
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('fcp:sync : échec de l\'exécution planifiée.');
+            });
     }
 
     /**
