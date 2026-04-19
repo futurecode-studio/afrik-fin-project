@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             FormationCompleteSeeder::class,
             StockSeeder::class,
             TransactionSeeder::class,
-            GovernmentBondSeeder::class,
+            // GovernmentBondSeeder retiré volontairement : les obligations
+            // sont désormais 100% dynamiques via la commande `php artisan umoa:sync`
+            // (source : UMOA-Titres). Conserver le seeder en base statique produisait
+            // des données fictives présentées comme réelles.
         ]);
 
         // \App\Models\User::factory(10)->create();

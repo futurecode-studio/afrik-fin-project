@@ -22,6 +22,18 @@ class Kernel extends ConsoleKernel
             ->onFailure(function () {
                 \Log::error('brvm:snapshot : échec de l\'exécution planifiée.');
             });
+
+        // Synchronisation des obligations UEMOA depuis UMOA-Titres.
+        // 2 fois par jour ouvré (matin + fin de journée) pour capturer au plus vite
+        // les nouvelles adjudications publiées.
+        $schedule->command('umoa:sync --force --purge')
+            ->weekdays()
+            ->twiceDaily(8, 20)
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('umoa:sync : échec de l\'exécution planifiée.');
+            });
     }
 
     /**

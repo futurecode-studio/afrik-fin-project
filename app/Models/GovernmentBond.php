@@ -14,18 +14,23 @@ class GovernmentBond extends Model
         'issuer',
         'country',
         'isin_code',
+        'external_code',
         'nominal_value',
         'currency',
         'interest_rate',
         'interest_type',
         'payment_frequency',
         'issue_date',
+        'auction_date',
         'maturity_date',
         'maturity_years',
         'current_price',
         'yield_to_maturity',
         'rating',
         'description',
+        'data_source',
+        'source_url',
+        'last_synced_at',
         'risk_level',
         'minimum_investment',
         'is_active',
@@ -34,7 +39,9 @@ class GovernmentBond extends Model
 
     protected $casts = [
         'issue_date' => 'date',
+        'auction_date' => 'date',
         'maturity_date' => 'date',
+        'last_synced_at' => 'datetime',
         'is_active' => 'boolean',
         'nominal_value' => 'decimal:2',
         'interest_rate' => 'decimal:2',
@@ -51,6 +58,22 @@ class GovernmentBond extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('display_order')->orderBy('maturity_date');
+    }
+
+    /**
+     * Masque automatiquement les obligations dont l'échéance est passée.
+     */
+    public function scopeNotMatured($query)
+    {
+        return $query->where('maturity_date', '>=', now()->toDateString());
+    }
+
+    /**
+     * Obligations émises dans les 60 derniers jours (en cours de souscription / récentes).
+     */
+    public function scopeRecent($query, int $days = 60)
+    {
+        return $query->where('issue_date', '>=', now()->subDays($days)->toDateString());
     }
 
     public function getRiskLevelLabelAttribute(): string
