@@ -2,41 +2,53 @@
     <section class="relative w-full flex items-center overflow-hidden" style="height:100vh; min-height:100vh;" 
         x-data="{
             currentSlide: 0,
+            paused: false,
             slides: [
                 {
                     image: '{{ asset('assets/images/img_1.png') }}',
+                    eyebrow: 'Expertise Financière',
                     title: 'Mikwabo, Africaine des Finances',
-                    subtitle: 'Votre allié financier pour une prospérité durable',
+                    subtitle: 'Accompagnement sur mesure pour investisseurs, entreprises et institutions de la zone UEMOA.',
                     cta: 'Découvrir nos services',
-                    link: '{{ route('services') }}'
+                    link: '{{ route('services') }}',
+                    ctaSecondary: 'Nous contacter',
+                    linkSecondary: '{{ route('contact') }}'
                 },
                 {
                     image: '{{ asset('assets/images/img_2.png') }}',
+                    eyebrow: 'Bourse & Investissement',
                     title: 'Investissement Stratégique',
-                    subtitle: 'Maximisez vos rendements sur le marché de la BRVM',
-                    cta: 'Investir Maintenant',
-                    link: '{{ route('investir.actions-brvm') }}'
+                    subtitle: 'Données de marché en temps réel, analyses expertes et conseils personnalisés pour maximiser vos rendements.',
+                    cta: 'Commencer à investir',
+                    link: '{{ route('investir.actions-brvm') }}',
+                    ctaSecondary: 'Voir les cotations',
+                    linkSecondary: '{{ route('services-bourse') }}'
                 },
                 {
                     image: '{{ asset('assets/images/img_3.png') }}',
+                    eyebrow: 'Formation Certifiante',
                     title: 'Formation d\'Excellence',
-                    subtitle: 'Maîtrisez les rouages de la finance et du trading',
-                    cta: 'Nos Formations',
-                    link: '{{ route('formations') }}'
+                    subtitle: 'Formations certifiantes en analyse financière, trading et gestion de portefeuille, dispensées par des experts de terrain.',
+                    cta: 'Explorer les formations',
+                    link: '{{ route('formations') }}',
+                    ctaSecondary: 'Voir le programme',
+                    linkSecondary: '{{ route('services-formation') }}'
                 }
             ],
             init() {
                 setInterval(() => {
-                    this.next();
-                }, 6000);
+                    if (!this.paused) this.next();
+                }, 5000);
             },
             next() {
                 this.currentSlide = (this.currentSlide + 1) % this.slides.length;
             },
             prev() {
                 this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-            }
-        }">
+            },
+            pad(n) { return String(n).padStart(2, '0'); }
+        }"
+        @mouseenter="paused = true" @mouseleave="paused = false">
         
         <!-- Background Slides -->
         <template x-for="(slide, index) in slides" :key="index">
@@ -49,7 +61,7 @@
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0">
                 <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover" style="filter: contrast(1.08) saturate(1.15) brightness(0.97); transform: translateZ(0); image-rendering: -webkit-optimize-contrast;">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20"></div>
             </div>
         </template>
 
@@ -71,23 +83,25 @@
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-(-8)">
                     
-                    <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary/20 backdrop-blur-md rounded-full mb-8 border border-secondary/30 shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-5 h-5 text-secondary">
+                    <!-- Badge de confiance (pill sombre avec icône dorée) -->
+                    <div class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-primary-dark/90 backdrop-blur-sm rounded-full mb-8 border border-secondary/40 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-secondary shrink-0">
                             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                             <path d="m9 12 2 2 4-4"></path>
                         </svg>
-                        <span class="text-sm font-semibold text-primary-foreground tracking-wide">Agréé AMF-UMOA N° AA/2022-03</span>
+                        <span class="text-sm md:text-base font-bold text-white tracking-wide whitespace-nowrap">Agréé AMF-UMOA N° AA/2022-03</span>
                     </div>
 
-                    <h1 class="text-5xl md:text-6xl lg:text-8xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg" x-text="slide.title"></h1>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-6 leading-[1.05] tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]" x-text="slide.title"></h1>
                     
-                    <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-2xl font-light drop-shadow" x-text="slide.subtitle"></p>
+                    <p class="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 leading-relaxed max-w-2xl font-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]" x-text="slide.subtitle"></p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <!-- CTA principal -->
+                    <div>
                         <a :href="slide.link">
-                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant transition-smooth h-14 rounded-lg px-10 text-base group">
+                            <button class="inline-flex items-center justify-center gap-3 whitespace-nowrap font-bold bg-secondary text-secondary-foreground hover:bg-secondary-light shadow-glow hover:shadow-elegant hover:scale-[1.02] transition-all duration-300 h-14 md:h-16 rounded-xl px-8 md:px-10 text-base md:text-lg group">
                                 <span x-text="slide.cta"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-smooth">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 group-hover:translate-x-1 transition-transform">
                                     <path d="M5 12h14"></path>
                                     <path d="m12 5 7 7-7 7"></path>
                                 </svg>
@@ -97,6 +111,16 @@
                 </div>
             </template>
             </div>
+        </div>
+
+        <!-- Indicateur numérique & progress -->
+        <div class="absolute bottom-12 right-6 lg:right-16 z-20 hidden md:flex items-center gap-4 text-white">
+            <span class="text-5xl lg:text-6xl font-extrabold tabular-nums" x-text="pad(currentSlide + 1)"></span>
+            <div class="w-20 lg:w-28 h-[2px] bg-white/30 relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 bg-secondary transition-all duration-500"
+                     :style="'width: ' + ((currentSlide + 1) / slides.length * 100) + '%'"></div>
+            </div>
+            <span class="text-lg lg:text-xl font-medium text-white/60 tabular-nums" x-text="pad(slides.length)"></span>
         </div>
 
         <!-- Navigation Buttons -->

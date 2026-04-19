@@ -19,6 +19,9 @@
         content="Plateforme financière africaine de référence. Formations e-learning, données boursières BRVM en temps réel, analyses de marché et conseil en investissement.">
     <meta property="og:type" content="website">
 
+    <!-- Vite (Tailwind + JS) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <!-- Livewire Styles --> 
     @livewireStyles
 </head>
@@ -175,7 +178,7 @@
             
             @yield("content")
             
-            <footer class="bg-gradient-hero text-primary-foreground">
+            <footer class="text-primary-foreground" style="background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 100%);">
                 <div class="container mx-auto px-4 py-12">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div class="space-y-4">

@@ -381,7 +381,7 @@
                 position: "center",
                 callback: "",
                 data: data.reference,
-                theme: "#1e40af",
+                theme: "#0A2E8C",
                 key: "{{ config('services.kkiapay.public_key') }}",
                 sandbox: {{ config('services.kkiapay.sandbox') ? 'true' : 'false' }},
             });
