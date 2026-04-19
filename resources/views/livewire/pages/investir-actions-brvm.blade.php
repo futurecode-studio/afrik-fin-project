@@ -713,21 +713,39 @@
 </main>
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 let brvmChart = null;
+let chartJsLoaded = false;
+let chartJsLoading = null;
 
-function createChart() {
+// Charge Chart.js à la demande (évite le CDN si le graphique n'est jamais affiché)
+function loadChartJs() {
+    if (chartJsLoaded) return Promise.resolve();
+    if (chartJsLoading) return chartJsLoading;
+    chartJsLoading = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+        script.onload = () => { chartJsLoaded = true; resolve(); };
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+    return chartJsLoading;
+}
+
+async function createChart() {
     const ctx = document.getElementById('brvmChart');
-    if (ctx) {
-        // Détruire l'ancien graphique s'il existe
-        if (brvmChart) {
-            brvmChart.destroy();
-        }
+    if (!ctx) return;
 
-        const chartData = @json($chartData);
-        
-        brvmChart = new Chart(ctx, {
+    await loadChartJs();
+
+    // Détruire l'ancien graphique s'il existe
+    if (brvmChart) {
+        brvmChart.destroy();
+    }
+
+    const chartData = @json($chartData);
+
+    brvmChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: chartData.labels || [],
@@ -831,19 +849,33 @@ function createChart() {
                 }
             }
         });
-    }
 }
 
-// Créer le graphique au chargement de la page
-document.addEventListener('DOMContentLoaded', createChart);
+// Lazy-load : charger Chart.js + créer le graphique uniquement quand visible
+function observeChart() {
+    const canvas = document.getElementById('brvmChart');
+    if (!canvas) return;
+    if (!('IntersectionObserver' in window)) { createChart(); return; }
 
-// Recréer le graphique après chaque mise à jour Livewire
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                createChart();
+                observer.disconnect();
+            }
+        });
+    }, { rootMargin: '100px' });
+    observer.observe(canvas);
+}
+
+document.addEventListener('DOMContentLoaded', observeChart);
+
+// Recréer le graphique après chaque mise à jour Livewire si déjà chargé
 document.addEventListener('livewire:init', () => {
-    Livewire.hook('morph.updated', ({ component }) => {
-        // Attendre que le DOM soit mis à jour
-        setTimeout(() => {
-            createChart();
-        }, 100);
+    Livewire.hook('morph.updated', () => {
+        if (chartJsLoaded) {
+            setTimeout(createChart, 100);
+        }
     });
 });
 </script>

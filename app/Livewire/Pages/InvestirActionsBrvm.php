@@ -303,12 +303,11 @@ class InvestirActionsBrvm extends Component
 
     public function showStockDetails(string $symbol)
     {
-        foreach ($this->allStocks as $stock) {
-            if ($stock['symbol'] === $symbol) {
-                $this->selectedStock = $stock;
-                $this->showModal = true;
-                break;
-            }
+        // Recherche idiomatique via Collection (code plus concis que la boucle manuelle)
+        $stock = collect($this->allStocks)->firstWhere('symbol', $symbol);
+        if ($stock) {
+            $this->selectedStock = $stock;
+            $this->showModal = true;
         }
     }
 
