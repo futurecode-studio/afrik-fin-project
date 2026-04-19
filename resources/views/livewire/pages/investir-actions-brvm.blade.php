@@ -115,6 +115,7 @@
                     <a 
                         href="https://www.brvm.org/fr/cours-actions/0/status/0" 
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
                     >
                         Voir sur BRVM.org
@@ -132,6 +133,14 @@
         <div class="container mx-auto px-4 pt-4">
             <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
                 {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="container mx-auto px-4 pt-4">
+            <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">
+                {{ session('error') }}
             </div>
         </div>
     @endif
@@ -169,19 +178,21 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
-        <!-- Image de fond -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Bourse BRVM" 
-                 class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
+    <section class="relative text-primary-foreground py-20 overflow-hidden" style="background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 60%, #1E4AB8 100%);">
+        <!-- Motifs décoratifs -->
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-secondary/30 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-primary-light/40 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Investir sur les <span class="text-secondary">Actions BRVM</span></h1>
-                <p class="text-lg text-primary-foreground/90">Suivez en temps réel les cours, indices et analyses de la Bourse Régionale des Valeurs Mobilières</p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/20 border border-secondary/40 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="text-sm font-semibold tracking-wide">Marché UEMOA</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Investir sur les <span class="text-secondary">Actions BRVM</span></h1>
+                <p class="text-lg text-primary-foreground/90">Suivez les cours, indices et analyses de la Bourse Régionale des Valeurs Mobilières.</p>
             </div>
         </div>
     </section>
@@ -499,11 +510,24 @@
     <!-- Graphique -->
     <section class="py-12 bg-muted/30">
         <div class="container mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-6">Évolution de l'indice BRVM Composite</h2>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+                <h2 class="text-2xl font-bold">Évolution de l'indice BRVM Composite</h2>
+                @if(!empty($chartData['is_simulated']))
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-yellow-50 text-yellow-800 border border-yellow-200" title="Les données historiques présentées sont une simulation à titre illustratif. Le cours actuel affiché reste réel.">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.71-3L13.71 4a2 2 0 00-3.42 0L3.22 16a2 2 0 001.71 3z"/></svg>
+                        Données illustratives
+                    </span>
+                @endif
+            </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 border-border">
                 <div class="h-80">
                     <canvas id="brvmChart"></canvas>
                 </div>
+                @if(!empty($chartData['is_simulated']))
+                    <p class="text-xs text-muted-foreground mt-4 italic">
+                        ⚠️ Les valeurs historiques sur 30 jours sont générées à titre indicatif. Seul le cours actuel provient des sources officielles.
+                    </p>
+                @endif
             </div>
         </div>
     </section>

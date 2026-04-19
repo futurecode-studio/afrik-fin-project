@@ -6,7 +6,9 @@ use App\Models\InvestmentAppointment;
 use App\Mail\InvestmentAppointmentNotification;
 use App\Services\BRVMScraperService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
 use Carbon\Carbon;
 
@@ -51,11 +53,20 @@ class InvestirActionsBrvm extends Component
     ];
 
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'name' => 'required|string|min:2|max:255',
         'email' => 'required|email|max:255',
-        'phone' => 'required|string|max:20',
+        'phone' => ['required', 'string', 'regex:/^[+\d\s\-\(\)]{8,20}$/'],
         'company' => 'nullable|string|max:255',
         'message' => 'nullable|string|max:1000',
+    ];
+
+    protected $messages = [
+        'name.required' => 'Votre nom est requis.',
+        'name.min' => 'Votre nom doit contenir au moins 2 caractères.',
+        'email.required' => 'Votre email est requis.',
+        'email.email' => "L'email fourni n'est pas valide.",
+        'phone.required' => 'Votre numéro de téléphone est requis.',
+        'phone.regex' => 'Format de téléphone invalide (ex : +229 01 23 45 67).',
     ];
 
     public function boot(BRVMScraperService $brvmService)
@@ -235,6 +246,7 @@ class InvestirActionsBrvm extends Component
             'labels' => $labels,
             'data' => $data,
             'currentValue' => $currentIndexValue,
+            'is_simulated' => true, // Les données historiques affichées sont une simulation tant qu'un flux officiel n'est pas branché.
         ];
     }
 
@@ -265,6 +277,15 @@ class InvestirActionsBrvm extends Component
 
     public function submit()
     {
+        // Rate-limiting anti-spam : 3 tentatives / 10 min par IP ou utilisateur
+        $throttleKey = 'brvm-appointment:' . (Auth::id() ?: request()->ip());
+        if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            session()->flash('error', "Trop de demandes. Réessayez dans {$seconds} secondes.");
+            return;
+        }
+        RateLimiter::hit($throttleKey, 600);
+
         $this->validate();
 
         $appointment = InvestmentAppointment::create([
@@ -278,8 +299,20 @@ class InvestirActionsBrvm extends Component
             'status' => 'pending',
         ]);
 
-        Mail::to($this->email)->send(new InvestmentAppointmentNotification($appointment, false));
-        Mail::to(config('mail.from.address'))->send(new InvestmentAppointmentNotification($appointment, true));
+        // Envoi des emails de manière non-bloquante (queue si disponible, sinon try/catch)
+        $adminEmail = config('mail.from.address') ?: env('MAIL_ADMIN_ADDRESS');
+        try {
+            Mail::to($this->email)->queue(new InvestmentAppointmentNotification($appointment, false));
+            if ($adminEmail) {
+                Mail::to($adminEmail)->queue(new InvestmentAppointmentNotification($appointment, true));
+            }
+        } catch (\Throwable $e) {
+            Log::error('Envoi email RDV BRVM échoué', [
+                'appointment_id' => $appointment->id,
+                'error' => $e->getMessage(),
+            ]);
+            // On n'interrompt pas l'utilisateur : la demande est enregistrée en base.
+        }
 
         session()->flash('success', 'Votre demande de rendez-vous a été envoyée avec succès ! Nous vous contacterons bientôt.');
 
