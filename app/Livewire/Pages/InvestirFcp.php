@@ -2,21 +2,13 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\InvestmentAppointment;
-use App\Mail\InvestmentAppointmentNotification;
+use App\Livewire\Concerns\HandlesInvestmentAppointment;
 use App\Services\MutualFundsApiService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class InvestirFcp extends Component
 {
-    // Formulaire de rendez-vous
-    public $name = '';
-    public $email = '';
-    public $phone = '';
-    public $company = '';
-    public $message = '';
+    use HandlesInvestmentAppointment;
 
     // Données FCP
     public $selectedCategory = 'Tous';
@@ -26,21 +18,14 @@ class InvestirFcp extends Component
     public $isLoading = true;
     public $error = null;
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'phone' => 'required|string|max:20',
-        'company' => 'nullable|string|max:255',
-        'message' => 'nullable|string|max:1000',
-    ];
+    protected function rules(): array
+    {
+        return $this->appointmentRules();
+    }
 
     public function mount()
     {
-        if (Auth::check()) {
-            $this->name = Auth::user()->name;
-            $this->email = Auth::user()->email;
-        }
-
+        $this->prefillFromAuthUser();
         $this->loadFunds();
     }
 
@@ -86,25 +71,7 @@ class InvestirFcp extends Component
 
     public function submit()
     {
-        $this->validate();
-
-        $appointment = InvestmentAppointment::create([
-            'user_id' => Auth::id(),
-            'investment_type' => 'fcp',
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'company' => $this->company,
-            'message' => $this->message,
-            'status' => 'pending',
-        ]);
-
-        Mail::to($this->email)->send(new InvestmentAppointmentNotification($appointment, false));
-        Mail::to(config('mail.from.address'))->send(new InvestmentAppointmentNotification($appointment, true));
-
-        session()->flash('success', 'Votre demande de rendez-vous a été envoyée avec succès ! Nous vous contacterons bientôt.');
-
-        $this->reset(['company', 'message']);
+        $this->submitAppointment('fcp');
     }
 
     public function render()
