@@ -374,9 +374,21 @@
                                 <path d="M8 14h.01"></path>
                             </svg></div>
                         <div class="flex-1">
-                            <p class="text-3xl font-bold text-primary-foreground mb-1">50+</p>
+                            @php
+                                $homePartners = \App\Models\Partner::active()->orderBy('order')->limit(6)->get();
+                            @endphp
+                            <p class="text-3xl font-bold text-primary-foreground mb-1">{{ $homePartners->count() }}+</p>
                             <p class="text-base font-semibold text-secondary mb-1">Entreprises partenaires
                             </p>
+                            @if($homePartners->isNotEmpty())
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    @foreach($homePartners->take(4) as $partner)
+                                        @if($partner->logo)
+                                            <img src="{{ $partner->logo ? '/storage/' . $partner->logo : '' }}" alt="{{ $partner->nom }}" class="h-6 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity">
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
                             <p class="text-sm text-primary-foreground/70">Réseau professionnel</p>
                         </div>
                     </div>
@@ -420,7 +432,6 @@
                         </div>
                     </div>
                 </div> -->
-            </div>
         </div>
     </section>
     <section class="py-20">

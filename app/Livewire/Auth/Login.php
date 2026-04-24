@@ -2,34 +2,38 @@
 
 namespace App\Livewire\Auth;
 
-use App\Livewire\Forms\LoginForm;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Login extends Component
 {
-    public LoginForm $form;
+    public string $email = '';
+    public string $password = '';
+    public bool $remember = false;
+    public string $errorMessage = '';
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function login(): void
+    public function login()
     {
-        $this->validate();
+        $this->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
 
-        $this->form->authenticate();
+        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+            $this->errorMessage = 'Email ou mot de passe incorrect';
+            return;
+        }
 
         Session::regenerate();
 
         $user = auth()->user();
-
-        // Rediriger selon le rôle
+        
         if ($user->isAdmin()) {
-            $this->redirect(route('admin.dashboard'), navigate: true);
-        } else {
-            $this->redirect(route('client.dashboard'), navigate: true);
+            return $this->redirect('/admin/dashboard');
         }
+        
+        return $this->redirect('/client/dashboard');
     }
 
     public function render()

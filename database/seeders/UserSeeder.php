@@ -8,47 +8,89 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Administrateur
-        $admin1 = User::create([
-            'name' => 'Administrateur Afri-Fin',
-            'email' => 'contact@africainedesfinances.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('contact@africainedesfinances.com'),
-            'role' => 'admin',
-            'phone' => '+229 97 12 34 56',
-            'address' => 'Zone administrative',
-            'city' => 'Cotonou',
-            'country' => 'Bénin',
-            'postal_code' => '01BP1234',
-            'date_of_birth' => '1985-06-15',
-            'gender' => 'male',
-            'is_active' => true,
-            'last_login_at' => now(),
-        ]);
-        $admin1->assignRole('admin');
+        $users = [
+            [
+                'name' => 'Administrateur Principal',
+                'email' => 'contact@africainedesfinances.com',
+                'password' => 'contact@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 89',
+                'role' => 'admin',
+            ],
+            [
+                'name' => 'Dr. Kofi Annan',
+                'email' => 'k.annan@africainedesfinances.com',
+                'password' => 'k.annan@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 89',
+                'role' => 'directeur_general',
+            ],
+            [
+                'name' => 'Marie Doumbouya',
+                'email' => 'm.doumbouya@africainedesfinances.com',
+                'password' => 'm.doumbouya@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 90',
+                'role' => 'directrice_adjointe',
+            ],
+            [
+                'name' => 'Jules Bakari',
+                'email' => 'j.bakari@africainedesfinances.com',
+                'password' => 'j.bakari@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 91',
+                'role' => 'analyste_financier',
+            ],
+            [
+                'name' => 'Fatou Diallo',
+                'email' => 'f.diallo@africainedesfinances.com',
+                'password' => 'f.diallo@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 92',
+                'role' => 'responsable_formation',
+            ],
+            [
+                'name' => 'Georgia Gnancadja',
+                'email' => 'g.gnancadja@africainedesfinances.com',
+                'password' => 'g.gnancadja@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 95',
+                'role' => 'chargee_clientele',
+            ],
+            [
+                'name' => 'Morel Agonsanou',
+                'email' => 'm.agonsanou@africainedesfinances.com',
+                'password' => 'm.agonsanou@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 96',
+                'role' => 'charge_clientele',
+            ],
+            [
+                'name' => 'Ognondoun Cyrille',
+                'email' => 'o.cyrille@africainedesfinances.com',
+                'password' => 'o.cyrille@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 97',
+                'role' => 'charge_clientele',
+            ],
+            [
+                'name' => 'Micheline Gloria Mountondji',
+                'email' => 'm.mountondji@africainedesfinances.com',
+                'password' => 'm.mountondji@africainedesfinances.com',
+                'phone' => '+229 01 44 21 78 98',
+                'role' => 'chargee_clientele',
+            ],
+        ];
 
-        // Utilisateur admin
-        $admin2 = User::create([
-            'name' => 'codi anselme',
-            'email' => 'codianselme@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('codianselme@gmail.com'),
-            'role' => 'admin',
-            'phone' => '+229 96 45 67 89',
-            'address' => 'Quartier Akpakpa',
-            'city' => 'Cotonou',
-            'country' => 'Bénin',
-            'postal_code' => '01BP5678',
-            'date_of_birth' => '1990-03-22',
-            'gender' => 'male',
-            'is_active' => true,
-            'last_login_at' => now()->subDays(2),
-        ]);
-        $admin2->assignRole('admin');
+        foreach ($users as $userData) {
+            $password = $userData['password'];
+            $role = $userData['role'];
+            
+            $user = User::updateOrCreate(
+                ['email' => $userData['email']],
+                [
+                    'name' => $userData['name'],
+                    'phone' => $userData['phone'],
+                    'password' => Hash::make($password),
+                    'is_active' => true,
+                ]
+            );
+            
+            $user->assignRole($role);
+        }
     }
 }

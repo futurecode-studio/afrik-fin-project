@@ -37,8 +37,11 @@ class Register extends Component
 
         Auth::login($user);
 
+        // Stocker la route dans la session pour redirection
+        session(['url.intended' => route('client.dashboard')]);
+
         // Rediriger vers le dashboard client
-        $this->redirect(route('client.dashboard'), navigate: true);
+        $this->redirect(route('client.dashboard'));
     }
 
     public function render()

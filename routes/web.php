@@ -43,6 +43,8 @@ Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/carriere', \App\Livewire\Pages\Carriere::class)->name('carriere');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
+Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
+Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
 Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
@@ -81,6 +83,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters');
     Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts');
     Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics');
+    Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners');
+    Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team');
     Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config');
 });
 

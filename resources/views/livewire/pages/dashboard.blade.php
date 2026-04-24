@@ -211,6 +211,49 @@
                 </div>
             </div>
         </a>
+        <a href="{{ route('admin.partners') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-handshake h-6 w-6 text-primary">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                <path d="M12 16v-4"></path>
+                                <path d="M12 8h.01"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Partenaires</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les partenaires</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('admin.team') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-users h-6 w-6 text-primary">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Équipe</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les membres</p>
+                </div>
+            </div>
+        </a>
         <!-- <a href="{{ route('admin.api-config') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

@@ -245,6 +245,14 @@
                                     <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
                                         href="{{ route('newsletter') }}">Newsletter</a>
                                 </li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('partenaires') }}">Partenaires</a>
+                                </li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('team') }}">Équipe</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="space-y-4">
