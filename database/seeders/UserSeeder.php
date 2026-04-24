@@ -12,6 +12,13 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
+                'name' => 'Codi Anselme',
+                'email' => 'codianselme@gmail.com',
+                'password' => 'codianselme@gmail.com',
+                'phone' => '+229 01 00 00 00 00',
+                'role' => 'super_admin',
+            ],
+            [
                 'name' => 'Administrateur Principal',
                 'email' => 'contact@africainedesfinances.com',
                 'password' => 'contact@africainedesfinances.com',
@@ -30,7 +37,7 @@ class UserSeeder extends Seeder
                 'email' => 'm.doumbouya@africainedesfinances.com',
                 'password' => 'm.doumbouya@africainedesfinances.com',
                 'phone' => '+229 01 44 21 78 90',
-                'role' => 'directrice_adjointe',
+                'role' => 'directrice_adroite',
             ],
             [
                 'name' => 'Jules Bakari',
