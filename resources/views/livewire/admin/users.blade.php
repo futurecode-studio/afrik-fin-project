@@ -65,11 +65,23 @@
                                     </td>
                                     <td class="p-4 align-middle">{{ $user->email }}</td>
                                     <td class="p-4 align-middle">
-                                        @if($user->role === 'admin')
-                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-purple-100 text-purple-800">Admin</span>
-                                        @else
-                                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800">Client</span>
-                                        @endif
+                                        @php
+                                            $roleName = $user->primary_role;
+                                            $roleColors = [
+                                                'super_admin' => 'bg-red-100 text-red-800',
+                                                'admin' => 'bg-purple-100 text-purple-800',
+                                                'directeur_general' => 'bg-indigo-100 text-indigo-800',
+                                                'directrice_adroite' => 'bg-indigo-100 text-indigo-800',
+                                                'analyste_financier' => 'bg-blue-100 text-blue-800',
+                                                'responsable_formation' => 'bg-teal-100 text-teal-800',
+                                                'charge_clientele' => 'bg-green-100 text-green-800',
+                                                'chargee_clientele' => 'bg-green-100 text-green-800',
+                                                'client' => 'bg-gray-100 text-gray-800',
+                                            ];
+                                        @endphp
+                                        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold {{ $roleColors[$roleName] ?? 'bg-gray-100 text-gray-800' }}">
+                                            {{ ucfirst(str_replace('_', ' ', $roleName)) }}
+                                        </span>
                                     </td>
                                     <td class="p-4 align-middle">{{ $user->phone ?? '-' }}</td>
                                     <td class="p-4 align-middle">

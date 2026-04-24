@@ -185,6 +185,7 @@ class Users extends Component
     public function render()
     {
         $users = User::query()
+            ->with('roles') // Eager load Spatie roles
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('email', 'like', '%' . $this->search . '%');

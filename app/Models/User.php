@@ -16,6 +16,15 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
+     * Get the primary role name for display
+     */
+    public function getPrimaryRoleAttribute(): string
+    {
+        $roleNames = $this->getRoleNames();
+        return $roleNames->first() ?? 'Client';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
