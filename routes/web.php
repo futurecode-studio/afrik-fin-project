@@ -66,26 +66,26 @@ Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->g
 });
 
 // Admin Routes
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', \App\Livewire\Pages\Dashboard::class)->name('dashboard');
-    Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile');
-    Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles');
-    Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations');
-    Route::get('/formations/{formation}/modules', \App\Livewire\Admin\FormationModules::class)->name('formations.modules');
-    Route::get('/formations/{formation}/modules/{module}/lessons', \App\Livewire\Admin\ModuleLessons::class)->name('formations.modules.lessons');
-    Route::get('/formations/{formation}/modules/{module}/quiz', \App\Livewire\Admin\ModuleQuizManager::class)->name('formations.modules.quiz');
-    Route::get('/users', \App\Livewire\Admin\Users::class)->name('users');
-    Route::get('/stock-data', \App\Livewire\Admin\StockData::class)->name('stock-data');
-    Route::get('/government-bonds', \App\Livewire\Admin\GovernmentBonds::class)->name('government-bonds');
-    Route::get('/job-applications', \App\Livewire\Admin\JobApplications::class)->name('job-applications');
-    Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions');
-    Route::get('/appointments', \App\Livewire\Admin\Appointments::class)->name('appointments');
-    Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters');
-    Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts');
-    Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics');
-    Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners');
-    Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team');
-    Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config');
+    Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile')->middleware('permission:users.view');
+    Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles')->middleware('permission:articles.view');
+    Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations')->middleware('permission:formations.view');
+    Route::get('/formations/{formation}/modules', \App\Livewire\Admin\FormationModules::class)->name('formations.modules')->middleware('permission:formations.view');
+    Route::get('/formations/{formation}/modules/{module}/lessons', \App\Livewire\Admin\ModuleLessons::class)->name('formations.modules.lessons')->middleware('permission:formations.view');
+    Route::get('/formations/{formation}/modules/{module}/quiz', \App\Livewire\Admin\ModuleQuizManager::class)->name('formations.modules.quiz')->middleware('permission:formations.view');
+    Route::get('/users', \App\Livewire\Admin\Users::class)->name('users')->middleware('permission:users.view');
+    Route::get('/stock-data', \App\Livewire\Admin\StockData::class)->name('stock-data')->middleware('permission:stock-data.view');
+    Route::get('/government-bonds', \App\Livewire\Admin\GovernmentBonds::class)->name('government-bonds')->middleware('permission:government-bonds.view');
+    Route::get('/job-applications', \App\Livewire\Admin\JobApplications::class)->name('job-applications')->middleware('permission:users.view');
+    Route::get('/transactions', \App\Livewire\Admin\Transactions::class)->name('transactions')->middleware('permission:transactions.view');
+    Route::get('/appointments', \App\Livewire\Admin\Appointments::class)->name('appointments')->middleware('permission:appointments.view');
+    Route::get('/newsletters', \App\Livewire\Admin\Newsletters::class)->name('newsletters')->middleware('permission:newsletters.view');
+    Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts')->middleware('permission:contacts.view');
+    Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics')->middleware('permission:statistics.view');
+    Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners')->middleware('permission:partners.view');
+    Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team')->middleware('permission:team.view');
+    Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config')->middleware('permission:users.view');
 });
 
 require __DIR__.'/auth.php';
