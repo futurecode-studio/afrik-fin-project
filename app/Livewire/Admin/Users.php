@@ -40,7 +40,7 @@ class Users extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->userId,
             'password' => $this->editMode ? 'nullable|min:8|confirmed' : 'required|min:8|confirmed',
-            'role' => 'required|in:admin,client',
+            'role' => 'required|in:admin,client,super_admin,directeur_general,directrice_adroite,analyste_financier,responsable_formation,charge_clientele,chargee_clientele',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:100',
@@ -61,6 +61,11 @@ class Users extends Component
         'password.min' => 'Le mot de passe doit contenir au moins 8 caractères',
         'password.confirmed' => 'Les mots de passe ne correspondent pas',
     ];
+
+    public function getRolesProperty()
+    {
+        return \Spatie\Permission\Models\Role::orderBy('name')->pluck('name', 'name')->toArray();
+    }
 
     public function updatingSearch()
     {
@@ -88,7 +93,7 @@ class Users extends Component
         $this->userId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
-        $this->role = $user->role;
+        $this->role = $user->getRoleNames()->first() ?? 'client';
         $this->phone = $user->phone;
         $this->address = $user->address;
         $this->city = $user->city;
@@ -109,7 +114,6 @@ class Users extends Component
         $userData = [
             'name' => $this->name,
             'email' => $this->email,
-            'role' => $this->role,
             'phone' => $this->phone,
             'address' => $this->address,
             'city' => $this->city,
@@ -127,9 +131,11 @@ class Users extends Component
         if ($this->editMode) {
             $user = User::findOrFail($this->userId);
             $user->update($userData);
+            $user->syncRoles($this->role);
             session()->flash('message', 'Utilisateur modifié avec succès');
         } else {
-            User::create($userData);
+            $user = User::create($userData);
+            $user->assignRole($this->role);
             session()->flash('message', 'Utilisateur créé avec succès');
             $this->resetPage(); // Retour à la première page
         }

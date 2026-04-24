@@ -81,6 +81,13 @@ class UserSeeder extends Seeder
                 'phone' => '+229 01 44 21 78 98',
                 'role' => 'chargee_clientele',
             ],
+            [
+                'name' => 'Client Test',
+                'email' => 'client@test.com',
+                'password' => 'client@test.com',
+                'phone' => '+229 01 02 03 04',
+                'role' => 'client',
+            ],
         ];
 
         foreach ($users as $userData) {
