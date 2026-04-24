@@ -42,8 +42,10 @@ return [
     */
 
     'brvm' => [
-        'cache_duration' => env('BRVM_CACHE_DURATION', 300), // 5 minutes par défaut
-        'timeout' => env('BRVM_TIMEOUT', 30), // timeout en secondes
+        'cache_duration' => env('BRVM_CACHE_DURATION', 900), // 15 minutes en cache (production)
+        'timeout' => env('BRVM_TIMEOUT', 30),
+        'connect_timeout' => env('BRVM_CONNECT_TIMEOUT', 10),
+        'long_cache_duration' => env('BRVM_LONG_CACHE', 86400), // 24h cache for fallback
         'sources' => [
             'richbourse' => 'https://www.richbourse.com',
             'brvm' => 'https://www.brvm.org',

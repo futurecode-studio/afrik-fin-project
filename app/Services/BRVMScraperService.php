@@ -17,6 +17,11 @@ class BRVMScraperService
     private $cacheDuration;
     private $timeout;
     private $richbourseUrl = 'https://www.richbourse.com';
+    private $brvmEndpoints = [
+        'https://www.brvm.org',
+        'https://brvm.org',
+    ];
+
     private $brvm_url = 'https://www.brvm.org';
 
     /**
@@ -87,6 +92,42 @@ class BRVMScraperService
     {
         $this->cacheDuration = config('services.brvm.cache_duration', 300);
         $this->timeout = config('services.brvm.timeout', 30);
+        
+        // Essayer d'autres endpoints BRVM.org si le principal échoue
+        $this->brvmEndpoints = [
+            'https://www.brvm.org',
+            'https://brvm.org',
+            'http://www.brvm.org',
+        ];
+    }
+
+    /**
+     * Essayer chaque endpoint jusqu'au premier succès
+     */
+    private function tryBrvmEndpoints(string $path): ?array
+    {
+        foreach ($this->brvmEndpoints as $endpoint) {
+            try {
+                $url = $endpoint . $path;
+                $response = Http::timeout($this->timeout)
+                    ->withOptions(['verify' => false])
+                    ->withHeaders([
+                        'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                        'Accept' => 'text/html,application/xhtml+xml',
+                        'Accept-Language' => 'fr-FR,fr;q=0.9',
+                    ])
+                    ->get($url);
+                
+                if ($response->successful()) {
+                    $this->brvm_url = $endpoint; // Sauvegarder l'endpoint qui fonctionne
+                    return $this->parseBRVMPage($response->body());
+                }
+            } catch (\Exception $e) {
+                Log::debug('BRVM endpoint failed: ' . $endpoint . ' - ' . $e->getMessage());
+                continue;
+            }
+        }
+        return null;
     }
 
     /**
@@ -288,30 +329,23 @@ class BRVMScraperService
      */
     private function fetchFromBRVMDirect(): array
     {
-        try {
-            $response = Http::timeout($this->timeout)
-                ->withOptions(['verify' => false])
-                ->withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                    'Accept-Language' => 'fr-FR,fr;q=0.9,en;q=0.8',
-                    'Accept-Encoding' => 'gzip, deflate, br',
-                    'Connection' => 'keep-alive',
-                    'Cache-Control' => 'max-age=0',
-                ])
-                ->get($this->brvm_url . '/fr/cours-actions/0');
-
-            if (!$response->successful()) {
-                Log::debug('BRVM.org: HTTP ' . $response->status());
-                return [];
-            }
-
-            return $this->parseBRVMPage($response->body());
-
-        } catch (\Exception $e) {
-            Log::debug('BRVM.org fetch failed: ' . $e->getMessage());
-            return [];
+        // Essayer plusieurs endpoints
+        $result = $this->tryBrvmEndpoints('/fr/cours-actions/0');
+        if (!empty($result)) {
+            return $result;
         }
+        
+        // Essayer d'autres chemins
+        $paths = ['/en/stock-market', '/cours-actions', '/stock-quotes'];
+        foreach ($paths as $path) {
+            $result = $this->tryBrvmEndpoints($path);
+            if (!empty($result)) {
+                return $result;
+            }
+        }
+        
+        Log::debug('BRVM.org: All endpoints failed');
+        return [];
     }
 
     /**
