@@ -62,9 +62,11 @@ class Users extends Component
         'password.confirmed' => 'Les mots de passe ne correspondent pas',
     ];
 
-    public function getRolesProperty()
+    public function getRoles(): array
     {
-        return \Spatie\Permission\Models\Role::orderBy('name')->pluck('name', 'name')->toArray();
+        return \Spatie\Permission\Models\Role::orderBy('name')
+            ->pluck('name')
+            ->toArray();
     }
 
     public function updatingSearch()
