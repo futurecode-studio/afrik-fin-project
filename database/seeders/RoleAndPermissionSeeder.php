@@ -12,7 +12,7 @@ class RoleAndPermissionSeeder extends Seeder
     {
         // Create all permissions for each module
         $modules = [
-            'users', 'articles', 'formations', 'partners', 'team',
+            'users', 'articles', 'formations', 'partners', 'team', 'roles',
             'stock-data', 'government-bonds', 'transactions', 'appointments',
             'newsletters', 'contacts', 'statistics', 'dashboard'
         ];

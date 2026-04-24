@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
                 ]
             );
             
-            $user->assignRole($role);
+            $user->syncRoles($role);
         }
     }
 }

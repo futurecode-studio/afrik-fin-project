@@ -254,6 +254,25 @@
                 </div>
             </div>
         </a>
+        <a href="{{ route('admin.roles') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-shield h-6 w-6 text-primary">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Rôles</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les rôles et permissions</p>
+                </div>
+            </div>
+        </a>
         <!-- <a href="{{ route('admin.api-config') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

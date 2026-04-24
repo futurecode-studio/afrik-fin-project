@@ -85,6 +85,7 @@ Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name(
     Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics')->middleware('permission:statistics.view');
     Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners')->middleware('permission:partners.view');
     Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team')->middleware('permission:team.view');
+    Route::get('/roles', \App\Livewire\Admin\Roles::class)->name('roles')->middleware('permission:roles.view');
     Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config')->middleware('permission:users.view');
 });
 
