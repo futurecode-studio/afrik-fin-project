@@ -19,6 +19,7 @@ class Partners extends Component
     public $partnerId;
 
     public $nom;
+    public $type = 'Autre';
     public $contact;
     public $email;
     public $website;
@@ -36,6 +37,7 @@ class Partners extends Component
 
         return [
             'nom' => 'required|string|max:255',
+            'type' => 'required|string|in:SGO,SGI,Autre',
             'contact' => 'nullable|string|max:100',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
@@ -52,6 +54,8 @@ class Partners extends Component
         return [
             'nom.required' => 'Le nom est obligatoire',
             'nom.max' => 'Le nom ne doit pas dépasser 255 caractères',
+            'type.required' => 'La catégorie est obligatoire',
+            'type.in' => 'La catégorie doit être SGO, SGI ou Autre',
             'contact.max' => 'Le contact ne doit pas dépasser 100 caractères',
             'email.email' => 'L\'adresse email doit être valide',
             'email.max' => 'L\'email ne doit pas dépasser 255 caractères',
@@ -110,6 +114,7 @@ class Partners extends Component
         
         $this->partnerId = $partner->id;
         $this->nom = $partner->nom;
+        $this->type = $partner->type ?? 'Autre';
         $this->contact = $partner->contact;
         $this->email = $partner->email;
         $this->website = $partner->website;
@@ -135,6 +140,7 @@ class Partners extends Component
 
         $partnerData = [
             'nom' => $this->nom,
+            'type' => $this->type,
             'contact' => $this->contact,
             'email' => $this->email,
             'website' => $this->website,
@@ -200,6 +206,7 @@ class Partners extends Component
     {
         $this->partnerId = null;
         $this->nom = '';
+        $this->type = 'Autre';
         $this->contact = '';
         $this->email = '';
         $this->website = '';

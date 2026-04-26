@@ -9,8 +9,15 @@ class Partner extends Model
 {
     use HasFactory;
 
+    const TYPES = [
+        'SGO' => "Sociétés de Gestion d'OPCVM (SGO)",
+        'SGI' => "Sociétés de Gestion et d'Intermédiation (SGI)",
+        'Autre' => "Autres Partenaires",
+    ];
+
     protected $fillable = [
         'nom',
+        'type',
         'contact',
         'email',
         'website',
@@ -30,10 +37,15 @@ class Partner extends Model
         return $query->where('is_active', true)->orderBy('order');
     }
 
+    public function getTypeLabel(): string
+    {
+        return self::TYPES[$this->type] ?? $this->type;
+    }
+
     public function getLogoUrlAttribute()
     {
         if ($this->logo) {
-            return asset('storage/partners/' . $this->logo);
+            return asset('storage/' . $this->logo);
         }
         return null;
     }

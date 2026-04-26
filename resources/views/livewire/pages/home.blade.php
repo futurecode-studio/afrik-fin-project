@@ -497,82 +497,62 @@
             </div>
         </div>
     </section>
+    @if($partnersByType->isNotEmpty())
     <section class="py-16 border-y border-border bg-muted/30">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <p class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">Ils nous font confiance</p>
                 <h2 class="text-2xl md:text-3xl font-bold">Nos <span class="text-primary">Partenaires Officiels</span></h2>
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                <!-- SGO -->
-                <div>
-                    <h3 class="text-xl font-bold text-center mb-8 text-secondary flex items-center justify-center gap-2">
-                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
-                        Sociétés de Gestion d'OPCVM (SGO)
-                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
-                    </h3>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africabourse Asset Mgt</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SAPHIR Asset Mgt</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">NSIA Asset Mgt</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SOAGA</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 col-span-2 md:col-span-1 md:col-start-1 md:col-end-3 lg:col-auto">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africaine de Gestion d'Actifs</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- SGI -->
-                <div>
-                    <h3 class="text-xl font-bold text-center mb-8 text-secondary flex items-center justify-center gap-2">
-                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
-                        Sociétés de Gestion et d'Intermédiation (SGI)
-                        <span class="w-8 h-1 bg-secondary rounded-full"></span>
-                    </h3>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">Africabourse</span>
+            @php
+                $typeLabels = \App\Models\Partner::TYPES;
+                $orderedTypes = array_keys($typeLabels);
+                $activeTypes = array_filter($orderedTypes, fn($k) => $partnersByType->has($k));
+                $typeCount = count($activeTypes);
+            @endphp
+
+            <div class="max-w-6xl mx-auto space-y-12">
+                @foreach($orderedTypes as $typeKey)
+                    @if($partnersByType->has($typeKey))
+                        @php $group = $partnersByType->get($typeKey); @endphp
+                        <div>
+                            @if($typeCount > 1)
+                            <h3 class="text-base font-semibold text-center mb-6 text-secondary flex items-center justify-center gap-3">
+                                <span class="flex-1 h-px bg-border max-w-[120px]"></span>
+                                {{ $typeLabels[$typeKey] }}
+                                <span class="flex-1 h-px bg-border max-w-[120px]"></span>
+                            </h3>
+                            @endif
+                            <div class="flex flex-wrap justify-center gap-4">
+                                @foreach($group as $partner)
+                                    <a href="{{ $partner->website ?: '#' }}" {{ $partner->website ? 'target="_blank" rel="noopener noreferrer"' : '' }}
+                                        class="group bg-card border border-border rounded-xl shadow-sm hover:shadow-elegant hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center overflow-hidden"
+                                        style="width: 160px; height: 80px; padding: 12px;">
+                                        @if($partner->logo)
+                                            <img src="{{ asset('storage/' . $partner->logo) }}" alt="{{ $partner->nom }}"
+                                                class="max-w-full max-h-full w-auto h-auto object-contain block"
+                                                style="max-height: 56px; max-width: 130px;">
+                                        @else
+                                            <span class="font-semibold text-xs text-center text-foreground group-hover:text-primary transition-colors leading-snug px-2">{{ $partner->nom }}</span>
+                                        @endif
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BENIN</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI UCA</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BFS</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI AGI</span>
-                        </div>
-                        <div class="group relative bg-card p-4 rounded-xl shadow-sm border border-border flex items-center justify-center h-24 hover:shadow-glow hover:border-primary/50 transition-all duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
-                            <span class="relative font-bold text-sm text-center text-secondary-foreground/90 group-hover:text-primary transition-colors">SGI BOA CAPITAL</span>
-                        </div>
-                    </div>
-                </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <div class="text-center mt-16">
+                <a href="{{ route('partenaires') }}" class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-light transition-colors">
+                    Voir tous nos partenaires
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
             </div>
         </div>
     </section>
+    @endif
     <section class="py-20 bg-muted/30">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">

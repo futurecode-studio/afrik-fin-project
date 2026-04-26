@@ -232,6 +232,21 @@
                 </div>
             </div>
         </a>
+        <a href="{{ route('admin.social-links') }}">
+            <div class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold tracking-tight text-lg">Réseaux Sociaux</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les liens réseaux sociaux</p>
+                </div>
+            </div>
+        </a>
         <a href="{{ route('admin.team') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">

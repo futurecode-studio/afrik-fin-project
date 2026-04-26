@@ -40,6 +40,7 @@
                             <tr class="border-b transition-colors hover:bg-muted/50">
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Logo</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Nom</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Catégorie</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Contact</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Email</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
@@ -64,6 +65,12 @@
                                     </td>
                                     <td class="p-4 align-middle">
                                         <div class="font-medium">{{ $partner->nom }}</div>
+                                    </td>
+                                    <td class="p-4 align-middle">
+                                        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold
+                                            {{ $partner->type === 'SGO' ? 'bg-blue-100 text-blue-800' : ($partner->type === 'SGI' ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-700') }}">
+                                            {{ $partner->type }}
+                                        </span>
                                     </td>
                                     <td class="p-4 align-middle text-sm text-muted-foreground">{{ $partner->contact ?? '-' }}</td>
                                     <td class="p-4 align-middle text-sm text-muted-foreground">{{ $partner->email ?? '-' }}</td>
@@ -97,7 +104,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="p-8 text-center text-muted-foreground">
+                                    <td colspan="8" class="p-8 text-center text-muted-foreground">
                                         Aucun partenaire trouvé. Cliquez sur "Ajouter un partenaire" pour en créer un.
                                     </td>
                                 </tr>
@@ -139,6 +146,17 @@
                             <input wire:model.live="nom" type="text"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                             @error('nom') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Catégorie <span class="text-red-500">*</span></label>
+                            <select wire:model="type"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                <option value="SGO">SGO &mdash; Sociétés de Gestion d&rsquo;OPCVM</option>
+                                <option value="SGI">SGI &mdash; Sociétés de Gestion et d&rsquo;Intermédiation</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                            @error('type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
