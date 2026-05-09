@@ -86,27 +86,27 @@
                                             </span>
                                         </a>
                                         <div class="border-t border-border"></div>
-                                        <button wire:click="edit({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-primary hover:bg-muted transition-colors">
+                                        <button @click="$wire.edit({{ $event->id }}); setTimeout(() => open = false, 300)" class="w-full text-left block px-4 py-2 text-sm text-primary hover:bg-muted transition-colors">
                                             <span class="inline-flex items-center gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
                                                 Modifier
                                             </span>
                                         </button>
-                                        <button wire:click="duplicate({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                                        <button @click="$wire.duplicate({{ $event->id }}); setTimeout(() => open = false, 300)" class="w-full text-left block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
                                             <span class="inline-flex items-center gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                                                 Dupliquer
                                             </span>
                                         </button>
                                         @if($event->trashed())
-                                            <button wire:click="restore({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
+                                            <button @click="$wire.restore({{ $event->id }}); setTimeout(() => open = false, 300)" class="w-full text-left block px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
                                                 <span class="inline-flex items-center gap-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                                                     Restaurer
                                                 </span>
                                             </button>
                                         @else
-                                            <button wire:click="confirmDelete({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                                            <button @click="$wire.confirmDelete({{ $event->id }}); setTimeout(() => open = false, 300)" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
                                                 <span class="inline-flex items-center gap-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                                                     Supprimer
