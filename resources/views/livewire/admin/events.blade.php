@@ -42,8 +42,12 @@
                                     <div>
                                         <p class="font-semibold">{{ $event->title }}</p>
                                         <p class="text-xs text-muted-foreground">{{ $event->category }}</p>
-                                    </div>
-                                </div>
+</div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+@endpush
                             </td>
                             <td class="p-4 whitespace-nowrap">
                                 {{ $event->starts_at?->format('d/m/Y H:i') }}
@@ -114,9 +118,29 @@
                         <label class="block text-sm font-medium mb-1">Description courte</label>
                         <textarea wire:model="description" rows="3" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary"></textarea>
                     </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium mb-1">Contenu (HTML)</label>
-                        <textarea wire:model="content" rows="5" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary font-mono text-xs"></textarea>
+                    <div class="md:col-span-2" wire:ignore x-data="{
+                        editor: null,
+                        initEditor() {
+                            if (this.editor) { tinymce.remove(this.editor); this.editor = null; }
+                            tinymce.init({
+                                selector: '#event-content-editor',
+                                plugins: 'link lists table code',
+                                toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link table | code',
+                                height: 300,
+                                menubar: false,
+                                setup: (ed) => {
+                                    ed.on('change input', () => {
+                                        this.$wire.set('content', ed.getContent());
+                                    });
+                                }
+                            }).then((editors) => {
+                                this.editor = editors[0];
+                                this.editor.setContent(this.$wire.content || '');
+                            });
+                        }
+                    }" x-init="initEditor()" @event-modal-opened.window="initEditor()" @event-modal-closed.window="if (editor) { tinymce.remove(editor); editor = null; }">
+                        <label class="block text-sm font-medium mb-1">Description détaillée</label>
+                        <textarea id="event-content-editor" class="w-full"></textarea>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Type</label>

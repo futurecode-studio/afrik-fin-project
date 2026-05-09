@@ -102,6 +102,7 @@ class Events extends Component
         $this->resetForm();
         $this->editMode = false;
         $this->showModal = true;
+        $this->dispatch('event-modal-opened');
     }
 
     public function closeModal()
@@ -109,6 +110,7 @@ class Events extends Component
         $this->showModal = false;
         $this->resetForm();
         $this->resetValidation();
+        $this->dispatch('event-modal-closed');
     }
 
     public function edit($id)
@@ -138,6 +140,7 @@ class Events extends Component
         $this->status = $event->status;
         $this->editMode = true;
         $this->showModal = true;
+        $this->dispatch('event-modal-opened');
     }
 
     public function save()
