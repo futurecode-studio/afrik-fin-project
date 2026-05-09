@@ -413,7 +413,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Téléphone</label>
-                        <input type="tel" wire:model="productPhone" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        <input type="tel" wire:model="productPhone" placeholder="+229 XX XX XX XX" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Variante *</label>
@@ -429,16 +429,78 @@
                         <label class="block text-sm font-medium mb-1">Quantité (max 10)</label>
                         <input type="number" wire:model="productQuantity" min="1" max="10" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
                     </div>
+
+                    <!-- Choix du moyen de paiement -->
+                    <div>
+                        <label class="block text-sm font-medium text-foreground mb-3">Moyen de paiement</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="relative cursor-pointer block">
+                                <input type="radio" wire:model.live="paymentProvider" value="kkiapay" class="sr-only">
+                                <div class="border-2 rounded-lg p-4 text-center transition-all {{ $paymentProvider === 'kkiapay' ? 'border-primary bg-primary/10 ring-2 ring-primary ring-offset-2' : 'border-border hover:border-muted-foreground bg-card' }}">
+                                    <div class="w-12 h-12 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-blue-600 font-bold">KK</span>
+                                    </div>
+                                    <span class="font-medium text-foreground">KKiaPay</span>
+                                    <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
+                                    @if($paymentProvider === 'kkiapay')
+                                        <div class="mt-2">
+                                            <span class="inline-flex items-center gap-1 text-xs text-primary font-medium">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                                Sélectionné
+                                            </span>
+                                        </div>
+                                    @endif
+                                </div>
+                            </label>
+                            <label class="relative cursor-pointer block">
+                                <input type="radio" wire:model.live="paymentProvider" value="fedapay" class="sr-only">
+                                <div class="border-2 rounded-lg p-4 text-center transition-all {{ $paymentProvider === 'fedapay' ? 'border-primary bg-primary/10 ring-2 ring-primary ring-offset-2' : 'border-border hover:border-muted-foreground bg-card' }}">
+                                    <div class="w-12 h-12 mx-auto mb-2 bg-green-100 rounded-full flex items-center justify-center">
+                                        <span class="text-green-600 font-bold">FP</span>
+                                    </div>
+                                    <span class="font-medium text-foreground">FedaPay</span>
+                                    <p class="text-xs text-muted-foreground mt-1">Mobile Money, Carte</p>
+                                    @if($paymentProvider === 'fedapay')
+                                        <div class="mt-2">
+                                            <span class="inline-flex items-center gap-1 text-xs text-primary font-medium">
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                                Sélectionné
+                                            </span>
+                                        </div>
+                                    @endif
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="p-6 border-t border-border flex justify-end gap-3">
+            <div class="p-6 border-t border-border flex justify-end gap-3 items-center">
                 <button wire:click="closeProductModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
-                <button wire:click="submitProductOrder" class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light font-semibold transition-colors">Payer en ligne</button>
+                <button wire:click="submitProductOrder" wire:loading.attr="disabled" class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light font-semibold transition-colors disabled:opacity-50 flex items-center gap-2">
+                    @if($selectedVariantId)
+                        @php
+                            $selVar = $productModal->variants->firstWhere('id', $selectedVariantId);
+                            $unit = $selVar->price ?? $productModal->price;
+                            $tot = $unit * $productQuantity;
+                        @endphp
+                        <span class="flex items-center gap-2">
+                            @if($paymentProvider === 'kkiapay')
+                                <span class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-xs font-bold text-blue-600">K</span>
+                            @else
+                                <span class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs font-bold text-green-600">F</span>
+                            @endif
+                            Payer {{ number_format($tot, 0, ',', ' ') }} FCFA
+                        </span>
+                    @else
+                        Payer en ligne
+                    @endif
+                </button>
             </div>
         </div>
     </div>
     @endif
 
+<script src="https://cdn.kkiapay.me/k.js"></script>
 <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
 <script>
 document.addEventListener('livewire:init', () => {
