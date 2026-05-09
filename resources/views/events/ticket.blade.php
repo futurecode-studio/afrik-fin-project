@@ -4,60 +4,180 @@
     <meta charset="UTF-8">
     <title>Ticket — {{ $registration->event->title }}</title>
     <style>
-        body { font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; color: #071F5A; }
-        .ticket { width: 100%; max-width: 600px; margin: 40px auto; border: 2px solid #0A2E8C; border-radius: 16px; overflow: hidden; }
-        .header { background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 100%); color: #fff; padding: 24px; text-align: center; }
-        .header h1 { margin: 0; font-size: 20px; }
-        .body { padding: 24px; background: #fff; text-align: center; }
-        .qr { margin: 16px auto; width: 200px; height: 200px; }
-        .name { font-size: 24px; font-weight: bold; margin: 8px 0; }
-        .meta { color: #555; font-size: 14px; margin-bottom: 4px; }
-        .badge { display: inline-block; background: #EEF2FC; color: #0A2E8C; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; margin-top: 8px; }
-        .footer { background: #f8f9fb; padding: 16px 24px; font-size: 12px; color: #777; text-align: center; border-top: 1px solid #eee; }
-        .details { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid #eee; }
-        .details div { text-align: center; flex: 1; }
-        .details div + div { border-left: 1px solid #eee; }
-        .details p { margin: 0; font-size: 12px; color: #777; }
-        .details strong { font-size: 14px; color: #071F5A; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #071F5A;
+            background: #f5f7fa;
+            padding: 24px;
+        }
+        .wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #0A2E8C;
+        }
+        /* Header */
+        .header {
+            background: #0A2E8C;
+            color: #fff;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .header .subtitle {
+            font-size: 11px;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* Body */
+        .body {
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .ticket-num {
+            font-size: 9px;
+            color: #777;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 16px;
+            word-break: break-all;
+        }
+        .qr-wrap {
+            margin: 8px auto 20px;
+            width: 220px;
+            height: 220px;
+        }
+        .qr-wrap img {
+            width: 100%;
+            height: 100%;
+        }
+        .participant-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #071F5A;
+            margin-bottom: 4px;
+        }
+        .participant-email {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .institution {
+            font-size: 11px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .badge {
+            display: inline-block;
+            background: #EEF2FC;
+            color: #0A2E8C;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e4eb;
+            margin: 16px 0;
+        }
+        /* Details */
+        .details {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .details td {
+            width: 33.33%;
+            text-align: center;
+            vertical-align: top;
+            padding: 12px 4px;
+        }
+        .details td + td {
+            border-left: 1px solid #e0e4eb;
+        }
+        .details .label {
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .details .value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #071F5A;
+        }
+        /* Footer */
+        .footer {
+            background: #f8f9fb;
+            padding: 14px 24px;
+            font-size: 9px;
+            color: #999;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .footer strong {
+            color: #0A2E8C;
+        }
     </style>
 </head>
 <body>
-    <div class="ticket">
+    <div class="wrapper">
         <div class="header">
             <h1>{{ $registration->event->title }}</h1>
-            <p style="margin:8px 0 0; font-size:13px; opacity:0.9;">Africaine des Finances — Ticket officiel</p>
+            <div class="subtitle">Africaine des Finances — Ticket officiel</div>
         </div>
         <div class="body">
-            <p class="meta">N° {{ $registration->qr_code }}</p>
-            <div class="qr">
-                <img src="data:image/svg+xml;base64,{{ base64_encode(QrCode::format('svg')->size(200)->generate($registration->qr_code)) }}" alt="QR Code" style="width:200px;height:200px;">
+            <p class="ticket-num">N° {{ $registration->qr_code }}</p>
+
+            <div class="qr-wrap">
+                <img src="data:image/svg+xml;base64,{{ base64_encode(QrCode::format('svg')->size(220)->generate($registration->qr_code)) }}" alt="QR Code">
             </div>
-            <p class="name">{{ $registration->fullName() }}</p>
-            <p class="meta">{{ $registration->email }}</p>
+
+            <p class="participant-name">{{ $registration->fullName() }}</p>
+            <p class="participant-email">{{ $registration->email }}</p>
+
             @if($registration->institution_name)
-                <p class="meta">{{ $registration->institution_name }}</p>
+                <p class="institution">{{ $registration->institution_name }}</p>
             @endif
+
             @if($registration->ticketType)
                 <span class="badge">{{ $registration->ticketType->name }}</span>
             @endif
 
-            <div class="details">
-                <div>
-                    <p>Date</p>
-                    <strong>{{ $registration->event->starts_at?->format('d/m/Y') }}</strong>
-                </div>
-                <div>
-                    <p>Heure</p>
-                    <strong>{{ $registration->event->starts_at?->format('H:i') }}</strong>
-                </div>
-                <div>
-                    <p>Lieu</p>
-                    <strong>{{ $registration->event->location_name ?? $registration->event->city ?? '-' }}</strong>
-                </div>
-            </div>
+            <hr class="divider">
+
+            <table class="details">
+                <tr>
+                    <td>
+                        <div class="label">Date</div>
+                        <div class="value">{{ $registration->event->starts_at?->format('d/m/Y') }}</div>
+                    </td>
+                    <td>
+                        <div class="label">Heure</div>
+                        <div class="value">{{ $registration->event->starts_at?->format('H:i') }}</div>
+                    </td>
+                    <td>
+                        <div class="label">Lieu</div>
+                        <div class="value">{{ $registration->event->location_name ?? $registration->event->city ?? '-' }}</div>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="footer">
-            Agréé AMF-UMOA N° AA/2022-03 — Présentez ce ticket à l'entrée. Toute reproduction est interdite.
+            <strong>Agréé AMF-UMOA N° AA/2022-03</strong><br>
+            Présentez ce ticket à l'entrée. Toute reproduction est interdite.<br>
+            Conservez ce QR code — il est unique et personnel.
         </div>
     </div>
 </body>
