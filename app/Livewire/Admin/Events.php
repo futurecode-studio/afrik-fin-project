@@ -19,6 +19,7 @@ class Events extends Component
     public $showDeleteModal = false;
     public $editMode = false;
     public $eventId;
+    public $activeDropdownId = null;
 
     // Champs formulaire
     public $title;
@@ -115,6 +116,7 @@ class Events extends Component
 
     public function edit($id)
     {
+        $this->activeDropdownId = null;
         $event = Event::findOrFail($id);
         $this->eventId = $event->id;
         $this->title = $event->title;
@@ -200,8 +202,14 @@ class Events extends Component
         $this->dispatch('event-saved');
     }
 
+    public function toggleDropdown($id)
+    {
+        $this->activeDropdownId = $this->activeDropdownId === $id ? null : $id;
+    }
+
     public function confirmDelete($id)
     {
+        $this->activeDropdownId = null;
         $this->eventId = $id;
         $this->showDeleteModal = true;
     }
@@ -217,6 +225,7 @@ class Events extends Component
 
     public function restore($id)
     {
+        $this->activeDropdownId = null;
         $event = Event::withTrashed()->findOrFail($id);
         $event->restore();
         session()->flash('message', 'Événement restauré avec succès.');
@@ -225,6 +234,7 @@ class Events extends Component
 
     public function duplicate($id)
     {
+        $this->activeDropdownId = null;
         $event = Event::findOrFail($id);
         $clone = $event->replicate();
         $clone->slug = Str::slug($event->title . '-copy-' . uniqid());
