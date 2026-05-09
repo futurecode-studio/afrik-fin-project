@@ -135,6 +135,7 @@ class EventDetail extends Component
             'order_id' => $order->id,
             'product_id' => $product->id,
             'variant_id' => $variant->id,
+            'product_name' => $product->name . ' — ' . $variant->variant_name,
             'quantity' => $this->productQuantity,
             'unit_price' => $unitPrice,
             'total_price' => $total,
@@ -151,6 +152,9 @@ class EventDetail extends Component
         ]);
 
         $this->showProductModal = false;
+
+        // Redirection vers la page de confirmation
+        return $this->redirect(route('event.order.confirmation', $order->order_number), navigate: true);
     }
 
     public function submitRegistration(EventRegistrationService $service)

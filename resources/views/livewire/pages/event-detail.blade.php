@@ -273,14 +273,17 @@
                         <div class="space-y-4">
                             @foreach($event->products as $product)
                             <div class="p-3 rounded-lg bg-muted/50 border border-border">
+                                @if($product->image_url)
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-32 rounded-lg object-cover mb-3 border border-border">
+                                @endif
                                 <div class="flex items-start justify-between mb-2">
                                     <div>
                                         <p class="font-semibold text-sm">{{ $product->name }}</p>
                                         <p class="text-xs text-muted-foreground mt-0.5">{{ $product->description }}</p>
                                     </div>
-                                    <span class="font-bold text-primary text-sm">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
+                                    <span class="font-bold text-primary text-sm whitespace-nowrap ml-2">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
                                 </div>
-                                <button wire:click="openProductModal({{ $product->id }})" class="w-full mt-2 text-center px-3 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
+                                <button wire:click="openProductModal({{ $product->id }})" class="w-full mt-2 text-center px-3 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary-light transition-colors">
                                     Commander
                                 </button>
                             </div>

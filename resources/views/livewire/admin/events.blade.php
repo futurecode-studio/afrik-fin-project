@@ -68,6 +68,7 @@
                                 <div class="flex items-center justify-end gap-2 flex-wrap">
                                     <a href="{{ route('admin.event.registrations', $event) }}" class="text-sm text-primary hover:underline">Inscrits</a>
                                     <a href="{{ route('admin.event.checkin', $event) }}" class="text-sm text-primary hover:underline">Émargement</a>
+                                    <a href="{{ route('admin.event.products', $event) }}" class="text-sm text-primary hover:underline">Boutique</a>
                                     <button wire:click="edit({{ $event->id }})" class="text-sm text-primary hover:underline">Modifier</button>
                                     <button wire:click="duplicate({{ $event->id }})" class="text-sm text-muted-foreground hover:text-foreground">Dupliquer</button>
                                     @if($event->trashed())

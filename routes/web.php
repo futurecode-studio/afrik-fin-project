@@ -50,6 +50,7 @@ Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
 Route::get('/evenements', \App\Livewire\Pages\EventsList::class)->name('events-list');
 Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
 Route::get('/evenements/ticket/{qrCode}', \App\Livewire\Pages\EventTicketPublic::class)->name('event.ticket.public');
+Route::get('/evenements/commande/{orderNumber}', \App\Livewire\Pages\EventOrderConfirmation::class)->name('event.order.confirmation');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
 Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
@@ -100,6 +101,7 @@ Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name(
     Route::get('/events', \App\Livewire\Admin\Events::class)->name('events')->middleware('permission:events.view');
     Route::get('/events/{event}/registrations', \App\Livewire\Admin\EventRegistrations::class)->name('event.registrations')->middleware('permission:event_registrations.view');
     Route::get('/events/{event}/checkin', \App\Livewire\Admin\EventCheckInManager::class)->name('event.checkin')->middleware('permission:event_checkin.manage');
+    Route::get('/events/{event}/products', \App\Livewire\Admin\EventProducts::class)->name('event.products')->middleware('permission:event_products.view');
 });
 
 require __DIR__.'/auth.php';
