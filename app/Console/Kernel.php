@@ -45,6 +45,15 @@ class Kernel extends ConsoleKernel
             ->onFailure(function () {
                 \Log::error('fcp:sync : échec de l\'exécution planifiée.');
             });
+
+        // Rappels événements J-7 et J-1 à 08:00 Abidjan.
+        $schedule->command('event:reminders')
+            ->dailyAt('08:00')
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('event:reminders : échec de l\'exécution planifiée.');
+            });
     }
 
     /**

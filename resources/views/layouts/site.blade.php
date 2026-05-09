@@ -57,7 +57,9 @@
                                 href="{{ route('services') }}">Services</a>
                             <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('formations*', 'formation-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
                                 href="{{ route('formations') }}">Formations</a>
-                            
+                            <a class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap {{ request()->routeIs('events-list', 'event-detail') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}"
+                                href="{{ route('events-list') }}">Événements</a>
+
                             <!-- Menu Investir avec dropdown -->
                             <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                                 <button class="px-3 py-2 rounded-md text-sm font-medium transition-smooth whitespace-nowrap flex items-center gap-1 {{ request()->routeIs('investir.*') ? 'bg-primary text-primary-foreground shadow-elegant' : 'text-foreground hover:bg-muted hover:text-primary' }}">
@@ -230,6 +232,10 @@
                                 <li>
                                     <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
                                         href="{{ route('formations') }}">Formations</a>
+                                </li>
+                                <li>
+                                    <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"
+                                        href="{{ route('events-list') }}">Événements</a>
                                 </li>
                                 <li>
                                     <a class="text-sm text-primary-foreground/80 hover:text-secondary transition-smooth"

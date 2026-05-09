@@ -46,6 +46,10 @@ Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
 
+// Événements publiques
+Route::get('/evenements', \App\Livewire\Pages\EventsList::class)->name('events-list');
+Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
+
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
 Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
 
@@ -63,6 +67,8 @@ Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->g
     Route::get('/formations/{slug}', \App\Livewire\Client\Formation::class)->name('formation');
     Route::get('/certificates', \App\Livewire\Client\Certificates::class)->name('certificates');
     Route::get('/profile', \App\Livewire\Client\Profile::class)->name('profile');
+    Route::get('/evenements', \App\Livewire\Client\MyEvents::class)->name('my-events');
+    Route::get('/evenements/{id}/ticket', \App\Livewire\Client\MyEventTicket::class)->name('event.ticket');
 });
 
 // Admin Routes
@@ -88,6 +94,11 @@ Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name(
     Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team')->middleware('permission:team.view');
     Route::get('/roles', \App\Livewire\Admin\Roles::class)->name('roles')->middleware('permission:roles.view');
     Route::get('/api-config', \App\Livewire\Admin\ApiConfig::class)->name('api-config')->middleware('permission:users.view');
+
+    // Events Admin
+    Route::get('/events', \App\Livewire\Admin\Events::class)->name('events')->middleware('permission:events.view');
+    Route::get('/events/{event}/registrations', \App\Livewire\Admin\EventRegistrations::class)->name('event.registrations')->middleware('permission:event_registrations.view');
+    Route::get('/events/{event}/checkin', \App\Livewire\Admin\EventCheckInManager::class)->name('event.checkin')->middleware('permission:event_checkin.manage');
 });
 
 require __DIR__.'/auth.php';

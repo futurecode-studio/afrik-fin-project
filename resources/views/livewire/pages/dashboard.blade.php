@@ -4,7 +4,29 @@
         <p class="text-muted-foreground">Gérez l'ensemble de votre site depuis cette interface
             d'administration</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><a href="{{ route('admin.articles') }}">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">        <a href="{{ route('admin.events') }}">
+            <div
+                class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
+                <div class="flex flex-col space-y-1.5 p-6">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-calendar h-6 w-6 text-primary">
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M16 2v4"></path>
+                                <path d="M8 2v4"></path>
+                                <path d="M3 10h18"></path>
+                            </svg></div>
+                        <h3 class="font-semibold tracking-tight text-lg">Événements</h3>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Gérer les événements, inscriptions et check-in</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ route('admin.articles') }}">
             <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-shadow cursor-pointer group">
                 <div class="flex flex-col space-y-1.5 p-6">

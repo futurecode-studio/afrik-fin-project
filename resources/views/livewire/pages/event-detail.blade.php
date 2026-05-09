@@ -1,0 +1,281 @@
+<main class="flex-1 pt-20">
+    <!-- Hero Event -->
+    <section class="relative text-primary-foreground py-16 overflow-hidden" style="background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 60%, #1E4AB8 100%);">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-secondary/30 rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <div class="flex-1 max-w-3xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full">{{ $event->category }}</span>
+                        @if($event->is_featured)
+                            <span class="px-3 py-1 bg-white/20 text-white text-xs font-bold rounded-full">À la une</span>
+                        @endif
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-bold mb-4">{{ $event->title }}</h1>
+                    <div class="flex flex-wrap items-center gap-4 text-primary-foreground/90 mb-6">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                            <span>{{ $event->starts_at?->format('l d F Y') }} • {{ $event->starts_at?->format('H:i') }} – {{ $event->ends_at?->format('H:i') }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>{{ $event->location_name ?? $event->city ?? 'En ligne' }}</span>
+                        </div>
+                    </div>
+                    <p class="text-lg text-primary-foreground/90 mb-6">{{ $event->description }}</p>
+
+                    @if($event->isRegistrationOpen())
+                        @if($isRegistered)
+                            <a href="{{ route('client.my-events') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                                Voir mon ticket
+                            </a>
+                        @else
+                            <button wire:click="openRegistrationModal" class="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground rounded-xl font-semibold hover:bg-secondary-light transition-colors shadow-glow hover:shadow-elegant">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                                Je participe
+                            </button>
+                        @endif
+                    @else
+                        <span class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white/80 rounded-xl font-semibold border border-white/20">
+                            Inscriptions fermées
+                        </span>
+                    @endif
+                </div>
+                @if($event->featured_image)
+                <div class="w-full md:w-80 h-56 rounded-2xl overflow-hidden shadow-elegant border border-white/10 flex-shrink-0">
+                    <img src="{{ asset('storage/'.$event->featured_image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
+                </div>
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-10">
+                    <!-- Programme -->
+                    @if($event->programItems->isNotEmpty())
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4">Programme</h2>
+                        <div class="space-y-3">
+                            @foreach($event->programItems as $item)
+                            <div class="flex items-start gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/30 transition-colors">
+                                <div class="w-16 flex-shrink-0 text-center">
+                                    <p class="text-sm font-bold text-primary">{{ $item->starts_at?->format('H:i') }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ $item->ends_at?->format('H:i') ?? '' }}</p>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold">{{ $item->title }}</h3>
+                                    @if($item->description)
+                                        <p class="text-sm text-muted-foreground mt-1">{{ $item->description }}</p>
+                                    @endif
+                                    @if($item->location_detail)
+                                        <p class="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                                            {{ $item->location_detail }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Description longue -->
+                    @if($event->content)
+                    <div class="prose max-w-none text-foreground">
+                        {!! $event->content !!}
+                    </div>
+                    @endif
+
+                    <!-- Documents -->
+                    @if($event->documents->isNotEmpty())
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4">Documents</h2>
+                        <div class="flex flex-wrap gap-3">
+                            @foreach($event->documents as $doc)
+                            <a href="{{ $doc->download_url }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-card hover:border-primary/30 hover:shadow-sm transition-all text-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                                {{ $doc->title }}
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Intervenants -->
+                    @if($event->speakers->isNotEmpty())
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4">Intervenants</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            @foreach($event->speakers as $speaker)
+                            <div class="flex items-center gap-4 p-4 rounded-xl border border-border bg-card">
+                                @if($speaker->photo)
+                                    <img src="{{ asset('storage/'.$speaker->photo) }}" alt="{{ $speaker->name }}" class="w-14 h-14 rounded-full object-cover">
+                                @else
+                                    <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">{{ substr($speaker->name, 0, 1) }}</div>
+                                @endif
+                                <div>
+                                    <p class="font-semibold">{{ $speaker->name }}</p>
+                                    <p class="text-sm text-muted-foreground">{{ $speaker->role }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ $speaker->company }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- Infos pratiques -->
+                    <div class="rounded-xl border bg-card p-6 border-border">
+                        <h3 class="font-bold mb-4">Informations</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0 mt-0.5"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                                <div>
+                                    <p class="font-medium">{{ $event->starts_at?->format('d/m/Y') }}</p>
+                                    <p class="text-muted-foreground">{{ $event->starts_at?->format('H:i') }} – {{ $event->ends_at?->format('H:i') }}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0 mt-0.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                                <div>
+                                    <p class="font-medium">{{ $event->location_name ?? 'En ligne' }}</p>
+                                    <p class="text-muted-foreground">{{ $event->location_address }}<br>{{ $event->city }}, {{ $event->country }}</p>
+                                </div>
+                            </div>
+                            @if($event->capacity > 0)
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary flex-shrink-0 mt-0.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <div>
+                                    <p class="font-medium">{{ $event->capacity }} places</p>
+                                    <p class="text-muted-foreground">{{ $event->seatsRemaining() }} disponibles</p>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Types de billets -->
+                    @if($event->ticketTypes->isNotEmpty())
+                    <div class="rounded-xl border bg-card p-6 border-border">
+                        <h3 class="font-bold mb-4">Tarifs</h3>
+                        <div class="space-y-3">
+                            @foreach($event->ticketTypes as $tt)
+                            <div class="flex items-center justify-between p-3 rounded-lg bg-muted/50 border border-border {{ $selectedTicketTypeId == $tt->id ? 'ring-2 ring-primary' : '' }}" wire:click="selectTicket({{ $tt->id }})">
+                                <div>
+                                    <p class="font-semibold text-sm">{{ $tt->name }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ $tt->seatsRemaining() }} places restantes</p>
+                                </div>
+                                <span class="font-bold text-primary">{{ $tt->price > 0 ? number_format($tt->price, 0, ',', ' ') . ' FCFA' : 'Gratuit' }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Sponsors -->
+                    @if($event->sponsors->isNotEmpty())
+                    <div class="rounded-xl border bg-card p-6 border-border">
+                        <h3 class="font-bold mb-4">Partenaires</h3>
+                        <div class="space-y-3">
+                            @foreach($event->sponsors as $sponsor)
+                            <div class="flex items-center gap-3">
+                                @if($sponsor->logo)
+                                    <img src="{{ asset('storage/'.$sponsor->logo) }}" alt="{{ $sponsor->nom }}" class="w-10 h-10 object-contain">
+                                @else
+                                    <div class="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-xs font-bold">{{ substr($sponsor->nom, 0, 1) }}</div>
+                                @endif
+                                <div>
+                                    <p class="text-sm font-medium">{{ $sponsor->nom }}</p>
+                                    <p class="text-xs text-muted-foreground capitalize">{{ $sponsor->pivot->sponsorship_level }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Inscription -->
+    @if($showRegistrationModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeRegistrationModal"></div>
+        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border">
+            <div class="p-6 border-b border-border flex items-center justify-between">
+                <h2 class="text-xl font-bold">Inscription</h2>
+                <button wire:click="closeRegistrationModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 space-y-4">
+                @if(session()->has('error'))
+                    <div class="rounded-lg bg-red-50 p-3 text-sm text-red-800 border border-red-200">{{ session('error') }}</div>
+                @endif
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Prénom *</label>
+                        <input type="text" wire:model="first_name" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nom *</label>
+                        <input type="text" wire:model="last_name" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Email *</label>
+                        <input type="email" wire:model="email" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Téléphone</label>
+                        <input type="tel" wire:model="phone" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Institution</label>
+                        <input type="text" wire:model="institution_name" placeholder="Banque, SGI, etc." class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Fonction</label>
+                        <input type="text" wire:model="job_title" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Taille T-shirt</label>
+                        <select wire:model="t_shirt_size" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                            <option value="">--</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Contact d'urgence</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" wire:model="emergency_contact_name" placeholder="Nom" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                            <input type="tel" wire:model="emergency_contact_phone" placeholder="Téléphone" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Remarques médicales (optionnel)</label>
+                        <textarea wire:model="medical_notes" rows="2" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-border flex justify-end gap-3">
+                <button wire:click="closeRegistrationModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
+                <button wire:click="submitRegistration" class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light font-semibold transition-colors">Confirmer mon inscription</button>
+            </div>
+        </div>
+    </div>
+    @endif
+</main>

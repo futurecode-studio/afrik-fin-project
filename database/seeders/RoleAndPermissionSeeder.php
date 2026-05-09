@@ -14,7 +14,8 @@ class RoleAndPermissionSeeder extends Seeder
         $modules = [
             'users', 'articles', 'formations', 'partners', 'team', 'roles',
             'stock-data', 'government-bonds', 'transactions', 'appointments',
-            'newsletters', 'contacts', 'statistics', 'dashboard'
+            'newsletters', 'contacts', 'statistics', 'dashboard',
+            'events', 'event_registrations', 'event_orders', 'event_products', 'event_checkin'
         ];
 
         $actions = ['view', 'create', 'edit', 'delete'];
@@ -43,19 +44,31 @@ class RoleAndPermissionSeeder extends Seeder
             'directrice_adroite' => [
                 'dashboard.view', 'dashboard.*', 'articles.*', 'formations.*',
                 'partners.view', 'partners.create', 'team.view', 'team.create', 'team.edit',
-                'stock-data.view', 'appointments.*', 'newsletters.*', 'statistics.view'
+                'stock-data.view', 'appointments.*', 'newsletters.*', 'statistics.view',
+                'events.*', 'event_registrations.*', 'event_orders.view', 'event_products.view'
             ],
             'analyste_financier' => [
                 'dashboard.view', 'stock-data.view', 'government-bonds.view', 'transactions.view', 'statistics.view'
             ],
             'responsable_formation' => [
-                'dashboard.view', 'formations.*', 'newsletters.*'
+                'dashboard.view', 'formations.*', 'newsletters.*',
+                'events.view', 'events.create', 'events.edit',
+                'event_registrations.view', 'event_registrations.edit',
+                'event_checkin.*'
             ],
             'chargee_clientele' => [
-                'dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create'
+                'dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create',
+                'events.view',
+                'event_registrations.view', 'event_registrations.create',
+                'event_checkin.*',
+                'event_orders.view'
             ],
             'charge_clientele' => [
-                'dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create'
+                'dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create',
+                'events.view',
+                'event_registrations.view', 'event_registrations.create',
+                'event_checkin.*',
+                'event_orders.view'
             ],
             'client' => ['dashboard.view'],
         ];

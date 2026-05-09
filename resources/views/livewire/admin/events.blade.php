@@ -1,0 +1,235 @@
+<div>
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold">Événements</h1>
+            <button wire:click="openModal" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light transition-colors text-sm font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                Nouvel événement
+            </button>
+        </div>
+
+        @if (session()->has('message'))
+            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">{{ session('message') }}</div>
+        @endif
+
+        <div class="mb-4 flex items-center gap-4">
+            <input type="text" wire:model.live.debounce.300ms="search" placeholder="Rechercher un événement..." class="w-full max-w-md px-4 py-2 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary">
+        </div>
+
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-muted">
+                        <tr>
+                            <th class="text-left p-4 font-semibold">Événement</th>
+                            <th class="text-left p-4 font-semibold">Date</th>
+                            <th class="text-left p-4 font-semibold">Lieu</th>
+                            <th class="text-left p-4 font-semibold">Statut</th>
+                            <th class="text-left p-4 font-semibold">Inscrits</th>
+                            <th class="text-right p-4 font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($events as $event)
+                        <tr class="border-t border-border hover:bg-muted/50 transition-colors">
+                            <td class="p-4">
+                                <div class="flex items-center gap-3">
+                                    @if($event->featured_image)
+                                        <img src="{{ asset('storage/'.$event->featured_image) }}" alt="" class="w-10 h-10 rounded-lg object-cover">
+                                    @else
+                                        <div class="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground text-xs">Aucune</div>
+                                    @endif
+                                    <div>
+                                        <p class="font-semibold">{{ $event->title }}</p>
+                                        <p class="text-xs text-muted-foreground">{{ $event->category }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4 whitespace-nowrap">
+                                {{ $event->starts_at?->format('d/m/Y H:i') }}
+                            </td>
+                            <td class="p-4">{{ $event->city ?? $event->location_name ?? '-' }}</td>
+                            <td class="p-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    @match($event->status)
+                                        'draft' => 'bg-gray-100 text-gray-800'
+                                        'published' => 'bg-emerald-100 text-emerald-800'
+                                        'ongoing' => 'bg-blue-100 text-blue-800'
+                                        'completed' => 'bg-primary/10 text-primary'
+                                        'cancelled' => 'bg-red-100 text-red-800'
+                                        'archived' => 'bg-muted text-muted-foreground'
+                                    @endmatch">
+                                    @match($event->status)
+                                        'draft' => 'Brouillon'
+                                        'published' => 'Publié'
+                                        'ongoing' => 'En cours'
+                                        'completed' => 'Terminé'
+                                        'cancelled' => 'Annulé'
+                                        'archived' => 'Archivé'
+                                        @default => $event->status
+                                    @endmatch
+                                </span>
+                            </td>
+                            <td class="p-4">
+                                <span class="font-semibold">{{ $event->registrations_count }}</span>
+                                @if($event->capacity > 0)
+                                    <span class="text-muted-foreground text-xs"> / {{ $event->capacity }}</span>
+                                @endif
+                            </td>
+                            <td class="p-4 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a href="{{ route('admin.event.registrations', $event) }}" class="text-sm text-primary hover:underline">Inscrits</a>
+                                    <a href="{{ route('admin.event.checkin', $event) }}" class="text-sm text-primary hover:underline">Émargement</a>
+                                    <button wire:click="edit({{ $event->id }})" class="text-sm text-primary hover:underline">Modifier</button>
+                                    <button wire:click="duplicate({{ $event->id }})" class="text-sm text-muted-foreground hover:text-foreground">Dupliquer</button>
+                                    @if($event->trashed())
+                                        <button wire:click="restore({{ $event->id }})" class="text-sm text-emerald-600 hover:underline">Restaurer</button>
+                                    @else
+                                        <button wire:click="confirmDelete({{ $event->id }})" class="text-sm text-red-600 hover:underline">Supprimer</button>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="6" class="p-8 text-center text-muted-foreground">Aucun événement trouvé.</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-4">{{ $events->links() }}</div>
+    </div>
+
+    <!-- Modal Event -->
+    @if($showModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" x-data="{ open: true }">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeModal"></div>
+        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-border">
+            <div class="p-6 border-b border-border flex items-center justify-between">
+                <h2 class="text-xl font-bold">{{ $editMode ? 'Modifier' : 'Créer' }} un événement</h2>
+                <button wire:click="closeModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Titre *</label>
+                        <input type="text" wire:model="title" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('title')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Slug</label>
+                        <input type="text" wire:model="slug" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('slug')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Catégorie</label>
+                        <input type="text" wire:model="category" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Description courte</label>
+                        <textarea wire:model="description" rows="3" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Contenu (HTML)</label>
+                        <textarea wire:model="content" rows="5" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary font-mono text-xs"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Type</label>
+                        <select wire:model="event_type" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                            <option value="physical">Présentiel</option>
+                            <option value="online">En ligne</option>
+                            <option value="hybrid">Hybride</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Capacité (0 = illimité)</label>
+                        <input type="number" wire:model="capacity" min="0" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Date de début *</label>
+                        <input type="datetime-local" wire:model="starts_at" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('starts_at')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Date de fin</label>
+                        <input type="datetime-local" wire:model="ends_at" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Ouverture inscriptions</label>
+                        <input type="datetime-local" wire:model="registration_opens_at" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Fermeture inscriptions</label>
+                        <input type="datetime-local" wire:model="registration_closes_at" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Lieu</label>
+                        <input type="text" wire:model="location_name" placeholder="Nom du lieu" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Adresse</label>
+                        <input type="text" wire:model="location_address" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Ville</label>
+                        <input type="text" wire:model="city" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Pays</label>
+                        <input type="text" wire:model="country" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Image mise en avant</label>
+                        <input type="file" wire:model="featured_image" accept="image/*" class="w-full text-sm">
+                        @if($featured_image_url)
+                            <img src="{{ asset('storage/'.$featured_image_url) }}" class="mt-2 h-20 rounded-lg object-cover">
+                        @endif
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Titre SEO</label>
+                        <input type="text" wire:model="seo_title" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Description SEO</label>
+                        <input type="text" wire:model="seo_description" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" wire:model="is_featured" id="is_featured" class="rounded border-border">
+                        <label for="is_featured" class="text-sm font-medium">Événement mis en avant</label>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Statut</label>
+                        <select wire:model="status" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                            <option value="draft">Brouillon</option>
+                            <option value="published">Publié</option>
+                            <option value="ongoing">En cours</option>
+                            <option value="completed">Terminé</option>
+                            <option value="cancelled">Annulé</option>
+                            <option value="archived">Archivé</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-border flex justify-end gap-3">
+                <button wire:click="closeModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted transition-colors">Annuler</button>
+                <button wire:click="save" class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light transition-colors font-medium">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    @if($showDeleteModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="$set('showDeleteModal', false)"></div>
+        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-md border border-border p-6">
+            <h3 class="text-lg font-bold mb-2">Confirmer la suppression</h3>
+            <p class="text-sm text-muted-foreground mb-6">Cet événement sera mis à la corbeille. Les inscriptions et commandes associées restent en base.</p>
+            <div class="flex justify-end gap-3">
+                <button wire:click="$set('showDeleteModal', false)" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
+                <button wire:click="delete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Supprimer</button>
+            </div>
+        </div>
+    </div>
+    @endif
+</div>

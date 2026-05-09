@@ -20,6 +20,7 @@ $this->call([
             FormationCompleteSeeder::class,
             StockSeeder::class,
             TransactionSeeder::class,
+            EventSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
