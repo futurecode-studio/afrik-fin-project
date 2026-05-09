@@ -44,14 +44,18 @@
                         </span>
                     @endif
                 </div>
-                @if($event->featured_image)
-                <div class="w-full md:w-80 h-56 rounded-2xl overflow-hidden shadow-elegant border border-white/10 flex-shrink-0">
-                    <img src="{{ asset('storage/'.$event->featured_image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
-                </div>
-                @endif
             </div>
         </div>
     </section>
+
+    <!-- Bannière mise en avant -->
+    @if($event->featured_image)
+    <section class="relative -mt-8 z-20 container mx-auto px-4">
+        <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 max-h-[480px]">
+            <img src="{{ asset('storage/'.$event->featured_image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
+        </div>
+    </section>
+    @endif
 
     <!-- Content -->
     <section class="py-12">
@@ -91,6 +95,57 @@
                     @if($event->content)
                     <div class="prose max-w-none text-foreground">
                         {!! $event->content !!}
+                    </div>
+                    @endif
+
+                    <!-- Galerie photos -->
+                    @if($event->galleries->isNotEmpty())
+                    <div x-data="{ current: 0, open: false, activeImg: '', total: {{ $event->galleries->count() }} }">
+                        <h2 class="text-2xl font-bold mb-4">Galerie photos</h2>
+                        <div class="relative">
+                            <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4" id="gallery-slider-{{ $event->id }}">
+                                @foreach($event->galleries as $index => $img)
+                                <div
+                                    class="flex-shrink-0 w-72 h-48 snap-start cursor-pointer rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
+                                    @click="open = true; activeImg = '{{ $img->image_url }}'"
+                                >
+                                    <img src="{{ $img->image_url }}" alt="{{ $img->caption }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                                @endforeach
+                            </div>
+                            @if($event->galleries->count() > 1)
+                            <button
+                                @click="document.getElementById('gallery-slider-{{ $event->id }}').scrollBy({ left: -300, behavior: 'smooth' })"
+                                class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full shadow flex items-center justify-center text-foreground hover:bg-white"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                            </button>
+                            <button
+                                @click="document.getElementById('gallery-slider-{{ $event->id }}').scrollBy({ left: 300, behavior: 'smooth' })"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full shadow flex items-center justify-center text-foreground hover:bg-white"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                            </button>
+                            @endif
+                        </div>
+
+                        <!-- Lightbox / Zoom -->
+                        <div
+                            x-show="open"
+                            x-transition.opacity.duration.300ms
+                            class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+                            @click="open = false"
+                            style="display: none;"
+                        >
+                            <button class="absolute top-4 right-4 text-white/80 hover:text-white" @click="open = false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                            </button>
+                            <img
+                                :src="activeImg"
+                                class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                                @click.stop
+                            >
+                        </div>
                     </div>
                     @endif
 

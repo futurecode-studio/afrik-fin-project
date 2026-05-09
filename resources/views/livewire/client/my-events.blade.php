@@ -32,18 +32,8 @@
                             <h3 class="font-bold text-lg">{{ $reg->event->title }}</h3>
                             <p class="text-sm text-muted-foreground">{{ $reg->event->starts_at?->format('d/m/Y H:i') }} • {{ $reg->event->city ?? $reg->event->location_name }}</p>
                             <div class="flex items-center gap-2 mt-2">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @match($reg->status)
-                                        'registered' => 'bg-blue-50 text-blue-800'
-                                        'confirmed' => 'bg-emerald-50 text-emerald-800'
-                                        'checked_in' => 'bg-primary/10 text-primary'
-                                        'cancelled' => 'bg-red-50 text-red-800'
-                                    @endmatch">
-                                    @if($reg->status === 'checked_in') Présent
-                                    @elseif($reg->status === 'confirmed') Confirmé
-                                    @elseif($reg->status === 'registered') Enregistré
-                                    @elseif($reg->status === 'cancelled') Annulé
-                                    @else {{ $reg->status }} @endif
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $reg->statusColorClasses() }}">
+                                    {{ $reg->statusLabel() }}
                                 </span>
                                 @if($reg->ticketType)
                                     <span class="text-xs text-muted-foreground">{{ $reg->ticketType->name }}</span>

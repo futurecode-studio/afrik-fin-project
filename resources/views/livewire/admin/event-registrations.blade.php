@@ -84,22 +84,8 @@
                             <td class="p-4">{{ $reg->ticketType?->name ?? '-' }}</td>
                             <td class="p-4">{{ $reg->t_shirt_size ?? '-' }}</td>
                             <td class="p-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @match($reg->status)
-                                        'registered' => 'bg-blue-100 text-blue-800'
-                                        'confirmed' => 'bg-emerald-100 text-emerald-800'
-                                        'checked_in' => 'bg-primary/10 text-primary'
-                                        'cancelled' => 'bg-red-100 text-red-800'
-                                        'no_show' => 'bg-gray-100 text-gray-800'
-                                    @endmatch">
-                                    @match($reg->status)
-                                        'registered' => 'Enregistré'
-                                        'confirmed' => 'Confirmé'
-                                        'checked_in' => 'Présent'
-                                        'cancelled' => 'Annulé'
-                                        'no_show' => 'Absent'
-                                        @default => $reg->status
-                                    @endmatch
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $reg->statusColorClasses() }}">
+                                    {{ $reg->statusLabel() }}
                                 </span>
                             </td>
                             <td class="p-4">

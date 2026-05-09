@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Event;
+use App\Models\EventGallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -37,6 +38,8 @@ class Events extends Component
     public $capacity = 0;
     public $featured_image;
     public $featured_image_url = '';
+    public $galleryImages = [];
+    public $existingGallery = [];
     public $seo_title;
     public $seo_description;
     public $is_featured = false;
@@ -62,7 +65,8 @@ class Events extends Component
             'city' => 'nullable|string|max:100',
             'country' => 'nullable|string|max:100',
             'capacity' => 'nullable|integer|min:0',
-            'featured_image' => $this->editMode ? 'nullable|image|max:2048' : 'nullable|image|max:2048',
+            'featured_image' => 'nullable|image|max:2048',
+            'galleryImages.*' => 'nullable|image|max:2048',
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string|max:500',
             'is_featured' => 'boolean',
@@ -127,6 +131,7 @@ class Events extends Component
         $this->country = $event->country;
         $this->capacity = $event->capacity;
         $this->featured_image_url = $event->featured_image;
+        $this->existingGallery = $event->galleries()->orderBy('display_order')->get()->toArray();
         $this->seo_title = $event->seo_title;
         $this->seo_description = $event->seo_description;
         $this->is_featured = $event->is_featured;
@@ -171,11 +176,22 @@ class Events extends Component
         if ($this->editMode) {
             $event = Event::findOrFail($this->eventId);
             $event->update($data);
-            session()->flash('message', 'Événement modifié avec succès.');
         } else {
-            Event::create($data);
-            session()->flash('message', 'Événement créé avec succès.');
+            $event = Event::create($data);
         }
+
+        // Sauvegarder les nouvelles images de galerie
+        foreach ($this->galleryImages as $upload) {
+            $path = $upload->store('events/gallery', 'public');
+            $event->galleries()->create([
+                'image_path' => $path,
+                'caption' => '',
+                'is_featured' => false,
+                'display_order' => $event->galleries()->count(),
+            ]);
+        }
+
+        session()->flash('message', $this->editMode ? 'Événement modifié avec succès.' : 'Événement créé avec succès.');
 
         $this->closeModal();
         $this->dispatch('event-saved');
@@ -222,6 +238,16 @@ class Events extends Component
         session()->flash('message', 'Mise en avant modifiée.');
     }
 
+    public function removeGalleryImage($galleryId)
+    {
+        $gallery = EventGallery::find($galleryId);
+        if ($gallery) {
+            $gallery->delete();
+            $this->existingGallery = array_values(array_filter($this->existingGallery, fn($g) => $g['id'] != $galleryId));
+            session()->flash('message', 'Image supprimée.');
+        }
+    }
+
     private function resetForm()
     {
         $this->eventId = null;
@@ -242,6 +268,8 @@ class Events extends Component
         $this->capacity = 0;
         $this->featured_image = null;
         $this->featured_image_url = '';
+        $this->galleryImages = [];
+        $this->existingGallery = [];
         $this->seo_title = '';
         $this->seo_description = '';
         $this->is_featured = false;

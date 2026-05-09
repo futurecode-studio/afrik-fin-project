@@ -129,4 +129,30 @@ class Event extends Model
         if ($this->capacity <= 0) return PHP_INT_MAX;
         return max(0, $this->capacity - $this->registration_count);
     }
+
+    public function statusLabel(): string
+    {
+        return match ($this->status) {
+            'draft' => 'Brouillon',
+            'published' => 'Publié',
+            'ongoing' => 'En cours',
+            'completed' => 'Terminé',
+            'cancelled' => 'Annulé',
+            'archived' => 'Archivé',
+            default => $this->status,
+        };
+    }
+
+    public function statusColorClasses(): string
+    {
+        return match ($this->status) {
+            'draft' => 'bg-gray-100 text-gray-800',
+            'published' => 'bg-emerald-100 text-emerald-800',
+            'ongoing' => 'bg-blue-100 text-blue-800',
+            'completed' => 'bg-primary/10 text-primary',
+            'cancelled' => 'bg-red-100 text-red-800',
+            'archived' => 'bg-muted text-muted-foreground',
+            default => 'bg-gray-100 text-gray-800',
+        };
+    }
 }

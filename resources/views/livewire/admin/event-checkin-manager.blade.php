@@ -35,11 +35,10 @@
                     <!-- Feedback scan -->
                     @if($scanResult)
                     <div class="mb-4 rounded-lg p-4 border text-sm
-                        @match($scanResult['type'])
-                            'success' => 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                            'warning' => 'bg-amber-50 text-amber-800 border-amber-200'
-                            'error' => 'bg-red-50 text-red-800 border-red-200'
-                        @endmatch">
+                        @if($scanResult['type'] === 'success') bg-emerald-50 text-emerald-800 border-emerald-200
+                        @elseif($scanResult['type'] === 'warning') bg-amber-50 text-amber-800 border-amber-200
+                        @else bg-red-50 text-red-800 border-red-200
+                        @endif">
                         <div class="flex items-center gap-2">
                             @if($scanResult['type'] === 'success')
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -119,15 +118,8 @@
                             <td class="p-3 text-muted-foreground">{{ $reg->email }}</td>
                             <td class="p-3">{{ $reg->ticketType?->name ?? '-' }}</td>
                             <td class="p-3">
-                                <span class="inline-flex px-2 py-0.5 rounded-full text-xs bg-blue-50 text-blue-700">
-                                    @match($reg->status)
-                                        'registered' => 'Enregistré'
-                                        'confirmed' => 'Confirmé'
-                                        'checked_in' => 'Présent'
-                                        'cancelled' => 'Annulé'
-                                        'no_show' => 'Absent'
-                                        @default => $reg->status
-                                    @endmatch
+                                <span class="inline-flex px-2 py-0.5 rounded-full text-xs {{ $reg->statusColorClasses() }}">
+                                    {{ $reg->statusLabel() }}
                                 </span>
                             </td>
                             <td class="p-3 text-right">

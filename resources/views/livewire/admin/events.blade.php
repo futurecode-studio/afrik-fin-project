@@ -50,24 +50,8 @@
                             </td>
                             <td class="p-4">{{ $event->city ?? $event->location_name ?? '-' }}</td>
                             <td class="p-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @match($event->status)
-                                        'draft' => 'bg-gray-100 text-gray-800'
-                                        'published' => 'bg-emerald-100 text-emerald-800'
-                                        'ongoing' => 'bg-blue-100 text-blue-800'
-                                        'completed' => 'bg-primary/10 text-primary'
-                                        'cancelled' => 'bg-red-100 text-red-800'
-                                        'archived' => 'bg-muted text-muted-foreground'
-                                    @endmatch">
-                                    @match($event->status)
-                                        'draft' => 'Brouillon'
-                                        'published' => 'Publié'
-                                        'ongoing' => 'En cours'
-                                        'completed' => 'Terminé'
-                                        'cancelled' => 'Annulé'
-                                        'archived' => 'Archivé'
-                                        @default => $event->status
-                                    @endmatch
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $event->statusColorClasses() }}">
+                                    {{ $event->statusLabel() }}
                                 </span>
                             </td>
                             <td class="p-4">
@@ -184,6 +168,38 @@
                         <input type="file" wire:model="featured_image" accept="image/*" class="w-full text-sm">
                         @if($featured_image_url)
                             <img src="{{ asset('storage/'.$featured_image_url) }}" class="mt-2 h-20 rounded-lg object-cover">
+                        @endif
+                    </div>
+
+                    <!-- Galerie photos -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-1">Galerie photos</label>
+                        <input type="file" wire:model="galleryImages" multiple accept="image/*" class="w-full text-sm">
+                        @error('galleryImages.*')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+
+                        <!-- Nouvelles images sélectionnées -->
+                        @if($galleryImages)
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                @foreach($galleryImages as $img)
+                                    <div class="w-20 h-20 rounded-lg overflow-hidden border border-border">
+                                        <img src="{{ $img->temporaryUrl() }}" class="w-full h-full object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <!-- Images existantes -->
+                        @if($existingGallery)
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                @foreach($existingGallery as $g)
+                                    <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-border group">
+                                        <img src="{{ asset('storage/'.$g['image_path']) }}" class="w-full h-full object-cover">
+                                        <button wire:click="removeGalleryImage({{ $g['id'] }})" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
                         @endif
                     </div>
                     <div>
