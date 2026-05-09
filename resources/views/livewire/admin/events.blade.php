@@ -65,7 +65,7 @@
                                 @endif
                             </td>
                             <td class="p-4 text-right">
-                                <div class="relative inline-block text-left" x-data="{ open: {{ $activeDropdownId === $event->id ? 'true' : 'false' }} }" x-init="$watch('open', value => { if(!value && {{ $activeDropdownId }} === {{ $event->id }}) $wire.activeDropdownId = null })" @click.away="open = false">
+                                <div class="relative inline-block text-left" x-data="{ open: {{ $activeDropdownId === $event->id ? 'true' : 'false' }} }" @click.away="if(open) $wire.activeDropdownId = 0">
                                     <button wire:click="toggleDropdown({{ $event->id }})" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-foreground bg-card border border-border rounded-lg hover:bg-muted transition-colors">
                                         Actions
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>

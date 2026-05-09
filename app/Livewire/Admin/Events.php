@@ -19,7 +19,7 @@ class Events extends Component
     public $showDeleteModal = false;
     public $editMode = false;
     public $eventId;
-    public $activeDropdownId = null;
+    public $activeDropdownId = 0;
 
     // Champs formulaire
     public $title;
