@@ -116,7 +116,7 @@ class EventDetail extends Component
         }
 
         $product = $variant->product;
-        $unitPrice = $product->price;
+        $unitPrice = $variant->price ?? $product->price;
         $total = $unitPrice * $this->productQuantity;
 
         $order = \App\Models\EventOrder::create([
@@ -135,7 +135,7 @@ class EventDetail extends Component
             'order_id' => $order->id,
             'product_id' => $product->id,
             'variant_id' => $variant->id,
-            'product_name' => $product->name . ' — ' . $variant->variant_name,
+            'product_name' => $product->name . ' — ' . $variant->variant_name . ($variant->size ? ' (' . $variant->size . ')' : ''),
             'quantity' => $this->productQuantity,
             'unit_price' => $unitPrice,
             'total_price' => $total,

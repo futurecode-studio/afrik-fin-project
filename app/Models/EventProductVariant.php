@@ -9,11 +9,12 @@ class EventProductVariant extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'sku', 'variant_name', 'size', 'color', 'stock_quantity', 'reserved_quantity'];
+    protected $fillable = ['product_id', 'sku', 'variant_name', 'price', 'size', 'color', 'stock_quantity', 'reserved_quantity'];
 
     protected $casts = [
         'stock_quantity' => 'integer',
         'reserved_quantity' => 'integer',
+        'price' => 'decimal:2',
     ];
 
     public function product()
@@ -34,5 +35,10 @@ class EventProductVariant extends Model
     public function isAvailable(int $qty = 1): bool
     {
         return $this->availableQuantity() >= $qty;
+    }
+
+    public function effectivePrice(): float
+    {
+        return (float) ($this->price ?? $this->product?->price ?? 0);
     }
 }

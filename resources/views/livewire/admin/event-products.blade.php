@@ -52,11 +52,19 @@
                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs bg-muted border border-border" title="Stock: {{ $v->stock_quantity }}">
                                             {{ $v->variant_name }}
                                             @if($v->size) <span class="ml-1 text-muted-foreground">({{ $v->size }})</span> @endif
+                                            @if($v->price) <span class="ml-1 font-semibold text-primary">{{ number_format($v->price, 0, ',', ' ') }} F</span> @endif
                                         </span>
                                     @endforeach
                                 </div>
                             </td>
-                            <td class="p-4 whitespace-nowrap font-semibold">{{ number_format($product->price, 0, ',', ' ') }} FCFA</td>
+                            <td class="p-4 whitespace-nowrap font-semibold">
+                                @if($product->variants->contains(fn($v) => $v->price > 0))
+                                    <span class="text-xs text-muted-foreground font-normal">À partir de</span><br>
+                                    {{ number_format($product->variants->min('price') ?? $product->price, 0, ',', ' ') }} FCFA
+                                @else
+                                    {{ number_format($product->price, 0, ',', ' ') }} FCFA
+                                @endif
+                            </td>
                             <td class="p-4">
                                 <button wire:click="toggleActive({{ $product->id }})" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $product->is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-800' }}">
                                     {{ $product->is_active ? 'Actif' : 'Inactif' }}
@@ -130,15 +138,18 @@
                             <input type="text" wire:model="variants.{{ $index }}.variant_name" placeholder="Nom (ex: M)" class="w-full px-2 py-1.5 text-sm border border-border rounded bg-background">
                         </div>
                         <div class="col-span-2">
+                            <input type="number" wire:model="variants.{{ $index }}.price" placeholder="Prix (FCFA)" min="0" class="w-full px-2 py-1.5 text-sm border border-border rounded bg-background">
+                        </div>
+                        <div class="col-span-2">
                             <input type="text" wire:model="variants.{{ $index }}.size" placeholder="Taille" class="w-full px-2 py-1.5 text-sm border border-border rounded bg-background">
                         </div>
                         <div class="col-span-2">
                             <input type="text" wire:model="variants.{{ $index }}.color" placeholder="Couleur" class="w-full px-2 py-1.5 text-sm border border-border rounded bg-background">
                         </div>
-                        <div class="col-span-3">
+                        <div class="col-span-2">
                             <input type="number" wire:model="variants.{{ $index }}.stock_quantity" placeholder="Stock" min="0" class="w-full px-2 py-1.5 text-sm border border-border rounded bg-background">
                         </div>
-                        <div class="col-span-2">
+                        <div class="col-span-1">
                             <button wire:click="removeVariant({{ $index }})" type="button" class="text-xs text-red-600 hover:underline w-full text-left">Retirer</button>
                         </div>
                     </div>

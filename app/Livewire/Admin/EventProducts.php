@@ -50,6 +50,7 @@ class EventProducts extends Component
             'image' => $this->editMode ? 'nullable|image|max:2048' : 'nullable|image|max:2048',
             'variants' => 'nullable|array',
             'variants.*.variant_name' => 'required_with:variants|string|max:100',
+            'variants.*.price' => 'nullable|numeric|min:0',
             'variants.*.size' => 'nullable|string|max:50',
             'variants.*.color' => 'nullable|string|max:50',
             'variants.*.stock_quantity' => 'required_with:variants|integer|min:0',
@@ -92,6 +93,7 @@ class EventProducts extends Component
         $this->variants = $product->variants->map(fn($v) => [
             'id' => $v->id,
             'variant_name' => $v->variant_name,
+            'price' => $v->price,
             'size' => $v->size,
             'color' => $v->color,
             'stock_quantity' => $v->stock_quantity,
@@ -133,6 +135,7 @@ class EventProducts extends Component
                 $variantData = [
                     'product_id' => $product->id,
                     'variant_name' => $v['variant_name'],
+                    'price' => !empty($v['price']) ? (float) $v['price'] : null,
                     'size' => $v['size'] ?? null,
                     'color' => $v['color'] ?? null,
                     'stock_quantity' => (int) ($v['stock_quantity'] ?? 0),
@@ -178,6 +181,7 @@ class EventProducts extends Component
     {
         $this->variants[] = [
             'variant_name' => '',
+            'price' => '',
             'size' => '',
             'color' => '',
             'stock_quantity' => 0,

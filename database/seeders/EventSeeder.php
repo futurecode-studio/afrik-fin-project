@@ -120,11 +120,11 @@ class EventSeeder extends Seeder
                 'price' => 5000,
                 'is_active' => true,
                 'variants' => [
-                    ['variant_name' => 'S', 'size' => 'S', 'stock_quantity' => 30],
-                    ['variant_name' => 'M', 'size' => 'M', 'stock_quantity' => 40],
-                    ['variant_name' => 'L', 'size' => 'L', 'stock_quantity' => 40],
-                    ['variant_name' => 'XL', 'size' => 'XL', 'stock_quantity' => 20],
-                    ['variant_name' => 'XXL', 'size' => 'XXL', 'stock_quantity' => 10],
+                    ['variant_name' => 'S', 'size' => 'S', 'price' => 5000, 'stock_quantity' => 30],
+                    ['variant_name' => 'M', 'size' => 'M', 'price' => 5000, 'stock_quantity' => 40],
+                    ['variant_name' => 'L', 'size' => 'L', 'price' => 5500, 'stock_quantity' => 40],
+                    ['variant_name' => 'XL', 'size' => 'XL', 'price' => 5500, 'stock_quantity' => 20],
+                    ['variant_name' => 'XXL', 'size' => 'XXL', 'price' => 6000, 'stock_quantity' => 10],
                 ],
             ],
             [

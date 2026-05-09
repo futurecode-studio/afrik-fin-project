@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('event_products')->cascadeOnDelete();
             $table->string('sku', 100)->unique();
             $table->string('variant_name');
+            $table->decimal('price', 12, 2)->nullable();
             $table->string('size', 20)->nullable();
             $table->string('color', 30)->nullable();
             $table->unsignedInteger('stock_quantity')->default(0);

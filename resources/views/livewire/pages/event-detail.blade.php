@@ -280,8 +280,23 @@
                                     <div>
                                         <p class="font-semibold text-sm">{{ $product->name }}</p>
                                         <p class="text-xs text-muted-foreground mt-0.5">{{ $product->description }}</p>
+                                        @if($product->variants->contains(fn($v) => $v->price > 0))
+                                            <div class="flex flex-wrap gap-1 mt-1">
+                                                @foreach($product->variants as $v)
+                                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary">
+                                                        {{ $v->variant_name }}: {{ number_format($v->price ?? $product->price, 0, ',', ' ') }} F
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
-                                    <span class="font-bold text-primary text-sm whitespace-nowrap ml-2">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
+                                    <span class="font-bold text-primary text-sm whitespace-nowrap ml-2">
+                                        @if($product->variants->contains(fn($v) => $v->price > 0))
+                                            {{ number_format($product->variants->min('price') ?? $product->price, 0, ',', ' ') }} FCFA
+                                        @else
+                                            {{ number_format($product->price, 0, ',', ' ') }} FCFA
+                                        @endif
+                                    </span>
                                 </div>
                                 <button wire:click="openProductModal({{ $product->id }})" class="w-full mt-2 text-center px-3 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary-light transition-colors">
                                     Commander
@@ -405,7 +420,7 @@
                         <select wire:model="selectedVariantId" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
                             <option value="">-- Choisir --</option>
                             @foreach($productModal->variants as $v)
-                                <option value="{{ $v->id }}">{{ $v->variant_name }} ({{ $v->availableQuantity() }} disp.)</option>
+                                <option value="{{ $v->id }}">{{ $v->variant_name }} @if($v->price) ({{ number_format($v->price, 0, ',', ' ') }} FCFA) @else ({{ number_format($productModal->price, 0, ',', ' ') }} FCFA) @endif — {{ $v->availableQuantity() }} disp.</option>
                             @endforeach
                         </select>
                         @error('selectedVariantId')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
