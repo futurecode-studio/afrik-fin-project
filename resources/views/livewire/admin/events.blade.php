@@ -65,71 +65,62 @@
                                 @endif
                             </td>
                             <td class="p-4 text-right">
-                                <div class="relative inline-block text-left" x-data="{
-                                    open: false,
-                                    pos: { top: 0, right: 0 },
-                                    toggle() {
-                                        this.open = !this.open;
-                                        if (this.open) {
-                                            let rect = this.$el.querySelector('button').getBoundingClientRect();
-                                            this.pos.top = rect.bottom + window.scrollY + 4;
-                                            this.pos.right = window.innerWidth - rect.right - window.scrollX;
-                                        }
-                                    }
-                                }" @scroll.window="open = false">
-                                    <button @click="toggle()" class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-foreground bg-card border border-border rounded-lg hover:bg-muted transition-colors">
+                                <div class="inline-block" x-data="{ open: false, top: 0, left: 0 }" @scroll.window="open = false">
+                                    <button x-ref="btn_{{ $event->id }}" @click="
+                                        let rect = $refs['btn_{{ $event->id }}'].getBoundingClientRect();
+                                        top = rect.bottom + 4;
+                                        left = rect.left - 160 + rect.width;
+                                        open = true;
+                                    " class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-foreground bg-card border border-border rounded-lg hover:bg-muted transition-colors">
                                         Actions
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                                     </button>
-
-                                    <template x-teleport="body">
-                                        <div x-show="open" x-transition
-                                             class="fixed z-[9999] w-48 rounded-lg border border-border bg-card shadow-lg overflow-hidden"
-                                             :style="'top: ' + pos.top + 'px; right: ' + pos.right + 'px;'"
-                                             @click.away="open = false"
-                                             style="display: none;">
-                                            <a href="{{ route('admin.event.registrations', $event) }}" @click="open = false" class="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors">
+                                    <div x-show="open" x-transition
+                                         class="fixed z-[9999] w-48 rounded-lg border border-border bg-card shadow-lg overflow-hidden"
+                                         :style="'top: ' + top + 'px; left: ' + left + 'px;'"
+                                         @click.away="open = false"
+                                         style="display: none;">
+                                        <a href="{{ route('admin.event.registrations', $event) }}" @click="open = false" class="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors">
+                                            <span class="inline-flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                                Inscrits
+                                            </span>
+                                        </a>
+                                        <a href="{{ route('admin.event.checkin', $event) }}" @click="open = false" class="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors">
+                                            <span class="inline-flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                                                Émargement
+                                            </span>
+                                        </a>
+                                        <div class="border-t border-border"></div>
+                                        <button wire:click="edit({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-primary hover:bg-muted transition-colors">
+                                            <span class="inline-flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                                                Modifier
+                                            </span>
+                                        </button>
+                                        <button wire:click="duplicate({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                                            <span class="inline-flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                                                Dupliquer
+                                            </span>
+                                        </button>
+                                        @if($event->trashed())
+                                            <button wire:click="restore({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
                                                 <span class="inline-flex items-center gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                                    Inscrits
-                                                </span>
-                                            </a>
-                                            <a href="{{ route('admin.event.checkin', $event) }}" @click="open = false" class="block px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors">
-                                                <span class="inline-flex items-center gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                                                    Émargement
-                                                </span>
-                                            </a>
-                                            <div class="border-t border-border"></div>
-                                            <button wire:click="edit({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-primary hover:bg-muted transition-colors">
-                                                <span class="inline-flex items-center gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
-                                                    Modifier
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                                                    Restaurer
                                                 </span>
                                             </button>
-                                            <button wire:click="duplicate({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                                        @else
+                                            <button wire:click="confirmDelete({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
                                                 <span class="inline-flex items-center gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                                    Dupliquer
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                                    Supprimer
                                                 </span>
                                             </button>
-                                            @if($event->trashed())
-                                                <button wire:click="restore({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 transition-colors">
-                                                    <span class="inline-flex items-center gap-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                                                        Restaurer
-                                                    </span>
-                                                </button>
-                                            @else
-                                                <button wire:click="confirmDelete({{ $event->id }})" @click="open = false" class="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                                                    <span class="inline-flex items-center gap-2">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                                                        Supprimer
-                                                    </span>
-                                                </button>
-                                            @endif
-                                        </div>
-                                    </template>
+                                        @endif
+                                    </div>
                                 </div>
                             </td>
                         </tr>
