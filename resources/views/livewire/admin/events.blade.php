@@ -16,7 +16,7 @@
             <input type="text" wire:model.live.debounce.300ms="search" placeholder="Rechercher un événement..." class="w-full max-w-md px-4 py-2 border border-border rounded-lg bg-background text-foreground focus:ring-2 focus:ring-primary">
         </div>
 
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead class="bg-muted">
