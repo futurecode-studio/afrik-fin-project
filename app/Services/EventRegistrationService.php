@@ -19,32 +19,34 @@ class EventRegistrationService
      * Inscrire un utilisateur à un événement.
      * Gère la capacité, la liste d'attente et la génération QR.
      */
-    public function register(User $user, Event $event, array $data, ?EventTicketType $ticketType = null): EventRegistration
+    public function register(?User $user, Event $event, array $data, ?EventTicketType $ticketType = null): EventRegistration
     {
         return DB::transaction(function () use ($user, $event, $data, $ticketType) {
-            // Vérifier doublon actif
-            $existing = EventRegistration::where('event_id', $event->id)
-                ->where('user_id', $user->id)
-                ->whereNotIn('status', ['cancelled','no_show'])
-                ->first();
+            // Vérifier doublon actif (uniquement pour utilisateurs connectés)
+            if ($user) {
+                $existing = EventRegistration::where('event_id', $event->id)
+                    ->where('user_id', $user->id)
+                    ->whereNotIn('status', ['cancelled','no_show'])
+                    ->first();
 
-            if ($existing) {
-                throw new \Exception('Vous êtes déjà inscrit à cet événement.');
+                if ($existing) {
+                    throw new \Exception('Vous êtes déjà inscrit à cet événement.');
+                }
             }
 
             $seatAvailable = $event->seatsRemaining() > 0;
             if (!$seatAvailable) {
-                $this->addToWaitlist($event, $user, $data['email'] ?? $user->email, $data['phone'] ?? null);
+                $this->addToWaitlist($event, $user, $data['email'] ?? ($user?->email ?? ''), $data['phone'] ?? null);
                 throw new \Exception('Les places sont épuisées. Vous avez été ajouté à la liste d\'attente.');
             }
 
             $registration = EventRegistration::create([
                 'event_id' => $event->id,
-                'user_id' => $user->id,
+                'user_id' => $user?->id,
                 'ticket_type_id' => $ticketType?->id,
-                'first_name' => $data['first_name'] ?? $user->name,
+                'first_name' => $data['first_name'] ?? ($user?->name ?? ''),
                 'last_name' => $data['last_name'] ?? '',
-                'email' => $data['email'] ?? $user->email,
+                'email' => $data['email'] ?? ($user?->email ?? ''),
                 'phone' => $data['phone'] ?? null,
                 'institution_name' => $data['institution_name'] ?? null,
                 'job_title' => $data['job_title'] ?? null,

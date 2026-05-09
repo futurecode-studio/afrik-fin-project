@@ -26,10 +26,24 @@ class EventDetail extends Component
     public $emergency_contact_phone = '';
     public $paymentProvider = 'kkiapay';
 
+    // Commande produits
+    public $showProductModal = false;
+    public $selectedProductId = null;
+    public $selectedVariantId = null;
+    public $productQuantity = 1;
+    public $productFirstName = '';
+    public $productLastName = '';
+    public $productEmail = '';
+    public $productPhone = '';
+
     public function mount($slug)
     {
         $this->event = Event::where('slug', $slug)
-            ->with(['ticketTypes' => fn($q) => $q->where('is_active', true), 'programItems', 'speakers', 'sponsors', 'documents', 'galleries'])
+            ->with([
+                'ticketTypes' => fn($q) => $q->where('is_active', true),
+                'programItems', 'speakers', 'sponsors', 'documents', 'galleries',
+                'products' => fn($q) => $q->where('is_active', true)->with('variants'),
+            ])
             ->firstOrFail();
 
         if (Auth::check()) {
@@ -46,11 +60,6 @@ class EventDetail extends Component
 
     public function openRegistrationModal()
     {
-        if (!Auth::check()) {
-            session(['intended_event' => $this->event->slug]);
-            return $this->redirect(route('connexion'), navigate: true);
-        }
-
         if (!$this->event->isRegistrationOpen()) {
             session()->flash('error', 'Les inscriptions sont fermées pour cet événement.');
             return;
@@ -65,12 +74,87 @@ class EventDetail extends Component
         $this->resetValidation();
     }
 
-    public function submitRegistration(EventRegistrationService $service)
+    public function openProductModal($productId)
     {
-        if (!Auth::check()) {
+        $this->selectedProductId = $productId;
+        $this->selectedVariantId = null;
+        $this->productQuantity = 1;
+        $this->showProductModal = true;
+
+        if (Auth::check()) {
+            $this->productFirstName = Auth::user()->name;
+            $this->productEmail = Auth::user()->email;
+        }
+    }
+
+    public function closeProductModal()
+    {
+        $this->showProductModal = false;
+        $this->resetValidation();
+    }
+
+    public function submitProductOrder()
+    {
+        $this->validate([
+            'productFirstName' => 'required|string|max:255',
+            'productLastName' => 'required|string|max:255',
+            'productEmail' => 'required|email',
+            'productPhone' => 'nullable|string|max:50',
+            'selectedVariantId' => 'required|exists:event_product_variants,id',
+            'productQuantity' => 'required|integer|min:1|max:10',
+        ], [
+            'productFirstName.required' => 'Le prénom est obligatoire.',
+            'productLastName.required' => 'Le nom est obligatoire.',
+            'productEmail.required' => 'L\'email est obligatoire.',
+            'selectedVariantId.required' => 'Veuillez choisir une variante.',
+        ]);
+
+        $variant = \App\Models\EventProductVariant::with('product')->find($this->selectedVariantId);
+        if (!$variant || !$variant->isAvailable($this->productQuantity)) {
+            session()->flash('error', 'Stock insuffisant pour cette variante.');
             return;
         }
 
+        $product = $variant->product;
+        $unitPrice = $product->price;
+        $total = $unitPrice * $this->productQuantity;
+
+        $order = \App\Models\EventOrder::create([
+            'event_id' => $this->event->id,
+            'user_id' => Auth::id(),
+            'order_number' => 'EVNTORD-' . strtoupper(uniqid()),
+            'subtotal' => $total,
+            'tax' => 0,
+            'total' => $total,
+            'currency' => 'XOF',
+            'status' => 'pending',
+            'notes' => 'Commande par ' . trim($this->productFirstName . ' ' . $this->productLastName) . ' (' . $this->productEmail . ')',
+        ]);
+
+        \App\Models\EventOrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $product->id,
+            'variant_id' => $variant->id,
+            'quantity' => $this->productQuantity,
+            'unit_price' => $unitPrice,
+            'total_price' => $total,
+        ]);
+
+        $this->dispatch('openPaymentWidget', [
+            'provider' => $this->paymentProvider,
+            'amount' => (int) $total,
+            'reference' => $order->order_number,
+            'email' => $this->productEmail,
+            'name' => $this->productFirstName . ' ' . $this->productLastName,
+            'phone' => $this->productPhone,
+            'formation' => $product->name,
+        ]);
+
+        $this->showProductModal = false;
+    }
+
+    public function submitRegistration(EventRegistrationService $service)
+    {
         $ticketType = $this->event->ticketTypes->firstWhere('id', $this->selectedTicketTypeId);
 
         $data = [
@@ -91,7 +175,6 @@ class EventDetail extends Component
             $registration = $service->register(Auth::user(), $this->event, $data, $ticketType);
 
             if ($ticketType && $ticketType->price > 0) {
-                // Redirection paiement
                 $this->dispatch('initiatePayment', [
                     'provider' => $this->paymentProvider,
                     'amount' => (int) $ticketType->price,
@@ -102,7 +185,7 @@ class EventDetail extends Component
                     'registration_id' => $registration->id,
                 ]);
             } else {
-                session()->flash('success', 'Inscription confirmée ! Votre ticket est disponible dans votre espace.');
+                session()->flash('success', 'Inscription confirmée ! <a href="' . route('event.ticket.public', $registration->qr_code) . '" class="underline font-bold">Télécharger mon ticket</a>');
             }
 
             $this->showRegistrationModal = false;

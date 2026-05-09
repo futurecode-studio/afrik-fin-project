@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\EventDocument;
 use App\Models\EventGallery;
+use App\Models\EventProduct;
+use App\Models\EventProductVariant;
 use App\Models\EventProgramItem;
 use App\Models\EventSpeaker;
 use App\Models\EventTicketType;
@@ -108,6 +110,56 @@ class EventSeeder extends Seeder
                     'file_size' => 0,
                 ])
             );
+        }
+
+        // Produits dérivés
+        $products = [
+            [
+                'name' => 'T-shirt Marathon ADF',
+                'description' => 'T-shirt technique respirant 100% polyester, logo ADF sérigraphié.',
+                'price' => 5000,
+                'is_active' => true,
+                'variants' => [
+                    ['variant_name' => 'S', 'size' => 'S', 'stock_quantity' => 30],
+                    ['variant_name' => 'M', 'size' => 'M', 'stock_quantity' => 40],
+                    ['variant_name' => 'L', 'size' => 'L', 'stock_quantity' => 40],
+                    ['variant_name' => 'XL', 'size' => 'XL', 'stock_quantity' => 20],
+                    ['variant_name' => 'XXL', 'size' => 'XXL', 'stock_quantity' => 10],
+                ],
+            ],
+            [
+                'name' => 'Casquette ADF',
+                'description' => 'Casquette snapback brodée logo ADF, ajustable.',
+                'price' => 3500,
+                'is_active' => true,
+                'variants' => [
+                    ['variant_name' => 'Unique', 'size' => 'Unique', 'stock_quantity' => 50],
+                ],
+            ],
+            [
+                'name' => 'Porte-clé ADF',
+                'description' => 'Porte-clé métallique avec logo ADF et numéro d\'édition limitée.',
+                'price' => 1500,
+                'is_active' => true,
+                'variants' => [
+                    ['variant_name' => 'Unique', 'size' => 'Unique', 'stock_quantity' => 100],
+                ],
+            ],
+        ];
+
+        foreach ($products as $p) {
+            $variants = $p['variants'];
+            unset($p['variants']);
+            $product = EventProduct::firstOrCreate(
+                ['event_id' => $event->id, 'name' => $p['name']],
+                array_merge($p, ['event_id' => $event->id])
+            );
+            foreach ($variants as $v) {
+                EventProductVariant::firstOrCreate(
+                    ['product_id' => $product->id, 'variant_name' => $v['variant_name']],
+                    array_merge($v, ['product_id' => $product->id, 'sku' => strtoupper(Str::slug($product->name)) . '-' . $v['variant_name']])
+                );
+            }
         }
 
         $this->command->info('Event Seeder: Marathon 2026 créé avec succès !');

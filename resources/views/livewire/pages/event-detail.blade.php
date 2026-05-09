@@ -26,8 +26,14 @@
                     </div>
                     <p class="text-lg text-primary-foreground/90 mb-6">{{ $event->description }}</p>
 
+                    @if(session()->has('success'))
+                        <div class="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-emerald-800 text-sm mb-4">
+                            {!! session('success') !!}
+                        </div>
+                    @endif
+
                     @if($event->isRegistrationOpen())
-                        @if($isRegistered)
+                        @if($isRegistered && Auth::check())
                             <a href="{{ route('client.my-events') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
                                 Voir mon ticket
@@ -259,6 +265,29 @@
                         </div>
                     </div>
                     @endif
+
+                    <!-- Boutique événement -->
+                    @if($event->products->isNotEmpty())
+                    <div class="rounded-xl border bg-card p-6 border-border">
+                        <h3 class="font-bold mb-4">Boutique événement</h3>
+                        <div class="space-y-4">
+                            @foreach($event->products as $product)
+                            <div class="p-3 rounded-lg bg-muted/50 border border-border">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div>
+                                        <p class="font-semibold text-sm">{{ $product->name }}</p>
+                                        <p class="text-xs text-muted-foreground mt-0.5">{{ $product->description }}</p>
+                                    </div>
+                                    <span class="font-bold text-primary text-sm">{{ number_format($product->price, 0, ',', ' ') }} FCFA</span>
+                                </div>
+                                <button wire:click="openProductModal({{ $product->id }})" class="w-full mt-2 text-center px-3 py-1.5 bg-primary/10 text-primary text-xs font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
+                                    Commander
+                                </button>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -333,4 +362,105 @@
         </div>
     </div>
     @endif
+
+    <!-- Modal Commande Produit -->
+    @if($showProductModal && $selectedProductId)
+    @php $productModal = $event->products->firstWhere('id', $selectedProductId); @endphp
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeProductModal"></div>
+        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-border">
+            <div class="p-6 border-b border-border flex items-center justify-between">
+                <h2 class="text-xl font-bold">Commander — {{ $productModal?->name }}</h2>
+                <button wire:click="closeProductModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="p-6 space-y-4">
+                @if(session()->has('error'))
+                    <div class="rounded-lg bg-red-50 p-3 text-sm text-red-800 border border-red-200">{{ session('error') }}</div>
+                @endif
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Prénom *</label>
+                        <input type="text" wire:model="productFirstName" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('productFirstName')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Nom *</label>
+                        <input type="text" wire:model="productLastName" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('productLastName')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Email *</label>
+                        <input type="email" wire:model="productEmail" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        @error('productEmail')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Téléphone</label>
+                        <input type="tel" wire:model="productPhone" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Variante *</label>
+                        <select wire:model="selectedVariantId" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                            <option value="">-- Choisir --</option>
+                            @foreach($productModal->variants as $v)
+                                <option value="{{ $v->id }}">{{ $v->variant_name }} ({{ $v->availableQuantity() }} disp.)</option>
+                            @endforeach
+                        </select>
+                        @error('selectedVariantId')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Quantité (max 10)</label>
+                        <input type="number" wire:model="productQuantity" min="1" max="10" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-border flex justify-end gap-3">
+                <button wire:click="closeProductModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
+                <button wire:click="submitProductOrder" class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light font-semibold transition-colors">Payer en ligne</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+<script>
+document.addEventListener('livewire:init', () => {
+    Livewire.on('openPaymentWidget', (data) => {
+        const paymentData = data[0];
+        if (paymentData.provider === 'kkiapay') {
+            if (typeof openKkiapayWidget === 'undefined') { alert('KKiaPay non disponible.'); return; }
+            openKkiapayWidget({
+                amount: paymentData.amount,
+                position: "center",
+                callback: "",
+                data: paymentData.reference,
+                theme: "#0A2E8C",
+                key: "{{ config('services.kkiapay.public_key') }}",
+                sandbox: {{ config('services.kkiapay.sandbox') ? 'true' : 'false' }},
+            });
+            addSuccessListener(response => {
+                Livewire.dispatch('paymentSuccess', [{ transactionId: response.transactionId, reference: paymentData.reference, status: 'SUCCESS' }]);
+            });
+        } else if (paymentData.provider === 'fedapay') {
+            if (typeof FedaPay === 'undefined') { alert('FedaPay non disponible.'); return; }
+            const amount = parseInt(paymentData.amount, 10);
+            if (isNaN(amount) || amount <= 0) { alert('Montant invalide.'); return; }
+            FedaPay.init({
+                public_key: "{{ config('services.fedapay.public_key') }}",
+                transaction: {
+                    amount: amount,
+                    description: paymentData.formation || 'Commande événement',
+                },
+                customer: {
+                    email: paymentData.email || '',
+                    lastname: paymentData.name || '',
+                    phone: paymentData.phone || '',
+                },
+                onComplete: function(transaction) {
+                    Livewire.dispatch('paymentSuccess', [{ transactionId: transaction.id, reference: paymentData.reference, status: transaction.status }]);
+                },
+            });
+        }
+    });
+});
+</script>
 </main>

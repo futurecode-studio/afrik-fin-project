@@ -49,6 +49,7 @@ Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
 // Événements publiques
 Route::get('/evenements', \App\Livewire\Pages\EventsList::class)->name('events-list');
 Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
+Route::get('/evenements/ticket/{qrCode}', \App\Livewire\Pages\EventTicketPublic::class)->name('event.ticket.public');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion');
 Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
