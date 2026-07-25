@@ -1,21 +1,27 @@
- <div>
-    <main class="container mx-auto px-4 py-8">
-        {{-- Message de succès --}}
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-                {{ session('message') }}
-            </div>
-        @endif
+ <div x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
+    <div class="admin-page space-y-6">
+<div class="flex flex-wrap justify-between items-end gap-4 mb-2">
+        <div>
+            <nav class="flex items-center gap-2 text-[#757683] mb-2 text-xs font-semibold tracking-wider uppercase">
+                <span>Administration</span>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-[#001a61]">FORMATIONS</span>
+            </nav>
+            <h2 class="text-3xl font-extrabold text-[#001a61] tracking-tight">Gestion des Formations</h2>
+        </div>
+    </div>
 
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+        {{-- Message de succès --}}
+
+        <div class="admin-card">
             <div class="flex flex-col space-y-1.5 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-2xl font-semibold leading-none tracking-tight">Liste des Formations</h3>
-                        <p class="text-sm text-muted-foreground">{{ $formations->total() }} formation(s) enregistrée(s)</p>
+                        <p class="text-sm text-[#757683]">{{ $formations->total() }} formation(s) enregistrée(s)</p>
                     </div>
-                    <button wire:click="openModal" type="button"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                    <button @click="open = true; $wire.openModal()" type="button"
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 admin-btn-primary  h-11 px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="h-4 w-4 mr-2">
@@ -31,30 +37,30 @@
                 {{-- Barre de recherche --}}
                 <div class="mt-4">
                     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Rechercher par titre, niveau..."
-                        class="flex h-10 w-full md:w-96 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                        class="flex h-10 w-full md:w-96 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                 </div>
             </div>
 
             <div class="p-6 pt-0">
                 <div class="relative w-full overflow-auto">
-                    <table class="w-full caption-bottom text-sm">
+                    <table class="admin-table w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-muted/50">
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Titre</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Niveau</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Modules</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Prix</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
-                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">Actions</th>
+                            <tr class="border-b transition-colors hover:bg-[#f0f3ff]">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Titre</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Niveau</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Modules</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Prix</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Statut</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Date</th>
+                                <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($formations as $formation)
-                                <tr class="border-b transition-colors hover:bg-muted/50 {{ $formation->trashed() ? 'opacity-50' : '' }}">
+                                <tr class="border-b transition-colors hover:bg-[#f0f3ff] {{ $formation->trashed() ? 'opacity-50' : '' }}">
                                     <td class="p-4 align-middle">
                                         <div class="font-medium">{{ $formation->titre }}</div>
-                                        <div class="text-sm text-muted-foreground">{{ Str::limit($formation->description_courte, 50) }}</div>
+                                        <div class="text-sm text-[#757683]">{{ Str::limit($formation->description_courte, 50) }}</div>
                                     </td>
                                     <td class="p-4 align-middle">
                                         <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
@@ -66,7 +72,7 @@
                                     </td>
                                     <td class="p-4 align-middle text-sm">
                                         <span class="inline-flex items-center gap-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#757683]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                             </svg>
                                             {{ $formation->modules_count ?? 0 }}
@@ -89,20 +95,31 @@
                                             {{ ucfirst($formation->statut) }}
                                         </span>
                                     </td>
-                                    <td class="p-4 align-middle text-sm text-muted-foreground">{{ $formation->created_at->format('d/m/Y') }}</td>
+                                    <td class="p-4 align-middle text-sm text-[#757683]">{{ $formation->created_at->format('d/m/Y') }}</td>
                                     <td class="p-4 align-middle text-right">
                                         <div class="flex justify-end gap-2">
                                             @if(!$formation->trashed())
+                                                <a href="{{ route('admin.formations.show', $formation->id) }}"
+                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-[#e7eeff] text-[#001a61] h-9 px-3"
+                                                    title="Stats & vue d’ensemble" wire:navigate.hover>
+                                                    <span class="material-symbols-outlined text-[18px]">analytics</span>
+                                                    Stats
+                                                </a>
                                                 <a href="{{ route('admin.formations.modules', $formation->id) }}"
                                                     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-primary bg-primary/10 hover:bg-primary/20 text-primary h-9 px-3"
-                                                    title="Gérer les modules">
+                                                    title="Gérer les modules" wire:navigate.hover>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                                     </svg>
                                                     Modules
                                                 </a>
+                                                <a href="{{ route('admin.formations.learners', $formation->id) }}"
+                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-[#e7eeff] text-[#001a61] h-9 px-3"
+                                                    title="Apprenants" wire:navigate.hover>
+                                                    <span class="material-symbols-outlined text-[18px]">groups</span>
+                                                </a>
                                                 <button wire:click="edit({{ $formation->id }})" 
-                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3">
+                                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-9 px-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
                                                         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
                                                         <path d="m15 5 4 4"></path>
@@ -133,7 +150,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="p-4 text-center text-muted-foreground">
+                                    <td colspan="7" class="p-4 text-center text-[#757683]">
                                         Aucune formation trouvée
                                     </td>
                                 </tr>
@@ -148,18 +165,17 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     {{-- Modal Ajout/Modification --}}
-    @if($showModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="closeModal">
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="open = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-2xl font-bold">
                             {{ $editMode ? 'Modifier la formation' : 'Créer une formation' }}
                         </h2>
-                        <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <button @click="open = false" class="text-gray-500 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 6 6 18"/>
                                 <path d="m6 6 12 12"/>
@@ -174,7 +190,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Titre <span class="text-red-500">*</span></label>
                                 <input wire:model.live="titre" type="text"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                                 @error('titre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -182,7 +198,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Slug (URL)</label>
                                 <input wire:model="slug" type="text"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                     placeholder="genere-automatiquement">
                                 @error('slug') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -229,7 +245,7 @@
                                 {{-- Zone d'édition Quill pour la description courte --}}
                                 <div
                                     id="editor-desc-courte"
-                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[100px]"
+                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[100px]"
                                 ></div>
 
                                 <textarea
@@ -287,7 +303,7 @@
                                 {{-- Zone d'édition Quill --}}
                                 <div
                                     id="editor-desc-complete"
-                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
+                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
                                 ></div>
 
                                 <textarea
@@ -305,14 +321,14 @@
                                     type="file"
                                     wire:model="image"
                                     accept="image/*"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                 >
 
                                 {{-- Prévisualisation si une image existe déjà (édition) --}}
                                 @if($editMode && $image_url)
                                     <p class="text-xs text-gray-500 mt-2">Image actuelle :</p>
                                     <img src="{{ $image_url }}" alt="Image actuelle" class="mt-1 h-20 rounded-md object-cover border">
-                                @endif
+                                
 
                                 @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -321,7 +337,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">OU URL de l'image</label>
                                 <input wire:model="image_url" type="text"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                     placeholder="https://example.com/image.jpg">
                                 @error('image_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -331,7 +347,7 @@
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Niveau <span class="text-red-500">*</span></label>
                                     <select wire:model="niveau"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                                         <option value="debutant">Débutant</option>
                                         <option value="intermediaire">Intermédiaire</option>
                                         <option value="avance">Avancé</option>
@@ -341,14 +357,14 @@
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Durée</label>
                                     <input wire:model="duree" type="text"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                         placeholder="ex: 8 semaines">
                                     @error('duree') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
                             {{-- Tarification --}}
-                            <div class="p-4 rounded-lg border bg-muted/30">
+                            <div class="p-4 rounded-lg border bg-[#eef3ff]/30">
                                 <label class="block text-sm font-medium mb-3">Tarification</label>
                                 <div class="flex items-center gap-4 mb-3">
                                     <label class="flex items-center gap-2 cursor-pointer">
@@ -361,7 +377,7 @@
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Prix (XOF) <span class="text-red-500">*</span></label>
                                     <input wire:model="prix" type="number" min="0" step="1"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                         placeholder="0">
                                     @error('prix') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
@@ -374,7 +390,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Statut <span class="text-red-500">*</span></label>
                                 <select wire:model="statut"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                                     <option value="brouillon">Brouillon</option>
                                     <option value="publie">Publié</option>
                                     <option value="archive">Archivé</option>
@@ -384,12 +400,12 @@
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-                            <button type="button" wire:click="closeModal"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                            <button type="button" @click="open = false"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                                 Annuler
                             </button>
                             <button type="submit"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 admin-btn-primary  h-11 px-6 py-3">
                                 {{ $editMode ? 'Modifier' : 'Créer' }}
                             </button>
                         </div>
@@ -397,18 +413,15 @@
                 </div>
             </div>
         </div>
-    @endif
-
     {{-- Modal Confirmation Suppression --}}
-    @if($showDeleteModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="$set('showDeleteModal', false)">
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="del = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative">
                 <h2 class="text-xl font-bold mb-4">Confirmer la suppression</h2>
                 <p class="text-gray-600 mb-6">Êtes-vous sûr de vouloir supprimer cette formation ? Cette action peut être annulée en restaurant la formation.</p>
                 
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteModal', false)"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                    <button @click="del = false"
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                         Annuler
                     </button>
                     <button wire:click="delete"
@@ -418,7 +431,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 </div>
 
 @script

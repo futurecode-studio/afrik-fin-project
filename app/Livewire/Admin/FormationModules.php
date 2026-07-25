@@ -7,9 +7,11 @@ use Livewire\WithPagination;
 use App\Models\Formation;
 use App\Models\FormationModule;
 use Illuminate\Support\Str;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class FormationModules extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public Formation $formation;
@@ -71,10 +73,8 @@ class FormationModules extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -110,10 +110,10 @@ class FormationModules extends Component
         if ($this->editMode) {
             $module = FormationModule::findOrFail($this->moduleId);
             $module->update($moduleData);
-            session()->flash('message', 'Module modifié avec succès');
+            $this->swalSuccess('Module modifié avec succès');
         } else {
             FormationModule::create($moduleData);
-            session()->flash('message', 'Module créé avec succès');
+            $this->swalSuccess('Module créé avec succès');
         }
 
         $this->closeModal();
@@ -130,7 +130,7 @@ class FormationModules extends Component
         $module = FormationModule::findOrFail($this->moduleId);
         $module->delete();
         
-        session()->flash('message', 'Module supprimé avec succès');
+        $this->swalSuccess('Module supprimé avec succès');
         $this->showDeleteModal = false;
         $this->moduleId = null;
     }

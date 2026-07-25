@@ -8,9 +8,11 @@ use Livewire\WithFileUploads;
 use App\Models\Formation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Formations extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public $search = '';
@@ -93,10 +95,8 @@ class Formations extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -156,10 +156,10 @@ class Formations extends Component
                 unset($formationData['published_at']);
             }
             $formation->update($formationData);
-            session()->flash('message', 'Formation modifiée avec succès');
+            $this->swalSuccess('Formation modifiée avec succès');
         } else {
             Formation::create($formationData);
-            session()->flash('message', 'Formation créée avec succès');
+            $this->swalSuccess('Formation créée avec succès');
         }
 
         // Fermer la modale et réinitialiser
@@ -183,7 +183,7 @@ class Formations extends Component
         $formation = Formation::findOrFail($this->formationId);
         $formation->delete();
         
-        session()->flash('message', 'Formation supprimée avec succès');
+        $this->swalSuccess('Formation supprimée avec succès');
         $this->showDeleteModal = false;
         $this->formationId = null;
         
@@ -195,7 +195,7 @@ class Formations extends Component
         $formation = Formation::withTrashed()->findOrFail($id);
         $formation->restore();
         
-        session()->flash('message', 'Formation restaurée avec succès');
+        $this->swalSuccess('Formation restaurée avec succès');
         
         $this->dispatch('formation-saved');
     }

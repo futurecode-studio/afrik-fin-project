@@ -18,11 +18,13 @@ class ModuleQuiz extends Model
         'tentatives_max',
         'is_active',
         'afficher_corrections',
+        'is_final',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'afficher_corrections' => 'boolean',
+        'is_final' => 'boolean',
     ];
 
     /**

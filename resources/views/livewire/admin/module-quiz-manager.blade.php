@@ -1,11 +1,15 @@
-<div>
+<div x-data="{
+    quizOpen: @entangle('showQuizModal').live,
+    qOpen: @entangle('showQuestionModal').live,
+    qDel: @entangle('showDeleteQuestionModal').live
+}">
     <main class="container mx-auto px-4 py-8">
         {{-- Breadcrumb --}}
         <nav class="mb-6 text-sm">
             <ol class="flex items-center space-x-2">
-                <li><a href="{{ route('admin.formations') }}" class="text-primary hover:underline">Formations</a></li>
+                <li><a href="{{ route('admin.formations') }}" class="text-primary hover:underline" wire:navigate.hover>Formations</a></li>
                 <li><span class="text-muted-foreground">/</span></li>
-                <li><a href="{{ route('admin.formations.modules', $module->formation_id) }}" class="text-primary hover:underline">{{ $module->formation->titre }}</a></li>
+                <li><a href="{{ route('admin.formations.modules', $module->formation_id) }}" class="text-primary hover:underline" wire:navigate.hover>{{ $module->formation->titre }}</a></li>
                 <li><span class="text-muted-foreground">/</span></li>
                 <li class="text-muted-foreground">{{ $module->titre }}</li>
                 <li><span class="text-muted-foreground">/</span></li>
@@ -14,11 +18,6 @@
         </nav>
 
         {{-- Message de succès --}}
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-                {{ session('message') }}
-            </div>
-        @endif
 
         {{-- Info Module --}}
         <div class="mb-6 rounded-lg border bg-card p-4">
@@ -30,7 +29,7 @@
                     </p>
                 </div>
                 <a href="{{ route('admin.formations.modules.lessons', ['formation' => $module->formation_id, 'module' => $module->id]) }}"
-                    class="inline-flex items-center gap-2 px-4 py-2 border border-input rounded-md hover:bg-accent">
+                    class="inline-flex items-center gap-2 px-4 py-2 border border-input rounded-md hover:bg-accent" wire:navigate.hover>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
@@ -52,7 +51,7 @@
                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $quiz->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
                                 {{ $quiz->is_active ? 'Actif' : 'Inactif' }}
                             </span>
-                            <button wire:click="openQuizModal"
+                            <button @click="quizOpen = true; $wire.openQuizModal()"
                                 class="inline-flex items-center gap-2 px-3 py-2 border border-input rounded-md hover:bg-accent text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -95,7 +94,7 @@
                         </svg>
                         <h3 class="text-lg font-semibold mb-2">Aucun quiz configuré</h3>
                         <p class="text-muted-foreground mb-4">Créez un quiz pour évaluer les apprenants à la fin de ce module.</p>
-                        <button wire:click="openQuizModal"
+                        <button @click="quizOpen = true; $wire.openQuizModal()"
                             class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -116,7 +115,7 @@
                         <h3 class="text-xl font-semibold">Questions du Quiz</h3>
                         <p class="text-sm text-muted-foreground">{{ $questions->count() }} question(s)</p>
                     </div>
-                    <button wire:click="openQuestionModal"
+                    <button @click="qOpen = true; $wire.openQuestionModal()"
                         class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -188,7 +187,7 @@
                     @empty
                         <div class="text-center py-8 text-muted-foreground">
                             <p>Aucune question dans ce quiz</p>
-                            <button wire:click="openQuestionModal" class="mt-4 text-primary hover:underline">
+                            <button @click="qOpen = true; $wire.openQuestionModal()" class="mt-4 text-primary hover:underline">
                                 Ajouter la première question
                             </button>
                         </div>
@@ -200,16 +199,15 @@
     </main>
 
     {{-- Modal Configuration Quiz --}}
-    @if($showQuizModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4" wire:click.self="closeQuizModal">
-            <div class="fixed inset-0 bg-black bg-opacity-50"></div>
-            <div class="relative bg-card rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div x-show="quizOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4" style="display:none" @keydown.escape.window="if (quizOpen) quizOpen = false">
+            <div class="fixed inset-0 bg-[#131c2a]/55" @click="quizOpen = false"></div>
+            <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#c5c5d4]" @click.stop>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-bold">
                             {{ $editQuizMode ? 'Modifier le Quiz' : 'Créer le Quiz' }}
                         </h2>
-                        <button wire:click="closeQuizModal" class="text-muted-foreground hover:text-foreground">
+                        <button @click="quizOpen = false" class="text-muted-foreground hover:text-foreground">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -263,7 +261,7 @@
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-                            <button type="button" wire:click="closeQuizModal"
+                            <button type="button" @click="quizOpen = false"
                                 class="px-4 py-2 border border-input rounded-md hover:bg-accent">
                                 Annuler
                             </button>
@@ -276,19 +274,17 @@
                 </div>
             </div>
         </div>
-    @endif
 
     {{-- Modal Question --}}
-    @if($showQuestionModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4" wire:click.self="closeQuestionModal">
-            <div class="fixed inset-0 bg-black bg-opacity-50"></div>
-            <div class="relative bg-card rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div x-show="qOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4" style="display:none" @keydown.escape.window="if (qOpen) qOpen = false">
+            <div class="fixed inset-0 bg-[#131c2a]/55" @click="qOpen = false"></div>
+            <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[#c5c5d4]" @click.stop>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-bold">
                             {{ $editQuestionMode ? 'Modifier la Question' : 'Ajouter une Question' }}
                         </h2>
-                        <button wire:click="closeQuestionModal" class="text-muted-foreground hover:text-foreground">
+                        <button @click="qOpen = false" class="text-muted-foreground hover:text-foreground">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -381,7 +377,7 @@
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-                            <button type="button" wire:click="closeQuestionModal"
+                            <button type="button" @click="qOpen = false"
                                 class="px-4 py-2 border border-input rounded-md hover:bg-accent">
                                 Annuler
                             </button>
@@ -394,19 +390,17 @@
                 </div>
             </div>
         </div>
-    @endif
 
     {{-- Modal Suppression Question --}}
-    @if($showDeleteQuestionModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="fixed inset-0 bg-black bg-opacity-50" wire:click="$set('showDeleteQuestionModal', false)"></div>
-            <div class="relative bg-card rounded-lg shadow-xl max-w-md w-full p-6">
+    <div x-show="qDel" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4" style="display:none">
+            <div class="fixed inset-0 bg-[#131c2a]/55" @click="qDel = false"></div>
+            <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl max-w-md w-full p-6 border border-[#c5c5d4]" @click.stop>
                 <h3 class="text-lg font-bold mb-4">Confirmer la suppression</h3>
                 <p class="text-muted-foreground mb-6">
                     Êtes-vous sûr de vouloir supprimer cette question ?
                 </p>
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteQuestionModal', false)"
+                    <button @click="qDel = false"
                         class="px-4 py-2 border border-input rounded-md hover:bg-accent">
                         Annuler
                     </button>
@@ -417,5 +411,4 @@
                 </div>
             </div>
         </div>
-    @endif
 </div>

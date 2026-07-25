@@ -7,9 +7,11 @@ use App\Models\FormationModule;
 use App\Models\ModuleQuiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizAnswer;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class ModuleQuizManager extends Component
 {
+    use WithSweetAlert;
     public FormationModule $module;
     public ?ModuleQuiz $quiz = null;
     
@@ -76,9 +78,8 @@ class ModuleQuizManager extends Component
     }
 
     public function closeQuizModal()
-    {
+{
         $this->showQuizModal = false;
-        $this->resetQuizForm();
     }
 
     public function saveQuiz()
@@ -104,10 +105,10 @@ class ModuleQuizManager extends Component
 
         if ($this->editQuizMode && $this->quiz) {
             $this->quiz->update($quizData);
-            session()->flash('message', 'Quiz modifié avec succès');
+            $this->swalSuccess('Quiz modifié avec succès');
         } else {
             $this->quiz = ModuleQuiz::create($quizData);
-            session()->flash('message', 'Quiz créé avec succès');
+            $this->swalSuccess('Quiz créé avec succès');
         }
 
         $this->closeQuizModal();
@@ -118,7 +119,7 @@ class ModuleQuizManager extends Component
         if ($this->quiz) {
             $this->quiz->delete();
             $this->quiz = null;
-            session()->flash('message', 'Quiz supprimé avec succès');
+            $this->swalSuccess('Quiz supprimé avec succès');
         }
     }
 
@@ -144,9 +145,8 @@ class ModuleQuizManager extends Component
     }
 
     public function closeQuestionModal()
-    {
+{
         $this->showQuestionModal = false;
-        $this->resetQuestionForm();
     }
 
     public function editQuestion($id)
@@ -232,7 +232,7 @@ class ModuleQuizManager extends Component
             }
         }
 
-        session()->flash('message', $this->editQuestionMode ? 'Question modifiée avec succès' : 'Question créée avec succès');
+        $this->swalSuccess($this->editQuestionMode ? 'Question modifiée avec succès' : 'Question créée avec succès');
         $this->closeQuestionModal();
     }
 
@@ -247,7 +247,7 @@ class ModuleQuizManager extends Component
         $question = QuizQuestion::findOrFail($this->questionId);
         $question->delete();
         
-        session()->flash('message', 'Question supprimée avec succès');
+        $this->swalSuccess('Question supprimée avec succès');
         $this->showDeleteQuestionModal = false;
         $this->questionId = null;
     }

@@ -1,22 +1,19 @@
-<div>
+<div x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
     <main class="container mx-auto px-4 py-8">
         {{-- Breadcrumb --}}
         <nav class="mb-6 text-sm">
             <ol class="flex items-center space-x-2">
-                <li><a href="{{ route('admin.formations') }}" class="text-primary hover:underline">Formations</a></li>
+                <li><a href="{{ route('admin.formations') }}" class="text-primary hover:underline" wire:navigate.hover>Formations</a></li>
                 <li><span class="text-muted-foreground">/</span></li>
-                <li class="text-muted-foreground">{{ $formation->titre }}</li>
+                <li><a href="{{ route('admin.formations.show', $formation) }}" class="text-primary hover:underline" wire:navigate.hover>{{ $formation->titre }}</a></li>
                 <li><span class="text-muted-foreground">/</span></li>
                 <li class="font-medium">Modules</li>
             </ol>
         </nav>
 
+        @include('livewire.admin.partials.formation-admin-nav', ['formation' => $formation])
+
         {{-- Message de succès --}}
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-                {{ session('message') }}
-            </div>
-        @endif
 
         {{-- Info Formation --}}
         <div class="mb-6 rounded-lg border bg-card p-4">
@@ -43,7 +40,7 @@
                         <h3 class="text-2xl font-semibold leading-none tracking-tight">Modules de la formation</h3>
                         <p class="text-sm text-muted-foreground">{{ $modules->total() }} module(s)</p>
                     </div>
-                    <button wire:click="openModal" type="button"
+                    <button @click="open = true; $wire.openModal()" type="button"
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -96,14 +93,14 @@
                                 {{-- Actions --}}
                                 <div class="flex items-center gap-2">
                                     <a href="{{ route('admin.formations.modules.lessons', ['formation' => $formation->id, 'module' => $module->id]) }}"
-                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3">
+                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3" wire:navigate.hover>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                         </svg>
                                         Leçons
                                     </a>
                                     <a href="{{ route('admin.formations.modules.quiz', ['formation' => $formation->id, 'module' => $module->id]) }}"
-                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3">
+                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3" wire:navigate.hover>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                                         </svg>
@@ -133,7 +130,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
                             <p>Aucun module pour cette formation</p>
-                            <button wire:click="openModal" class="mt-4 text-primary hover:underline">
+                            <button @click="open = true; $wire.openModal()" class="mt-4 text-primary hover:underline">
                                 Créer le premier module
                             </button>
                         </div>
@@ -149,15 +146,14 @@
     </main>
 
     {{-- Modal Ajout/Modification Module --}}
-    @if($showModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="closeModal">
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="open = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-2xl font-bold text-gray-900">
                             {{ $editMode ? 'Modifier le module' : 'Ajouter un module' }}
                         </h2>
-                        <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <button @click="open = false" class="text-gray-500 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -222,7 +218,7 @@
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-                            <button type="button" wire:click="closeModal"
+                            <button type="button" @click="open = false"
                                 class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                                 Annuler
                             </button>
@@ -235,18 +231,17 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 
     {{-- Modal Suppression --}}
-    @if($showDeleteModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4">
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4">
             <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative">
                 <h3 class="text-lg font-bold text-gray-900 mb-4">Confirmer la suppression</h3>
                 <p class="text-gray-600 mb-6">
                     Êtes-vous sûr de vouloir supprimer ce module ? Cette action supprimera également toutes les leçons et le quiz associés.
                 </p>
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteModal', false)"
+                    <button @click="del = false"
                         class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
                         Annuler
                     </button>
@@ -257,5 +252,5 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 </div>
