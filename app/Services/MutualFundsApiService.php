@@ -177,6 +177,8 @@ class MutualFundsApiService
             'nav_value' => $this->formatCurrency($nav),
             'variation_percentage' => round($variation, 2),
             'variation' => $this->formatVariation($variation),
+            'nav' => $nav,
+            'vl' => $nav,
             'currency' => 'FCFA',
             'date' => $date,
             'source' => 'sikafinance',

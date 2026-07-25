@@ -5,9 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\Stock;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class StockData extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -107,16 +109,16 @@ class StockData extends Component
                 $stock = Stock::findOrFail($this->stockId);
                 $stock->update($data);
                 $stock->calculateVariation();
-                session()->flash('success', 'Le titre a été modifié avec succès.');
+                $this->swalSuccess('Le titre a été modifié avec succès.');
             } else {
                 $stock = Stock::create($data);
                 $stock->calculateVariation();
-                session()->flash('success', 'Le titre a été ajouté avec succès.');
+                $this->swalSuccess('Le titre a été ajouté avec succès.');
             }
 
             $this->closeModal();
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue : ' . $e->getMessage());
+            $this->swalError('Une erreur est survenue : ' . $e->getMessage());
         }
     }
 
@@ -130,11 +132,11 @@ class StockData extends Component
     {
         try {
             Stock::findOrFail($this->stockId)->delete();
-            session()->flash('success', 'Le titre a été supprimé avec succès.');
+            $this->swalSuccess('Le titre a été supprimé avec succès.');
             $this->showDeleteModal = false;
             $this->stockId = null;
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue lors de la suppression.');
+            $this->swalError('Une erreur est survenue lors de la suppression.');
         }
     }
 
@@ -144,23 +146,20 @@ class StockData extends Component
             $stock = Stock::findOrFail($id);
             $stock->is_active = !$stock->is_active;
             $stock->save();
-            session()->flash('success', 'Le statut a été modifié avec succès.');
+            $this->swalSuccess('Le statut a été modifié avec succès.');
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue.');
+            $this->swalError('Une erreur est survenue.');
         }
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function closeDeleteModal()
-    {
+{
         $this->showDeleteModal = false;
-        $this->stockId = null;
     }
 
     private function resetForm()

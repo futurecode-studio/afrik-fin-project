@@ -21,6 +21,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /*
 |--------------------------------------------------------------------------
+| Market API (données locales — jamais Mansa côté client)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('v1')->group(function () {
+    Route::get('/market/overview', [\App\Http\Controllers\Api\V1\MarketController::class, 'overview']);
+    Route::get('/market/gainers', [\App\Http\Controllers\Api\V1\MarketController::class, 'gainers']);
+    Route::get('/market/losers', [\App\Http\Controllers\Api\V1\MarketController::class, 'losers']);
+    Route::get('/market/most-active', [\App\Http\Controllers\Api\V1\MarketController::class, 'mostActive']);
+
+    Route::get('/stocks', [\App\Http\Controllers\Api\V1\MarketController::class, 'stocks']);
+    Route::get('/stocks/{symbol}', [\App\Http\Controllers\Api\V1\MarketController::class, 'show']);
+    Route::get('/stocks/{symbol}/history', [\App\Http\Controllers\Api\V1\MarketController::class, 'history']);
+
+    Route::get('/indices', [\App\Http\Controllers\Api\V1\MarketController::class, 'indices']);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Mutual Funds API Routes
 |--------------------------------------------------------------------------
 |

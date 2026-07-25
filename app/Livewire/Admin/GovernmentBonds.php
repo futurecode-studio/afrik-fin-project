@@ -6,9 +6,11 @@ use App\Models\GovernmentBond;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class GovernmentBonds extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $showModal = false;
@@ -77,9 +79,8 @@ class GovernmentBonds extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
     }
 
     public function resetForm()
@@ -115,10 +116,10 @@ class GovernmentBonds extends Component
         if ($this->editMode) {
             $bond = GovernmentBond::findOrFail($this->bondId);
             $bond->update($this->getBondData());
-            session()->flash('success', 'Obligation mise à jour avec succès.');
+            $this->swalSuccess('Obligation mise à jour avec succès.');
         } else {
             GovernmentBond::create($this->getBondData());
-            session()->flash('success', 'Obligation créée avec succès.');
+            $this->swalSuccess('Obligation créée avec succès.');
         }
 
         $this->closeModal();
@@ -163,7 +164,7 @@ class GovernmentBonds extends Component
     public function delete()
     {
         GovernmentBond::findOrFail($this->bondId)->delete();
-        session()->flash('success', 'Obligation supprimée avec succès.');
+        $this->swalSuccess('Obligation supprimée avec succès.');
         $this->showDeleteModal = false;
         $this->bondId = null;
     }
@@ -172,7 +173,7 @@ class GovernmentBonds extends Component
     {
         $bond = GovernmentBond::findOrFail($id);
         $bond->update(['is_active' => !$bond->is_active]);
-        session()->flash('success', 'Statut mis à jour avec succès.');
+        $this->swalSuccess('Statut mis à jour avec succès.');
     }
 
     private function getBondData()

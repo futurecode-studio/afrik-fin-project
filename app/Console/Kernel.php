@@ -12,11 +12,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // Snapshot quotidien des indices BRVM à 19h (après clôture du marché UEMOA),
-        // du lundi au vendredi. Alimente l'historique utilisé par le graphique.
-        $schedule->command('brvm:snapshot --force')
+        // Sync BRVM via Mansa (≈30 min freshness) — heures de séance UEMOA
+        // ~2 appels Mansa / run (stocks + indices) → ~30–40 req/jour max
+        $schedule->command('market:sync-brvm')
             ->weekdays()
-            ->at('19:00')
+            ->everyThirtyMinutes()
+            ->between('08:00', '16:30')
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('market:sync-brvm : échec de l\'exécution planifiée.');
+            });
+
+        // Snapshot indices fin de séance (réutilise Mansa / table market_indices)
+        $schedule->command('brvm:snapshot')
+            ->weekdays()
+            ->at('17:00')
             ->timezone('Africa/Abidjan')
             ->withoutOverlapping()
             ->onFailure(function () {

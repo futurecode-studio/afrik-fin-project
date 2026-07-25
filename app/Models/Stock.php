@@ -12,8 +12,12 @@ class Stock extends Model
     protected $fillable = [
         'symbol',
         'company_name',
+        'exchange',
+        'currency',
         'current_price',
+        'open_price',
         'previous_price',
+        'change_amount',
         'variation_percent',
         'volume',
         'market_cap',
@@ -21,19 +25,29 @@ class Stock extends Model
         'high_price',
         'low_price',
         'is_active',
+        'source',
+        'source_updated_at',
         'last_updated',
     ];
 
     protected $casts = [
         'current_price' => 'decimal:2',
+        'open_price' => 'decimal:2',
         'previous_price' => 'decimal:2',
+        'change_amount' => 'decimal:4',
         'variation_percent' => 'decimal:2',
         'market_cap' => 'decimal:2',
         'high_price' => 'decimal:2',
         'low_price' => 'decimal:2',
         'is_active' => 'boolean',
         'last_updated' => 'datetime',
+        'source_updated_at' => 'datetime',
     ];
+
+    public function prices()
+    {
+        return $this->hasMany(StockPrice::class);
+    }
 
     /**
      * Calculer la variation en pourcentage
