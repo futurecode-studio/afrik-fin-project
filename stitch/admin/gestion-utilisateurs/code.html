@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestion des Utilisateurs - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-variant": "#dae3f6",
+                "surface-bright": "#f9f9ff",
+                "secondary-container": "#ffbf00",
+                "primary-fixed-dim": "#b7c4ff",
+                "on-tertiary-fixed-variant": "#314381",
+                "surface-container": "#e7eeff",
+                "tertiary-container": "#213371",
+                "primary-container": "#0a2e8c",
+                "inverse-primary": "#b7c4ff",
+                "secondary-fixed": "#ffdfa0",
+                "tertiary-fixed-dim": "#b7c4ff",
+                "outline": "#757683",
+                "inverse-on-surface": "#ebf1ff",
+                "primary": "#001a61",
+                "on-primary-fixed-variant": "#223f9b",
+                "error-container": "#ffdad6",
+                "tertiary-fixed": "#dce1ff",
+                "on-tertiary-fixed": "#001551",
+                "on-primary-container": "#839cfd",
+                "on-surface-variant": "#444652",
+                "secondary-fixed-dim": "#fbbc00",
+                "on-secondary-fixed": "#261a00",
+                "surface-dim": "#d1daed",
+                "on-surface": "#131c2a",
+                "on-secondary": "#ffffff",
+                "surface-tint": "#3d58b5",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f0f3ff",
+                "on-secondary-container": "#6d5000",
+                "inverse-surface": "#28313f",
+                "on-background": "#131c2a",
+                "on-secondary-fixed-variant": "#5c4300",
+                "background": "#f9f9ff",
+                "on-tertiary-container": "#8d9ee3",
+                "on-primary": "#ffffff",
+                "on-error": "#ffffff",
+                "surface-container-highest": "#dae3f6",
+                "surface": "#f9f9ff",
+                "on-primary-fixed": "#001551",
+                "outline-variant": "#c5c5d4",
+                "primary-fixed": "#dce1ff",
+                "on-tertiary": "#ffffff",
+                "secondary": "#795900",
+                "tertiary": "#051c5b",
+                "surface-container-high": "#dfe8fc",
+                "error": "#ba1a1a",
+                "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "stack-md": "16px",
+                "margin-desktop": "64px",
+                "stack-sm": "8px",
+                "section-gap": "80px",
+                "gutter": "24px",
+                "stack-lg": "32px",
+                "margin-mobile": "20px",
+                "container-max": "1280px"
+            },
+            "fontFamily": {
+                "body-lg": ["Figtree"],
+                "display-lg": ["Figtree"],
+                "headline-md": ["Figtree"],
+                "headline-sm": ["Figtree"],
+                "data-value": ["IBM Plex Mono"],
+                "data-label": ["IBM Plex Mono"],
+                "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .data-mono { font-family: 'IBM Plex Mono', monospace; }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline z-50 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-gutter">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Africaine des Finances</h1>
+</div>
+<div class="flex items-center gap-stack-lg">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-2 text-body-md focus:outline-none focus:border-primary w-64" placeholder="Rechercher..." type="text"/>
+</div>
+<div class="flex items-center gap-stack-md text-primary dark:text-primary-fixed-dim">
+<button class="hover:text-primary-container transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary-container transition-colors"><span class="material-symbols-outlined">account_balance_wallet</span></button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white ml-2 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a financial administrator, clean background, high-end business attire, soft cinematic lighting, minimalist aesthetic reflecting institutional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbeknreVBy0iUVIxMf2N_QddrZzXX31Dm44bqp3XRW0g3Xsa4XwsqTERYgVHW1GcyokiJ5wbpELQ8ejXR-bBPuCE0tpJz6-lN4si6BRMG0YT_om4Z-Xmc9LAdnj2YCPSe69jvg6n_dIUzXJCXs5Y4dWPZ6fqQngONcHrXZFblezrhvG_xWIMn-M8IDRVGq8LQ_-HtLCEORLO48OpNwPaRkn2COjF0Lx_NgIOmP3U8wI-i0ld-Fd5DjKLmNFCOvX8IflZ5gEo2DEA"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Sidebar & Layout Wrapper -->
+<div class="pt-16 flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline flex flex-col py-stack-lg px-4 space-y-2 z-40">
+<div class="px-4 mb-stack-lg">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</h2>
+<p class="font-body-md text-sm text-on-surface-variant">Premium Wealth Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">school</span> Gestion des Utilisateurs
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">event</span> Événements
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">visibility</span> Ma Watchlist
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all font-body-md rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span> Paramètres
+                </a>
+</nav>
+<div class="mt-auto px-4 py-stack-md">
+<button class="w-full bg-secondary-container text-on-secondary-container font-bold py-3 px-4 rounded-xl hover:opacity-90 transition-opacity">
+                    Investir Maintenant
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 p-margin-desktop bg-surface-bright">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<nav class="flex items-center gap-2 text-outline mb-2">
+<span class="font-data-label text-data-label">ADMINISTRATION</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-data-label text-data-label text-primary">UTILISATEURS</span>
+</nav>
+<h2 class="font-display-lg text-display-lg text-primary">Gestion des Utilisateurs</h2>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-xl font-bold hover:bg-tertiary transition-colors">
+<span class="material-symbols-outlined">person_add</span> Nouvel Utilisateur
+                </button>
+</div>
+<!-- Filters Area -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl mb-gutter flex flex-wrap items-center gap-stack-lg">
+<div class="flex-1 min-w-[200px]">
+<label class="block font-data-label text-data-label text-outline mb-1">RECHERCHE</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded border border-outline-variant focus:border-primary outline-none" placeholder="Nom, email..." type="text"/>
+</div>
+</div>
+<div class="w-48">
+<label class="block font-data-label text-data-label text-outline mb-1">RÔLE</label>
+<select class="w-full px-4 py-2 bg-surface rounded border border-outline-variant focus:border-primary outline-none appearance-none">
+<option>Tous les rôles</option>
+<option>Administrateur</option>
+<option>Analyste</option>
+<option>Client Premium</option>
+</select>
+</div>
+<div class="w-48">
+<label class="block font-data-label text-data-label text-outline mb-1">PAYS</label>
+<select class="w-full px-4 py-2 bg-surface rounded border border-outline-variant focus:border-primary outline-none appearance-none">
+<option>Tous les pays</option>
+<option>Sénégal</option>
+<option>Côte d'Ivoire</option>
+<option>Cameroun</option>
+<option>Maroc</option>
+</select>
+</div>
+<div class="w-48">
+<label class="block font-data-label text-data-label text-outline mb-1">STATUT</label>
+<select class="w-full px-4 py-2 bg-surface rounded border border-outline-variant focus:border-primary outline-none appearance-none">
+<option>Tous les statuts</option>
+<option>Actif</option>
+<option>Suspendu</option>
+<option>En attente</option>
+</select>
+</div>
+<button class="mt-5 px-4 py-2 text-primary border border-primary rounded-lg font-bold hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span> Appliquer
+                </button>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#EEF3FF] border-b border-outline-variant">
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider">Utilisateur</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider">Contact</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider">Rôle</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider">Inscription</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider">Dernière Connexion</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-bold text-primary">MK</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Moussa Konaté</p>
+<p class="text-sm text-outline">ID: 99420-SN</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-body-md text-on-surface">m.konate@finance.sn</p>
+<p class="text-sm text-outline">+221 77 450 12 34</p>
+</td>
+<td class="px-6 py-5">
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-xs font-bold border border-primary-container/20">ADMINISTRATEUR</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">12 Mai 2023</p>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">Aujourd'hui, 09:45</p>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors" title="Modifier">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors" title="Suspendre">
+<span class="material-symbols-outlined">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-bold text-primary">AS</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Aissatou Sow</p>
+<p class="text-sm text-outline">ID: 88214-CI</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-body-md text-on-surface">a.sow@wealth.ci</p>
+<p class="text-sm text-outline">+225 07 89 45 67</p>
+</td>
+<td class="px-6 py-5">
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold border border-secondary-container/40">CLIENT PREMIUM</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">28 Jan 2024</p>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">Il y a 2 jours</p>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Suspended) -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3 opacity-60">
+<div class="w-10 h-10 rounded-full bg-outline-variant flex items-center justify-center font-bold text-white">JB</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Jean Bakary</p>
+<p class="text-sm text-outline">ID: 77102-CM</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 opacity-60">
+<p class="font-body-md text-on-surface">j.bakary@global.cm</p>
+<p class="text-sm text-outline">+237 650 11 22 33</p>
+</td>
+<td class="px-6 py-5">
+<span class="bg-error/10 text-error px-3 py-1 rounded-full text-xs font-bold border border-error/20">SUSPENDU</span>
+</td>
+<td class="px-6 py-5 opacity-60">
+<p class="font-data-value text-data-value text-on-surface">05 Sep 2022</p>
+</td>
+<td class="px-6 py-5 opacity-60">
+<p class="font-data-value text-data-value text-on-surface">15 Avr 2024</p>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-primary hover:text-primary-container transition-colors" title="Réactiver">
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-bold text-primary">OM</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Oumar Maïga</p>
+<p class="text-sm text-outline">ID: 11204-ML</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-body-md text-on-surface">o.maiga@invest.ml</p>
+<p class="text-sm text-outline">+223 20 22 44 66</p>
+</td>
+<td class="px-6 py-5">
+<span class="bg-tertiary-container/10 text-tertiary-container px-3 py-1 rounded-full text-xs font-bold border border-tertiary-container/20">ANALYSTE</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">02 Fév 2024</p>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value text-data-value text-on-surface">Il y a 3 heures</p>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between">
+<p class="font-data-label text-data-label text-outline">Affichage de 1-4 sur 124 utilisateurs</p>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded border border-outline-variant text-outline disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant text-on-surface font-bold text-xs hover:bg-surface-container-low">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant text-on-surface font-bold text-xs hover:bg-surface-container-low">3</button>
+<span class="text-outline mx-1">...</span>
+<button class="w-8 h-8 rounded border border-outline-variant text-on-surface font-bold text-xs hover:bg-surface-container-low">31</button>
+<button class="p-2 rounded border border-outline-variant text-outline hover:text-primary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md mt-auto">
+<p class="font-data-label text-data-label text-outline dark:text-outline-variant">© 2024 Africaine des Finances. All rights reserved.</p>
+<div class="flex gap-stack-lg mt-4 md:mt-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                // Ignore clicks on action buttons
+                if (e.target.closest('button')) return;
+                
+                // Toggle active state
+                document.querySelectorAll('tbody tr').forEach(r => r.classList.remove('bg-primary-container/5'));
+                row.classList.add('bg-primary-container/5');
+            });
+        });
+
+        // Filter dropdown simple interaction logic
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', () => {
+                select.classList.add('border-primary');
+                select.classList.add('bg-primary-container/5');
+            });
+        });
+    </script>
+</body></html>

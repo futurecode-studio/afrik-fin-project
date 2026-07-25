@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "primary": "#001a61",
+                    "on-surface-variant": "#444652",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-surface": "#28313f",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-container": "#213371",
+                    "tertiary": "#051c5b",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#839cfd",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "on-secondary-container": "#6d5000",
+                    "surface-tint": "#3d58b5",
+                    "outline": "#757683",
+                    "on-background": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "outline-variant": "#c5c5d4",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-fixed": "#001551",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-container": "#0a2e8c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f9f9ff; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .status-pill { padding: 4px 12px; border-radius: 9999px; font-weight: 600; font-size: 12px; }
+        .grid-institutionnel { border-collapse: separate; border-spacing: 0; }
+        .grid-institutionnel th { background-color: #EEF3FF; }
+        .premium-shadow { box-shadow: 0 20px 40px rgba(6, 29, 92, 0.04); }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest dark:bg-inverse-surface h-16 border-b border-outline-variant dark:border-outline">
+<div class="font-display-lg text-headline-sm text-primary dark:text-primary-fixed-dim font-bold tracking-tight">Heritage Academy</div>
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 font-bold" href="#">My Courses</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary transition-colors" href="#">Library</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined cursor-pointer text-on-surface-variant">notifications</span>
+<span class="material-symbols-outlined cursor-pointer text-on-surface-variant">help</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a financial services student, wearing business casual attire, with a soft studio lighting setup and a neutral grey background that maintains the institutional and high-end aesthetic of the heritage academy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPMmtJt4-Lc1WIfPpVRLAm-hQE6VYbIJXcJO-5d_D22T6EyH9ACrIDlFuHn03ur6tzuhNTI4QadrbhcJQYZMyoz2DJZ22tvQgrhHIW0PlA0kPnA2OVzDPLRZItXtrNSJCU6VCJo4PfrtNaYKq-3gT6vkvKAo9rPMWiDEc1-pjKXlZj0dboKKtgr-VPeEn3EQ-G9gqhD64j-JVYC_Wq4UjqkXwDKQyYu2gu9xqQOLWAtVlJd9jMf3IVSGEomuag6iPEuIFTclN4_A"/>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-80 flex flex-col z-40 bg-surface-container-low dark:bg-surface-container-high border-r border-outline-variant dark:border-outline py-stack-lg">
+<div class="px-stack-lg mb-stack-lg">
+<div class="flex items-center gap-stack-md mb-2">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-body-md text-primary font-bold">Wealth Management 101</h3>
+<p class="text-on-surface-variant text-[12px]">65% Complete</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 65%;"></div>
+</div>
+</div>
+<nav class="flex-grow">
+<div class="flex flex-col">
+<a class="group flex items-center transition-all duration-200 px-stack-lg py-3 text-on-surface-variant hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mr-stack-md">play_circle</span>
+<span class="font-body-md">Introduction</span>
+</a>
+<a class="group flex items-center transition-all duration-200 px-stack-lg py-3 bg-primary-container text-on-primary-container rounded-r-full font-bold" href="#">
+<span class="material-symbols-outlined mr-stack-md">account_balance</span>
+<span class="font-body-md">Market Fundamentals</span>
+</a>
+<a class="group flex items-center transition-all duration-200 px-stack-lg py-3 text-on-surface-variant hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mr-stack-md">analytics</span>
+<span class="font-body-md">Risk Assessment</span>
+</a>
+<a class="group flex items-center transition-all duration-200 px-stack-lg py-3 text-on-surface-variant hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mr-stack-md">verified_user</span>
+<span class="font-body-md">Financial Ethics</span>
+</a>
+<a class="group flex items-center transition-all duration-200 px-stack-lg py-3 text-on-surface-variant hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mr-stack-md">workspace_premium</span>
+<span class="font-body-md">Final Certification</span>
+</a>
+</div>
+</nav>
+<div class="px-stack-lg mt-auto pt-stack-lg border-t border-outline-variant">
+<div class="flex flex-col gap-2 mb-stack-lg">
+<a class="flex items-center text-on-surface-variant hover:text-primary font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined mr-2 text-[18px]">description</span> Resources
+                    </a>
+<a class="flex items-center text-on-surface-variant hover:text-primary font-data-label text-data-label" href="#">
+<span class="material-symbols-outlined mr-2 text-[18px]">contact_support</span> Support
+                    </a>
+</div>
+<button class="w-full py-3 bg-secondary text-on-secondary font-bold rounded-lg hover:bg-[#5c4300] transition-colors">
+                    Continue Learning
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-80 w-full min-h-screen px-margin-desktop py-section-gap">
+<div class="max-w-container-max mx-auto">
+<!-- Breadcrumbs & Header -->
+<div class="mb-stack-lg">
+<p class="font-data-label text-data-label text-on-surface-variant uppercase tracking-widest mb-2">Exercice : Analyse de Portefeuille Institutionnel</p>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md">Correction d’exercice</h1>
+</div>
+<!-- Score & Status Banner -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-section-gap">
+<div class="col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg premium-shadow flex flex-col items-center justify-center text-center">
+<span class="font-data-label text-data-label text-on-surface-variant mb-2">NOTE FINALE</span>
+<div class="flex items-baseline">
+<span class="font-display-lg text-display-lg text-primary">16</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant">/20</span>
+</div>
+</div>
+<div class="col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg premium-shadow flex flex-col items-center justify-center text-center">
+<span class="font-data-label text-data-label text-on-surface-variant mb-2">STATUT</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2EB873] text-[32px]">check_circle</span>
+<span class="font-headline-md text-headline-md text-[#2EB873]">Validé</span>
+</div>
+<p class="text-on-surface-variant text-[14px] mt-2">Seuil de réussite : 14/20</p>
+</div>
+<div class="col-span-1 bg-[#EEF3FF] border border-primary/10 rounded-xl p-stack-lg flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">download</span>
+</div>
+<span class="font-headline-sm text-body-lg text-primary">Fichier Annoté</span>
+</div>
+<p class="text-primary/70 text-[14px] mb-4">Téléchargez votre copie avec les annotations détaillées du formateur.</p>
+<a class="inline-flex items-center text-primary font-bold hover:underline" href="#">
+                            exercice_analyse_v1.pdf <span class="material-symbols-outlined ml-1">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Detailed Feedback Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Formateur Comment -->
+<div class="lg:col-span-7 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg premium-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 opacity-5 translate-x-12 -translate-y-12">
+<span class="material-symbols-outlined text-[128px]">format_quote</span>
+</div>
+<div class="flex items-center gap-stack-md mb-stack-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a senior financial instructor, middle-aged, wearing professional glasses and a suit, with a background of a prestigious library of financial law books. The lighting is warm and authoritative, reinforcing a high-end educational brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkQsr48JrKy0dG1uGIlpN4T3mpzVKFcRBn6zD8G-0C-tI2zW-yFuImk5NaD2WmVoC1a7rOcI4c9pve9h-QwGlWJE1OUIoqLZrwdiIieAcc18cJFHk-lkkUgYDl7aFE_F_zA73duv1HNhw059DfOqEyA6sz19Fy0ezloQED9uW_L1gDcI3xs311dVQCooHDwZZRWCx-JF6A8hLyOUjFPqgXeart3x_FbEsTgNeYioASnrgTPbKnUEOE1yGUugBAEtyUapFWDe_zwQ"/>
+</div>
+<div>
+<h4 class="font-headline-sm text-body-lg text-primary">Jean-Pierre Lefebvre</h4>
+<p class="text-on-surface-variant text-[12px]">Formateur Principal en Gestion de Patrimoine</p>
+</div>
+</div>
+<h5 class="font-headline-sm text-body-md text-on-surface mb-stack-sm">Commentaire détaillé</h5>
+<div class="space-y-stack-md text-on-surface-variant leading-relaxed font-body-md">
+<p>Une excellente compréhension globale des mécanismes de marché. Vos calculs sur l'indice de Sharpe sont d'une précision remarquable, ce qui démontre une maîtrise technique solide des outils d'analyse quantitative.</p>
+<p>Cependant, l'argumentaire concernant la diversification sectorielle manque de profondeur sur les marchés émergents. Pour les prochaines étapes, je vous conseille de revoir le module 4.2 pour affiner votre approche du risque systémique.</p>
+<p>Bravo pour la rigueur de votre présentation, conforme aux standards de l'institution.</p>
+</div>
+</div>
+<!-- Evaluation Matrix -->
+<div class="lg:col-span-5 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg premium-shadow">
+<h5 class="font-headline-sm text-body-lg text-primary mb-stack-lg">Critères Évalués</h5>
+<div class="space-y-stack-lg">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Précision des Calculs</span>
+<span class="text-[12px] text-on-surface-variant">Analyse quantitative et formules</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[12px] font-bold text-[#2EB873]">ACQUIS</span>
+<div class="w-3 h-3 rounded-full bg-[#2EB873]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Stratégie de Risque</span>
+<span class="text-[12px] text-on-surface-variant">Identification des menaces potentielles</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[12px] font-bold text-[#2EB873]">ACQUIS</span>
+<div class="w-3 h-3 rounded-full bg-[#2EB873]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Diversification</span>
+<span class="text-[12px] text-on-surface-variant">Allocation d'actifs multi-sectorielle</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[12px] font-bold text-[#795900]">EN COURS</span>
+<div class="w-3 h-3 rounded-full bg-[#ffbf00]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Éthique Financière</span>
+<span class="text-[12px] text-on-surface-variant">Conformité aux normes Heritage</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[12px] font-bold text-[#2EB873]">ACQUIS</span>
+<div class="w-3 h-3 rounded-full bg-[#2EB873]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Rédaction &amp; Format</span>
+<span class="text-[12px] text-on-surface-variant">Clarté de l'expression écrite</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[12px] font-bold text-outline">NON ACQUIS</span>
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Actions -->
+<div class="flex flex-col md:flex-row gap-gutter justify-end border-t border-outline-variant pt-stack-lg">
+<button class="px-8 py-4 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary/5 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined mr-2">restart_alt</span> Refaire l'exercice
+                    </button>
+<button class="px-8 py-4 bg-primary text-on-primary font-bold rounded-lg hover:bg-[#061D5C] transition-all flex items-center justify-center">
+                        Continuer la formation <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
+<div class="flex flex-col gap-2">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed">Heritage Financial Institution</div>
+<p class="font-data-label text-data-label text-on-surface-variant">© 2024 Heritage Financial Institution. All rights reserved. Professional Excellence in Education.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="text-on-surface-variant font-data-label text-data-label hover:text-primary underline" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-data-label text-data-label hover:text-primary underline" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-data-label text-data-label hover:text-primary underline" href="#">Security Disclosure</a>
+<a class="text-on-surface-variant font-data-label text-data-label hover:text-primary underline" href="#">Contact Support</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.opacity = '0.8';
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.opacity = '1';
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple fade-in animation for main content
+        window.addEventListener('load', () => {
+            document.querySelector('main').style.opacity = '0';
+            document.querySelector('main').style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.querySelector('main').style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body></html>

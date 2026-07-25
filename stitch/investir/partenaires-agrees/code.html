@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annuaire des Partenaires | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary": "#ffffff",
+                "outline-variant": "#c5c5d4",
+                "surface-bright": "#f9f9ff",
+                "on-tertiary-fixed": "#001551",
+                "surface-variant": "#dae3f6",
+                "surface-container-highest": "#dae3f6",
+                "surface-dim": "#d1daed",
+                "on-tertiary-fixed-variant": "#314381",
+                "inverse-primary": "#b7c4ff",
+                "primary-fixed": "#dce1ff",
+                "surface": "#f9f9ff",
+                "secondary-fixed": "#ffdfa0",
+                "primary": "#001a61",
+                "secondary": "#795900",
+                "error-container": "#ffdad6",
+                "on-primary-fixed": "#001551",
+                "inverse-on-surface": "#ebf1ff",
+                "on-secondary-container": "#6d5000",
+                "surface-container-high": "#dfe8fc",
+                "secondary-fixed-dim": "#fbbc00",
+                "tertiary": "#051c5b",
+                "on-surface-variant": "#444652",
+                "on-secondary-fixed-variant": "#5c4300",
+                "secondary-container": "#ffbf00",
+                "primary-fixed-dim": "#b7c4ff",
+                "on-tertiary-container": "#8d9ee3",
+                "on-secondary": "#ffffff",
+                "primary-container": "#0a2e8c",
+                "surface-container-lowest": "#ffffff",
+                "on-background": "#131c2a",
+                "tertiary-container": "#213371",
+                "outline": "#757683",
+                "on-error-container": "#93000a",
+                "on-tertiary": "#ffffff",
+                "background": "#f9f9ff",
+                "surface-container": "#e7eeff",
+                "on-primary-container": "#839cfd",
+                "tertiary-fixed": "#dce1ff",
+                "on-primary-fixed-variant": "#223f9b",
+                "on-surface": "#131c2a",
+                "error": "#ba1a1a",
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#b7c4ff",
+                "surface-tint": "#3d58b5",
+                "inverse-surface": "#28313f",
+                "on-secondary-fixed": "#261a00",
+                "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "margin-mobile": "20px",
+                "section-gap": "80px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "container-max": "1280px",
+                "gutter": "24px",
+                "stack-md": "16px",
+                "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                "headline-sm": ["Figtree"],
+                "data-value": ["IBM Plex Mono"],
+                "data-label": ["IBM Plex Mono"],
+                "body-md": ["Figtree"],
+                "headline-md": ["Figtree"],
+                "body-lg": ["Figtree"],
+                "display-lg": ["Figtree"],
+                "display-lg-mobile": ["Figtree"]
+            },
+            "fontSize": {
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .partner-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .partner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(6, 29, 92, 0.04);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<div class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-data-label text-data-label font-bold text-on-primary uppercase">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:text-secondary-container transition-colors"><span class="material-symbols-outlined">language</span></button>
+<button class="hover:text-secondary-container transition-colors"><span class="material-symbols-outlined">mail</span></button>
+<button class="hover:text-secondary-container transition-colors"><span class="material-symbols-outlined">call</span></button>
+</div>
+</div>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">
+                Africaine des Finances
+            </div>
+<div class="hidden lg:flex items-center gap-8 h-full">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Training</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Analysis</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1" href="#">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary font-bold px-4 py-2 hover:opacity-80 transition-all">Login</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold hover:bg-primary-container transition-all">Commencer à investir</button>
+</div>
+</div>
+</nav>
+<!-- Header Section -->
+<header class="py-section-gap bg-surface-container-low border-b border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-3xl">
+<h1 class="text-display-lg font-display-lg text-primary mb-stack-md leading-tight">
+                    Écosystème de Confiance
+                </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">
+                    Accédez à l'annuaire complet des institutions agréées par l'AMF-UMOA. Notre réseau de partenaires SGI, SGO et Banques garantit la sécurité et la performance de vos investissements sur le marché financier régional.
+                </p>
+</div>
+</div>
+</header>
+<!-- Filters Section -->
+<section class="py-stack-lg border-b border-outline-variant bg-surface sticky top-20 z-30 shadow-sm">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col lg:flex-row items-center gap-gutter">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md" placeholder="Rechercher un partenaire par nom..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-stack-md w-full lg:w-auto">
+<select class="px-4 py-3 rounded-lg border-outline-variant bg-surface text-on-surface font-data-label text-data-label focus:border-primary">
+<option>Type d'institution</option>
+<option>SGI (Bourse)</option>
+<option>SGO (Gestion d'actifs)</option>
+<option>Banque Commerciale</option>
+<option>Institution de Dépôt</option>
+</select>
+<select class="px-4 py-3 rounded-lg border-outline-variant bg-surface text-on-surface font-data-label text-data-label focus:border-primary">
+<option>Pays</option>
+<option>Sénégal</option>
+<option>Côte d'Ivoire</option>
+<option>Bénin</option>
+<option>Burkina Faso</option>
+<option>Togo</option>
+</select>
+<select class="px-4 py-3 rounded-lg border-outline-variant bg-surface text-on-surface font-data-label text-data-label focus:border-primary">
+<option>Services</option>
+<option>Gestion de Fortune</option>
+<option>Courtage</option>
+<option>Émission de Titres</option>
+</select>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-secondary-fixed-dim transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+<span>Filtrer</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Directory Grid -->
+<main class="py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<span class="text-data-label font-data-label text-primary uppercase tracking-wider">Résultats</span>
+<h2 class="text-headline-md font-headline-md text-on-surface">128 Partenaires Répertoriés</h2>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded bg-surface text-primary"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 border border-outline-variant rounded bg-surface text-outline"><span class="material-symbols-outlined">list</span></button>
+</div>
+</div>
+<!-- Partners Bento Grid / Gallery -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="A clean, minimalist logo for a high-end financial institution featuring abstract geometric lines in primary blue. The logo is centered on a light grey background with soft studio lighting to emphasize a premium corporate feel. Professional financial branding aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPnP_XFHFEKG9ZeEK51bcKcP19rXHSW-py9LmsIZ9nke-h9gMlRBI6vC2L14W8c0nqhRrQaYgkiOXr3Y3nyjwg6roq8QaZXjZSni-J5SX2WaaKxl-jI8v24Q2Z-jr2OzCHxbvJnj6cvgBRdE2Hpcr9kA8BB-7_kofMDVcPgZRyuMtY_EpJ7mCmyxYZaT6aLFY6ku4o2lxK8tAULH4wQt_RyqBilK22vvw_Pi4egaFQhyHo_HXe6soECDyqAQ-u4bxvqKCE6eBjrA"/>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-data-label font-data-label">SGI Agréée</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">Société Générale Capital</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Dakar, Sénégal</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Courtage</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Advisory</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="A sophisticated emblem for an investment management firm using interlocking golden circles and dark blue typography. Minimalist and authoritative design against a crisp white background. Professional photography with high-end corporate lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiBazQ_wdKGdC9XkBms92w52tnFwr9yqNJ7CS6hTECuCEhQ9EXAX2NsirMzl6bAcZLgJ2HRnNzNbz7ieX2cGjwFQCpjzxQpxfAQTE4JPzzeU-lcB4aInZCVixP-AW9lw1UvOsN8lp9Zu8M4CS50feb7-VerMvf2z02KcEKYbf_GUTVpsKXjDzyISokgcpaWiqoFKX43aSN85OiYLvg0HQSN7AmBDegvTEKfkyIyqALhIgkH_SiLJLSeUa49kyJ9MrCbeLeZaHAcA"/>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-data-label font-data-label">SGO Asset Mgmt</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">Attijari Asset Management</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Abidjan, Côte d'Ivoire</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">OPCVM</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Gestion Privée</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.8
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="Corporate logo of a pan-African bank featuring stylized African map contours integrated with financial upward trends. Palette of deep indigo and soft gold. High-resolution branding asset with clean vectors and professional depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyCpPJChC9W8KMwd2nPiiB2hZMqBe5SX55pTOblHJ3FUS9L4d1G-1Av8t2abmN38qO2j5breDJGbJNc10SGDHEeRkdceX_Y9RhTf9vhJt-zkpi5Xqy8wj87L0RMYy_9NYI5RY8jSjUdIuaQg-ohiyGVV1POXAP2_1iElxxrjwE5H4pHmVzpzNRpK-Kw_hbFkL7X9zc5Zpp9LmDUqnnlE1LESRozkzH_Mt3GDZwcn7BKsLTCzVczfyR4bul6AzCBKtussmRI4r9eg"/>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-data-label font-data-label">Banque Dépositaire</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">Ecobank Transnational</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Lomé, Togo</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Dépôt de Titres</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Règlement</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.7
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="A minimalist finance logo with bold serif font 'AF' and a subtle gold leaf accent. The style is traditional yet contemporary, suggesting heritage and stability. Soft shadows and a clean studio lighting environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTQ9sc5ZxhiJmliOui70m8bmSg9nr2vVe9BSSCvQTIUqpP0Jt8s8ihAfvuH3Yl2moFMKLDj9KCgM_R1xA8K6itoDbMHj4sAxs8FR4_n07w57wJc_VjgYAIOErqFJCeICkHM6NoUBt7SUVw27jtfABMKm7XiGTgFqpIcT9KoDDB0eEGVaZ-GTPp6yHCezH_a6L_kjdfgDw5jXk5LKD9BG7Vw6PKFCDLgOFwwhz4xwjTbIQf5zQM0mfO4pWUdc5ZfSpzhFNX8Xxj-g"/>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-data-label font-data-label">SGI Agréée</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">Africa Bourse</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Cotonou, Bénin</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Trading</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Émission</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.6
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="Modern logo for a FinTech wealth management partner. Bright blue colors and high-contrast white. Abstract pulse-like graphic representing growth. Shot against a neutral background in a professional setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-pTHZZlFH_GM-jaEK9Ff4h1iQf752QFUQsAZoUl6qvlA0P9PJ0Krm6ktyRjTEv28A7av-96KrED_pSB48ATG7gYU03FfXLXK3YZ2c3VSdoquxHH9yiHsiISXIctpHq92sSINsesZA4KGltNjcFvIJLZF_S0lVLosYfDBaVia4Trcriq27fAFhEqj2cbUebijWX_99mgbqUF-ZdyRHkVz_wtNqUFk_NVlqXPqYMMvSMGy4zbpK5b_7jAeruKVfEU7oQGuwOko-Nw"/>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-data-label font-data-label">SGO Asset Mgmt</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">CGF Gestion</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Dakar, Sénégal</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Gestion de Fonds</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="partner-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="Elegant corporate logo of a financial institution. Features silver and navy blue tones. The icon represents a shield and a graph line merged together. Very professional and corporate aesthetic, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdcy39eCeLyQPz__HNO2FculgtupLjrYQVVu6Z5Xs4nTpjQ1-mxP0vddYo54gRZ3a1Dm7VnrLaHqm3ucV_OsAj0F4cSzqfwo7tkw58fC_vsP2tb5IEqtbIDvslUMUvwRlwlGVs-AyGOrRNQgjnNoFGL9n2YJEAmG6zYrKUa3_TvDtPxzRfkIshFT_A5UhEeD16V24dsa6--v5Ck4sxnyt13d3iQx1pi9bzpN4mgrSgdc9rCfU62uiHO2IIiekQv7dcsnLA3v3kng"/>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-data-label font-data-label">SGI Agréée</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">Hudson &amp; Cie</h3>
+<p class="text-data-label font-data-label text-outline mb-stack-md">Abidjan, Côte d'Ivoire</p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Bourse</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[11px] font-bold text-on-surface-variant uppercase">Fusions-Acq</span>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant flex justify-between items-center">
+<span class="text-data-label font-data-label flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.8
+                        </span>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
+                            Voir profil <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-section-gap flex justify-center items-center gap-stack-md">
+<button class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-all">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-all">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded border border-outline-variant text-outline hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Map CTA Section -->
+<section class="bg-primary text-on-primary py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-section-gap items-center">
+<div>
+<h2 class="text-display-lg font-display-lg mb-stack-md">Présence Régionale</h2>
+<p class="text-body-lg font-body-lg text-on-primary/80 mb-stack-lg">
+                    Trouvez le partenaire le plus proche de chez vous parmi nos implantations dans les 8 pays de l'UEMOA. Nos experts sont à votre disposition pour vous accompagner dans vos projets financiers.
+                </p>
+<div class="space-y-stack-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center"><span class="material-symbols-outlined">location_on</span></div>
+<div>
+<p class="font-bold">Siège Social</p>
+<p class="text-on-primary/60">Avenue de la République, Dakar</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center"><span class="material-symbols-outlined">public</span></div>
+<div>
+<p class="font-bold">8 Pays Membres</p>
+<p class="text-on-primary/60">Couverture intégrale de la zone UMOA</p>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden shadow-2xl h-[400px] relative">
+<img class="w-full h-full object-cover" data-alt="A professional digital map showing the West African region with glowing points indicating partner office locations. The map is rendered in high-tech architectural style with deep blues and gold highlights. Sophisticated data visualization aesthetic for a financial institution." data-location="Dakar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC06sEQgDkg-pR5RIIMa_G3UUvChFnq94yLoEE-iUzzg8XlYPd9CdB_5tYr-fEtaqZHo6Oy-OdKtdnBlBjcbeOtUpuWg8chsqMLUI3lGCFis5wgRJYDxLQYl1d8N0p12ZRlxuyRW-sHLcfH0AObv1wZceTEjZsVMNfme2JovRw0S3IJgwqvw11xoBN8QAY7DoqJLHjSi8EL6i75-4oryC80599Bu74w3Zhez_-uzDQOh1niGPruIDO629W5EiOxWlBTIm2TP2xESA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-desktop py-section-gap grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-stack-md">
+                    Africaine des Finances
+                </div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-stack-md max-w-xs">
+                    Leader de l'ingénierie financière et de l'investissement en zone UEMOA.
+                </p>
+<div class="flex gap-4">
+<a class="text-primary hover:opacity-80 transition-all" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-primary hover:opacity-80 transition-all" href="#"><span class="material-symbols-outlined">info</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-[12px] tracking-widest text-outline">Platform</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Invest</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Corporate</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Training</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-[12px] tracking-widest text-outline">Learn</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Markets</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Analysis</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Resources</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-[12px] tracking-widest text-outline">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Privacy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Regulatory</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Terms</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-[12px] tracking-widest text-outline">Contact</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Dakar, SN</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Support</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">FAQ</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant py-8">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center text-data-label font-data-label text-outline">
+                © 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.
+            </div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for cards
+        document.querySelectorAll('.partner-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.material-symbols-outlined:last-child');
+                if(icon) icon.style.transform = 'translateX(4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.material-symbols-outlined:last-child');
+                if(icon) icon.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>

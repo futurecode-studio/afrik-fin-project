@@ -37,17 +37,14 @@ class Register extends Component
 
         Auth::login($user);
 
-        // Stocker la route dans la session pour redirection
-        session(['url.intended' => route('client.dashboard')]);
-
-        // Rediriger vers le dashboard client
-        $this->redirect(route('client.dashboard'));
+        // Onboarding intérêts puis dashboard
+        $this->redirect(route('client.interests'));
     }
 
     public function render()
     {
         return view('livewire.auth.register')
-            ->extends('layouts.site', ['title' => 'Inscription'])
+            ->extends('layouts.site', ['title' => 'Inscription — Africaine des Finances'])
             ->section('content');
     }
 }

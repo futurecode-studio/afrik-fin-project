@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suivi Financier &amp; Transactions - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+            background: rgba(249, 249, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 z-50 w-full h-16 bg-surface dark:bg-on-surface flex justify-between items-center px-margin-desktop border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Africaine des Finances</span>
+</div>
+<nav class="hidden md:flex space-x-stack-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Transactions</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Investissements</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Documents</a>
+</nav>
+<div class="flex items-center gap-gutter">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-xl focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md w-64" placeholder="Rechercher une transaction..." type="text"/>
+</div>
+<div class="flex items-center space-x-4">
+<button class="relative p-2 text-primary hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-primary hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Corporate headshot of a professional African executive in a tailored navy blue suit, set against a blurred high-end office background with warm architectural lighting. The style is prestigious, clean, and modern, reflecting the elite branding of a major financial institution with soft color grading and high-resolution clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbz-PYJjmGZjfBlXPIT5X5pKmLGvH7sBeqUE7AHezliyWdpt6BarIhrJSV5kmyovnnzEv0KiqbIvwefmTjaEDmxk9yLY6e5zGOLAItKFhFgK41oW75fBspCW8G_VAGTTjHxfKYCm0S-8PGuUSEkCFp21z6ONoEt4GGWdGYcHimM1j5XLChQ5FDX9Gmf3N9zuildanQsj--d8R5f2Qb79Xbo7wiON0rUbMEykrFywc3-R-Eiy5wJVJ5_uYxS863f_VhK0zzVOGO_A"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Sidebar Wrapper for Desktop -->
+<div class="flex pt-16 min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low dark:bg-on-surface flex flex-col py-stack-lg px-4 space-y-2 border-r border-outline-variant dark:border-outline hidden md:flex">
+<div class="px-4 mb-stack-lg">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm">account_balance</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</span>
+</div>
+<p class="text-xs text-outline uppercase tracking-widest font-bold">Premium Wealth Management</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-body-md">Finances</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-body-md">My Trainings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-body-md">My Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-body-md">My Watchlist</span>
+</a>
+<div class="mt-auto pt-stack-lg border-t border-outline-variant space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<button class="w-full mt-4 bg-secondary-container text-on-secondary-container font-bold py-3 rounded-lg hover:brightness-95 transition-all">
+                    Invest Now
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 px-margin-desktop py-stack-lg bg-background min-h-full">
+<!-- Page Header & Stats Bento -->
+<div class="mb-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-1">Suivi Financier</h1>
+<p class="text-on-surface-variant font-body-lg">Historique consolidé des transactions et paiements institutionnels.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 border border-primary text-primary px-6 py-2 rounded font-bold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                            Filtres
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2 rounded font-bold hover:bg-tertiary transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Exporter CSV
+                        </button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between h-32">
+<span class="text-data-label text-outline uppercase">Total Transigé</span>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-headline-md text-primary">12.4M</span>
+<span class="text-xs text-outline font-body-md">FCFA</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between h-32">
+<span class="text-data-label text-outline uppercase">Transactions Réussies</span>
+<div class="flex items-center gap-3">
+<span class="font-data-value text-headline-md text-primary">94.2%</span>
+<span class="text-xs px-2 py-0.5 bg-[#2EB873]/10 text-[#2EB873] rounded-full font-bold">+2.4%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between h-32">
+<span class="text-data-label text-outline uppercase">Échecs Critiques</span>
+<div class="flex items-center gap-3">
+<span class="font-data-value text-headline-md text-error">12</span>
+<span class="text-xs text-outline font-body-md">Ce mois</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden">
+
+<span class="text-data-label text-outline uppercase relative z-10">Remboursements</span>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-data-value text-headline-md text-secondary">420K</span>
+<span class="text-xs text-outline font-body-md">FCFA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden">
+<!-- Filters Bar -->
+<div class="p-4 border-b border-outline-variant flex flex-wrap gap-stack-md items-center bg-surface-container-low">
+<div class="flex-1 min-w-[200px]">
+<select class="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:ring-primary focus:border-primary">
+<option>Toutes les périodes</option>
+<option>Derniers 30 jours</option>
+<option>Dernier Trimestre</option>
+<option>Année 2024</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<select class="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:ring-primary focus:border-primary">
+<option>Tous les produits</option>
+<option>Formations Executive</option>
+<option>Billets Conférence</option>
+<option>Audit Patrimonial</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<select class="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:ring-primary focus:border-primary">
+<option>Tous les statuts</option>
+<option>Réussi</option>
+<option>Échoué</option>
+<option>Remboursé</option>
+</select>
+</div>
+<button class="p-2 bg-surface-container-high rounded-lg hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+<!-- Financial Table -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-surface-container text-primary font-bold">
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase">Référence</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase">Client</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase">Produit</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase">Montant</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase text-center">Paiement</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase text-center">Statut</th>
+<th class="px-6 py-4 text-data-label border-b border-outline-variant uppercase text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-data-value text-primary">#TR-902183</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary text-xs">MA</div>
+<div>
+<p class="font-bold text-on-surface">Moussa Aliou</p>
+<p class="text-xs text-outline">aliou.m@group-fin.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Formation Finance Durable</td>
+<td class="px-6 py-4 font-data-value text-primary">750,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase text-outline">Virement</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#2EB873]/10 text-[#2EB873]">
+<span class="w-1.5 h-1.5 bg-[#2EB873] rounded-full mr-2"></span>Réussi
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-[#F3F4F7]/30">
+<td class="px-6 py-4 font-data-value text-primary">#TR-902184</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-container text-xs">SK</div>
+<div>
+<p class="font-bold text-on-surface">Sarah Kone</p>
+<p class="text-xs text-outline">s.kone@invest-sa.sn</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Billet Forum Emerging Markets</td>
+<td class="px-6 py-4 font-data-value text-primary">225,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase text-outline">CB</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-error">
+<span class="w-1.5 h-1.5 bg-error rounded-full mr-2"></span>Échoué
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value text-primary">#TR-902185</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed-dim flex items-center justify-center font-bold text-primary text-xs">BT</div>
+<div>
+<p class="font-bold text-on-surface">Bakary Toure</p>
+<p class="text-xs text-outline">btoure@ecobank.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Audit Corporate 2024</td>
+<td class="px-6 py-4 font-data-value text-primary">4,500,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase text-outline">Virement</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-fixed text-secondary">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full mr-2"></span>Remboursé
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-[#F3F4F7]/30">
+<td class="px-6 py-4 font-data-value text-primary">#TR-902186</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center font-bold text-on-primary text-xs">CD</div>
+<div>
+<p class="font-bold text-on-surface">Chaka Diarra</p>
+<p class="text-xs text-outline">diarra.c@gov.ml</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Masterclass Risk Management</td>
+<td class="px-6 py-4 font-data-value text-primary">1,200,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase text-outline">Wave</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#2EB873]/10 text-[#2EB873]">
+<span class="w-1.5 h-1.5 bg-[#2EB873] rounded-full mr-2"></span>Réussi
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value text-primary">#TR-902187</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-bold text-primary text-xs">ID</div>
+<div>
+<p class="font-bold text-on-surface">Ismael Diallo</p>
+<p class="text-xs text-outline">idiallo@gmail.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Webinaire Blockchain Africa</td>
+<td class="px-6 py-4 font-data-value text-primary">45,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="px-3 py-1 bg-surface-container-high rounded text-xs font-bold uppercase text-outline">Orange Money</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#2EB873]/10 text-[#2EB873]">
+<span class="w-1.5 h-1.5 bg-[#2EB873] rounded-full mr-2"></span>Réussi
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
+<span class="text-data-label text-outline">Affichage de 1-5 sur 128 transactions</span>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-bold">1</button>
+<button class="px-4 py-2 hover:bg-surface-container-high rounded-lg font-medium">2</button>
+<button class="px-4 py-2 hover:bg-surface-container-high rounded-lg font-medium">3</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="mt-section-gap flex flex-col md:flex-row justify-between items-center px-0 py-stack-md w-full border-t border-outline-variant">
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. All rights reserved.</p>
+<div class="flex gap-gutter mt-4 md:mt-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Mobile Bottom NavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant flex justify-around items-center h-16 z-50">
+<button class="flex flex-col items-center text-on-surface-variant py-2">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] uppercase font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center text-primary py-2 border-t-2 border-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-[10px] uppercase font-bold">Finances</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant py-2">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-[10px] uppercase font-bold">Learn</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant py-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] uppercase font-bold">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                console.log('Row clicked - detail view would open');
+                // Placeholder for potential modal or navigation
+            });
+        });
+
+        // Search highlight simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+
+        // Animation for export button
+        const exportBtn = document.querySelector('button:contains("Exporter")');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                exportBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Préparation...';
+                setTimeout(() => {
+                    exportBtn.innerHTML = '<span class="material-symbols-outlined" data-icon="check">check</span> Terminé';
+                    setTimeout(() => {
+                        exportBtn.innerHTML = '<span class="material-symbols-outlined" data-icon="download">download</span> Exporter CSV';
+                    }, 2000);
+                }, 1500);
+            });
+        }
+    </script>
+</body></html>

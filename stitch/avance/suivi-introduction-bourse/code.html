@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suivi IPO - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-surface": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d1daed",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#c5c5d4",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary-container": "#0a2e8c",
+                    "primary": "#001a61",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-secondary-fixed": "#261a00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-background": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#8d9ee3",
+                    "inverse-surface": "#28313f",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .count-down-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant h-20">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block border border-primary text-primary px-4 py-2 rounded-lg font-bold hover:bg-surface-container-low transition-colors">Support</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-tertiary transition-colors">Invest Now</button>
+<div class="flex items-center gap-2 ml-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors">settings</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high ml-2 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business executive in a high-end corporate office setting. The lighting is soft and natural, emphasizing a prestigious and trustworthy character. The aesthetic follows a light-mode color palette with clean, sharp focus and a minimalist background of glass and architectural lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5Nqprgzt5I3ZxufeStODwlFD43Y0Pn4K0Gz6bws6mZLxB5Zi1xGdpR1nkKt1Ix4FmnTAvtEjrzSq6VvnqWfme8cvZjY7eK539uxMOpmAWXr3Cx1-1xFYO0I7mM-YctrTpCCXa6skbogY_YvwK1WzxQzcUYW-EnbRiYpGk_Qiuxr5ObMPba4x7Vnke_sMS5uWYtvM_dVlDmdKUIB3c-RD5bvA59k77UKML8hBrw1S0ZyEKdz9NIbI_UbWqQGgr-kpdGyh2tAIkDQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Breadcrumb & Status -->
+<div class="flex items-center gap-2 text-on-surface-variant font-data-label text-data-label mb-8">
+<span>Investissements</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span>IPO Center</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">SOLAR-AFRIQUE S.A.</span>
+</div>
+<!-- Hero Section: Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Company Profile & Countdown -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<div class="glass-card rounded-xl p-stack-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 opacity-10 -mr-16 -mt-16 bg-primary-container rounded-full blur-3xl"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 rounded-lg bg-white flex items-center justify-center border border-outline-variant shadow-sm">
+<img class="w-14 h-14 object-contain" data-alt="Corporate logo of a solar energy company named Solar-Afrique. The design features a modern, minimalist sun icon combined with geometric African patterns in deep blue and gold. Professional and high-end aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc4fglQJVNuDZkVkrvLb3ta9r6OHn8SRQ6l6M3mBhEv39bxUEze9RuSx1ge7XCVo2M7nVsDSDwNY96b1tLSafLFCDcHzh3dnixNjcm_IXS9BXMyGfWE97mvyOMzsSJt8m-Te2TErul7tsJ-h23AC_hAZeLJNkyT5wmqmJiPNn8GbT-PFDOx81_pb_p4ssOAFzk7law22P5HqIUAucacBpTrmoLiUrpCCXfUPae7xrKdMg5iGOthCLpK_Whsn4s4Khs-nsmDzW7GA"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">SOLAR-AFRIQUE S.A.</h1>
+<p class="text-on-surface-variant font-body-md">Leader de l'énergie photovoltaïque en Afrique de l'Ouest</p>
+</div>
+</div>
+<div class="bg-primary/5 border border-primary/20 px-4 py-2 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary font-bold font-data-label text-data-label">SOUSCRIPTION EN COURS</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg border-t border-outline-variant pt-stack-lg">
+<div>
+<p class="text-on-surface-variant font-data-label text-data-label mb-1">PRIX DE L'OFFRE</p>
+<p class="font-display-lg text-display-lg text-primary leading-tight">12,500 <span class="text-headline-sm">FCFA</span></p>
+</div>
+<div>
+<p class="text-on-surface-variant font-data-label text-data-label mb-1">TITRES PROPOSÉS</p>
+<p class="font-headline-md text-headline-md">2,400,000</p>
+<p class="text-on-surface-variant text-sm">Actions Ordinaires</p>
+</div>
+<div>
+<p class="text-on-surface-variant font-data-label text-data-label mb-1">VALEUR TOTALE</p>
+<p class="font-headline-md text-headline-md">30,000,000,000</p>
+<p class="text-on-surface-variant text-sm">FCFA</p>
+</div>
+</div>
+</div>
+<!-- Timeline & Progress -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="glass-card rounded-xl p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                            Clôture de l'offre
+                        </h3>
+<div class="flex justify-between gap-2" id="countdown">
+<div class="count-down-item bg-surface-container-low border border-outline-variant rounded-lg p-3 flex-1">
+<span class="font-display-lg text-headline-md text-primary" id="days">04</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Jours</span>
+</div>
+<div class="count-down-item bg-surface-container-low border border-outline-variant rounded-lg p-3 flex-1">
+<span class="font-display-lg text-headline-md text-primary" id="hours">12</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Heures</span>
+</div>
+<div class="count-down-item bg-surface-container-low border border-outline-variant rounded-lg p-3 flex-1">
+<span class="font-display-lg text-headline-md text-primary" id="minutes">45</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Min</span>
+</div>
+<div class="count-down-item bg-primary text-on-primary rounded-lg p-3 flex-1">
+<span class="font-display-lg text-headline-md" id="seconds">08</span>
+<span class="text-[10px] uppercase font-bold tracking-widest opacity-80">Sec</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between text-sm">
+<span class="text-on-surface-variant italic">Date limite : 25 Octobre 2024</span>
+</div>
+</div>
+<div class="glass-card rounded-xl p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+                            État du Placement
+                        </h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-body-md font-medium text-on-surface-variant">Taux de couverture</span>
+<span class="text-primary font-bold">142%</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant">L'offre est actuellement sur-souscrite. Les allocations finales seront calculées au prorata.</p>
+</div>
+</div>
+</div>
+<!-- Market Analysis Visual -->
+<div class="glass-card rounded-xl p-stack-lg h-64 relative overflow-hidden flex items-end">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A high-tech digital financial visualization showing clean, upward-trending line graphs and data clusters representing growth in the renewable energy sector in Africa. The style is professional, featuring translucent layers, soft deep blue shadows, and a sophisticated corporate finish in a light-mode palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcWYzh62HrMDPa_2uGooDR9ssFnBFZPa6C2PcG75hDgyN5WSlsAiaUK5QqqlqavwXxFWe4rQ3_KS3TFqqA1NnI_Picr2A0RlU9C3bBbWULmhxzFcAA93hLs6KsqdqK1kHK3yukTrL_u-X--XazBGodWk5ZY5euHLMPn1ZsVTPxanEHWS1eFe-Ew_vJhzkBzmilUgM-ZgtuvhjbjdbUQDryGZvU7Qwd4TxN0-ZjpQ6wjwW9wYGKiKHf_VfIecKqNOHIjxU5sDwW8w"/>
+</div>
+<div class="relative z-10 w-full bg-white/90 backdrop-blur-md p-4 rounded-lg flex items-center justify-between border border-outline-variant">
+<div>
+<p class="font-bold text-on-surface">Indicateur de Performance Sectoriel</p>
+<p class="text-sm text-on-surface-variant">Secteur Energie : +18.4% YTD</p>
+</div>
+<button class="flex items-center gap-1 text-primary font-bold text-sm">
+                            VOIR L'ANALYSE <span class="material-symbols-outlined">trending_up</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Participation Form -->
+<div class="col-span-12 lg:col-span-4">
+<div class="glass-card rounded-xl p-stack-lg sticky top-24 shadow-xl border-primary/20">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-2">Participer à l'offre</h2>
+<p class="text-on-surface-variant text-sm mb-6">Saisissez les détails de votre intention d'investissement.</p>
+<form class="space-y-4" onsubmit="event.preventDefault(); alert('Ordre envoyé avec succès !');">
+<div>
+<label class="block text-data-label font-data-label mb-1 text-on-surface-variant">Compte Titres</label>
+<select class="w-full p-3 rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none bg-surface">
+<option>PEA - Main Account (....8291)</option>
+<option>Ordinary Trading Account (....4402)</option>
+</select>
+</div>
+<div>
+<label class="block text-data-label font-data-label mb-1 text-on-surface-variant">Quantité demandée (min. 10)</label>
+<div class="relative">
+<input class="w-full p-3 rounded border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="share_qty" min="10" step="1" type="number" value="100"/>
+<span class="absolute right-4 top-3 text-on-surface-variant text-sm">Titres</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Prix unitaire</span>
+<span class="font-data-value text-data-value">12,500 FCFA</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Frais d'opération (0.5%)</span>
+<span class="font-data-value text-data-value" id="fee_calc">6,250 FCFA</span>
+</div>
+<div class="border-t border-outline-variant pt-3 flex justify-between items-center">
+<span class="font-bold text-on-surface">TOTAL ESTIMÉ</span>
+<span class="font-display-lg text-headline-sm text-primary" id="total_calc">1,256,250 FCFA</span>
+</div>
+</div>
+<div class="flex gap-2 items-start text-xs text-on-surface-variant">
+<input class="mt-1 rounded text-primary border-outline-variant focus:ring-primary" required="" type="checkbox"/>
+<p>Je certifie avoir pris connaissance de la <a class="text-primary underline" href="#">Note d'Information</a> visée par l'AMF sous le numéro n°2024-042.</p>
+</div>
+<button class="w-full py-4 bg-secondary-container text-on-secondary-container font-extrabold rounded-lg hover:brightness-95 transition-all shadow-md active:scale-[0.98]" type="submit">
+                            CONFIRMER LA SOUSCRIPTION
+                        </button>
+<p class="text-center text-[10px] text-on-surface-variant opacity-70">
+                            Opération sécurisée par Africaine des Finances. Aucun débit immédiat.
+                        </p>
+</form>
+</div>
+</div>
+</div>
+<!-- Documentation & Information -->
+<section class="mt-section-gap grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-6 rounded-lg flex gap-4 items-start">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Note d'Information</h4>
+<p class="text-sm text-on-surface-variant mb-3">Document complet visé par le régulateur détaillant l'opération.</p>
+<a class="text-primary text-sm font-bold flex items-center gap-1" href="#">TÉLÉCHARGER PDF <span class="material-symbols-outlined text-sm">download</span></a>
+</div>
+</div>
+<div class="glass-card p-6 rounded-lg flex gap-4 items-start">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Rapport d'Analyse</h4>
+<p class="text-sm text-on-surface-variant mb-3">Étude approfondie de nos analystes sur le potentiel de Solar-Afrique.</p>
+<a class="text-primary text-sm font-bold flex items-center gap-1" href="#">LIRE LE RAPPORT <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+</div>
+</div>
+<div class="glass-card p-6 rounded-lg flex gap-4 items-start">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">help</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Webinaire Investisseurs</h4>
+<p class="text-sm text-on-surface-variant mb-3">Replay de la présentation des dirigeants du groupe.</p>
+<a class="text-primary text-sm font-bold flex items-center gap-1" href="#">VOIR LE REPLAY <span class="material-symbols-outlined text-sm">play_circle</span></a>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar (Minimal Overlay Trigger for Mobile) -->
+<div class="md:hidden fixed bottom-6 right-6 z-[60]">
+<button class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant mt-section-gap py-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-2">
+<span class="text-headline-sm font-bold text-primary mb-4 block">Africaine des Finances</span>
+<p class="text-on-surface-variant max-w-md">L'excellence financière au service du développement continental. Institution agréée par le conseil régional de l'épargne publique et des marchés financiers.</p>
+</div>
+<div>
+<h5 class="font-bold text-on-surface mb-4">Légal</h5>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Conditions Générales</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Politique de Confidentialité</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Mentions Légales</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-on-surface mb-4">Contact</h5>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> support@africaine-finances.com</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">phone</span> +225 01 02 03 04 05</li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-[12px] text-on-surface-variant/60 text-center">
+            © 2024 Africaine des Finances. Tous droits réservés.
+        </div>
+</footer>
+<script>
+        // Real-time calculation logic
+        const shareInput = document.getElementById('share_qty');
+        const feeCalc = document.getElementById('fee_calc');
+        const totalCalc = document.getElementById('total_calc');
+        const PRICE_PER_SHARE = 12500;
+        const FEE_PERCENT = 0.005;
+
+        function updateTotals() {
+            const qty = parseInt(shareInput.value) || 0;
+            const subtotal = qty * PRICE_PER_SHARE;
+            const fee = subtotal * FEE_PERCENT;
+            const total = subtotal + fee;
+
+            feeCalc.innerText = `${fee.toLocaleString()} FCFA`;
+            totalCalc.innerText = `${total.toLocaleString()} FCFA`;
+        }
+
+        shareInput.addEventListener('input', updateTotals);
+
+        // Simple Countdown Timer
+        function startCountdown() {
+            let days = 4, hours = 12, mins = 45, secs = 8;
+            
+            setInterval(() => {
+                secs--;
+                if(secs < 0) { secs = 59; mins--; }
+                if(mins < 0) { mins = 59; hours--; }
+                if(hours < 0) { hours = 23; days--; }
+                
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(mins).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(secs).padStart(2, '0');
+            }, 1000);
+        }
+        
+        startCountdown();
+    </script>
+</body></html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Résultat du Quiz - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        @keyframes subtle-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: subtle-float 6s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dfe8fc",
+                        "primary-container": "#0a2e8c",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131c2a",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dce1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-container": "#213371",
+                        "secondary": "#795900",
+                        "on-primary-container": "#839cfd",
+                        "on-background": "#131c2a",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d4",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dae3f6",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed": "#001551",
+                        "surface": "#f9f9ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "surface-dim": "#d1daed",
+                        "on-surface-variant": "#444652",
+                        "tertiary": "#051c5b",
+                        "surface-bright": "#f9f9ff",
+                        "primary": "#001a61",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "headline-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation Header -->
+<header class="bg-surface fixed top-0 w-full z-50 border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<nav class="flex gap-stack-md items-center h-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-body-md text-body-md">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-body-md text-body-md">Invest</a>
+<a class="text-primary font-bold font-body-md text-body-md">Training</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-body-md text-body-md">Analysis</a>
+</nav>
+<div class="flex items-center gap-stack-sm ml-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container rounded-full">account_balance</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container rounded-full">notifications</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-xs">JD</div>
+</div>
+</div>
+</header>
+<!-- Side Navigation (Suppressed for Result Page focus, but kept shell logic for institutional feel) -->
+<main class="flex-grow pt-24 pb-section-gap px-margin-mobile md:px-margin-desktop container-max mx-auto w-full">
+<!-- Result Content Container -->
+<div class="max-w-4xl mx-auto">
+<!-- Hero Results Section: Bento Style -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Score Card -->
+<div class="md:col-span-8 glass-card rounded-xl p-stack-lg relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-[#2EB873]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[#2EB873] font-bold font-headline-sm text-headline-sm uppercase tracking-wider">Quiz Réussi</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Analyse de Risque de Marché</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Félicitations ! Vous avez démontré une compréhension approfondie des mécanismes de volatilité et de couverture au sein de l'espace UMOA.</p>
+</div>
+<div class="mt-stack-lg flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-data-label text-data-label text-outline uppercase">Votre Score Final</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-6xl text-primary">08</span>
+<span class="font-headline-md text-headline-md text-outline">/ 10</span>
+</div>
+</div>
+<div class="h-24 w-24 relative float-animation">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="50.24" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-data-value text-data-value text-primary">80%</div>
+</div>
+</div>
+<!-- Atmospheric Background Element -->
+<div class="absolute top-[-20%] right-[-10%] w-64 h-64 bg-primary opacity-[0.03] rounded-full blur-3xl"></div>
+</div>
+<!-- Stats Side Column -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Stat 1: Time -->
+<div class="glass-card rounded-xl p-stack-md flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<div>
+<p class="font-data-label text-data-label text-outline uppercase">Temps Utilisé</p>
+<p class="font-data-value text-data-value text-on-surface">12m 45s</p>
+</div>
+</div>
+<!-- Stat 2: Attempts -->
+<div class="glass-card rounded-xl p-stack-md flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">history</span>
+</div>
+<div>
+<p class="font-data-label text-data-label text-outline uppercase">Tentatives</p>
+<p class="font-data-value text-data-value text-on-surface">01 / 03</p>
+</div>
+</div>
+<!-- Stat 3: Global Rank -->
+<div class="bg-primary-container rounded-xl p-stack-md flex items-center gap-stack-md text-white">
+<div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-fixed">workspace_premium</span>
+</div>
+<div>
+<p class="font-data-label text-data-label text-white/70 uppercase">Classement</p>
+<p class="font-data-value text-data-value">Top 15%</p>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="md:col-span-12 mt-stack-lg flex flex-col md:flex-row items-center justify-between gap-stack-md border-t border-outline-variant pt-stack-lg">
+<div class="flex gap-stack-md w-full md:w-auto">
+<button class="flex-1 md:flex-none px-stack-lg h-12 rounded-lg border border-primary text-primary font-bold hover:bg-surface-container transition-all flex items-center justify-center gap-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+                            Revoir les réponses
+                        </button>
+<button class="flex-1 md:flex-none px-stack-lg h-12 rounded-lg border border-outline text-on-surface-variant font-bold hover:bg-surface-container transition-all flex items-center justify-center gap-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]">replay</span>
+                            Refaire le quiz
+                        </button>
+</div>
+<button class="w-full md:w-auto px-stack-lg h-12 rounded-lg bg-primary text-white font-bold hover:bg-tertiary transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/10 active:scale-95 duration-200">
+                        Continuer le cours
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Recommendation Section -->
+<div class="mt-section-gap">
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-lg border-l-4 border-secondary-container pl-4">Prochaines Étapes Recommandées</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Recommended Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full overflow-hidden rounded-xl mb-stack-md relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A cinematic, high-angle shot of a modern financial trading floor in a West African capital city. The scene features glowing digital monitors displaying stock market trends and financial data in a sleek, light-mode office setting. The lighting is bright and professional with accents of deep blue and gold, reflecting a prestigious institutional atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUAU496IsuVWyBg1cG-ONYNO9YO1pmu2OccrGERt1NDdfilf6ShqJf9vvmITUEiip56aGq5wQUEOUPMNdUl4J1WvlYLZe3eTVCDrWK8Gloxg3qKweEtasakqQRAG73w9nc2tc5O-QwUDt7Yc2cTOCGwG_IrKDD_z4dXj6grX6NP45IPzcvoEhBC1k_I4RW_XQ-wGI3LIlymr9cI-QCHtPZrz_4hgqfvG3AOTg6c3bHdOmxCkjho2XUv0oWypZHbS6KcnFPXR3GOQ')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<span class="font-data-label text-data-label text-secondary uppercase">Module Avancé</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:underline">Stratégies de Hedging UMOA</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">Approfondissez vos connaissances sur les instruments dérivés adaptés au marché régional.</p>
+</div>
+<!-- Recommended Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full overflow-hidden rounded-xl mb-stack-md relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="An close-up artistic photograph of gold bars and commemorative African currency coins resting on a dark navy blue velvet surface. The lighting focuses on the metallic sheen and fine textures of the assets, conveying wealth management and institutional stability. The color palette is dominated by rich golds and deep blues under soft, dramatic lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuABQpubrz3IhUqwSb-N6KPa7WrcCtJTVFM9qFN8ftIz4T6plTcjDuK4WUFg-iXs1EUZ-kudp2OgAPG0Iawg28Crs2sAqo5j04mJWA0NPWzUXeOyBMPvNdLus8TXU0Z4wlAdz8IzyoQ2dI1lmuGCa_W_spp9ZnYxqmzhK6MyEQJJEr_w8vrSRgLoAkoJjFvE_TUO0QIsJJB0VPMTzJd6HpsJIMLuyTf_cS9e0QsAI9JiVWjsU8b73GAFzCONnMhhLe8LfHdcy0DZkA')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<span class="font-data-label text-data-label text-secondary uppercase">Webinaire</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:underline">Perspectives Économiques 2024</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">Rejoignez nos experts pour une analyse des tendances macroéconomiques actuelles.</p>
+</div>
+<!-- Recommended Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full overflow-hidden rounded-xl mb-stack-md relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A minimalist architectural photograph of a modern financial institution building with large glass facades reflecting a bright blue sky. The composition is clean and structured, emphasizing symmetry and professional authority. The aesthetic is high-key with brilliant whites and cool blue tones, suggesting a transparent and forward-thinking corporate identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCNd_xXMkMn0rqpTWWHyGpOaz8QyhZpLGHd8XLhmmg1RBBkO0wof9aS27enccaLhfoglMQ63v2LMAC-78RK5ts8QS67uX3rI8-tKK5F0rg-oTG8IPsEiTxu1aLoAGwCIp9xc6O28F1_yfaPabOSGPF492g9shPkz4_-QACi447v6E8wbfeNzpK6QrEa9tykVIrgoFnaRHBkXkLSvzIoXJmp1kfDA8e2xZYvlfeucso6TiLPuhLyDkKrlAAM72-hyeNAPSDb_29_pQ')"></div>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<span class="font-data-label text-data-label text-secondary uppercase">Ressource</span>
+<h4 class="font-headline-sm text-headline-sm text-primary group-hover:underline">Guide des Régulations AMF</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">Le document de référence complet pour la conformité financière en zone Franc.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md mt-auto">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</div>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer">Legal Notice</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer">Regulatory Disclosure</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer">Contact Support</a>
+</div>
+<p class="text-on-primary/60 font-body-md text-body-md text-center max-w-2xl mt-4">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved. 
+            Autorité des Marchés Financiers de l'Union Monétaire Ouest Africaine.
+        </p>
+</footer>
+<script>
+        // Micro-interactions for button activity and navigation
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', (e) => {
+                // Mock interaction feedback
+                console.log('Action performed:', el.innerText || 'Icon click');
+            });
+        });
+
+        // Theme toggle (for demonstration of the system's flexibility)
+        const toggleTheme = () => {
+            document.documentElement.classList.toggle('dark');
+        };
+    </script>
+</body></html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Notes — Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-tab-indicator {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom scrollbar for institutional feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c5c5d4; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #757683; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f9f9ff",
+                      "on-surface": "#131c2a",
+                      "on-surface-variant": "#444652",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "inverse-on-surface": "#ebf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#fbbc00",
+                      "secondary-fixed": "#ffdfa0",
+                      "on-secondary-fixed": "#261a00",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#b7c4ff",
+                      "on-primary-fixed": "#001551",
+                      "surface": "#f9f9ff",
+                      "on-secondary-container": "#6d5000",
+                      "on-tertiary-fixed-variant": "#314381",
+                      "secondary-container": "#ffbf00",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#b7c4ff",
+                      "outline-variant": "#c5c5d4",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#223f9b",
+                      "surface-container": "#e7eeff",
+                      "surface-variant": "#dae3f6",
+                      "surface-container-highest": "#dae3f6",
+                      "outline": "#757683",
+                      "on-primary": "#ffffff",
+                      "primary": "#001a61",
+                      "surface-tint": "#3d58b5",
+                      "on-tertiary-fixed": "#001551",
+                      "on-tertiary-container": "#8d9ee3",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#dce1ff",
+                      "surface-container-low": "#f0f3ff",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed": "#dce1ff",
+                      "tertiary-container": "#213371",
+                      "surface-dim": "#d1daed",
+                      "on-error": "#ffffff",
+                      "primary-container": "#0a2e8c",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#051c5b",
+                      "inverse-surface": "#28313f",
+                      "on-primary-container": "#839cfd",
+                      "on-background": "#131c2a",
+                      "surface-container-high": "#dfe8fc",
+                      "secondary": "#795900"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-mobile": "20px",
+                      "section-gap": "80px",
+                      "margin-desktop": "64px",
+                      "stack-lg": "32px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Figtree"],
+                      "body-lg": ["Figtree"],
+                      "headline-sm": ["Figtree"],
+                      "display-lg-mobile": ["Figtree"],
+                      "body-md": ["Figtree"],
+                      "display-lg": ["Figtree"],
+                      "data-value": ["IBM Plex Mono"],
+                      "data-label": ["IBM Plex Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop h-20 bg-surface border-b border-outline-variant max-w-container-max mx-auto">
+<div class="flex items-center gap-gutter">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</h1>
+<nav class="hidden md:flex gap-8 items-center h-full pt-1">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior African financial executive in a crisp navy blue suit, set against a blurred high-end corporate office background. The lighting is soft and natural, emphasizing competence and trust. The overall aesthetic is clean, minimalist, and authoritative, matching the corporate modern brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_td7t6MKz7xF8p3dIkKAbxniBL8OCLpIMcBv_3bb6tN_8I-gKXFtpfODaehtoP8WhiMp__2Ovpf6NKYBiS6KHrxVI0l1jnU6sD5NW9vq1jp1onpHtcnvTPja0vwerbJPkz-Wm7j4nGgsfVwZLtzPINt132jD96YCJXDx7bPNeii_g1Ls36k85fDlqD11ZTdoEmBtxxUUCF8rwFCeeeNgJa1p6StIOPoRo7WdeQcdcNYIaXl7BdDwekoG385q-KFEciXORVOILPQ"/>
+</div>
+<div class="hidden sm:block">
+<p class="font-bold text-primary text-sm leading-none">M. Kouamé</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">Premium Member</p>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-80px)] overflow-hidden">
+<!-- Side Navigation Bar (Sidebar gauche) -->
+<aside class="w-72 bg-surface-container border-r border-outline-variant flex flex-col h-full shrink-0">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="school">school</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary leading-tight">Academy</h2>
+<p class="text-xs text-outline font-data-label">Centre de Formation</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest px-4 mb-2">Navigation</p>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="analytics">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-body-md text-body-md">Mes Notes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Portfolio</span>
+</a>
+</div>
+<div class="mt-10">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest px-4 mb-4">Formations Actives</p>
+<div class="flex flex-col gap-3">
+<button class="text-left px-4 py-3 border border-outline-variant bg-white/50 rounded-lg hover:border-primary transition-colors group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<p class="text-xs text-outline font-data-label mb-1">MFA-01</p>
+<p class="font-bold text-primary text-sm line-clamp-1">Marchés Financiers Africains</p>
+</button>
+<button class="text-left px-4 py-3 border border-transparent hover:border-outline-variant rounded-lg transition-colors group">
+<p class="text-xs text-outline font-data-label mb-1">WMA-24</p>
+<p class="font-medium text-on-surface-variant text-sm line-clamp-1">Gestion de Patrimoine</p>
+</button>
+<button class="text-left px-4 py-3 border border-transparent hover:border-outline-variant rounded-lg transition-colors group">
+<p class="text-xs text-outline font-data-label mb-1">CFI-03</p>
+<p class="font-medium text-on-surface-variant text-sm line-clamp-1">Corporate Finance Pro</p>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error/5 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Déconnexion</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background p-stack-lg lg:p-12">
+<div class="max-w-5xl mx-auto">
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<nav class="flex items-center gap-2 text-xs text-outline mb-3 font-data-label">
+<a class="hover:text-primary" href="#">Academy</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary" href="#">MFA-01</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">Mes Notes</span>
+</nav>
+<h2 class="font-display-lg text-display-lg text-primary tracking-tight">Archives Personnelles</h2>
+<p class="text-on-surface-variant mt-2 max-w-2xl font-body-lg">Retrouvez l'intégralité de vos annotations synchronisées avec le curriculum "Marchés Financiers Africains".</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-tertiary transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="export_notes">export_notes</span>
+                            Exporter en PDF
+                        </button>
+</div>
+</header>
+<!-- Filter / Search Row -->
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border border-outline-variant rounded-xl focus:border-primary focus:ring-0 transition-all placeholder:text-outline/60" placeholder="Rechercher dans mes notes..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-5 py-3 border border-outline-variant rounded-xl bg-white text-on-surface-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                            Trier par date
+                        </button>
+</div>
+</div>
+<!-- Notes Timeline Grid -->
+<div class="space-y-gutter">
+<!-- Day Group -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+<span class="text-data-label font-data-label text-outline bg-surface px-4 py-1 border border-outline-variant rounded-full">Aujourd'hui, 24 Octobre 2023</span>
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-1 gap-gutter">
+<!-- Note Card 1 -->
+<article class="glass-card p-stack-lg rounded-xl flex flex-col md:flex-row gap-gutter group hover:shadow-lg transition-all duration-300">
+<div class="w-full md:w-56 shrink-0">
+<div class="aspect-video rounded-lg overflow-hidden bg-surface-dim relative mb-3">
+<img class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all" data-alt="A professional high-definition screen capture of a financial trading interface showing stock market trends for African tech companies. The UI is sleek with deep blue and gold accents, consistent with the institutional brand. Soft cinematic lighting hits the frame, conveying a premium educational experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcheA3VdzmwFvn_Pwdg2-Pne1uX38G4b_tAsV0cFZd9WL5O6PoNDJDsPlLDOyvKExs_Ee1EHd0dEZdKihehqxvVrTU_HcNl8D0B09C2jt7EWhc6mNKokBKKmw4jfEogcZ2z4pS13sFbD98AvTDvQhCb-JC3T9TSjqmpbT89QW7O-F1304TmCozG5du15ezuffCyiaLAAsUDQLWTFHMOgVlK45MkU2BZflj5W0X4AN65Yl1TLSgnrxBojhoSuIFM25KF0zRl5OZow"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5 bg-secondary-container/20 text-secondary font-data-label text-data-label px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-bold">18:42</span>
+</div>
+<button class="text-primary hover:underline text-xs font-bold flex items-center gap-1">
+                                            Voir le cours
+                                            <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Analyse de la BRVM (Bourse Régionale)</h3>
+<p class="text-sm text-outline font-data-label">Module 3: Structures de marché — Leçon 4</p>
+</div>
+<div class="flex gap-1">
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-outline-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-secondary border-y border-r border-outline-variant/30">
+<p class="text-on-surface-variant leading-relaxed">
+                                            Point crucial sur l'interconnectivité des bourses en zone UEMOA. L'expert souligne que la liquidité de la BRVM est influencée par les réformes de 2021. 
+                                            <span class="font-bold text-primary italic">Note : Comparer avec la bourse de Lagos pour le prochain rapport trimestriel.</span>
+</p>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-outline uppercase tracking-tight">Analyse</span>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-outline uppercase tracking-tight">Stratégie</span>
+</div>
+</div>
+</article>
+<!-- Note Card 2 -->
+<article class="glass-card p-stack-lg rounded-xl flex flex-col md:flex-row gap-gutter group hover:shadow-lg transition-all duration-300">
+<div class="w-full md:w-56 shrink-0">
+<div class="aspect-video rounded-lg overflow-hidden bg-surface-dim relative mb-3">
+<img class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all" data-alt="A clean, minimalist 3D rendering of a financial bar chart illustrating growth, using the corporate primary blue and secondary gold palette. The background is a soft light gray with subtle reflections, suggesting a high-end financial dashboard. The style is institutional, precise, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3smFgBmfoKKtu6cPt-p28hlIHosGp51O4B5LpL7AILyuJK6iRodSbXrF5HORTQse5ZP6YJQnT2Ssn4g_rrl7wXQCS3Mk1LVbT6QdvEo8nUK36UcOy9Kon4LX6nicxKReJJM_66hcBTvvvE7j4TvLvXgo787TlzIDmKJv-W1_zUC4hYmp28qYz5ktA0OwxuUQ58oz4UqK5l6M9RrLzN87xDBaVF3zhnezbhGd1azLSD1G0CS10kpTuErDPnswW3iS6CLdcJZ3wRw"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5 bg-secondary-container/20 text-secondary font-data-label text-data-label px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-bold">04:15</span>
+</div>
+<button class="text-primary hover:underline text-xs font-bold flex items-center gap-1">
+                                            Voir le cours
+                                            <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Indicateurs de volatilité émergents</h3>
+<p class="text-sm text-outline font-data-label">Module 4: Gestion des risques — Leçon 1</p>
+</div>
+<div class="flex gap-1">
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 text-outline-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-primary border-y border-r border-outline-variant/30">
+<p class="text-on-surface-variant leading-relaxed">
+                                            La volatilité sur le marché obligataire est moindre que sur les actions en période de crise inflationniste. Utiliser l'indicateur RSI spécifique aux marchés à faible volume. Attention à l'asymétrie d'information.
+                                        </p>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-outline uppercase tracking-tight">Risque</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Previous Day -->
+<section class="mt-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-4 mb-6">
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+<span class="text-data-label font-data-label text-outline bg-surface px-4 py-1 border border-outline-variant rounded-full">Hier, 23 Octobre 2023</span>
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+</div>
+<!-- Simple row layout for older notes -->
+<div class="space-y-4">
+<article class="bg-white p-6 border border-outline-variant rounded-xl flex items-center justify-between hover:border-primary transition-all group">
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-center justify-center w-16 h-16 bg-surface-container rounded-lg">
+<span class="text-data-label font-bold text-primary">12:30</span>
+<span class="text-[10px] text-outline font-data-label">MIN</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface group-hover:text-primary transition-colors">Introduction aux produits dérivés</h3>
+<p class="text-xs text-outline font-data-label italic">"Comprendre l'effet de levier sur les contrats à terme..."</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-outline uppercase">Dérivés</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="keyboard_arrow_right">keyboard_arrow_right</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+</div>
+<!-- Pagination/Load more -->
+<div class="flex justify-center mt-stack-lg">
+<button class="px-8 py-3 border border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all">
+                        Charger plus d'archives
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button - Only for Desktop Quick Actions -->
+<button class="fixed bottom-10 right-10 w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform z-50 group">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+<span class="absolute right-16 bg-on-surface text-white px-3 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Nouvelle note libre</span>
+</button>
+<script>
+        // Micro-interactions for hovering and active states
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple mock for direct links to timestamp
+        document.querySelectorAll('[data-icon="play_circle"]').forEach(btn => {
+            btn.parentElement.addEventListener('click', (e) => {
+                const timestamp = e.currentTarget.parentElement.querySelector('.font-bold').innerText;
+                console.log(`Navigating to lesson at timestamp: ${timestamp}`);
+                // Implementation would go here
+            });
+        });
+    </script>
+</body></html>

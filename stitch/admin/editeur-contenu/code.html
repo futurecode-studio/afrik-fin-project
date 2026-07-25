@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances - Éditeur de Contenu CMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dae3f6",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "surface-container": "#e7eeff",
+                    "tertiary-container": "#213371",
+                    "primary-container": "#0a2e8c",
+                    "inverse-primary": "#b7c4ff",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary": "#001a61",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "on-surface-variant": "#444652",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-dim": "#d1daed",
+                    "on-surface": "#131c2a",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#3d58b5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-container": "#6d5000",
+                    "inverse-surface": "#28313f",
+                    "on-background": "#131c2a",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "background": "#f9f9ff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#dae3f6",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551",
+                    "outline-variant": "#c5c5d4",
+                    "primary-fixed": "#dce1ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#795900",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "margin-desktop": "64px",
+                    "stack-sm": "8px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "20px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .editor-container .ql-editor {
+            min-height: 400px;
+        }
+        body {
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-surface docked full-width top-0 border-b border-outline-variant flex justify-between items-center px-margin-desktop w-full h-16 z-50 sticky">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Marchés</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Éditeur CMS</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">account_balance_wallet</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional financial editor in a modern office, wearing business attire, high-key lighting, corporate atmosphere, minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5mkqV9-DpRcBeQz85fhMYZg14ZvxV9_WX4IKDy-BmTpd-jm0Aag14iGHe4pfzpS8XIcpzJ0wHMiYgE71CKlolagIVyeIrgBe310zpuNY5gC4luwlmIHeiwmJa8VrqK6ha33L3C2cFeFuCaEtgEQ175mwLzUwo7cCS0uWjxg_L-IsXFciFb4kbYbE003qCmNFArn51zdZ-_DHVtoCfUCg8Ic7ybGh_jwoB7qMkk9ElD8YUhVV6MpqHM06WGT2aDfspCbvcKKezFA"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col py-stack-lg px-4 space-y-2 bg-surface-container-low border-r border-outline-variant fixed left-0 top-16 h-[calc(100vh-64px)] w-64">
+<div class="mb-stack-lg px-4">
+<p class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</p>
+<p class="font-data-label text-data-label text-outline uppercase">Premium Wealth Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md">My Trainings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-body-md">Content Editor</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-md">My Watchlist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<button class="w-full bg-secondary-container text-on-secondary-container font-bold py-3 rounded-lg hover:opacity-90 transition-all">
+                Invest Now
+            </button>
+</aside>
+<!-- Main Content (Canvas) -->
+<main class="flex-1 lg:ml-64 pt-6 pb-20 px-4 md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Editor Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg">
+<div>
+<nav class="flex items-center gap-2 text-outline mb-2">
+<span class="font-data-label">CMS</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-data-label">Nouvel Article</span>
+</nav>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary">Création de Contenu</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-2 border border-primary text-primary font-bold rounded hover:bg-surface-container-low transition-colors">
+                        Brouillon
+                    </button>
+<button class="px-8 py-2 bg-primary text-white font-bold rounded hover:bg-tertiary transition-colors shadow-sm">
+                        Publier
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Primary Editor Fields -->
+<div class="xl:col-span-8 space-y-stack-lg">
+<!-- Title & Summary Card -->
+<section class="bg-white border border-outline-variant p-stack-lg rounded shadow-sm">
+<div class="space-y-stack-md">
+<div>
+<label class="block font-data-label text-outline mb-2 uppercase">Titre de l'Analyse</label>
+<input class="w-full h-12 px-4 border border-outline-variant rounded focus:ring-2 focus:ring-primary focus:border-primary font-headline-sm outline-none transition-all" placeholder="Ex: Perspectives du marché boursier en Afrique de l'Ouest 2024" type="text"/>
+</div>
+<div>
+<label class="block font-data-label text-outline mb-2 uppercase">Résumé (Chapeau)</label>
+<textarea class="w-full px-4 py-3 border border-outline-variant rounded focus:ring-2 focus:ring-primary focus:border-primary font-body-md outline-none transition-all resize-none" placeholder="Un court paragraphe pour introduire le sujet et capter l'attention des investisseurs..." rows="3"></textarea>
+</div>
+</div>
+</section>
+<!-- Rich Text Editor Placeholder -->
+<section class="bg-white border border-outline-variant rounded shadow-sm overflow-hidden">
+<div class="bg-surface-container-low border-b border-outline-variant p-3 flex flex-wrap gap-4 items-center">
+<div class="flex items-center border-r border-outline-variant pr-4 gap-2">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_bold</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_italic</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_underlined</span>
+</div>
+<div class="flex items-center border-r border-outline-variant pr-4 gap-2">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_list_bulleted</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_list_numbered</span>
+</div>
+<div class="flex items-center border-r border-outline-variant pr-4 gap-2">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">format_quote</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">link</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">image</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">table_chart</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-white p-1 rounded">query_stats</span>
+</div>
+<div class="ml-auto">
+<span class="font-data-label text-outline">0 mots</span>
+</div>
+</div>
+<div class="min-h-[500px] p-stack-lg focus:outline-none" contenteditable="true">
+<p class="text-on-surface-variant italic">Commencez à rédiger votre analyse ici...</p>
+</div>
+</section>
+<!-- Sources Section -->
+<section class="bg-white border border-outline-variant p-stack-lg rounded shadow-sm">
+<h3 class="font-headline-sm text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">source</span> Sources et Références
+                        </h3>
+<div class="space-y-3 mb-4" id="sources-list">
+<div class="flex gap-3">
+<input class="flex-1 px-4 py-2 border border-outline-variant rounded outline-none focus:border-primary" placeholder="Nom de la source" type="text"/>
+<input class="flex-1 px-4 py-2 border border-outline-variant rounded outline-none focus:border-primary" placeholder="Lien URL" type="url"/>
+<button class="p-2 text-error hover:bg-error-container rounded transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold hover:underline transition-all">
+<span class="material-symbols-outlined">add_circle</span> Ajouter une source
+                        </button>
+</section>
+</div>
+<!-- Right Column: Sidebar Settings -->
+<div class="xl:col-span-4 space-y-stack-lg">
+<!-- Cover Image Card -->
+<section class="bg-white border border-outline-variant rounded shadow-sm overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-data-label text-primary uppercase">Image de Couverture</h3>
+</div>
+<div class="p-stack-lg">
+<div class="relative group aspect-video bg-surface-container rounded-lg border-2 border-dashed border-outline-variant flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-4xl text-outline mb-2">add_a_photo</span>
+<span class="font-data-label text-outline">Glissez ou cliquez pour télécharger</span>
+<!-- Hidden Img for data-alt logic -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-10 transition-opacity rounded-lg" data-alt="High-resolution financial chart on a digital screen, selective focus, bokeh office lights in the background, professional navy and gold color palette, sophisticated financial mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvgi5r3CxpPtaus84WmCl2daxmp4IYPshw25p2h9Hs5NwlfulD61J6fC-1DRqoGtexXFVff42RKIW4AFgWVd4gJHZWIJ-TEtp7h-pAROmhKgGoXE_DYjrsb9XdTabX20dW17_MfLP6-NhcvKMaEoQepZwC3JG2ujmSk5EQgD8JqQoduptSKCYq4euX9tryDdVkZXUqJ_3QoBCNsESbeRe4uvEv6lI8oT2Mdf5mllaQDzTvU15ZBe50hdEbX1X5TZJ_K64EBR1agg"/>
+</div>
+<p class="mt-2 text-[12px] text-outline text-center">Format recommandé : 1200x630px (PNG ou JPG)</p>
+</div>
+</section>
+<!-- SEO Parameters -->
+<section class="bg-white border border-outline-variant rounded shadow-sm overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-data-label text-primary uppercase">Paramètres SEO</h3>
+</div>
+<div class="p-stack-lg space-y-4">
+<div>
+<label class="block font-data-label text-outline mb-1 uppercase">Slug URL</label>
+<div class="flex items-center border border-outline-variant rounded bg-surface-container-low px-2 h-10">
+<span class="text-outline text-sm pr-2 border-r border-outline-variant">/anal/</span>
+<input class="bg-transparent border-none outline-none flex-1 px-2 text-sm" type="text" value="perspectives-marche-2024"/>
+</div>
+</div>
+<div>
+<label class="block font-data-label text-outline mb-1 uppercase">Mots-clés</label>
+<div class="flex flex-wrap gap-2 p-2 border border-outline-variant rounded min-h-[80px]">
+<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-sm text-xs font-bold flex items-center gap-1">
+                                        Finances <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</span>
+<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-sm text-xs font-bold flex items-center gap-1">
+                                        Afrique <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</span>
+<input class="border-none outline-none text-sm w-20 bg-transparent" placeholder="Ajouter..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Publishing Status & Meta -->
+<section class="bg-white border border-outline-variant rounded shadow-sm overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-data-label text-primary uppercase">Statut & Publication</h3>
+</div>
+<div class="p-stack-lg space-y-stack-md">
+<div class="flex items-center justify-between">
+<span class="font-body-md">État actuel :</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span> Brouillon
+                                </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md">Visibilité :</span>
+<select class="bg-transparent border-none font-bold text-primary outline-none cursor-pointer">
+<option>Publique</option>
+<option>Privée</option>
+<option>Premium</option>
+</select>
+</div>
+<div class="pt-4 border-t border-outline-variant">
+<button class="w-full text-left flex items-center justify-between group">
+<span class="font-body-md">Soumettre pour revue</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">send</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest full-width border-t border-outline-variant mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-8 mb-4 md:mb-0">
+<span class="font-headline-sm text-headline-sm text-primary">Africaine des Finances</span>
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for the CMS Editor
+        document.addEventListener('DOMContentLoaded', () => {
+            // Placeholder for "Add Source" logic
+            const addSourceBtn = document.querySelector('button:has(.material-symbols-outlined:contains("add_circle"))');
+            if(addSourceBtn) {
+                addSourceBtn.addEventListener('click', () => {
+                    const list = document.getElementById('sources-list');
+                    const newItem = document.createElement('div');
+                    newItem.className = "flex gap-3 animate-in fade-in slide-in-from-top-2 duration-300";
+                    newItem.innerHTML = `
+                        <input type="text" placeholder="Nom de la source" class="flex-1 px-4 py-2 border border-outline-variant rounded outline-none focus:border-primary">
+                        <input type="url" placeholder="Lien URL" class="flex-1 px-4 py-2 border border-outline-variant rounded outline-none focus:border-primary">
+                        <button class="p-2 text-error hover:bg-error-container rounded transition-colors" onclick="this.parentElement.remove()">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    `;
+                    list.appendChild(newItem);
+                });
+            }
+
+            // Word counter simulation
+            const editor = document.querySelector('[contenteditable="true"]');
+            const counter = document.querySelector('.ml-auto .font-data-label');
+            if(editor && counter) {
+                editor.addEventListener('input', () => {
+                    const text = editor.innerText.trim();
+                    const words = text ? text.split(/\s+/).length : 0;
+                    counter.innerText = `${words} mot${words > 1 ? 's' : ''}`;
+                    if(words > 0) editor.classList.remove('italic', 'text-on-surface-variant');
+                });
+                
+                // Clear placeholder text on focus
+                editor.addEventListener('focus', () => {
+                    if(editor.innerText.trim() === 'Commencez à rédiger votre analyse ici...') {
+                        editor.innerText = '';
+                        editor.classList.remove('italic', 'text-on-surface-variant');
+                    }
+                });
+            }
+        });
+
+        // Helper to find symbols since JSDOM might not support certain CSS selectors well
+        function findBySymbol(text) {
+            return Array.from(document.querySelectorAll('.material-symbols-outlined')).find(el => el.textContent === text);
+        }
+    </script>
+</body></html>

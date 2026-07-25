@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Portail Institutionnel Corporate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-surface": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d1daed",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#c5c5d4",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary-container": "#0a2e8c",
+                    "primary": "#001a61",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-secondary-fixed": "#261a00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-background": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#8d9ee3",
+                    "inverse-surface": "#28313f",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .premium-border {
+            border-left: 4px solid #ffbf00;
+        }
+        .stat-card:hover {
+            box-shadow: 0 20px 40px -20px rgba(6, 29, 92, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar Implementation -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant h-20">
+<div class="flex items-center gap-8">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 border border-primary text-primary font-bold rounded hover:bg-surface-container-low transition-colors">Support</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-bold rounded hover:bg-tertiary transition-colors">Invest Now</button>
+<div class="flex items-center gap-3 ml-4 border-l border-outline-variant pl-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-2 rounded-full">settings</span>
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="Corporate professional headshot of a business executive in a dark navy suit, high-key studio lighting with a clean white background. Minimalist and formal aesthetic for an institutional financial portal user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADDgr8bN6uNZ5DR31WMFwosjhUxYsOG49C7eUAiKlgcZeX5zO7zR9c9ym7NA_mOxG1sf4CCaL32ETYrmIQu4IhlJszl-e4h2gG-C7gzDIkP9QJMZ3_p2NfV6eCoyBMjZ_ZRD0WcILA_axNo87i2bQPu8xoZZPvDnIZlZwqzMHHdzPKj5a8xiYgtQ94huplvvS8GchGLdL1VDSCV_lAp8DzGKasXQBuBwG3sI5LOf-TczmrsJWHK9nb-Jl2JAn6yrOVF7GkTd2_ww"/>
+</div>
+</div>
+</header>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center overflow-hidden bg-primary text-on-primary">
+
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="space-y-stack-lg">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-secondary-container text-secondary-container">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-data-label text-[12px] uppercase tracking-widest">Partenaire Institutionnel de Confiance</span>
+</div>
+<h2 class="font-display-lg text-display-lg">Catalyseur de la Souveraineté Financière Corporate.</h2>
+<p class="font-body-lg text-body-lg opacity-80 max-w-xl">
+                        Nous accompagnons les fleurons de l'économie africaine dans leurs opérations stratégiques : levées de fonds paneuropéennes, introductions en bourse et optimisation de trésorerie institutionnelle.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-secondary-container text-on-secondary-container font-bold text-lg rounded shadow-lg hover:scale-105 transition-transform">Accéder au Terminal</button>
+<button class="px-8 py-4 border border-on-primary text-on-primary font-bold text-lg rounded hover:bg-white/10 transition-colors">Découvrir nos Solutions</button>
+</div>
+</div>
+<div class="hidden md:grid grid-cols-2 gap-4">
+<div class="space-y-4 pt-12">
+<div class="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg">
+<span class="block text-secondary-container font-data-value text-3xl mb-1">4.2B €</span>
+<span class="text-white/60 text-data-label uppercase">Actifs sous gestion</span>
+</div>
+<div class="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg">
+<span class="block text-secondary-container font-data-value text-3xl mb-1">12</span>
+<span class="text-white/60 text-data-label uppercase">IPOs Réussies en 2023</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg">
+<span class="block text-secondary-container font-data-value text-3xl mb-1">180+</span>
+<span class="text-white/60 text-data-label uppercase">Grands Comptes</span>
+</div>
+<div class="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg">
+<span class="block text-secondary-container font-data-value text-3xl mb-1">AA+</span>
+<span class="text-white/60 text-data-label uppercase">Notation de Solidité</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section (Bento Style) -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-desktop">
+<div class="mb-stack-lg flex justify-between items-end">
+<div class="max-w-2xl">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Expertise Sectorielle &amp; Solutions Sur Mesure</h3>
+<p class="text-on-surface-variant font-body-md">Une ingénierie financière de pointe pour répondre aux exigences complexes des entreprises institutionnelles.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 group">
+                    Voir tous les services <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Service 1 -->
+<div class="md:col-span-8 group relative overflow-hidden bg-white border border-outline-variant p-10 rounded-lg stat-card transition-all flex flex-col justify-between min-h-[400px]">
+<div class="relative z-10">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded mb-6 text-primary">
+<span class="material-symbols-outlined text-3xl">account_balance</span>
+</div>
+<h4 class="text-2xl font-bold text-primary mb-4">Levée de Fonds &amp; Marchés de Capitaux</h4>
+<p class="text-on-surface-variant max-w-md mb-8">Accès privilégié aux investisseurs institutionnels mondiaux. Structuration de dettes souveraines, obligations privées et placements privés.</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-on-surface font-medium">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Structuration de Roadshows
+                            </li>
+<li class="flex items-center gap-3 text-on-surface font-medium">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Moody's / S&amp;P Advisory
+                            </li>
+</ul>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="Dramatic architectural view of a modern financial district with glass skyscrapers reflecting a golden sunset. High-contrast lighting, prestigious corporate aesthetic, deep blues and golden ambers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBvCOHvukmlaGZzMN8kc0aMtxvdgmUOqUrAX5xojDf2PJYaeTXWujBHwPhVLY8q3_ZIb0zBXVuo6daLCjR8wrvyGf-IEk1WvQ_qhepgGabIjXIpqO7kTEa77dFXTG-ldmrhVD3Gq32sjfxJmcQYacODaDWV2HEjUEUWmI46-Pzu07f3xPvkWed8kwps1WPtBTxoSqkd-xUp7JB7h2hTf9kG8VcV58YGxFogj26-TeirjavFxq1-XBrZp6WXrS14dWJgbb2fNh8uA"/>
+</div>
+</div>
+<!-- Main Service 2 -->
+<div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant p-8 rounded-lg flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-3xl text-primary mb-6">query_stats</span>
+<h4 class="text-xl font-bold text-primary mb-3">Introductions en Bourse (IPO)</h4>
+<p class="text-sm text-on-surface-variant">Direction complète du processus de cotation, du due diligence à la première cloche.</p>
+</div>
+<a class="mt-8 text-primary font-bold flex items-center gap-2" href="#">Protocoles IPO <span class="material-symbols-outlined">chevron_right</span></a>
+</div>
+<!-- Main Service 3 -->
+<div class="md:col-span-4 bg-primary text-on-primary p-8 rounded-lg premium-border shadow-md">
+<span class="material-symbols-outlined text-3xl text-secondary-container mb-6">payments</span>
+<h4 class="text-xl font-bold mb-3">Gestion de Trésorerie Corporate</h4>
+<p class="text-sm opacity-80">Optimisation des liquidités et couverture des risques de change pour les multinationales opérant en Afrique.</p>
+<button class="mt-8 px-4 py-2 bg-secondary-container text-on-secondary-container text-sm font-bold rounded">Simulateur Yield</button>
+</div>
+<!-- Main Service 4 -->
+<div class="md:col-span-8 bg-white border border-outline-variant p-10 rounded-lg flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h4 class="text-xl font-bold text-primary mb-4">Conseil en Fusion-Acquisition (M&amp;A)</h4>
+<p class="text-on-surface-variant mb-6">Expertise stratégique pour vos opérations de croissance externe et de désinvestissement sur le continent.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded border border-outline-variant/30">
+<span class="block font-bold text-primary">Cross-border</span>
+<span class="text-xs text-on-surface-variant">Expertise 15 pays</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded border border-outline-variant/30">
+<span class="block font-bold text-primary">Valuation</span>
+<span class="text-xs text-on-surface-variant">Modélisation DCF</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-64 h-48 bg-surface-container rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close-up of two business professionals shaking hands in a high-end corporate boardroom. Soft natural light, luxury office environment with mahogany wood and leather textures. Highly formal and trustworthy mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuOV-GZCogIcSYyDYSrWHV1_oh6eeyf0Qo__PU1xCLyTBnfuSOMnUlsBlzMQF9HHVSdoOHcXe8pUPqGb6LLZYZJ3XjuZ6Rlk40G43Tj7kSC1D7ZzsBGUNS7QYYglq6FaS7b2Vz4EAUuqpntdTdoAMqVZYuJW2hVs_GYbJT7TfmdTAEwu2sLcQoL3dESJtp6O9lp9Y_VJOTV-WGPs35AliCfA_qRfDky5bM3Szq0F1k9gzs8_hBh8bSMbNUJgTSCciYp01FlGCmdA"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Dedicated Advisor Section -->
+<section class="bg-surface-container py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="aspect-square rounded-2xl overflow-hidden border-8 border-white shadow-xl relative z-10">
+<img class="w-full h-full object-cover" data-alt="Portrait of a sophisticated senior financial advisor in a charcoal grey tailored suit, standing in a brightly lit glass atrium of a modern corporate bank building. The background is softly blurred. Lighting is professional and warm, conveying authority and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVoE0QanU634miQ_JvqIVmqvdX4tcwOBKAFYt7wJh-wkb3ZBNYBNbP-kV1LOu8jfyYKM96Ay4t_3x_FHqymzwxm-1b-bRAZXqAk1YcJySwd7gcUXZ6-lDQs_6HaCrumlkSd14HGjsx7IKRkuvpJKbLF6lFNAsEmrEYZ5aG528c3G8cXfkVS4KisToHDLt2vKcgX-HRzjCLkMc3_LKw6dOxqS9EORAlbk4P_1IH7WvKqcPznHBpZVUrU1gihYk8AsItozO-9Rynvg"/>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-6 -right-6 w-48 h-48 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute top-8 left-8 bg-white p-4 shadow-lg rounded flex items-center gap-3 z-20">
+<div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+<span class="font-data-label text-xs uppercase text-primary">Conseiller en Ligne</span>
+</div>
+</div>
+<div>
+<h3 class="font-display-lg text-[40px] leading-tight text-primary mb-6">Votre Partenaire Privilégié au Quotidien.</h3>
+<p class="text-body-lg text-on-surface-variant mb-8">
+                        Chaque client institutionnel bénéficie d'un interlocuteur unique, expert des marchés financiers africains, pour une réactivité optimale et une confidentialité absolue.
+                    </p>
+<div class="space-y-6">
+<div class="flex gap-4 p-4 bg-white rounded border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-3xl">support_agent</span>
+<div>
+<h5 class="font-bold text-primary">Jean-Marc T.</h5>
+<p class="text-sm text-on-surface-variant italic">Directeur des Relations Institutionnelles</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 px-6 py-4 bg-primary text-on-primary font-bold rounded flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">calendar_today</span> Réserver un créneau
+                            </button>
+<button class="flex-1 px-6 py-4 border border-primary text-primary font-bold rounded flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">chat</span> Lancer le Chat sécurisé
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-desktop">
+<h3 class="text-center font-headline-md text-headline-md text-primary mb-stack-lg">Ils nous font confiance</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-8 bg-white border border-outline-variant rounded relative">
+<span class="material-symbols-outlined text-4xl text-surface-container-high absolute top-4 right-4 opacity-50">format_quote</span>
+<p class="italic text-on-surface-variant mb-6">"Le professionnalisme et la profondeur d'analyse de l'Africaine des Finances ont été déterminants pour le succès de notre levée de fonds obligataire."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-full flex items-center justify-center text-primary font-bold">SA</div>
+<div>
+<span class="block font-bold text-sm">CFO, Groupe Agro-Industriel</span>
+<span class="text-xs text-outline uppercase tracking-wider">Cameroun</span>
+</div>
+</div>
+</div>
+<div class="p-8 bg-white border border-outline-variant rounded relative">
+<span class="material-symbols-outlined text-4xl text-surface-container-high absolute top-4 right-4 opacity-50">format_quote</span>
+<p class="italic text-on-surface-variant mb-6">"Une réactivité rare pour un partenaire institutionnel de cette envergure. Leur plateforme digitale facilite grandement notre gestion quotidienne."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-full flex items-center justify-center text-primary font-bold">BK</div>
+<div>
+<span class="block font-bold text-sm">Trésorier, Bank of Lagos</span>
+<span class="text-xs text-outline uppercase tracking-wider">Nigeria</span>
+</div>
+</div>
+</div>
+<div class="p-8 bg-white border border-outline-variant rounded relative">
+<span class="material-symbols-outlined text-4xl text-surface-container-high absolute top-4 right-4 opacity-50">format_quote</span>
+<p class="italic text-on-surface-variant mb-6">"L'expertise sur les introductions en bourse est sans égal. Un accompagnement de bout en bout qui a rassuré nos nouveaux actionnaires."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container rounded-full flex items-center justify-center text-primary font-bold">MC</div>
+<div>
+<span class="block font-bold text-sm">CEO, Mining Corp SA</span>
+<span class="text-xs text-outline uppercase tracking-wider">Côte d'Ivoire</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- SideNavBar (Mobile Trigger/Portal Access) -->
+<aside class="hidden fixed left-0 top-0 h-screen w-64 bg-surface-container border-r border-outline-variant z-40 transform -translate-x-full transition-transform duration-300 md:translate-x-0 md:static md:hidden lg:flex flex-col py-stack-lg px-4 gap-stack-md" id="side-nav">
+<div class="mb-8 px-4">
+<h1 class="font-headline-sm text-headline-sm text-primary">Client Portal</h1>
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-widest">Institutional Excellence</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-body-md text-body-md">Administration</span>
+</a>
+</div>
+<button class="mx-4 my-6 bg-primary text-on-primary py-3 rounded font-bold shadow-md hover:opacity-90 transition-opacity">Open New Account</button>
+<div class="border-t border-outline-variant pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2 text-error hover:bg-error-container/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<footer class="bg-primary-container text-on-primary-container py-stack-lg mt-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid md:grid-cols-4 gap-12 border-b border-outline/30 pb-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<h2 class="text-headline-md font-bold mb-6 text-white">Africaine des Finances</h2>
+<p class="max-w-md text-on-primary-container opacity-70">
+                        Membre agréé de la Bourse Régionale des Valeurs Mobilières. Siège social : Plateau, Abidjan, Côte d'Ivoire. Présence dans 12 pays de la zone UEMOA et CEMAC.
+                    </p>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Institution</h4>
+<ul class="space-y-4 opacity-70">
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Gouvernance</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Rapports Annuels</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Responsabilité Sociétale</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Presse &amp; Médias</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6">Légal</h4>
+<ul class="space-y-4 opacity-70">
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Protection des Données</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Mentions Légales</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Conformité AML/KYC</a></li>
+<li><a class="hover:text-secondary-fixed-dim transition-colors" href="#">Régulations</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-50">
+<p>© 2024 Africaine des Finances. Tous droits réservés.</p>
+<div class="flex gap-6">
+<a href="#">LinkedIn</a>
+<a href="#">Bloomberg</a>
+<a href="#">Reuters Terminal</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for hover states and sticky nav shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Initialize any tooltips or interactive maps if needed
+        console.log("Portal Initialized: Statutary & Formal Mode Active");
+    </script>
+</body></html>

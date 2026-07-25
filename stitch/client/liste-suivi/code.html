@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ma Liste de Suivi - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for institutional feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #001a61;
+            border-radius: 10px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+    </style>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#795900",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface": "#131c2a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-container": "#ffbf00",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "primary": "#001a61",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-primary": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-variant": "#dae3f6",
+                    "outline": "#757683",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#051c5b",
+                    "surface-container-highest": "#dae3f6",
+                    "outline-variant": "#c5c5d4",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "on-tertiary-fixed": "#001551",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-background": "#131c2a",
+                    "on-primary-fixed": "#001551",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#28313f",
+                    "inverse-on-surface": "#ebf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-md": "16px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline docked full-width top-0 z-50">
+<div class="flex justify-between items-center px-margin-desktop w-full h-16">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Africaine des Finances</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Marchés</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Portefeuille</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Ma Liste de Suivi</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Analyses</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border-outline-variant rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none w-64" placeholder="Rechercher une valeur..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg">search</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a sharp navy blue suit, set against a blurred modern office background with soft lighting. The image conveys authority and expertise in financial management, with a high-key, clean aesthetic matching a prestigious African banking brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL3ISqhn4dknhzlZxlncdep1ks9PNbo019jz3hQHsEgHhkbaqLh0DGSfvXJGLq5HYTCnKdYEEpoB6q1aqVIfMeEk0Cu7SStsLKj0MDCYwTjqh97yaengzQmECd7w3kyWJVzt8z7I-6kgwWXyfciUVFilNDP5VOzAAdBVoKVhnLAiX9G04_XW6QyGg07eOqCkgJupgVXIdxaQ087hEESQfdQfft8P6D_jIietRVAd8yiDS5Xtnjd6cQikn2fF0ZDsi7ka8JxJi20w"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-stack-lg px-4 space-y-2 bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-bold text-primary leading-tight">Client Portal</p>
+<p class="text-[10px] uppercase tracking-widest text-outline">Premium Wealth</p>
+</div>
+</div>
+</div>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Mes Formations</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">event</span>
+<span>Événements</span>
+</a>
+<a class="flex items-center gap-3 p-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98] transition-transform font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined fill-icon">visibility</span>
+<span>Ma Liste de Suivi</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Paramètres</span>
+</a>
+<div class="pt-10 mt-auto px-2">
+<button class="w-full bg-secondary-container text-on-secondary-container font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">trending_up</span>
+<span>Investir Maintenant</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-desktop bg-background">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-stack-lg gap-4">
+<div>
+<nav class="flex items-center gap-2 text-outline text-data-label font-data-label mb-2">
+<span>Portail</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Ma Liste de Suivi</span>
+</nav>
+<h1 class="font-headline-md text-display-lg leading-tight text-primary">Ma Liste de Suivi</h1>
+<p class="text-on-surface-variant mt-2 max-w-2xl">Supervisez vos actifs stratégiques en temps réel. Configurez des alertes intelligentes pour ne manquer aucune opportunité de marché sur la BRVM et les places internationales.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 px-6 py-3 border border-primary text-primary font-bold rounded hover:bg-primary-container/10 transition-all">
+<span class="material-symbols-outlined">notifications_active</span>
+<span>Configurer Alertes</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded shadow-md hover:bg-tertiary transition-all">
+<span class="material-symbols-outlined">add</span>
+<span>Ajouter une Valeur</span>
+</button>
+</div>
+</div>
+<!-- Bento Stats (Quick Overview) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-xl">
+<p class="text-data-label font-data-label text-outline mb-1 uppercase tracking-wider">Actifs Suivis</p>
+<p class="text-headline-md font-bold text-primary">14 <span class="text-body-md font-normal text-outline">Valeurs</span></p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-xl">
+<p class="text-data-label font-data-label text-outline mb-1 uppercase tracking-wider">Top Hausse (24h)</p>
+<p class="text-headline-md font-bold text-[#2EB873]">+4.82%</p>
+<p class="text-xs text-on-surface-variant mt-1">SONATEL (SNTS)</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-xl">
+<p class="text-data-label font-data-label text-outline mb-1 uppercase tracking-wider">Volume Total Suivi</p>
+<p class="text-headline-md font-bold text-primary">842.5M <span class="text-body-md font-normal text-outline">XOF</span></p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-xl">
+<p class="text-data-label font-data-label text-outline mb-1 uppercase tracking-wider">Alertes Actives</p>
+<p class="text-headline-md font-bold text-secondary">06 <span class="text-body-md font-normal text-outline">Déclenchables</span></p>
+</div>
+</div>
+<!-- Watchlist Table -->
+<div class="bg-white border border-outline-variant rounded-lg overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#EEF3FF] border-b border-outline-variant">
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest">Symbole</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest">Nom de la Valeur</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest text-right">Cours Actuel</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest text-right">Variation (%)</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest text-right">Volume (24h)</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest text-center">Alertes</th>
+<th class="px-6 py-4 font-bold text-primary uppercase text-[12px] tracking-widest text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<span class="font-data-value text-data-value bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded">SNTS</span>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="font-bold text-on-surface">Sonatel Sénégal</p>
+<p class="text-xs text-outline">Actions • BRVM</p>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<p class="font-data-value text-data-value">17 400</p>
+<p class="text-[10px] text-outline">XOF</p>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center text-[#2EB873] font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                                            +2.35%
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface-variant font-data-label">
+                                        125.4K
+                                    </td>
+<td class="px-6 py-4 text-center">
+<div class="flex justify-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#2EB873]" title="Alerte Prix Hausse Active"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<span class="font-data-value text-data-value bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded">ONTB</span>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="font-bold text-on-surface">Onatel Burkina</p>
+<p class="text-xs text-outline">Actions • BRVM</p>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<p class="font-data-value text-data-value">2 250</p>
+<p class="text-[10px] text-outline">XOF</p>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center text-error font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_down</span>
+                                            -0.85%
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface-variant font-data-label">
+                                        45.2K
+                                    </td>
+<td class="px-6 py-4 text-center">
+<div class="flex justify-center gap-1">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<span class="font-data-value text-data-value bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded">EIB6.5</span>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="font-bold text-on-surface">EIB 6.50% 2024-2031</p>
+<p class="text-xs text-outline">Obligation • International</p>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<p class="font-data-value text-data-value">98.42</p>
+<p class="text-[10px] text-outline">EUR</p>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center text-outline font-bold">
+<span class="material-symbols-outlined text-sm mr-1">drag_handle</span>
+                                            0.00%
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface-variant font-data-label">
+                                        8.2M
+                                    </td>
+<td class="px-6 py-4 text-center">
+<div class="flex justify-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary" title="Alerte Rendement Active"></span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<span class="font-data-value text-data-value bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded">BOAB</span>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="font-bold text-on-surface">BOA Bénin</p>
+<p class="text-xs text-outline">Actions • BRVM</p>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<p class="font-data-value text-data-value">6 150</p>
+<p class="text-[10px] text-outline">XOF</p>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center text-[#2EB873] font-bold">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                                            +1.20%
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface-variant font-data-label">
+                                        18.9K
+                                    </td>
+<td class="px-6 py-4 text-center">
+<div class="flex justify-center gap-1">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<span class="font-data-value text-data-value bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded">TPCI.O7</span>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="font-bold text-on-surface">TPCI 5.90% 2023-2030</p>
+<p class="text-xs text-outline">Obligation • Côte d'Ivoire</p>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<p class="font-data-value text-data-value">10 000</p>
+<p class="text-[10px] text-outline">XOF</p>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center text-outline font-bold">
+<span class="material-symbols-outlined text-sm mr-1">drag_handle</span>
+                                            0.00%
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface-variant font-data-label">
+                                        1.5M
+                                    </td>
+<td class="px-6 py-4 text-center">
+<div class="flex justify-center gap-1">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Analysis Sidebar / Bottom section -->
+<div class="mt-section-gap grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-sm text-headline-sm text-primary">Tendance du Marché</h3>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                                Voir graphiques avancés <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="h-64 bg-surface-container border border-outline-variant rounded-xl flex items-center justify-center relative overflow-hidden">
+<!-- Technical Chart Mockup -->
+<div class="absolute inset-0 p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[10px] font-bold text-primary">1D</span>
+<span class="px-2 py-1 bg-primary text-white rounded text-[10px] font-bold">1W</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[10px] font-bold text-primary">1M</span>
+</div>
+<div class="text-right">
+<p class="text-xs text-outline">BRVM Composite</p>
+<p class="font-bold text-primary">212.45 <span class="text-[#2EB873] text-[10px]">+0.15%</span></p>
+</div>
+</div>
+<div class="w-full h-32 flex items-end gap-1 px-4">
+<div class="flex-1 bg-primary/20 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[65%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[85%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-primary/50 rounded-t h-[90%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-primary/70 rounded-t h-[95%]"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[88%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-gutter">
+<div class="bg-primary text-white p-stack-lg rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-bold mb-2">Conseil d'Expert</h4>
+<p class="text-sm opacity-90 leading-relaxed mb-4">Le secteur bancaire affiche une résilience notable ce trimestre. Envisagez de renforcer vos positions sur BOA Bénin avant le détachement du coupon.</p>
+<button class="bg-secondary-container text-on-secondary-container font-bold px-4 py-2 rounded text-xs">Lire l'analyse complète</button>
+</div>
+<!-- Atmospheric abstract texture -->
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="border border-outline-variant p-stack-lg rounded-xl">
+<h4 class="font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">verified</span>
+                                Alertes Récentes
+                            </h4>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+</div>
+<div class="text-sm">
+<p class="font-bold">ONATEL sous 2 300 XOF</p>
+<p class="text-outline text-xs">Il y a 2 heures</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm">info</span>
+</div>
+<div class="text-sm">
+<p class="font-bold">Volume exceptionnel : SONATEL</p>
+<p class="text-outline text-xs">Aujourd'hui, 09:15</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant full-width mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full">
+<div class="flex flex-col md:flex-row items-center gap-stack-md">
+<span class="font-headline-sm text-headline-sm text-primary">Africaine des Finances</span>
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. All rights reserved.</p>
+</div>
+<div class="flex gap-stack-lg mt-4 md:mt-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+<!-- Notification Micro-interaction script -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', function() {
+                // Mimic interactive selection
+                console.log('Selected value detail requested');
+            });
+        });
+        
+        // Simple scale effect on CTA buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-[0.98]'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-[0.98]'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-[0.98]'));
+        });
+    </script>
+</body></html>

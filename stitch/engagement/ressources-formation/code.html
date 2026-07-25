@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances - Ressources de Formation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed": "#001551",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#6d5000",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "secondary-container": "#ffbf00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container": "#e7eeff",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "outline": "#757683",
+                    "on-primary": "#ffffff",
+                    "primary": "#001a61",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-container": "#213371",
+                    "surface-dim": "#d1daed",
+                    "on-error": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#051c5b",
+                    "inverse-surface": "#28313f",
+                    "on-primary-container": "#839cfd",
+                    "on-background": "#131c2a",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary": "#795900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .file-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(6, 29, 92, 0.04);
+        }
+        /* Custom scrollbar for institutional feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #DADFE7; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0A2E8C; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 bg-surface border-b border-outline-variant">
+<div class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</div>
+<nav class="hidden md:flex gap-gutter items-center h-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional corporate portrait of a financial executive in a high-end office environment. The subject is wearing a tailored blue suit against a blurred background of a modern glass skyscraper. The lighting is soft and professional, emphasizing a prestigious and authoritative atmosphere characteristic of an elite African financial institution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNj3XEfam9F3nWGIGPYQ8GTQE-of49nw93m854GUeCmTt9XEWTLeKGrxPOkdq2IIhDqffe15jD719HvWcNb5Ff50UdglKIpUMqWfq8stapHNM99c7b7TixJCh8FhwchEyr80OdPDqfGuGbrmkDgp17E3phvbnPpaWRB9UGonAYVafKncZCloApV3DGeQrtrWXGmnH_ZUchKPGe24A7Jp2aRTGMJoA7JRBGEofGt504cgHVzqpdP_rPg2HhkUHQs9fhOod2qHqyaA"/>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen">
+<!-- Side Navigation Bar -->
+<aside class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-20 py-stack-lg px-4 gap-stack-md bg-surface-container border-r border-outline-variant">
+<div class="mb-stack-lg px-2">
+<div class="font-headline-sm text-headline-sm text-primary">Client Portal</div>
+<div class="text-xs text-outline uppercase tracking-wider font-semibold">Institutional Excellence</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">analytics</span> Market Analysis
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Investment Portfolio
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">school</span> Academy Courses
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">description</span> Financial Reports
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span> Administration
+                </a>
+</nav>
+<div class="mt-auto pt-stack-lg border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-margin-desktop bg-background">
+<!-- Breadcrumbs & Header -->
+<div class="mb-stack-lg">
+<div class="flex items-center gap-2 text-outline font-data-label text-data-label mb-2">
+<a class="hover:text-primary" href="#">Academy</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Masterclass Finance</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-on-surface font-semibold">Ressources</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Bibliothèque de Ressources</h1>
+<p class="text-on-surface-variant max-w-2xl font-body-lg text-body-lg">
+                            Accédez à l'ensemble des supports pédagogiques, modèles financiers et guides techniques nécessaires à votre parcours de formation.
+                        </p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:brightness-95 transition-all shadow-sm">
+<span class="material-symbols-outlined">download_for_offline</span> Tout télécharger (.zip)
+                    </button>
+</div>
+</div>
+<!-- Filters & Search Bar -->
+<section class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant mb-stack-lg shadow-sm">
+<div class="flex flex-wrap items-center gap-gutter">
+<!-- Search -->
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-background" placeholder="Rechercher une ressource..." type="text"/>
+</div>
+<!-- Type Filter -->
+<div class="flex items-center gap-2">
+<span class="text-data-label font-data-label text-outline uppercase tracking-wider">Type:</span>
+<div class="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant">
+<button class="px-4 py-1.5 rounded-md bg-primary text-white text-sm font-bold shadow-sm">Tous</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:bg-surface-container-high text-sm font-medium transition-colors">PDF</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:bg-surface-container-high text-sm font-medium transition-colors">Excel</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:bg-surface-container-high text-sm font-medium transition-colors">Templates</button>
+</div>
+</div>
+<!-- Module Filter -->
+<div class="flex items-center gap-2">
+<span class="text-data-label font-data-label text-outline uppercase tracking-wider">Module:</span>
+<select class="bg-background border border-outline-variant rounded-lg px-4 py-2 text-sm font-medium focus:ring-primary min-w-[200px]">
+<option>Tous les modules</option>
+<option>Module 1: Fondamentaux</option>
+<option>Module 2: Analyse de Risque</option>
+<option>Module 3: Gestion de Portefeuille</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Resources List (Institutional Table Style) -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-bold text-primary font-data-label text-data-label uppercase tracking-widest w-1/2">Nom de la Ressource</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label text-data-label uppercase tracking-widest">Catégorie</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label text-data-label uppercase tracking-widest">Taille</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label text-data-label uppercase tracking-widest">Dernière Mise à jour</th>
+<th class="px-6 py-4 font-bold text-primary font-data-label text-data-label uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Resource 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined text-2xl">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Guide de l'Investisseur Institutionnel 2024</div>
+<div class="text-sm text-outline">Module 1 • Support de cours principal</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Documentation</span>
+</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">4.2 MB</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">12 Mars 2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Resource 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Modèle d'Analyse de Cash-Flow Dynamique</div>
+<div class="text-sm text-outline">Module 2 • Outil pratique Excel</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Template</span>
+</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">856 KB</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">05 Fév 2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Resource 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-2xl">view_in_ar_new</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Synthèse des Marchés Emergents Afrique de l'Ouest</div>
+<div class="text-sm text-outline">Module 3 • Slides de présentation</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Cours</span>
+</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">12.8 MB</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">28 Jan 2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Resource 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Checklist de Conformité Réglementaire</div>
+<div class="text-sm text-outline">Transversal • Aide-mémoire</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Outil</span>
+</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">142 KB</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">15 Jan 2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Resource 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined text-2xl">archive</span>
+</div>
+<div>
+<div class="font-bold text-on-surface">Archive des Études de Cas - Cohorte 2023</div>
+<div class="text-sm text-outline">Historique • Dossier compressé</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Archive</span>
+</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">45.0 MB</td>
+<td class="px-6 py-5 font-data-value text-data-value text-on-surface-variant">20 Déc 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 text-primary hover:bg-primary hover:text-white rounded-lg transition-all border border-primary/20">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- Bottom Pagination & Info -->
+<div class="mt-stack-md flex justify-between items-center text-on-surface-variant">
+<div class="font-data-label text-data-label">Affichage de 5 sur 24 ressources</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-low disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-1">
+<button class="w-10 h-10 rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant hover:bg-surface-container-low font-medium">2</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant hover:bg-surface-container-low font-medium">3</button>
+<span class="px-2 self-center">...</span>
+<button class="w-10 h-10 rounded-lg border border-outline-variant hover:bg-surface-container-low font-medium">5</button>
+</div>
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Featured Resources Bento Grid (Promoted Content) -->
+<section class="mt-section-gap">
+<div class="flex items-center justify-between mb-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-primary">Ressources Premium Recommandées</h2>
+<a class="text-primary font-bold hover:underline flex items-center gap-1" href="#">
+                        Tout voir <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Bento Item 1: Large -->
+<div class="md:col-span-2 relative h-[300px] rounded-2xl overflow-hidden group cursor-pointer border border-outline-variant">
+<div class="absolute inset-0 z-0 scale-105 group-hover:scale-100 transition-transform duration-700" data-alt="A sophisticated digital visualization of global financial markets featuring glowing interconnected nodes and data streams across an abstract world map. The aesthetic is clean and futuristic, using a professional color palette of deep navy blues, gold accents, and bright white light. Soft focus and high-end digital rendering create a sense of premium quality and authoritative insight." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsvCESIoy0KvtqiRigtp5hA7Z4jcuROtOz2jHGSPvFOD_1mUu-Y3yolAH4knVPSfKfhL4pQu9fFhGe8uRow1eAwPmqcJhxQyVfI_U6peD78eSXw92tJhRSmAPN_HfJcgp_-aSD3DWQt7j1cibszpTGND5sH_618D02-CYd-DVNAp-O7c3nOTv-vwUO9yJ7ekMiimc1N2KGOGPGx0RW-sZcIVVHMy9VqFmR5OxUY-cDfoO9fv4Ud8LJTJhScdoatOhmbOwlJn4QJQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent z-10"></div>
+<div class="absolute bottom-0 left-0 p-stack-lg z-20 text-white">
+<span class="bg-secondary text-on-secondary px-3 py-1 rounded-full text-xs font-bold uppercase mb-stack-sm inline-block">Mise à jour majeure</span>
+<h3 class="font-headline-md text-headline-md mb-2">Rapport Trimestriel des Marchés 2024</h3>
+<p class="text-white/80 max-w-lg mb-4">Analyse complète des tendances macro-économiques et opportunités d'investissement en zone CFA pour le Q2.</p>
+<button class="flex items-center gap-2 font-bold hover:gap-3 transition-all">
+                                Consulter le dossier <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+</div>
+<!-- Bento Item 2: Vertical Small -->
+<div class="bg-primary text-white p-stack-lg rounded-2xl flex flex-col justify-between border border-primary-container shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">verified</span>
+</div>
+<div class="z-10">
+<div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary-container">workspace_premium</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Certification Expert</h3>
+<p class="text-white/70 text-sm">Le guide officiel pour la préparation aux examens de certification de l'Africaine des Finances.</p>
+</div>
+<button class="mt-stack-lg w-full bg-white text-primary py-3 rounded-xl font-bold hover:bg-secondary-container hover:text-on-secondary-container transition-colors z-10">
+                            Télécharger le Pack
+                        </button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant z-50 px-4 py-2 flex justify-between items-center shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center p-2 text-outline" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Accueil</span>
+</a>
+<a class="flex flex-col items-center p-2 text-outline" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Marchés</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="text-[10px] font-bold">Academy</span>
+</a>
+<a class="flex flex-col items-center p-2 text-outline" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-[10px] font-bold">Portfolio</span>
+</a>
+<a class="flex flex-col items-center p-2 text-outline" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profil</span>
+</a>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (!e.target.closest('button')) {
+                    const downloadBtn = row.querySelector('button');
+                    if (downloadBtn) {
+                        downloadBtn.classList.add('scale-90');
+                        setTimeout(() => downloadBtn.classList.remove('scale-90'), 150);
+                        console.log('Initiating download for:', row.querySelector('.font-bold').innerText);
+                    }
+                }
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

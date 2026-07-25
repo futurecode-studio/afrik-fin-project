@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Heritage Academy - Leçon Audio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "primary": "#001a61",
+                    "on-surface-variant": "#444652",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-surface": "#28313f",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-container": "#213371",
+                    "tertiary": "#051c5b",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#839cfd",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "on-secondary-container": "#6d5000",
+                    "surface-tint": "#3d58b5",
+                    "outline": "#757683",
+                    "on-background": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "outline-variant": "#c5c5d4",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-fixed": "#001551",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-container": "#0a2e8c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #dae3f6;
+        border-radius: 10px;
+      }
+      .active-transcript-segment {
+        color: #001a61;
+        font-weight: 600;
+        border-left: 3px solid #001a61;
+        padding-left: 12px;
+      }
+      .progress-range {
+        -webkit-appearance: none;
+        height: 4px;
+        background: #dae3f6;
+        border-radius: 2px;
+        outline: none;
+      }
+      .progress-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        background: #001a61;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .progress-range::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest h-16 border-b border-outline-variant">
+<div class="flex items-center gap-gutter">
+<h1 class="font-display-lg text-headline-sm text-primary">Heritage Academy</h1>
+<nav class="hidden md:flex gap-stack-lg ml-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="#">My Courses</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">settings</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden ml-2 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a high-net-worth individual, a woman in a tailored navy blue blazer looking confidently at the camera. The background is a soft-focus corporate office environment with warm, elegant lighting. The overall aesthetic is one of success, stability, and premium professionalism, consistent with a high-end financial institution brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdZHWQ9sZRJVxnJMmOIRBvqzhi-o3aN7FhFK4v8SKclndGc6GZUPh5B4rCHpbqZxu1VIeGVRE_F3a1geVvsg15gG4fy5YFotuAGDTAwNm0PJp3Cndi5EBO0JrAR8KySGYMdQjdeRSeiFMr6d4Xc8cguvK9F9nbSMUOrqUzDUhCzQXCx17a7j4YindTjDNeL41hcELow4QwO5JCq5-BcM97wgBMgCSt0LTRrvWtygMeG1ntEdqT_5JMokEs-7SmjJJEnA7EB_0_Dg"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Course Context) -->
+<aside class="hidden md:flex flex-col w-80 bg-surface-container-low border-r border-outline-variant h-full">
+<div class="p-6 border-b border-outline-variant">
+<div class="flex items-center gap-stack-md mb-4">
+<img class="w-12 h-12 rounded-lg object-cover" data-alt="A macro close-up of a premium fountain pen resting on a stack of high-quality financial reports. The lighting is dramatic, highlighting the texture of the paper and the polished metal of the pen. The scene conveys a sense of intellectual depth, heritage, and meticulous attention to detail within the financial education sector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSGnfvJrgAxKH_jybkLQ6VzcoLTwXgDrN8uuyJpxfwKyiZB0Cqe_evyCqKMNEV5LxWLWLHqlBXr5EQEQP-vp2gRH5fuCHfSm18ziQ90KfK9S56xTT4hlnONPp4d44C93HdvvkrNY4cptiNceTaH-0SYhmRbEp4P19S-SfkiaaphYYGw0u9hCSTP0JQXYViSij-fiGZggny-DOxVB5tB8IVZ1nOMcmpaIpiU8N45IDopojBbsvCiIMzZ2v2_KGwPc51n1IFtGmMOA"/>
+<div>
+<h2 class="font-headline-sm text-primary text-[16px] leading-tight">Wealth Management 101</h2>
+<p class="text-on-surface-variant text-[12px]">65% Complete</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[65%]"></div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar py-4">
+<div class="px-2 space-y-1">
+<button class="w-full group flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-r-full transition-all text-left">
+<span class="material-symbols-outlined mr-3">play_circle</span>
+<span class="font-body-md">Introduction</span>
+</button>
+<button class="w-full group flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-r-full transition-all text-left">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-body-md">Market Fundamentals</span>
+</button>
+<button class="w-full group flex items-center p-3 bg-primary-container text-on-primary-container rounded-r-full font-bold transition-all text-left">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md">Risk Assessment</span>
+</button>
+<button class="w-full group flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-r-full transition-all text-left">
+<span class="material-symbols-outlined mr-3">verified_user</span>
+<span class="font-body-md">Financial Ethics</span>
+</button>
+<button class="w-full group flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-r-full transition-all text-left">
+<span class="material-symbols-outlined mr-3">workspace_premium</span>
+<span class="font-body-md">Final Certification</span>
+</button>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant bg-surface-container-low">
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold hover:bg-primary/90 transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">cloud_download</span>
+<span>Télécharger l'audio</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area: Audio Player -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden bg-surface">
+<!-- Player Section -->
+<div class="flex-1 flex flex-col items-center justify-center p-8 md:p-12 border-r border-outline-variant relative">
+<div class="absolute top-8 left-8">
+<button class="flex items-center gap-2 text-primary hover:underline font-medium transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Retour au cours
+                    </button>
+</div>
+<!-- Album Art & Info -->
+<div class="max-w-md w-full text-center space-y-8">
+<div class="relative group mx-auto">
+<div class="absolute inset-0 bg-primary/5 rounded-2xl blur-3xl group-hover:bg-primary/10 transition-all"></div>
+<div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-2xl shadow-xl overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A premium album art cover for a financial course titled 'Advanced Risk Management'. The design features abstract blue and gold geometric patterns suggesting growth and stability. A focused portrait of a senior financial advisor in a professional setting is subtly integrated into the background. The typography is elegant, using a bold serif font that conveys authority and heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVyvHmGLmsfWZ-phvUqniHAI4p72vUD5CSsdjZErma5GBzz9BWhqv6nwp16469Vo3aSNQzl-fr5Z30zs1LfYLCq4Nwr8HC1zec8s51NVMEQCjdjVMZQLn3H7UYR73DWl82f_NGB7ep9uj3fJ-dyOcH87SKJ-uPwfqn7X9thRgzOsZUWvj2AdZOlir_mX3ApulcKygPkDG6exR2ViO4DcdTJCnqznMHagjIxHJ1_zmKUfGhFZhMNnkMRRQBdqgFGJLp1z7nyOMyPA"/>
+</div>
+</div>
+<div class="space-y-2">
+<h3 class="font-display-lg text-headline-md text-primary">Module 3 : Stratégies de couverture</h3>
+<p class="text-on-surface-variant font-body-lg">Formateur : Dr. Marcus Sterling, CFA</p>
+</div>
+<!-- Player Controls -->
+<div class="w-full space-y-6 pt-4">
+<!-- Timeline -->
+<div class="space-y-1">
+<input class="w-full progress-range" max="100" min="0" type="range" value="45"/>
+<div class="flex justify-between text-data-label font-data-label text-outline">
+<span>12:45</span>
+<span>28:10</span>
+</div>
+</div>
+<!-- Buttons Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[28px]">replay_10</span>
+</button>
+<div class="flex items-center justify-center w-16 h-16 bg-primary text-on-primary rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+</div>
+<button class="flex items-center justify-center w-10 h-10 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[28px]">forward_10</span>
+</button>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">volume_up</span>
+<input class="w-20 h-1 bg-outline-variant rounded-full appearance-none accent-primary" type="range"/>
+</div>
+<button class="text-data-label font-data-label text-primary border border-primary px-2 py-1 rounded hover:bg-primary/5 transition-all">1.25x</button>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<button class="w-full max-w-xs py-4 bg-secondary text-on-secondary rounded-lg font-bold text-headline-sm text-[18px] hover:bg-on-secondary-container transition-all shadow-md">
+                            Marquer comme terminé
+                        </button>
+</div>
+</div>
+</div>
+<!-- Transcript Section -->
+<div class="w-full md:w-96 flex flex-col bg-surface-container-lowest">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<h4 class="font-headline-sm text-[16px] text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">notes</span>
+                        Transcription
+                    </h4>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">search</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6">
+<div class="space-y-1">
+<span class="text-data-label font-data-label text-outline">00:00</span>
+<p class="text-on-surface-variant leading-relaxed">Bienvenue dans ce troisième module dédié aux stratégies de couverture de risque. Aujourd'hui, nous allons explorer comment les institutions financières protègent leurs actifs.</p>
+</div>
+<div class="space-y-1 active-transcript-segment">
+<span class="text-data-label font-data-label text-primary">12:45</span>
+<p class="text-on-surface leading-relaxed">Il est crucial de comprendre que la couverture n'est pas une forme de pari, mais une assurance contre la volatilité. Prenons l'exemple des contrats à terme sur indices...</p>
+</div>
+<div class="space-y-1 opacity-50">
+<span class="text-data-label font-data-label text-outline">13:20</span>
+<p class="text-on-surface-variant leading-relaxed">Les dérivés permettent de figer un prix futur, créant ainsi une certitude dans un environnement de marché par définition incertain. Cela demande une rigueur mathématique.</p>
+</div>
+<div class="space-y-1 opacity-50">
+<span class="text-data-label font-data-label text-outline">15:10</span>
+<p class="text-on-surface-variant leading-relaxed">Nous verrons ensuite comment ces instruments s'intègrent dans un portefeuille de gestion de fortune global, en minimisant la corrélation entre les différentes classes d'actifs.</p>
+</div>
+<div class="space-y-1 opacity-50">
+<span class="text-data-label font-data-label text-outline">18:45</span>
+<p class="text-on-surface-variant leading-relaxed">La prochaine étape consiste à analyser les coûts de transaction associés à ces couvertures, car une protection trop coûteuse peut éroder les rendements nets à long terme.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-outline-variant">
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-secondary">info</span>
+<p class="text-[12px] text-on-surface-variant italic leading-tight">La transcription est générée automatiquement et synchronisée avec le temps de lecture.</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-stack-md px-margin-desktop bg-surface-container-highest border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 z-50">
+<div class="flex flex-col md:flex-row items-center gap-gutter">
+<span class="font-headline-sm text-[16px] text-primary">Heritage Financial</span>
+<p class="font-data-label text-data-label text-on-surface-variant text-[12px]">© 2024 Heritage Financial Institution. All rights reserved. Professional Excellence in Education.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="text-on-surface-variant font-data-label text-[12px] hover:text-primary hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-data-label text-[12px] hover:text-primary hover:underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-data-label text-[12px] hover:text-primary hover:underline transition-all" href="#">Security Disclosure</a>
+<a class="text-on-surface-variant font-data-label text-[12px] hover:text-primary hover:underline transition-all" href="#">Contact Support</a>
+</div>
+</footer>
+<script>
+        // Simple Micro-interactions
+        const playBtn = document.querySelector('.bg-primary.text-on-primary');
+        let isPlaying = true;
+        
+        playBtn?.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            const icon = playBtn.querySelector('.material-symbols-outlined');
+            icon.innerText = isPlaying ? 'pause' : 'play_arrow';
+            playBtn.classList.toggle('scale-105', isPlaying);
+        });
+
+        // Simulating transcript scrolling awareness
+        const transcriptContainer = document.querySelector('.custom-scrollbar');
+        if (transcriptContainer) {
+            // Placeholder for real sync logic
+            console.log('Transcript synced with playback');
+        }
+    </script>
+</body></html>

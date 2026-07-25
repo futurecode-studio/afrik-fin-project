@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Détail du Billet - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#795900",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface": "#131c2a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-container": "#ffbf00",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "primary": "#001a61",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-primary": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-variant": "#dae3f6",
+                    "outline": "#757683",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#051c5b",
+                    "surface-container-highest": "#dae3f6",
+                    "outline-variant": "#c5c5d4",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "on-tertiary-fixed": "#001551",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-background": "#131c2a",
+                    "on-primary-fixed": "#001551",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#28313f",
+                    "inverse-on-surface": "#ebf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-md": "16px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .ticket-cut {
+            position: relative;
+        }
+        .ticket-cut::before, .ticket-cut::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #f9f9ff;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .ticket-cut::before { left: -12px; }
+        .ticket-cut::after { right: -12px; }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(218, 223, 231, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop w-full h-16 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Tableau de bord</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Mes Événements</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Portefeuille</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Paramètres</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:text-primary-container transition-colors">notifications</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a premium banking client, a middle-aged African man in a tailored dark blue suit, looking confident and smiling slightly. The background is a blurred corporate office with warm lighting and a clean, high-end financial atmosphere, consistent with the Africaine des Finances brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAndDtLGlzYxtXvnsIYfI9xYdkWluLqPZ3PLpMTbPQoYhgUbUL_uORxc6hQ3qimdZfPztXE9SxVLEJ9xw3VxFRbDd0pRUwD1G1u8EX7EZ8-TRvw5TDKFSP9MY53g4KtSrxHYoHT-x3Z9WdjWE_0u_h5F7Wa5cx_eBrhuIXQBSzghiSW5fRtGdkcwxCUOU2_mGxs_tc2eq3rOSlfWY3auAIH0QVoGuLi_Y77vPTfHCo_1cisaNnVtvAM67FA0kLsGsFEud0r6CQgxg"/>
+</div>
+</div>
+</header>
+<main class="flex-grow py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Breadcrumb & Back Action -->
+<div class="mb-stack-lg flex items-center gap-2">
+<button class="flex items-center gap-2 text-primary font-medium hover:underline" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_back</span>
+                Retour à mes événements
+            </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Ticket Detail -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<!-- Ticket Header -->
+<div class="bg-primary p-stack-lg text-on-primary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-data-label font-data-label">CONFÉRENCE PRESTIGE</span>
+<h1 class="font-headline-md text-headline-md mt-2">Sommet Africain de la Finance Durable 2024</h1>
+</div>
+<div class="text-right">
+<p class="font-data-label text-data-label opacity-80">Réf. Billet</p>
+<p class="font-data-value text-data-value">AF-9844-2024</p>
+</div>
+</div>
+</div>
+<!-- Main Ticket Content -->
+<div class="p-stack-lg grid grid-cols-1 md:grid-cols-2 gap-stack-lg bg-white">
+<div class="space-y-6">
+<div>
+<p class="font-data-label text-data-label text-outline mb-1">PARTICIPANT</p>
+<p class="font-headline-sm text-headline-sm text-primary">Jean-Baptiste KOUADIO</p>
+<p class="text-body-md text-on-surface-variant">Directeur d'Investissement - AXA Africa</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-data-label text-data-label text-outline mb-1">DATE</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<p class="font-body-lg text-body-lg font-bold">14 Nov. 2024</p>
+</div>
+</div>
+<div>
+<p class="font-data-label text-data-label text-outline mb-1">HEURE</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<p class="font-body-lg text-body-lg font-bold">09:00 - 18:00</p>
+</div>
+</div>
+</div>
+<div>
+<p class="font-data-label text-data-label text-outline mb-1">LIEU</p>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-body-lg text-body-lg font-bold">Palais des Congrès, Sofitel Ivoire</p>
+<p class="text-body-md text-on-surface-variant">Boulevard Hassan II, Abidjan, Côte d'Ivoire</p>
+</div>
+</div>
+</div>
+</div>
+<!-- QR Code Section -->
+<div class="flex flex-col items-center justify-center border-l border-outline-variant pl-0 md:pl-stack-lg">
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant mb-4">
+<!-- Simulated QR Code with a pattern -->
+<div class="w-48 h-48 bg-white border-4 border-white shadow-inner flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#001a61 2px, transparent 2px); background-size: 8px 8px;"></div>
+<div class="w-36 h-36 bg-primary-container flex items-center justify-center relative z-10 rounded-sm">
+<span class="material-symbols-outlined text-white text-7xl" style="font-variation-settings: 'wght' 200">qr_code_2</span>
+</div>
+</div>
+</div>
+<p class="text-center text-body-md font-bold text-primary">SCANNABLE À L'ENTRÉE</p>
+<p class="text-center text-data-label text-on-surface-variant mt-1">Veuillez présenter ce code au point de contrôle</p>
+</div>
+</div>
+<!-- Separation Line with Ticket Cut -->
+<div class="ticket-cut bg-white h-px w-full relative">
+<div class="absolute inset-x-4 border-t-2 border-dashed border-outline-variant top-0"></div>
+</div>
+<!-- Footer Info & Actions -->
+<div class="p-stack-lg bg-surface-container-low">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<p class="font-data-label text-data-label text-outline">TYPE D'ACCÈS</p>
+<p class="font-body-md font-bold text-secondary">Accès Premium & Lounge VIP</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-medium hover:bg-primary-container transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                                    Télécharger PDF
+                                </button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">share</span>
+                                    Transférer
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Conditions Section -->
+<div class="bg-white border border-outline-variant rounded-xl p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">info</span>
+                        Conditions d'accès
+                    </h3>
+<ul class="space-y-3 text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-1">check_circle</span>
+                            Une pièce d'identité officielle en cours de validité est requise à l'entrée.
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-1">check_circle</span>
+                            Tenue de ville ou tenue traditionnelle formelle exigée.
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-1">check_circle</span>
+                            Accès strictement personnel et non-cessible sans autorisation préalable.
+                        </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-1">check_circle</span>
+                            Ouverture des portes 45 minutes avant le début de la session.
+                        </li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Sidebar Actions & Map -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Quick Actions Card -->
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6">Actions rapides</h3>
+<div class="space-y-3">
+<button class="w-full bg-white border border-outline-variant text-primary font-bold py-3 px-4 rounded-lg flex items-center justify-between hover:bg-surface-container-low transition-all group">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">event</span>
+                                Ajouter au calendrier
+                            </span>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full bg-white border border-outline-variant text-primary font-bold py-3 px-4 rounded-lg flex items-center justify-between hover:bg-surface-container-low transition-all group">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">restaurant</span>
+                                Gérer mes préférences repas
+                            </span>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<button class="w-full bg-white border border-outline-variant text-primary font-bold py-3 px-4 rounded-lg flex items-center justify-between hover:bg-surface-container-low transition-all group">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">contact_support</span>
+                                Contacter l'organisateur
+                            </span>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Mini-Map Card -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden flex flex-col h-full">
+<div class="p-stack-lg border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary">Itinéraire</h3>
+<a class="text-primary font-bold text-data-label underline hover:opacity-80 transition-opacity" href="#">Google Maps</a>
+</div>
+<div class="relative flex-grow min-h-[300px]">
+<img class="w-full h-full object-cover" data-alt="A clean, highly professional minimalist map of the Cocody and Plateau areas in Abidjan, Côte d'Ivoire. The map features a premium banking aesthetic with deep navy blue for water and light gray for streets. A gold marker clearly pinpoints the Sofitel Hotel area. The overall style is elegant, modern, and high-contrast, similar to a luxury real estate brochure." data-location="Abidjan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkzcRjbKcabHJpFDVXZNGUq3eUIm90CBCMprJbiOzug1Co7oUymALUujyPB35Yi_bRem6a_p6kv42-WIXiHIHsSgxXe8pzUkEBlLG7pJ5ZDzBR9v2ilEcQ3YCvmLFEbXkI3ww6Af0XTh_0w1bIef1QKttHIN5-NVKdRIAkcVoRaL3eI_CxYaD7-z3-c-8p-XHsR1-4xFl7oUdj3NxvyGJj9fvJO9pYx0w37g9dqRBunQ4opDErwXaniYMJTwlWN75CTYScTJp6Ag"/>
+<!-- Floating Navigation Button -->
+<div class="absolute bottom-4 right-4 shadow-lg">
+<button class="bg-primary-container text-on-primary-container p-4 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">directions</span>
+                                S'y rendre
+                            </button>
+</div>
+</div>
+<div class="p-stack-lg bg-surface-container-lowest">
+<p class="text-body-md font-bold mb-1">Service de Conciergerie</p>
+<p class="text-data-label text-on-surface-variant">Parking VIP disponible pour les détenteurs de billets Premium. Service de chauffeur sur demande au +225 27 22 XX XX.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full">
+<div class="mb-4 md:mb-0">
+<span class="font-headline-sm text-headline-sm text-primary">Africaine des Finances</span>
+</div>
+<div class="text-center md:text-left mb-4 md:mb-0">
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Politique de Confidentialité</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Conditions Générales</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Centre d'aide</a>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

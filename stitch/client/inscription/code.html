@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inscription | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .form-input-focus:focus {
+            box-shadow: 0 0 0 2px rgba(10, 46, 140, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#795900",
+                      "on-tertiary-fixed-variant": "#314381",
+                      "on-surface": "#131c2a",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#ffdfa0",
+                      "tertiary-fixed-dim": "#b7c4ff",
+                      "primary-fixed": "#dce1ff",
+                      "secondary-fixed-dim": "#fbbc00",
+                      "tertiary-fixed": "#dce1ff",
+                      "surface-bright": "#f9f9ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#dfe8fc",
+                      "secondary-container": "#ffbf00",
+                      "on-secondary-container": "#6d5000",
+                      "surface-container": "#e7eeff",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "surface-tint": "#3d58b5",
+                      "primary": "#001a61",
+                      "on-secondary-fixed": "#261a00",
+                      "inverse-primary": "#b7c4ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#223f9b",
+                      "surface-variant": "#dae3f6",
+                      "outline": "#757683",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "tertiary": "#051c5b",
+                      "surface-container-highest": "#dae3f6",
+                      "outline-variant": "#c5c5d4",
+                      "on-tertiary-container": "#8d9ee3",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#0a2e8c",
+                      "surface-dim": "#d1daed",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "surface": "#f9f9ff",
+                      "background": "#f9f9ff",
+                      "on-tertiary-fixed": "#001551",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#213371",
+                      "on-error-container": "#93000a",
+                      "on-background": "#131c2a",
+                      "on-primary-fixed": "#001551",
+                      "on-surface-variant": "#444652",
+                      "on-primary-container": "#839cfd",
+                      "surface-container-low": "#f0f3ff",
+                      "inverse-surface": "#28313f",
+                      "inverse-on-surface": "#ebf1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "stack-md": "16px",
+                      "section-gap": "80px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "container-max": "1280px",
+                      "stack-lg": "32px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-sm": ["Figtree"],
+                      "body-lg": ["Figtree"],
+                      "headline-md": ["Figtree"],
+                      "display-lg-mobile": ["Figtree"],
+                      "data-value": ["IBM Plex Mono"],
+                      "data-label": ["IBM Plex Mono"],
+                      "body-md": ["Figtree"],
+                      "display-lg": ["Figtree"]
+              },
+              "fontSize": {
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Suppression of Nav Shell as per "Destination" Rule for transactional screens -->
+<main class="flex-grow flex flex-col md:flex-row min-h-screen">
+<!-- Left Side: Registration Form -->
+<div class="w-full md:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface z-10">
+<div class="max-w-md w-full animate-fade-in">
+<!-- Brand Header -->
+<div class="mb-stack-lg">
+<div class="flex items-center gap-3 mb-stack-sm">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<h1 class="font-headline-md text-headline-md text-primary">Africaine des Finances</h1>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Créez votre compte investisseur et accédez à l'excellence financière.</p>
+</div>
+<!-- Registration Form -->
+<form action="#" class="space-y-stack-md" onsubmit="return false;">
+<div class="grid grid-cols-2 gap-gutter">
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="first_name">Prénom</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low" id="first_name" placeholder="Jean" required="" type="text"/>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="last_name">Nom</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low" id="last_name" placeholder="Dupont" required="" type="text"/>
+</div>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="email">E-mail Professionnel</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low" id="email" placeholder="j.dupont@entreprise.com" required="" type="email"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="phone">Téléphone</label>
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low" id="phone" placeholder="+225 00 00 00 00" required="" type="tel"/>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="country">Pays de Résidence</label>
+<select class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low appearance-none cursor-pointer" id="country">
+<option value="CI">Côte d'Ivoire</option>
+<option value="SN">Sénégal</option>
+<option value="FR">France</option>
+<option value="MA">Maroc</option>
+<option value="CM">Cameroun</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="font-data-label text-data-label text-outline uppercase tracking-wider" for="password">Mot de passe</label>
+<div class="relative">
+<input class="w-full px-4 py-3 border border-outline-variant rounded-lg focus:ring-0 focus:border-primary transition-all form-input-focus bg-surface-container-low" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<p class="text-[12px] text-outline italic">8 caractères minimum, incluant majuscule et chiffre.</p>
+</div>
+<!-- Checkboxes -->
+<div class="space-y-3 pt-2">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary-container" required="" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface-variant leading-snug">
+                                J'accepte les <a class="text-primary font-bold hover:underline" href="#">Conditions Générales d'Utilisation</a> et la Politique de Confidentialité.
+                            </span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 rounded border-outline-variant text-primary focus:ring-primary-container" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface-variant leading-snug">
+                                Je souhaite recevoir les analyses de marché et opportunités d'investissement par e-mail.
+                            </span>
+</label>
+</div>
+<!-- Actions -->
+<div class="pt-stack-md space-y-stack-md">
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold hover:bg-primary-container transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2" type="submit">
+<span>Créer mon compte</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="text-center">
+<p class="font-body-md text-on-surface-variant">
+                                Déjà client ? <a class="text-primary font-bold hover:underline transition-all" href="#">Connectez-vous ici</a>
+</p>
+</div>
+</div>
+</form>
+<!-- Trust Badges -->
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant flex justify-between items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl">verified_user</span>
+<span class="material-symbols-outlined text-4xl">security</span>
+<span class="material-symbols-outlined text-4xl">lock</span>
+<span class="material-symbols-outlined text-4xl">public</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Illustrative Content -->
+<div class="hidden md:block md:w-1/2 relative overflow-hidden bg-primary">
+<!-- Animated Shader Background Layer -->
+
+<!-- High-Quality Image Background -->
+<div class="absolute inset-0 z-0 bg-cover bg-center mix-blend-multiply opacity-80" data-alt="A professional, high-end photograph of a modern financial district at sunset, with gleaming glass skyscrapers reflecting a golden and deep blue sky. The scene conveys a sense of global authority and institutional security, using a palette of deep navy blues and warm gold accents. In the foreground, a subtle, clean office interior with a solid oak table is blurred out, focusing the viewer's attention on the thriving city of Abidjan through the floor-to-ceiling windows. The mood is aspirational, prestigious, and extremely reliable." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeZsJd_akR4kPJ_ITuF5COxqpoVtFXtFniXgRK2fO77S8TGQHRyX9C2IDGPXmP-qaO3F2x9UVJq3zLsZwo3W40zP_RrRW7F9b8bEYudvZV2xdJKDswxK-CnCqipT8XlOx_bb8fSpj0KhXQtF_ACDZHads72obTwsy6-RCBuSMRNsq8T9cyTLx0-SdulILY3W4xpdoQtZDBeXF-szi_y0thiQZ4NvFkY-jIiyDmPycomrl1LdFDnKcjmGHZi83XKHaop8msR8c_0w')">
+</div>
+<!-- Content Overlay -->
+<div class="relative z-10 h-full flex flex-col justify-between p-margin-desktop text-on-primary">
+<div class="animate-slide-up">
+<div class="inline-block px-4 py-2 bg-secondary text-on-primary font-data-label text-xs uppercase tracking-widest rounded-full mb-stack-md">
+                        Partenaire de Confiance
+                    </div>
+<h2 class="font-display-lg text-display-lg mb-stack-md">Votre prospérité,<br/>notre mission d'excellence.</h2>
+<p class="font-body-lg text-body-lg opacity-90 max-w-lg">
+                        Rejoignez la première institution financière panafricaine dédiée à la gestion de patrimoine stratégique et aux investissements institutionnels.
+                    </p>
+</div>
+<!-- Testimonial / Credibility Bento Card -->
+<div class="glass-card p-stack-lg rounded-xl border border-white/20 animate-fade-in-delayed">
+<div class="flex items-center gap-4 mb-stack-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a distinguished African executive in his 50s, wearing a tailored navy suit and glasses, smiling confidently. The lighting is soft and professional, emphasizing wisdom and financial success. The background is a clean, modern corporate setting with warm wood tones. High-end lifestyle photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC5QtHKRzd_S8RIwIs0xccsf_NVDMPsvAK7zXHYRmjI2sgHSFN0mDxukKI5NvWF_MtVJb36kepYdbxV0dfKy_wWg9K6-lpcsi0j7UTDplV5d4e3Po2-JJLNOOruX_smiapV_m377geoUpUmtNR0JIknuGCNGHNfWPhWyN8FQxNrXsWIQkDPt-T0J0qrwFMTO4d4Qv9yVtnj6QG6T-6Tt7MXL7_QWID3X8nBTaB9RTlJotMXJlBqtGbH9g9MEixJ5MoCxK0cOHSsw"/>
+</div>
+<div>
+<p class="font-bold text-headline-sm leading-tight">Ibrahim K.</p>
+<p class="font-data-label text-xs opacity-80">Investisseur Institutionnel</p>
+</div>
+</div>
+<p class="font-body-md italic leading-relaxed">
+                        "L'Africaine des Finances offre une rigueur analytique et une proximité client inégalées. C'est le partenaire idéal pour sécuriser nos actifs sur le long terme."
+                    </p>
+<div class="flex gap-1 mt-stack-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer for Transactional Screens (Simplified) -->
+<footer class="w-full py-stack-md px-margin-desktop bg-surface-container-lowest border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. Tous droits réservés.</p>
+<div class="flex gap-stack-lg">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Confidentialité</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Mentions Légales</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Assistance</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for form inputs
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.querySelector('label')?.classList.add('text-primary');
+            });
+            el.addEventListener('blur', () => {
+                el.parentElement.querySelector('label')?.classList.remove('text-primary');
+            });
+        });
+
+        // Simple animation entrance control
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.animate-slide-up').forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 200 + (index * 100));
+            });
+        });
+    </script>
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .animate-fade-in-delayed {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.4s forwards;
+        }
+        
+        /* Custom Input Styling for better corporate feel */
+        input::placeholder {
+            color: #c5c5d4;
+            font-size: 0.9rem;
+        }
+        
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23757683' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+    </style>
+</body></html>

@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class ResetPassword extends Component
 {
+    use WithSweetAlert;
     public ?string $token = null;
     public string $email = '';
     public string $password = '';
@@ -57,7 +59,7 @@ class ResetPassword extends Component
         });
 
         if ($status == Password::PASSWORD_RESET) {
-            session()->flash('message', 'Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
+            $this->swalSuccess('Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
             return redirect()->route('login');
         }
 

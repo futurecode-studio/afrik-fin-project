@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Administration Carrières</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#dae3f6",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container-high": "#dfe8fc",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#051c5b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-surface": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "tertiary-container": "#213371",
+                    "outline": "#757683",
+                    "background": "#f9f9ff",
+                    "inverse-surface": "#28313f",
+                    "surface-tint": "#3d58b5",
+                    "secondary-container": "#ffbf00",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary": "#001a61",
+                    "on-background": "#131c2a",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "on-secondary-fixed": "#261a00",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary-container": "#0a2e8c",
+                    "secondary": "#795900",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .data-table-row:hover { background-color: rgba(231, 238, 255, 0.4); }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col p-stack-md gap-stack-sm z-50">
+<div class="mb-stack-lg">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">Africaine des Finances</h1>
+</div>
+<div class="flex items-center gap-3 p-2 mb-stack-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JD</div>
+<div>
+<p class="font-body-md text-on-surface font-bold leading-tight">Jean Dupont</p>
+<p class="text-xs text-on-surface-variant">Client Privilège</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Candidatures</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-md">Transactions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Paramètres</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-body-md">Sécurité</span>
+</a>
+</nav>
+<button class="mt-4 mb-stack-md w-full bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+<span>Nouvel Investissement</span>
+</button>
+<div class="pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Déconnexion</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar (from JSON logic) -->
+<header class="w-full h-20 bg-surface border-b border-outline-variant sticky top-0 z-40 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-stack-lg">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Gestion des Candidatures</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<input class="w-72 bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Rechercher un candidat..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+<button class="font-body-md font-medium text-on-surface-variant hover:text-primary transition-colors">Espace Client</button>
+<button class="font-body-md font-medium text-on-surface-variant hover:text-primary transition-colors">Contact</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="flex-1 overflow-y-auto p-margin-desktop bg-background">
+<!-- Statistics Overview (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Total Candidats</p>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-primary">1,284</span>
+<span class="text-green-600 text-sm font-bold flex items-center mb-1">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> 12%
+                        </span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Entretiens cette semaine</p>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-tertiary">42</span>
+<span class="text-primary-container text-xs font-medium px-2 py-0.5 bg-primary-container/10 rounded mb-1">Actif</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Score Moyen Qualification</p>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-secondary">84%</span>
+<span class="text-on-surface-variant text-sm mb-1">/ 100</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Temps de recrutement</p>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-primary">18j</span>
+<span class="text-on-surface-variant text-sm mb-1">moyen</span>
+</div>
+</div>
+</div>
+<!-- Filters and Search -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 mb-gutter flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-bold text-sm whitespace-nowrap">Tous (1,284)</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-medium text-sm whitespace-nowrap">Nouveau (312)</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-medium text-sm whitespace-nowrap">Entretien (124)</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-medium text-sm whitespace-nowrap">Refusé (804)</button>
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-medium text-sm whitespace-nowrap">Embauché (44)</button>
+</div>
+<div class="flex items-center gap-3">
+<select class="bg-surface-container-low border-outline-variant rounded-lg text-sm px-4 py-2 focus:ring-primary outline-none">
+<option>Offre: Analyste Financier Senior</option>
+<option>Offre: Responsable Conformité</option>
+<option>Offre: Chef de Projet IT</option>
+</select>
+<button class="flex items-center gap-2 text-on-surface-variant border border-outline-variant px-4 py-2 rounded-lg text-sm hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filtres avancés
+                    </button>
+</div>
+</div>
+<!-- Main Table Section -->
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider">Candidat</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider">Poste visé</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider text-center">Score IQ</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider">Statut</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider">Date</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="data-table-row transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim overflow-hidden border border-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate financial analyst for a high-end African bank, smiling confidently. The lighting is soft and studio-quality, with a blurred minimalist office background. The color palette reflects professionalism with blues and neutral tones, aligning with a premium corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI7jTgFmlSSsz097xV7lv5Dkm4Jc5Qz0KyVtFrcFL443TErPrOdyK3W6kdpiuYK8L1XysqwQszecAD8QmlJJdA7C3SNxXe-TQ_iMRIYHWrdxpO4HNjaN1eZ8JOs4BU1kPnmHLkWvrpe5ceJp9TOX3-D98wOXUFUvu8626Kpx_w4nce86g6BuNIRXF0c6dO30b8pWW5FqC_9ZCvjo5OdqAR3P-FU6az0E4beOv-z-6V29-lOqe42AnuQP67miDDmXbAVgjaw35ihg"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Amara Touré</div>
+<div class="text-xs text-on-surface-variant">Dakar, Sénégal</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Analyste Financier Senior</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<span class="font-data-value text-data-value text-green-600">92/100</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-green-500" style="width: 92%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">ENTRETIEN</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-data-label">12 Mai 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary-container text-white px-4 py-1.5 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">Voir Profil</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="data-table-row transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim overflow-hidden border border-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a young female project manager in a bright corporate office setting. She has a composed and intelligent expression, wearing business professional attire. The setting is clean, modern, and high-key, emphasizing a light-mode aesthetic consistent with luxury financial branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI3PH8saQoZ4efYd_VtnQTym6tcsU7udd1wMZM52cm1-D8P2Flir3A2m3zg76ydGNTLl_h7yR9Mnq1ylwdOGIWXY8s-wZhBm_kNolaNcPYyQKbmtY4rFL6E1anx6o8VOkdc45UuqxK-Bf8tnJwqj-648jeXR9jdqTzAsHzYQYMy1McFEHTttNgYuQiWnb28T0yRgOAvnPu1bkEhB09J2HmypR4WxnFZ2-tQ_mHkMdV8Jp_u3_xsDfluEJpl7-wurx405zhmjRYbw"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Koffi Kouassi</div>
+<div class="text-xs text-on-surface-variant">Abidjan, Côte d'Ivoire</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Responsable Conformité</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<span class="font-data-value text-data-value text-secondary">88/100</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 88%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">NOUVEAU</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-data-label">14 Mai 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary-container text-white px-4 py-1.5 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">Voir Profil</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="data-table-row transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim overflow-hidden border border-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a senior financial executive with a serious and authoritative look. High contrast lighting with a dark navy background to denote stability and power. The aesthetic is extremely professional and high-status, designed for an institutional financial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYl0iWE3TpG6szP3zV140lW-H6MF_chpVbzWi9glKwGwmnDQ8eYpchnr-eDzHJdPbVrLzG_xmXcX7X60gma35jcrUcyS0B6dRdkyvq8RpoBEVn0_e5gw9V7xVe3cicdmgw0PMdmVjC4ruo5YVPbZp-8RSI7HFHVXcENOh--qw-b0YYg6QDwFH8f5wpqXwi6roAjWBY3QI6B5Y309DgBPssWUpRuTZ2fonqH3vUmSufVU5dMMS18DX0JAnyxIZZSCiT9HAdXks5A"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Idriss Diallo</div>
+<div class="text-xs text-on-surface-variant">Bamako, Mali</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Analyste Financier Senior</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<span class="font-data-value text-data-value text-on-surface-variant">65/100</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-outline" style="width: 65%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-error-container text-on-error-container">REFUSÉ</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-data-label">10 Mai 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary-container text-white px-4 py-1.5 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">Voir Profil</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="data-table-row transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-dim overflow-hidden border border-outline-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern office lobby for a prestigious financial firm, featuring clean glass surfaces, marble floors, and soft blue lighting. The environment looks exclusive and high-end, with a sense of peace and institutional reliability. High key, light mode aesthetic for a corporate website." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgNYmImnRUaDjsBDlRVHbnuPF08cJ9x0QZZxnunsyvMlE1UBV8-dFFvNYHGr9orPtFIb79WCo5YM4g1raI0Hii4xakMWY9fmRpfjN2TW12rPbM4bcSqKDIjJL6OmPfZcsginrXNoBOKmR6zxkMK5rcHDxvsRXxrqII9AzpZj9av9nEyRNP3TxkdEaaCIg2yzt0ovWdEptRmwzmrVLaEFrfIs0E3YZ65dlnsAAyQvutBDowWE3peb09BzqhF9ufu3pgIXisPvFnag"/>
+</div>
+<div>
+<div class="font-bold text-on-surface">Yasmine Benani</div>
+<div class="text-xs text-on-surface-variant">Casablanca, Maroc</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Gestionnaire de Patrimoine</td>
+<td class="px-6 py-4">
+<div class="flex flex-col items-center gap-1">
+<span class="font-data-value text-data-value text-green-600">95/100</span>
+<div class="w-20 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-green-500" style="width: 95%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">EMBAUCHÉ</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-data-label">08 Mai 2024</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-primary-container text-white px-4 py-1.5 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">Voir Profil</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="bg-surface-container-low px-6 py-4 border-t border-outline-variant flex items-center justify-between">
+<p class="text-sm text-on-surface-variant font-body-md">Affichage de 4 candidatures sur 1,284</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer (from JSON) -->
+<footer class="bg-primary py-stack-lg w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2">
+<h3 class="font-headline-sm text-headline-sm text-on-primary mb-2">Africaine des Finances</h3>
+<p class="font-body-md text-on-primary-container/80 max-w-sm mb-4">
+                        Partenaire stratégique pour votre prospérité. Excellence, Intégrité, Innovation.
+                    </p>
+<p class="font-data-label text-data-label text-on-primary-container/80">
+                        © 2024 Africaine des Finances. Agréé AMF-UMOA n°AF-2023-01.
+                    </p>
+</div>
+<div>
+<h4 class="font-body-md font-bold text-on-primary mb-4">Liens Utiles</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="font-data-label text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a></li>
+<li><a class="font-data-label text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Confidentialité</a></li>
+<li><a class="font-data-label text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Risques</a></li>
+<li><a class="font-data-label text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Réglementation</a></li>
+</ul>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex gap-4 mb-4">
+<span class="material-symbols-outlined text-on-primary cursor-pointer hover:text-secondary-fixed">language</span>
+<span class="material-symbols-outlined text-on-primary cursor-pointer hover:text-secondary-fixed">account_balance</span>
+<span class="material-symbols-outlined text-on-primary cursor-pointer hover:text-secondary-fixed">shield</span>
+</div>
+<button class="px-6 py-2 border border-on-primary text-on-primary rounded-lg font-bold hover:bg-on-primary hover:text-primary transition-all">
+                        Support 24/7
+                    </button>
+</div>
+</div>
+</footer>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple filter logic simulation
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.innerText.includes('Nouveau') || this.innerText.includes('Entretien') || this.innerText.includes('Tous')) {
+                    document.querySelectorAll('button').forEach(b => b.classList.remove('bg-primary', 'text-on-primary', 'font-bold'));
+                    document.querySelectorAll('button').forEach(b => {
+                        if(b.innerText.includes('(')) b.classList.add('text-on-surface-variant', 'font-medium');
+                    });
+                    this.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+                    this.classList.remove('text-on-surface-variant', 'hover:bg-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>

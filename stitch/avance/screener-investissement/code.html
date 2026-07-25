@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Recherche Avancée d'Investissements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-surface": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d1daed",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#c5c5d4",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary-container": "#0a2e8c",
+                    "primary": "#001a61",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-secondary-fixed": "#261a00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-background": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#8d9ee3",
+                    "inverse-surface": "#28313f",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c5c5d4; border-radius: 10px; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid #DADFE7; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant h-20">
+<div class="flex items-center gap-12">
+<span class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</span>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Markets</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<button class="text-primary border border-primary px-4 py-2 rounded-lg font-bold hover:bg-surface-container-low transition-all">Support</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-tertiary transition-all shadow-sm">Invest Now</button>
+</div>
+<div class="flex gap-4 border-l border-outline-variant pl-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="settings">settings</span>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional studio portrait of a high-net-worth individual investor, confident and smiling, wearing a tailored charcoal grey business suit. The background is a soft-focus corporate office with warm mahogany textures and clean architectural lines. Lighting is sophisticated and professional, reflecting a high-end financial institution's brand identity. The overall mood is prestigious, reliable, and secure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64N37dT-WFDJ1OF9WLP5Ju82KuLtRtxxjbkgAe2AW4daCRtjNpBa8XyThfhUj9mwLE2FmXVTwPSddNXb4ZBXWipK_KdOTJk_mECgzb7avGGluBh7BWAPC50Gs_C6LDG-gm3VbhuxE6z1i1i-i99_ZY2GZpVl6McUJsUWu67CfIOugAmn4mCn0a7-dxmZ2jyX7HBHMx6XgTKPyPGF-lT2wIPksCBOO_TQXul5pzpcJq9q_7BhdKlewXLeWgSpmX-OdKIBUPi-mnw"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex min-h-[calc(100vh-80px)] max-w-container-max mx-auto">
+<!-- SideNavBar - Filters Section -->
+<aside class="w-80 h-[calc(100vh-80px)] sticky top-20 border-r border-outline-variant bg-surface-container-lowest p-6 overflow-y-auto custom-scrollbar">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="tune">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Filtres Avancés</h2>
+</div>
+<div class="space-y-8">
+<!-- Asset Type -->
+<section>
+<label class="font-data-label text-data-label text-on-surface-variant uppercase mb-3 block">Type d'Actif</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface group-hover:text-primary">Actions</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface group-hover:text-primary">Obligations</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface group-hover:text-primary">Private Equity</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body-md text-on-surface group-hover:text-primary">Immobilier</span>
+</label>
+</div>
+</section>
+<!-- Sector -->
+<section>
+<label class="font-data-label text-data-label text-on-surface-variant uppercase mb-3 block">Secteur d'Activité</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg p-2.5 font-body-md focus:ring-2 focus:ring-primary outline-none transition-all">
+<option>Tous les secteurs</option>
+<option>Énergie &amp; Infrastructures</option>
+<option>Technologies &amp; Fintech</option>
+<option>Agriculture durable</option>
+<option>Services Financiers</option>
+</select>
+</section>
+<!-- Yield Range -->
+<section>
+<div class="flex justify-between items-center mb-3">
+<label class="font-data-label text-data-label text-on-surface-variant uppercase">Rendement Min.</label>
+<span class="font-data-value text-data-value text-primary" id="yield-value">4.5%</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="15" min="0" oninput="document.getElementById('yield-value').innerText = this.value + '%'" step="0.5" type="range" value="4.5"/>
+</section>
+<!-- Risk Rating -->
+<section>
+<label class="font-data-label text-data-label text-on-surface-variant uppercase mb-3 block">Notation de Risque (SRI)</label>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded border border-outline-variant text-sm font-bold hover:bg-primary-container hover:text-white transition-colors">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant text-sm font-bold hover:bg-primary-container hover:text-white transition-colors">2</button>
+<button class="w-8 h-8 rounded bg-primary text-white text-sm font-bold">3</button>
+<button class="w-8 h-8 rounded border border-outline-variant text-sm font-bold hover:bg-primary-container hover:text-white transition-colors">4</button>
+<button class="w-8 h-8 rounded border border-outline-variant text-sm font-bold hover:bg-primary-container hover:text-white transition-colors">5</button>
+</div>
+</section>
+<!-- Eligibility -->
+<section>
+<label class="font-data-label text-data-label text-on-surface-variant uppercase mb-3 block">Éligibilité Fiscale</label>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-body-md">PEA / PEA-PME</span>
+<div class="relative inline-block w-12 h-6 rounded-full bg-primary transition-colors cursor-pointer">
+<div class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-all"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md">Investissement PME</span>
+<div class="relative inline-block w-12 h-6 rounded-full bg-outline-variant transition-colors cursor-pointer">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-xl font-bold text-headline-sm hover:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+                    Appliquer les filtres
+                </button>
+</div>
+</aside>
+<!-- Content Canvas -->
+<section class="flex-1 p-margin-desktop bg-background">
+<div class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex gap-2 text-sm text-on-surface-variant mb-2">
+<span>Investissements</span>
+<span>/</span>
+<span class="text-primary font-medium">Recherche d'opportunités</span>
+</nav>
+<h1 class="font-display-lg text-display-lg text-on-surface">Opportunités de Marché</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mt-2">Explorez notre sélection rigoureuse d'actifs financiers en Afrique de l'Ouest, validés par notre comité de gestion.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant px-4 py-2 rounded-lg text-body-md font-medium hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="sort">sort</span>
+                        Trier par
+                    </button>
+<button class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant px-4 py-2 rounded-lg text-body-md font-medium hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+                        Exporter
+                    </button>
+</div>
+</div>
+<!-- Search Status Summary -->
+<div class="flex gap-4 mb-8">
+<span class="bg-primary-container text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                    Obligations <span class="material-symbols-outlined text-xs" data-icon="close">close</span>
+</span>
+<span class="bg-primary-container text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                    Risque 1-3 <span class="material-symbols-outlined text-xs" data-icon="close">close</span>
+</span>
+<span class="text-on-surface-variant font-data-label text-sm self-center ml-2">124 opportunités trouvées</span>
+</div>
+<!-- Results List -->
+<div class="space-y-6">
+<!-- Result Item 1 -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-secondary-container"></div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1">
+<div class="flex items-start justify-between mb-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">Fonds de Souveraineté Sénégal 2024</h3>
+<p class="text-body-md text-on-surface-variant">Obligations d'État - Infrastructure &amp; Développement</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="bg-surface-container-high px-3 py-1 rounded text-xs font-bold text-on-surface-variant uppercase tracking-wider">Eligible PEA</span>
+<span class="bg-surface-container-high px-3 py-1 rounded text-xs font-bold text-on-surface-variant uppercase tracking-wider">Notation AAA</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Rendement Cible</p>
+<p class="text-headline-sm font-bold text-primary">6.25% <span class="text-sm font-normal text-on-surface-variant">/ an</span></p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Risque SRI</p>
+<div class="flex gap-1 items-center mt-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<span class="ml-2 font-data-value text-sm">3/7</span>
+</div>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Maturité</p>
+<p class="text-data-value font-bold text-on-surface">120 Mois</p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Ticket Minimum</p>
+<p class="text-data-value font-bold text-on-surface">5 000 000 FCFA</p>
+</div>
+</div>
+</div>
+<div class="lg:w-48 flex flex-col justify-between border-l border-outline-variant pl-8">
+<div>
+<p class="text-xs font-data-label text-on-surface-variant uppercase mb-2">Clôture dans</p>
+<div class="flex items-center gap-2 text-error font-bold">
+<span class="material-symbols-outlined text-lg" data-icon="timer">timer</span>
+<span>12 Jours</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-tertiary transition-all mt-4 w-full">Détails</button>
+</div>
+</div>
+</div>
+<!-- Result Item 2 -->
+<div class="glass-card rounded-xl p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1">
+<div class="flex items-start justify-between mb-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-secondary-container/10 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">West Africa Green Bond II</h3>
+<p class="text-body-md text-on-surface-variant">Obligations Vertes - Énergie Solaire &amp; Durable</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="bg-[#2EB8731A] text-[#2EB873] px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Impact Positif</span>
+<span class="bg-surface-container-high px-3 py-1 rounded text-xs font-bold text-on-surface-variant uppercase tracking-wider">Notation AA</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Rendement Cible</p>
+<p class="text-headline-sm font-bold text-primary">5.80% <span class="text-sm font-normal text-on-surface-variant">/ an</span></p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Risque SRI</p>
+<div class="flex gap-1 items-center mt-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<span class="ml-2 font-data-value text-sm">2/7</span>
+</div>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Maturité</p>
+<p class="text-data-value font-bold text-on-surface">60 Mois</p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Ticket Minimum</p>
+<p class="text-data-value font-bold text-on-surface">1 000 000 FCFA</p>
+</div>
+</div>
+</div>
+<div class="lg:w-48 flex flex-col justify-between border-l border-outline-variant pl-8">
+<div>
+<p class="text-xs font-data-label text-on-surface-variant uppercase mb-2">Statut</p>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span>Ouvert</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-tertiary transition-all mt-4 w-full">Détails</button>
+</div>
+</div>
+</div>
+<!-- Result Item 3 -->
+<div class="glass-card rounded-xl p-6 opacity-80 bg-surface-container-low transition-all duration-300 group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-outline"></div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1">
+<div class="flex items-start justify-between mb-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-outline-variant/20 rounded-lg flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-3xl" data-icon="factory">factory</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface-variant">Industries Côte d'Ivoire S.A.</h3>
+<p class="text-body-md text-on-surface-variant">Obligations Corporatives - Manufacturier</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">Souscription Fermée</span>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Rendement Final</p>
+<p class="text-headline-sm font-bold text-outline">7.15%</p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Risque SRI</p>
+<div class="flex gap-1 items-center mt-2">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+<span class="ml-2 font-data-value text-sm">4/7</span>
+</div>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Maturité</p>
+<p class="text-data-value font-bold text-on-surface-variant">84 Mois</p>
+</div>
+<div>
+<p class="text-data-label font-data-label text-on-surface-variant uppercase text-xs mb-1">Collecte Totale</p>
+<p class="text-data-value font-bold text-on-surface-variant">2.5B FCFA</p>
+</div>
+</div>
+</div>
+<div class="lg:w-48 flex flex-col justify-end border-l border-outline-variant pl-8">
+<button class="bg-surface-container-highest text-outline py-3 rounded-lg font-bold cursor-not-allowed w-full">Consulter l'historique</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-2">
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded border border-outline-variant font-bold hover:bg-surface-container-low">2</button>
+<button class="w-10 h-10 rounded border border-outline-variant font-bold hover:bg-surface-container-low">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 rounded border border-outline-variant font-bold hover:bg-surface-container-low">12</button>
+<button class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-8 right-8 bg-secondary-container text-on-secondary-container w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform group z-[100]">
+<span class="material-symbols-outlined text-3xl" data-icon="chat_bubble">chat_bubble</span>
+<span class="absolute right-20 bg-primary text-white px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium pointer-events-none">Parler à un conseiller</span>
+</button>
+<footer class="bg-surface-container-highest border-t border-outline-variant py-stack-lg px-margin-desktop">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between gap-gutter">
+<div class="max-w-xs">
+<h4 class="font-headline-sm text-primary mb-4">Africaine des Finances</h4>
+<p class="text-body-md text-on-surface-variant mb-6">Partenaire de confiance pour vos investissements stratégiques sur le continent africain.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="public">public</span>
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="mail">mail</span>
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="call">call</span>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-12">
+<div>
+<h5 class="font-bold text-on-surface mb-4">Services</h5>
+<ul class="space-y-2 text-on-surface-variant text-body-md">
+<li><a class="hover:text-primary" href="#">Gestion Privée</a></li>
+<li><a class="hover:text-primary" href="#">Corporate Banking</a></li>
+<li><a class="hover:text-primary" href="#">Analyse de Marché</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-on-surface mb-4">Légal</h5>
+<ul class="space-y-2 text-on-surface-variant text-body-md">
+<li><a class="hover:text-primary" href="#">Confidentialité</a></li>
+<li><a class="hover:text-primary" href="#">Mentions Légales</a></li>
+<li><a class="hover:text-primary" href="#">Conformité AMF</a></li>
+</ul>
+</div>
+<div class="hidden lg:block">
+<h5 class="font-bold text-on-surface mb-4">Langue</h5>
+<button class="flex items-center gap-2 border border-outline-variant px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-sm" data-icon="language">language</span>
+                        Français (FR)
+                    </button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto mt-12 pt-8 border-t border-outline-variant text-center text-sm text-on-surface-variant font-data-label">
+            © 2024 Africaine des Finances. Tous droits réservés. Agréé par l'AMF sous le numéro 2024-X92.
+        </div>
+</footer>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                if(e.target.checked) {
+                    console.log('Filter applied: ' + e.target.nextElementSibling.innerText);
+                }
+            });
+        });
+
+        // Simulating loading state for results
+        const filterButton = document.querySelector('aside button');
+        filterButton.addEventListener('click', () => {
+            const results = document.querySelectorAll('.glass-card');
+            results.forEach(card => {
+                card.style.opacity = '0.4';
+                card.style.transform = 'translateY(10px)';
+            });
+            setTimeout(() => {
+                results.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 600);
+        });
+    </script>
+</body></html>

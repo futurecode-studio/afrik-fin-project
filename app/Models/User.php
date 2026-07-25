@@ -44,6 +44,7 @@ class User extends Authenticatable
         'avatar',
         'is_active',
         'last_login_at',
+        'interests_completed_at',
     ];
 
     /**
@@ -67,6 +68,7 @@ class User extends Authenticatable
         'date_of_birth' => 'date',
         'is_active' => 'boolean',
         'last_login_at' => 'datetime',
+        'interests_completed_at' => 'datetime',
     ];
 
     /**
@@ -88,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany(Enrollment::class);
     }
 
+    public function activityLogs()
+    {
+        return $this->hasMany(UserActivityLog::class);
+    }
+
     /**
      * Relation avec les formations (via enrollments)
      */
@@ -104,6 +111,29 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function watchlistItems()
+    {
+        return $this->hasMany(StockWatchlist::class)->orderBy('position');
+    }
+
+    public function watchlistStocks()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_watchlists')
+            ->withPivot('position')
+            ->withTimestamps()
+            ->orderByPivot('position');
+    }
+
+    public function interests()
+    {
+        return $this->hasMany(UserInterest::class);
+    }
+
+    public function hasCompletedInterests(): bool
+    {
+        return $this->interests_completed_at !== null;
     }
 
     /**

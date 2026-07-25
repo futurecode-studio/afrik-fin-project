@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Analyse d'abandon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .funnel-step {
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%, 5% 50%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f9f9ff",
+                      "on-surface": "#131c2a",
+                      "on-surface-variant": "#444652",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "inverse-on-surface": "#ebf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#fbbc00",
+                      "secondary-fixed": "#ffdfa0",
+                      "on-secondary-fixed": "#261a00",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#b7c4ff",
+                      "on-primary-fixed": "#001551",
+                      "surface": "#f9f9ff",
+                      "on-secondary-container": "#6d5000",
+                      "on-tertiary-fixed-variant": "#314381",
+                      "secondary-container": "#ffbf00",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#b7c4ff",
+                      "outline-variant": "#c5c5d4",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#223f9b",
+                      "surface-container": "#e7eeff",
+                      "surface-variant": "#dae3f6",
+                      "surface-container-highest": "#dae3f6",
+                      "outline": "#757683",
+                      "on-primary": "#ffffff",
+                      "primary": "#001a61",
+                      "surface-tint": "#3d58b5",
+                      "on-tertiary-fixed": "#001551",
+                      "on-tertiary-container": "#8d9ee3",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#dce1ff",
+                      "surface-container-low": "#f0f3ff",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed": "#dce1ff",
+                      "tertiary-container": "#213371",
+                      "surface-dim": "#d1daed",
+                      "on-error": "#ffffff",
+                      "primary-container": "#0a2e8c",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#051c5b",
+                      "inverse-surface": "#28313f",
+                      "on-primary-container": "#839cfd",
+                      "on-background": "#131c2a",
+                      "surface-container-high": "#dfe8fc",
+                      "secondary": "#795900"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-mobile": "20px",
+                      "section-gap": "80px",
+                      "margin-desktop": "64px",
+                      "stack-lg": "32px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Figtree"],
+                      "body-lg": ["Figtree"],
+                      "headline-sm": ["Figtree"],
+                      "display-lg-mobile": ["Figtree"],
+                      "body-md": ["Figtree"],
+                      "display-lg": ["Figtree"],
+                      "data-value": ["IBM Plex Mono"],
+                      "data-label": ["IBM Plex Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col py-stack-lg px-4 gap-stack-md z-40">
+<div class="flex items-center gap-3 px-2 mb-stack-lg">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Client Portal</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Institutional Excellence</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">school</span>
+<span class="font-body-md text-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">description</span>
+<span class="font-body-md text-body-md">Financial Reports</span>
+</a>
+<!-- Active State: Administration (as this is an Admin Analysis Page) -->
+<a class="flex items-center gap-3 px-3 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold rounded-lg scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+<span class="font-body-md text-body-md">Administration</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-outline-variant pt-stack-md">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 p-stack-lg max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-stack-lg flex justify-between items-end">
+<div class="animate-fade-in">
+<nav class="flex items-center gap-2 text-on-surface-variant font-data-label text-data-label mb-2">
+<span>Administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Analyse d'abandon</span>
+</nav>
+<h2 class="font-display-lg text-display-lg text-primary leading-tight">Conversion Pédagogique</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl mt-2">
+                    Visualisation du tunnel de progression des apprenants. Identifiez les modules critiques où la déperdition est la plus élevée pour optimiser vos contenus financiers.
+                </p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="px-6 py-2.5 rounded border border-primary text-primary font-bold hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                    Rapport Complet
+                </button>
+<button class="px-6 py-2.5 rounded bg-secondary-container text-on-secondary-container font-bold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span>
+                    Filtrer par Cursus
+                </button>
+</div>
+</header>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl animate-fade-in" style="animation-delay: 0.1s;">
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">Taux de Complétion Global</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">64.2%</span>
+<span class="text-error font-bold text-sm flex items-center">-2.4%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full mt-4">
+<div class="bg-primary h-full rounded-full" style="width: 64.2%"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl animate-fade-in" style="animation-delay: 0.2s;">
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">Inscriptions (30j)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">1,284</span>
+<span class="text-green-600 font-bold text-sm flex items-center">+12%</span>
+</div>
+<div class="flex gap-1 mt-4 items-end h-6">
+<div class="bg-primary/20 w-full h-1/2"></div>
+<div class="bg-primary/20 w-full h-3/4"></div>
+<div class="bg-primary/20 w-full h-2/3"></div>
+<div class="bg-primary/20 w-full h-full"></div>
+<div class="bg-primary w-full h-4/5"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl animate-fade-in" style="animation-delay: 0.3s;">
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">Point de Friction Majeur</p>
+<div class="flex items-center gap-2">
+<span class="font-data-value text-xl text-error">Module 4</span>
+<span class="text-on-surface-variant text-xs">(-22% Drop)</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-3 leading-tight">Analyse de risques &amp; Produits dérivés</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl animate-fade-in" style="animation-delay: 0.4s;">
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">Temps Moyen de Rétention</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">18j</span>
+<span class="text-on-surface-variant font-bold text-sm">moyenne</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-3 leading-tight">Augmentation de +3 jours vs Q1</p>
+</div>
+</div>
+<!-- Funnel Visualization Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Funnel Chart (Main Visual) -->
+<div class="lg:col-span-2 bg-white border border-outline-variant rounded-xl p-8 relative overflow-hidden animate-fade-in" style="animation-delay: 0.5s;">
+<div class="flex justify-between items-start mb-10">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Entonnoir de Conversion</h3>
+<p class="text-on-surface-variant font-body-md">Déperdition par étape du cursus "Wealth Management Pro"</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+<span class="text-xs font-data-label">Apprenants Actifs</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-error/40 rounded-full"></div>
+<span class="text-xs font-data-label">Abandons</span>
+</div>
+</div>
+</div>
+<!-- Horizontal Funnel -->
+<div class="relative py-12 flex flex-col gap-12">
+<!-- Steps -->
+<div class="flex items-center w-full">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer">
+<div class="w-full bg-primary/10 h-32 relative flex items-center justify-center funnel-step transition-all group-hover:bg-primary/20">
+<div class="bg-primary w-full h-full absolute inset-0 opacity-100 funnel-step" style="width: 100%;"></div>
+<span class="relative z-10 font-data-value text-white text-xl">100%</span>
+</div>
+<div class="mt-4 text-center">
+<p class="font-bold text-sm">Module 1</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Introduction</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer -ml-[4%]">
+<div class="w-full bg-primary/10 h-32 relative flex items-center justify-center funnel-step transition-all group-hover:bg-primary/20">
+<div class="bg-primary w-full h-full absolute inset-0 opacity-90 funnel-step" style="width: 100%;"></div>
+<span class="relative z-10 font-data-value text-white text-xl">92%</span>
+</div>
+<div class="mt-4 text-center">
+<p class="font-bold text-sm">Module 2</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Fondamentaux</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer -ml-[4%]">
+<div class="w-full bg-primary/10 h-32 relative flex items-center justify-center funnel-step transition-all group-hover:bg-primary/20">
+<div class="bg-primary w-full h-full absolute inset-0 opacity-75 funnel-step" style="width: 100%;"></div>
+<span class="relative z-10 font-data-value text-white text-xl">81%</span>
+</div>
+<div class="mt-4 text-center">
+<p class="font-bold text-sm">Module 3</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Stratégies</p>
+</div>
+</div>
+<!-- Step 4 (Friction Point) -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer -ml-[4%]">
+<div class="w-full bg-error/10 h-32 relative flex items-center justify-center funnel-step border-2 border-error/50 transition-all group-hover:bg-error/20">
+<div class="bg-primary w-full h-full absolute inset-0 opacity-50 funnel-step" style="width: 100%;"></div>
+<span class="relative z-10 font-data-value text-white text-xl">59%</span>
+<div class="absolute -top-8 bg-error text-white text-[10px] px-2 py-1 rounded font-bold">ALERTE : -22%</div>
+</div>
+<div class="mt-4 text-center">
+<p class="font-bold text-sm text-error">Module 4</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Risques</p>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer -ml-[4%]">
+<div class="w-full bg-primary/10 h-32 relative flex items-center justify-center funnel-step transition-all group-hover:bg-primary/20">
+<div class="bg-primary w-full h-full absolute inset-0 opacity-40 funnel-step" style="width: 100%;"></div>
+<span class="relative z-10 font-data-value text-white text-xl">51%</span>
+</div>
+<div class="mt-4 text-center">
+<p class="font-bold text-sm">Module 5</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Certification</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Graphic -->
+<div class="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none">
+
+</div>
+</div>
+<!-- Analysis Panel -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-6 animate-fade-in" style="animation-delay: 0.6s;">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-6">Diagnostic du Module 4</h4>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-10 h-10 shrink-0 bg-error/10 text-error flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div>
+<p class="font-bold text-sm">Complexité Élevée</p>
+<p class="text-xs text-on-surface-variant">Temps moyen passé sur l'évaluation : 45 min (+150% vs Module 3). Probable surcharge cognitive.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 shrink-0 bg-error/10 text-error flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<div>
+<p class="font-bold text-sm">Taux d'Échec Quiz</p>
+<p class="text-xs text-on-surface-variant">42% des apprenants échouent à la première tentative sur "Calcul de Volatilité".</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 shrink-0 bg-secondary-container text-on-secondary-container flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="font-bold text-sm">Action Recommandée</p>
+<p class="text-xs text-on-surface-variant">Fragmenter la leçon 4.2 en trois micro-modules de 5 minutes avec supports visuels interactifs.</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant">
+<button class="w-full py-3 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
+                        Appliquer les optimisations
+                    </button>
+</div>
+</div>
+</section>
+<!-- Detailed Friction List -->
+<section class="bg-white border border-outline-variant rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.7s;">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/30">
+<h3 class="font-headline-sm text-headline-sm text-primary">Détail des points de friction</h3>
+<div class="flex items-center gap-2">
+<span class="text-xs font-data-label text-on-surface-variant">Trier par :</span>
+<select class="bg-transparent border-none text-xs font-bold text-primary focus:ring-0 cursor-pointer">
+<option>Taux de déperdition</option>
+<option>Nombre d'abandons</option>
+<option>Impact sur complétion</option>
+</select>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface font-bold text-sm uppercase tracking-wider">
+<th class="px-6 py-4 font-bold">Étape du Cursus</th>
+<th class="px-6 py-4 font-bold text-center">Apprenants Actifs</th>
+<th class="px-6 py-4 font-bold text-center">Déperdition (Drop)</th>
+<th class="px-6 py-4 font-bold">Feedback Sentiment</th>
+<th class="px-6 py-4 font-bold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/5 flex items-center justify-center font-bold text-primary">01</div>
+<div>
+<p class="font-bold text-sm">Marchés Financiers Africains</p>
+<p class="text-[11px] text-on-surface-variant">Introduction &amp; Panorama</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center font-data-value">1,284</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-bold text-green-600">-2%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-sm font-bold">Éditer</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/5 flex items-center justify-center font-bold text-primary">02</div>
+<div>
+<p class="font-bold text-sm">Gestion de Portefeuille</p>
+<p class="text-[11px] text-on-surface-variant">Allocation d'actifs</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center font-data-value">1,181</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-bold text-on-secondary-container">-8%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 0.5;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-sm font-bold">Éditer</button>
+</td>
+</tr>
+<tr class="hover:bg-error/5 transition-colors bg-error/5">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-error/10 flex items-center justify-center font-bold text-error">04</div>
+<div>
+<p class="font-bold text-sm">Dérivés &amp; Risques</p>
+<p class="text-[11px] text-on-surface-variant">Modèles mathématiques</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-center font-data-value">758</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-extrabold text-error">-22%</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-error text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-red-700 transition-colors">Optimiser</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-surface-container-lowest text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-data-label transition-colors">Charger plus de modules (12 restants)</button>
+</div>
+</section>
+<!-- Bottom Floating Suggestion (Contextual FAB Suppression followed: but using an contextual alert instead) -->
+<div class="fixed bottom-8 right-8 z-50 animate-fade-in" style="animation-delay: 1s;">
+<div class="glass-effect border border-primary/20 shadow-2xl rounded-full pl-2 pr-6 py-2 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div class="pr-2">
+<p class="text-[12px] font-bold text-primary">IA Insight</p>
+<p class="text-[10px] text-on-surface-variant">Réduire la durée du quiz M4 pourrait sauver 15% d'apprenants.</p>
+</div>
+<button class="text-primary hover:text-primary-container">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for funnel highlighting
+        document.querySelectorAll('.funnel-step').forEach(step => {
+            step.addEventListener('mouseenter', () => {
+                step.style.transform = 'scale(1.02)';
+                step.style.transition = 'transform 0.3s ease';
+            });
+            step.addEventListener('mouseleave', () => {
+                step.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple visibility observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-fade-in').forEach(el => observer.observe(el));
+    </script>
+</body></html>

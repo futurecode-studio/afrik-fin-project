@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Administration des Marchés - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dae3f6",
+                        "surface-bright": "#f9f9ff",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "tertiary-container": "#213371",
+                        "primary-container": "#0a2e8c",
+                        "inverse-primary": "#b7c4ff",
+                        "secondary-fixed": "#ffdfa0",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "inverse-on-surface": "#ebf1ff",
+                        "primary": "#001a61",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "on-surface-variant": "#444652",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-surface": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3d58b5",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-background": "#131c2a",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "background": "#f9f9ff",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#dae3f6",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed": "#001551",
+                        "outline-variant": "#c5c5d4",
+                        "primary-fixed": "#dce1ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#795900",
+                        "tertiary": "#051c5b",
+                        "surface-container-high": "#dfe8fc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "display-lg-mobile": ["Figtree"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-desktop w-full h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Africaine des Finances</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Marchés</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Administration</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Portefeuille</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer">account_balance_wallet</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a high-level African financial executive, clean-shaven, wearing a tailored navy suit. The portrait is set against a soft, out-of-focus high-end office background with warm wooden accents and natural morning light, conveying trust, experience, and authority in the financial sector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQraZo8Ga6zAhcp3Ab_iaJj_Vfl-jNhAilc_ikRj3RTqEaoYnFPgFo_7j0j6fxor2sWP6qwg39_ZOAWiQtkKMV8zsGRkAptaEYO-g_OmeohHR6mLAF1dc9LqROqgSC8_mDEaj3GhPIc7RzQgQZnZx35nLvVM9Jc_srXK8LRPORf3n6-huDxDIFqCHNQd0rbY4a49c1hMMTsdNcsM8yPbrxLaUxH2JmQcOMbvlndpxKc2tESVWEecE8EZDEYVkqzG0EG3B8_iaHsw"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline hidden md:flex flex-col py-stack-lg px-4 space-y-2">
+<div class="mb-8 px-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</h2>
+<p class="text-data-label font-data-label text-outline">Premium Wealth Management</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md">Market Data</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">sync</span>
+<span class="font-body-md">Sync Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-body-md">Permissions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<div class="mt-auto p-4 bg-primary text-on-primary rounded-xl">
+<p class="text-data-label font-data-label mb-2">Opportunité Alpha</p>
+<button class="w-full py-2 bg-secondary-container text-on-secondary-container font-bold rounded hover:opacity-90 transition-opacity">Invest Now</button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 p-margin-desktop bg-surface-bright">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary">Administration des Marchés</h1>
+<p class="text-body-lg text-on-surface-variant">Centre de contrôle et synchronisation des flux financiers BRVM.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 px-4 py-2 border border-primary text-primary font-bold rounded hover:bg-primary-fixed transition-all">
+<span class="material-symbols-outlined">download</span>
+<span>Exporter Journal</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-bold rounded hover:bg-tertiary transition-all shadow-sm">
+<span class="material-symbols-outlined">refresh</span>
+<span>Sync Manuelle</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- API BRVM Status Card -->
+<div class="md:col-span-4 glass-panel p-stack-lg rounded-xl flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-6">
+<span class="px-3 py-1 bg-[#2EB8731A] text-[#2EB873] font-data-label text-data-label rounded-full border border-[#2EB87333]">OPÉRATIONNEL</span>
+<span class="material-symbols-outlined text-outline">api</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Passerelle API BRVM</h3>
+<p class="text-body-md text-on-surface-variant mb-4">Flux temps-réel des cotations régionales.</p>
+</div>
+<div class="relative z-10 flex items-center gap-2">
+<div class="w-3 h-3 bg-[#2EB873] rounded-full status-pulse"></div>
+<span class="text-data-label font-data-label text-on-surface">Latence: 142ms</span>
+</div>
+<!-- Mini visual decoration -->
+<div class="absolute bottom-0 right-0 w-32 h-32 opacity-10 pointer-events-none">
+
+</div>
+</div>
+<!-- Sync Metrics -->
+<div class="md:col-span-8 glass-panel p-stack-lg rounded-xl flex flex-col md:flex-row gap-8">
+<div class="flex-1">
+<p class="text-data-label font-data-label text-outline uppercase mb-2">Dernière Synchronisation</p>
+<p class="font-display-lg text-primary text-3xl mb-1">Aujourd'hui, 14:35:02</p>
+<p class="text-body-md text-[#2EB873] flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                2,492 entités mises à jour avec succès.
+                            </p>
+</div>
+<div class="w-px bg-outline-variant hidden md:block"></div>
+<div class="flex-1">
+<p class="text-data-label font-data-label text-outline uppercase mb-2">Intégrité des Données</p>
+<p class="font-display-lg text-primary text-3xl mb-1">99.98%</p>
+<p class="text-body-md text-on-surface-variant">2 anomalies détectées en 24h.</p>
+</div>
+</div>
+<!-- Market Asset Visibility Control -->
+<div class="md:col-span-8 glass-panel rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-primary">Visibilité des Actifs</h3>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded border border-outline-variant">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="text-data-label font-data-label">Tous les types</span>
+</div>
+</div>
+<table class="w-full border-collapse text-left">
+<thead>
+<tr class="bg-[#EEF3FF] text-on-primary-fixed-variant font-bold text-data-label border-b border-outline-variant">
+<th class="px-6 py-4">ACTIF</th>
+<th class="px-6 py-4">TYPE</th>
+<th class="px-6 py-4">SOURCE</th>
+<th class="px-6 py-4">DERNIER PRIX</th>
+<th class="px-6 py-4 text-right">STATUT</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-bold text-primary">SONATEL (SNTS)</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">Action</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">API_BRVM_PROD</td>
+<td class="px-6 py-4 font-data-label font-bold">17,450 XOF</td>
+<td class="px-6 py-4 text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+<tr class="bg-[#F3F4F7] hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-bold text-primary">BICI CI (BICC)</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">Action</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">API_BRVM_PROD</td>
+<td class="px-6 py-4 font-data-label font-bold">7,800 XOF</td>
+<td class="px-6 py-4 text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-bold text-primary">TPCI 5.90% 2024-2034</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">Obligation</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">MANUAL_UPLOAD</td>
+<td class="px-6 py-4 font-data-label font-bold">10,000 XOF</td>
+<td class="px-6 py-4 text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+<tr class="bg-[#F3F4F7] hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-bold text-primary">FCP HORIZON</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">FCP</td>
+<td class="px-6 py-4 text-on-surface-variant text-data-label">INTERNAL_SGR</td>
+<td class="px-6 py-4 font-data-label font-bold">1,245.82 XOF</td>
+<td class="px-6 py-4 text-right">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-surface-container-lowest text-center">
+<button class="text-primary font-bold text-data-label hover:underline">Voir les 142 autres actifs</button>
+</div>
+</div>
+<!-- Error Log Panel -->
+<div class="md:col-span-4 glass-panel rounded-xl flex flex-col h-full overflow-hidden">
+<div class="p-6 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-primary">Journal des Erreurs</h3>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-3 max-h-[500px] scrollbar-hide">
+<!-- Error Item -->
+<div class="p-3 bg-error-container/20 border-l-4 border-error rounded flex gap-3 items-start">
+<span class="material-symbols-outlined text-error mt-0.5">error</span>
+<div>
+<p class="text-data-label font-bold text-on-error-container">TIMEOUT_API_001</p>
+<p class="text-xs text-on-surface-variant font-data-label">14:12:05 — Échec de récupération BOLLORE.</p>
+<button class="text-primary font-bold text-[10px] mt-2 uppercase tracking-wider">Réessayer</button>
+</div>
+</div>
+<!-- Warning Item -->
+<div class="p-3 bg-secondary-container/10 border-l-4 border-secondary rounded flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary mt-0.5">warning</span>
+<div>
+<p class="text-data-label font-bold text-on-secondary-container">SCHEMA_MISMATCH</p>
+<p class="text-xs text-on-surface-variant font-data-label">12:30:11 — Nouveau champ détecté: 'vol_prev'.</p>
+</div>
+</div>
+<!-- Error Item -->
+<div class="p-3 bg-error-container/20 border-l-4 border-error rounded flex gap-3 items-start">
+<span class="material-symbols-outlined text-error mt-0.5">error</span>
+<div>
+<p class="text-data-label font-bold text-on-error-container">AUTH_EXPIRED</p>
+<p class="text-xs text-on-surface-variant font-data-label">09:00:00 — Jeton d'accès BRVM expiré.</p>
+<button class="text-primary font-bold text-[10px] mt-2 uppercase tracking-wider">Renouveler</button>
+</div>
+</div>
+<!-- Silent Error -->
+<div class="p-3 border-l-4 border-outline-variant rounded flex gap-3 items-start opacity-60">
+<span class="material-symbols-outlined text-outline mt-0.5">info</span>
+<div>
+<p class="text-data-label font-bold">INFO_CLEANUP</p>
+<p class="text-xs text-on-surface-variant font-data-label">Hier, 23:59 — Nettoyage du cache terminé.</p>
+</div>
+</div>
+</div>
+<button class="p-4 bg-primary-container text-on-primary-container font-bold text-center hover:bg-primary transition-colors">
+                            Journal Complet
+                        </button>
+</div>
+</div>
+<!-- Footer Separator -->
+<div class="h-section-gap"></div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<span class="font-headline-sm text-headline-sm text-primary">Africaine des Finances</span>
+<p class="font-data-label text-data-label text-outline">© 2024 Africaine des Finances. All rights reserved.</p>
+</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for table rows highlight
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.boxShadow = "inset 4px 0 0 #001a61";
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.boxShadow = "none";
+            });
+        });
+
+        // Simple visibility toggle notification
+        document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const assetName = e.target.closest('tr').querySelector('td:first-child').innerText;
+                const status = e.target.checked ? "visible" : "masqué";
+                console.log(`L'actif ${assetName} est maintenant ${status}.`);
+            });
+        });
+    </script>
+</body></html>

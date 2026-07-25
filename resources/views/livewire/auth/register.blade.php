@@ -1,74 +1,46 @@
-<main class="flex-1 pt-20">
-    <section class="bg-gradient-hero text-primary-foreground py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Créer un compte</h1>
-                <p class="text-lg text-primary-foreground/90">Inscrivez-vous pour accéder à nos formations et gérer votre parcours d'apprentissage</p>
-            </div>
+<div class="bg-[#f9f9ff] min-h-[70vh]">
+    <section class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12 lg:py-20 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+            <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c]">Rejoindre</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61] mt-3 leading-tight">Créez votre compte</h1>
+            <p class="mt-4 text-[#444652] text-lg">Inscription gratuite pour suivre les marchés, formations et événements.</p>
+            <ul class="mt-6 space-y-2 text-sm text-[#444652]">
+                <li class="flex gap-2"><span class="material-symbols-outlined text-[#001a61] text-base">check_circle</span> Accès formations et certificats</li>
+                <li class="flex gap-2"><span class="material-symbols-outlined text-[#001a61] text-base">check_circle</span> Liste de suivi BRVM personnalisée</li>
+                <li class="flex gap-2"><span class="material-symbols-outlined text-[#001a61] text-base">check_circle</span> Billets d’événements</li>
+            </ul>
+        </div>
+
+        <div class="bg-white border border-[#c5c5d4] rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 class="text-xl font-bold text-[#001a61]">Inscription</h2>
+            <form wire:submit.prevent="register" class="mt-6 space-y-4">
+                <div>
+                    <label class="text-xs font-semibold text-[#757683]">Nom complet</label>
+                    <input wire:model="name" type="text" required class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('name') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-[#757683]">Email</label>
+                    <input wire:model="email" type="email" required class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('email') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-[#757683]">Mot de passe</label>
+                    <input wire:model="password" type="password" required class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('password') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-[#757683]">Confirmation</label>
+                    <input wire:model="password_confirmation" type="password" required class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                </div>
+                <button type="submit" class="w-full bg-[#001a61] text-white font-bold py-3 rounded-lg hover:bg-[#0a2e8c]">
+                    Créer mon compte
+                </button>
+            </form>
+            <p class="mt-6 text-center text-sm text-[#757683]">
+                Déjà inscrit ?
+                <a href="{{ route('connexion') }}" class="font-bold text-[#001a61] hover:underline">Se connecter</a>
+            </p>
         </div>
     </section>
-    <section class="py-16">
-        <div class="container mx-auto px-4 flex items-center justify-center">
-            <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md">
-                <div class="flex flex-col space-y-1.5 p-6">
-                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Inscription</h3>
-                    <p class="text-sm text-muted-foreground">Créez votre compte client</p>
-                </div>
-                <div class="p-6 pt-0">
-                    <form wire:submit="register" class="space-y-4">
-                        <!-- Name -->
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="name">Nom complet</label>
-                            <input wire:model="name" type="text"
-                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                id="name" name="name" placeholder="Votre nom complet" required autofocus autocomplete="name">
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
-
-                        <!-- Email Address -->
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="email">Email</label>
-                            <input wire:model="email" type="email"
-                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                id="email" name="email" placeholder="email@exemple.com" required autocomplete="username">
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
-
-                        <!-- Password -->
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                for="password">Mot de passe</label>
-                            <input wire:model="password" type="password" 
-                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                for="password_confirmation">Confirmer le mot de passe</label>
-                            <input wire:model="password_confirmation" type="password" 
-                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                                id="password_confirmation" name="password_confirmation" placeholder="••••••••" required autocomplete="new-password">
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                        </div>
-
-                        <div class="flex items-center justify-between mt-4">
-                            <a class="text-sm text-primary hover:underline" 
-                               href="{{ route('connexion') }}" 
-                               wire:navigate>
-                                Déjà inscrit ?
-                            </a>
-
-                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3"
-                                type="submit">
-                                S'inscrire
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+</div>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<title>Palmarès Actions - Africaine des Finances</title>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c5c5d4;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131c2a",
+                    "outline": "#757683",
+                    "secondary": "#795900",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-fixed": "#001551",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "tertiary": "#051c5b",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dce1ff",
+                    "surface-variant": "#dae3f6",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "primary": "#001a61",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-high": "#dfe8fc",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-container-highest": "#dae3f6",
+                    "on-surface": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "inverse-surface": "#28313f",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#839cfd",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "tertiary-fixed": "#dce1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "section-gap": "80px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary-container flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] docked full-width top-0 z-50">
+<div class="flex items-center gap-stack-sm text-on-primary">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="font-data-label text-data-label font-bold">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-md text-on-primary/80">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors" data-icon="language">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors" data-icon="mail">mail</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors" data-icon="call">call</span>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 border-b border-outline-variant dark:border-outline sticky top-10 z-40">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">Africaine des Finances</div>
+<div class="hidden md:flex gap-stack-lg">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 text-data-label font-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-data-label font-data-label" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-data-label font-data-label" href="#">Training</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-data-label font-data-label" href="#">Analysis</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-data-label font-data-label" href="#">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-data-label font-data-label" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="hidden lg:block text-primary font-bold px-4 py-2 hover:bg-surface-container-high transition-all">Login</button>
+<button class="bg-primary-container text-on-primary-container font-bold px-6 py-2 rounded-lg hover:opacity-80 transition-all">Commencer à investir</button>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg min-h-screen">
+<!-- Header Section -->
+<section class="mb-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-end gap-stack-md">
+<div class="max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Palmarès du Marché</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Analysez les performances en temps réel de la BRVM. Filtrez les titres par hausse, baisse, volume d'échange et capitalisation boursière.</p>
+</div>
+<div class="bg-surface-container p-stack-sm rounded-xl flex gap-stack-sm">
+<div class="flex flex-col items-end px-stack-md">
+<span class="text-data-label font-data-label text-on-surface-variant">BRVM Composite</span>
+<div class="flex items-center gap-1">
+<span class="text-headline-sm font-headline-sm text-primary">214.32</span>
+<span class="text-data-label font-data-label text-success text-[#2EB873] flex items-center">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                                +0.45%
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Tabs Section -->
+<section class="mb-stack-lg">
+<div class="flex items-center gap-stack-sm mb-stack-lg overflow-x-auto pb-4 custom-scrollbar">
+<button class="px-6 py-3 bg-primary text-on-primary rounded-full font-bold whitespace-nowrap shadow-md transition-all active:scale-95" onclick="switchTab(this, 'gainers')">Plus fortes hausses</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'losers')">Plus fortes baisses</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'volumes')">Plus gros volumes</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'caps')">Capitalisation</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'dividends')">Rendements</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'monthly')">Perf. Mensuelle</button>
+<button class="px-6 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-medium whitespace-nowrap hover:bg-surface-variant transition-all" onclick="switchTab(this, 'yearly')">Perf. Annuelle</button>
+</div>
+<!-- Content Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#EEF3FF] border-b border-outline-variant">
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label">Rang</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label">Valeur</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label">Secteur</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label text-right">Cours (XOF)</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label text-right">Variation</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label text-right">Volume</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label font-data-label text-right">Action</th>
+</tr>
+</thead>
+<tbody id="ranking-table-body">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<span class="w-8 h-8 flex items-center justify-center bg-primary-container text-on-primary-container font-bold rounded-lg text-sm">1</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-primary">SONATEL SN</span>
+<span class="text-xs text-on-surface-variant">SNTS</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">Télécoms</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">17 800</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#2EB873] font-bold">+7.45%</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">45,201</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<span class="w-8 h-8 flex items-center justify-center bg-surface-container-high text-on-surface-variant font-bold rounded-lg text-sm">2</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-primary">BOLLORE CI</span>
+<span class="text-xs text-on-surface-variant">BOLC</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">Transport</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">1 550</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#2EB873] font-bold">+5.21%</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">12,890</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<span class="w-8 h-8 flex items-center justify-center bg-surface-container-high text-on-surface-variant font-bold rounded-lg text-sm">3</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-primary">ECOBANK CI</span>
+<span class="text-xs text-on-surface-variant">ECOC</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">Finances</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">6 900</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#2EB873] font-bold">+4.38%</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">8,445</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<span class="w-8 h-8 flex items-center justify-center bg-surface-container-high text-on-surface-variant font-bold rounded-lg text-sm">4</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-primary">SOLIBRA CI</span>
+<span class="text-xs text-on-surface-variant">SLBC</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">Industrie</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">85 000</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#2EB873] font-bold">+3.20%</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">2,102</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<span class="w-8 h-8 flex items-center justify-center bg-surface-container-high text-on-surface-variant font-bold rounded-lg text-sm">5</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-primary">SGB CI</span>
+<span class="text-xs text-on-surface-variant">SGBC</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">Finances</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">16 200</td>
+<td class="px-6 py-4 text-right">
+<span class="text-[#2EB873] font-bold">+2.85%</span>
+</td>
+<td class="px-6 py-4 text-right font-data-value text-data-value">6,730</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pagination / Action -->
+<div class="mt-stack-md flex justify-between items-center">
+<span class="text-data-label font-data-label text-on-surface-variant">Affichage de 1-5 sur 46 titres</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Insights Bento Grid -->
+<section class="mt-section-gap grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="md:col-span-2 bg-primary rounded-xl p-stack-lg text-on-primary flex flex-col justify-between relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-headline-md font-headline-md mb-stack-sm">Analyse de Secteur : Finance</h3>
+<p class="opacity-80 max-w-lg mb-stack-md">Le secteur financier mène la croissance trimestrielle avec une augmentation moyenne de 12.4% de la capitalisation boursière sur les banques ivoiriennes.</p>
+<button class="bg-secondary-container text-on-secondary-container font-bold px-6 py-2 rounded-lg hover:brightness-110 transition-all">Voir le rapport sectoriel</button>
+</div>
+<div class="absolute right-0 bottom-0 opacity-10 scale-150 transform translate-x-1/4 translate-y-1/4">
+<span class="material-symbols-outlined text-[200px]" data-icon="account_balance">account_balance</span>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-stack-lg border border-outline-variant">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-stack-md">Top Dividende</h3>
+<div class="flex items-center gap-stack-md mb-stack-md">
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<div class="font-bold text-primary">NESTLE CI</div>
+<div class="text-sm text-on-surface-variant">Rendement : 11.2%</div>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2 font-medium">Prochain détachement : 15 Juin 2024</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant mt-section-gap">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-stack-sm">Africaine des Finances</div>
+<p class="text-body-md text-on-surface-variant max-w-xs mb-stack-md">Votre partenaire stratégique pour l'investissement boursier et financier dans la zone UMOA.</p>
+<div class="flex gap-stack-sm">
+<span class="material-symbols-outlined p-2 bg-surface rounded-full cursor-pointer hover:text-primary transition-all" data-icon="public">public</span>
+<span class="material-symbols-outlined p-2 bg-surface rounded-full cursor-pointer hover:text-primary transition-all" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-stack-sm">Platform</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline transition-all" href="#">Trading</a></li>
+<li><a class="hover:underline transition-all" href="#">Palmarès</a></li>
+<li><a class="hover:underline transition-all" href="#">Indices</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-stack-sm">Learn</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline transition-all" href="#">Académie</a></li>
+<li><a class="hover:underline transition-all" href="#">Webinaires</a></li>
+<li><a class="hover:underline transition-all" href="#">Guides PDF</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-stack-sm">Legal</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline transition-all" href="#">Régulation</a></li>
+<li><a class="hover:underline transition-all" href="#">Confidentialité</a></li>
+<li><a class="hover:underline transition-all" href="#">Mentions Légales</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-stack-sm">Contact</h4>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline transition-all" href="#">Support</a></li>
+<li><a class="hover:underline transition-all" href="#">Siège Social</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop py-stack-md border-t border-outline-variant text-center md:text-left">
+<span class="text-data-label font-data-label text-on-surface-variant">© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</span>
+</div>
+</footer>
+<script>
+        function switchTab(btn, type) {
+            // Update button styles
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('bg-primary', 'text-on-primary', 'shadow-md', 'font-bold');
+                b.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'font-medium');
+            });
+            btn.classList.add('bg-primary', 'text-on-primary', 'shadow-md', 'font-bold');
+            btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'font-medium');
+
+            // Simulate Data Update
+            const tbody = document.getElementById('ranking-table-body');
+            const data = {
+                gainers: [
+                    { name: 'SONATEL SN', ticker: 'SNTS', sector: 'Télécoms', price: '17 800', change: '+7.45%', vol: '45,201', up: true },
+                    { name: 'BOLLORE CI', ticker: 'BOLC', sector: 'Transport', price: '1 550', change: '+5.21%', vol: '12,890', up: true },
+                    { name: 'ECOBANK CI', ticker: 'ECOC', sector: 'Finances', price: '6 900', change: '+4.38%', vol: '8,445', up: true },
+                    { name: 'SOLIBRA CI', ticker: 'SLBC', sector: 'Industrie', price: '85 000', change: '+3.20%', vol: '2,102', up: true },
+                    { name: 'SGB CI', ticker: 'SGBC', sector: 'Finances', price: '16 200', change: '+2.85%', vol: '6,730', up: true }
+                ],
+                losers: [
+                    { name: 'SITAB CI', ticker: 'STBC', sector: 'Agriculture', price: '6 100', change: '-6.45%', vol: '1,200', up: false },
+                    { name: 'CIE CI', ticker: 'CIEC', sector: 'Services', price: '2 150', change: '-4.20%', vol: '15,800', up: false },
+                    { name: 'TOTAL CI', ticker: 'TTLC', sector: 'Distribution', price: '2 400', change: '-3.85%', vol: '8,200', up: false },
+                    { name: 'UNIWAX CI', ticker: 'UNXC', sector: 'Industrie', price: '540', change: '-2.10%', vol: '4,500', up: false },
+                    { name: 'ONATEL BF', ticker: 'ONTB', sector: 'Télécoms', price: '2 250', change: '-1.45%', vol: '9,700', up: false }
+                ],
+                volumes: [
+                    { name: 'ECOBANK CI', ticker: 'ECOC', sector: 'Finances', price: '6 900', change: '+0.45%', vol: '254,800', up: true },
+                    { name: 'SONATEL SN', ticker: 'SNTS', sector: 'Télécoms', price: '17 800', change: '+1.20%', vol: '142,300', up: true },
+                    { name: 'SGB CI', ticker: 'SGBC', sector: 'Finances', price: '16 200', change: '-0.20%', vol: '98,400', up: false },
+                    { name: 'BOLLORE CI', ticker: 'BOLC', sector: 'Transport', price: '1 550', change: '+0.00%', vol: '87,200', up: null },
+                    { name: 'PALM CI', ticker: 'PALC', sector: 'Agriculture', price: '6 800', change: '-0.15%', vol: '65,300', up: false }
+                ]
+            };
+
+            const selectedData = data[type] || data.gainers;
+            
+            tbody.innerHTML = selectedData.map((item, index) => `
+                <tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+                    <td class="px-6 py-4">
+                        <span class="w-8 h-8 flex items-center justify-center ${index === 0 ? 'bg-primary-container text-on-primary-container' : 'bg-surface-container-high text-on-surface-variant'} font-bold rounded-lg text-sm">${index + 1}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-primary">${item.name}</span>
+                            <span class="text-xs text-on-surface-variant">${item.ticker}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 bg-surface-container-high text-on-tertiary-fixed-variant rounded text-xs font-medium uppercase tracking-wider">${item.sector}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right font-data-value text-data-value">${item.price}</td>
+                    <td class="px-6 py-4 text-right">
+                        <span class="${item.up === true ? 'text-[#2EB873]' : item.up === false ? 'text-error' : 'text-on-surface-variant'} font-bold">${item.change}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right font-data-value text-data-value">${item.vol}</td>
+                    <td class="px-6 py-4 text-right">
+                        <button class="p-2 rounded-lg border border-outline-variant text-primary hover:bg-primary hover:text-on-primary transition-all">
+                            <span class="material-symbols-outlined text-sm" data-icon="add_chart">add_chart</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    </script>
+</body></html>

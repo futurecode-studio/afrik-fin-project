@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paramètres Système &amp; Sécurité | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #757683;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dae3f6",
+                        "surface-bright": "#f9f9ff",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "tertiary-container": "#213371",
+                        "primary-container": "#0a2e8c",
+                        "inverse-primary": "#b7c4ff",
+                        "secondary-fixed": "#ffdfa0",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "inverse-on-surface": "#ebf1ff",
+                        "primary": "#001a61",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "on-surface-variant": "#444652",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-surface": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#3d58b5",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-background": "#131c2a",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "background": "#f9f9ff",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#dae3f6",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed": "#001551",
+                        "outline-variant": "#c5c5d4",
+                        "primary-fixed": "#dce1ff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#795900",
+                        "tertiary": "#051c5b",
+                        "surface-container-high": "#dfe8fc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "display-lg-mobile": ["Figtree"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-desktop w-full h-16 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Africaine des Finances</h1>
+</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<nav class="flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Portail Client</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Investissements</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Paramètres Système</a>
+</nav>
+<div class="flex items-center gap-4 ml-6 border-l pl-6 border-outline-variant">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">account_balance_wallet</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a high-net-worth African executive in a tailored navy blue suit. The lighting is soft and cinematic, emphasizing a professional and trustworthy demeanor. The background is a clean, minimalist office environment with subtle blue tones, reflecting the premium financial institution aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7glC2eeJHDD-mPnSoYhQH3fkphCBLNhh4oe5HMyieOBk-L8_5SydlKuP_ncuK5aW_Aq1G_JvcdTLbBNMrHHLee4GsDLCMgApCaUf0HZ3Y528TV-w3izb8o9H-9o06F1kLKlSusk0CNCiqGBn6FM3H-xtjpI1zMrTiCfbQpUPIOz1lVnHq-Y6tNFwiKnOZuLApiENPaXRNwqm3w8oFHv_Tk5ahMupl1melWZ2LB4vpOjG4ggk7fAcM6HDxpSm6_zx34aIyNlgQWw"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-stack-lg px-4 space-y-2 bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline fixed left-0 top-16 h-full w-64">
+<div class="px-4 mb-stack-lg">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Administration</h2>
+<p class="text-on-surface-variant text-xs uppercase tracking-widest mt-1">Infrastructure Globale</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md">My Trainings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md">My Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-md">My Watchlist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<div class="mt-auto p-4 bg-primary text-on-primary rounded-xl mb-16">
+<p class="text-xs font-semibold opacity-80 mb-2">Sécurité</p>
+<p class="text-sm font-medium mb-4">Niveau de protection : Élevé</p>
+<button class="w-full py-2 bg-secondary-container text-on-secondary-container font-bold rounded text-sm hover:opacity-90 transition-opacity">
+                    Vérification System
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-stack-lg lg:p-margin-desktop bg-background min-h-screen">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-stack-lg">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary mb-2">Paramètres &amp; Sécurité</h2>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Configuration avancée de l'infrastructure bancaire et gestion de la conformité sécuritaire pour l'Africaine des Finances.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-2 border border-primary text-primary font-bold rounded hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl">backup</span>
+                            Sauvegarde
+                        </button>
+<button class="flex items-center gap-2 px-6 py-2 bg-secondary-container text-on-secondary-container font-bold rounded hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-xl">save</span>
+                            Appliquer
+                        </button>
+</div>
+</div>
+<!-- Bento Grid for System Control -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Security Policies Section -->
+<section class="lg:col-span-8 bg-white border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center justify-between mb-stack-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-surface-container p-2 rounded-lg">security</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Politiques de Sécurité Globale</h3>
+</div>
+<span class="text-xs font-data-label text-outline uppercase tracking-widest">Dernière maj: Il y a 2h</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div>
+<h4 class="font-bold text-on-surface">Authentification Multi-facteurs (MFA)</h4>
+<p class="text-sm text-on-surface-variant">Forcer le MFA pour tous les accès institutionnels et comptes VIP.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div>
+<h4 class="font-bold text-on-surface">Expiration des Sessions</h4>
+<p class="text-sm text-on-surface-variant">Déconnexion automatique après inactivité prolongée (Paramétré: 15min).</p>
+</div>
+<select class="bg-white border-outline-variant rounded-md text-sm font-medium focus:ring-primary focus:border-primary">
+<option>5 minutes</option>
+<option selected="">15 minutes</option>
+<option>30 minutes</option>
+<option>1 heure</option>
+</select>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-all cursor-pointer">
+<div>
+<h4 class="font-bold text-on-surface">Restrictions IP Géographiques</h4>
+<p class="text-sm text-on-surface-variant">Limiter l'accès aux back-offices aux régions approuvées (UEMOA/CEMAC).</p>
+</div>
+<button class="text-primary font-bold text-sm underline hover:text-primary-container">Gérer la liste</button>
+</div>
+</div>
+</section>
+<!-- API Keys Sidebar -->
+<section class="lg:col-span-4 bg-tertiary-container text-white rounded-xl p-stack-lg relative overflow-hidden">
+
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-secondary-container">key</span>
+<h3 class="font-headline-sm text-headline-sm">Clés API &amp; Accès</h3>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-white/10 backdrop-blur rounded-lg border border-white/20">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-data-label uppercase opacity-70">Passerelle Paiement</span>
+<span class="px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded">ACTIVE</span>
+</div>
+<code class="font-data-value text-xs break-all block py-2 px-3 bg-black/20 rounded">af_prod_live_9x77v...km22</code>
+</div>
+<div class="p-4 bg-white/10 backdrop-blur rounded-lg border border-white/20">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-data-label uppercase opacity-70">Reporting SWIFT</span>
+<span class="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 text-[10px] font-bold rounded">DEV</span>
+</div>
+<code class="font-data-value text-xs break-all block py-2 px-3 bg-black/20 rounded">af_test_sbx_r45_...p90q</code>
+</div>
+<button class="w-full mt-4 py-3 bg-white text-primary font-bold rounded-lg flex items-center justify-center gap-2 hover:bg-secondary-container hover:text-on-secondary-container transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                                    Générer une clé
+                                </button>
+</div>
+</div>
+</section>
+<!-- Audit Log & Monitoring -->
+<section class="lg:col-span-12 bg-white border border-outline-variant rounded-xl overflow-hidden">
+<div class="px-stack-lg py-4 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">history_edu</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Journal d'Audit Système</h3>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-full text-sm focus:ring-primary focus:border-primary w-64" placeholder="Rechercher un événement..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-sm">search</span>
+</div>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded">filter_list</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-primary font-bold border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-data-label text-xs uppercase">Horodatage</th>
+<th class="px-6 py-4 font-data-label text-xs uppercase">Utilisateur</th>
+<th class="px-6 py-4 font-data-label text-xs uppercase">Action</th>
+<th class="px-6 py-4 font-data-label text-xs uppercase">Module</th>
+<th class="px-6 py-4 font-data-label text-xs uppercase">IP Address</th>
+<th class="px-6 py-4 font-data-label text-xs uppercase text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value text-sm">24/05/2024 14:32:01</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-[10px] flex items-center justify-center text-white font-bold">MK</div>
+<span class="font-medium">Moussa K. (Admin)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Rotation Clé API SWIFT</td>
+<td class="px-6 py-4 text-sm">Core Banking API</td>
+<td class="px-6 py-4 font-data-value text-xs">197.231.45.12</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">SUCCÈS</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value text-sm">24/05/2024 12:15:44</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-outline text-[10px] flex items-center justify-center text-white font-bold">SY</div>
+<span class="font-medium">System Core</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Sauvegarde Snapshot Hebdomadaire</td>
+<td class="px-6 py-4 text-sm">Infrastructure/Backup</td>
+<td class="px-6 py-4 font-data-value text-xs">Internal::AWS-SA-1</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">TERMINÉ</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value text-sm">24/05/2024 09:12:00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-error text-[10px] flex items-center justify-center text-white font-bold">EXT</div>
+<span class="font-medium">Inconnu</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium">Tentative Connexion MFA Échouée</td>
+<td class="px-6 py-4 text-sm">Portail Client Login</td>
+<td class="px-6 py-4 font-data-value text-xs">45.12.89.201</td>
+<td class="px-6 py-4 text-right">
+<span class="px-3 py-1 bg-error-container text-error text-xs font-bold rounded-full">ALERTE</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Branding & Identity -->
+<section class="lg:col-span-12 bg-white border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-primary">palette</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Identité de Marque &amp; Personnalisation UI</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+<div class="space-y-4">
+<label class="block">
+<span class="text-sm font-bold text-on-surface block mb-2">Logo Principal</span>
+<div class="border-2 border-dashed border-outline-variant rounded-lg h-32 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-3xl text-outline">upload_file</span>
+<span class="text-xs text-on-surface-variant font-medium">Cliquez pour remplacer (SVG/PNG)</span>
+</div>
+</label>
+</div>
+<div class="space-y-4">
+<div>
+<span class="text-sm font-bold text-on-surface block mb-2">Couleur Primaire (Institutional Blue)</span>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-[#001a61] shadow-inner border border-outline-variant"></div>
+<input class="font-data-value flex-1 px-4 py-2 border-outline-variant rounded border focus:ring-primary focus:border-primary" type="text" value="#001A61"/>
+</div>
+</div>
+<div>
+<span class="text-sm font-bold text-on-surface block mb-2">Couleur Premium (Gold Accent)</span>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-[#FFBF00] shadow-inner border border-outline-variant"></div>
+<input class="font-data-value flex-1 px-4 py-2 border-outline-variant rounded border focus:ring-primary focus:border-primary" type="text" value="#FFBF00"/>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block">
+<span class="text-sm font-bold text-on-surface block mb-2">Police de Caractères par défaut</span>
+<select class="w-full bg-white border-outline-variant rounded-lg text-sm font-medium focus:ring-primary focus:border-primary p-3">
+<option selected="">Figtree (Modern Professional)</option>
+<option>IBM Plex Sans (Precise Technical)</option>
+<option>Playfair Display (Premium Classical)</option>
+</select>
+</label>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<p class="text-xs text-on-surface-variant mb-3 italic">"L'identité visuelle renforce la confiance institutionnelle. Veillez à respecter les standards de contraste WCAG AA."</p>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded">CONTRASTE OK</div>
+<div class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded">LISIBILITÉ 9.8/10</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom spacing for FAB and Footer -->
+<div class="h-24"></div>
+</div>
+</main>
+</div>
+<!-- Contextual FAB (Suppressing as per mandate on Settings screen, but keeping a subtle help button) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform z-40 group">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="absolute right-full mr-4 px-3 py-1 bg-on-surface text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Assistance Technique</span>
+</button>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full relative z-10">
+<div class="flex items-center gap-2 mb-4 md:mb-0">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">ADF</span>
+<span class="text-outline font-data-label text-data-label ml-2">© 2024 Africaine des Finances. All rights reserved.</span>
+</div>
+<div class="flex gap-8">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+<div class="hidden lg:flex items-center gap-2 text-xs text-outline ml-4">
+<span class="material-symbols-outlined text-sm">dns</span>
+<span>Server: AF-W-PROD-01</span>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parent = this.closest('.bg-surface-container-low');
+                if (this.checked) {
+                    parent.style.borderColor = 'transparent';
+                } else {
+                    parent.style.borderColor = '#ba1a1a';
+                }
+            });
+        });
+
+        // Tab selection visual logic (simulated)
+        const sideNavLinks = document.querySelectorAll('aside a');
+        sideNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // In a real app, this would be handled by a router
+                // No need to preventDefault for a simple mock-up UI
+            });
+        });
+    </script>
+</body></html>

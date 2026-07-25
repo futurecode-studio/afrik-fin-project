@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simulateur d'Intérêts Composés | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#dae3f6",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container-high": "#dfe8fc",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#051c5b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-surface": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "tertiary-container": "#213371",
+                    "outline": "#757683",
+                    "background": "#f9f9ff",
+                    "inverse-surface": "#28313f",
+                    "surface-tint": "#3d58b5",
+                    "secondary-container": "#ffbf00",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary": "#001a61",
+                    "on-background": "#131c2a",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "on-secondary-fixed": "#261a00",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary-container": "#0a2e8c",
+                    "secondary": "#795900",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f9f9ff; color: #131c2a; font-family: 'Figtree', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f0f3ff; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c5c5d4; border-radius: 10px; }
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { background: #dae3f6; height: 4px; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; background: #001a61; border-radius: 50%; margin-top: -6px; cursor: pointer; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b border-outline-variant">
+<nav class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<div class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Marchés</a>
+<a class="text-primary font-bold border-b-2 border-secondary-container transition-colors" href="#">Investir</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Formations</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 border border-primary text-primary font-bold rounded hover:bg-surface-container-low transition-all">Contact</button>
+<button class="px-6 py-2 bg-primary-container text-on-primary-container font-bold rounded hover:opacity-80 transition-opacity">Espace Client</button>
+</div>
+</nav>
+</header>
+<main class="flex-grow max-w-container-max mx-auto w-full px-margin-desktop py-stack-lg">
+<!-- Hero Section -->
+<section class="mb-section-gap">
+<div class="max-w-3xl">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">Simulateur de Croissance du Patrimoine</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Anticipez l'évolution de vos investissements grâce à la puissance des intérêts composés. Notre outil vous permet de projeter votre capital sur le long terme avec précision.
+                </p>
+</div>
+</section>
+<!-- Calculator Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar: Inputs -->
+<aside class="lg:col-span-4 flex flex-col gap-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">tune</span> Configuration
+                    </h3>
+<div class="space-y-6">
+<!-- Initial Capital -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-data-label text-data-label text-on-surface-variant uppercase">Capital Initial</label>
+<span class="font-data-value text-data-value text-primary" id="initial-val">5 000 000 FCFA</span>
+</div>
+<input class="w-full" id="initial-input" max="100000000" min="0" step="500000" type="range" value="5000000"/>
+</div>
+<!-- Monthly Deposit -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-data-label text-data-label text-on-surface-variant uppercase">Versement Mensuel</label>
+<span class="font-data-value text-data-value text-primary" id="monthly-val">100 000 FCFA</span>
+</div>
+<input class="w-full" id="monthly-input" max="5000000" min="0" step="10000" type="range" value="100000"/>
+</div>
+<!-- Duration -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-data-label text-data-label text-on-surface-variant uppercase">Durée (Années)</label>
+<span class="font-data-value text-data-value text-primary" id="duration-val">15 ans</span>
+</div>
+<input class="w-full" id="duration-input" max="40" min="1" step="1" type="range" value="15"/>
+</div>
+<!-- Interest Rate -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-data-label text-data-label text-on-surface-variant uppercase">Taux Annuel Estimé</label>
+<span class="font-data-value text-data-value text-primary" id="rate-val">7 %</span>
+</div>
+<input class="w-full" id="rate-input" max="15" min="1" step="0.5" type="range" value="7"/>
+</div>
+</div>
+<button class="w-full mt-8 bg-secondary-container text-on-secondary-container font-bold py-3 rounded-lg flex justify-center items-center gap-2 hover:opacity-90 transition-opacity">
+                        Actualiser la Simulation
+                    </button>
+</div>
+<div class="bg-primary text-on-primary p-stack-lg rounded-xl flex flex-col gap-4">
+<span class="material-symbols-outlined text-secondary-fixed text-4xl">verified_user</span>
+<h4 class="font-headline-sm text-headline-sm">Expertise Privée</h4>
+<p class="font-body-md text-body-md opacity-80">Besoin d'une stratégie sur mesure pour vos actifs ? Nos conseillers en gestion de patrimoine sont à votre disposition.</p>
+<a class="text-secondary-fixed font-bold flex items-center gap-1 hover:gap-2 transition-all" href="#">Prendre rendez-vous <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</aside>
+<!-- Main Content: Charts & Summary -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Key Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl">
+<div class="font-data-label text-data-label text-on-surface-variant mb-1">CAPITAL FINAL</div>
+<div class="font-headline-md text-headline-md text-primary" id="stat-final">53 245 000 FCFA</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl">
+<div class="font-data-label text-data-label text-on-surface-variant mb-1">TOTAL INVESTI</div>
+<div class="font-headline-md text-headline-md text-primary" id="stat-invested">23 000 000 FCFA</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl border-l-4 border-l-secondary-container">
+<div class="font-data-label text-data-label text-on-surface-variant mb-1">INTÉRÊTS GÉNÉRÉS</div>
+<div class="font-headline-md text-headline-md text-secondary" id="stat-interests">30 245 000 FCFA</div>
+</div>
+</div>
+<!-- Growth Chart -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-8">Courbe de Croissance</h3>
+<div class="chart-container flex items-end justify-between gap-1 h-[300px]">
+<!-- Dynamic bars will be injected here -->
+<div class="w-full h-full flex items-end gap-[2px]" id="chart-area"></div>
+</div>
+<div class="flex justify-between mt-4 font-data-label text-data-label text-on-surface-variant">
+<span>Année 0</span>
+<span>Projection Finale</span>
+</div>
+</div>
+<!-- Annual Summary Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-stack-lg border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary">Récapitulatif Annuel</h3>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+<span class="material-symbols-outlined">download</span> Exporter en PDF
+                        </button>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 font-data-label text-data-label text-primary">ANNÉE</th>
+<th class="px-6 py-4 font-data-label text-data-label text-primary">VERSEMENTS CUMULÉS</th>
+<th class="px-6 py-4 font-data-label text-data-label text-primary">INTÉRÊTS CUMULÉS</th>
+<th class="px-6 py-4 font-data-label text-data-label text-primary">VALEUR TOTALE</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant" id="table-body">
+<!-- Data injected via JS -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Legal Disclaimer -->
+<div class="flex gap-4 p-stack-md bg-surface-container-low rounded-lg border border-outline-variant italic">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+<strong>Mention Légale :</strong> Les simulations présentées ici sont fournies à titre purement illustratif et ne constituent en aucun cas une promesse de rendement ou un conseil financier. Les performances passées ne préjugent pas des performances futures. Tout investissement comporte des risques, notamment de perte en capital. Africaine des Finances décline toute responsabilité quant aux décisions prises sur la base de ces calculs.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg bg-primary text-on-primary mt-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-on-primary mb-4">Africaine des Finances</div>
+<p class="font-body-md text-body-md text-on-primary-container/80 mb-6">Partenaire de votre prospérité sur le continent africain.</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-data-label text-data-label text-secondary-container mb-2">SERVICES</span>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Marché des Actions</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Obligations d'État</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Gestion Privée</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-data-label text-data-label text-secondary-container mb-2">RESSOURCES</span>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Blog Financier</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Guides Investisseur</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Calendrier Économique</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-data-label text-data-label text-secondary-container mb-2">LÉGAL</span>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Confidentialité</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Risques</a>
+<a class="text-on-primary-container/80 hover:text-secondary-fixed transition-colors" href="#">Réglementation</a>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-on-primary/10 px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-data-label text-data-label text-on-primary-container/60">© 2024 Africaine des Finances. Agréé AMF-UMOA n°AF-2023-01.</p>
+<div class="flex gap-6">
+<a class="text-on-primary-container/60 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-primary-container/60 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+<a class="text-on-primary-container/60 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">call</span></a>
+</div>
+</div>
+</footer>
+<script>
+        const initialInput = document.getElementById('initial-input');
+        const monthlyInput = document.getElementById('monthly-input');
+        const durationInput = document.getElementById('duration-input');
+        const rateInput = document.getElementById('rate-input');
+
+        const initialVal = document.getElementById('initial-val');
+        const monthlyVal = document.getElementById('monthly-val');
+        const durationVal = document.getElementById('duration-val');
+        const rateVal = document.getElementById('rate-val');
+
+        const statFinal = document.getElementById('stat-final');
+        const statInvested = document.getElementById('stat-invested');
+        const statInterests = document.getElementById('stat-interests');
+
+        const tableBody = document.getElementById('table-body');
+        const chartArea = document.getElementById('chart-area');
+
+        function formatCurrency(val) {
+            return new Intl.NumberFormat('fr-FR', {
+                style: 'decimal',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            }).format(val) + " FCFA";
+        }
+
+        function calculate() {
+            const P = parseFloat(initialInput.value);
+            const PMT = parseFloat(monthlyInput.value);
+            const r = parseFloat(rateInput.value) / 100 / 12;
+            const years = parseInt(durationInput.value);
+            const n = years * 12;
+
+            initialVal.innerText = formatCurrency(P);
+            monthlyVal.innerText = formatCurrency(PMT);
+            durationVal.innerText = `${years} ans`;
+            rateVal.innerText = `${rateInput.value} %`;
+
+            let currentBalance = P;
+            let totalInvested = P;
+            let dataPoints = [];
+
+            tableBody.innerHTML = '';
+            chartArea.innerHTML = '';
+
+            for (let i = 1; i <= years; i++) {
+                let yearlyInterest = 0;
+                for (let j = 1; j <= 12; j++) {
+                    const interest = currentBalance * r;
+                    yearlyInterest += interest;
+                    currentBalance += interest + PMT;
+                    totalInvested += PMT;
+                }
+
+                dataPoints.push({
+                    year: i,
+                    balance: currentBalance,
+                    invested: totalInvested,
+                    interest: currentBalance - totalInvested
+                });
+
+                // Update Table
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-surface-container-low/30' : '';
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-data-value text-on-surface">Année ${i}</td>
+                    <td class="px-6 py-4 font-data-label text-on-surface-variant">${formatCurrency(totalInvested)}</td>
+                    <td class="px-6 py-4 font-data-label text-secondary font-medium">${formatCurrency(currentBalance - totalInvested)}</td>
+                    <td class="px-6 py-4 font-data-value text-primary">${formatCurrency(currentBalance)}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+
+            statFinal.innerText = formatCurrency(currentBalance);
+            statInvested.innerText = formatCurrency(totalInvested);
+            statInterests.innerText = formatCurrency(currentBalance - totalInvested);
+
+            // Update Chart
+            const maxVal = dataPoints[dataPoints.length - 1].balance;
+            dataPoints.forEach(point => {
+                const barContainer = document.createElement('div');
+                barContainer.className = 'flex-grow h-full flex flex-col justify-end relative group';
+                
+                const heightPercent = (point.balance / maxVal) * 100;
+                const investedPercent = (point.invested / point.balance) * 100;
+                
+                barContainer.innerHTML = `
+                    <div class="w-full bg-primary-container relative" style="height: ${heightPercent}%">
+                        <div class="absolute bottom-0 w-full bg-primary" style="height: ${investedPercent}%"></div>
+                        <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                            ${formatCurrency(point.balance)}
+                        </div>
+                    </div>
+                `;
+                chartArea.appendChild(barContainer);
+            });
+        }
+
+        [initialInput, monthlyInput, durationInput, rateInput].forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        // Initialize
+        calculate();
+    </script>
+</body></html>

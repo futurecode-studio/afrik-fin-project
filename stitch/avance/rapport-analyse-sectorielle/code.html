@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Rapport d'Analyse Sectorielle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-surface": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d1daed",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#c5c5d4",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary-container": "#0a2e8c",
+                    "primary": "#001a61",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-secondary-fixed": "#261a00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-background": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#8d9ee3",
+                    "inverse-surface": "#28313f",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .premium-border-gradient {
+            border-left: 4px solid #0A2E8C;
+        }
+        .newsletter-shadow {
+            box-shadow: 0 4px 20px rgba(6, 29, 92, 0.04);
+        }
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .bento-item {
+            transition: transform 0.2s ease-in-out;
+        }
+        .bento-item:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant py-4">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex items-center gap-2 text-primary border border-primary px-4 py-2 rounded font-semibold text-sm">
+                Support
+            </button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded font-bold text-sm hover:bg-tertiary transition-colors">
+                Invest Now
+            </button>
+<div class="flex items-center gap-3 ml-4 border-l pl-4 border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a financial advisor in a light-filled modern office, wearing a dark navy suit. The image has a clean, high-key lighting style consistent with a premium financial institution's brand identity. Subtle blue tones and white backgrounds dominate the aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHqnP7km5btV-1m2RFbSTPjkQS_3c_Tv5btLbDiDYHhRvfM1uuiR5lkL0UkqO8oAoqcWSFHPjh_PIHkw5OyjGPPt1l3qXDFyq7trqm56fgVoknJsV3DChOA_n3JYlvEvWZzFKcVknIeschGNOdE5A0U2Jl2u-WrlyeSNx2oJYxqWJ8Qclyc5oYLYc0fF_uySuGGo-19iUnqk_0oLt6RyHdMqTeQ8BdnQiUTiVbXXxC4URyHNTK1gK5hVfLigi-tsrGSZ4AlCmLMQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Header / Hero Section -->
+<section class="mb-section-gap flex flex-col md:flex-row md:items-end justify-between gap-stack-lg border-b border-outline-variant pb-stack-lg">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-data-label text-[12px] uppercase font-bold tracking-wider">Expert Analysis</span>
+<span class="text-outline font-data-label text-data-label">24 Octobre 2023</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md leading-tight">
+                    Dynamiques Énergétiques en Afrique de l'Ouest : <br/>La Transition en Marche.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                    Une analyse approfondie des flux de capitaux, des cadres réglementaires et de l'émergence des énergies renouvelables comme moteur de croissance souveraine au sein de l'UEMOA.
+                </p>
+</div>
+<div class="flex flex-col gap-4 min-w-[280px]">
+<div class="p-4 bg-surface-container-low border border-outline-variant rounded-lg">
+<p class="font-data-label text-[12px] text-outline uppercase mb-1">Auteur Principal</p>
+<p class="font-headline-sm text-headline-sm text-primary">Dr. Malik Traoré</p>
+<p class="text-on-surface-variant text-sm">Chef Stratégiste Macroéconomique</p>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container-highest text-primary py-2 px-4 rounded font-semibold text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span> PDF
+                    </button>
+<button class="flex-1 bg-surface-container-highest text-primary py-2 px-4 rounded font-semibold text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">share</span> Partager
+                    </button>
+</div>
+</div>
+</section>
+<!-- Bento Grid Dashboard / Analysis -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Key Macro Metrics -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-stack-md">
+<div class="bg-white p-6 rounded-lg newsletter-shadow border border-outline-variant bento-item">
+<p class="text-outline font-data-label text-[12px] uppercase mb-2">Croissance Secteur (Est. 2024)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-primary">+8.4%</span>
+<span class="text-success text-[#2EB873] font-bold text-sm">↑ 1.2%</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg newsletter-shadow border border-outline-variant bento-item">
+<p class="text-outline font-data-label text-[12px] uppercase mb-2">Investissements Directs</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-primary">$4.2B</span>
+<span class="text-success text-[#2EB873] font-bold text-sm">Target</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-1/2"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg newsletter-shadow border border-outline-variant bento-item">
+<p class="text-outline font-data-label text-[12px] uppercase mb-2">Taux d'Électrification</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-primary">54.2%</span>
+<span class="text-outline font-bold text-sm">Avg</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-low rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-2/3"></div>
+</div>
+</div>
+</div>
+<!-- Focus Text -->
+<div class="md:col-span-4 row-span-2 bg-primary text-on-primary p-stack-lg rounded-lg relative overflow-hidden flex flex-col justify-between bento-item">
+<div class="z-10">
+<h3 class="font-headline-sm text-headline-sm mb-stack-md">L'Angle du Bureau d'Études</h3>
+<p class="opacity-80 font-body-md mb-stack-md">
+                        "La convergence entre souveraineté énergétique et maturité des marchés financiers locaux crée une fenêtre d'opportunité sans précédent pour les investisseurs institutionnels. Nous privilégions les actifs de production IPP (Independent Power Producers)."
+                    </p>
+<div class="premium-border-gradient pl-4 py-2 bg-white/5 border-l-2 border-secondary-container">
+<p class="italic text-sm">Note de synthèse : Focus Sénégal & Côte d'Ivoire</p>
+</div>
+</div>
+<div class="mt-8 z-10">
+<button class="bg-secondary-container text-on-secondary-container w-full py-3 rounded font-bold hover:brightness-110 transition-all">
+                        Consulter la Note Stratégique
+                    </button>
+</div>
+<!-- Abstract Pattern background component simulated with CSS -->
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-secondary-container/10 rounded-full blur-3xl"></div>
+</div>
+<!-- Detailed Correlation Chart Area -->
+<div class="md:col-span-8 bg-white p-stack-lg rounded-lg newsletter-shadow border border-outline-variant bento-item min-h-[400px] flex flex-col">
+<div class="flex justify-between items-start mb-stack-lg">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Corrélation : Prix de l'Énergie vs Indice Industriel</h4>
+<p class="text-on-surface-variant text-sm">Analyse comparative sur les 18 derniers mois (UEMOA)</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container-low rounded text-xs font-bold text-primary">12M</button>
+<button class="px-3 py-1 hover:bg-surface-container-low rounded text-xs font-bold text-outline">24M</button>
+<button class="px-3 py-1 hover:bg-surface-container-low rounded text-xs font-bold text-outline">MAX</button>
+</div>
+</div>
+<!-- Simulated Chart -->
+<div class="flex-1 w-full flex items-end gap-2 px-4 pb-8 border-b border-l border-outline-variant relative">
+<!-- Grid Lines -->
+<div class="absolute inset-x-0 top-1/4 border-t border-outline-variant/30 w-full"></div>
+<div class="absolute inset-x-0 top-2/4 border-t border-outline-variant/30 w-full"></div>
+<div class="absolute inset-x-0 top-3/4 border-t border-outline-variant/30 w-full"></div>
+<!-- Bars -->
+<div class="flex-1 bg-primary-container/20 h-[60%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[40%]"></div>
+<div class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-surface p-2 rounded shadow text-[10px] whitespace-nowrap z-20">Q1 2023: +4.2%</div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[75%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[55%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[90%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[70%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[85%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[65%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[65%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[45%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[50%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[30%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[80%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[60%]"></div>
+</div>
+<div class="flex-1 bg-primary-container/20 h-[95%] hover:bg-primary-container/40 transition-colors cursor-pointer relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[85%]"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary"></div>
+<span class="text-xs text-outline font-data-label">Coût KWh</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary-container/40"></div>
+<span class="text-xs text-outline font-data-label">Indice Production</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Recommended Section -->
+<section class="mb-section-gap">
+<div class="flex items-center justify-between mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary">Valeurs Recommandées - Sélection Octobre</h2>
+<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">Voir toute la liste <span class="material-symbols-outlined">arrow_forward</span></a>
+</div>
+<div class="overflow-x-auto bg-white rounded-lg newsletter-shadow border border-outline-variant">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Actif / Entreprise</th>
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Secteur Précis</th>
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Cours (XOF)</th>
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Variation YTD</th>
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Recommandation</th>
+<th class="px-6 py-4 font-data-label text-[12px] uppercase text-primary font-bold">Potentiel</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary font-bold">SN</div>
+<div>
+<p class="font-bold text-on-surface">Sonatel Sénégal</p>
+<p class="text-xs text-outline">SNTS - BRVM</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Infrastructure Telecom</td>
+<td class="px-6 py-5 font-data-value text-data-value">17,450</td>
+<td class="px-6 py-5 text-[#2EB873] font-bold text-sm">+12.4%</td>
+<td class="px-6 py-5">
+<span class="bg-[#2EB873]/10 text-[#2EB873] px-3 py-1 rounded text-xs font-bold">ACHAT FORT</span>
+</td>
+<td class="px-6 py-5 font-bold text-primary">+18.5%</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary-container/10 flex items-center justify-center text-secondary font-bold">CI</div>
+<div>
+<p class="font-bold text-on-surface">CIE Côte d'Ivoire</p>
+<p class="text-xs text-outline">CIEC - BRVM</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Production Électrique</td>
+<td class="px-6 py-5 font-data-value text-data-value">2,100</td>
+<td class="px-6 py-5 text-[#2EB873] font-bold text-sm">+4.8%</td>
+<td class="px-6 py-5">
+<span class="bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded text-xs font-bold">ACCUMULER</span>
+</td>
+<td class="px-6 py-5 font-bold text-primary">+9.2%</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary font-bold">ON</div>
+<div>
+<p class="font-bold text-on-surface">Onatel Burkina</p>
+<p class="text-xs text-outline">ONTB - BRVM</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant text-sm">Telecom Services</td>
+<td class="px-6 py-5 font-data-value text-data-value">2,800</td>
+<td class="px-6 py-5 text-error font-bold text-sm">-2.1%</td>
+<td class="px-6 py-5">
+<span class="bg-surface-container-highest text-outline px-3 py-1 rounded text-xs font-bold">CONSERVER</span>
+</td>
+<td class="px-6 py-5 font-bold text-primary">+4.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Newsletter Subscription / Call to action -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg bg-surface-container border border-outline-variant p-stack-lg rounded-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md">Restez à la pointe de l'intelligence financière.</h3>
+<p class="text-on-surface-variant mb-stack-md">Recevez nos analyses exclusives, nos notes de synthèse et les recommandations de notre bureau d'études directement dans votre boîte mail chaque lundi matin.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-white border border-outline-variant rounded px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="votre@email.com" type="email"/>
+<button class="bg-primary text-on-primary px-8 py-3 rounded font-bold hover:bg-tertiary transition-colors">
+                        S'abonner
+                    </button>
+</div>
+</div>
+<div class="relative h-64 rounded-lg overflow-hidden hidden md:block">
+<img class="w-full h-full object-cover" data-alt="A sophisticated macro photograph of high-end architectural details in a modern financial district. Focus on clean glass lines, geometric steel structures, and a soft blue-toned urban reflection. The overall mood is prestigious, stable, and forward-looking, perfectly matching the corporate financial aesthetic of Africaine des Finances." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDfiL4pXOD8RQh7LbdfaJVIlK4ChM8uQLyuSImni3b20frXPEUgTftLW17vEfhuj87EGoiC2c3-9kUgQS4yuGZEOYhH8VEmSobDrQluNtgwPKutSl4n2yaaV_978fJ-4NYdZ8CKxX_eqbWebgj7MMnSXlhXocoqagWpyszlV2ege2Qk6-eLE1tNrcMF9yGrcok1kATRFs67UrBsLc_oXx0D9w56xDRRVj28odXO0bgCov6NWEw-zONkJ1mPp1IWt0oTDM6ljePfw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-6">
+<p class="text-white font-bold text-lg">Plus de 15,000 investisseurs nous font confiance.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-primary text-on-primary mt-section-gap py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+<div class="col-span-1 md:col-span-2">
+<span class="text-headline-md font-headline-md font-bold mb-stack-md block">Africaine des Finances</span>
+<p class="opacity-70 max-w-sm mb-stack-lg">Leader panafricain de l'analyse financière et de la gestion de patrimoine. Nous accompagnons les institutions et les particuliers dans la croissance de leurs actifs.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-xs tracking-widest opacity-60">Expertise</h4>
+<ul class="space-y-2 text-sm opacity-80">
+<li><a class="hover:text-secondary-container transition-colors" href="#">Analyse Macro</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Marchés Actions</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Marchés Obligataires</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Gestion Privée</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 uppercase text-xs tracking-widest opacity-60">Légal</h4>
+<ul class="space-y-2 text-sm opacity-80">
+<li><a class="hover:text-secondary-container transition-colors" href="#">Mentions Légales</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Politique de Confidentialité</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Réglementation AMF</a></li>
+<li><a class="hover:text-secondary-container transition-colors" href="#">Contact Support</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-section-gap pt-stack-lg border-t border-white/10 flex flex-col md:flex-row justify-between text-[12px] opacity-50">
+<p>© 2023 Africaine des Finances. Tous droits réservés.</p>
+<p>Agrément SGI n° 004/2012 - UEMOA</p>
+</div>
+</footer>
+<!-- Side Navigation Bar (Hidden on Mobile, simplified for this desktop view) -->
+<div class="hidden lg:flex fixed left-0 top-0 h-screen w-16 flex-col items-center py-stack-lg bg-surface-container border-r border-outline-variant z-40">
+<div class="mb-stack-lg">
+<span class="material-symbols-outlined text-primary text-[32px]">account_balance</span>
+</div>
+<nav class="flex flex-col gap-6 flex-1">
+<a class="w-10 h-10 rounded-lg flex items-center justify-center bg-secondary-container text-on-secondary-container shadow-sm" href="#">
+<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+</a>
+<a class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</a>
+<a class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+</a>
+</nav>
+<div class="flex flex-col gap-4 mt-auto">
+<a class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="w-10 h-10 rounded-lg flex items-center justify-center text-outline hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</div>
+<script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.2s ease-out';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Simple fade-in animation for bento items
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bento-item').forEach(item => {
+            item.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700');
+            observer.observe(item);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quiz Interactif - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-high": "#dfe8fc",
+                "primary-container": "#0a2e8c",
+                "inverse-on-surface": "#ebf1ff",
+                "on-error": "#ffffff",
+                "on-surface": "#131c2a",
+                "tertiary-fixed": "#dce1ff",
+                "on-secondary": "#ffffff",
+                "error": "#ba1a1a",
+                "primary-fixed": "#dce1ff",
+                "on-error-container": "#93000a",
+                "surface-container-low": "#f0f3ff",
+                "tertiary-container": "#213371",
+                "secondary": "#795900",
+                "on-primary-container": "#839cfd",
+                "on-background": "#131c2a",
+                "on-secondary-container": "#6d5000",
+                "inverse-surface": "#28313f",
+                "on-tertiary": "#ffffff",
+                "background": "#f9f9ff",
+                "secondary-fixed-dim": "#fbbc00",
+                "on-tertiary-fixed-variant": "#314381",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#c5c5d4",
+                "on-tertiary-fixed": "#001551",
+                "on-primary": "#ffffff",
+                "error-container": "#ffdad6",
+                "surface-container-highest": "#dae3f6",
+                "on-secondary-fixed-variant": "#5c4300",
+                "on-primary-fixed": "#001551",
+                "surface": "#f9f9ff",
+                "primary-fixed-dim": "#b7c4ff",
+                "outline": "#757683",
+                "on-secondary-fixed": "#261a00",
+                "surface-container": "#e7eeff",
+                "on-primary-fixed-variant": "#223f9b",
+                "tertiary-fixed-dim": "#b7c4ff",
+                "surface-tint": "#3d58b5",
+                "surface-dim": "#d1daed",
+                "on-surface-variant": "#444652",
+                "tertiary": "#051c5b",
+                "surface-bright": "#f9f9ff",
+                "primary": "#001a61",
+                "secondary-container": "#ffbf00",
+                "on-tertiary-container": "#8d9ee3",
+                "surface-variant": "#dae3f6",
+                "secondary-fixed": "#ffdfa0",
+                "inverse-primary": "#b7c4ff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "margin-desktop": "64px",
+                "stack-sm": "8px",
+                "section-gap": "80px",
+                "stack-md": "16px",
+                "margin-mobile": "20px",
+                "gutter": "24px",
+                "stack-lg": "32px",
+                "container-max": "1280px"
+            },
+            "fontFamily": {
+                "body-lg": ["Figtree"],
+                "display-lg": ["Figtree"],
+                "data-value": ["IBM Plex Mono"],
+                "data-label": ["IBM Plex Mono"],
+                "body-md": ["Figtree"],
+                "headline-sm": ["Figtree"],
+                "headline-md": ["Figtree"],
+                "display-lg-mobile": ["Figtree"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .option-card:hover .radio-indicator {
+            border-color: #001a61;
+        }
+        .option-card.selected {
+            background-color: #0a2e8c;
+            color: #ffffff;
+            border-color: #0a2e8c;
+        }
+        .option-card.selected .radio-indicator {
+            border-color: #ffffff;
+            background-color: #ffffff;
+            box-shadow: inset 0 0 0 3px #0a2e8c;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant h-16 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80" onclick="window.history.back()">arrow_back</span>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">Africaine des Finances</h1>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="hidden md:flex gap-stack-lg items-center text-on-surface-variant font-body-md">
+<span class="text-primary font-bold transition-colors cursor-pointer">Training</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Markets</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Analysis</span>
+</div>
+<div class="flex items-center gap-stack-sm border-l border-outline-variant pl-gutter">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Sidebar (Contextual for Training) -->
+<aside class="hidden lg:flex flex-col h-screen py-stack-lg px-stack-md bg-surface-container-low border-r border-outline-variant fixed left-0 top-16 w-64">
+<div class="mb-stack-lg px-stack-sm">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Module 04</h2>
+<p class="font-body-md text-on-surface-variant">Analyse des Marchés Financiers UMOA</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-stack-md px-stack-md py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Cours Magistral</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-3 bg-primary-container text-on-primary-container font-bold rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span>Quiz d'Évaluation</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Ressources</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-3 text-on-surface-variant hover:bg-surface-variant rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span>Discussion</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-section-gap px-margin-mobile md:px-margin-desktop lg:ml-64 flex flex-col items-center">
+<div class="w-full max-container-max max-w-4xl">
+<!-- Progress Header -->
+<div class="mb-stack-lg flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-data-label text-data-label text-primary uppercase tracking-wider">Question 04 sur 10</span>
+<span class="font-data-value text-data-value text-on-surface">40% Complété</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[40%] transition-all duration-500 ease-out"></div>
+</div>
+</div>
+<!-- Quiz Card -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg md:p-12 rounded-lg">
+<!-- Question with Image Support -->
+<div class="mb-stack-lg grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md">
+                            Quel est l'impact principal d'une hausse du taux directeur par la BCEAO sur la liquidité bancaire dans la zone UMOA ?
+                        </h3>
+<p class="font-body-md text-on-surface-variant">
+                            Veuillez analyser le graphique ci-contre montrant les tendances interbancaires avant de répondre.
+                        </p>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant shadow-sm h-64 md:h-auto">
+<img class="w-full h-full object-cover" data-alt="A professional financial chart showing a line graph of interbank liquidity rates in West Africa. The chart uses a sophisticated palette of deep blues and amber, with clean white backgrounds and technical annotations. The visual style is institutional, precise, and authoritative, suitable for a high-end banking analysis interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWdIOeG3oxWDptVrbhV_vggIIcSQWxK_sknZh92FDjQW3ZIF5c-fmHG5Zdmc_nTD1vksgGPvP3QhKlYSSLEQymZNoOB0VatHaZewNrYu2YF55o3J8-FlwC0yL4s_7cdeQvN2VDPFmxx-I0uJwVPxd1J_NeGrvplO2rzBIOE_zChmUZj1wTQMFFUs2QqyJnJ_TKMLYXP3eUR5vRAWnTbYEw1SSrV0JVA--IuWVXlI_EI6EnOxyO1y2lHHWCWJPGQKWqoT5WJJY6ng"/>
+</div>
+</div>
+<!-- Multiple Choice Options -->
+<div class="flex flex-col gap-stack-md" id="options-container">
+<!-- Option A -->
+<div class="option-card group flex items-center gap-stack-md p-stack-md border border-outline-variant rounded-xl cursor-pointer transition-all duration-200 active:scale-[0.99]" onclick="selectOption(this)">
+<div class="radio-indicator w-5 h-5 rounded-full border-2 border-outline transition-all shrink-0"></div>
+<span class="font-body-lg text-body-lg">Augmentation immédiate du volume des prêts interbancaires.</span>
+</div>
+<!-- Option B -->
+<div class="option-card group flex items-center gap-stack-md p-stack-md border border-outline-variant rounded-xl cursor-pointer transition-all duration-200 active:scale-[0.99]" onclick="selectOption(this)">
+<div class="radio-indicator w-5 h-5 rounded-full border-2 border-outline transition-all shrink-0"></div>
+<span class="font-body-lg text-body-lg">Resserrement des conditions de refinancement et baisse de la liquidité disponible.</span>
+</div>
+<!-- Option C -->
+<div class="option-card group flex items-center gap-stack-md p-stack-md border border-outline-variant rounded-xl cursor-pointer transition-all duration-200 active:scale-[0.99]" onclick="selectOption(this)">
+<div class="radio-indicator w-5 h-5 rounded-full border-2 border-outline transition-all shrink-0"></div>
+<span class="font-body-lg text-body-lg">Stabilité parfaite des taux de dépôt pour les particuliers.</span>
+</div>
+<!-- Option D -->
+<div class="option-card group flex items-center gap-stack-md p-stack-md border border-outline-variant rounded-xl cursor-pointer transition-all duration-200 active:scale-[0.99]" onclick="selectOption(this)">
+<div class="radio-indicator w-5 h-5 rounded-full border-2 border-outline transition-all shrink-0"></div>
+<span class="font-body-lg text-body-lg">Suppression totale des réserves obligatoires.</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Quiz Navigation Footer -->
+<footer class="fixed bottom-0 w-full bg-surface border-t border-outline-variant py-stack-md px-margin-desktop lg:pl-[calc(256px+64px)] z-40">
+<div class="flex justify-between items-center max-w-4xl w-full mx-auto">
+<button class="flex items-center gap-2 px-stack-lg py-3 font-bold text-primary border border-primary rounded hover:bg-surface-container-high transition-colors active:opacity-80">
+<span class="material-symbols-outlined">chevron_left</span>
+<span>Précédent</span>
+</button>
+<div class="flex gap-stack-md">
+<button class="px-stack-lg py-3 font-bold text-on-surface-variant hover:text-primary transition-colors">Passer la question</button>
+<button class="bg-primary text-on-primary px-stack-lg py-3 font-bold rounded shadow-sm hover:bg-tertiary transition-colors active:scale-95 duration-200 flex items-center gap-2">
+<span>Suivant</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Global Site Footer (Hidden during Quiz focus) -->
+<div class="hidden">
+<footer class="w-full py-section-gap px-margin-desktop bg-primary flex flex-col items-center gap-stack-md">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</div>
+<div class="flex gap-gutter">
+<span class="text-on-primary/80 hover:text-secondary-container cursor-pointer transition-colors">Legal Notice</span>
+<span class="text-on-primary/80 hover:text-secondary-container cursor-pointer transition-colors">Privacy Policy</span>
+<span class="text-on-primary/80 hover:text-secondary-container cursor-pointer transition-colors">Regulatory Disclosure</span>
+</div>
+<div class="text-on-primary/80 text-body-md mt-4">© 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.</div>
+</footer>
+</div>
+<script>
+        function selectOption(element) {
+            // Remove selection from all options
+            const options = document.querySelectorAll('.option-card');
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            element.classList.add('selected');
+            
+            // Subtle feedback animation
+            element.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(0.98)' },
+                { transform: 'scale(1)' }
+            ], {
+                duration: 150,
+                easing: 'ease-out'
+            });
+        }
+
+        // Add keyboard navigation for options
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= 1 && e.key <= 4) {
+                const options = document.querySelectorAll('.option-card');
+                selectOption(options[e.key - 1]);
+            }
+        });
+    </script>
+</body></html>

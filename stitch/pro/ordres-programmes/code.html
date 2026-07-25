@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestion des Ordres Programmés | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed": "#ffdfa0",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "inverse-on-surface": "#ebf1ff",
+                    "outline": "#757683",
+                    "surface-container-highest": "#dae3f6",
+                    "on-background": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "secondary": "#795900",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-fixed": "#261a00",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary": "#051c5b",
+                    "on-tertiary-fixed": "#001551",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary": "#001a61",
+                    "on-tertiary-container": "#8d9ee3",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#28313f",
+                    "primary-container": "#0a2e8c",
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Figtree', sans-serif;
+            background-color: #f9f9ff;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+    </style>
+</head>
+<body class="text-on-background">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant h-20 fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">Africaine des Finances</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">Marchés</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold font-body-md text-body-md" href="#">Investissements</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">Compte Client</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">Rapports</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md text-body-md" href="#">Actualités</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 border border-primary text-primary font-bold rounded hover:bg-surface-container transition-all scale-95 active:opacity-80">Contact</button>
+<button class="px-6 py-2 bg-primary-container text-on-primary font-bold rounded hover:bg-primary transition-all scale-95 active:opacity-80">Espace Client</button>
+</div>
+</div>
+</header>
+<main class="mt-32 px-margin-desktop max-w-container-max mx-auto mb-20">
+<!-- Page Title & Abstract -->
+<section class="mb-12">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">Stratégies d'Ordres Programmés</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Automatisez vos transactions sur les marchés régionaux. Configurez des ordres à seuil de déclenchement, des stop-loss et des take-profit pour sécuriser vos rendements en toute sérénité.
+            </p>
+</section>
+<!-- Main Workspace: Bento Grid Layout -->
+<div class="bento-grid">
+<!-- Asset Selector & Real-time Chart Placeholder -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-8 flex flex-col gap-6 h-[500px]">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm">SONATEL (SN)</h3>
+<span class="font-data-label text-data-label text-on-surface-variant">BRVM: SNTS</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-value text-headline-md block text-primary">16,450.00 XOF</span>
+<span class="text-sm font-bold text-green-600">+1.24% (Aujourd'hui)</span>
+</div>
+</div>
+<!-- Chart Visualization -->
+<div class="relative flex-1 bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center border border-outline-variant">
+
+<div class="z-10 text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-2">monitoring</span>
+<p class="font-data-label text-on-surface-variant">Flux Temps Réel Activé</p>
+</div>
+<!-- Mock candles for financial feel -->
+<div class="absolute bottom-10 left-10 right-10 h-32 flex items-end gap-2 opacity-50">
+<div class="w-4 bg-green-500 rounded-t h-[60%]"></div>
+<div class="w-4 bg-green-400 rounded-t h-[75%]"></div>
+<div class="w-4 bg-red-400 rounded-t h-[65%]"></div>
+<div class="w-4 bg-green-500 rounded-t h-[85%]"></div>
+<div class="w-4 bg-red-400 rounded-t h-[40%]"></div>
+<div class="w-4 bg-green-500 rounded-t h-[90%]"></div>
+<div class="w-4 bg-green-400 rounded-t h-[70%]"></div>
+</div>
+</div>
+</div>
+<!-- Configuration Sidebar -->
+<div class="col-span-12 lg:col-span-4 glass-card rounded-xl p-8 flex flex-col gap-6">
+<h3 class="font-headline-sm text-headline-sm border-b border-outline-variant pb-4">Nouvel Ordre</h3>
+<div class="space-y-4">
+<div>
+<label class="font-data-label text-on-surface-variant mb-2 block">Type de Condition</label>
+<select class="w-full h-12 border border-outline-variant rounded-lg px-4 bg-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+<option>Ordre à seuil de déclenchement</option>
+<option>Ordre OCO (L'un annule l'autre)</option>
+<option>Trailing Stop (Suiveur)</option>
+<option>Ordre lié (Take Profit &amp; Stop Loss)</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="font-data-label text-on-surface-variant mb-2 block">Quantité</label>
+<input class="w-full h-12 border border-outline-variant rounded-lg px-4 bg-white focus:border-primary outline-none" placeholder="0" type="number"/>
+</div>
+<div>
+<label class="font-data-label text-on-surface-variant mb-2 block">Prix Cible (XOF)</label>
+<input class="w-full h-12 border border-outline-variant rounded-lg px-4 bg-white focus:border-primary outline-none" placeholder="16500" type="number"/>
+</div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border border-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-md font-bold text-primary">Protection Active</span>
+<input checked="" class="rounded text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-data-label">
+<span>Stop Loss</span>
+<span class="text-error">15,800.00 XOF</span>
+</div>
+<div class="flex justify-between text-xs font-data-label">
+<span>Take Profit</span>
+<span class="text-green-600">17,200.00 XOF</span>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white font-bold rounded-lg hover:bg-tertiary transition-colors shadow-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">bolt</span>
+                        Placer l'Ordre Programmé
+                    </button>
+<p class="text-[10px] text-center text-on-surface-variant italic">
+                        Les frais de courtage s'élèvent à 0.6% HT par exécution.
+                    </p>
+</div>
+</div>
+<!-- Active Strategies Table -->
+<div class="col-span-12 glass-card rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm">Stratégies Actives</h3>
+<div class="flex gap-2">
+<button class="p-2 rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">refresh</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container text-primary text-left">
+<th class="p-4 font-data-label border-b border-outline-variant">Date Création</th>
+<th class="p-4 font-data-label border-b border-outline-variant">Instrument</th>
+<th class="p-4 font-data-label border-b border-outline-variant">Condition</th>
+<th class="p-4 font-data-label border-b border-outline-variant">Volume</th>
+<th class="p-4 font-data-label border-b border-outline-variant">Statut</th>
+<th class="p-4 font-data-label border-b border-outline-variant">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="hover:bg-surface-container-low transition-colors border-b border-outline-variant group">
+<td class="p-4 font-data-value">22/05/2024</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold">Orange CI</span>
+<span class="text-xs text-on-surface-variant">BRVM: ORAC</span>
+</div>
+</td>
+<td class="p-4 font-data-value text-primary">Achat si Prix &gt; 10,250</td>
+<td class="p-4 font-data-value">150 Unités</td>
+<td class="p-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-200">En attente</span>
+</td>
+<td class="p-4">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-error hover:scale-110 transition-transform"><span class="material-symbols-outlined">cancel</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors border-b border-outline-variant group">
+<td class="p-4 font-data-value">21/05/2024</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold">BOA SN</span>
+<span class="text-xs text-on-surface-variant">BRVM: BOAS</span>
+</div>
+</td>
+<td class="p-4 font-data-value text-primary">Vente si Prix &lt; 2,150</td>
+<td class="p-4 font-data-value">500 Unités</td>
+<td class="p-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold border border-secondary">Déclenché</span>
+</td>
+<td class="p-4">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:scale-110 transition-transform"><span class="material-symbols-outlined">history</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors border-b border-outline-variant group">
+<td class="p-4 font-data-value">20/05/2024</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold">CIE CI</span>
+<span class="text-xs text-on-surface-variant">BRVM: CIEC</span>
+</div>
+</td>
+<td class="p-4 font-data-value text-primary">OCO: Buy @ 1,800 / Sell @ 2,400</td>
+<td class="p-4 font-data-value">1,000 Unités</td>
+<td class="p-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-200">En attente</span>
+</td>
+<td class="p-4">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-error hover:scale-110 transition-transform"><span class="material-symbols-outlined">cancel</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Strategy Education / Insights -->
+<div class="col-span-12 md:col-span-6 glass-card rounded-xl p-8 flex flex-col gap-4">
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h4 class="font-headline-sm text-headline-sm">Conseil d'Expert</h4>
+</div>
+<p class="font-body-md text-on-surface-variant italic">
+                    "L'utilisation d'ordres à seuil de déclenchement permet de limiter les pertes émotionnelles lors de fortes volatilités nocturnes. Pour SONATEL, un stop-loss à 5% sous le support actuel est recommandé par nos analystes."
+                </p>
+<a class="text-primary font-bold flex items-center gap-2 mt-2 hover:underline" href="#">
+                    Voir l'analyse complète
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<!-- Market Status Mini-Card -->
+<div class="col-span-12 md:col-span-6 glass-card rounded-xl p-8 flex items-center justify-between">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">État du Marché BRVM</h4>
+<p class="font-data-label text-on-surface-variant">Fermeture dans : 02h 14m</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<span class="text-xs font-bold uppercase tracking-wider text-green-600 block">Ouvert</span>
+<span class="font-data-value text-xl">Prestige: +0.45%</span>
+</div>
+<div class="w-12 h-12 rounded-full border-4 border-green-200 border-t-green-600 animate-spin"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop bg-on-background text-surface mt-20">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline-sm text-headline-sm text-secondary-container block mb-4">Africaine des Finances</span>
+<p class="font-body-md text-surface-container-high opacity-80">Votre partenaire stratégique pour la gestion de fortune et les investissements institutionnels en Afrique de l'Ouest.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold text-secondary-container mb-2">Solutions</span>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Wealth Management</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Courtage Bourse</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Asset Management</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold text-secondary-container mb-2">Légal</span>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Politique de Confidentialité</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Gouvernance</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold text-secondary-container mb-2">Contact</span>
+<p class="text-surface-container-high flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">call</span> +221 33 800 00 00
+                </p>
+<p class="text-surface-container-high flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span> contact@africainefinances.sn
+                </p>
+<div class="flex gap-4 mt-4">
+<div class="w-8 h-8 rounded bg-surface-container-high/10 flex items-center justify-center hover:bg-secondary-container/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">share</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto mt-12 pt-8 border-t border-surface-container-high/10 flex flex-col md:flex-row justify-between items-center text-xs opacity-60">
+<p>© 2024 Africaine des Finances. Institution Financière Agréée.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<span>CSR</span>
+<span>Carrières</span>
+<span>Investisseurs</span>
+</div>
+</div>
+</footer>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed bottom-10 right-10 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="success-notification">
+<div class="bg-primary text-white p-6 rounded-xl shadow-2xl flex items-center gap-4 border border-primary-container">
+<span class="material-symbols-outlined text-3xl text-green-400">check_circle</span>
+<div>
+<p class="font-bold">Ordre Validé</p>
+<p class="text-sm opacity-80">La stratégie a été injectée dans le carnet d'ordres.</p>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interaction for Order Placement
+        const orderBtn = document.querySelector('button.bg-primary');
+        const notification = document.getElementById('success-notification');
+
+        orderBtn.addEventListener('click', () => {
+            orderBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Traitement...';
+            orderBtn.disabled = true;
+
+            setTimeout(() => {
+                orderBtn.innerHTML = '<span class="material-symbols-outlined">bolt</span> Placer l\'Ordre Programmé';
+                orderBtn.disabled = false;
+                
+                // Show notification
+                notification.classList.remove('translate-y-20', 'opacity-0');
+                notification.classList.add('translate-y-0', 'opacity-100');
+
+                setTimeout(() => {
+                    notification.classList.add('translate-y-20', 'opacity-0');
+                    notification.classList.remove('translate-y-0', 'opacity-100');
+                }, 4000);
+            }, 1200);
+        });
+
+        // Toggle focus effect on inputs
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+                input.parentElement.style.transition = 'transform 0.2s ease';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>

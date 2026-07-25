@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#131c2a",
+                        "outline": "#757683",
+                        "secondary": "#795900",
+                        "surface-container": "#e7eeff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#001551",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "primary-container": "#0a2e8c",
+                        "surface-dim": "#d1daed",
+                        "tertiary": "#051c5b",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dce1ff",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary": "#001a61",
+                        "outline-variant": "#c5c5d4",
+                        "surface-container-high": "#dfe8fc",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-highest": "#dae3f6",
+                        "on-surface": "#131c2a",
+                        "surface-bright": "#f9f9ff",
+                        "error": "#ba1a1a",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b7c4ff",
+                        "inverse-surface": "#28313f",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#839cfd",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-surface-variant": "#444652",
+                        "on-primary-fixed": "#001551",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6d5000",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#213371",
+                        "tertiary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #DADFE7; border-radius: 10px; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] docked full-width top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-data-label text-data-label font-bold text-on-primary uppercase">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined text-[18px]">language</button>
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined text-[18px]">mail</button>
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined text-[18px]">call</button>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 sticky top-10 z-40">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">Africaine des Finances</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 font-body-md text-body-md" href="#">Markets</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 font-body-md text-body-md" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 font-body-md text-body-md" href="#">Training</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 font-body-md text-body-md" href="#">Analysis</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 font-body-md text-body-md" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-inverse-primary font-medium hover:underline transition-all">Login</button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-bold hover:bg-primary-container transition-all">Commencer à investir</button>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-12">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h1 class="text-display-lg font-display-lg text-primary mb-2">Comparateur d'actions</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Analysez et comparez les performances de plusieurs actifs simultanément pour optimiser votre stratégie d'investissement régionale.</p>
+</div>
+<button class="flex items-center gap-2 bg-surface-container border border-outline-variant px-5 py-2.5 rounded-lg hover:bg-surface-container-high transition-all text-primary font-bold">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span>Exporter en PDF</span>
+</button>
+</div>
+<!-- Bento Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Selection & Chart Section -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Selection Tool -->
+<div class="bg-white border border-outline-variant rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Sélection des actifs (Max 5)</h3>
+<span class="text-data-label font-data-label text-outline uppercase tracking-wider">3/5 Sélectionnés</span>
+</div>
+<div class="flex flex-wrap gap-3 mb-6">
+<!-- Active Chips -->
+<div class="flex items-center gap-2 bg-primary-container/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full">
+<span class="font-bold">SONA.SN</span>
+<button class="material-symbols-outlined text-[16px] hover:text-error">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary-container/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full">
+<span class="font-bold">ETIT.TG</span>
+<button class="material-symbols-outlined text-[16px] hover:text-error">close</button>
+</div>
+<div class="flex items-center gap-2 bg-primary-container/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full">
+<span class="font-bold">ONTB.BF</span>
+<button class="material-symbols-outlined text-[16px] hover:text-error">close</button>
+</div>
+<!-- Add Button -->
+<button class="flex items-center gap-1 border border-dashed border-outline text-outline px-3 py-1.5 rounded-full hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="text-sm font-medium">Ajouter une action</span>
+</button>
+</div>
+<!-- Selection Table (Simplified for UI context) -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Rechercher par symbole ou nom (ex: Orange CI, Sonatel...)" type="text"/>
+</div>
+</div>
+<!-- Normalized Chart -->
+<div class="bg-white border border-outline-variant rounded-xl p-6 relative h-[480px] overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Comparaison Normalisée</h3>
+<p class="text-data-label font-data-label text-outline">Performance relative base 100 - 12 derniers mois</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs font-bold bg-primary text-white rounded">1Y</button>
+<button class="px-3 py-1 text-xs font-bold text-outline hover:bg-surface-container rounded transition-all">3Y</button>
+<button class="px-3 py-1 text-xs font-bold text-outline hover:bg-surface-container rounded transition-all">5Y</button>
+<button class="px-3 py-1 text-xs font-bold text-outline hover:bg-surface-container rounded transition-all">YTD</button>
+</div>
+</div>
+<!-- Chart Placeholder with custom tag -->
+<div class="absolute inset-x-6 bottom-6 top-24 bg-surface-container-lowest rounded-lg border border-outline-variant/30 flex items-center justify-center">
+<div class="w-full h-full relative">
+
+<!-- Decorative Graph Overlay (SVG representation of normalized lines) -->
+<svg class="absolute inset-0 w-full h-full px-2" fill="none" viewbox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 200C100 190 200 220 300 150C400 80 500 120 600 60C700 40 800 20" stroke="#001A61" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0 200C100 210 200 180 300 190C400 200 500 150 600 170C700 160 800 140" stroke="#795900" stroke-dasharray="4 4" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0 200C100 205 200 215 300 230C400 210 500 240 600 220C700 210 800 205" stroke="#BA1A1A" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Metrics / Insights -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<div class="bg-surface-container text-primary p-8 rounded-xl border border-primary/10">
+<h4 class="text-headline-sm font-headline-sm mb-4">Meilleur Performance</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-medium">Actif:</span>
+<span class="font-bold">SONA.SN (Sonatel)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-medium">Rendement Annuel:</span>
+<span class="text-2xl font-extrabold text-green-600">+18.42%</span>
+</div>
+<div class="pt-4 border-t border-primary/10">
+<p class="text-sm italic opacity-80 leading-relaxed text-on-surface">La Sonatel maintient sa position de leader sur le marché avec une volatilité maîtrisée malgré les fluctuations sectorielles.</p>
+</div>
+</div>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-6">
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-6">Distribution Sectorielle</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">Télécoms</span>
+<span class="font-data-value">45%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">Services Financiers</span>
+<span class="font-data-value">30%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 30%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-medium">Industrie</span>
+<span class="font-data-value">25%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-outline" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Table Section -->
+<div class="col-span-12">
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/30">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Matrice Comparative Détaillée</h3>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">filter_list</button>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">settings</button>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-outline-variant">
+<th class="px-6 py-4 text-data-label font-data-label text-outline uppercase tracking-wider">Metrique / Symbole</th>
+<th class="px-6 py-4 border-l border-outline-variant/30">
+<div class="flex flex-col">
+<span class="text-primary font-bold">SONA.SN</span>
+<span class="text-xs text-outline-variant font-normal">Sonatel Senegal</span>
+</div>
+</th>
+<th class="px-6 py-4 border-l border-outline-variant/30">
+<div class="flex flex-col">
+<span class="text-primary font-bold">ETIT.TG</span>
+<span class="text-xs text-outline-variant font-normal">Ecobank Transnational</span>
+</div>
+</th>
+<th class="px-6 py-4 border-l border-outline-variant/30">
+<div class="flex flex-col">
+<span class="text-primary font-bold">ONTB.BF</span>
+<span class="text-xs text-outline-variant font-normal">Onatel BF</span>
+</div>
+</th>
+<th class="px-6 py-4 border-l border-outline-variant/30 bg-surface-container-lowest text-outline-variant font-medium text-center">
+                                        Action 4
+                                    </th>
+<th class="px-6 py-4 border-l border-outline-variant/30 bg-surface-container-lowest text-outline-variant font-medium text-center">
+                                        Action 5
+                                    </th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface bg-surface-container-lowest sticky left-0">Performance (1an)</td>
+<td class="px-6 py-4 font-data-value text-green-600">+18.42%</td>
+<td class="px-6 py-4 font-data-value text-green-600">+5.15%</td>
+<td class="px-6 py-4 font-data-value text-red-600">-2.30%</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Volatilité (Annualisée)</td>
+<td class="px-6 py-4 font-data-value text-on-surface">12.5%</td>
+<td class="px-6 py-4 font-data-value text-on-surface">24.8%</td>
+<td class="px-6 py-4 font-data-value text-on-surface">18.2%</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Volume Moyen (30j)</td>
+<td class="px-6 py-4 font-data-value text-on-surface">45.2K</td>
+<td class="px-6 py-4 font-data-value text-on-surface">1.2M</td>
+<td class="px-6 py-4 font-data-value text-on-surface">12.1K</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Capitalisation (Mrds CFA)</td>
+<td class="px-6 py-4 font-data-value text-on-surface">1,500.0</td>
+<td class="px-6 py-4 font-data-value text-on-surface">620.5</td>
+<td class="px-6 py-4 font-data-value text-on-surface">210.8</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Dividende Yield</td>
+<td class="px-6 py-4 font-data-value text-on-surface">7.8%</td>
+<td class="px-6 py-4 font-data-value text-on-surface">4.2%</td>
+<td class="px-6 py-4 font-data-value text-on-surface">10.5%</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Secteur</td>
+<td class="px-6 py-4 text-body-md">Télécoms</td>
+<td class="px-6 py-4 text-body-md">Banques</td>
+<td class="px-6 py-4 text-body-md">Télécoms</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+<td class="px-6 py-4 text-center text-outline-variant">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant mt-20">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-6">Africaine des Finances</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-xs mb-6">Votre partenaire stratégique pour la gestion de patrimoine et les investissements sur les marchés de l'UEMOA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">public</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">hub</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">rss_feed</span>
+</div>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface mb-4 uppercase tracking-widest">Platform</h5>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Markets</a></li>
+<li><a class="text-primary font-bold font-body-md text-body-md" href="#">Invest</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Analysis</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface mb-4 uppercase tracking-widest">Resources</h5>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Learn</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Resources</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Corporate</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface mb-4 uppercase tracking-widest">Legal</h5>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Legal Notice</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all font-body-md text-body-md" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop py-6 border-t border-outline-variant/30 text-center text-data-label font-data-label text-on-surface-variant/70">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.
+        </div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', function(e) {
+                // Potential ripple effect logic or navigation feedback
+                console.log('Interaction detected on:', el.textContent.trim());
+            });
+        });
+
+        // Simple mock for tab switching or selection logic
+        const chips = document.querySelectorAll('.rounded-full button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', (e) => {
+                e.stopPropagation();
+                chip.parentElement.remove();
+            });
+        });
+    </script>
+</body></html>

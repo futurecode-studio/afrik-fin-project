@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Heritage Academy - Wealth Management 101</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "primary": "#001a61",
+                    "on-surface-variant": "#444652",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-surface": "#28313f",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-container": "#213371",
+                    "tertiary": "#051c5b",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#839cfd",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "on-secondary-container": "#6d5000",
+                    "surface-tint": "#3d58b5",
+                    "outline": "#757683",
+                    "on-background": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "outline-variant": "#c5c5d4",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-fixed": "#001551",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-container": "#0a2e8c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+        .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Corporate typography rhythm */
+        article h2 { @apply font-headline-md text-headline-md text-primary mt-stack-lg mb-stack-md; }
+        article h3 { @apply font-headline-sm text-headline-sm text-on-surface mt-stack-md mb-stack-sm; }
+        article p { @apply font-body-md text-body-md text-on-surface-variant mb-stack-md leading-relaxed; }
+        article ul { @apply list-disc list-inside mb-stack-md space-y-2 text-on-surface-variant font-body-md; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary-container/30">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest h-16 border-b border-outline-variant">
+<div class="flex items-center gap-gutter">
+<h1 class="font-display-lg text-display-lg text-primary scale-50 origin-left">Heritage Academy</h1>
+<nav class="hidden md:flex gap-stack-lg h-full items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors cursor-pointer" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold cursor-pointer" href="#">My Courses</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors cursor-pointer" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">notifications</span>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">help</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" data-alt="Close-up portrait of a professional African executive in a charcoal grey suit, smiling confidently against a soft-focus office background. The lighting is warm and natural, reinforcing an atmosphere of prestige and leadership consistent with a high-end financial institution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQkqH4eYc64IbQ_xXE9SJvVMA-D9R2U8xWfW5ogPGUxC8jY41te36HQxLhR8OX4ArWdeX-irNnC6qY5p_VaNEqDsjcd60tGib-ROFPH7U-ejV1vPCRYYMmpvcc4kgH_gwfoYEwi8WKeOlxHpqDMIOYB3oRhKWS6Qfoa67ae7G7VOiQPo9J8FLpp8SDacKHAKZMyYZI0OKWnBm5sb6A1VT6OhHMviadsLFFUINWk91VsCKTAZi2jGFHC0x9EgDX2x5Df67cbqpORw"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-80 flex flex-col z-40 bg-surface-container-low border-r border-outline-variant overflow-y-auto hidden lg:flex">
+<div class="p-stack-lg border-b border-outline-variant">
+<div class="flex items-center gap-stack-md mb-stack-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary leading-tight">Wealth Management 101</h2>
+<p class="text-xs text-on-surface-variant font-medium">65% Complete</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+<nav class="flex-grow py-stack-md">
+<div class="px-stack-md mb-stack-sm uppercase text-[10px] font-bold tracking-widest text-outline">Course Curriculum</div>
+<ul class="space-y-1">
+<li class="group flex items-center transition-all duration-200 text-on-surface-variant hover:bg-surface-variant/50 px-stack-md py-3 cursor-pointer">
+<span class="material-symbols-outlined mr-3">play_circle</span>
+<span class="font-body-md">Introduction</span>
+</li>
+<li class="group flex items-center transition-all duration-200 bg-primary-container text-on-primary-container rounded-r-full font-bold px-stack-md py-3">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-body-md">Market Fundamentals</span>
+</li>
+<li class="group flex items-center transition-all duration-200 text-on-surface-variant hover:bg-surface-variant/50 px-stack-md py-3 cursor-pointer opacity-80">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md">Risk Assessment</span>
+</li>
+<li class="group flex items-center transition-all duration-200 text-on-surface-variant hover:bg-surface-variant/50 px-stack-md py-3 cursor-pointer opacity-80">
+<span class="material-symbols-outlined mr-3">verified_user</span>
+<span class="font-body-md">Financial Ethics</span>
+</li>
+<li class="group flex items-center transition-all duration-200 text-on-surface-variant hover:bg-surface-variant/50 px-stack-md py-3 cursor-pointer opacity-80">
+<span class="material-symbols-outlined mr-3">workspace_premium</span>
+<span class="font-body-md">Final Certification</span>
+</li>
+</ul>
+</nav>
+<div class="p-stack-md border-t border-outline-variant bg-surface-container-lowest/50">
+<div class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<span class="font-data-label text-data-label">Resources</span>
+</div>
+<div class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-data-label text-data-label">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Course Player Content -->
+<main class="flex-grow lg:ml-80 pb-32">
+<div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<!-- Lesson Header -->
+<header class="mb-stack-lg border-b border-outline-variant pb-stack-lg">
+<div class="flex items-center gap-2 text-secondary mb-stack-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-data-label text-data-label">12 minutes de lecture</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Les Fondamentaux des Marchés de Capitaux</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Comprendre la dynamique entre l'offre et la demande institutionnelle et le rôle des banques centrales dans l'économie moderne.</p>
+</header>
+<!-- Article Content -->
+<article class="prose max-w-none">
+<p>Le marché des capitaux constitue l'épine dorsale de toute économie moderne développée. Il permet la rencontre entre les agents économiques disposant d'un excédent de capitaux et ceux nécessitant un financement pour leurs projets d'investissement à long terme.</p>
+<h2>1. Structure et Acteurs Principaux</h2>
+<p>Les marchés se divisent traditionnellement en deux compartiments distincts mais interdépendants : le marché primaire et le marché secondaire. Dans le cadre de la gestion de patrimoine, il est crucial de comprendre que chaque transaction impacte la liquidité globale du système.</p>
+<!-- Box Definition (Blue) -->
+<div class="bg-surface-container-low border-l-4 border-primary p-stack-md my-stack-lg rounded-r-lg">
+<div class="flex items-center gap-2 text-primary font-bold mb-1">
+<span class="material-symbols-outlined text-xl">info</span>
+<span class="font-headline-sm text-headline-sm">Définition : Marché Primaire</span>
+</div>
+<p class="font-body-md text-on-surface italic mb-0">Le marché "du neuf" où sont émis les nouveaux titres financiers. C'est ici que les entreprises et les États lèvent des fonds directement auprès des investisseurs.</p>
+</div>
+<h3>Les instruments négociés</h3>
+<p>On y retrouve principalement trois types d'actifs financiers qui servent de base à toute stratégie d'investissement sérieuse :</p>
+<ul>
+<li><strong>Les actions :</strong> Titres de propriété représentant une fraction du capital d'une entreprise.</li>
+<li><strong>Les obligations :</strong> Titres de créance représentant un emprunt émis par une entité.</li>
+<li><strong>Les produits dérivés :</strong> Instruments dont la valeur dépend d'un actif sous-jacent.</li>
+</ul>
+<!-- Integrated Image with Caption -->
+<figure class="my-stack-lg">
+<div class="w-full aspect-video rounded-xl overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A sophisticated financial dashboard display on a professional trading monitor, showing real-time stock market fluctuations and complex candlestick charts. The environment is a dimly lit, high-end corporate office with soft blue ambient lighting reflecting off glass surfaces, creating a mood of authority and precision. The aesthetic is clean and modern, highlighting technological advancement." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvDVbPqQOiGIjj7S7F7Z01j5Huw2rXEG9idw_wJwEmDHNt3ZDD6dr5R7XSURaTzGr3r56ziozSPlvlcrANt2dsLwNY60tdzg0kOi1EehofAZvz0iF8qkhIeBkXyquBa0FfYBd6WqTiGqaiO_uy-_xECnV0ltd_lapkiRk9fxYAWr8swqxBFMj6ZCh30zqBwRrrvykOm-BpP9ZWswArzg0nW0UFJ_G38q8DPYpJ9wXDVJKFYGp4SBdCFrjwoVXFLDeVVc6Z3iCfrw"/>
+</div>
+<figcaption class="mt-stack-sm text-center text-on-surface-variant font-data-label text-sm">Figure 1.1 : Visualisation de la volatilité intraday sur les marchés émergents.</figcaption>
+</figure>
+<h2>2. Le Rôle des Banques Centrales</h2>
+<p>Les banques centrales agissent comme les régulateurs ultimes. Par le biais de la politique monétaire, elles influencent les taux d'intérêt et, par extension, l'attractivité des différentes classes d'actifs.</p>
+<!-- Box Example (Gold) -->
+<div class="bg-secondary-fixed/20 border-l-4 border-secondary p-stack-md my-stack-lg rounded-r-lg">
+<div class="flex items-center gap-2 text-secondary font-bold mb-1">
+<span class="material-symbols-outlined text-xl">lightbulb</span>
+<span class="font-headline-sm text-headline-sm">Exemple Pratique</span>
+</div>
+<p class="font-body-md text-on-surface mb-0">Lorsqu'une banque centrale augmente ses taux directeurs, les rendements obligataires existants deviennent moins attractifs par rapport aux nouveaux titres, entraînant généralement une baisse mécanique du prix des obligations sur le marché secondaire.</p>
+</div>
+<h3>Analyse de l'Inflation</h3>
+<p>L'inflation est le risque le plus insidieux pour le patrimoine à long terme. Une stratégie de gestion de fortune efficace doit impérativement intégrer des actifs capables de surperformer l'indice des prix à la consommation sur des cycles complets.</p>
+</article>
+<!-- Downloadable Resources -->
+<section class="mt-section-gap pt-stack-lg border-t border-outline-variant">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md">Ressources Complémentaires</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex items-center justify-between p-stack-md bg-surface-container-lowest border border-outline-variant rounded-lg hover:border-primary transition-all cursor-pointer group">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary text-3xl">picture_as_pdf</span>
+<div>
+<p class="font-bold text-on-surface">Guide des Marchés.pdf</p>
+<p class="text-xs text-on-surface-variant">2.4 MB • PDF Document</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">download</span>
+</div>
+<div class="flex items-center justify-between p-stack-md bg-surface-container-lowest border border-outline-variant rounded-lg hover:border-primary transition-all cursor-pointer group">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary text-3xl">table_chart</span>
+<div>
+<p class="font-bold text-on-surface">Modèle d'Analyse.xlsx</p>
+<p class="text-xs text-on-surface-variant">1.1 MB • Excel Sheet</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">download</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Lesson Footer Navigation -->
+<footer class="fixed bottom-0 left-0 lg:left-80 right-0 bg-surface-container-lowest border-t border-outline-variant px-margin-desktop py-stack-md z-40 flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="flex items-center gap-stack-md w-full md:w-auto order-2 md:order-1">
+<button class="flex items-center gap-2 px-6 py-2.5 border border-primary text-primary font-bold hover:bg-surface-container-low transition-colors rounded-lg w-1/2 md:w-auto justify-center">
+<span class="material-symbols-outlined">chevron_left</span>
+                Précédent
+            </button>
+<button class="flex items-center gap-2 px-6 py-2.5 border border-primary text-primary font-bold hover:bg-surface-container-low transition-colors rounded-lg w-1/2 md:w-auto justify-center">
+                Suivant
+                <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="w-full md:w-auto order-1 md:order-2 flex items-center justify-between md:justify-end gap-stack-lg">
+<div class="hidden md:flex flex-col items-end">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Leçon Suivante</p>
+<p class="text-sm font-bold text-primary">Analyse de Risque Fondamentale</p>
+</div>
+<button class="flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold hover:bg-[#061D5C] transition-colors rounded-lg shadow-sm w-full md:w-auto justify-center">
+<span class="material-symbols-outlined">task_alt</span>
+                Marquer comme terminé
+            </button>
+</div>
+</footer>
+<!-- Global Footer -->
+<div class="mt-section-gap">
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-highest border-t border-outline-variant">
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-primary">Heritage Financial</h3>
+<p class="font-data-label text-data-label text-on-surface-variant max-w-sm text-center md:text-left">
+                    © 2024 Heritage Financial Institution. All rights reserved. Professional Excellence in Education.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary underline font-data-label text-data-label transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline font-data-label text-data-label transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline font-data-label text-data-label transition-colors" href="#">Security Disclosure</a>
+<a class="text-on-surface-variant hover:text-primary underline font-data-label text-data-label transition-colors" href="#">Contact Support</a>
+</div>
+</footer>
+</div>
+<script>
+        // Micro-interaction for completion button
+        document.querySelector('button.bg-primary').addEventListener('click', function() {
+            this.classList.toggle('bg-green-600');
+            const icon = this.querySelector('.material-symbols-outlined');
+            const text = this.childNodes[2];
+            
+            if (this.classList.contains('bg-green-600')) {
+                icon.textContent = 'verified';
+                text.textContent = 'Terminé !';
+                confettiEffect();
+            } else {
+                icon.textContent = 'task_alt';
+                text.textContent = 'Marquer comme terminé';
+            }
+        });
+
+        function confettiEffect() {
+            // Simple visual feedback could go here
+            console.log("Course segment completed");
+        }
+    </script>
+</body></html>

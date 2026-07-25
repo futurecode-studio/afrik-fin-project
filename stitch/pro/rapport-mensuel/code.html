@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+        .data-grid-cols {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 24px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary-fixed-dim": "#b7c4ff",
+                "tertiary-fixed": "#dce1ff",
+                "surface-container": "#e7eeff",
+                "secondary-fixed": "#ffdfa0",
+                "surface-tint": "#3d58b5",
+                "on-tertiary": "#ffffff",
+                "surface-bright": "#f9f9ff",
+                "on-surface-variant": "#444652",
+                "on-primary-container": "#839cfd",
+                "surface-container-high": "#dfe8fc",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-container": "#213371",
+                "inverse-primary": "#b7c4ff",
+                "on-primary-fixed-variant": "#223f9b",
+                "primary-fixed-dim": "#b7c4ff",
+                "outline-variant": "#c5c5d4",
+                "inverse-on-surface": "#ebf1ff",
+                "outline": "#757683",
+                "surface-container-highest": "#dae3f6",
+                "on-background": "#131c2a",
+                "error-container": "#ffdad6",
+                "secondary": "#795900",
+                "secondary-container": "#ffbf00",
+                "on-primary-fixed": "#001551",
+                "on-error-container": "#93000a",
+                "surface-container-low": "#f0f3ff",
+                "surface-variant": "#dae3f6",
+                "on-secondary-fixed": "#261a00",
+                "primary-fixed": "#dce1ff",
+                "on-secondary-container": "#6d5000",
+                "tertiary": "#051c5b",
+                "on-tertiary-fixed": "#001551",
+                "on-secondary": "#ffffff",
+                "error": "#ba1a1a",
+                "surface-dim": "#d1daed",
+                "on-tertiary-fixed-variant": "#314381",
+                "primary": "#001a61",
+                "on-tertiary-container": "#8d9ee3",
+                "secondary-fixed-dim": "#fbbc00",
+                "on-error": "#ffffff",
+                "inverse-surface": "#28313f",
+                "primary-container": "#0a2e8c",
+                "background": "#f9f9ff",
+                "on-surface": "#131c2a",
+                "on-secondary-fixed-variant": "#5c4300",
+                "surface": "#f9f9ff",
+                "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "section-gap": "80px",
+                "margin-desktop": "64px",
+                "stack-md": "16px",
+                "stack-lg": "32px",
+                "stack-sm": "8px",
+                "container-max": "1280px",
+                "margin-mobile": "20px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "headline-sm": ["Figtree"],
+                "headline-md": ["Figtree"],
+                "data-value": ["IBM Plex Mono"],
+                "display-lg": ["Figtree"],
+                "body-md": ["Figtree"],
+                "data-label": ["IBM Plex Mono"],
+                "body-lg": ["Figtree"]
+            },
+            "fontSize": {
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<!-- Top Navigation Shell -->
+<nav class="bg-surface border-b border-outline-variant h-20 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto sticky top-0 z-50">
+<div class="flex items-center gap-stack-lg">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">Africaine des Finances</span>
+</div>
+<div class="hidden md:flex gap-gutter">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-200" href="#">Marchés</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-200" href="#">Investissements</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="#">Compte Client</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-200" href="#">Rapports</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors duration-200" href="#">Actualités</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="px-stack-lg py-2 border border-primary text-primary font-bold hover:bg-surface-container transition-all scale-95 active:opacity-80">Contact</button>
+<button class="px-stack-lg py-2 bg-primary-container text-on-primary font-bold hover:bg-primary transition-all scale-95 active:opacity-80">Espace Client</button>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg space-y-section-gap">
+<!-- Hero Section: Monthly Overview -->
+<header class="space-y-stack-md">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="font-data-label text-data-label text-secondary tracking-widest">RAPPORT DE PERFORMANCE MENSUELE</h4>
+<h1 class="font-display-lg text-display-lg text-primary mt-2">Novembre 2024</h1>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 px-stack-md py-2 border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+<span class="font-data-label text-data-label uppercase">Exporter PDF</span>
+</button>
+<button class="flex items-center gap-2 px-stack-md py-2 border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">share</span>
+<span class="font-data-label text-data-label uppercase">Partager</span>
+</button>
+</div>
+</div>
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mt-stack-lg">
+<div class="bg-surface-container-lowest p-stack-lg border border-outline-variant shadow-sm flex flex-col justify-between">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Performance Nette</span>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-md text-primary">+4.28%</span>
+<span class="material-symbols-outlined text-green-600 font-bold">trending_up</span>
+</div>
+<p class="text-data-label text-outline mt-2">vs. +3.15% Indice</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-lg border border-outline-variant shadow-sm flex flex-col justify-between">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Valeur Liquidative</span>
+<div class="mt-4">
+<span class="font-display-lg text-headline-md text-primary">1 452.84 €</span>
+<p class="text-data-label text-outline mt-2">Au 30/11/2024</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-lg border border-outline-variant shadow-sm flex flex-col justify-between">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Actif Net Sous Gestion</span>
+<div class="mt-4">
+<span class="font-display-lg text-headline-md text-primary">42.8M €</span>
+<p class="text-data-label text-outline mt-2">+2.4M € Collecte nette</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-lg border border-outline-variant shadow-sm flex flex-col justify-between">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Impact des Frais</span>
+<div class="mt-4">
+<span class="font-display-lg text-headline-md text-error">-0.12%</span>
+<p class="text-data-label text-outline mt-2">Gestion &amp; Dépositaires</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Performance Analysis & Chart -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Chart Placeholder Area -->
+<div class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-stack-lg relative min-h-[500px]">
+<div class="flex justify-between items-center mb-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary">Comparaison Performance vs. Benchmark</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary-container"></span>
+<span class="text-data-label">Portefeuille</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-secondary-fixed-dim"></span>
+<span class="text-data-label">MSCI World ACWI</span>
+</div>
+</div>
+</div>
+<!-- Simulated Chart Content -->
+<div class="w-full h-80 flex items-end gap-1 relative overflow-hidden">
+
+<div class="flex-1 bg-surface-container h-[40%] hover:bg-primary-container transition-all group relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-background text-surface text-[10px] px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">Jun: +1.2%</div>
+</div>
+<div class="flex-1 bg-surface-container h-[55%] hover:bg-primary-container transition-all group relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-background text-surface text-[10px] px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">Jul: +2.1%</div>
+</div>
+<div class="flex-1 bg-surface-container h-[45%] hover:bg-primary-container transition-all group relative"></div>
+<div class="flex-1 bg-surface-container h-[65%] hover:bg-primary-container transition-all group relative"></div>
+<div class="flex-1 bg-surface-container h-[80%] hover:bg-primary-container transition-all group relative"></div>
+<div class="flex-1 bg-primary-container h-[95%] relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-background text-surface text-[10px] px-2 py-1">Nov: +4.2%</div>
+</div>
+</div>
+<div class="grid grid-cols-6 mt-4 border-t border-outline-variant pt-2">
+<span class="text-data-label text-outline text-center">Juin</span>
+<span class="text-data-label text-outline text-center">Juil</span>
+<span class="text-data-label text-outline text-center">Août</span>
+<span class="text-data-label text-outline text-center">Sept</span>
+<span class="text-data-label text-outline text-center">Oct</span>
+<span class="text-data-label text-outline text-center">Nov</span>
+</div>
+</div>
+<!-- Side Commentary: Gérant -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="bg-primary text-on-primary p-stack-lg shadow-xl">
+<div class="flex items-center gap-4 mb-stack-md">
+<div class="w-16 h-16 bg-surface-dim overflow-hidden border-2 border-secondary-container">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior investment manager in a dark blue suit, looking confident and experienced. The lighting is soft and corporate, set against a blurred background of a modern glass-walled office in an African financial district. High-contrast, prestigious aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfyWWYPuyasmdzXCy2DeYnTOlSaE2OY_DvljK-eC0aaPFyTTnjLKTJI9sr5J_FVqlaeUhgT_LOhS-A3Nmxxyml6wsdgaDRahamPIAcPvWj69EfS8ss8cg6uVunvuNGkcRZQpb30sJ_-NR4tEiTq3FnNvXFOo90iDCIsqo-iE_i_Z4OVaZKHZ9uC0UfrNhxApqgKbw2NwSYSZN_BYffWffOGtDjgmyUuB_Aly_bsCvyAa9v1ObCtRFRzpJsY8mQ5QjGxd8kCT9Xzw"/>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">Marc-André Diop</p>
+<p class="text-data-label opacity-80 uppercase tracking-wider">Directeur des Investissements</p>
+</div>
+</div>
+<p class="font-body-md italic leading-relaxed">
+                        "La performance exceptionnelle de ce mois est portée par notre surpondération tactique sur les valeurs technologiques émergentes et une gestion rigoureuse du risque de change. Nous maintenons notre cap de prudence face à la volatilité attendue du T1 2025."
+                    </p>
+<div class="mt-stack-lg flex items-center gap-2 text-secondary-container font-bold cursor-pointer hover:underline">
+<span>Consulter l'analyse complète</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-lg border border-outline-variant">
+<h4 class="font-data-label text-data-label text-primary mb-stack-md uppercase border-b border-outline-variant pb-2">PROCHAINES ÉCHÉANCES</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<div class="font-data-value text-primary border-r border-outline-variant pr-4">15/12</div>
+<div class="text-body-md">Distribution des dividendes trimestriels</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="font-data-value text-primary border-r border-outline-variant pr-4">10/01</div>
+<div class="text-body-md">Webinaire trimestriel : Perspectives 2025</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Contribution by Asset Class -->
+<section class="space-y-stack-lg">
+<h3 class="font-headline-md text-headline-md text-primary">Contribution par Classe d'Actifs</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-primary border-b border-outline-variant">
+<th class="py-4 px-6 font-bold uppercase text-data-label">Classe d'Actif</th>
+<th class="py-4 px-6 font-bold uppercase text-data-label">Poids (%)</th>
+<th class="py-4 px-6 font-bold uppercase text-data-label">Performance Absolue</th>
+<th class="py-4 px-6 font-bold uppercase text-data-label">Contribution Brute</th>
+<th class="py-4 px-6 font-bold uppercase text-data-label">Attribution</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-body-md font-bold text-primary">Actions Internationales</span>
+</td>
+<td class="py-4 px-6 font-data-value">45.0%</td>
+<td class="py-4 px-6 font-data-value text-green-700">+6.12%</td>
+<td class="py-4 px-6 font-data-value text-green-700">+2.75%</td>
+<td class="py-4 px-6">
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-primary h-2" style="width: 85%;"></div>
+</div>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<span class="font-body-md font-bold text-primary">Obligations Corporate</span>
+</td>
+<td class="py-4 px-6 font-data-value">30.0%</td>
+<td class="py-4 px-6 font-data-value text-green-700">+3.45%</td>
+<td class="py-4 px-6 font-data-value text-green-700">+1.03%</td>
+<td class="py-4 px-6">
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-primary h-2" style="width: 45%;"></div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">real_estate_agent</span>
+<span class="font-body-md font-bold text-primary">Immobilier (SCPI)</span>
+</td>
+<td class="py-4 px-6 font-data-value">15.0%</td>
+<td class="py-4 px-6 font-data-value text-on-surface">+1.20%</td>
+<td class="py-4 px-6 font-data-value text-on-surface">+0.18%</td>
+<td class="py-4 px-6">
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-primary h-2" style="width: 15%;"></div>
+</div>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 px-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-body-md font-bold text-primary">Trésorerie &amp; Equivalents</span>
+</td>
+<td class="py-4 px-6 font-data-value">10.0%</td>
+<td class="py-4 px-6 font-data-value text-on-surface">+0.50%</td>
+<td class="py-4 px-6 font-data-value text-on-surface">+0.05%</td>
+<td class="py-4 px-6">
+<div class="w-full bg-surface-variant h-2">
+<div class="bg-primary h-2" style="width: 5%;"></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Fees & Transparency Impact -->
+<section class="data-grid-cols">
+<div class="col-span-12 md:col-span-5 bg-surface-container-lowest border border-outline-variant p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-stack-md">Impact des Frais sur la Performance</h3>
+<div class="space-y-stack-md mt-stack-lg">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant">
+<span class="text-body-md">Frais de Gestion Annuels</span>
+<span class="font-data-value text-primary">0.85%</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant">
+<span class="text-body-md">Frais de Dépositaire</span>
+<span class="font-data-value text-primary">0.05%</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant text-error">
+<span class="font-bold">Total Impact Mensuel</span>
+<span class="font-data-value">-0.12%</span>
+</div>
+</div>
+<p class="text-data-label text-outline mt-stack-lg leading-tight">
+                    Notre structure de frais est dégressive et alignée sur vos intérêts. Une performance supérieure au benchmark déclenche une commission de surperformance de 15%.
+                </p>
+</div>
+<div class="col-span-12 md:col-span-7 bg-primary-container p-stack-lg flex flex-col justify-center relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-secondary-container">Optimisation Fiscale Mensuelle</h3>
+<p class="text-surface mt-stack-md max-w-md">
+                        En novembre, notre stratégie de "tax-loss harvesting" a permis de neutraliser 14,200 € de plus-values latentes, optimisant ainsi votre rendement net d'impôt de +0.34% sur le mois.
+                    </p>
+<button class="mt-stack-lg px-stack-lg py-3 bg-secondary-container text-on-secondary-fixed font-bold hover:bg-secondary-fixed transition-all">
+                        Télécharger le relevé fiscal IFU
+                    </button>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-20">
+
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-on-background text-surface py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline-sm text-headline-sm text-secondary-container">Africaine des Finances</span>
+<p class="mt-4 font-body-md opacity-70">L'excellence financière au service de la croissance durable du continent.</p>
+</div>
+<div class="col-span-1 flex flex-col gap-2">
+<span class="font-bold mb-2">Institution</span>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Gouvernance</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Investisseurs</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Carrières</a>
+</div>
+<div class="col-span-1 flex flex-col gap-2">
+<span class="font-bold mb-2">Légal</span>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">Confidentialité</a>
+<a class="text-surface-container-high hover:text-secondary-fixed transition-colors" href="#">CSR</a>
+</div>
+<div class="col-span-1">
+<span class="font-bold mb-2">Suivez-nous</span>
+<div class="flex gap-4 mt-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">business_center</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">verified_user</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 border-t border-surface-container-high mt-8 pt-8 text-center opacity-60">
+<p class="font-body-md">© 2024 Africaine des Finances. Institution Financière Agréée.</p>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the data table
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(8px)';
+                row.style.transition = 'transform 0.3s ease';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SONATEL SN | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5d4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #757683;
+        }
+        .chart-container {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#131c2a",
+                        "outline": "#757683",
+                        "secondary": "#795900",
+                        "surface-container": "#e7eeff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#001551",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "primary-container": "#0a2e8c",
+                        "surface-dim": "#d1daed",
+                        "tertiary": "#051c5b",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dce1ff",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary": "#001a61",
+                        "outline-variant": "#c5c5d4",
+                        "surface-container-high": "#dfe8fc",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-highest": "#dae3f6",
+                        "on-surface": "#131c2a",
+                        "surface-bright": "#f9f9ff",
+                        "error": "#ba1a1a",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b7c4ff",
+                        "inverse-surface": "#28313f",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#839cfd",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-surface-variant": "#444652",
+                        "on-primary-fixed": "#001551",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6d5000",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#213371",
+                        "tertiary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary-container text-on-primary flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] sticky top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-data-label text-data-label font-bold text-on-primary">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="hover:text-secondary-container transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">language</span>
+<span class="font-data-label">FR</span>
+</button>
+<button class="hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+</button>
+<button class="hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">call</span>
+</button>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline h-20 sticky top-10 z-40">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">
+                Africaine des Finances
+            </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 text-data-label font-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Training</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Analysis</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary font-bold px-4 py-2 hover:bg-surface-container transition-all">Login</button>
+<button class="bg-primary text-on-primary px-6 py-2 font-bold hover:bg-tertiary transition-all">Commencer à investir</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Header: Asset Info -->
+<section class="mb-stack-lg animate-in fade-in slide-in-from-top-4 duration-700">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex items-center gap-stack-md">
+<div class="w-16 h-16 bg-white border border-outline-variant flex items-center justify-center p-2 rounded-lg">
+<img class="w-full h-full object-contain" data-alt="A clean, minimalist logo of a telecommunications company, featuring professional corporate branding with deep blue and orange accents. The logo is displayed on a high-end white surface in a well-lit financial trading office setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDur82tDlZazj5rAaIBUinrcSI-d9tkYNpYkP450k5hHs82IjCjJ7Rh2qbtNwU8-7SDPAdAGv6SYc2sl4QuzudIwNvJ6zf49WaOFNwiSyFjxPuAaA3tas0DXB60RYS0mT_3_uq7bWQXxL2pmuMR8e36Zsn2AMLF1Wdaz3-KbI5jtYyAq54TIdibLr9aKVyMxapixbFDMqS-vJb94WbmYp6kV5DbWlwB4Q2sN03XhQO9DqmYiaqg2z6iobcIPbRGY1YXY8rVeZ73wQ"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="text-headline-md font-headline-md text-primary">SONATEL SN</h1>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 font-data-label text-data-label rounded">SNTS</span>
+<span class="text-on-surface-variant font-data-label text-data-label">Secteur: Télécommunications</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant text-data-label font-data-label">
+<span>BRVM: SNTS</span>
+<span>•</span>
+<span>Dernière mise à jour: 12 Nov 2024, 15:45 GMT</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-baseline gap-2">
+<span class="text-display-lg font-display-lg text-primary">18 450</span>
+<span class="text-headline-sm font-headline-sm text-primary">FCFA</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-body-lg font-body-lg font-bold text-[#2EB873] flex items-center">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+                            +3.25%
+                        </span>
+<span class="text-on-surface-variant font-data-label text-data-label">(+580 FCFA)</span>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="mt-8 flex gap-4 border-b border-outline-variant pb-stack-md">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 font-bold hover:bg-tertiary transition-all">
+<span class="material-symbols-outlined text-[20px]">show_chart</span>
+                    Investir
+                </button>
+<button class="flex items-center gap-2 border border-primary text-primary px-6 py-2.5 font-bold hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[20px]">star</span>
+                    Watchlist
+                </button>
+<button class="flex items-center gap-2 border border-outline text-on-surface-variant px-6 py-2.5 font-bold hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[20px]">compare_arrows</span>
+                    Comparer
+                </button>
+<button class="ml-auto p-2.5 border border-outline-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<div class="mb-stack-lg">
+<div class="flex gap-8 overflow-x-auto no-scrollbar border-b border-outline-variant">
+<button class="pb-4 px-1 border-b-2 border-primary text-primary font-bold transition-all" id="tab-overview" onclick="switchTab('overview')">Aperçu</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-history" onclick="switchTab('history')">Historique</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-profile" onclick="switchTab('profile')">Profil Société</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-dividends" onclick="switchTab('dividends')">Dividendes</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-documents" onclick="switchTab('documents')">Documents</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-news" onclick="switchTab('news')">Actualités</button>
+<button class="pb-4 px-1 border-b-2 border-transparent text-on-surface-variant font-medium hover:text-primary transition-all" id="tab-analysis" onclick="switchTab('analysis')">Analyse Expert</button>
+</div>
+</div>
+<!-- Tab Content: Overview -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="content-overview">
+<!-- Main Column -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Pro Chart Section -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 h-[480px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div class="flex gap-2">
+<button class="px-3 py-1 text-data-label bg-primary text-on-primary">1D</button>
+<button class="px-3 py-1 text-data-label hover:bg-surface-container transition-colors">1W</button>
+<button class="px-3 py-1 text-data-label hover:bg-surface-container transition-colors">1M</button>
+<button class="px-3 py-1 text-data-label hover:bg-surface-container transition-colors font-bold border-b-2 border-primary">1Y</button>
+<button class="px-3 py-1 text-data-label hover:bg-surface-container transition-colors">5Y</button>
+<button class="px-3 py-1 text-data-label hover:bg-surface-container transition-colors">MAX</button>
+</div>
+<div class="flex gap-4">
+<span class="flex items-center gap-1 text-data-label text-on-surface-variant"><span class="w-3 h-3 bg-primary"></span> Prix</span>
+<span class="flex items-center gap-1 text-data-label text-on-surface-variant"><span class="w-3 h-3 bg-secondary-container"></span> Volume</span>
+</div>
+</div>
+<div class="flex-grow relative overflow-hidden chart-container">
+
+<!-- Simulated Chart Path -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 400">
+<path d="M0,350 L50,340 L100,360 L150,330 L200,310 L250,320 L300,280 L350,260 L400,290 L450,240 L500,210 L550,230 L600,180 L650,150 L700,160 L750,120 L800,100 L850,130 L900,90 L950,70 L1000,50" fill="none" stroke="#001a61" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,350 L50,340 L100,360 L150,330 L200,310 L250,320 L300,280 L350,260 L400,290 L450,240 L500,210 L550,230 L600,180 L650,150 L700,160 L750,120 L800,100 L850,130 L900,90 L950,70 L1000,50 V400 H0 Z" fill="url(#chartGradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#001a61"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute bottom-0 left-0 w-full h-24 flex items-end justify-between px-2 opacity-20">
+<div class="w-4 bg-secondary-container h-8"></div>
+<div class="w-4 bg-secondary-container h-12"></div>
+<div class="w-4 bg-secondary-container h-20"></div>
+<div class="w-4 bg-secondary-container h-16"></div>
+<div class="w-4 bg-secondary-container h-24"></div>
+<div class="w-4 bg-secondary-container h-10"></div>
+<div class="w-4 bg-secondary-container h-14"></div>
+</div>
+</div>
+</div>
+<!-- Session Summary Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 border border-outline-variant">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-4">Résumé de session</h3>
+<div class="space-y-4">
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">Ouverture</span>
+<span class="font-data-value text-data-value">17 870 FCFA</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">Plus haut</span>
+<span class="font-data-value text-data-value">18 600 FCFA</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">Plus bas</span>
+<span class="font-data-value text-data-value">17 850 FCFA</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">Volume</span>
+<span class="font-data-value text-data-value">42 851</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-data-label">Capitalisation</span>
+<span class="font-data-value text-data-value">1 845 Mrd FCFA</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 border border-outline-variant">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-4">Ratios Clés</h3>
+<div class="space-y-4">
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">PER</span>
+<span class="font-data-value text-data-value">10.4x</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">Rendement Dividende</span>
+<span class="font-data-value text-data-value">7.85%</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">BPA</span>
+<span class="font-data-value text-data-value">1 774 FCFA</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span class="text-on-surface-variant font-data-label">52 Sem. Haut</span>
+<span class="font-data-value text-data-value">19 200 FCFA</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-data-label">52 Sem. Bas</span>
+<span class="font-data-value text-data-value">14 500 FCFA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="lg:col-span-4 space-y-stack-lg">
+<!-- Market Sentiment Card -->
+<div class="bg-primary text-on-primary p-6 shadow-xl relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-headline-sm font-headline-sm mb-4">Sentiment Marché</h3>
+<div class="flex items-center justify-between mb-2">
+<span class="text-data-label">Achat</span>
+<span class="text-data-label">Vente</span>
+</div>
+<div class="h-2 w-full bg-on-primary/20 rounded-full overflow-hidden flex mb-4">
+<div class="h-full bg-secondary-container w-3/4"></div>
+<div class="h-full bg-error w-1/4"></div>
+</div>
+<p class="text-body-md opacity-80 mb-6">75% des analystes recommandent l'achat fort sur ce titre.</p>
+<button class="w-full bg-secondary-container text-primary font-bold py-3 hover:opacity-90 transition-all">Consulter l'analyse complète</button>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]">insights</span>
+</div>
+</div>
+<!-- Latest News Snippet -->
+<div class="bg-white border border-outline-variant p-6">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-6">Actualités Récentes</h3>
+<div class="space-y-6">
+<article class="group cursor-pointer">
+<span class="text-data-label font-data-label text-on-surface-variant mb-1 block">Il y a 2 heures</span>
+<h4 class="font-bold text-body-md group-hover:text-primary transition-colors leading-snug">Sonatel annonce un déploiement massif de la 5G au Sénégal pour 2025.</h4>
+</article>
+<article class="group cursor-pointer">
+<span class="text-data-label font-data-label text-on-surface-variant mb-1 block">Hier</span>
+<h4 class="font-bold text-body-md group-hover:text-primary transition-colors leading-snug">Résultats T3 2024 : Croissance de 12% du chiffre d'affaires.</h4>
+</article>
+<article class="group cursor-pointer">
+<span class="text-data-label font-data-label text-on-surface-variant mb-1 block">10 Nov 2024</span>
+<h4 class="font-bold text-body-md group-hover:text-primary transition-colors leading-snug">L'autorité de régulation approuve l'expansion régionale de Orange Money.</h4>
+</article>
+</div>
+<button class="mt-6 text-primary font-bold flex items-center gap-2 hover:underline">
+                        Toutes les news <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Quick Actions -->
+<div class="bg-surface-container-high p-6 border border-outline-variant">
+<h3 class="text-data-label font-bold text-primary mb-4 uppercase tracking-widest">Outils Pro</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex flex-col items-center justify-center p-4 bg-white border border-outline-variant hover:border-primary transition-all gap-2">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="text-[12px] font-bold">Alerte</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-white border border-outline-variant hover:border-primary transition-all gap-2">
+<span class="material-symbols-outlined text-primary">download</span>
+<span class="text-[12px] font-bold">Données</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-white border border-outline-variant hover:border-primary transition-all gap-2">
+<span class="material-symbols-outlined text-primary">print</span>
+<span class="text-[12px] font-bold">Fiche PDF</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-white border border-outline-variant hover:border-primary transition-all gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span class="text-[12px] font-bold">Calculateur</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Hidden Sections (Tabs) -->
+<div class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-history">
+<div class="bg-white border border-outline-variant overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Date</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Clôture</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Variation</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Volume</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Ouverture</th>
+<th class="px-6 py-4 font-bold text-primary text-data-label">Plus Haut</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value">12/11/2024</td>
+<td class="px-6 py-4 font-bold">18 450</td>
+<td class="px-6 py-4 text-[#2EB873]">+3.25%</td>
+<td class="px-6 py-4">42 851</td>
+<td class="px-6 py-4">17 870</td>
+<td class="px-6 py-4">18 600</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-surface/30">
+<td class="px-6 py-4 font-data-value">11/11/2024</td>
+<td class="px-6 py-4 font-bold">17 870</td>
+<td class="px-6 py-4 text-error">-0.45%</td>
+<td class="px-6 py-4">12 402</td>
+<td class="px-6 py-4">17 950</td>
+<td class="px-6 py-4">18 100</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-value">08/11/2024</td>
+<td class="px-6 py-4 font-bold">17 950</td>
+<td class="px-6 py-4 text-[#2EB873]">+1.12%</td>
+<td class="px-6 py-4">28 990</td>
+<td class="px-6 py-4">17 700</td>
+<td class="px-6 py-4">18 000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-profile">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 space-y-6">
+<div class="bg-white border border-outline-variant p-8">
+<h3 class="text-headline-sm font-headline-sm text-primary mb-4">À propos de SONATEL</h3>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+                            La Société Nationale de Télécommunications du Sénégal (SONATEL) est l'opérateur historique des télécommunications au Sénégal. Fondée en 1985, elle est devenue au fil des décennies le leader incontesté sur ses marchés de présence (Sénégal, Mali, Guinée, Guinée-Bissau et Sierra Leone) sous la marque Orange.
+                        </p>
+<p class="mt-4 text-body-md text-on-surface-variant leading-relaxed">
+                            Cotée à la BRVM depuis 1998, Sonatel est la première capitalisation boursière de l'UEMOA, représentant un pilier stratégique pour l'économie régionale à travers ses services de téléphonie mobile, fixe, internet et ses solutions financières mobiles avec Orange Money.
+                        </p>
+</div>
+</div>
+<div class="bg-surface-container-high border border-outline-variant p-6 h-fit">
+<h3 class="text-data-label font-bold text-primary mb-6 uppercase tracking-widest">Management</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a senior executive male in a business suit, looking confident and approachable, high-end photography for an annual report, neutral office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKeewakRITO3h41_MzsWrD30GwKIcMwDLQSVl82SpMdbGT7IW7APmACJpXWqsaqWZaDTT8xP2hlRLf7itsmtHPDDRZLi7hAbEnMl0Ma07xyOMO-4SoRYTL9xg3L-zn8S5wAJoABIEVj1dvY4qKD7YMAvo4z3IwfhwBiKAliAql2mDA6SRrdECZxfM_tTVGYLQzSjHmbRzTQAwLqzbpSdbMapbWzF6Cq1f0INEjGk_x7zTqeKszdxLPVOqnxWbii9zmkKGU-hoJXA"/>
+</div>
+<div>
+<p class="font-bold text-body-md">Sékou Dramé</p>
+<p class="text-data-label text-on-surface-variant">Directeur Général</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of an African female executive in business attire, smiling warmly, professional studio lighting, sophisticated corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw5qJSCn5w0G-fNqus1w-z5tLyv_igtPOtC22Rpwv3qYzzDDT-X-Bs0TTw1gZTngVVcaPkwl6rlG_XjJgX4JwoC3bz-UY9jHfH__4_gXPBCbQF0vQB0GtpvujPr9GA2Pqge17pBPWdAZ-XhIdRYocAtmXydSyc7cgZ7A_e2A82rFN-NZpkwN9Segd9fmmDpHO_UKlX5hmRp2G_yvLTrTmf4Ax-zi4dZTLS8NeYk0XtJBkv91DIEc0CgqTbuL3q2MiyW3OxafGdIw"/>
+</div>
+<div>
+<p class="font-bold text-body-md">Fama Diagne</p>
+<p class="text-data-label text-on-surface-variant">Directrice Financière</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant mt-section-gap">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-4">Africaine des Finances</div>
+<p class="text-body-md text-on-surface-variant mb-6 max-w-xs">Le leader de l'intermédiation financière et du conseil en investissement dans la zone UMOA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70">qr_code_2</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70">public</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-primary">Plateforme</h4>
+<ul class="space-y-2 text-data-label text-on-surface-variant">
+<li><a class="hover:underline transition-all" href="#">Actions BRVM</a></li>
+<li><a class="hover:underline transition-all" href="#">Obligations</a></li>
+<li><a class="hover:underline transition-all" href="#">OPCVM</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-primary">Apprendre</h4>
+<ul class="space-y-2 text-data-label text-on-surface-variant">
+<li><a class="hover:underline transition-all" href="#">Guide Boursier</a></li>
+<li><a class="hover:underline transition-all" href="#">Webinaires</a></li>
+<li><a class="hover:underline transition-all" href="#">Glossaire</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-primary">Légal</h4>
+<ul class="space-y-2 text-data-label text-on-surface-variant">
+<li><a class="hover:underline transition-all" href="#">Confidentialité</a></li>
+<li><a class="hover:underline transition-all" href="#">Conditions d'usage</a></li>
+<li><a class="hover:underline transition-all" href="#">Tarification</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-primary">Contact</h4>
+<ul class="space-y-2 text-data-label text-on-surface-variant">
+<li>Dakar, Sénégal</li>
+<li>+221 33 800 00 00</li>
+<li>contact@af-finances.sn</li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/30 text-center text-data-label text-on-surface-variant/70">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.
+        </div>
+</footer>
+<script>
+        function switchTab(tabId) {
+            // Hide all contents
+            const contents = ['overview', 'history', 'profile', 'dividends', 'documents', 'news', 'analysis'];
+            contents.forEach(id => {
+                const element = document.getElementById('content-' + id);
+                if (element) element.classList.add('hidden');
+                
+                const tabButton = document.getElementById('tab-' + id);
+                if (tabButton) {
+                    tabButton.classList.remove('border-primary', 'text-primary', 'font-bold');
+                    tabButton.classList.add('border-transparent', 'text-on-surface-variant', 'font-medium');
+                }
+            });
+
+            // Show selected content
+            const activeElement = document.getElementById('content-' + tabId);
+            if (activeElement) activeElement.classList.remove('hidden');
+
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.add('border-primary', 'text-primary', 'font-bold');
+                activeTab.classList.remove('border-transparent', 'text-on-surface-variant', 'font-medium');
+            }
+        }
+    </script>
+</body></html>

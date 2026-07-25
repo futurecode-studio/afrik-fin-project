@@ -32,6 +32,10 @@ class RoleAndPermissionSeeder extends Seeder
             $allPermissions[] = "{$module}.*";
         }
 
+        // Alias métier pour l’émargement QR
+        Permission::firstOrCreate(['name' => 'event_checkin.manage']);
+        $allPermissions[] = 'event_checkin.manage';
+
         // Create all roles
         $roles = [
             'super_admin' => '*',

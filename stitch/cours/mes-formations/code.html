@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Formations | Heritage Academy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "primary": "#001a61",
+                    "on-surface-variant": "#444652",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-surface": "#28313f",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-container": "#213371",
+                    "tertiary": "#051c5b",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#839cfd",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "on-secondary-container": "#6d5000",
+                    "surface-tint": "#3d58b5",
+                    "outline": "#757683",
+                    "on-background": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "outline-variant": "#c5c5d4",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-fixed": "#001551",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-container": "#0a2e8c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .nav-active {
+            border-bottom: 2px solid #001a61;
+            padding-bottom: 4px;
+            font-weight: 700;
+            color: #001a61;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #001a61;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest border-b border-outline-variant h-16">
+<div class="flex items-center gap-stack-lg">
+<span class="font-display-lg text-headline-md text-primary tracking-tighter">Heritage Academy</span>
+<nav class="hidden md:flex gap-stack-lg ml-12 h-full items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="#">My Courses</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-body-md" placeholder="Rechercher une formation..." type="text"/>
+</div>
+<div class="flex items-center gap-stack-md text-primary">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">help</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a sharp navy suit, soft studio lighting, high-end professional photography style, neutral grey background, representative of institutional excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGAAKtXpozuQsks0qGk0ZcbZMJvmiS5Sf8lmY0bWu83G-mBXIf8MnsjcGZJzj-XOUvc9ebfv0B2zQrGmTd5EzXYouj1Ru89ZjNecFlnVxmIQ00BK6LFRUKybfP40JI6iWUXvthlb8NRnL1ZtqvE_ujwLs0HbW0RgAIfxvItnGk46rrP2IB4DOMlSIcideeuIyLqY1OHTr6DYdw30xfFsuGpBY0hM5bY6YJtkoJUKCQps-uhGGkxF0585LiSk1HMMqGSvT6vJFCew"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Header Section -->
+<section class="mb-section-gap">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Mes formations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Retrouvez vos cours et continuez votre progression vers l'excellence financière.</p>
+</div>
+<div class="flex gap-stack-sm mb-2">
+<button class="bg-primary text-on-primary px-stack-lg py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-tertiary transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                        Continuer le cours
+                    </button>
+</div>
+</div>
+<!-- Tabs Section -->
+<div class="mt-stack-lg border-b border-outline-variant flex gap-gutter overflow-x-auto no-scrollbar">
+<button class="nav-active px-2 py-3 text-body-md whitespace-nowrap">En cours</button>
+<button class="text-on-surface-variant font-medium hover:text-primary px-2 py-3 text-body-md whitespace-nowrap">À commencer</button>
+<button class="text-on-surface-variant font-medium hover:text-primary px-2 py-3 text-body-md whitespace-nowrap">Terminées</button>
+<button class="text-on-surface-variant font-medium hover:text-primary px-2 py-3 text-body-md whitespace-nowrap">Certificats</button>
+</div>
+</section>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<div class="absolute top-3 left-3 z-10">
+<span class="bg-secondary text-on-secondary px-3 py-1 rounded-full text-data-label font-bold text-xs uppercase tracking-wider">Premium</span>
+</div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated panoramic view of a modern stock exchange trading floor with multiple high-resolution monitors displaying complex financial data and candlesticks, deep navy and golden lighting, professional corporate atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH6Y6B4c6dHIpP9VkGpzzxjTC3qK0iaURzwS0alKS3lRRK7E8srTisD47yuPW8poftEyuoZ9hADFz64Ru37-zcsGf97faZjfl3cpg4Z1dgSMhxOUI4F0pUdi3aam6lXVSOdoHn1tzb8ep4jcxhHGWYtcVGBO2Huuw_uUTpXt6R_I_BAiO6W7ZIaCoKerfCyjMtheKWwVIh4VFZDBLs-724CGqGOaTtlTrdHjQ3beGjcYfD0I265-dK_6frJs3x90g4vieRjpq0hQ"/>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="text-secondary font-bold text-data-label uppercase">Investissement</span>
+<span class="text-on-surface-variant text-data-label bg-surface-container py-1 px-2 rounded">Intermédiaire</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Investir à la BRVM</h3>
+<p class="text-on-surface-variant font-medium mb-stack-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                        Jean-Marc Kouassi
+                    </p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Progression</span>
+<span class="font-data-value text-data-value text-primary">72%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mb-stack-md overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 72%"></div>
+</div>
+<div class="grid grid-cols-2 gap-stack-md border-t border-outline-variant pt-stack-md">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Modules</span>
+<span class="text-primary font-bold">9/12 terminés</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Temps restant</span>
+<span class="text-primary font-bold">46 min</span>
+</div>
+</div>
+<div class="mt-stack-md flex items-center justify-between text-on-surface-variant text-data-label">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                Dernière activité : Aujourd'hui
+                            </span>
+<button class="text-primary hover:text-secondary font-bold flex items-center transition-colors">
+                                Reprendre <span class="material-symbols-outlined ml-1">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a luxury fountain pen resting on a crisp white legal document with golden seals, soft cinematic lighting casting gentle shadows, ivory and royal blue color palette, symbolizing high-level financial ethics and institutional heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXMP2Bv_At0b6ARJBfMlRwgVYj9rZQYIhj4UwMK4QY7bFmF7G5wCPWZ0Z-7P_grbiet4dx80dQND6VrRq3kzx5s8ljRToFUrtJFs3gfan-DhqUllJ8avPCmbz20mmwFpS7-VlEPp6j4ijzqWjtEXbpFukncPUxtDls6b_twNcb6KDmwqe0Jk5k8I1d489UYPsytu8ZHUxz2LwkR6BE14gq34QJ9CUiLHcEcf8YD6q55J7DQFTvkUYNL6e60CzHmH0qg3rQ6bNiFg"/>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="text-secondary font-bold text-data-label uppercase">Gestion Privée</span>
+<span class="text-on-surface-variant text-data-label bg-surface-container py-1 px-2 rounded">Expert</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Wealth Management 101</h3>
+<p class="text-on-surface-variant font-medium mb-stack-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                        Sarah Diallo
+                    </p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Progression</span>
+<span class="font-data-value text-data-value text-primary">65%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mb-stack-md overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+<div class="grid grid-cols-2 gap-stack-md border-t border-outline-variant pt-stack-md">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Modules</span>
+<span class="text-primary font-bold">13/20 terminés</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Temps restant</span>
+<span class="text-primary font-bold">2h 15m</span>
+</div>
+</div>
+<div class="mt-stack-md flex items-center justify-between text-on-surface-variant text-data-label">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                Dernière activité : Hier
+                            </span>
+<button class="text-primary hover:text-secondary font-bold flex items-center transition-colors">
+                                Reprendre <span class="material-symbols-outlined ml-1">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant 3D glass rendering of a rising line graph against a backdrop of iconic African architectural silhouettes, soft sunlight through large glass windows, a sense of prosperity and institutional stability, pristine corporate aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEaz2ClSTLFNzJyB_CVhPCyqJDsRki-cfeh-XqGptVNnybgveBKQxFVDMfk9nNvyMqAY_W6VDOIbcPbZVvlJg0e72KIuYWCwm7822FKgkD7TEXu5lKxtez-7bGLSFs6AekprsSudW0zSx4b1e8to6wjpV4XGt4BkySLEnR5xLW1DpEPEE0NXdl5OcwiSxHAkUSVvmThsP9bk4--ra-hEmo2t0cFqRH8voKTa8KdLYIkMuFrb1Y0TCKld9PWN3LfQQbzUqEbwSJsg"/>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="text-secondary font-bold text-data-label uppercase">Macro-Économie</span>
+<span class="text-on-surface-variant text-data-label bg-surface-container py-1 px-2 rounded">Débutant</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Fondamentaux du Marché</h3>
+<p class="text-on-surface-variant font-medium mb-stack-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                        Dr. Amadou Sow
+                    </p>
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-on-surface-variant">Progression</span>
+<span class="font-data-value text-data-value text-primary">15%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mb-stack-md overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 15%"></div>
+</div>
+<div class="grid grid-cols-2 gap-stack-md border-t border-outline-variant pt-stack-md">
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Modules</span>
+<span class="text-primary font-bold">1/6 terminés</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-on-surface-variant text-[12px] uppercase font-bold tracking-tighter">Temps restant</span>
+<span class="text-primary font-bold">5h 40m</span>
+</div>
+</div>
+<div class="mt-stack-md flex items-center justify-between text-on-surface-variant text-data-label">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                Dernière activité : 3 jours
+                            </span>
+<button class="text-primary hover:text-secondary font-bold flex items-center transition-colors">
+                                Reprendre <span class="material-symbols-outlined ml-1">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination or Load More -->
+<div class="mt-section-gap flex flex-col items-center gap-stack-md">
+<button class="border-2 border-primary text-primary px-margin-desktop py-3 rounded-lg font-bold hover:bg-primary hover:text-on-primary transition-all">
+                Charger plus de formations
+            </button>
+<p class="text-on-surface-variant text-data-label">Affichage de 3 sur 18 formations actives</p>
+</div>
+</main>
+<!-- SideNavBar (Fixed for Tablet/Desktop) - Implementation via context check -->
+<!-- Not explicitly rendered as it might clutter the "Mes Formations" focus screen, but kept available in layout logic -->
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-highest border-t border-outline-variant mt-section-gap">
+<div class="flex flex-col items-center md:items-start gap-stack-sm">
+<span class="font-headline-sm text-headline-sm text-primary">Heritage Academy</span>
+<p class="font-data-label text-data-label text-on-surface-variant text-center md:text-left">© 2024 Heritage Financial Institution. All rights reserved. Professional Excellence in Education.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary underline text-data-label transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline text-data-label transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline text-data-label transition-colors" href="#">Security Disclosure</a>
+<a class="text-on-surface-variant hover:text-primary underline text-data-label transition-colors" href="#">Contact Support</a>
+</div>
+</footer>
+<!-- Interactive Search Focus Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.querySelector('input[type="text"]');
+            if (searchInput) {
+                searchInput.addEventListener('focus', () => {
+                    searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+                });
+                searchInput.addEventListener('blur', () => {
+                    searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+                });
+            }
+
+            // Simple tab switching simulation
+            const tabs = document.querySelectorAll('.nav-active, .text-on-surface-variant.font-medium.px-2');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    tabs.forEach(t => {
+                        t.classList.remove('nav-active');
+                        t.classList.add('text-on-surface-variant', 'font-medium');
+                        t.style.borderBottom = "none";
+                        t.style.fontWeight = "500";
+                    });
+                    e.target.classList.add('nav-active');
+                    e.target.classList.remove('text-on-surface-variant', 'font-medium');
+                    e.target.style.fontWeight = "700";
+                });
+            });
+        });
+    </script>
+</body></html>

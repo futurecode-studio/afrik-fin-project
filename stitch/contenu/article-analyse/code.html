@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .prose p { margin-bottom: 1.5rem; }
+        .prose h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-surface": "#131c2a",
+                        "on-surface-variant": "#444652",
+                        "tertiary-fixed": "#dce1ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "tertiary": "#051c5b",
+                        "background": "#f9f9ff",
+                        "on-background": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "outline": "#757683",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-container-highest": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "outline-variant": "#c5c5d4",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#795900",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "primary": "#001a61",
+                        "primary-container": "#0a2e8c",
+                        "surface-tint": "#3d58b5",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-primary-fixed": "#001551",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#213371",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "display-lg": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "data-value": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+</div>
+<nav class="hidden md:flex gap-stack-lg items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Marchés</a>
+<a class="text-primary font-bold font-body-md text-body-md" href="#">Analyse</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Investir</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Formation</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">account_balance</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</header>
+<main class="pt-24 pb-section-gap">
+<article class="max-w-[800px] mx-auto px-margin-mobile md:px-0">
+<!-- Article Header -->
+<header class="mb-stack-lg">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="bg-primary-container text-white px-3 py-1 rounded-full text-[12px] font-bold tracking-wider uppercase">Économie Régionale</span>
+<span class="text-outline font-data-label text-data-label">• 8 min de lecture</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md leading-tight">L'intégration des marchés financiers de l'UMOA : Perspectives 2025</h1>
+<div class="flex items-center justify-between border-y border-outline-variant py-stack-md my-stack-lg">
+<div class="flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a financial analyst in a modern office, wearing a dark suit. The lighting is soft and corporate, following a premium light-mode aesthetic with deep blues and clean whites. The background is a blurred high-end boardroom in Dakar, suggesting authority and institutional prestige." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq7X1J_Hh7dQjP3SzMia5kuZLVoOwo8cbaY413nxqsnozzHJlaub67QBsBOU6HHN8DJrJ_tIBybLi1YbIaTFm4ZRLtOAF1cDxDR9Xu_dL-us6crudzGqHd09ob-lXwR7iabBHWeXFxQyBJfxLDZqH3_mJEVW-OmUSVTFrmHrXMKWwrJUjaIl0KVsDtUVYK7SUJdCXZyohFbDCAbxgeHxxnCCn_aF1uJ8Cqr_igMzi5ADDqc1jynxuHh_uYJ1PYd9FXSG6yf5Gimw"/>
+</div>
+<div>
+<p class="font-headline-sm text-[16px] text-on-surface font-bold">Dr. Amadou Kouyaté</p>
+<p class="text-on-surface-variant text-[14px]">Analyste Principal, AMF-UMOA Certified</p>
+</div>
+</div>
+<div class="flex items-center gap-stack-md text-on-surface-variant">
+<span class="text-data-label font-data-label">Publié le 12 Octobre 2024</span>
+<div class="flex gap-stack-sm">
+<button class="material-symbols-outlined hover:text-primary transition-colors">bookmark</button>
+<button class="material-symbols-outlined hover:text-primary transition-colors">share</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Image -->
+<figure class="mb-section-gap">
+<div class="rounded-xl overflow-hidden aspect-video shadow-sm border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A wide-angle professional photograph of the BRVM stock exchange trading floor in Abidjan. Modern digital screens display green financial data and charts against a backdrop of sophisticated architectural glass and steel. The lighting is bright and airy, conveying a sense of transparency and forward-looking prosperity in the West African financial sector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVbsxK20tUBS3Tia5vUvHMYT_JhEFhlVIeY8Uf-KhsuxkerusWsQXvLHcKdAoJ20EJpYtrEO7UTHaJw2naImsgqQpz3HMC7hJTinzBO3tz0ouxQO50xL6EglpDLVS7lcekUVSJJHrLog6Y8jmfGiTXJTsTdvNCvOSUiDx5QWYX4aVox_Jrbp2HYNHFdNSFJrWIZC2BEdseqbm2iX4PP0JETgrGGWDlFxNTuIXOl8pjEYy7Xz2ClYSjJW4y7ZqJi87Z7kztP9WoNw"/>
+</div>
+<figcaption class="mt-stack-sm text-outline text-center text-body-md italic">Siège de la BRVM, Abidjan - Symbole de la dynamique financière régionale.</figcaption>
+</figure>
+<!-- Content Container -->
+<div class="prose max-w-none font-body-lg text-body-lg text-on-surface leading-relaxed">
+<p class="font-bold text-[22px] text-primary-container mb-stack-lg">
+                    Le paysage financier de l'Union Monétaire Ouest-Africaine (UMOA) traverse une phase de mutation sans précédent. Sous l'impulsion des réformes de la Banque Centrale, l'intégration des places boursières régionales s'accélère.
+                </p>
+<p>Depuis le début de la décennie, les autorités de régulation travaillent à l'unification des cadres réglementaires. Cette harmonisation vise non seulement à fluidifier les flux de capitaux entre les huit pays membres, mais également à renforcer l'attractivité de la zone pour les investisseurs institutionnels étrangers.</p>
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+                    La Digitalisation comme Catalyseur
+                </h2>
+<p>L'introduction de plateformes de trading en ligne certifiées a permis une augmentation de 15% du volume des transactions quotidiennes. Les particuliers, autrefois exclus des marchés complexes, accèdent désormais via leurs terminaux mobiles à des produits de placement diversifiés.</p>
+<div class="my-stack-lg p-stack-lg bg-surface-container-low border-l-4 border-secondary rounded-r-xl">
+<p class="text-primary font-bold italic mb-0">"La souveraineté financière de notre zone passera nécessairement par la capacité de nos marchés à financer nos propres infrastructures de développement."</p>
+<p class="text-on-surface-variant text-[14px] mt-stack-sm">— Gouverneur de la BCEAO, Rapport Annuel 2023</p>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Les Défis de la Liquidité</h2>
+<p>Malgré ces avancées, la question de la liquidité reste centrale. Le marché secondaire peine encore à atteindre sa maturité, avec des écarts de cotation parfois importants sur les titres moins prestigieux. La création d'un fonds de garantie régional pour les investissements en capital est actuellement à l'étude pour pallier cette volatilité.</p>
+<p>En conclusion, l'année 2025 s'annonce comme un pivot. L'interconnexion complète des systèmes de règlement-livraison devrait réduire les délais de transaction de 48 heures à un règlement quasi instantané, plaçant l'UMOA aux standards internationaux les plus rigoureux.</p>
+</div>
+<!-- Sources & Tags -->
+<footer class="mt-section-gap pt-stack-lg border-t border-outline-variant">
+<div class="mb-stack-lg">
+<h4 class="font-headline-sm text-[16px] text-primary uppercase tracking-widest mb-stack-md">Sources Consultées</h4>
+<ul class="list-none space-y-2 text-on-surface-variant font-data-label text-[14px]">
+<li class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<a class="underline hover:text-primary" href="#">Rapport Trimestriel de l'AMF-UMOA (Q3 2024)</a>
+</li>
+<li class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<a class="underline hover:text-primary" href="#">Statistiques de la BRVM - Flux de capitaux transfrontaliers</a>
+</li>
+</ul>
+</div>
+<div class="flex flex-wrap gap-stack-sm">
+<span class="bg-surface-container-high px-4 py-2 rounded-lg text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest cursor-pointer transition-colors">#Investissement</span>
+<span class="bg-surface-container-high px-4 py-2 rounded-lg text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest cursor-pointer transition-colors">#UMOA</span>
+<span class="bg-surface-container-high px-4 py-2 rounded-lg text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest cursor-pointer transition-colors">#FinanceAfricaine</span>
+<span class="bg-surface-container-high px-4 py-2 rounded-lg text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest cursor-pointer transition-colors">#DigitalBanking</span>
+</div>
+</footer>
+</article>
+</main>
+<!-- Similar Articles Section -->
+<section class="bg-surface-container-low py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Continuer la lecture</h3>
+<p class="text-on-surface-variant">Analyses et perspectives sélectionnées pour vous</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-stack-sm hover:underline">
+                    Tout voir <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Horizontal Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group bg-surface border border-outline-variant rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-all">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist high-tech data center interior with servers glowing in blue light. The composition is professional and represents the digital backbone of modern finance. Soft shadows and a sharp focus on the technology reflect an institutional commitment to security and progress." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Pk0bQcqbQJ4OmxfbQaV0tYvxDpUVw9TDk3bLBF3Dpsve-ZHGibIQo15QtqBDD3mJqMqRp16T6JUOPqLQ3y8W2iCy52Q3VPvwRN9LpmiRqdID2BYffyoJeFn2IUCVfag2M7Zlb8N5WI0Jp80F362wxTBbANV3414QlUxzFyQXbjIzlTxj6rC6F_xVoGonHhPjakaV237KE1qcjl9beZvGKO5UOdwfBR7YNE9zer0WIqztHlDv_Zn7-LnnHAf7XzVQ2vQ1mkmBag"/>
+</div>
+<div class="p-stack-md">
+<span class="text-secondary font-data-label text-[12px] uppercase font-bold tracking-tighter">Technologie</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-2 group-hover:text-primary-container transition-colors">Cyber-sécurité bancaire : Les nouveaux protocoles de l'UMOA</h4>
+<div class="flex items-center gap-stack-sm mt-stack-md text-outline text-[14px]">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>5 min</span>
+<span>•</span>
+<span>Il y a 2 jours</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface border border-outline-variant rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-all">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden sunrise over a vast agricultural plantation in West Africa, representing the commodity markets and real economy. The lighting is warm and prestigious, suggesting growth and prosperity. The aesthetic is corporate yet evocative, following the premium brand guidelines of Africaine des Finances." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATiAUQmP8I4LHtVsPSzmOx0T0Jyp2Wd98gl5jCzQT3DA02TMWebDj1H6wsfA5f5zLZcacLrmhPsLMN8sBHt2BLH-W3SlsDHdT964FRBF6HHo9eij71WFCWSypVuEk9in2Cxuh8dIJsBxHGWsgpORxErcp1LmJsWvhbBhD9vVTLwYpA_3PWsjnVZ0HLBAaOeOK78snB5u2DZwBuwysXY4BtWZ3pMj8ST3xYA2aQ2puhntxbAmU1Iblw7rH-7OFdF8yQJXPGG-DLDw"/>
+</div>
+<div class="p-stack-md">
+<span class="text-secondary font-data-label text-[12px] uppercase font-bold tracking-tighter">Marchés</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-2 group-hover:text-primary-container transition-colors">Matières premières : Le café-cacao face à la volatilité mondiale</h4>
+<div class="flex items-center gap-stack-sm mt-stack-md text-outline text-[14px]">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>12 min</span>
+<span>•</span>
+<span>Hier</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface border border-outline-variant rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-all">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated architectural shot of a modern central bank building made of glass and stone, reflecting the blue sky. The building represents institutional stability and authority. The design is clean, symmetrical, and projects a sense of immense financial weight and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL0Ki4oA_-3P-g1t6LZUJoucSAQaX37VTz8y_7mEj47h2LLfJCQ9tZ5XT2brA7PKpn51FGKtXyKqCCWJ9Hw0qxeKF-4kdMXkUMTy1mu0saSML_zWmQsjUJVmE11xLMJbuCbbSfwGyJvmVIaF0Na3Z-T8z8PLSiy_8r9zz36U4gQL7Ni1zNksCDHtI0M0FQbz2uYPda3ANzzKRCMwkPUe9gn04IkDQGY4hdSsUMo98GyWKFAW2gfOhxd2wqF_MR9ZaLEHiEv8cTFA"/>
+</div>
+<div class="p-stack-md">
+<span class="text-secondary font-data-label text-[12px] uppercase font-bold tracking-tighter">Régulation</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mt-2 group-hover:text-primary-container transition-colors">Nouveaux critères d'éligibilité pour les émetteurs obligataires</h4>
+<div class="flex items-center gap-stack-sm mt-stack-md text-outline text-[14px]">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>7 min</span>
+<span>•</span>
+<span>Il y a 4 heures</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md">
+<div class="flex flex-col md:flex-row justify-between w-full max-w-container-max border-b border-white/10 pb-stack-lg mb-stack-lg">
+<div class="mb-stack-lg md:mb-0">
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</span>
+<p class="text-on-primary/60 mt-stack-sm max-w-xs">L'excellence financière au service de la prospérité régionale. Certifié AMF-UMOA.</p>
+</div>
+<div class="grid grid-cols-2 md:flex gap-stack-lg text-on-primary/80">
+<a class="hover:text-secondary-container transition-colors" href="#">Mentions Légales</a>
+<a class="hover:text-secondary-container transition-colors" href="#">Politique de Confidentialité</a>
+<a class="hover:text-secondary-container transition-colors" href="#">Divulgation Réglementaire</a>
+<a class="hover:text-secondary-container transition-colors" href="#">Support Contact</a>
+</div>
+</div>
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-primary/80">© 2024 Africaine des Finances. Sous licence AMF-UMOA. Tous droits réservés.</p>
+</div>
+</footer>
+<!-- Reading Progress Bar -->
+<div class="fixed top-16 left-0 h-1 bg-secondary-container z-[60] transition-all duration-150" id="progress-bar" style="width: 0%"></div>
+<script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+</body></html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dfe8fc",
+                        "primary-container": "#0a2e8c",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131c2a",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dce1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-container": "#213371",
+                        "secondary": "#795900",
+                        "on-primary-container": "#839cfd",
+                        "on-background": "#131c2a",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d4",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dae3f6",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed": "#001551",
+                        "surface": "#f9f9ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "surface-dim": "#d1daed",
+                        "on-surface-variant": "#444652",
+                        "tertiary": "#051c5b",
+                        "surface-bright": "#f9f9ff",
+                        "primary": "#001a61",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .answer-card-transition {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timer-warning {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { color: inherit; }
+            50% { color: #ba1a1a; }
+        }
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- Top Navigation (Shell Implementation) -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant h-16 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+<div class="h-6 w-[1px] bg-outline-variant mx-2"></div>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant">Certification AMF-UMOA : Session 2024</span>
+</div>
+<div class="flex items-center gap-stack-lg">
+<!-- Countdown Timer -->
+<div class="flex items-center gap-stack-sm bg-surface-container py-2 px-4 rounded-lg border border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<div class="font-data-value text-data-value text-primary w-20 text-center" id="countdown">
+                    01:42:58
+                </div>
+</div>
+<button class="bg-primary text-on-primary font-headline-sm px-6 py-2 rounded-lg hover:bg-primary-container transition-colors shadow-sm active:scale-95 duration-200">
+                Terminer l'examen
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex mt-16 overflow-hidden">
+<!-- Left Side Navigation: Question Grid -->
+<aside class="w-80 bg-surface-container-low border-r border-outline-variant p-stack-lg flex flex-col gap-stack-lg overflow-y-auto">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-stack-md">Navigation</h3>
+<div class="grid grid-cols-5 gap-2">
+<!-- Iterating Questions -->
+<script>
+                        const gridContainer = document.currentScript.parentElement;
+                        for(let i=1; i<=30; i++) {
+                            const isAnswered = i < 12;
+                            const isActive = i === 12;
+                            const div = document.createElement('div');
+                            div.className = `h-10 w-10 flex items-center justify-center font-data-label text-data-label cursor-pointer rounded-lg border transition-all 
+                                ${isActive ? 'bg-primary text-on-primary border-primary font-bold ring-2 ring-primary ring-offset-2' : 
+                                  isAnswered ? 'bg-primary-container text-on-primary-container border-primary-container/20' : 
+                                  'bg-surface-container-highest text-on-surface-variant border-outline-variant hover:border-primary'}`;
+                            div.innerText = i;
+                            gridContainer.appendChild(div);
+                        }
+                    </script>
+</div>
+</div>
+<div class="mt-auto pt-stack-lg border-t border-outline-variant space-y-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<div class="w-4 h-4 bg-primary-container rounded-sm"></div>
+<span class="text-data-label text-on-surface-variant">Répondues (11)</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-4 h-4 bg-surface-container-highest rounded-sm border border-outline-variant"></div>
+<span class="text-data-label text-on-surface-variant">Restantes (19)</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-4 h-4 bg-primary rounded-sm"></div>
+<span class="text-data-label text-on-surface-variant">Question actuelle</span>
+</div>
+</div>
+</aside>
+<!-- Central Question Content -->
+<section class="flex-1 overflow-y-auto bg-surface-container-lowest p-margin-desktop flex justify-center">
+<div class="max-w-3xl w-full flex flex-col gap-stack-lg">
+<!-- Question Label & Progress -->
+<div class="flex justify-between items-end">
+<div>
+<span class="text-primary font-bold text-data-label uppercase tracking-widest">Question 12 sur 30</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-2 leading-snug">
+                            Dans le cadre des marchés financiers de l'UMOA, quelle est la fonction principale du Conseil Régional de l'Épargne Publique et des Marchés Financiers (CREPMF) ?
+                        </h2>
+</div>
+</div>
+<!-- Asset / Supporting Document (Placeholder) -->
+<div class="relative group aspect-[16/6] w-full overflow-hidden rounded-xl border border-outline-variant bg-surface">
+<img class="object-cover w-full h-full opacity-90" data-alt="A professional high-fidelity diagram of a financial regulatory structure with flowcharts and institutional seals. The style is minimalist and corporate, utilizing deep primary blues and soft grays on a clean white background. Subtle lighting highlights the professional authority of the document." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD94a39oH2tq5zbJReGT7r-gfdJVu6HQlfJyAgSbJl2S6WbghsVuMzjqsHQeL_kf1vmi0hSwc_4hZmEzNKAjTJAwxIMGSeePiMBp1NselY9QsBhRXe5l6FywhS62MQenkK9tcCwhIWjlUNPo_xRffZSmPngbVZJPhYEoASgdJaF0-zsGJYFJYaR--eWEvwYgxbTY7cl7By545AN1i58HeCORaLerAlCJNAZLlowI3EOBLbAH4nVWl85WtYpT7QNRxJw6kNSJBu3jQ"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-transparent transition-all pointer-events-none">
+<span class="bg-white/90 px-4 py-2 rounded-full text-data-label font-bold text-primary flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span> Document de référence n°4
+                        </span>
+</div>
+</div>
+<!-- Multiple Choice Answers -->
+<div class="grid gap-stack-md">
+<!-- Option A -->
+<label class="answer-card-transition group relative flex items-center p-stack-lg rounded-xl border border-outline-variant hover:border-primary cursor-pointer hover:bg-surface-container">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="exam_q12" type="radio"/>
+<div class="ml-stack-lg">
+<span class="block font-headline-sm text-on-surface">A. La gestion directe des portefeuilles clients</span>
+<p class="text-on-surface-variant mt-1 text-body-md">Le CREPMF intervient comme gestionnaire d'actifs pour le compte des États membres.</p>
+</div>
+</label>
+<!-- Option B -->
+<label class="answer-card-transition group relative flex items-center p-stack-lg rounded-xl border-primary bg-primary-container/5 ring-1 ring-primary cursor-pointer">
+<input checked="" class="w-5 h-5 text-primary border-outline focus:ring-primary" name="exam_q12" type="radio"/>
+<div class="ml-stack-lg">
+<span class="block font-headline-sm text-primary font-bold">B. La régulation et la protection de l'épargne publique</span>
+<p class="text-on-surface-variant mt-1 text-body-md">Assurer l'organisation de l'appel public à l'épargne et le contrôle des acteurs du marché.</p>
+</div>
+<span class="absolute right-stack-lg material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</label>
+<!-- Option C -->
+<label class="answer-card-transition group relative flex items-center p-stack-lg rounded-xl border border-outline-variant hover:border-primary cursor-pointer hover:bg-surface-container">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="exam_q12" type="radio"/>
+<div class="ml-stack-lg">
+<span class="block font-headline-sm text-on-surface">C. L'émission exclusive de la monnaie fiduciaire</span>
+<p class="text-on-surface-variant mt-1 text-body-md">Le Conseil détient le monopole de l'impression des billets de banque CFA.</p>
+</div>
+</label>
+<!-- Option D -->
+<label class="answer-card-transition group relative flex items-center p-stack-lg rounded-xl border border-outline-variant hover:border-primary cursor-pointer hover:bg-surface-container">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="exam_q12" type="radio"/>
+<div class="ml-stack-lg">
+<span class="block font-headline-sm text-on-surface">D. La fixation arbitraire des taux d'intérêt directeurs</span>
+<p class="text-on-surface-variant mt-1 text-body-md">Rôle consistant à modifier les taux sans consultation de la BCEAO.</p>
+</div>
+</label>
+</div>
+<!-- Action Footer for Central Content -->
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant flex justify-between items-center pb-20">
+<button class="flex items-center gap-2 text-primary font-bold hover:translate-x-[-4px] transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Question Précédente
+                    </button>
+<button class="bg-primary-container text-on-primary-container font-bold px-8 py-3 rounded-lg flex items-center gap-2 hover:bg-primary-container/80 transition-all active:scale-95">
+                        Question Suivante
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Side: Exam Stats & Tools -->
+<aside class="w-72 bg-surface-container-low border-l border-outline-variant p-stack-lg flex flex-col gap-stack-lg">
+<div class="bg-white p-stack-md rounded-xl border border-outline-variant shadow-sm">
+<h4 class="font-data-label text-data-label text-primary uppercase mb-stack-sm">Performances Session</h4>
+<div class="space-y-stack-sm">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant text-body-md">Progression</span>
+<span class="font-data-value text-data-value">37%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[37%]"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="text-on-surface-variant text-body-md">Temps moyen/q</span>
+<span class="font-data-value text-data-value">1:12s</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<h4 class="font-data-label text-data-label text-on-surface-variant uppercase mb-2">Outils autorisés</h4>
+<button class="flex items-center gap-3 p-3 bg-surface border border-outline-variant rounded-lg hover:bg-surface-container transition-colors text-on-surface">
+<span class="material-symbols-outlined text-primary">calculate</span>
+<span class="font-body-md">Calculatrice Financière</span>
+</button>
+<button class="flex items-center gap-3 p-3 bg-surface border border-outline-variant rounded-lg hover:bg-surface-container transition-colors text-on-surface">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="font-body-md">Table des matières</span>
+</button>
+<button class="flex items-center gap-3 p-3 bg-surface border border-outline-variant rounded-lg hover:bg-surface-container transition-colors text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">flag</span>
+<span class="font-body-md">Marquer pour plus tard</span>
+</button>
+</div>
+<div class="mt-auto p-stack-md rounded-xl bg-error-container/20 border border-error/10 text-error flex items-start gap-2">
+<span class="material-symbols-outlined">warning</span>
+<p class="text-data-label leading-tight">Attention : Toute tentative de quitter le mode plein écran sera enregistrée et signalée aux examinateurs.</p>
+</div>
+</aside>
+</main>
+<!-- Script for the countdown logic -->
+<script>
+        let totalSeconds = (1 * 3600) + (42 * 60) + 58;
+        const timerElement = document.getElementById('countdown');
+
+        function updateTimer() {
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+
+            timerElement.innerText = 
+                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            
+            if (totalSeconds <= 600) { // Last 10 minutes
+                timerElement.parentElement.classList.add('timer-warning');
+            }
+            
+            if (totalSeconds > 0) {
+                totalSeconds--;
+            } else {
+                clearInterval(timerInterval);
+                alert("L'examen est terminé. Vos réponses sont sauvegardées.");
+            }
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Prevent typical exam fraud interactions
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v' || e.key === 'f' || e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body></html>

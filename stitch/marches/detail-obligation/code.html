@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Détail de l'Obligation - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131c2a",
+                    "outline": "#757683",
+                    "secondary": "#795900",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-fixed": "#001551",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "tertiary": "#051c5b",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dce1ff",
+                    "surface-variant": "#dae3f6",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "primary": "#001a61",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-high": "#dfe8fc",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-container-highest": "#dae3f6",
+                    "on-surface": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "inverse-surface": "#28313f",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#839cfd",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "tertiary-fixed": "#dce1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "section-gap": "80px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(6, 29, 92, 0.04);
+            transform: translateY(-2px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar (Regulatory) -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container z-50 fixed top-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-data-label text-data-label font-bold text-on-primary uppercase tracking-wider">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="hover:text-secondary-container transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span class="font-data-label">FR</span>
+</button>
+<button class="hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</button>
+<button class="hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</button>
+</div>
+</header>
+<!-- TopNavBar (Main Nav) -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline fixed top-10 w-full z-40 h-20 flex items-center">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">
+                Africaine des Finances
+            </div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Markets</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 text-body-md font-body-md" href="#">Invest</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Training</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Analysis</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">About</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="text-on-surface font-medium hover:text-primary transition-colors text-body-md font-body-md">Login</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold hover:bg-primary-container transition-all active:opacity-80">Commencer à investir</button>
+</div>
+</div>
+</nav>
+<main class="pt-40 pb-section-gap px-margin-desktop max-w-container-max mx-auto">
+<!-- Breadcrumb & Back -->
+<div class="mb-stack-lg flex items-center gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 text-data-label font-data-label" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                Retour aux marchés
+            </a>
+<span class="text-outline-variant">/</span>
+<span class="text-outline font-data-label text-data-label">Détail de l'obligation</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Header & Core Stats -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Hero Header Card -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-surface-container-high text-primary px-3 py-1 rounded text-[12px] font-bold tracking-widest uppercase">Obligation Souveraine</span>
+<span class="bg-success/10 text-[#2EB873] px-3 py-1 rounded text-[12px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2EB873]"></span>
+                                Ouvert à la souscription
+                            </span>
+</div>
+<h1 class="text-display-lg font-display-lg text-primary mb-1">ÉTAT DU SÉNÉGAL 6,15% 2023-2033</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Émetteur : Ministère des Finances et du Budget du Sénégal</p>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="text-right">
+<p class="text-data-label font-data-label text-outline uppercase tracking-wider">Taux Facial</p>
+<p class="text-[40px] leading-none font-bold text-secondary">6,15 %</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Financial Parameters -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-stack-md">
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<p class="text-data-label font-data-label text-outline mb-2 uppercase">Montant Total</p>
+<p class="text-headline-sm font-headline-sm text-on-surface">150 Mrd FCFA</p>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<p class="text-data-label font-data-label text-outline mb-2 uppercase">Durée</p>
+<p class="text-headline-sm font-headline-sm text-on-surface">10 Ans</p>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<p class="text-data-label font-data-label text-outline mb-2 uppercase">Périodicité</p>
+<p class="text-headline-sm font-headline-sm text-on-surface">Semestrielle</p>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg">
+<p class="text-data-label font-data-label text-outline mb-2 uppercase">Prix d'Émission</p>
+<p class="text-headline-sm font-headline-sm text-on-surface">10 000 FCFA</p>
+</div>
+</div>
+<!-- Dates Grid -->
+<div class="bg-surface-container-lowest border border-outline-variant overflow-hidden rounded-lg">
+<div class="bg-surface-container-high px-stack-md py-3 border-b border-outline-variant">
+<h3 class="font-headline-sm text-headline-sm text-primary">Calendrier de l'opération</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2">
+<div class="p-stack-md border-b md:border-b-0 md:border-r border-outline-variant flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+<div>
+<p class="text-data-label font-data-label text-outline uppercase">Date de Jouissance</p>
+<p class="font-data-value text-data-value text-on-surface">15 Octobre 2023</p>
+</div>
+</div>
+<div class="p-stack-md flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event_upcoming</span>
+</div>
+<div>
+<p class="text-data-label font-data-label text-outline uppercase">Date d'Échéance</p>
+<p class="font-data-value text-data-value text-on-surface">15 Octobre 2033</p>
+</div>
+</div>
+</div>
+</div>
+<!-- How to subscribe -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-stack-lg">
+<h3 class="font-display-lg-mobile text-display-lg-mobile text-primary mb-stack-md">Comment souscrire ?</h3>
+<div class="space-y-stack-md">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-data-label">1</div>
+<p class="text-body-md font-body-md text-on-surface">Connectez-vous à votre espace client ou créez un compte en quelques minutes avec vos pièces justificatives.</p>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-data-label">2</div>
+<p class="text-body-md font-body-md text-on-surface">Sélectionnez le montant d'investissement souhaité (multiple du prix d'émission : 10 000 FCFA).</p>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-data-label">3</div>
+<p class="text-body-md font-body-md text-on-surface">Validez votre souscription par signature électronique sécurisée.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Documents & Risks -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- CTA Side Card -->
+<div class="bg-primary text-on-primary p-stack-lg rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-headline-sm font-headline-sm mb-stack-sm">Prêt à investir ?</h4>
+<p class="text-on-primary/80 mb-stack-md text-body-md">Bénéficiez d'un accompagnement personnalisé par nos experts financiers pour optimiser votre portefeuille.</p>
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-lg font-bold text-headline-sm hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">support_agent</span>
+                            Être accompagné
+                        </button>
+</div>
+<div class="absolute -right-10 -bottom-10 opacity-10">
+<span class="material-symbols-outlined text-[180px]">trending_up</span>
+</div>
+</div>
+<!-- Official Documents -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined">description</span>
+                        Documents officiels
+                    </h4>
+<div class="space-y-2">
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant group" href="#">
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-primary">Note d'Information</span>
+<span class="material-symbols-outlined text-outline">download</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant group" href="#">
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-primary">Avis de l'AMF-UMOA</span>
+<span class="material-symbols-outlined text-outline">download</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant group" href="#">
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-primary">Calendrier d'amortissement</span>
+<span class="material-symbols-outlined text-outline">download</span>
+</a>
+</div>
+</div>
+<!-- Risk Disclosure -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined">warning</span>
+                        Facteurs de Risques
+                    </h4>
+<div class="space-y-stack-md text-body-md font-body-md text-on-surface-variant">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-error text-[20px] mt-1">shield_with_heart</span>
+<p><strong>Risque de crédit :</strong> Capacité de l'émetteur à honorer ses engagements.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-error text-[20px] mt-1">waves</span>
+<p><strong>Risque de taux :</strong> Variation de la valeur de l'obligation en fonction des taux du marché.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-error text-[20px] mt-1">csv</span>
+<p><strong>Risque de liquidité :</strong> Facilité de revente des titres sur le marché secondaire.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg mb-section-gap">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-stack-md">Africaine des Finances</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-xs">Le leader de l'intermédiation financière dans la zone UEMOA, au service de votre prospérité.</p>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface uppercase mb-stack-sm">Investir</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Bourse</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Obligations</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">FCP / SICAV</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface uppercase mb-stack-sm">Apprendre</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Académie</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Webinaires</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Lexique</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface uppercase mb-stack-sm">Légal</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Mentions légales</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">RGPD</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Tarification</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-on-surface uppercase mb-stack-sm">Contact</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Support</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all hover:underline" href="#">Agences</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-stack-lg border-t border-outline-variant/30 text-data-label font-data-label text-on-surface-variant">
+<p>© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</p>
+<div class="flex gap-stack-md mt-4 md:mt-0">
+<a class="hover:text-primary" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="hover:text-primary" href="#"><span class="material-symbols-outlined">mail</span></a>
+<a class="hover:text-primary" href="#"><span class="material-symbols-outlined">group</span></a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll reveal or interactions could go here
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', function() {
+                this.classList.add('opacity-80');
+            });
+            btn.addEventListener('mouseup', function() {
+                this.classList.remove('opacity-80');
+            });
+        });
+    </script>
+</body></html>

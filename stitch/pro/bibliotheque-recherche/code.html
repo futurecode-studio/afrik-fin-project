@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Publications &amp; Analyses - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed": "#ffdfa0",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "inverse-on-surface": "#ebf1ff",
+                    "outline": "#757683",
+                    "surface-container-highest": "#dae3f6",
+                    "on-background": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "secondary": "#795900",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-fixed": "#261a00",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary": "#051c5b",
+                    "on-tertiary-fixed": "#001551",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary": "#001a61",
+                    "on-tertiary-container": "#8d9ee3",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#28313f",
+                    "primary-container": "#0a2e8c",
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .publication-card:hover .download-overlay {
+            opacity: 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Header Navigation -->
+<header class="bg-surface sticky top-0 z-50 border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md font-extrabold text-primary">Africaine des Finances</div>
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md" href="#">Marchés</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md" href="#">Investissements</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md" href="#">Compte Client</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold font-body-md" href="#">Rapports</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-body-md" href="#">Actualités</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant px-4 py-2 font-body-md hover:text-primary transition-all">Contact</button>
+<button class="bg-primary-container text-on-primary font-bold px-6 py-2.5 rounded hover:bg-tertiary transition-all scale-95 active:opacity-80">Espace Client</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen">
+<!-- Hero Section & Search -->
+<section class="relative py-section-gap overflow-hidden bg-surface-container-low">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop">
+<div class="max-w-2xl">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md">Centre d'Analyses &amp; Intelligence Économique</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg">Accédez à notre bibliothèque premium de recherche financière, analyses sectorielles et prévisions macroéconomiques sur les marchés africains.</p>
+</div>
+<!-- Global Filter Bar -->
+<div class="bg-surface border border-outline-variant p-2 rounded-lg shadow-sm flex flex-col md:flex-row gap-2 items-stretch mt-stack-lg">
+<div class="flex-grow flex items-center px-4 gap-3 bg-surface-container-lowest border border-outline-variant rounded">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 py-3 text-body-md" placeholder="Rechercher une publication, un mot-clé..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-6 py-3 border border-outline-variant rounded bg-surface hover:bg-surface-container transition-colors text-on-surface font-medium">
+<span class="material-symbols-outlined">filter_list</span>
+                            Filtres Avancés
+                        </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded font-bold hover:bg-tertiary transition-all">Rechercher</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg flex flex-col md:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 space-y-stack-lg">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Secteurs</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Énergie &amp; Mines</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-primary font-semibold">Services Financiers</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Agriculture</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Télécoms &amp; Tech</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Infrastructure</span>
+</label>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Zones Géographiques</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Afrique de l'Ouest (UEMOA)</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Afrique Centrale (CEMAC)</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-5 h-5" type="checkbox"/>
+<span class="text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Maghreb</span>
+</label>
+</div>
+</div>
+<div class="pt-stack-md border-t border-outline-variant">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Analystes</h3>
+<div class="space-y-3 max-h-64 overflow-y-auto custom-scrollbar pr-2">
+<div class="flex items-center gap-3 cursor-pointer p-2 hover:bg-surface-container rounded transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-[10px] text-white font-bold">JD</div>
+<span class="text-body-md text-on-surface font-medium">Jean Dupont</span>
+</div>
+<div class="flex items-center gap-3 cursor-pointer p-2 hover:bg-surface-container rounded transition-all">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-[10px] text-on-secondary-container font-bold">SM</div>
+<span class="text-body-md text-on-surface font-medium">Sarah Mansour</span>
+</div>
+<div class="flex items-center gap-3 cursor-pointer p-2 hover:bg-surface-container rounded transition-all">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-[10px] text-on-tertiary font-bold">AK</div>
+<span class="text-body-md text-on-surface font-medium">Amadou Koné</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Results Grid -->
+<div class="flex-grow">
+<div class="flex justify-between items-baseline mb-stack-md">
+<h2 class="font-headline-md text-headline-md text-primary">Publications Récentes <span class="text-body-md font-normal text-outline ml-2">(128 analyses trouvées)</span></h2>
+<div class="flex gap-4">
+<button class="text-primary font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                            Plus récents
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Publication Card 1 -->
+<div class="publication-card group bg-surface border border-outline-variant rounded overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="relative h-48 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A professional aerial photograph of a bustling African financial district with modern glass skyscrapers reflecting a golden sunset. The lighting is warm and cinematic, suggesting prosperity and growth. The architectural style is contemporary and prestigious, aligning with a corporate financial theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQL3rDsrFe8ksfxoSGktHXyjDu9ym9SN20MSdg9U6jyiRzUmKEW5dMd5IXsHTu7wioVwCBRkHQptnfJo7CKIO9pjunkgkHrQwOYB-3m36tBT90pH0CuC2vg76i7XOKl8HjN3Gc50qtvDE-AgnGmpuveF52QKc6ptNyNTjMYzvZP6gbh6a4SNpt19Tu8RQyhCYZ2WnPrPJSY_5yFuOaoVqfVU2zE0gjavhH_Pr2t8g3lAqXmScdeDREaCXmYCnZYaWhwsxLroY6uw"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm">Premium</span>
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm">Secteur Bancaire</span>
+</div>
+<div class="download-overlay absolute inset-0 bg-primary/80 opacity-0 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary px-6 py-2 font-bold rounded flex items-center gap-2 hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined">download</span>
+                                    Télécharger PDF
+                                </button>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-outline uppercase">Mars 2024</span>
+<span class="text-body-md font-medium text-primary">Côte d'Ivoire</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors leading-tight">Perspectives Bancaires 2024 : L'émergence du Digital Banking en Afrique de l'Ouest.</h3>
+<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">Une analyse approfondie de l'évolution des ratios de solvabilité et de l'adoption des solutions fintech par les banques traditionnelles de l'UEMOA.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest"></div>
+<span class="text-body-md font-semibold">Par Sarah Mansour</span>
+</div>
+<span class="font-data-value text-data-value text-outline">12.4 MB</span>
+</div>
+</div>
+</div>
+<!-- Publication Card 2 -->
+<div class="publication-card group bg-surface border border-outline-variant rounded overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="relative h-48 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A clean, minimalist high-tech data visualization scene with glowing blue line graphs and abstract geometric structures representing financial growth. The background is a deep navy blue with subtle light leaks. The style is sophisticated, modern, and information-dense, reflecting high-end economic analysis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn3hdjvrVU6BFcBaRmz3J6H60HVf9ieTxmpcy7ED0g-kS0Veloh7MeSAvwoCIQZFXvDoThsWdoCwMe-jONSTYdRTgy1GGH9UBIphcdIUR7tZgF5iBQytQ4eBmyZHrkrIuowMh-NLe7ppiaN_kBRnem229m6KIQb0zK1B0VHw8eO24qSYEx90xL2HEgrD4GJv40dzg7-beQcQDXGe3YhZ8vBYf9JLDtYGnriT75RU99y1OuAEWwFr3Cvqjah6zIxxWM-mqzp9weAA"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-tertiary-container text-on-tertiary text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm">Macro-Économie</span>
+</div>
+<div class="download-overlay absolute inset-0 bg-primary/80 opacity-0 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary px-6 py-2 font-bold rounded flex items-center gap-2 hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined">download</span>
+                                    Télécharger PDF
+                                </button>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-outline uppercase">Février 2024</span>
+<span class="text-body-md font-medium text-primary">Sénégal</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors leading-tight">Impact de l'Exploitation Gazière sur la Croissance du PIB : Horizon 2025-2030.</h3>
+<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">Modélisation économique des revenus gaziers attendus et analyse de l'effet d'entraînement sur les secteurs secondaires de l'économie sénégalaise.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest"></div>
+<span class="text-body-md font-semibold">Par Amadou Koné</span>
+</div>
+<span class="font-data-value text-data-value text-outline">8.1 MB</span>
+</div>
+</div>
+</div>
+<!-- Publication Card 3 -->
+<div class="publication-card group bg-surface border border-outline-variant rounded overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="relative h-48 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up shot of raw minerals and gold bars under studio lighting, symbolizing natural resource wealth. The image is crisp, with deep contrast and a professional color grade of gold and charcoal tones. It looks like a high-end cover for a mining sector annual report, emphasizing value and solidity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXYrbXM3LvPL7ZRZRIYVe_pc7ux6blyWobBTEmxy7sK5V1l82t7FJGW-uaTByMDWpwgZ8P5g8LVExstOTiNm1j5ka_W-BxF4gRSpUmZLlySS-fZ2a38GVAazzIcC5Ycl6ePOy2dZRwHsArzwdSwC5TWEAuCnpRhdRYk8FBDCFCzIykIOXnFDvVz4Lfi_t7Ls9Ui1OmqSY0yQne_d-0x4tD7Eu3-HyG5KZinCuDw9LZLagpT-etN6OJ5zAg_dc3S_3rAyNEhmwAOA"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm">Mines &amp; Énergie</span>
+</div>
+<div class="download-overlay absolute inset-0 bg-primary/80 opacity-0 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary px-6 py-2 font-bold rounded flex items-center gap-2 hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined">download</span>
+                                    Télécharger PDF
+                                </button>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-outline uppercase">Janvier 2024</span>
+<span class="text-body-md font-medium text-primary">Régional</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors leading-tight">Focus Mines : La ruée vers le Lithium et les métaux critiques en Afrique Centrale.</h3>
+<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">Inventaire des nouveaux projets miniers et analyse des cadres réglementaires en vigueur pour l'exploitation des métaux de la transition énergétique.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest"></div>
+<span class="text-body-md font-semibold">Par Jean Dupont</span>
+</div>
+<span class="font-data-value text-data-value text-outline">15.9 MB</span>
+</div>
+</div>
+</div>
+<!-- Publication Card 4 -->
+<div class="publication-card group bg-surface border border-outline-variant rounded overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="relative h-48 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A modern, high-tech control room with large screens displaying real-time financial markets data from African stock exchanges. The room is dimly lit, with the blue light of the screens illuminating the professional environment. The atmosphere is intense, focused, and data-driven, representing high-level market monitoring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIjTFqT5Lo2dV7B3akRAjbAuX81jIz2Rz0_21T2bqECVi1vDGDClEZeDZj5SskpQkey4VjNncHw9IwvVZneF5tlmf3KYy7TDLFWqVcjNacvNFF76mOhhKj0GimFtf9vO5bu3gIPLOtD_VZC_Q5fTZ3zdior7qCbiWasqfLKV68y7ckO1oeC7WRpU_Jsa_8ls-15ydSPdP4SAr7CWeiR7wKSMskVRJYNmCafEXW-rnzt0LWEe5qhXdjLl-JkI0JTV8FCgZ23rvYHA"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider rounded-sm">Bourse</span>
+</div>
+<div class="download-overlay absolute inset-0 bg-primary/80 opacity-0 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary px-6 py-2 font-bold rounded flex items-center gap-2 hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined">download</span>
+                                    Télécharger PDF
+                                </button>
+</div>
+</div>
+<div class="p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-label text-data-label text-outline uppercase">Décembre 2023</span>
+<span class="text-body-md font-medium text-primary">BRVM</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors leading-tight">Performance Trimestrielle des Blue Chips : Analyse Comparative 2023.</h3>
+<p class="text-body-md text-on-surface-variant mb-6 line-clamp-3">Bilan annuel des principales capitalisations boursières régionales et recommandations d'arbitrage pour le premier trimestre 2024.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant pt-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest"></div>
+<span class="text-body-md font-semibold">Par Sarah Mansour</span>
+</div>
+<span class="font-data-value text-data-value text-outline">10.2 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-stack-lg flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary font-bold rounded">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Newsletter / CTA -->
+<section class="bg-primary py-section-gap mt-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<h2 class="font-display-lg text-display-lg text-white mb-4">Ne manquez aucune analyse stratégique.</h2>
+<p class="font-body-lg text-body-lg text-tertiary-fixed mb-0">Inscrivez-vous à notre veille hebdomadaire pour recevoir les condensés de nos recherches directement dans votre boîte mail.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-2">
+<input class="flex-grow px-6 py-4 rounded bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:ring-2 focus:ring-secondary-container focus:outline-none" placeholder="Votre adresse email professionnelle" type="email"/>
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded font-extrabold hover:bg-secondary-fixed transition-all uppercase tracking-wide">S'abonner</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto mt-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-secondary-container mb-stack-md">Africaine des Finances</div>
+<p class="text-surface-container-high text-body-md opacity-80 leading-relaxed">Institution financière de premier plan dédiée au développement et à l'excellence des marchés africains.</p>
+</div>
+<div>
+<h4 class="text-white font-bold mb-stack-md">Navigation</h4>
+<ul class="space-y-2">
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Marchés</a></li>
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Investissements</a></li>
+<li><a class="text-secondary-container font-bold text-body-md" href="#">Rapports</a></li>
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Actualités</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-stack-md">Informations</h4>
+<ul class="space-y-2">
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Mentions Légales</a></li>
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Politique de Confidentialité</a></li>
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">Gouvernance</a></li>
+<li><a class="text-surface-container-high hover:text-secondary-fixed transition-colors text-body-md" href="#">CSR</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-stack-md">Contact</h4>
+<p class="text-surface-container-high text-body-md mb-2">contact@africaine-finances.com</p>
+<p class="text-surface-container-high text-body-md">+225 27 20 00 00 00</p>
+<div class="flex gap-4 mt-4">
+<a class="text-white hover:text-secondary-container transition-all" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-white hover:text-secondary-container transition-all" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 pt-stack-lg border-t border-white/10 mt-stack-lg flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-surface-container-high text-body-md">© 2024 Africaine des Finances. Institution Financière Agréée.</span>
+<div class="flex gap-8">
+<a class="text-surface-container-high hover:text-secondary-fixed text-body-md" href="#">Investisseurs</a>
+<a class="text-surface-container-high hover:text-secondary-fixed text-body-md" href="#">Carrières</a>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth transitions for interaction
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Filter interaction simulation
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(box => {
+            box.addEventListener('change', () => {
+                const resultsArea = document.querySelector('.grid-cols-1');
+                resultsArea.style.opacity = '0.5';
+                setTimeout(() => {
+                    resultsArea.style.opacity = '1';
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Panier Formation - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-surface": "#131c2a",
+                        "on-surface-variant": "#444652",
+                        "tertiary-fixed": "#dce1ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "tertiary": "#051c5b",
+                        "background": "#f9f9ff",
+                        "on-background": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "outline": "#757683",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-container-highest": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "outline-variant": "#c5c5d4",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#795900",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "primary": "#001a61",
+                        "primary-container": "#0a2e8c",
+                        "surface-tint": "#3d58b5",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-primary-fixed": "#001551",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#213371",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "display-lg": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+</div>
+<div class="hidden md:flex items-center gap-gutter">
+<nav class="flex gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Invest</a>
+<a class="text-primary font-bold font-body-md" href="#">Training</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Analysis</a>
+</nav>
+<div class="flex items-center gap-stack-md ml-stack-lg">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">account_balance</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Breadcrumb / Back button -->
+<div class="mb-stack-lg flex items-center gap-stack-sm text-on-surface-variant cursor-pointer group">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-body-md">Retour au catalogue des formations</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-lg">Votre Panier</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Items List (Bento-style layout for training items) -->
+<div class="lg:col-span-8 space-y-stack-md">
+<!-- Training Item 1 -->
+<div class="glass-card border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row transition-all hover:shadow-[0_20px_40px_rgba(6,29,92,0.04)]">
+<div class="w-full md:w-48 h-48 md:h-auto overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional high-fidelity photograph of a sleek, modern tablet displaying complex financial charts and candlestick graphs. The setting is a bright, upscale corporate office in Abidjan, with warm sunlight filtering through large windows. The overall aesthetic is clean, light-mode, with deep blue and gold accents reflecting the Africaine des Finances brand. The image focuses on precision and professional growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4FzMlpPRqkHPiJrT1mieooDkpOGcqd9KCVByC2mD5PvhncEN6ZSutBV653NDBvq6lCk4cZ8_GRd96wlBIvFVt5yzdYvJnqWp3f40sUJ9gmXuYdkuRr5FiZohWAwUfIY2omgRhABuVn1z5lLJagCLvWeYSkREopnVHrrFC_Dr6j4ZSdjho3W_cpNQ1rpVj2GBi1JwqNzZWJ8GhPdfht5LzPt1Q-hy1rIP-CiIvwGx6AzMkgYtwibT6j06opcPPhOFD9fOJlWiohw"/>
+</div>
+<div class="p-stack-md flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="bg-surface-container-highest text-primary px-3 py-1 rounded-full text-data-label mb-2 inline-block">Certification AMF-UMOA</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Maîtrise des Marchés de Capitaux Africains</h3>
+<p class="text-on-surface-variant font-body-md mt-1">Niveau Avancé • 40 Heures de formation • Session Live + E-learning</p>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-stack-md">
+<div class="flex gap-stack-md text-on-surface-variant">
+<span class="flex items-center gap-1 font-body-md"><span class="material-symbols-outlined text-[18px]">verified_user</span> Certifié</span>
+<span class="flex items-center gap-1 font-body-md"><span class="material-symbols-outlined text-[18px]">group</span> 12 places restantes</span>
+</div>
+<div class="text-right">
+<span class="font-data-value text-data-value text-primary">450.000 FCFA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Training Item 2 -->
+<div class="glass-card border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row transition-all hover:shadow-[0_20px_40px_rgba(6,29,92,0.04)]">
+<div class="w-full md:w-48 h-48 md:h-auto overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up shot of a luxury fountain pen resting on a crisp white legal document with the label Regulatory Disclosure. The lighting is bright and institutional, evoking a sense of law and order. The color palette uses professional blues and soft grays, matching a premier financial services visual identity. The composition is minimalist and sharp, focusing on authority and regulatory compliance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUClkBkEyfMjIEf4N-9VU3Oo1x4IAEuu5OD6kqg_RhoPp0L3c0Bj-V7w5p2ppSSCsiDtqVtqcVojeLIU0JQ5NAuomJ_BTfV99DcGpZ3gDV_cRU8tTCg0zwKaC_C__7TPI8urGTEL0_osO7jbk_NLgP-A8Cwb3i4VbC1Vn1mkvyrNCreNF6WH9xSuC0ZVN9ghSjAZrYmafNbprljG-OkSFOBd0CGeWLxpcMpXm0pj_w3AbN475KimjuUWLgCJ6L3_R5qu0sqKfaaQ"/>
+</div>
+<div class="p-stack-md flex-grow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<span class="bg-surface-container-highest text-primary px-3 py-1 rounded-full text-data-label mb-2 inline-block">Compliance & Risks</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Gestion des Risques Financiers et Réglementaires</h3>
+<p class="text-on-surface-variant font-body-md mt-1">Niveau Intermédiaire • 24 Heures de formation • Accès illimité 1 an</p>
+</div>
+<button class="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-stack-md">
+<div class="flex gap-stack-md text-on-surface-variant">
+<span class="flex items-center gap-1 font-body-md"><span class="material-symbols-outlined text-[18px]">lock</span> Accès Sécurisé</span>
+<span class="flex items-center gap-1 font-body-md"><span class="material-symbols-outlined text-[18px]">update</span> Mise à jour 2024</span>
+</div>
+<div class="text-right">
+<span class="font-data-value text-data-value text-primary">275.000 FCFA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggested Add-on (Small Card) -->
+<div class="bg-primary text-on-primary rounded-xl p-stack-md flex flex-col md:flex-row items-center justify-between gap-stack-md">
+<div class="flex items-center gap-stack-md">
+<div class="bg-secondary-container text-on-secondary-container p-3 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm">Option Premium Wealth</h4>
+<p class="text-on-primary/80 font-body-md">Ajoutez 1h de coaching personnalisé avec un expert AMF.</p>
+</div>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded font-bold hover:brightness-90 transition-all whitespace-nowrap">
+                        Ajouter pour 50.000 FCFA
+                    </button>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<aside class="lg:col-span-4 sticky top-24">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-stack-lg flex flex-col gap-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-primary border-b border-outline-variant pb-4">Récapitulatif</h2>
+<div class="space-y-stack-sm py-4 border-b border-outline-variant">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Sous-total (2 formations)</span>
+<span class="font-data-value text-data-value text-on-surface">725.000 FCFA</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Frais de certification</span>
+<span class="font-data-value text-data-value text-on-surface">15.000 FCFA</span>
+</div>
+<div class="flex justify-between font-body-md text-secondary font-bold">
+<span>Réduction (BIENVENUE10)</span>
+<span class="font-data-value text-data-value">-72.500 FCFA</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="py-2">
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">CODE PROMO</label>
+<div class="flex gap-2">
+<input class="flex-grow bg-white border border-outline-variant rounded p-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md" placeholder="Entrez votre code" type="text"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded font-medium hover:bg-primary-container transition-colors">Appliquer</button>
+</div>
+</div>
+<div class="flex justify-between items-center py-4">
+<span class="font-headline-sm text-headline-sm text-primary">Total</span>
+<div class="text-right">
+<span class="block font-display-lg text-[28px] leading-tight text-primary font-extrabold">667.500 FCFA</span>
+<span class="text-data-label text-on-surface-variant">Toutes taxes comprises</span>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 rounded font-bold text-lg hover:brightness-95 active:scale-[0.98] transition-all shadow-[0_4px_0_#d49f00]">
+                            PROCÉDER AU PAIEMENT
+                        </button>
+<button class="w-full border border-primary text-primary py-3 rounded font-bold hover:bg-primary/5 transition-all">
+                            CONTINUER MES ACHATS
+                        </button>
+</div>
+<!-- Security Badge -->
+<div class="mt-4 flex items-center justify-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="text-data-label uppercase tracking-wider">Paiement 100% Sécurisé via AMF Gateway</span>
+</div>
+<div class="mt-4 flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="material-symbols-outlined text-4xl">payments</span>
+<span class="material-symbols-outlined text-4xl">account_balance</span>
+<span class="material-symbols-outlined text-4xl">credit_card</span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md bg-primary dark:bg-primary-container">
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</span>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Legal Notice</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Contact Support</a>
+</div>
+<div class="h-px w-32 bg-on-primary/20"></div>
+<p class="text-on-primary/60 font-body-md text-center max-w-2xl">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved. 
+            Institution financière agréée opérant sur les marchés de l'UMOA.
+        </p>
+</footer>
+<script>
+        // Simple micro-interaction for active state simulation
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => el.style.opacity = '0.8');
+            el.addEventListener('mouseup', () => el.style.opacity = '1');
+            el.addEventListener('mouseleave', () => el.style.opacity = '1');
+        });
+    </script>
+</body></html>

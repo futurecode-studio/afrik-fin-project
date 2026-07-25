@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin 3 — Suivi par Formation | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed": "#001551",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#6d5000",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "secondary-container": "#ffbf00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container": "#e7eeff",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "outline": "#757683",
+                    "on-primary": "#ffffff",
+                    "primary": "#001a61",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-container": "#213371",
+                    "surface-dim": "#d1daed",
+                    "on-error": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#051c5b",
+                    "inverse-surface": "#28313f",
+                    "on-primary-container": "#839cfd",
+                    "on-background": "#131c2a",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary": "#795900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f9f9ff; color: #131c2a; font-family: 'Figtree', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .data-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .data-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(6, 29, 92, 0.08); }
+        .chart-bar { transition: height 1s ease-out; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0A2E8C; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-stack-lg px-4 gap-stack-md bg-surface-container dark:bg-surface-container-lowest border-r border-outline-variant z-40">
+<div class="px-4 mb-8">
+<h1 class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed">Client Portal</h1>
+<p class="text-xs text-on-surface-variant opacity-70">Institutional Excellence</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary font-bold rounded-lg scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-body-md text-body-md">Administration</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- TopNavBar (Integrated Layout) -->
+<header class="sticky top-0 z-30 bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-gutter">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Africaine des Finances</span>
+<nav class="hidden lg:flex gap-6 ml-8">
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Markets</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Investments</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Academy</a>
+<a class="font-data-label text-data-label text-primary font-bold border-b-2 border-primary pb-1" href="#">Wealth</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-surface-container-low rounded-full">notifications</button>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container-low rounded-full">settings</button>
+<div class="h-10 w-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive for a financial institution, clean background, high-end photography, sharp focus, neutral studio lighting, representing a trusted advisor in African finance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtAy4OvtNw6Et5NID30EMd_xoX_PtbAXHPBiEK_zfotiBWUb7zzFgYcFi9amoGZS2BN3bVLXUsyv4gcZiQPE6iklQ_6HOhGH_K1pTVmCqsS4ghkxTBK9Dp-KXwvZy7k9ZMRERhFcJWxRc3NEwa5Sabdi4jggZCcziDWNr2fGooZMmXVMm_Lup4asaDBv9rahniKhVLkuTWZtI905XeP3K-JEZkLY6_OhxWqwnTm-UMjf52jknBxUQJRGFEw4dpOoAGTlMnfhdx-Q"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-margin-desktop max-w-container-max mx-auto space-y-stack-lg">
+<!-- Page Header & Course Selector -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<span class="font-data-label text-data-label text-primary uppercase tracking-widest">Administration / Academy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-2">Suivi par formation</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-1">Analyse détaillée des performances pédagogiques et taux d'engagement.</p>
+</div>
+<div class="flex gap-4">
+<div class="relative min-w-[280px]">
+<select class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 font-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none appearance-none">
+<option>Marchés Financiers de l'Afrique de l'Ouest</option>
+<option>Gestion de Fortune & Private Banking</option>
+<option>Introduction aux FinTechs Africaines</option>
+<option>Régulation Bancaire CEMAC/UEMOA</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<button class="bg-primary text-white px-6 py-3 rounded-lg font-body-md hover:bg-tertiary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-body-md">download</span>
+                        Exporter Rapport
+                    </button>
+</div>
+</div>
+<!-- Bento Grid - Key Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="data-card bg-white border border-outline-variant p-6 rounded-lg">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container text-primary rounded-lg">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-xs font-bold text-success flex items-center text-[#2EB873]">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                        </span>
+</div>
+<p class="font-data-label text-data-label text-on-surface-variant">Inscrits Totaux</p>
+<h3 class="font-display-lg text-[32px] text-on-surface mt-1">1,248</h3>
+<p class="text-[10px] text-outline mt-2 uppercase tracking-tight">Mise à jour: Il y a 10 min</p>
+</div>
+<div class="data-card bg-white border border-outline-variant p-6 rounded-lg">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container text-primary rounded-lg">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<span class="text-xs font-bold text-[#2EB873] flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +4.2%
+                        </span>
+</div>
+<p class="font-data-label text-data-label text-on-surface-variant">Taux de Complétion</p>
+<h3 class="font-display-lg text-[32px] text-on-surface mt-1">68.5%</h3>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-3">
+<div class="bg-[#2EB873] h-full rounded-full" style="width: 68.5%"></div>
+</div>
+</div>
+<div class="data-card bg-white border border-outline-variant p-6 rounded-lg">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error-container text-error rounded-lg">
+<span class="material-symbols-outlined">running_with_errors</span>
+</div>
+<span class="text-xs font-bold text-error flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> -0.8%
+                        </span>
+</div>
+<p class="font-data-label text-data-label text-on-surface-variant">Taux d'Abandon</p>
+<h3 class="font-display-lg text-[32px] text-on-surface mt-1">14.2%</h3>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-3">
+<div class="bg-error h-full rounded-full" style="width: 14.2%"></div>
+</div>
+</div>
+<div class="data-card bg-white border border-outline-variant p-6 rounded-lg">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">military_tech</span>
+</div>
+<span class="text-xs font-bold text-on-surface-variant flex items-center">
+                            Objectif: 85
+                        </span>
+</div>
+<p class="font-data-label text-data-label text-on-surface-variant">Score Moyen Cert.</p>
+<h3 class="font-display-lg text-[32px] text-on-surface mt-1">82.4<span class="text-headline-sm">/100</span></h3>
+<p class="text-[10px] text-outline mt-2 uppercase tracking-tight">Sur 412 examens passés</p>
+</div>
+</div>
+<!-- Detailed Analysis Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Chart: Completion vs Abandonment per Module -->
+<div class="lg:col-span-2 bg-white border border-outline-variant rounded-lg p-6 flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Analyse par Module</h4>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs text-on-surface-variant">Complétion</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="text-xs text-on-surface-variant">Abandon</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex items-end justify-between gap-4 h-[300px] border-b border-outline-variant pb-2 relative">
+<!-- Module 1 -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="flex items-end gap-1 w-full justify-center h-full">
+<div class="chart-bar bg-primary w-1/4 rounded-t-sm" style="height: 92%"></div>
+<div class="chart-bar bg-error w-1/4 rounded-t-sm" style="height: 4%"></div>
+</div>
+<span class="text-[10px] font-data-label text-outline text-center uppercase">Mod. 1: Fondements</span>
+</div>
+<!-- Module 2 -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="flex items-end gap-1 w-full justify-center h-full">
+<div class="chart-bar bg-primary w-1/4 rounded-t-sm" style="height: 84%"></div>
+<div class="chart-bar bg-error w-1/4 rounded-t-sm" style="height: 12%"></div>
+</div>
+<span class="text-[10px] font-data-label text-outline text-center uppercase">Mod. 2: Régulation</span>
+</div>
+<!-- Module 3 -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="flex items-end gap-1 w-full justify-center h-full">
+<div class="chart-bar bg-primary w-1/4 rounded-t-sm" style="height: 71%"></div>
+<div class="chart-bar bg-error w-1/4 rounded-t-sm" style="height: 22%"></div>
+</div>
+<span class="text-[10px] font-data-label text-outline text-center uppercase">Mod. 3: Analyse</span>
+</div>
+<!-- Module 4 -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="flex items-end gap-1 w-full justify-center h-full">
+<div class="chart-bar bg-primary w-1/4 rounded-t-sm" style="height: 65%"></div>
+<div class="chart-bar bg-error w-1/4 rounded-t-sm" style="height: 28%"></div>
+</div>
+<span class="text-[10px] font-data-label text-outline text-center uppercase">Mod. 4: Pratique</span>
+</div>
+<!-- Module 5 -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="flex items-end gap-1 w-full justify-center h-full">
+<div class="chart-bar bg-primary w-1/4 rounded-t-sm" style="height: 58%"></div>
+<div class="chart-bar bg-error w-1/4 rounded-t-sm" style="height: 15%"></div>
+</div>
+<span class="text-[10px] font-data-label text-outline text-center uppercase">Mod. 5: Synthèse</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="h-0"></div>
+</div>
+</div>
+<div class="mt-6 p-4 bg-surface-container-low rounded-lg border border-outline-variant/30 text-body-md italic text-on-surface-variant flex gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+                        L'abandon critique se situe au Module 4 (Pratique). Révision du contenu interactif recommandée pour améliorer l'engagement.
+                    </div>
+</div>
+<!-- Column 3: Satisfaction & Certification Insights -->
+<div class="space-y-gutter">
+<div class="bg-white border border-outline-variant rounded-lg p-6">
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-6">Performance Certification</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-data-label text-data-label">Réussite (1ère tentative)</span>
+<span class="font-data-value text-data-value">74%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 74%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-data-label text-data-label">Mention "Excellent" (>90)</span>
+<span class="font-data-value text-data-value">18%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 18%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center">
+<div class="inline-flex flex-col items-center">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container" cx="64" cy="64" fill="transparent" r="56" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="64" cy="64" fill="transparent" r="56" stroke="currentColor" stroke-dasharray="351.8" stroke-dashoffset="35.18" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-headline-md font-bold">4.8</span>
+<span class="text-[10px] uppercase font-bold text-outline">Satisfaction</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mt-2">Moyenne de 520 avis apprenants</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Table: Detailed Student Progression -->
+<div class="bg-white border border-outline-variant rounded-lg overflow-hidden">
+<div class="px-6 py-5 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Détails par Cohorte</h4>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-bold border border-outline-variant rounded hover:bg-white transition-colors">7 derniers jours</button>
+<button class="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded">Tout</button>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-data-label text-data-label uppercase tracking-tight">
+<th class="px-6 py-4 font-bold border-b border-outline-variant">ID Cohorte</th>
+<th class="px-6 py-4 font-bold border-b border-outline-variant">Période</th>
+<th class="px-6 py-4 font-bold border-b border-outline-variant text-center">Apprenants</th>
+<th class="px-6 py-4 font-bold border-b border-outline-variant text-center">Engagement (%)</th>
+<th class="px-6 py-4 font-bold border-b border-outline-variant text-center">Progression Moy.</th>
+<th class="px-6 py-4 font-bold border-b border-outline-variant text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="text-body-md divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-primary">CH-2024-Q1-AF</td>
+<td class="px-6 py-4">Jan 2024 - Mar 2024</td>
+<td class="px-6 py-4 text-center font-data-value">312</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#2EB873]"></span> 94%
+                                    </div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="w-24 bg-surface-container h-1.5 rounded-full mx-auto overflow-hidden">
+<div class="bg-primary h-full" style="width: 100%"></div>
+</div>
+<span class="text-[10px] text-outline mt-1 block">Terminé</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-[#2EB873]/10 text-[#2EB873] px-3 py-1 rounded-full text-xs font-bold">Certifié</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-primary">CH-2024-Q2-AF</td>
+<td class="px-6 py-4">Avr 2024 - Juin 2024</td>
+<td class="px-6 py-4 text-center font-data-value">420</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> 82%
+                                    </div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="w-24 bg-surface-container h-1.5 rounded-full mx-auto overflow-hidden">
+<div class="bg-primary h-full" style="width: 45%"></div>
+</div>
+<span class="text-[10px] text-outline mt-1 block">Module 2/5</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-xs font-bold">En cours</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-primary">CH-2024-INST</td>
+<td class="px-6 py-4">Mai 2024 - Juil 2024</td>
+<td class="px-6 py-4 text-center font-data-value">128</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span> 42%
+                                    </div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="w-24 bg-surface-container h-1.5 rounded-full mx-auto overflow-hidden">
+<div class="bg-primary h-full" style="width: 12%"></div>
+</div>
+<span class="text-[10px] text-outline mt-1 block">Introduction</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold">Planifié</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Support Floating Action Suppression Logic Applied -->
+<div class="h-16"></div> <!-- Padding bottom -->
+</main>
+<script>
+        // Micro-interaction for charts: re-animate on course change
+        document.querySelector('select').addEventListener('change', function() {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const originalHeight = bar.style.height;
+                bar.style.height = '0%';
+                setTimeout(() => {
+                    bar.style.height = originalHeight;
+                }, 100);
+            });
+            
+            // Randomize some stats for demo visual feedback
+            const stats = document.querySelectorAll('.font-display-lg');
+            stats.forEach(stat => {
+                stat.classList.add('opacity-50');
+                setTimeout(() => stat.classList.remove('opacity-50'), 300);
+            });
+        });
+    </script>
+</body></html>

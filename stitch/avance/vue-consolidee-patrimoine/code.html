@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wealth Management Dashboard | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-surface": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d1daed",
+                    "surface-container-low": "#f0f3ff",
+                    "outline-variant": "#c5c5d4",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "tertiary": "#051c5b",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary-container": "#0a2e8c",
+                    "primary": "#001a61",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-secondary-fixed": "#261a00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-background": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline": "#757683",
+                    "on-tertiary-container": "#8d9ee3",
+                    "inverse-surface": "#28313f",
+                    "surface": "#f9f9ff",
+                    "on-primary-fixed": "#001551"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .chart-pie {
+            background: conic-gradient(
+                #001a61 0% 45%, 
+                #ffbf00 45% 75%, 
+                #0a2e8c 75% 100%
+            );
+            border-radius: 50%;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-50 w-full bg-surface border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-bold text-primary">
+                Africaine des Finances
+            </div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Academy</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="hidden lg:flex items-center gap-stack-sm mr-stack-md">
+<button class="px-4 py-2 text-primary border border-primary font-bold rounded-lg hover:bg-surface-container-low transition-all">Support</button>
+<button class="px-4 py-2 bg-primary text-on-primary font-bold rounded-lg hover:bg-tertiary transition-all">Invest Now</button>
+</div>
+<div class="flex gap-stack-sm text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container-low p-2 rounded-full">settings</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a high-net-worth investor client in a high-end office environment. The image uses soft, natural window lighting and a sophisticated blue and neutral color palette, emphasizing authority and financial security in a light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvg7QJaL1D_LWthLlMU3AREAs34frAbzp9kjaZCU7aUSvCMDpgImOQUFPZE6HDrXVQH8b6xORgmmfhnYF_-yzZKbHKla2Krcx02svdYO13Ffnxtkicw1MpZPmCimsPEjJyyE6gj0awydf6rvn32PeDqM6hplOOOGtwRKCSAAyduENaA_RsvqWUNu0PicwkJOmYjIniovQzxrRKupqgxAJsQlgHiX7ejj6rK7hfBQlB9ywnaHXWst9A5j5iWHj4TU8Nnbr1x3Q4xA"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full max-w-container-max mx-auto px-margin-desktop py-stack-lg gap-gutter">
+<!-- SideNavBar Component -->
+<aside class="hidden lg:flex flex-col w-64 shrink-0 gap-stack-md sticky top-28 h-[calc(100vh-140px)]">
+<div class="flex flex-col gap-1 px-2">
+<div class="font-headline-sm text-headline-sm text-primary mb-1">Client Portal</div>
+<div class="text-on-surface-variant text-sm mb-stack-lg">Institutional Excellence</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Financial Reports</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-outline-variant pt-stack-md">
+<button class="w-full bg-secondary text-on-secondary py-3 rounded-lg font-bold mb-stack-md hover:brightness-90 transition-all">Open New Account</button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 min-w-0">
+<!-- Hero Header -->
+<section class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Vue Consolidée</h1>
+<p class="text-on-surface-variant font-body-lg">Gestion de patrimoine privé — Mis à jour : Aujourd'hui, 09:42</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant px-6 py-4 rounded-xl flex flex-col items-end">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase tracking-widest">Performance YTD</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 font-bold">trending_up</span>
+<span class="font-data-value text-3xl text-emerald-600">+14.28%</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid Summary -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Total Balance Card -->
+<div class="md:col-span-8 bg-surface border border-outline-variant rounded-xl p-8 flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-2">Valeur Totale du Portefeuille</h2>
+<div class="font-display-lg text-display-lg text-primary mb-6">4,829,040 <span class="text-headline-md font-medium">EUR</span></div>
+<div class="grid grid-cols-3 gap-stack-lg pt-stack-lg border-t border-outline-variant/30">
+<div>
+<p class="text-on-surface-variant text-sm mb-1 uppercase tracking-wider">Actions</p>
+<p class="font-data-value text-xl">2,173,068 €</p>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm mb-1 uppercase tracking-wider">Obligations</p>
+<p class="font-data-value text-xl">1,448,712 €</p>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm mb-1 uppercase tracking-wider">Liquidités</p>
+<p class="font-data-value text-xl">1,207,260 €</p>
+</div>
+</div>
+</div>
+<!-- Subtle pattern background -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[320px]">account_balance</span>
+</div>
+</div>
+<!-- Asset Allocation Pie Chart -->
+<div class="md:col-span-4 bg-surface border border-outline-variant rounded-xl p-8 flex flex-col items-center">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-stack-lg self-start">Allocation d'actifs</h2>
+<div class="relative w-48 h-48 chart-pie shadow-lg mb-stack-lg">
+<div class="absolute inset-8 bg-surface rounded-full flex items-center justify-center flex-col">
+<span class="font-data-label text-[10px] text-on-surface-variant">RISQUE</span>
+<span class="font-bold text-primary">MODÉRÉ</span>
+</div>
+</div>
+<div class="w-full flex flex-col gap-2">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span> Actions</div>
+<span class="font-data-value">45%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-secondary-container"></span> Obligations</div>
+<span class="font-data-value">30%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary-container"></span> Liquidités</div>
+<span class="font-data-value">25%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Holdings Table -->
+<section class="mb-section-gap">
+<div class="flex items-center justify-between mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary">Détails des Investissements</h2>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                        Exporter le rapport <span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-headline-sm text-sm text-primary uppercase tracking-wider">Actif</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-primary uppercase tracking-wider">Catégorie</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-primary uppercase tracking-wider text-right">Valeur</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-primary uppercase tracking-wider text-right">Perf. 12m</th>
+<th class="px-6 py-4 font-headline-sm text-sm text-primary uppercase tracking-wider text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Vanguard S&P 500 ETF</span>
+<span class="text-xs text-on-surface-variant font-data-label">VOO:NYSE</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Actions US</td>
+<td class="px-6 py-5 text-right font-data-value">845,210 €</td>
+<td class="px-6 py-5 text-right text-emerald-600 font-bold">+18.4%</td>
+<td class="px-6 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">STABLE</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">African Dev. Bank Bond</span>
+<span class="text-xs text-on-surface-variant font-data-label">AFDB:FIXED</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Obligations Souveraines</td>
+<td class="px-6 py-5 text-right font-data-value">1,200,500 €</td>
+<td class="px-6 py-5 text-right text-emerald-600 font-bold">+5.2%</td>
+<td class="px-6 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">REVENU</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Gold Spot (EUR)</span>
+<span class="text-xs text-on-surface-variant font-data-label">XAU:COM</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Matières Premières</td>
+<td class="px-6 py-5 text-right font-data-value|">452,000 €</td>
+<td class="px-6 py-5 text-right text-amber-600 font-bold">+12.1%</td>
+<td class="px-6 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">HEDGE</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Euro Cash Reserve</span>
+<span class="text-xs text-on-surface-variant font-data-label">CASH:MM</span>
+</div>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Monétaire</td>
+<td class="px-6 py-5 text-right font-data-value">1,207,260 €</td>
+<td class="px-6 py-5 text-right text-on-surface-variant font-bold">+2.8%</td>
+<td class="px-6 py-5 text-right">
+<span class="px-3 py-1 rounded-full text-xs font-bold bg-surface-container-highest text-on-surface-variant">LIQUIDE</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Expert Recommendations -->
+<section>
+<div class="flex items-center gap-3 mb-stack-lg">
+<span class="material-symbols-outlined text-secondary text-3xl">psychology</span>
+<h2 class="font-headline-md text-headline-md text-primary">Recommandations de l'Expert Wealth</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Recommendation Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-6 hover:shadow-lg transition-all border-l-4 border-l-secondary-container">
+<div class="flex items-start justify-between mb-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded">STRATÉGIQUE</span>
+<span class="text-xs text-on-surface-variant font-data-label">URGENCE: MOYENNE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Rééquilibrage Obligations Vertes</h3>
+<p class="text-on-surface-variant mb-6 text-sm">
+                            Votre exposition aux obligations souveraines classiques est élevée. Nous recommandons un arbitrage de 15% vers les Obligations Vertes de la BAD pour optimiser le rendement fiscal.
+                        </p>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-sm">Voir l'opportunité</button>
+<button class="text-on-surface-variant font-bold text-sm">Plus tard</button>
+</div>
+</div>
+<!-- Recommendation Card 2 -->
+<div class="bg-primary text-on-primary rounded-xl p-6 hover:shadow-lg transition-all relative overflow-hidden">
+<div class="flex items-start justify-between mb-4 relative z-10">
+<span class="px-3 py-1 bg-secondary text-white text-xs font-bold rounded">PREMIUM</span>
+<span class="text-xs text-white/70 font-data-label">PRIVATE EQUITY</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2 relative z-10">Fonds Infrastructure Afrique 2024</h3>
+<p class="text-white/80 mb-6 text-sm relative z-10">
+                            Accès exclusif à la clôture du fonds infrastructure. Target IRR 18%. Ticket minimum 100k €. Valable encore 4 jours.
+                        </p>
+<div class="flex items-center gap-4 relative z-10">
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-bold text-sm">Contacter mon Advisor</button>
+</div>
+<!-- Background decoration -->
+<div class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[150px]">rocket_launch</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Bottom NavBar (Hidden on desktop) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant px-margin-mobile py-3 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Accueil</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="text-[10px] font-bold">Patrimoine</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px] font-bold">Marchés</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profil</span>
+</button>
+</nav>
+<!-- Floating Action Button (Only on Mobile for Wealth Management) -->
+<button class="md:hidden fixed bottom-24 right-6 w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-2xl flex items-center justify-center z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<footer class="mt-section-gap w-full border-t border-outline-variant bg-surface-container-low py-12">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between gap-stack-lg">
+<div>
+<div class="text-headline-sm font-bold text-primary mb-4">Africaine des Finances</div>
+<p class="text-on-surface-variant max-w-sm text-sm">
+                    L'excellence institutionnelle au service de votre prospérité. Membre agréé du conseil financier panafricain.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-stack-lg">
+<div class="flex flex-col gap-2">
+<span class="font-bold text-primary text-sm">Services</span>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Gestion de Fortune</a>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Private Banking</a>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Family Office</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-bold text-primary text-sm">Légal</span>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Confidentialité</a>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Conformité</a>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">Réglementation</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-bold text-primary text-sm">Contact</span>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">+221 33 800 00 00</a>
+<a class="text-on-surface-variant text-sm hover:underline" href="#">wealth@africafinance.com</a>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-stack-lg pt-stack-md border-t border-outline-variant/30 text-center text-xs text-on-surface-variant">
+            © 2024 Africaine des Finances. Tous droits réservés. Sécurité certifiée Grade A.
+        </div>
+</footer>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.2s ease-out';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Dynamic greeting based on time of day (French)
+        const updateGreeting = () => {
+            const hour = new Date().getHours();
+            const welcomeText = document.querySelector('p.text-on-surface-variant.font-body-lg');
+            if (welcomeText) {
+                const prefix = hour < 18 ? "Bonjour, " : "Bonsoir, ";
+                welcomeText.innerHTML = prefix + "Gestion de patrimoine privé — Mis à jour : Aujourd'hui, " + new Date().toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'});
+            }
+        };
+        updateGreeting();
+    </script>
+</body></html>

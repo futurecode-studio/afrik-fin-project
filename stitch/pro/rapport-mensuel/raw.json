@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/502005973728556936/screens/beb33d842609441cba7a00a2dfd4fe0c\",\"title\":\"Rapport Mensuel de Gestion — Africaine des Finances\",\"screenshot\":{\"name\":\"projects/502005973728556936/files/45393f844d564ca2a28ff7085d4d4e40\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AP1WRLurC7nZootu89P_q_aO7yRab1ZpQnGjVACtqUjSUfby9NeFrcmYCGuKHjkiD385OcG42lrgaKP_bYkya21C62kg8dFbz9hp3LcJOri5VwaLJ269me6kEsJ9k_Fa1KBYe01lxi0iKGsLtSJ-mKacYepkqz4VzaiwkCVnJW4uTYSrMysji3SYSJr-kBtgFo-WSJeD0aU6A-qo6-mofsWwp_chjvUOC0yJ9K2ag-5H9V7prTiig56EctBOXQ\"},\"htmlCode\":{\"name\":\"projects/502005973728556936/files/abffc855b5f54d759999a0e00b948250\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2Q0NmJjZTc5NWJhZjQ1MzBiOGU0MmYyYTQ4ZWRhMDlkEgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4588\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "4588",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2Q0NmJjZTc5NWJhZjQ1MzBiOGU0MmYyYTQ4ZWRhMDlkEgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/502005973728556936/files/abffc855b5f54d759999a0e00b948250"
+      },
+      "name": "projects/502005973728556936/screens/beb33d842609441cba7a00a2dfd4fe0c",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AP1WRLurC7nZootu89P_q_aO7yRab1ZpQnGjVACtqUjSUfby9NeFrcmYCGuKHjkiD385OcG42lrgaKP_bYkya21C62kg8dFbz9hp3LcJOri5VwaLJ269me6kEsJ9k_Fa1KBYe01lxi0iKGsLtSJ-mKacYepkqz4VzaiwkCVnJW4uTYSrMysji3SYSJr-kBtgFo-WSJeD0aU6A-qo6-mofsWwp_chjvUOC0yJ9K2ag-5H9V7prTiig56EctBOXQ",
+        "name": "projects/502005973728556936/files/45393f844d564ca2a28ff7085d4d4e40"
+      },
+      "title": "Rapport Mensuel de Gestion — Africaine des Finances",
+      "width": "2560"
+    }
+  }
+}

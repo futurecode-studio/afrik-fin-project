@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Discussion du cours - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed": "#001551",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#6d5000",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "secondary-container": "#ffbf00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container": "#e7eeff",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "outline": "#757683",
+                    "on-primary": "#ffffff",
+                    "primary": "#001a61",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-container": "#213371",
+                    "surface-dim": "#d1daed",
+                    "on-error": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#051c5b",
+                    "inverse-surface": "#28313f",
+                    "on-primary-container": "#839cfd",
+                    "on-background": "#131c2a",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary": "#795900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c5c5d4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant">
+<div class="flex items-center h-16 gap-stack-lg">
+<span class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</span>
+<nav class="hidden md:flex gap-gutter">
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Markets</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Investments</a>
+<a class="font-data-label text-data-label text-primary font-bold border-b-2 border-primary pb-1" href="#">Academy</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Wealth</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary transition-colors" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="hidden lg:flex items-center gap-stack-sm">
+<button class="px-4 py-2 border border-primary text-primary text-data-label font-bold rounded hover:bg-surface-container-low transition-all">Support</button>
+<button class="px-4 py-2 bg-primary text-on-primary text-data-label font-bold rounded hover:bg-primary-container transition-all">Invest Now</button>
+</div>
+<div class="flex items-center gap-stack-sm border-l border-outline-variant pl-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container-low rounded-full">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container-low rounded-full">settings</span>
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-fixed" data-alt="Close-up portrait of a professional African financial advisor in a modern office, wearing a dark blue suit, soft studio lighting, high-end corporate photography style with a shallow depth of field, background showing a blurry high-rise cityscape." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkoeXqYAGGAxy67PqMKoccVd8KKBZJEg675W3VOp-f4i_ncl_DhfjmWFkLii7vgFHlpQFwE8qoDYSzM7gtzioQgvn4gPyZ0WU3nx9h4dZ4acURrG3AgL5LFAE_InAQl_jZjLmqF_G-7BPNP13Lq2yNpypABKthLD1WGOh5gKTiKZkUdg6u4YSpcWwuiYGg0Gkr89YUo8Kdl7HQie35SixFY63Z9c7sTncF7LgbQ98Urg9b_Abe0HuXAb_cZH6MXCdwZ-deaLvdgA"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-16 bg-surface-container border-r border-outline-variant py-stack-lg px-4 gap-stack-md z-40">
+<div class="mb-4">
+<h2 class="font-headline-sm text-headline-sm text-primary">Client Portal</h2>
+<p class="text-data-label text-on-surface-variant opacity-70">Institutional Excellence</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">analytics</span>
+<span class="font-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">account_balance_wallet</span>
+<span class="font-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">description</span>
+<span class="font-body-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">admin_panel_settings</span>
+<span class="font-body-md">Administration</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-md border-t border-outline-variant flex flex-col gap-1">
+<button class="w-full py-3 bg-primary text-on-primary text-data-label font-bold rounded mb-4 shadow-sm active:scale-95 transition-transform">Open New Account</button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/10 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-background">
+<div class="max-w-5xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md mb-section-gap">
+<div>
+<nav class="flex items-center gap-2 text-data-label text-on-surface-variant mb-2">
+<a class="hover:text-primary" href="#">Academy</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Masterclass Finance Africaine</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Forum de discussion</span>
+</nav>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary leading-tight">Discussion du cours</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mt-stack-sm">Participez aux échanges, posez vos questions aux experts et partagez vos analyses avec la communauté.</p>
+</div>
+<button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-bold shadow-md hover:shadow-lg transition-all active:scale-95 whitespace-nowrap">
+<span class="material-symbols-outlined">add_comment</span>
+                        Poser une question
+                    </button>
+</div>
+<!-- Forum Stats & Filters -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">forum</span>
+</div>
+<div>
+<p class="text-data-label text-on-surface-variant">Total Threads</p>
+<p class="font-headline-sm text-headline-sm text-primary">1,284</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600">check_circle</span>
+</div>
+<div>
+<p class="text-data-label text-on-surface-variant">Résolus</p>
+<p class="font-headline-sm text-headline-sm text-primary">85%</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600">bolt</span>
+</div>
+<div>
+<p class="text-data-label text-on-surface-variant">Actifs</p>
+<p class="font-headline-sm text-headline-sm text-primary">42</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600">avg_time</span>
+</div>
+<div>
+<p class="text-data-label text-on-surface-variant">Réponse moyenne</p>
+<p class="font-headline-sm text-headline-sm text-primary">2h</p>
+</div>
+</div>
+</div>
+<!-- Discussion List Filters -->
+<div class="flex flex-wrap items-center justify-between gap-stack-md mb-stack-md p-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-stack-sm overflow-x-auto no-scrollbar">
+<button class="px-4 py-2 bg-primary text-on-primary text-data-label rounded-md">Toutes les questions</button>
+<button class="px-4 py-2 hover:bg-surface-container-high text-on-surface-variant text-data-label rounded-md transition-colors">Non résolues</button>
+<button class="px-4 py-2 hover:bg-surface-container-high text-on-surface-variant text-data-label rounded-md transition-colors">Mes questions</button>
+</div>
+<div class="relative w-full md:w-auto">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 w-full md:w-64 bg-surface border border-outline-variant rounded-lg text-body-md focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="Rechercher une discussion..." type="text"/>
+</div>
+</div>
+<!-- Discussion Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-bold text-data-label text-on-surface">DISCUSSION</th>
+<th class="px-6 py-4 font-bold text-data-label text-on-surface hidden lg:table-cell">LEÇON ASSOCIÉE</th>
+<th class="px-6 py-4 font-bold text-data-label text-on-surface hidden sm:table-cell">RÉPONSES</th>
+<th class="px-6 py-4 font-bold text-data-label text-on-surface">STATUT</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Discussion Item 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-start gap-4">
+<img class="w-10 h-10 rounded-full flex-shrink-0 object-cover border border-outline-variant" data-alt="Corporate headshot of a young African woman with braided hair, professional business attire, neutral studio background, soft natural lighting, high resolution photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzMurl5s7dJbgc-97gYkbEjvf_OEkJbdEj_7f_P_7PYMEAoCK6kqzXqDuegx9fdJU6SS9Y-rMGGTwiKtVCJLRRb_Tc0ArmvGWr6BXke2yp80T1wIL7TbuV08AAvM3lly_TvuERV6BlzUGUOlnVPw832eLPqYUfjLIskgfMp6ZcolHfNybgWMhQVCaPhw8fVEIYV1Z5-vNLuRQY-BNehALFXtw3qe4AV28W51JLeGNv13XB3h_IaqMO4qTYH8Rxl9IIK-M4M53_MA"/>
+<div>
+<h3 class="font-bold text-primary group-hover:underline mb-1">Impact des taux directeurs sur les marchés émergents de l'UEMOA ?</h3>
+<div class="flex items-center gap-2 text-data-label text-on-surface-variant">
+<span class="font-semibold text-on-surface">Amara Diallo</span>
+<span>•</span>
+<span>Il y a 2 heures</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 hidden lg:table-cell">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-data-label rounded-full">Module 4: Politiques Monétaires</span>
+</td>
+<td class="px-6 py-5 hidden sm:table-cell">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-data-value">12</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 text-data-label font-bold rounded-full border border-blue-100">
+<span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                                        En cours
+                                    </span>
+</td>
+</tr>
+<!-- Discussion Item 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-start gap-4">
+<img class="w-10 h-10 rounded-full flex-shrink-0 object-cover border border-outline-variant" data-alt="Portrait of an experienced African financier, wearing glasses and a formal grey suit, clean minimalist office background, professional executive portrait lighting, detailed facial features." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZGAAcsTNyU76UXyiiT9FedYsgsp2-lzF9w9wu2AUkFZPLR9B0WB9f8nWch81t9MNOMPz8CtasFCNEbeknP17DFMadvDybplnqD6wcLxr2ft05ky6VoDYVCch2cK7_S42ph3d2EbOtJ1wh8vUkzbU7FZboSOaLBTbZEexLOUpX7shB5EsV2r6hdy3CEIWVf8RgXzlqAIZyohWPe7ygJyGlO1f5jCvZKyQL5dcGpZzV2Q3Q0L49T1sgZcQQcGtwvZc5ZQwUBKKSvw"/>
+<div>
+<h3 class="font-bold text-primary group-hover:underline mb-1">Question sur le calcul de la VAN pour les projets d'infrastructure</h3>
+<div class="flex items-center gap-2 text-data-label text-on-surface-variant">
+<span class="font-semibold text-on-surface">Kofi Mensah</span>
+<span>•</span>
+<span>Hier à 15:45</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 hidden lg:table-cell">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-data-label rounded-full">Module 2: Évaluation de Projets</span>
+</td>
+<td class="px-6 py-5 hidden sm:table-cell">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-data-value">5</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-data-label font-bold rounded-full border border-green-100">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Résolu
+                                    </span>
+</td>
+</tr>
+<!-- Discussion Item 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-body-md">OS</div>
+<div>
+<h3 class="font-bold text-primary group-hover:underline mb-1">Analyse comparative des bourses BRVM et NSE (Nigeria)</h3>
+<div class="flex items-center gap-2 text-data-label text-on-surface-variant">
+<span class="font-semibold text-on-surface">Oluwaseun S.</span>
+<span>•</span>
+<span>4 fév. 2024</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 hidden lg:table-cell">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-data-label rounded-full">Module 5: Marchés de Capitaux</span>
+</td>
+<td class="px-6 py-5 hidden sm:table-cell">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-data-value">28</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-data-label font-bold rounded-full border border-green-100">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Résolu
+                                    </span>
+</td>
+</tr>
+<!-- Discussion Item 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-start gap-4">
+<img class="w-10 h-10 rounded-full flex-shrink-0 object-cover border border-outline-variant" data-alt="Medium shot of a young male African tech entrepreneur, casual business attire, workspace background with subtle digital accents, cinematic lighting, modern corporate look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnwfj5UhsbXJTLlrk4tMDznrlckLczDq0ZOCDyFbntciAibNtsHdJliV6ap8cNP_mGf3Vsd3F75LnXxyehjz4zM-35t00qJbFKXzwktcpRLDzYAnS48w_s57y_kjwLRhTILLrBoGIqjjuvS0oUnBNgCVc5P3GkFdjW9bvNeG027elBnPmcHYHB_pfp7g1rKeSAvM6OHcyqgUGWIIyboZdhwQSyzEz6XpSwy3e67tKDAw0KeZg9vkDpFHMNKWMJax1AVi0vGDwvpA"/>
+<div>
+<h3 class="font-bold text-primary group-hover:underline mb-1">Stratégies de couverture contre le risque de change ?</h3>
+<div class="flex items-center gap-2 text-data-label text-on-surface-variant">
+<span class="font-semibold text-on-surface">Moussa Traoré</span>
+<span>•</span>
+<span>Il y a 5h</span>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 hidden lg:table-cell">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-data-label rounded-full">Module 3: Gestion des Risques</span>
+</td>
+<td class="px-6 py-5 hidden sm:table-cell">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-data-value">0</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-container-high text-on-surface-variant text-data-label font-bold rounded-full border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                                        Nouveau
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="mt-stack-lg flex items-center justify-between">
+<p class="text-data-label text-on-surface-variant">Affichage de 1-10 sur 128 discussions</p>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high disabled:opacity-50 transition-colors" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary font-bold rounded">1</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors text-on-surface-variant">2</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors text-on-surface-variant">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors text-on-surface-variant">13</button>
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Featured Community Experts -->
+<div class="mt-section-gap">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-stack-md">Experts de la communauté</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of an African female financial analyst in her 40s, sharp professional business attire, high-end office setting, soft backlighting, warm and authoritative tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdWFYggPSBFJX79Xvylir38iWYhD93y2EULYEzucZ1G3EMfaDuEHu58VFlVqdg6dJ7eFW95whku6PKLDvQRzZbHR5ssMLX5dOg4gCL_PrB3Xu7vq0l6qx5Xf50JvLr8VyOQunxuPgjKPkvja3olQUppxpJLJQEy6o6upfoGhvJzF4FrPi0SXl9u71KlgHC-UB_O-BJdrvgmQT3mcGuu2wF6BsBS2-Yzqb-qSsvn3yQ09iNZFtRRdormq9d7IWvhNfNMieTpHtW6w"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-0.5 rounded-full ring-2 ring-white">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Dr. Fatou Diop</p>
+<p class="text-data-label text-on-surface-variant">Macro-économiste Senior</p>
+<p class="text-[12px] text-primary font-semibold mt-1">2.4k contributions</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Portrait of a young African male financial researcher, creative office workspace, daylight photography, modern professional aesthetic, sharp focus on eyes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbaiPN7H24vn96WlYx897Cx5yRo-_6xVUjGtTqaqFzzksTriejwhLwLdMEq1j6aSTEE_TSBgWcJO7kwxHCitvZAXIVdz1VaWmztDip-_TZmVXIMnA43eOMUMGOL6Efs4Zhckikuj8cSnu0R08W4PvTzORS3rhH8o84k-B4_pnKjx52Oju0Z5MHzZya7anXFaNKSyiKMQiNB_W4AfIqAUyuCtEDqD4m-weAWmtFBR-6NLGJwf_sWtvVnlOvUUGXS12DzGHDDa2JnA"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-0.5 rounded-full ring-2 ring-white">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Jean-Marc Boni</p>
+<p class="text-data-label text-on-surface-variant">Analyste Financier CFA</p>
+<p class="text-[12px] text-primary font-semibold mt-1">1.8k contributions</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl flex items-center gap-4">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover" data-alt="Close-up of a middle-aged African businessman, confident smile, blurred banking interior background, high-quality professional lighting, authentic corporate feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-32JVelRECIW_OyORJPG5jA8l0UyD0AwWoYK6n0uoJ2_4SatKQC7PCAkrQGBUS3eHDzlbZH5V4BBdYs5WlkWDzYokWzjQYvcGJRfKlwqHetDctn6eO-G4fOXuNkoufoogSj3nZb1YErxSZa_kB3qaBU6zp-Z6HEe62Wb9a28-dlfpy4VeZEo5ud5wH0puwBJWulnyHzEnJidkFpWtrWzO3DYWajZKxUph4Z0KnYvIpsPFLTjhoYzDlCRUVwVLReHSAr1M70CdDA"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-0.5 rounded-full ring-2 ring-white">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<p class="font-bold text-on-surface">Samuel Okonjo</p>
+<p class="text-data-label text-on-surface-variant">Expert Banquier d'Affaires</p>
+<p class="text-[12px] text-primary font-semibold mt-1">3.1k contributions</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-8 right-8 md:hidden w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+<script>
+        // Micro-interactions for table rows
+        document.querySelectorAll('tr[cursor-pointer]').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.add('opacity-70');
+                setTimeout(() => row.classList.remove('opacity-70'), 150);
+            });
+        });
+
+        // Simple Tab active state toggle
+        const filterButtons = document.querySelectorAll('.no-scrollbar button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+            });
+        });
+    </script>
+</body></html>

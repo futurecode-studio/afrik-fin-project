@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simulateur Obligataire | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Component Styling Logic and Global Visual Tokens -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#dae3f6",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container-high": "#dfe8fc",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#051c5b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-surface": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "tertiary-container": "#213371",
+                    "outline": "#757683",
+                    "background": "#f9f9ff",
+                    "inverse-surface": "#28313f",
+                    "surface-tint": "#3d58b5",
+                    "secondary-container": "#ffbf00",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary": "#001a61",
+                    "on-background": "#131c2a",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "on-secondary-fixed": "#261a00",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary-container": "#0a2e8c",
+                    "secondary": "#795900",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Figtree', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="w-full top-0 sticky z-50 bg-surface border-b border-outline-variant h-20 px-margin-desktop">
+<div class="max-w-container-max mx-auto flex justify-between items-center h-full">
+<div class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Marchés</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Investir</a>
+<a class="text-primary font-bold border-b-2 border-secondary-container py-1" href="#">Formations</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Analyses</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 border border-primary text-primary font-semibold rounded hover:bg-surface-container-low transition-all">Contact</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-semibold rounded hover:bg-primary-container transition-all">Espace Client</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Header Section -->
+<header class="mb-stack-lg">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Simulateur de Rendement Obligataire</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Outil de précision pour le calcul du Rendement Actuariel (YTM) et la projection des flux de trésorerie pour vos investissements à revenu fixe sur les marchés de l'UMOA.
+            </p>
+</header>
+<!-- Main Tool Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Input Panel -->
+<aside class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-panel p-8 rounded-lg shadow-sm">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">tune</span> Paramètres du Titre
+                    </h2>
+<form class="space-y-6" id="bondForm">
+<div>
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">VALEUR NOMINALE (FCFA)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-data-value focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="nominal" placeholder="ex: 10000" type="number" value="10000"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">TAUX COUPON (%)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-data-value focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="couponRate" step="0.01" type="number" value="6.5"/>
+</div>
+<div>
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">PRIX D'ACHAT (%)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-data-value focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="purchasePrice" step="0.01" type="number" value="98.5"/>
+</div>
+</div>
+<div>
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">FRÉQUENCE DE PAIEMENT</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-body-md focus:border-primary outline-none appearance-none" id="frequency">
+<option value="1">Annuelle</option>
+<option selected="" value="2">Semestrielle</option>
+</select>
+</div>
+<div>
+<label class="block font-data-label text-data-label text-on-surface-variant mb-2">MATURITÉ (ANNÉES)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-3 font-data-value focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="maturity" max="30" min="1" type="number" value="5"/>
+</div>
+<button class="w-full py-4 bg-secondary-container text-on-secondary-container font-bold rounded-lg hover:brightness-95 active:scale-[0.98] transition-all flex justify-center items-center gap-2" onclick="calculateYTM()" type="button">
+<span class="material-symbols-outlined">calculate</span> CALCULER LE RENDEMENT
+                        </button>
+</form>
+</div>
+<!-- Info Card -->
+<div class="bg-primary text-on-primary p-8 rounded-lg">
+<h3 class="font-headline-sm text-headline-sm mb-4">Besoin d'expertise ?</h3>
+<p class="font-body-md opacity-80 mb-6">Nos conseillers en gestion de patrimoine vous accompagnent dans l'optimisation de votre portefeuille obligataire.</p>
+<button class="w-full py-3 border border-on-primary text-on-primary font-semibold rounded hover:bg-white/10 transition-colors">Prendre rendez-vous</button>
+</div>
+</aside>
+<!-- Results Panel -->
+<section class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="glass-panel p-6 rounded-lg border-l-4 border-secondary-container">
+<span class="text-on-surface-variant font-data-label text-xs uppercase tracking-wider">Rendement Actuariel (YTM)</span>
+<div class="text-3xl font-bold text-primary mt-2 font-data-value" id="ytmDisplay">6.87%</div>
+<div class="text-xs text-green-600 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> Rendement supérieur au coupon
+                        </div>
+</div>
+<div class="glass-panel p-6 rounded-lg">
+<span class="text-on-surface-variant font-data-label text-xs uppercase tracking-wider">Coupon Périodique</span>
+<div class="text-3xl font-bold text-on-surface mt-2 font-data-value" id="periodicCoupon">325 FCFA</div>
+<div class="text-xs text-on-surface-variant mt-1">Brut par titre</div>
+</div>
+<div class="glass-panel p-6 rounded-lg">
+<span class="text-on-surface-variant font-data-label text-xs uppercase tracking-wider">Montant à l'échéance</span>
+<div class="text-3xl font-bold text-on-surface mt-2 font-data-value" id="finalCash">10 325 FCFA</div>
+<div class="text-xs text-on-surface-variant mt-1">Dernier flux total</div>
+</div>
+</div>
+<!-- Cashflow Table -->
+<div class="glass-panel rounded-lg overflow-hidden flex flex-col">
+<div class="px-8 py-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h2 class="font-headline-sm text-headline-sm text-primary">Calendrier des Flux de Trésorerie</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-on-surface-variant">download</span></button>
+<button class="p-2 hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-on-surface-variant">print</span></button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container text-primary font-bold font-data-label uppercase text-xs">
+<tr>
+<th class="px-8 py-4">Période</th>
+<th class="px-8 py-4">Désignation</th>
+<th class="px-8 py-4">Flux de coupon (FCFA)</th>
+<th class="px-8 py-4">Principal (FCFA)</th>
+<th class="px-8 py-4 text-right">Flux Net (FCFA)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant" id="cashflowBody">
+<!-- Dynamic Content -->
+<tr class="hover:bg-surface-variant transition-colors">
+<td class="px-8 py-4 font-data-value">0</td>
+<td class="px-8 py-4 font-body-md italic text-on-surface-variant">Investissement initial</td>
+<td class="px-8 py-4 font-data-value">-</td>
+<td class="px-8 py-4 font-data-value">-9 850</td>
+<td class="px-8 py-4 font-data-value text-right text-error font-bold">-9 850,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Chart Placeholder with Animation -->
+<div class="relative h-64 rounded-lg overflow-hidden bg-primary-container">
+
+<div class="absolute inset-0 flex flex-col justify-center items-center text-on-primary p-8 text-center z-10">
+<span class="material-symbols-outlined text-4xl mb-2">analytics</span>
+<h3 class="font-headline-sm">Visualisation Dynamique</h3>
+<p class="font-body-md opacity-70">L'analyse graphique de la courbe des taux est disponible pour nos clients Espace Privilège.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-surface-container-highest w-full py-stack-lg mt-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-on-primary mb-4">Africaine des Finances</div>
+<p class="text-on-primary-container/80 font-body-md mb-4 text-sm">Votre partenaire de confiance pour l'investissement obligataire et la gestion d'actifs dans la zone UMOA.</p>
+</div>
+<div>
+<h4 class="font-data-label text-secondary-container mb-4">Liens Utiles</h4>
+<ul class="space-y-2 text-on-primary-container/80 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Bourse Régionale (BRVM)</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Calendrier des émissions</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Guides Investisseurs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-data-label text-secondary-container mb-4">Légal</h4>
+<ul class="space-y-2 text-on-primary-container/80 text-sm">
+<li>Mentions Légales</li>
+<li>Confidentialité</li>
+<li>Risques</li>
+</ul>
+</div>
+<div>
+<h4 class="font-data-label text-secondary-container mb-4">Certification</h4>
+<p class="text-on-primary-container/80 text-xs">Agrée AMF-UMOA n°AF-2023-01. Membre du réseau des spécialistes en valeurs du trésor.</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-stack-lg pt-8 border-t border-on-primary/10 text-center text-on-primary-container/60 font-data-label text-xs">
+            © 2024 Africaine des Finances. Agréé AMF-UMOA n°AF-2023-01.
+        </div>
+</footer>
+<script>
+        function calculateYTM() {
+            const nominal = parseFloat(document.getElementById('nominal').value);
+            const couponRate = parseFloat(document.getElementById('couponRate').value) / 100;
+            const purchasePricePct = parseFloat(document.getElementById('purchasePrice').value) / 100;
+            const frequency = parseInt(document.getElementById('frequency').value);
+            const maturity = parseInt(document.getElementById('maturity').value);
+
+            const purchasePrice = nominal * purchasePricePct;
+            const periodicCouponValue = (nominal * couponRate) / frequency;
+            const nPeriods = maturity * frequency;
+
+            // Simplified YTM Approximation (The "Bond Man's" Formula)
+            // YTM = [Coupon + (Face - Price) / n] / [(Face + Price) / 2]
+            const annualCoupon = nominal * couponRate;
+            const capitalGainPerYear = (nominal - purchasePrice) / maturity;
+            const averageInvestmentValue = (nominal + purchasePrice) / 2;
+            const ytm = (annualCoupon + capitalGainPerYear) / averageInvestmentValue;
+
+            // Update UI Summary
+            document.getElementById('ytmDisplay').innerText = (ytm * 100).toFixed(2) + '%';
+            document.getElementById('periodicCoupon').innerText = periodicCouponValue.toLocaleString('fr-FR') + ' FCFA';
+            document.getElementById('finalCash').innerText = (nominal + periodicCouponValue).toLocaleString('fr-FR') + ' FCFA';
+
+            // Generate Table
+            const tbody = document.getElementById('cashflowBody');
+            tbody.innerHTML = '';
+
+            // Row 0: Purchase
+            const initialRow = document.createElement('tr');
+            initialRow.className = 'hover:bg-surface-variant transition-colors';
+            initialRow.innerHTML = `
+                <td class="px-8 py-4 font-data-value">0</td>
+                <td class="px-8 py-4 font-body-md italic text-on-surface-variant">Décaissement initial</td>
+                <td class="px-8 py-4 font-data-value">-</td>
+                <td class="px-8 py-4 font-data-value">-${purchasePrice.toLocaleString('fr-FR')}</td>
+                <td class="px-8 py-4 font-data-value text-right text-error font-bold">-${purchasePrice.toLocaleString('fr-FR', {minimumFractionDigits: 2})}</td>
+            `;
+            tbody.appendChild(initialRow);
+
+            // Intermediate Periods
+            for (let i = 1; i <= nPeriods; i++) {
+                const isFinal = (i === nPeriods);
+                const principal = isFinal ? nominal : 0;
+                const net = periodicCouponValue + principal;
+                
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-surface-variant transition-colors';
+                row.innerHTML = `
+                    <td class="px-8 py-4 font-data-value">${i}</td>
+                    <td class="px-8 py-4 font-body-md">${isFinal ? 'Échéance finale' : 'Coupon périodique'}</td>
+                    <td class="px-8 py-4 font-data-value">${periodicCouponValue.toLocaleString('fr-FR')}</td>
+                    <td class="px-8 py-4 font-data-value">${principal > 0 ? principal.toLocaleString('fr-FR') : '-'}</td>
+                    <td class="px-8 py-4 font-data-value text-right text-primary font-bold">${net.toLocaleString('fr-FR', {minimumFractionDigits: 2})}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+
+        // Initialize on load
+        window.onload = calculateYTM;
+    </script>
+</body></html>

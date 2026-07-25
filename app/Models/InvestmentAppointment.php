@@ -42,6 +42,9 @@ class InvestmentAppointment extends Model
             'actions_brvm' => 'Actions BRVM',
             'obligations' => 'Obligations d\'États',
             'fcp' => 'Fonds Communs de Placement',
+            'gestion_mandat' => 'Gestion sous mandat',
+            'institutionnel' => 'Portail institutionnel',
+            'mise_en_relation' => 'Mise en relation partenaire',
             default => $this->investment_type,
         };
     }

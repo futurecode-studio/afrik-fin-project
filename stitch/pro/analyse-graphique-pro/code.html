@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Africaine des Finances | Terminal d'Analyse Graphique</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed": "#ffdfa0",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "inverse-on-surface": "#ebf1ff",
+                    "outline": "#757683",
+                    "surface-container-highest": "#dae3f6",
+                    "on-background": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "secondary": "#795900",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-fixed": "#261a00",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary": "#051c5b",
+                    "on-tertiary-fixed": "#001551",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary": "#001a61",
+                    "on-tertiary-container": "#8d9ee3",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#28313f",
+                    "primary-container": "#0a2e8c",
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        /* Expert Dark Theme Overrides for Chart Area */
+        .chart-terminal {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        
+        .chart-grid-line {
+            stroke: rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 10px;
+        }
+
+        /* Glassmorphism for floating toolbars */
+        .glass-panel {
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(48, 54, 61, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopAppBar (Shared Component Logic) -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 z-50">
+<div class="flex items-center gap-gutter">
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-inverse-primary">Africaine des Finances</span>
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="font-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Marchés</a>
+<a class="font-headline-sm text-headline-sm text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold" href="#">Investissements</a>
+<a class="font-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Compte Client</a>
+<a class="font-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200" href="#">Rapports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 text-primary border border-primary font-bold hover:bg-primary/5 transition-all scale-95 active:opacity-80">Contact</button>
+<button class="px-6 py-2 bg-primary-container text-on-primary-container font-bold shadow-sm hover:brightness-110 transition-all scale-95 active:opacity-80">Espace Client</button>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden chart-terminal relative">
+<!-- Left Drawing Toolbar -->
+<aside class="w-14 glass-panel flex flex-col items-center py-4 gap-4 z-20">
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Curseur">
+<span class="material-symbols-outlined text-white/70">near_me</span>
+</button>
+<div class="w-8 h-px bg-white/10"></div>
+<button class="p-2 hover:bg-white/10 rounded transition-colors text-primary-container" title="Ligne de tendance">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">show_chart</span>
+</button>
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Fibonacci">
+<span class="material-symbols-outlined text-white/70">architecture</span>
+</button>
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Formes">
+<span class="material-symbols-outlined text-white/70">pentagon</span>
+</button>
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Texte">
+<span class="material-symbols-outlined text-white/70">title</span>
+</button>
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Mesure">
+<span class="material-symbols-outlined text-white/70">straighten</span>
+</button>
+<div class="mt-auto">
+<button class="p-2 hover:bg-white/10 rounded transition-colors" title="Paramètres">
+<span class="material-symbols-outlined text-white/70">settings</span>
+</button>
+</div>
+</aside>
+<!-- Chart Viewport -->
+<section class="flex-1 flex flex-col relative overflow-hidden">
+<!-- Secondary Header / Chart Controls -->
+<div class="h-12 border-b border-white/5 flex items-center px-4 justify-between glass-panel z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 border-r border-white/10 pr-4">
+<span class="font-data-value text-white font-bold">BRVM: SONATEL</span>
+<span class="text-xs text-green-400 font-data-label">+1.42%</span>
+</div>
+<!-- Periodicity Selector -->
+<div class="flex gap-1">
+<button class="px-2 py-1 text-xs font-bold text-white/40 hover:text-white transition-colors">1m</button>
+<button class="px-2 py-1 text-xs font-bold text-white/40 hover:text-white transition-colors">15m</button>
+<button class="px-2 py-1 text-xs font-bold bg-primary-container text-white rounded transition-colors">1H</button>
+<button class="px-2 py-1 text-xs font-bold text-white/40 hover:text-white transition-colors">4H</button>
+<button class="px-2 py-1 text-xs font-bold text-white/40 hover:text-white transition-colors">1D</button>
+<button class="px-2 py-1 text-xs font-bold text-white/40 hover:text-white transition-colors">1W</button>
+</div>
+<div class="w-px h-6 bg-white/10"></div>
+<!-- Type of chart -->
+<button class="p-1 text-white/60 hover:text-white">
+<span class="material-symbols-outlined text-sm">candlestick_chart</span>
+</button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs text-white/40 font-data-label uppercase">Indicateurs</span>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-tertiary-container/30 text-tertiary-fixed text-[10px] rounded border border-tertiary-container">RSI (14)</span>
+<span class="px-2 py-0.5 bg-tertiary-container/30 text-tertiary-fixed text-[10px] rounded border border-tertiary-container">MACD (12, 26, 9)</span>
+<span class="px-2 py-0.5 bg-tertiary-container/30 text-tertiary-fixed text-[10px] rounded border border-tertiary-container">EMA (50, 200)</span>
+</div>
+</div>
+<button class="flex items-center gap-1 text-xs text-secondary-container hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+<span>Ajouter</span>
+</button>
+</div>
+</div>
+<!-- The Main Graphic Canvas Area -->
+<div class="flex-1 relative overflow-hidden cursor-crosshair">
+<!-- Background Shader for Atmosphere -->
+
+<!-- SVG Chart Mockup -->
+<svg class="absolute inset-0 z-0" height="100%" width="100%">
+<defs>
+<lineargradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0a2e8c" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#0a2e8c" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Vertical Grid Lines -->
+<g class="chart-grid-line">
+<line x1="10%" x2="10%" y1="0" y2="100%"></line>
+<line x1="30%" x2="30%" y1="0" y2="100%"></line>
+<line x1="50%" x2="50%" y1="0" y2="100%"></line>
+<line x1="70%" x2="70%" y1="0" y2="100%"></line>
+<line x1="90%" x2="90%" y1="0" y2="100%"></line>
+</g>
+<!-- Horizontal Grid Lines -->
+<g class="chart-grid-line">
+<line x1="0" x2="100%" y1="20%" y2="20%"></line>
+<line x1="0" x2="100%" y1="40%" y2="40%"></line>
+<line x1="0" x2="100%" y1="60%" y2="60%"></line>
+<line x1="0" x2="100%" y1="80%" y2="80%"></line>
+</g>
+<!-- Main Price Action (Polyline) -->
+<path d="M0,450 Q50,420 100,480 T200,410 T300,460 T400,380 T500,320 T600,350 T700,280 T800,220 T900,250 T1000,180 L1200,150" fill="none" stroke="#b7c4ff" stroke-width="2"></path>
+<!-- Area Fill -->
+<path d="M0,450 Q50,420 100,480 T200,410 T300,460 T400,380 T500,320 T600,350 T700,280 T800,220 T900,250 T1000,180 L1200,150 V1000 H0 Z" fill="url(#areaGradient)"></path>
+<!-- EMA 200 (Long term indicator) -->
+<path d="M0,500 C100,490 200,485 300,470 S500,430 700,410 S900,380 1200,350" fill="none" stroke="#ffbf00" stroke-dasharray="4" stroke-width="1.5"></path>
+</svg>
+<!-- Floating Data Box -->
+<div class="absolute top-8 left-8 p-4 glass-panel rounded shadow-xl z-10 border-l-4 border-primary">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center gap-8">
+<span class="text-white/40 text-xs font-data-label uppercase">Ouv</span>
+<span class="text-white font-data-value">16,250.00</span>
+</div>
+<div class="flex justify-between items-center gap-8">
+<span class="text-white/40 text-xs font-data-label uppercase">Haut</span>
+<span class="text-white font-data-value">16,480.00</span>
+</div>
+<div class="flex justify-between items-center gap-8">
+<span class="text-white/40 text-xs font-data-label uppercase">Bas</span>
+<span class="text-white font-data-value">16,120.00</span>
+</div>
+<div class="flex justify-between items-center gap-8">
+<span class="text-white/40 text-xs font-data-label uppercase">Clôt</span>
+<span class="text-white font-data-value">16,425.00</span>
+</div>
+<div class="mt-2 pt-2 border-t border-white/10 flex justify-between">
+<span class="text-white/40 text-xs font-data-label">VOL</span>
+<span class="text-secondary-container font-data-value">1.2M</span>
+</div>
+</div>
+</div>
+<!-- Lower Indicator (RSI) -->
+<div class="absolute bottom-0 left-0 right-0 h-32 border-t border-white/10 glass-panel">
+<div class="flex justify-between px-4 py-1">
+<span class="text-[10px] font-bold text-white/40">RSI (14) <span class="text-tertiary-fixed ml-2">64.21</span></span>
+</div>
+<svg class="opacity-50" height="80%" width="100%">
+<rect fill="rgba(183, 196, 255, 0.05)" height="60%" width="100%" x="0" y="20%"></rect>
+<line stroke="rgba(255,255,255,0.1)" stroke-dasharray="2" x1="0" x2="100%" y1="20%" y2="20%"></line>
+<line stroke="rgba(255,255,255,0.1)" stroke-dasharray="2" x1="0" x2="100%" y1="80%" y2="80%"></line>
+<path d="M0,60 L50,55 L100,70 L150,40 L200,30 L250,50 L300,45 L350,20 L400,25 L450,40 L500,35 L550,20 L600,15 L650,30 L700,25 L750,40 L800,35 L850,50 L900,45 L950,30 L1000,25" fill="none" stroke="#839cfd" stroke-width="1"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Right Panel (Order Book & Watchlist) -->
+<aside class="w-80 border-l border-white/5 flex flex-col glass-panel z-20">
+<!-- Tabs -->
+<div class="flex border-b border-white/10">
+<button class="flex-1 py-3 text-xs font-bold border-b-2 border-secondary-container text-secondary-container bg-white/5">Carnet d'ordres</button>
+<button class="flex-1 py-3 text-xs font-bold text-white/40 hover:text-white transition-colors">Marché</button>
+<button class="flex-1 py-3 text-xs font-bold text-white/40 hover:text-white transition-colors">Alertes</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+<!-- Watchlist Preview -->
+<div>
+<h3 class="text-[10px] uppercase text-white/30 font-bold mb-3 tracking-widest">Favoris BRVM</h3>
+<div class="space-y-2">
+<div class="flex justify-between items-center p-2 hover:bg-white/5 rounded group cursor-pointer transition-colors">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">SONATEL</span>
+<span class="text-[10px] text-white/40 uppercase">Telecom</span>
+</div>
+<div class="text-right">
+<div class="text-sm font-data-value text-green-400">16,425</div>
+<div class="text-[10px] text-green-400/70">+1.42%</div>
+</div>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-white/5 rounded group cursor-pointer transition-colors border-l-2 border-secondary-container bg-white/5">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">ECOBANK</span>
+<span class="text-[10px] text-white/40 uppercase">Finance</span>
+</div>
+<div class="text-right">
+<div class="text-sm font-data-value text-error">19.00</div>
+<div class="text-[10px] text-error/70">-0.52%</div>
+</div>
+</div>
+<div class="flex justify-between items-center p-2 hover:bg-white/5 rounded group cursor-pointer transition-colors">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white">BOA MALI</span>
+<span class="text-[10px] text-white/40 uppercase">Finance</span>
+</div>
+<div class="text-right">
+<div class="text-sm font-data-value text-white">1,540</div>
+<div class="text-[10px] text-white/40">0.00%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Flow Visual -->
+<div class="pt-4 border-t border-white/5">
+<h3 class="text-[10px] uppercase text-white/30 font-bold mb-3 tracking-widest">Flux d'ordres</h3>
+<div class="space-y-1">
+<!-- Sell Orders -->
+<div class="relative h-6 flex items-center px-2 overflow-hidden">
+<div class="absolute top-0 right-0 h-full bg-error/10 w-[45%]"></div>
+<span class="text-[10px] font-data-value text-error/80 w-20">16,430</span>
+<span class="text-[10px] font-data-value text-white/60 ml-auto">12,450</span>
+</div>
+<div class="relative h-6 flex items-center px-2 overflow-hidden">
+<div class="absolute top-0 right-0 h-full bg-error/10 w-[82%]"></div>
+<span class="text-[10px] font-data-value text-error/80 w-20">16,428</span>
+<span class="text-[10px] font-data-value text-white/60 ml-auto">24,100</span>
+</div>
+<!-- Spread -->
+<div class="py-2 text-center text-white/20 text-[10px] font-bold border-y border-white/5 my-1">
+                            SPREAD 2.00
+                        </div>
+<!-- Buy Orders -->
+<div class="relative h-6 flex items-center px-2 overflow-hidden">
+<div class="absolute top-0 right-0 h-full bg-green-500/10 w-[60%]"></div>
+<span class="text-[10px] font-data-value text-green-400 w-20">16,425</span>
+<span class="text-[10px] font-data-value text-white/60 ml-auto">18,200</span>
+</div>
+<div class="relative h-6 flex items-center px-2 overflow-hidden">
+<div class="absolute top-0 right-0 h-full bg-green-500/10 w-[30%]"></div>
+<span class="text-[10px] font-data-value text-green-400 w-20">16,420</span>
+<span class="text-[10px] font-data-value text-white/60 ml-auto">8,900</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trade Actions -->
+<div class="p-4 bg-white/5 border-t border-white/10">
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-error/20 text-error border border-error/30 py-3 rounded font-bold text-sm uppercase tracking-wider hover:bg-error/30 transition-all active:scale-95">Vendre</button>
+<button class="bg-green-500/20 text-green-400 border border-green-500/30 py-3 rounded font-bold text-sm uppercase tracking-wider hover:bg-green-500/30 transition-all active:scale-95">Acheter</button>
+</div>
+</div>
+</aside>
+</main>
+<!-- Global Footer Overlay (Minimal for Terminal) -->
+<footer class="h-8 bg-on-background dark:bg-background border-t border-white/5 flex items-center px-4 justify-between text-[10px] text-white/40 font-data-label z-50">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span> Serveur Opérationnel</span>
+<span>Latence: 12ms</span>
+<span>UTC +00:00</span>
+</div>
+<div>
+            © 2024 Africaine des Finances. Terminal Expert v4.2.1
+        </div>
+</footer>
+<script>
+        // Micro-interaction for the crosshair and data box tracking
+        const chartArea = document.querySelector('section');
+        const dataBox = document.querySelector('.glass-panel.rounded.shadow-xl');
+
+        chartArea.addEventListener('mousemove', (e) => {
+            // Optional: Move a custom crosshair line or update data in real-time
+            // For now, adding a subtle glow effect to the box based on mouse position
+            const rect = chartArea.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // This could be used to position vertical/horizontal crosshair lines
+        });
+
+        // Toggle Dark/Light (Internal logic since design is forced dark/expert for chart)
+        // Note: The prompt asked for a "design sombre et expert" so we override the base light mode here.
+        document.documentElement.classList.add('dark');
+    </script>
+</body></html>

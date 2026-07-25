@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Événements | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #001a61;
+        }
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+            font-family: 'Figtree', sans-serif;
+        }
+    </style>
+<!-- Include Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#795900",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-surface": "#131c2a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdfa0",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "tertiary-fixed": "#dce1ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-container": "#ffbf00",
+                        "on-secondary-container": "#6d5000",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "primary": "#001a61",
+                        "on-secondary-fixed": "#261a00",
+                        "inverse-primary": "#b7c4ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "surface-variant": "#dae3f6",
+                        "outline": "#757683",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#051c5b",
+                        "surface-container-highest": "#dae3f6",
+                        "outline-variant": "#c5c5d4",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#0a2e8c",
+                        "surface-dim": "#d1daed",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "on-tertiary-fixed": "#001551",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#213371",
+                        "on-error-container": "#93000a",
+                        "on-background": "#131c2a",
+                        "on-primary-fixed": "#001551",
+                        "on-surface-variant": "#444652",
+                        "on-primary-container": "#839cfd",
+                        "surface-container-low": "#f0f3ff",
+                        "inverse-surface": "#28313f",
+                        "inverse-on-surface": "#ebf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "display-lg": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline fixed top-0 w-full h-16 z-50 flex justify-between items-center px-margin-desktop">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            Africaine des Finances
+        </div>
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">account_balance_wallet</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior African financial executive in a modern office environment. The subject is wearing a tailored navy blue suit and a subtle, high-quality tie. The background is softly blurred, showing a bright, contemporary workspace with large windows and hints of African art. The lighting is natural and sophisticated, conveying trust and authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVf67E_JZ-yNNueiNAs3kPzZYmhOfuHhgiGFIc7NNdnM-6cBHSJiUBXLgAjA3Ay7j18nYbCJaFtp1YTyhhuwm75JZW9fpaTeCmT4pMGN1WSe_SP5ViEsLqZRa9iBsdZi3svaMfabjS_qNQ33TTRx37_2cL3AoDwksPaiNaWAh6tk8AkQK43wn1ACP4b4O0inUi2r6XYQjMMmoVdk9tLiII3pnKftI6QK1ydHUcoX3ncccorRHaPkk27tsvfSSnyGeZjOEh3-cF-A"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline pt-16 z-40 hidden md:flex flex-col py-stack-lg px-4 space-y-2">
+<div class="mb-8 px-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</h2>
+<p class="font-body-md text-sm text-on-surface-variant">Premium Wealth Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md">My Trainings</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 bg-primary-container text-on-primary-container font-bold rounded-lg transition-transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md">My Events</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-md">My Watchlist</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<button class="mt-auto mx-2 bg-secondary-container text-on-secondary-container font-bold py-3 px-4 rounded-lg hover:brightness-95 transition-all text-center">
+            Invest Now
+        </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:pl-64 pt-16 min-h-screen">
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Header Section -->
+<div class="mb-12">
+<h1 class="font-display-lg text-display-lg text-primary mb-4">Mes Événements</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">
+                    Gérez vos participations aux conférences exclusives, ateliers de formation et sommets financiers organisés par l'Africaine des Finances.
+                </p>
+</div>
+<!-- Summary Bento Row -->
+<div class="bento-grid mb-stack-lg">
+<div class="col-span-12 md:col-span-4 bg-white border border-outline-variant p-6 rounded-lg">
+<p class="font-data-label text-data-label text-outline mb-2">PLACES RÉSERVÉES</p>
+<div class="flex items-baseline space-x-2">
+<span class="font-display-lg text-4xl text-primary">12</span>
+<span class="font-body-md text-on-surface-variant">Billets actifs</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 bg-white border border-outline-variant p-6 rounded-lg">
+<p class="font-data-label text-data-label text-outline mb-2">PROCHAIN ÉVÉNEMENT</p>
+<div class="font-headline-sm text-on-surface">Sommet Émergence 2024</div>
+<p class="font-body-md text-sm text-on-surface-variant">Dans 3 jours • Dakar, Sénégal</p>
+</div>
+<div class="col-span-12 md:col-span-4 bg-primary-container p-6 rounded-lg flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-primary-container text-3xl">confirmation_number</span>
+<span class="text-on-primary-container font-data-label text-xs">PREMIUM MEMBER</span>
+</div>
+<button class="text-left text-white font-headline-sm flex items-center group">
+                        Réserver un nouvel événement
+                        <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Tabs Navigation -->
+<div class="flex space-x-8 border-b border-outline-variant mb-8 relative">
+<button class="pb-4 px-2 font-headline-sm text-primary relative active" id="tab-upcoming" onclick="switchTab('upcoming')">
+                    À venir
+                    <div class="active-tab-indicator" id="indicator-upcoming"></div>
+</button>
+<button class="pb-4 px-2 font-headline-sm text-outline hover:text-primary transition-colors relative" id="tab-past" onclick="switchTab('past')">
+                    Passés
+                    <div class="active-tab-indicator hidden" id="indicator-past"></div>
+</button>
+</div>
+<!-- Events List Section -->
+<div class="space-y-6" id="upcoming-list">
+<!-- Event Card 1 -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(6,29,92,0.04)] transition-all flex flex-col md:flex-row">
+<div class="w-full md:w-64 h-48 md:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A high-altitude aerial view of a futuristic financial district in an African metropolis. The architecture features sleek glass skyscrapers with integrated green vertical gardens. The lighting is late afternoon golden hour, casting long, elegant shadows and highlighting the metallic textures of the buildings. The atmosphere is vibrant, professional, and progressive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkPbpddns_puvAwQf0dXernm0SuubBaFHVQvWfDEL5Hfgnuikc2P1NVv-dfQymWXj9TrGzMbfh1rF14yk89NnA9ElxPbUiMNbU-KI7jzenygm8BvC-YzBHZrzEWYT_9Mg-ag64w02nCwo139OgbWVFSTRgGvpdOHXfI2yKc7gk24G0cHl-8fsvMKTVqjugTiauL2jzA5tTmMZoZoEmQFcQ9257fbFFvZWB5nOsut8JqQrIxva0j5zsrQ9AKxvNY-xscO7B7DImSg"/>
+<div class="absolute top-4 left-4 bg-primary text-white font-data-label px-3 py-1 text-xs rounded">CONFERENCE</div>
+</div>
+<div class="flex-1 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Sommet de l'Émergence Africaine 2024</h3>
+<span class="bg-primary-container/10 text-primary-container text-xs font-bold px-2 py-1 rounded">2 PLACES</span>
+</div>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-body-md mb-6">
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>24 - 26 Octobre 2024</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>CICAD, Dakar, Sénégal</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center text-[10px] font-bold">AS</div>
+</div>
+<button class="flex items-center space-x-2 bg-primary text-white px-6 py-2.5 rounded-lg font-headline-sm text-sm hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-lg">qr_code_2</span>
+<span>Voir mon billet</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(6,29,92,0.04)] transition-all flex flex-col md:flex-row">
+<div class="w-full md:w-64 h-48 md:h-auto overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A sophisticated close-up of a high-end digital tablet displaying complex financial analytics and global market trends. The screen glows softly in a dimly lit, luxurious boardroom. In the background, out-of-focus city lights sparkle through a floor-to-ceiling window. The color palette is dominated by deep blues and golds, reflecting a premium investment environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq6Q-lt9xVWAEXOj_tt9bdWMHLYjeI8aoB0918IGZuHxVoLUanBuF176oRbceAwjtzpyKrf2C1OM3K2hjdkCy6Cugoyxkbdx9cWR7CpBT4rYddqnzs4wsu9xk_i3SgGJ5SJLYn8iSa2PIpCztN8d5KTUaq8PznJrIreEhZG8QkuEF4I3m6YZX24dIglMssFuKuVGBmlu0ehvmL7vqBbubP5gfC-k2jGMmTvEsQKGDZAl_TVIfTJujMfVhZcwKG7Jfv-ke28J9YEw"/>
+<div class="absolute top-4 left-4 bg-secondary text-white font-data-label px-3 py-1 text-xs rounded">WEBINAR</div>
+</div>
+<div class="flex-1 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface">Gestion d'Actifs en Période de Volatilité</h3>
+<span class="bg-primary-container/10 text-primary-container text-xs font-bold px-2 py-1 rounded">1 PLACE</span>
+</div>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-body-md mb-6">
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm">videocam</span>
+<span>En ligne (Zoom Premium)</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>15:00 GMT+0</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-6">
+<div class="text-outline text-sm">Lien d'accès envoyé par email</div>
+<button class="flex items-center space-x-2 bg-white border border-primary text-primary px-6 py-2.5 rounded-lg font-headline-sm text-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg">link</span>
+<span>Accéder à la salle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Past Events List (Hidden by default) -->
+<div class="space-y-6 hidden" id="past-list">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden opacity-80 flex flex-col md:flex-row">
+<div class="w-full md:w-64 h-48 md:h-auto grayscale overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An elegant, minimalist sculpture representing growth and unity, placed in the lobby of a prestigious financial institution. The lighting is soft and diffuse, highlighting the smooth curves of the polished stone. The surroundings are clean and modern, with marble floors reflecting the ambient light. The entire scene communicates stability, heritage, and quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZlQ43dQbBBxXm3FxbYBSL-pvZbrVynlhTYtPN-Fu-hDNZpmvpLyfGHyJHUtw1YB8TIzOkFCpA6cGHIGpMreZla1ZFaUjdKokVwDd6_O2RReWF3g4YDB9PQFw_Cq0Ij__WceTtBjHUQf9zk-5pylJmQkpPDo6329DkUpYIx097l4X5qDaNEsvid40UWiTEnD-qSQ1eMDWKBd6r1aN0OH2CcKOdOddHtIYQXuZWlXfR0WgP5IJdwx1tInEzhLjzqc_c4Ew7oZA3DA"/>
+</div>
+<div class="flex-1 p-8 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-outline">Forum Annuel de l'Investissement 2023</h3>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-body-md mb-4 mt-2">
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>12 Décembre 2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-6">
+<div class="text-outline text-sm italic">Événement terminé</div>
+<button class="flex items-center space-x-2 text-primary font-bold hover:underline">
+<span class="material-symbols-outlined">play_circle</span>
+<span>Accéder au replay</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full">
+<div class="font-headline-sm text-headline-sm text-primary mb-4 md:mb-0">
+                Africaine des Finances
+            </div>
+<div class="flex space-x-8 mb-4 md:mb-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+<div class="font-data-label text-data-label text-outline">
+                © 2024 Africaine des Finances. All rights reserved.
+            </div>
+</div>
+</footer>
+<script>
+        function switchTab(type) {
+            const upcomingList = document.getElementById('upcoming-list');
+            const pastList = document.getElementById('past-list');
+            const upcomingBtn = document.getElementById('tab-upcoming');
+            const pastBtn = document.getElementById('tab-past');
+            const upcomingIndicator = document.getElementById('indicator-upcoming');
+            const pastIndicator = document.getElementById('indicator-past');
+
+            if (type === 'upcoming') {
+                upcomingList.classList.remove('hidden');
+                pastList.classList.add('hidden');
+                upcomingBtn.classList.add('text-primary');
+                upcomingBtn.classList.remove('text-outline');
+                pastBtn.classList.add('text-outline');
+                pastBtn.classList.remove('text-primary');
+                upcomingIndicator.classList.remove('hidden');
+                pastIndicator.classList.add('hidden');
+            } else {
+                upcomingList.classList.add('hidden');
+                pastList.classList.remove('hidden');
+                pastBtn.classList.add('text-primary');
+                pastBtn.classList.remove('text-outline');
+                upcomingBtn.classList.add('text-outline');
+                upcomingBtn.classList.remove('text-primary');
+                pastIndicator.classList.remove('hidden');
+                upcomingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Simple animation for numbers
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        window.onload = () => {
+            const counter = document.querySelector('.text-4xl');
+            animateValue(counter, 0, 12, 1000);
+        };
+    </script>
+</body></html>

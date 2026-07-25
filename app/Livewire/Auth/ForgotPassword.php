@@ -4,9 +4,11 @@ namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Password;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class ForgotPassword extends Component
 {
+    use WithSweetAlert;
     public string $email = '';
 
     protected $rules = [
@@ -39,7 +41,7 @@ class ForgotPassword extends Component
 
         $this->reset('email');
 
-        session()->flash('message', 'Un email de réinitialisation a été envoyé à votre adresse.');
+        $this->swalSuccess('Un email de réinitialisation a été envoyé à votre adresse.');
     }
 
     public function render()

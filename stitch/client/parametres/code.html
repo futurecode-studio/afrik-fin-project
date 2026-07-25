@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paramètres du Compte | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#795900",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface": "#131c2a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-container": "#ffbf00",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "primary": "#001a61",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-primary": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-variant": "#dae3f6",
+                    "outline": "#757683",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#051c5b",
+                    "surface-container-highest": "#dae3f6",
+                    "outline-variant": "#c5c5d4",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "on-tertiary-fixed": "#001551",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#213371",
+                    "on-error-container": "#93000a",
+                    "on-background": "#131c2a",
+                    "on-primary-fixed": "#001551",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-low": "#f0f3ff",
+                    "inverse-surface": "#28313f",
+                    "inverse-on-surface": "#ebf1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-md": "16px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Figtree', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .nav-active { border-bottom: 2px solid #001a61; font-weight: 700; color: #001a61; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c5c5d4; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- Top Navigation Shell -->
+<header class="bg-surface docked full-width top-0 border-b border-outline-variant flex justify-between items-center px-margin-desktop w-full h-16 z-50">
+<div class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</div>
+<nav class="hidden md:flex items-center space-x-8 h-full">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors py-2" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors py-2" href="#">Investissements</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 py-2" href="#">Paramètres</a>
+</nav>
+<div class="flex items-center space-x-stack-md">
+<button class="material-symbols-outlined text-primary hover:text-primary-container transition-colors">notifications</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a high-net-worth African executive in a charcoal grey tailored suit, against a soft-focus corporate banking lobby. The lighting is sophisticated and warm, highlighting the subject's confident expression. The overall aesthetic is clean, premium, and authoritative, matching the financial institution's brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZV0TgqB0OKi_7eZe6Xba0nHAEhVz4J86l0t8a7xXBcZ4bELKh_DsPkgMoyeiG86X55etXwTi2ppMqs6lIcfA09xfkqXxBSDLb0ZATvgw9d-6GAzFB9QdeKio46ad4CG9ndnQVdkGwyj9Q08v8pTvZukWV7W3PO-MxHmIihRRAqpsFU0VJjok2wZOmGBLUeyZF7X4CTpt5p2lqxrhnnFimKVaEJkKwKzghpG-yOtFPByvhh1fOcAyeHKhDDUfvt9ps1CiyhqqXGg"/>
+</div>
+</div>
+</header>
+<div class="flex max-w-[1440px] mx-auto min-h-[calc(100vh-64px)]">
+<!-- Side Navigation Shell -->
+<aside class="hidden md:flex flex-col py-stack-lg px-4 space-y-2 border-r border-outline-variant w-64 bg-surface-container-low shrink-0">
+<div class="mb-stack-lg px-2">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</div>
+<p class="text-on-surface-variant text-sm">Premium Wealth Management</p>
+</div>
+<a class="flex items-center space-x-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">My Trainings</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md text-body-md">My Events</span>
+</a>
+<a class="flex items-center space-x-3 p-3 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<div class="pt-stack-lg mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container font-bold py-3 px-4 rounded-lg hover:brightness-95 transition-all">
+                    Invest Now
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<header class="mb-stack-lg">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Paramètres du Compte</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Gérez vos informations personnelles, votre sécurité et vos préférences de contact.</p>
+</header>
+<!-- Bento Layout for Sections -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Section: Personal Info -->
+<section class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center justify-between mb-stack-lg">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-container/10 rounded-full">person</span>
+<h2 class="font-headline-sm text-headline-sm">Informations personnelles</h2>
+</div>
+<button class="text-primary font-bold hover:underline text-sm">Modifier</button>
+</div>
+<div class="flex flex-col md:flex-row gap-stack-lg items-start">
+<div class="relative group">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up professional corporate portrait of an African man in his late 40s, wearing a clean white shirt. The background is a soft beige tone with architectural linear details. The lighting is bright and airy, suggesting a morning office environment. The style is minimalist and high-end, evoking trust and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Oz5zgAHburfsN58K_SnOWT14cv-NYeLD6o6Q2zFbh66X0XgKvJJdkhKbGTPs87qavC_yDAhyP3fTFZ0wpCywgnnGWPzQbLYIJgvcGe1keZ1KtbVWmnCE-kfLIQgADGPnfFeIoRyeD4HUlZriQM_gZAi1m_RYWrcNqMxf6r50-ijRNglzxWm_cUKe3bWT6d0KE92n5cTBdgwKbCtsZahLlyQUwFlbL87K2zQHw70GPwAnYNnTEiK_RmCDDqOGE7Fb6GkSnkPy_g"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-stack-md w-full">
+<div class="space-y-1">
+<label class="text-data-label font-data-label text-outline block">Nom Complet</label>
+<p class="font-body-md text-body-md font-semibold">Jean-Pierre Kouamé</p>
+</div>
+<div class="space-y-1">
+<label class="text-data-label font-data-label text-outline block">Adresse E-mail</label>
+<p class="font-body-md text-body-md font-semibold">jp.kouame@africainefinances.com</p>
+</div>
+<div class="space-y-1">
+<label class="text-data-label font-data-label text-outline block">Téléphone</label>
+<p class="font-body-md text-body-md font-semibold">+225 07 08 09 10 11</p>
+</div>
+<div class="space-y-1">
+<label class="text-data-label font-data-label text-outline block">Localisation</label>
+<p class="font-body-md text-body-md font-semibold">Abidjan, Côte d'Ivoire</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Security Summary Widget -->
+<div class="lg:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-stack-lg flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+<span class="bg-secondary text-on-secondary text-xs px-2 py-1 rounded font-bold">STABLE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-2">Score de Sécurité</h3>
+<p class="text-sm opacity-80 mb-6">Votre compte est protégé par les standards bancaires les plus élevés.</p>
+</div>
+<div class="w-full bg-white/20 h-2 rounded-full overflow-hidden mb-2">
+<div class="bg-white h-full w-[85%]"></div>
+</div>
+<p class="text-xs font-data-label">Dernière connexion: Aujourd'hui, 10:45</p>
+</div>
+<!-- Section: Security (Password & 2FA) -->
+<section class="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center space-x-4 mb-stack-lg">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-container/10 rounded-full">lock</span>
+<h2 class="font-headline-sm text-headline-sm">Sécurité d'accès</h2>
+</div>
+<div class="space-y-stack-md">
+<div class="flex justify-between items-center p-3 hover:bg-surface-container rounded-lg transition-colors cursor-pointer group">
+<div>
+<p class="font-body-md font-semibold">Mot de passe</p>
+<p class="text-xs text-outline">Mis à jour il y a 3 mois</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<div class="flex justify-between items-center p-3 hover:bg-surface-container rounded-lg transition-colors cursor-pointer group">
+<div>
+<p class="font-body-md font-semibold">Appareils connectés</p>
+<p class="text-xs text-outline">2 sessions actives</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">devices</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center space-x-4 mb-stack-lg">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-container/10 rounded-full">phonelink_lock</span>
+<h2 class="font-headline-sm text-headline-sm">Double Authentification</h2>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex-1 pr-4">
+<p class="text-body-md mb-4">Ajoutez une couche de sécurité supplémentaire à votre compte en utilisant votre téléphone portable.</p>
+<div class="inline-flex items-center px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold">
+<span class="material-symbols-outlined text-sm mr-1" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    ACTIVÉ (SMS)
+                                </div>
+</div>
+<button class="bg-outline-variant text-on-surface px-4 py-2 rounded font-bold text-sm hover:bg-outline transition-colors">Configurer</button>
+</div>
+</div>
+</section>
+<!-- Section: Notifications -->
+<section class="lg:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg">
+<div class="flex items-center space-x-4 mb-stack-lg">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-container/10 rounded-full">notifications_active</span>
+<h2 class="font-headline-sm text-headline-sm">Préférences de notification</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-primary">
+<th class="px-6 py-4 font-bold rounded-tl-lg">Type de notification</th>
+<th class="px-6 py-4 font-bold text-center">E-mail</th>
+<th class="px-6 py-4 font-bold text-center">SMS</th>
+<th class="px-6 py-4 font-bold text-center rounded-tr-lg">Push Mobile</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr>
+<td class="px-6 py-4">
+<p class="font-semibold">Alertes de transaction</p>
+<p class="text-xs text-outline">Notifications instantanées pour chaque mouvement sur vos comptes.</p>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="font-semibold">Rapports d'investissement</p>
+<p class="text-xs text-outline">Analyses mensuelles de la performance de votre portefeuille.</p>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="font-semibold">Sécurité &amp; Connexion</p>
+<p class="text-xs text-outline">Alertes sur les nouvelles connexions ou changements de sécurité.</p>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-6 py-4 text-center">
+<input checked="" class="w-5 h-5 text-primary border-outline rounded focus:ring-primary" type="checkbox"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-stack-lg flex justify-end">
+<button class="bg-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-primary-container transition-all">Enregistrer les préférences</button>
+</div>
+</section>
+</div>
+<!-- Visual Decorative Element (Shader/Animation Placeholder Area) -->
+<div class="mt-section-gap relative h-48 rounded-2xl overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-tertiary opacity-90 z-10"></div>
+<!-- Logic for background interaction/animation could be here -->
+<div class="relative z-20 h-full flex flex-col items-center justify-center text-white px-margin-mobile text-center">
+<h4 class="font-headline-md text-headline-md mb-2">Besoin d'assistance personnalisée ?</h4>
+<p class="max-w-2xl text-body-md opacity-90">Votre gestionnaire de compte dédié est disponible pour vous accompagner dans la configuration de votre espace premium.</p>
+<button class="mt-stack-md bg-secondary text-on-secondary font-bold py-2 px-6 rounded-full hover:scale-105 transition-transform">Contacter un conseiller</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest full-width border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full">
+<div class="font-headline-sm text-headline-sm text-primary mb-4 md:mb-0">Africaine des Finances</div>
+<div class="flex space-x-6 mb-4 md:mb-0">
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+<div class="font-data-label text-data-label text-outline">
+                © 2024 Africaine des Finances. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant flex justify-around items-center h-16 z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-[10px]">Invest</span>
+</a>
+<a class="flex flex-col items-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px]">Settings</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for form feedback
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if(this.checked) {
+                    console.log('Notification enabled');
+                    // Add ripple or sound effect logic here if needed
+                }
+            });
+        });
+
+        // Simple smooth scroll for the content canvas
+        const mainCanvas = document.querySelector('main');
+        mainCanvas.style.scrollBehavior = 'smooth';
+    </script>
+</body></html>

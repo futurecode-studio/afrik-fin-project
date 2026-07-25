@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/502005973728556936/screens/68d73cd0feec4d21adb0b2950d7c8f83\",\"title\":\"Bibliothèque de Recherche — Africaine des Finances\",\"screenshot\":{\"name\":\"projects/502005973728556936/files/8aea761594a0413e98627b613412390a\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AP1WRLsxe5sGoC0I9oJxuAi0xWtCl_tFX9PRWWCjzVpEDVe8GrgAGj5Ua8luSdqOCog7DoOmHs3bWmD7xRT33nVNJCF7cbjkjOMwsHDpV0O2Qj-MCEjtsAQldFlR2YXtqRq2EN7k2K6C8IBKfbk67Il5U3EYp4X8RwCce42ri1LkfcX-zv_wCLjO2FTPIk1ZlE0r60Klm0Bftk8m_WaOfBICeYWqKlXm4igCtSAgeMwhyHS2T621gBJGQvL7sQ\"},\"htmlCode\":{\"name\":\"projects/502005973728556936/files/35a2fd18c4854e39a564b7873a555cfb\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzI0Njc0MTE2NTY2NjQ5NjlhNzFjMDFmMWI2MDNmYzc3EgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4980\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "4980",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzI0Njc0MTE2NTY2NjQ5NjlhNzFjMDFmMWI2MDNmYzc3EgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/502005973728556936/files/35a2fd18c4854e39a564b7873a555cfb"
+      },
+      "name": "projects/502005973728556936/screens/68d73cd0feec4d21adb0b2950d7c8f83",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AP1WRLsxe5sGoC0I9oJxuAi0xWtCl_tFX9PRWWCjzVpEDVe8GrgAGj5Ua8luSdqOCog7DoOmHs3bWmD7xRT33nVNJCF7cbjkjOMwsHDpV0O2Qj-MCEjtsAQldFlR2YXtqRq2EN7k2K6C8IBKfbk67Il5U3EYp4X8RwCce42ri1LkfcX-zv_wCLjO2FTPIk1ZlE0r60Klm0Bftk8m_WaOfBICeYWqKlXm4igCtSAgeMwhyHS2T621gBJGQvL7sQ",
+        "name": "projects/502005973728556936/files/8aea761594a0413e98627b613412390a"
+      },
+      "title": "Bibliothèque de Recherche — Africaine des Finances",
+      "width": "2560"
+    }
+  }
+}

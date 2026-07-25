@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestion des Événements | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(218, 223, 231, 0.6);
+        }
+        .financial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0A2E8C;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#dae3f6",
+                        "surface-bright": "#f9f9ff",
+                        "secondary-container": "#ffbf00",
+                        "primary-container": "#0a2e8c",
+                        "primary": "#001a61",
+                        "on-surface": "#131c2a",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "outline": "#757683",
+                        "outline-variant": "#c5c5d4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#dfe8fc",
+                        "surface-container-highest": "#dae3f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-desktop w-full h-16 sticky top-0 z-50">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Africaine des Finances</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Marchés</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Investissements</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Événements</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Ressources</a>
+</nav>
+<div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+<span class="material-symbols-outlined text-primary cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer">account_balance_wallet</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a financial executive for a premium banking portal. The person is dressed in a charcoal grey tailored suit, looking confident and approachable. The background is a soft-focus modern office with warm, ambient lighting, reflecting a high-end institutional environment. The overall aesthetic is clean, sharp, and prestigious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2w0kG3cMZaKf1DuJchsk-GNmBjtY-a6UepSnPOg0bAVBmDQV7Nt7xMvfF8meGLRPxQm0-DSYwhXZ0gu2Hfs8RmDkVQpjHnwAcvc2QYEr9bkByBqV9J-RrwepFBTEDiGg1Az7tu9lhRbnx5LUjjHNAqJiDLB2IWbjGRsLVkEJBgMWheVGaNqVGDnkJ_UAQ1XDmndQPX0REcFn3cdCY-qGOdT1QLAro6atHBL6MfJQMja7YBo54zfnL_-_xROBmzEb78lmD7mHr0w"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-on-surface border-r border-outline-variant dark:border-outline flex flex-col py-stack-lg px-4 space-y-2 fixed left-0 top-16 h-[calc(100vh-64px)] w-64 hidden lg:flex">
+<div class="mb-stack-lg px-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Client Portal</h2>
+<p class="text-on-surface-variant text-sm">Premium Wealth Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md">My Trainings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container font-bold rounded-lg scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md">My Events</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-md">My Watchlist</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<button class="w-full bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold hover:brightness-95 transition-all mt-auto">
+                Invest Now
+            </button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 p-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Gestion des Événements</h1>
+<p class="text-on-surface-variant text-body-lg">Pilotage des conférences, webinaires et flux de participants.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 border border-primary text-primary px-6 py-2.5 rounded-lg font-bold hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">download</span>
+                            Rapport Global
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 rounded-lg font-bold hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined">add</span>
+                            Nouvel Événement
+                        </button>
+</div>
+</div>
+<!-- Stats Overview (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-section-gap">
+<div class="glass-panel p-6 rounded-xl">
+<p class="text-data-label text-outline uppercase mb-2">Total Billets Vendus</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">12,840</span>
+<span class="text-green-600 text-sm font-bold">+12%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-4">
+<div class="bg-primary h-1 rounded-full w-[78%]"></div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<p class="text-data-label text-outline uppercase mb-2">Taux de Remplissage Moyen</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">84.2%</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-4">Sur 15 événements actifs</p>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<p class="text-data-label text-outline uppercase mb-2">Revenus Générés (K€)</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-primary">452.5</span>
+<span class="text-green-600 text-sm font-bold">+5.4%</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-4">Période Q3 2024</p>
+</div>
+<div class="glass-panel p-6 rounded-xl bg-primary-container text-on-primary-container">
+<p class="text-data-label opacity-70 uppercase mb-2">Check-ins en cours</p>
+<div class="flex items-baseline gap-2">
+<span class="font-data-value text-3xl text-white">1,204</span>
+</div>
+<p class="text-xs mt-4">Conférence Annuelle Finances</p>
+</div>
+</div>
+<!-- Events List Table -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-primary">Liste des Événements Actifs</h3>
+<div class="flex gap-stack-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none w-64" placeholder="Rechercher..." type="text"/>
+</div>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-white transition-all">
+<span class="material-symbols-outlined text-outline">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant">
+<th class="px-6 py-4 text-data-label text-primary font-bold">ÉVÉNEMENT</th>
+<th class="px-6 py-4 text-data-label text-primary font-bold">DATE & TYPE</th>
+<th class="px-6 py-4 text-data-label text-primary font-bold">REMPLISSAGE</th>
+<th class="px-6 py-4 text-data-label text-primary font-bold">VENTES</th>
+<th class="px-6 py-4 text-data-label text-primary font-bold">STATUT</th>
+<th class="px-6 py-4 text-data-label text-primary font-bold">ACTIONS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Event Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="font-bold text-primary">Conférence Investissement 2024</p>
+<p class="text-xs text-on-surface-variant">Salle des Congrès, Casablanca</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-medium text-on-surface">15 Oct 2024</p>
+<p class="text-xs text-outline italic">Présentiel</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-outline-variant h-1.5 rounded-full overflow-hidden max-w-[80px]">
+<div class="bg-green-500 h-full w-[95%]"></div>
+</div>
+<span class="font-data-value text-xs">95%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value">475/500</p>
+<p class="text-xs text-on-surface-variant">85,500 €</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publié</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-container hover:text-white rounded-lg transition-all" title="Liste participants">
+<span class="material-symbols-outlined text-sm">group</span>
+</button>
+<button class="p-2 hover:bg-secondary-container hover:text-on-secondary-container rounded-lg transition-all" title="Check-in">
+<span class="material-symbols-outlined text-sm">qr_code_scanner</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-all" title="Éditer">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Event Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined">video_library</span>
+</div>
+<div>
+<p class="font-bold text-primary">Webinaire: Crypto-actifs & Régulation</p>
+<p class="text-xs text-on-surface-variant">Zoom / Streaming Live</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-medium text-on-surface">22 Oct 2024</p>
+<p class="text-xs text-outline italic">Digital</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-outline-variant h-1.5 rounded-full overflow-hidden max-w-[80px]">
+<div class="bg-primary h-full w-[62%]"></div>
+</div>
+<span class="font-data-value text-xs">62%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value">620/1000</p>
+<p class="text-xs text-on-surface-variant">12,400 €</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Brouillon</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-container hover:text-white rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">group</span>
+</button>
+<button class="p-2 hover:bg-secondary-container hover:text-on-secondary-container rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">qr_code_scanner</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Event Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">workspace_premium</span>
+</div>
+<div>
+<p class="font-bold text-primary">Sommet Africain de l'Émergence</p>
+<p class="text-xs text-on-surface-variant">Hôtel Ivoire, Abidjan</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-medium text-on-surface">05 Nov 2024</p>
+<p class="text-xs text-outline italic">Présentiel</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-outline-variant h-1.5 rounded-full overflow-hidden max-w-[80px]">
+<div class="bg-red-500 h-full w-[25%]"></div>
+</div>
+<span class="font-data-value text-xs">25%</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="font-data-value">312/1200</p>
+<p class="text-xs text-on-surface-variant">156,000 €</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publié</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-primary-container hover:text-white rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">group</span>
+</button>
+<button class="p-2 hover:bg-secondary-container hover:text-on-secondary-container rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">qr_code_scanner</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+<p class="text-xs text-outline">Affichage de 1-3 sur 15 événements</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white text-xs disabled:opacity-50">Précédent</button>
+<button class="px-3 py-1 bg-primary text-white rounded text-xs">1</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white text-xs">2</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white text-xs">Suivant</button>
+</div>
+</div>
+</div>
+<!-- Featured Action Section -->
+<div class="mt-section-gap grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Participant Preview Card -->
+<div class="glass-panel rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center border-l-4 border-l-secondary-container">
+<div class="w-40 h-40 rounded-full shrink-0 relative">
+<img class="w-full h-full object-cover rounded-full" data-alt="A macro close-up of a high-tech holographic security badge being scanned by a futuristic laser sensor. The scene is set in a dimly lit, professional corporate foyer with deep blue and gold accents. The lighting is focused and dramatic, highlighting the intricate digital patterns on the badge. The visual style is premium and security-oriented, representing modern check-in technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSWYNPDOHnMKGXfRfquKAiYvscoUpm3p3sSEjCvnHDFIFVxb-Zxmp1ggf5nhoZc1Q5opSAJbymSEOlv_gOHE7E2rsxHTmFtbDzT3jVFBDpK7D6tNPrBEQWh_O7GCp1nbCZuZHYqnY_M5FeGNGtgGcuPwYXeW4hfzQHLLRLCg_JznlEiIUEzBJ-RuGSm8iUqYs7jcsi6hiHIshkZBmVWG-9JykaVePkQMSEpEl4rj48P9VV5vM5OiSEdH-Y4wUHzP1nDMr8x5CVlw"/>
+<div class="absolute inset-0 rounded-full border-2 border-dashed border-secondary-container animate-pulse"></div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="font-headline-sm text-primary mb-2">Check-in Rapide</h4>
+<p class="text-on-surface-variant mb-6">Utilisez la caméra de votre tablette ou un scanner externe pour valider les billets de la conférence en cours.</p>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold flex items-center justify-center gap-2 w-full md:w-auto hover:bg-primary-container">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                                Ouvrir le Terminal
+                            </button>
+</div>
+</div>
+<!-- Marketing Card -->
+<div class="relative rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-primary/40 z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An expansive aerial view of a grand luxury hotel ballroom in Africa during a prestigious financial summit. The room is filled with rows of professionals, elegant lighting fixtures, and large digital displays showing market trends. The color palette is rich with midnight blue and golden amber. The mood is one of high-stakes corporate excellence and networking." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACYY-jOfhgIp2DIV_EDTVwpuR074K7B0XjBcPP9tHylMLx42tH0UGusEKX5fahvQ4yTUlYin8ltyVIAB7Csw6WDTlegYV2Xf-EtcDPDxU1zmJkv5Neka1C_2yv1JqZ_LsV0ti0QJbNqVihAIPM7RyesRQzJt_TTrg-i_v_-3DmHZzlWB24TfFhpSbjsu4NIUnRZxPxkXpV4duei85BEFBUXqKAq9NAhSN9X0j109i9tGsV7F5BUaH1c2zHJNuExyo6qopZAz40sg"/>
+<div class="relative z-20 p-8 h-full flex flex-col justify-end text-white">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded w-fit mb-3">Conseil Stratégique</span>
+<h4 class="font-headline-md mb-2">Boostez votre Taux de Remplissage</h4>
+<p class="text-white/80 mb-6 max-w-md">Nos algorithmes prévoient une baisse de la demande pour les webinaires de novembre. Lancez une campagne promotionnelle dès maintenant.</p>
+<button class="text-secondary-container font-bold flex items-center gap-2 hover:underline">
+                                Voir les suggestions marketing
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant flex flex-col md:flex-row justify-between items-center px-margin-desktop py-stack-md w-full mt-auto">
+<div class="flex flex-col md:flex-row items-center gap-stack-md">
+<span class="font-headline-sm text-primary">Africaine des Finances</span>
+<p class="font-data-label text-outline text-xs">© 2024 Africaine des Finances. All rights reserved.</p>
+</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="font-data-label text-outline hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-data-label text-outline hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-data-label text-outline hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+<script>
+        // Optional micro-interaction for active states or simulation
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', function() {
+                // Potential for opening details or navigation
+                console.log('Row clicked');
+            });
+        });
+
+        // Simulating some loading or data refresh
+        window.addEventListener('load', () => {
+            const stats = document.querySelectorAll('.font-data-value');
+            stats.forEach(stat => {
+                stat.classList.add('transition-all', 'duration-1000');
+            });
+        });
+    </script>
+</body></html>

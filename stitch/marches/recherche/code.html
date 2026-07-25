@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .search-results-container {
+            max-height: calc(100vh - 240px);
+            scrollbar-width: thin;
+            scrollbar-color: #757683 transparent;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131c2a",
+                    "outline": "#757683",
+                    "secondary": "#795900",
+                    "surface-container": "#e7eeff",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-fixed": "#001551",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-container": "#0a2e8c",
+                    "surface-dim": "#d1daed",
+                    "tertiary": "#051c5b",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dce1ff",
+                    "surface-variant": "#dae3f6",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "primary": "#001a61",
+                    "outline-variant": "#c5c5d4",
+                    "surface-container-high": "#dfe8fc",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-container-highest": "#dae3f6",
+                    "on-surface": "#131c2a",
+                    "surface-bright": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "inverse-primary": "#b7c4ff",
+                    "inverse-surface": "#28313f",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#839cfd",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-surface-variant": "#444652",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "tertiary-fixed": "#dce1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "section-gap": "80px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-sm": ["Figtree"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary text-on-primary flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] fixed top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-data-label text-data-label font-bold uppercase tracking-wider">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">mail</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">call</span>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 mt-10 relative">
+<div class="flex items-center">
+<span class="text-headline-md font-headline-md font-extrabold text-primary">Africaine des Finances</span>
+</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Markets</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Invest</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Training</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Analysis</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant font-medium px-4 py-2 hover:text-primary transition-colors">Login</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-primary-container transition-all">Commencer à investir</button>
+</div>
+</nav>
+<!-- Main Content: Global Search Interface -->
+<main class="min-h-screen pt-12 pb-section-gap px-margin-desktop max-w-container-max mx-auto">
+<!-- Search Header Area -->
+<section class="max-w-4xl mx-auto mt-12 mb-stack-lg">
+<div class="flex flex-col gap-4">
+<h1 class="text-display-lg font-display-lg text-primary tracking-tight">Recherche globale</h1>
+<p class="text-body-lg text-on-surface-variant opacity-80">Trouvez des actions, des obligations, des formations ou des articles d'expertise en un instant.</p>
+</div>
+<!-- Floating Search Bar Container -->
+<div class="mt-stack-lg relative group">
+<div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="w-full h-16 pl-14 pr-32 bg-surface border border-outline-variant rounded-xl shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-body-lg font-medium" id="mainSearchInput" placeholder="Rechercher 'Orange CI', 'Obligations d'État', 'Analyse Technique'..." type="text"/>
+<div class="absolute inset-y-0 right-4 flex items-center">
+<kbd class="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded-md border border-outline-variant bg-surface-container text-data-label font-data-label text-outline text-[11px] uppercase">
+<span class="text-[14px]">⌘</span> K
+                    </kbd>
+</div>
+</div>
+<!-- Horizontal Quick Filters -->
+<div class="flex flex-wrap items-center gap-3 mt-stack-md" id="filterChips">
+<button class="px-5 py-2 rounded-full border border-primary bg-primary text-on-primary font-medium text-data-label transition-all flex items-center gap-2">
+                    Tous les résultats
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary hover:text-primary transition-all text-data-label flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">show_chart</span> Stocks
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary hover:text-primary transition-all text-data-label flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">account_balance</span> Bonds
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary hover:text-primary transition-all text-data-label flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">school</span> Training
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary hover:text-primary transition-all text-data-label flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_month</span> Events
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary hover:text-primary transition-all text-data-label flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">description</span> Articles
+                </button>
+</div>
+</section>
+<!-- Initial State: History & Popular -->
+<section class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-stack-lg animate-in fade-in slide-in-from-bottom-4 duration-700" id="initialState">
+<!-- Recent History -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant pb-2">
+<h3 class="text-data-label font-data-label uppercase text-outline">Recherches récentes</h3>
+<button class="text-[12px] font-bold text-primary hover:underline">Effacer</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">history</span>
+<span class="flex-grow font-medium">BCEAO Taux Directeurs</span>
+<span class="material-symbols-outlined text-sm text-outline opacity-0 group-hover:opacity-100">north_west</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">history</span>
+<span class="flex-grow font-medium">Sonatel (SNTS) Dividend 2024</span>
+<span class="material-symbols-outlined text-sm text-outline opacity-0 group-hover:opacity-100">north_west</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">history</span>
+<span class="flex-grow font-medium">Masterclass Analyse Fondamentale</span>
+<span class="material-symbols-outlined text-sm text-outline opacity-0 group-hover:opacity-100">north_west</span>
+</div>
+</div>
+</div>
+<!-- Popular Suggestions -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant pb-2">
+<h3 class="text-data-label font-data-label uppercase text-outline">Tendances actuelles</h3>
+<span class="material-symbols-outlined text-lg text-secondary">trending_up</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<a class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md hover:bg-primary hover:text-on-primary transition-all" href="#">#BRVM20</a>
+<a class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md hover:bg-primary hover:text-on-primary transition-all" href="#">#InvestirAbidjan</a>
+<a class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md hover:bg-primary hover:text-on-primary transition-all" href="#">#FormationTrading</a>
+<a class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md hover:bg-primary hover:text-on-primary transition-all" href="#">#WafaAssurances</a>
+<a class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md hover:bg-primary hover:text-on-primary transition-all" href="#">#Bonds2025</a>
+</div>
+</div>
+</section>
+<!-- Results View (Hidden initially) -->
+<section class="hidden max-w-4xl mx-auto" id="resultsContainer">
+<div class="search-results-container space-y-stack-lg">
+<!-- Category: Stocks -->
+<div class="space-y-stack-md">
+<h4 class="text-data-label font-data-label font-bold text-outline uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">show_chart</span> Stocks
+                    </h4>
+<div class="grid grid-cols-1 gap-2">
+<!-- Stock Result -->
+<div class="p-4 bg-white border border-outline-variant rounded-xl flex items-center justify-between hover:shadow-md transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center font-bold text-primary">ORG</div>
+<div>
+<h5 class="font-bold text-on-background">Orange Côte d'Ivoire (ORAC)</h5>
+<p class="text-data-label text-outline uppercase">BRVM: ORAC • Télécommunications</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-value font-data-value text-primary">11,250 CFA</div>
+<div class="text-sm font-bold text-[#2EB873] flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> +2.45%
+                                </div>
+</div>
+</div>
+<!-- Stock Result -->
+<div class="p-4 bg-white border border-outline-variant rounded-xl flex items-center justify-between hover:shadow-md transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center font-bold text-primary">SNT</div>
+<div>
+<h5 class="font-bold text-on-background">Sonatel Sénégal (SNTS)</h5>
+<p class="text-data-label text-outline uppercase">BRVM: SNTS • Télécommunications</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-data-value font-data-value text-primary">18,900 CFA</div>
+<div class="text-sm font-bold text-error flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> -0.15%
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: Training -->
+<div class="space-y-stack-md">
+<h4 class="text-data-label font-data-label font-bold text-outline uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">school</span> Training &amp; Courses
+                    </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col border border-outline-variant rounded-xl overflow-hidden bg-white hover:border-primary transition-all">
+<div class="h-32 bg-surface-container-high relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A professional financial classroom setting with modern equipment, soft blue corporate lighting, and high-quality digital displays showing stock market charts. The atmosphere is academic and prestigious, aiming at high-level financial professionals." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3deIugAPImAZLogcbPcf8t9LlWrTnggkbtOd9UuFuJYSlamvlTZ54nTEMYFNzKMZwESK7RZLlK29vbisWy2UK5d4CP0V1FKWgAuP0R_QuaSBSknLL_DzqQWrt8aFubIL2boixvfmPRDB2x08Fs3cAJhWCkCm9dKROr79_yIT1vVAn_vzeA5WcM6ejPkg-aEVxIoKn2OsONpnK07GjDNtY2b4vEWNo6tWQxobyVPpKB0HDZJ2Nd1FfLnnxgCWJS9T1HVBUKszbGw')"></div>
+<span class="absolute top-2 right-2 bg-secondary text-on-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase">Nouveau</span>
+</div>
+<div class="p-4 space-y-2">
+<h5 class="font-bold">Analyse Fondamentale Avancée</h5>
+<p class="text-sm text-on-surface-variant line-clamp-2">Maîtrisez les bilans et les ratios financiers pour vos investissements à long terme.</p>
+<div class="flex justify-between items-center pt-2">
+<span class="text-primary font-bold text-sm">150,000 CFA</span>
+<span class="text-[12px] text-outline flex items-center gap-1"><span class="material-symbols-outlined text-sm">timer</span> 12h</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col border border-outline-variant rounded-xl overflow-hidden bg-white hover:border-primary transition-all">
+<div class="h-32 bg-surface-container-high relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close-up of a digital screen displaying advanced candlestick trading patterns and technical indicators like RSI and MACD. The lighting is focused and professional with a cool blue and dark tone, conveying precision and modern trading expertise." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBiRHfd3s-y8JYhr0Z4mLJYXw1-_gPAM2x1NiPnCBRSYsnuCOsC1K6qiPU7YVaqVTcFH__eKDJgg8xQ7Ise6xX_AJn4pWl2R4yJugA64LtQ9zCrN4YxiRUTvYA9ILiyth1NJHIAsKoawa8qyILMw6mq9ApOUu9DwKydhkpZmIb6cXPeyJWsj5crI1i9rb0wQ3d9YODFLYEriA-1SxWZdOjrsw54tIp5IiE9mkOHiUuPGFNEDFm1FEwVf200g9nT_g2jfaWl_r_lPA')"></div>
+</div>
+<div class="p-4 space-y-2">
+<h5 class="font-bold">Introduction au Day Trading</h5>
+<p class="text-sm text-on-surface-variant line-clamp-2">Découvrez les bases de l'analyse technique et de la gestion du risque intra-journalier.</p>
+<div class="flex justify-between items-center pt-2">
+<span class="text-primary font-bold text-sm">Gratuit</span>
+<span class="text-[12px] text-outline flex items-center gap-1"><span class="material-symbols-outlined text-sm">timer</span> 3h</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: Articles -->
+<div class="space-y-stack-md">
+<h4 class="text-data-label font-data-label font-bold text-outline uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">description</span> Articles &amp; Guides
+                    </h4>
+<div class="space-y-3">
+<a class="block p-4 bg-surface rounded-lg border border-transparent hover:border-outline-variant hover:bg-white transition-all group" href="#">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold text-primary uppercase bg-primary-fixed px-2 py-0.5 rounded">Expertise</span>
+<h5 class="font-bold mt-1 group-hover:text-primary">L'impact de la hausse des taux de la BCEAO sur l'épargne en 2024</h5>
+<p class="text-sm text-on-surface-variant mt-1">Publié le 12 Février • Par Dr. Amadou Koné</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+<a class="block p-4 bg-surface rounded-lg border border-transparent hover:border-outline-variant hover:bg-white transition-all group" href="#">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold text-secondary uppercase bg-secondary-fixed px-2 py-0.5 rounded">Guide</span>
+<h5 class="font-bold mt-1 group-hover:text-primary">Guide complet : Comment ouvrir un compte-titres à l'Africaine des Finances</h5>
+<p class="text-sm text-on-surface-variant mt-1">Publié le 05 Janvier • Par Équipe Support</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- No Results State (Hidden by default) -->
+<section class="hidden max-w-4xl mx-auto py-20 text-center flex flex-col items-center justify-center animate-in fade-in zoom-in duration-300" id="noResultsState">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-5xl text-outline-variant">search_off</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-primary mb-2">Aucun résultat trouvé</h3>
+<p class="text-body-lg text-on-surface-variant max-w-md mx-auto">Nous n'avons trouvé aucun résultat pour "<span class="font-bold" id="searchQueryPlaceholder"></span>". Essayez de reformuler votre recherche ou d'utiliser des termes plus génériques.</p>
+<div class="mt-stack-lg flex gap-4">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-bold" onclick="clearSearch()">Réinitialiser la recherche</button>
+<button class="px-6 py-2 border border-primary text-primary rounded-lg font-bold">Consulter l'aide</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg">
+<div class="col-span-2">
+<span class="text-headline-sm font-headline-sm font-bold text-primary">Africaine des Finances</span>
+<p class="mt-4 text-body-md text-on-surface-variant">L'excellence financière au service du développement africain. Régulé par l'AMF-UMOA.</p>
+</div>
+<div>
+<h6 class="font-bold mb-4">Platform</h6>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Stocks</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Bonds</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">ETFs</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold mb-4">Learn</h6>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Academy</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Webinars</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold mb-4">Corporate</h6>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">About Us</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Careers</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Press</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-bold mb-4">Legal</h6>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Privacy Policy</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Terms of Use</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-stack-lg pt-stack-md border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4 text-data-label font-data-label text-outline">
+<span>© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</span>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-colors" href="#">Twitter</a>
+<a class="hover:text-primary transition-colors" href="#">Facebook</a>
+</div>
+</div>
+</footer>
+<!-- Scripts for Interaction -->
+<script>
+        const searchInput = document.getElementById('mainSearchInput');
+        const initialState = document.getElementById('initialState');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const noResultsState = document.getElementById('noResultsState');
+        const searchQueryPlaceholder = document.getElementById('searchQueryPlaceholder');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query === "") {
+                initialState.classList.remove('hidden');
+                resultsContainer.classList.add('hidden');
+                noResultsState.classList.add('hidden');
+            } else if (query === "empty" || query === "rien" || query === "none") {
+                initialState.classList.add('hidden');
+                resultsContainer.classList.add('hidden');
+                noResultsState.classList.remove('hidden');
+                searchQueryPlaceholder.innerText = e.target.value;
+            } else {
+                initialState.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                noResultsState.classList.add('hidden');
+                
+                // Logic to filter visibility can be added here
+                // For now, we just show the results view as a demo
+            }
+        });
+
+        function clearSearch() {
+            searchInput.value = "";
+            initialState.classList.remove('hidden');
+            resultsContainer.classList.add('hidden');
+            noResultsState.classList.add('hidden');
+            searchInput.focus();
+        }
+
+        // Filter chips interaction
+        const chips = document.querySelectorAll('#filterChips button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+                    c.classList.add('bg-surface-container-lowest', 'text-on-surface-variant', 'border-outline-variant');
+                });
+                chip.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+                chip.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant', 'border-outline-variant');
+            });
+        });
+
+        // Shortcut Key Interaction
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+    </script>
+</body></html>

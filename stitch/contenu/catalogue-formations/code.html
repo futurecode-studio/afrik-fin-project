@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catalogue des Formations | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for institutional feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #001a61;
+            border-radius: 4px;
+        }
+        .card-hover:hover {
+            box-shadow: 0 20px 40px -12px rgba(6, 29, 92, 0.08);
+            transform: translateY(-4px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-surface": "#131c2a",
+                        "on-surface-variant": "#444652",
+                        "tertiary-fixed": "#dce1ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "tertiary": "#051c5b",
+                        "background": "#f9f9ff",
+                        "on-background": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "outline": "#757683",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-container-highest": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "outline-variant": "#c5c5d4",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#795900",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "primary": "#001a61",
+                        "primary-container": "#0a2e8c",
+                        "surface-tint": "#3d58b5",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-primary-fixed": "#001551",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#213371",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Invest</a>
+<a class="text-primary font-bold transition-colors font-body-md" href="#">Training</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Analysis</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">account_balance</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">account_circle</span>
+</div>
+</nav>
+<!-- Sidebar (Hidden on mobile) -->
+<aside class="hidden lg:flex flex-col h-screen py-stack-lg px-stack-md h-full w-64 fixed left-0 top-16 bg-surface-container-low border-r border-outline-variant z-40">
+<div class="mb-stack-lg px-2">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+</div>
+<div>
+<p class="font-bold text-primary text-sm leading-tight">Academy Portal</p>
+<p class="text-xs text-on-surface-variant">AMF-UMOA Certified</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full cursor-pointer transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Tableau de bord</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-full cursor-pointer transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-body-md">Catalogue</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full cursor-pointer transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-body-md">Mes cours</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-full cursor-pointer transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-body-md">Certifications</span>
+</div>
+</nav>
+<div class="mt-auto px-2">
+<div class="bg-secondary-container p-stack-md rounded-xl text-on-secondary-container">
+<p class="font-bold text-sm mb-1">Premium Wealth</p>
+<p class="text-xs mb-3">Accédez à des formations exclusives pour investisseurs institutionnels.</p>
+<button class="w-full py-2 bg-primary text-on-primary text-xs font-bold rounded-lg hover:bg-primary-container transition-colors">Passer Pro</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-16 min-h-screen">
+<!-- Hero Section -->
+<header class="relative overflow-hidden bg-primary py-16 px-margin-desktop">
+
+<div class="relative z-10 max-w-container-max mx-auto">
+<h1 class="text-on-primary font-display-lg text-display-lg mb-4">Excellence Académique &amp; Financière</h1>
+<p class="text-on-primary/80 font-body-lg text-body-lg max-w-2xl">
+                    Développez votre expertise avec les leaders du marché financier UMOA. Des cursus certifiants conçus par des praticiens pour des futurs experts.
+                </p>
+</div>
+</header>
+<!-- Filters Bar -->
+<section class="sticky top-16 z-30 bg-surface/80 backdrop-blur-md border-b border-outline-variant px-margin-desktop py-4 shadow-sm">
+<div class="max-w-container-max mx-auto flex flex-wrap items-center justify-between gap-stack-md">
+<div class="flex flex-wrap items-center gap-4">
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-outline-variant px-4 py-2 pr-10 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+<option>Niveau : Tous</option>
+<option>Débutant</option>
+<option>Intermédiaire</option>
+<option>Expert</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-outline-variant px-4 py-2 pr-10 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+<option>Catégorie : Finance</option>
+<option>Marchés de Capitaux</option>
+<option>Gestion de Fortune</option>
+<option>Réglementation</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-outline-variant px-4 py-2 pr-10 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+<option>Format : Tous</option>
+<option>Présentiel</option>
+<option>E-learning</option>
+<option>Hybride</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container border border-outline-variant px-4 py-2 pr-10 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+<option>Prix : Tous</option>
+<option>Gratuit</option>
+<option>Payant</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-primary">12 formations trouvées</span>
+</div>
+</div>
+</section>
+<!-- Course Grid -->
+<section class="px-margin-desktop py-stack-lg">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-stack-lg">
+<!-- Card 1 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional photograph of a modern financial trading floor in a West African financial center. Traders are working at high-tech workstations with multiple screens showing financial charts and market data. The lighting is bright and corporate with primary blue accents. The style is prestigious and institutional, conveying authority and market leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFERoRlkDHaWalY2iajjl1e1H5iAiEWK3H2GvRe_OdwEyIVsk2ScL6hGxn80-l0cXfKtumLfvb1zddntZulMp9rAg0gt8kw4krW3cw4eEh8Wl56wyTbog933soFF9U4QF5Kyp9KjaTgggsUsZwopHhukcuGalO4dG1Jub8eTVELMIwdjAhwOsEHn56G3YG32ep62G8zTqkI0Fte2kxP4OY0ovSpFgEs_PMLYGeP8dq9jXHxHAMrt4zCVC4St7Bf5tRgctjsn4IpQ"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold text-primary">Certifiant</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Expert</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 24 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Maîtrise des Marchés de Capitaux UMOA</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Analyse approfondie des instruments financiers, de la gestion des risques et des mécanismes de compensation au sein de la BRVM.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">450.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a gold bullion bar with intricate engravings, resting on a textured dark leather surface. The lighting is dramatic, warm, and high-contrast, highlighting the richness and stability of wealth management. Subtle reflections of data graphs are seen on the reflective gold surface. Premium, luxurious, and highly professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJJf6WPP_qADsxkHHhrybgwSvjoAMiRgoC44m8rUP-5XcLr3DIwrcVCAdUgH44uJpA08RUjsZU2QfDtSMAwDE5FzSFmjn8xkAq2CTYyo4WHbK2A_d-xkdM3pQsnGz50L8BvuPeVjY2ViJrp19bJw3lmUMqN0lsRc9EplIZLVW3dM_q9yeH_51FeUfN0F0cT7rdf9NS6VnwYq2LMPfzUyDrlEPNzL6UJ_8gTFHFNYAWp6L57BwDjakaQczHFUw9PvfywbbOc95BVA"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold text-primary">Certifiant</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Intermédiaire</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 12 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Gestion de Fortune &amp; Family Office</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Les clés de la structuration patrimoniale et des stratégies d'investissement pour les HNWI en Afrique de l'Ouest.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">325.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A sleek glass building facade representing a modern central bank or regulatory authority. The building is captured during blue hour with internal office lights glowing warmly. A large digital ticker displaying stock prices runs across the base. The image is crisp, symmetrical, and exudes an atmosphere of legal and regulatory stability. Global blue-gray color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrVp6d7hQ89qyw18itTh6amLQRJox2Dc-yuMbJLU6NAWKiUjTQ_QFbpUOTp7-Ayb0BpxyiMpgJ4QROT7Iu2GDg-0t06vw2ARO9-sBQMJcdkejQftw1_p9ejGDt7qirCZHbQKGoU1mnz0sWP0btFRkF8UmS3LxYfrhRNRoPphfcLovxZPBbgfuLZtx_ezpVdqJ4qK4aZgOblPw14s2QcQ6dWpJ1gJ387AnbaHT_Bqhg69vBeWwHKICIrxkEksxfsRt9ItRqFqn49g"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">hourglass_empty</span>
+<span class="text-[12px] font-bold text-primary">Attestation</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Débutant</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 8 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Cadre Réglementaire AMF-UMOA</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Comprendre les fondements juridiques et les obligations de conformité pour les acteurs du marché financier régional.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">175.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-end tablet screen displaying complex fintech analytics, heatmaps, and financial forecasting graphs. The background shows a modern minimalist office with soft bokeh. The lighting is cool-toned with bright highlights, emphasizing technology and precision. Modern corporate financial aesthetic with deep blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRDLdiCiKkex2TK_eoVTBMHHVfEq3z8-Zr-vWwKBXKHUabJCi_FRy_-XG_Ufzv5ppE4rHrdLNqt2FKm_oOVUoWB9N1VHpJzubTSxE2ZTbVN3fRBqUU1q7PZxtfnONSF1Rff9nd3CkOvmJvUCOZjcW_Lv8RWQb0Wp0AYRTTQQTtcgkm8hm3Uz0GCAqZdze6vbdVOkWRkb3IQoUMdLWn0zj4ReaSn5V1iXi0DMcsJeSj_phIq8uY0nYRl9WBkK_41FZXHh2DZkspTw"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold text-primary">Certifiant</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Expert</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 32 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Analyse Quantitative &amp; Algorithmique</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Techniques avancées de modélisation mathématique appliquées à l'arbitrage et à la gestion quantitative de portefeuille.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">600.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional business setting featuring two diverse executives in formal corporate attire shaking hands over a sleek glass desk. In the background, a large digital world map with glowing nodes connected by lines signifies global finance. High-key lighting, professional white-space, institutional authority. Primary blue and soft gray accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjEDFCQ0_jL4LM1vXkTUL4hxNiE6rQb-LJ4L4DR_0ZLI3OftET40KV8mJHsnMulu5rPd9-FaD3GYELwcT1hbi8OuqFJw4wJbNvVJy6SAs1sZKFD_keavkeHvbUoMCSCRDDIrjGRyecWU0z4IqPmCdOABAKpeDgT2d7gQhk-fzx3O75DM4ij9AtM6ghDuk5JkGA4EO3g8FRlsKhKnHyeMpZW_qRqEjbg8Kl5TlJeH-z3J27KxLM_bC2dMwG4AceTuXgn-7gPIvrZA"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">hourglass_empty</span>
+<span class="text-[12px] font-bold text-primary">Attestation</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Intermédiaire</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 16 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Financements Structurés &amp; PPP</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Mécanismes de financement de projets d'infrastructure et partenariats public-privé dans la zone UEMOA.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">380.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of a silver fountain pen resting on a crisp white bank document with official seals. The background features a blurred corporate board room. The aesthetic is extremely clean, minimalist, and focuses on legal integrity and financial professionalism. Soft natural lighting from a large window. Neutral tones with deep blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv_p1500-PKa3wpuXyEKIYlID0Gcpc834hfEqt_rzNVHt2AdwFnN7Q81vBoA0xNd4GuZyRla0qX-fG6F3EduDaABN60QA66oChPVkhIGv_2WEnJvx91lKOd42VHbni_xrXhtgOUB3VLNDM3KW2njglknxFflUJsww4tXJQ9uPb9E2rkgVnPbPrhjbEZIzN3uMobKPNEIEn1ZnH54siIXzsFTbR6OmNNOUTta3HR0RJbqfHWhqReBFBqsXEdroq7J4bEC-vfTq9Zg"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold text-primary">Certifiant</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-high text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Expert</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 20 Heures
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-3 leading-tight">Gouvernance &amp; Éthique Financière</h3>
+<p class="text-on-surface-variant text-sm mb-6 flex-grow">
+                            Les standards internationaux de gouvernance d'entreprise et les meilleures pratiques déontologiques en finance.
+                        </p>
+<div class="flex items-center justify-between mt-auto pt-6 border-t border-outline-variant">
+<div>
+<p class="text-xs text-on-surface-variant font-data-label">Investissement</p>
+<p class="text-xl font-data-value text-primary">410.000 FCFA</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-bold text-sm transition-colors flex items-center gap-2">
+                                Voir le programme
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-stack-lg flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-variant text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-variant text-on-surface-variant transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-variant text-on-surface-variant transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-variant text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Newsletter / CTA -->
+<section class="bg-surface-container-high py-section-gap px-margin-desktop">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between gap-stack-lg">
+<div class="max-w-xl">
+<h2 class="text-primary font-headline-md text-headline-md mb-2">Restez informé de nos sessions</h2>
+<p class="text-on-surface-variant font-body-md">Inscrivez-vous à notre newsletter académique pour recevoir les dates des prochaines sessions et les analyses exclusives de nos experts.</p>
+</div>
+<div class="flex w-full md:w-auto gap-2">
+<input class="flex-grow md:w-64 px-4 py-3 rounded-lg border border-outline outline-none focus:ring-2 focus:ring-primary" placeholder="votre@email.com" type="email"/>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:bg-primary-container transition-all">S'inscrire</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md w-full">
+<div class="w-full max-w-container-max flex flex-col md:flex-row justify-between items-center gap-stack-md border-b border-on-primary/10 pb-stack-lg">
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</span>
+<div class="flex flex-wrap justify-center gap-stack-md">
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Legal Notice</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md" href="#">Contact Support</a>
+</div>
+</div>
+<p class="text-on-primary/60 font-body-md text-center mt-stack-md">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.
+        </p>
+</footer>
+<script>
+        // Micro-interactions for filters
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', (e) => {
+                console.log(`Filtering by: ${e.target.value}`);
+                // Simple feedback effect
+                e.target.parentElement.classList.add('opacity-50');
+                setTimeout(() => {
+                    e.target.parentElement.classList.remove('opacity-50');
+                }, 300);
+            });
+        });
+
+        // Hover effects for cards handled via Tailwind CSS 'group-hover' logic or custom classes
+    </script>
+</body></html>

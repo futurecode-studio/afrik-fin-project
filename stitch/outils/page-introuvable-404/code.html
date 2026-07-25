@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e7eeff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#dae3f6",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface-variant": "#444652",
+                        "surface-container-highest": "#dae3f6",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "surface-container-high": "#dfe8fc",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#051c5b",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001551",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-surface": "#131c2a",
+                        "inverse-on-surface": "#ebf1ff",
+                        "tertiary-container": "#213371",
+                        "outline": "#757683",
+                        "background": "#f9f9ff",
+                        "inverse-surface": "#28313f",
+                        "surface-tint": "#3d58b5",
+                        "secondary-container": "#ffbf00",
+                        "secondary-fixed": "#ffdfa0",
+                        "primary": "#001a61",
+                        "on-background": "#131c2a",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "on-secondary-fixed": "#261a00",
+                        "outline-variant": "#c5c5d4",
+                        "surface-container-low": "#f0f3ff",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "primary-container": "#0a2e8c",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6d5000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Header / TopNavBar Placeholder (Suppressed as per 404/Task-focused rule, but used for Branding) -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b border-outline-variant flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">
+            Africaine des Finances
+        </div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Espace Client</a>
+<a class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-primary-container transition-colors" href="#">Contact</a>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center relative px-margin-mobile md:px-margin-desktop py-stack-lg overflow-hidden">
+<!-- Abstract Background Element -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-container rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary-container rounded-full blur-[100px] opacity-40"></div>
+</div>
+<div class="relative z-10 max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<!-- Visual Section -->
+<div class="order-2 md:order-1 flex justify-center">
+<div class="relative w-full aspect-square max-w-md">
+<!-- Glass Card Visualization -->
+<div class="absolute inset-0 glass-effect border border-outline-variant rounded-xl shadow-xl flex flex-col items-center justify-center p-stack-lg animate-float">
+<div class="text-[120px] font-display-lg text-primary-container leading-none mb-4 select-none opacity-20">404</div>
+<!-- Symbolic Financial Chart Decoration -->
+<div class="w-full h-32 flex items-end gap-1 px-4">
+<div class="flex-1 bg-primary-container/20 rounded-t-sm h-[30%]"></div>
+<div class="flex-1 bg-primary-container/30 rounded-t-sm h-[50%]"></div>
+<div class="flex-1 bg-primary-container/10 rounded-t-sm h-[20%]"></div>
+<div class="flex-1 bg-primary-container/40 rounded-t-sm h-[70%]"></div>
+<div class="flex-1 bg-error/20 rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-secondary-container/50 rounded-t-sm h-[60%] border-t-2 border-secondary-fixed"></div>
+<div class="flex-1 bg-primary-container/20 rounded-t-sm h-[35%]"></div>
+<div class="flex-1 bg-primary-container/15 rounded-t-sm h-[25%]"></div>
+</div>
+<div class="mt-8 flex items-center gap-2 text-on-surface-variant font-data-label">
+<span class="material-symbols-outlined text-secondary">trending_down</span>
+<span>VALEUR NON TROUVÉE</span>
+</div>
+</div>
+<!-- Floating Badge -->
+<div class="absolute -top-4 -right-4 bg-white border border-outline-variant p-4 rounded-xl shadow-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div>
+<p class="font-data-label text-xs uppercase tracking-wider text-outline">Erreur Système</p>
+<p class="font-bold text-primary">Code 0x404</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Section -->
+<div class="order-1 md:order-2 space-y-stack-lg">
+<div class="space-y-stack-sm">
+<h1 class="font-display-lg text-display-lg text-primary">
+                        Oups !
+                    </h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant max-w-md">
+                        Cette page semble s'être égarée sur le marché.
+                    </p>
+</div>
+<p class="font-body-lg text-body-lg text-outline leading-relaxed max-w-md">
+                    L'adresse que vous avez saisie est peut-être incorrecte ou la page a été déplacée vers un nouveau portefeuille de contenus.
+                </p>
+<!-- Navigation Options (Bento Style) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+<a class="flex flex-col p-4 bg-white border border-outline-variant rounded-xl hover:border-primary hover:shadow-lg transition-all group" href="/">
+<span class="material-symbols-outlined text-primary mb-2">home</span>
+<span class="font-bold text-primary">Accueil</span>
+<span class="text-sm text-outline">Retour à la vue d'ensemble</span>
+</a>
+<a class="flex flex-col p-4 bg-white border border-outline-variant rounded-xl hover:border-primary hover:shadow-lg transition-all group" href="/formations">
+<span class="material-symbols-outlined text-primary mb-2">school</span>
+<span class="font-bold text-primary">Formations</span>
+<span class="text-sm text-outline">Maîtrisez vos investissements</span>
+</a>
+<a class="flex flex-col p-4 bg-white border border-outline-variant rounded-xl hover:border-primary hover:shadow-lg transition-all group sm:col-span-2" href="/support">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">support_agent</span>
+<div>
+<span class="font-bold text-primary block">Support Technique</span>
+<span class="text-sm text-outline">Nous sommes là pour vous aider à retrouver votre chemin</span>
+</div>
+</div>
+</a>
+</div>
+<div class="pt-stack-md">
+<button class="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all" onclick="window.history.back()">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Revenir à la page précédente
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg bg-primary mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-2">
+<div class="font-headline-sm text-headline-sm text-on-primary mb-stack-sm">Africaine des Finances</div>
+<p class="font-data-label text-on-primary-container/80 max-w-sm">
+                    © 2024 Africaine des Finances. Agréé AMF-UMOA n°AF-2023-01. Excellence et rigueur au service de votre patrimoine.
+                </p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-on-primary-container/80 font-data-label hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a>
+<a class="text-on-primary-container/80 font-data-label hover:text-secondary-fixed transition-colors" href="#">Confidentialité</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-on-primary-container/80 font-data-label hover:text-secondary-fixed transition-colors" href="#">Risques</a>
+<a class="text-on-primary-container/80 font-data-label hover:text-secondary-fixed transition-colors" href="#">Réglementation</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for the floating chart
+        document.addEventListener('mousemove', (e) => {
+            const visual = document.querySelector('.animate-float');
+            if (visual) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+                visual.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        // Reset rotation when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const visual = document.querySelector('.animate-float');
+            if (visual) {
+                visual.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            }
+        });
+    </script>
+</body></html>

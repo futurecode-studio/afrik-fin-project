@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Résultats de l'Examen - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.8s ease-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .bento-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dfe8fc",
+                        "primary-container": "#0a2e8c",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131c2a",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dce1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-container": "#213371",
+                        "secondary": "#795900",
+                        "on-primary-container": "#839cfd",
+                        "on-background": "#131c2a",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d4",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dae3f6",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed": "#001551",
+                        "surface": "#f9f9ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "surface-dim": "#d1daed",
+                        "on-surface-variant": "#444652",
+                        "tertiary": "#051c5b",
+                        "surface-bright": "#f9f9ff",
+                        "primary": "#001a61",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "headline-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            Africaine des Finances
+        </div>
+<div class="flex items-center gap-stack-lg">
+<div class="hidden md:flex gap-stack-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md cursor-pointer" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md cursor-pointer" href="#">Invest</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold font-body-md text-body-md cursor-pointer" href="#">Training</a>
+</div>
+<div class="flex gap-stack-sm items-center">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">account_balance</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-stack-lg text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">Résultats de Certification</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                L'examen de certification AMF-UMOA est une étape exigeante. Bien que vous n'ayez pas atteint le seuil cette fois-ci, votre progression montre une base solide.
+            </p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Score Overview Card -->
+<section class="md:col-span-5 bento-card bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col items-center justify-center text-center">
+<div class="relative w-48 h-48 flex items-center justify-center mb-stack-md">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="transparent" r="42" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" id="progress-circle" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-data-value text-4xl text-primary">62%</span>
+<span class="font-data-label text-on-surface-variant uppercase tracking-wider">Score Obtenu</span>
+</div>
+</div>
+<div class="w-full h-px bg-outline-variant mb-stack-md"></div>
+<div class="flex justify-between w-full px-stack-md">
+<div class="flex flex-col">
+<span class="font-data-label text-on-surface-variant">Requis</span>
+<span class="font-data-value text-primary">70%</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-data-label text-on-surface-variant">Statut</span>
+<span class="font-data-value text-error">Non Validé</span>
+</div>
+</div>
+</section>
+<!-- Encouragement & CTA -->
+<section class="md:col-span-7 bento-card bg-primary text-on-primary p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-stack-sm mb-stack-sm">
+<span class="material-symbols-outlined text-secondary-fixed">school</span>
+<h2 class="font-headline-sm text-headline-sm">Persévérance est la Clé</h2>
+</div>
+<p class="font-body-md text-body-md opacity-90 mb-stack-lg">
+                        Vous n'êtes qu'à 8% de l'accréditation professionnelle. Les experts financiers de l'Africaine des Finances recommandent une révision ciblée de 10 heures sur les modules signalés pour garantir votre succès lors de la prochaine tentative.
+                    </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-stack-md">
+<button class="bg-secondary-container text-on-secondary-fixed px-stack-lg py-3 rounded-lg font-headline-sm text-body-md hover:bg-secondary-fixed transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">menu_book</span>
+                        Revoir les cours
+                    </button>
+<button class="border border-on-primary text-on-primary px-stack-lg py-3 rounded-lg font-headline-sm text-body-md hover:bg-white/10 transition-all active:scale-95 flex items-center justify-center gap-2">
+                        Réessayer plus tard
+                    </button>
+</div>
+</section>
+<!-- Recommendation Block -->
+<section class="md:col-span-12 bento-card bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant bg-surface-container flex items-center justify-between">
+<h3 class="font-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                        Modules à réviser en priorité
+                    </h3>
+<span class="font-data-label text-on-surface-variant">3 Modules identifiés</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#EEF3FF]">
+<tr>
+<th class="p-stack-md font-bold text-primary border-b border-outline-variant">Module</th>
+<th class="p-stack-md font-bold text-primary border-b border-outline-variant">Score</th>
+<th class="p-stack-md font-bold text-primary border-b border-outline-variant">Lacunes Détectées</th>
+<th class="p-stack-md font-bold text-primary border-b border-outline-variant text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="p-stack-md">
+<div class="font-body-md font-bold">Réglementation de l'UMOA</div>
+<div class="text-xs text-on-surface-variant">Module 02 - Droit Financier</div>
+</td>
+<td class="p-stack-md font-data-value text-error">45%</td>
+<td class="p-stack-md font-body-md text-on-surface-variant">Règles prudentielles et limites d'exposition.</td>
+<td class="p-stack-md text-right">
+<button class="text-primary hover:underline font-bold text-sm">Ouvrir le manuel</button>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest/50 hover:bg-surface-variant/30 transition-colors">
+<td class="p-stack-md">
+<div class="font-body-md font-bold">Analyse de Portefeuille</div>
+<div class="text-xs text-on-surface-variant">Module 05 - Gestion de Actifs</div>
+</td>
+<td class="p-stack-md font-data-value text-secondary">58%</td>
+<td class="p-stack-md font-body-md text-on-surface-variant">Calcul du ratio de Sharpe et frontière efficiente.</td>
+<td class="p-stack-md text-right">
+<button class="text-primary hover:underline font-bold text-sm">Ouvrir le manuel</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="p-stack-md">
+<div class="font-body-md font-bold">Produits Dérivés Complexes</div>
+<div class="text-xs text-on-surface-variant">Module 08 - Marchés des Capitaux</div>
+</td>
+<td class="p-stack-md font-data-value text-secondary">64%</td>
+<td class="p-stack-md font-body-md text-on-surface-variant">Options exotiques et couvertures de change.</td>
+<td class="p-stack-md text-right">
+<button class="text-primary hover:underline font-bold text-sm">Ouvrir le manuel</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Visual Support / Atmosphere -->
+<section class="md:col-span-12 h-64 relative rounded-xl overflow-hidden">
+<div class="absolute inset-0 z-0" data-alt="A sophisticated and bright high-key architectural photography of a modern financial institution library in Africa. Large glass windows let in soft natural sunlight, illuminating rows of organized financial journals and textbooks. The color palette is dominated by professional blues and crisp whites, with warm golden accents from the morning sun. The atmosphere is quiet, studious, and inspiring, conveying a sense of knowledge and elite professional preparation." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuLFpmKOwSA0kdzEzcvF886okJJ5KwdDsCylr-fBVUCrBZhizBDPZrs33wNNQidUXAy02hg8j522P5aFKzoNCYmz5XEcAB_RP8rlYUxX0ySqOnKPRHTyX_Hra7S8Ciyd3SVSarSWEI8_OBm2LbS_K_VQpsXS33_4ZXVKCkaVf-afa1p1jpFmlT3wZWWstVwQ0elyDRs6qMUKAJikRFq-Kcm6meSZoNTqy_3Ix0YPo7lKRksEb92LjxexshkPUu1Po8O-BMrtwX8w')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent z-10 flex items-center p-stack-lg">
+<div class="max-w-md text-on-primary">
+<h4 class="font-headline-md mb-stack-sm italic">"La réussite n'est pas finale, l'échec n'est pas fatal : c'est le courage de continuer qui compte."</h4>
+<p class="font-data-label opacity-75">— Winston Churchill</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</div>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Legal Notice</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md" href="#">Contact Support</a>
+</div>
+<p class="font-body-md text-body-md opacity-60 text-center max-w-2xl">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved. Membre agréé du système financier régional de l'UEMOA.
+        </p>
+</footer>
+<script>
+        // Micro-interaction for score animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const circle = document.getElementById('progress-circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            
+            // Score is 62%
+            const scorePercent = 62;
+            const offset = circumference - (scorePercent / 100 * circumference);
+            
+            setTimeout(() => {
+                circle.style.strokeDashoffset = offset;
+            }, 300);
+        });
+    </script>
+</body></html>

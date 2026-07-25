@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Examen Final | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-shadow {
+            box-shadow: 0 20px 40px -15px rgba(6, 29, 92, 0.04);
+        }
+        .tonal-border {
+            border: 1px solid #DADFE7;
+        }
+        .instruction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dfe8fc",
+                        "primary-container": "#0a2e8c",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131c2a",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dce1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-container": "#213371",
+                        "secondary": "#795900",
+                        "on-primary-container": "#839cfd",
+                        "on-background": "#131c2a",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c5d4",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dae3f6",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed": "#001551",
+                        "surface": "#f9f9ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container": "#e7eeff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "surface-dim": "#d1daed",
+                        "on-surface-variant": "#444652",
+                        "tertiary": "#051c5b",
+                        "surface-bright": "#f9f9ff",
+                        "primary": "#001a61",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "section-gap": "80px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary">
+            Africaine des Finances
+        </div>
+<div class="flex items-center gap-stack-lg">
+<div class="flex items-center gap-stack-sm text-on-surface-variant">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-body-md">Portail de Certification AMF-UMOA</span>
+</div>
+<div class="flex gap-stack-md">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80">account_circle</span>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-32 pb-section-gap px-margin-desktop max-w-container-max mx-auto w-full">
+<section class="max-w-4xl mx-auto">
+<div class="mb-stack-lg flex items-center gap-stack-sm">
+<span class="px-stack-md py-1 bg-primary-container text-on-primary-container font-data-label text-data-label rounded-full">
+                    SESSION OFFICIELLE
+                </span>
+<span class="text-on-surface-variant font-data-label text-data-label uppercase tracking-widest">Code Examen: FIN-EXAM-2024</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md">
+                Examen Final de Gestion de Fortune
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-section-gap max-w-3xl leading-relaxed">
+                Bienvenue à l'épreuve finale de certification. Cette évaluation valide vos compétences techniques en analyse de marchés et en conseil financier institutionnel. Assurez-vous d'être dans un environnement calme avant de débuter.
+            </p>
+<div class="instruction-grid mb-section-gap">
+<div class="bg-surface-container-lowest tonal-border p-stack-lg flex flex-col gap-stack-sm">
+<span class="material-symbols-outlined text-primary mb-stack-sm">schedule</span>
+<span class="font-data-label text-data-label text-on-surface-variant">Durée de l'épreuve</span>
+<span class="font-headline-sm text-headline-sm text-primary">120 Minutes</span>
+<p class="text-on-surface-variant text-sm mt-stack-sm">Le chronomètre démarre dès le lancement.</p>
+</div>
+<div class="bg-surface-container-lowest tonal-border p-stack-lg flex flex-col gap-stack-sm">
+<span class="material-symbols-outlined text-primary mb-stack-sm">grade</span>
+<span class="font-data-label text-data-label text-on-surface-variant">Seuil de Réussite</span>
+<span class="font-headline-sm text-headline-sm text-primary">70% Minimum</span>
+<p class="text-on-surface-variant text-sm mt-stack-sm">Requis pour l'accréditation AMF-UMOA.</p>
+</div>
+<div class="bg-surface-container-lowest tonal-border p-stack-lg flex flex-col gap-stack-sm">
+<span class="material-symbols-outlined text-primary mb-stack-sm">history_edu</span>
+<span class="font-data-label text-data-label text-on-surface-variant">Nombre de Tentatives</span>
+<span class="font-headline-sm text-headline-sm text-primary">03 Tentatives</span>
+<p class="text-on-surface-variant text-sm mt-stack-sm">Ceci est votre première tentative officielle.</p>
+</div>
+</div>
+<div class="bg-primary/5 tonal-border p-stack-lg mb-section-gap">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-stack-md">Règlement Académique</h3>
+<ul class="space-y-stack-md text-on-surface-variant">
+<li class="flex gap-stack-md items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span>Toute sortie de l'onglet de navigation entraînera un avertissement automatique.</span>
+</li>
+<li class="flex gap-stack-md items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span>L'utilisation de matériel externe ou de calculateurs non autorisés est proscrite.</span>
+</li>
+<li class="flex gap-stack-md items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span>En cas de déconnexion technique, vous disposez de 5 minutes pour réintégrer la session.</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-stack-lg p-stack-lg bg-surface-container-high rounded-lg">
+<label class="flex items-center gap-stack-md cursor-pointer group">
+<div class="relative flex items-center">
+<input class="w-6 h-6 rounded-sm border-outline text-primary focus:ring-primary-container transition-all cursor-pointer" id="confirmReady" type="checkbox"/>
+</div>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">
+                        Je confirme avoir lu les conditions et je suis prêt à lancer l'examen.
+                    </span>
+</label>
+<button class="px-stack-lg py-4 bg-primary text-on-primary font-headline-sm text-headline-sm rounded-lg opacity-50 cursor-not-allowed transition-all hover:bg-tertiary active:scale-95 flex items-center gap-stack-md" disabled="" id="launchBtn">
+<span>Lancer l'Examen</span>
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+</section>
+</main>
+<footer class="w-full py-section-gap px-margin-desktop bg-primary flex flex-col items-center gap-stack-md">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary">
+            Africaine des Finances
+        </div>
+<nav class="flex flex-wrap justify-center gap-stack-lg text-on-primary/80">
+<a class="font-body-md text-body-md hover:text-secondary-container transition-colors" href="#">Notice Légale</a>
+<a class="font-body-md text-body-md hover:text-secondary-container transition-colors" href="#">Politique de Confidentialité</a>
+<a class="font-body-md text-body-md hover:text-secondary-container transition-colors" href="#">Divulgation Réglementaire</a>
+<a class="font-body-md text-body-md hover:text-secondary-container transition-colors" href="#">Support Technique</a>
+</nav>
+<p class="font-body-md text-body-md text-on-primary/60 text-center">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.
+        </p>
+</footer>
+<script>
+        const checkbox = document.getElementById('confirmReady');
+        const button = document.getElementById('launchBtn');
+
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                button.disabled = false;
+                button.classList.remove('opacity-50', 'cursor-not-allowed');
+                button.classList.add('premium-shadow');
+            } else {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.classList.remove('premium-shadow');
+            }
+        });
+
+        button.addEventListener('click', function() {
+            if (!this.disabled) {
+                this.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> <span>Initialisation...</span>';
+                setTimeout(() => {
+                    alert('Accès sécurisé à la console d\'examen en cours...');
+                }, 800);
+            }
+        });
+    </script>
+</body></html>

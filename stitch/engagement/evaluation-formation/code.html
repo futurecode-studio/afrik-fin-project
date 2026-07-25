@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Évaluation de la formation - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "background": "#f9f9ff",
+                "on-surface": "#131c2a",
+                "on-surface-variant": "#444652",
+                "on-secondary-fixed-variant": "#5c4300",
+                "inverse-on-surface": "#ebf1ff",
+                "surface-container-lowest": "#ffffff",
+                "secondary-fixed-dim": "#fbbc00",
+                "secondary-fixed": "#ffdfa0",
+                "on-secondary-fixed": "#261a00",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#b7c4ff",
+                "on-primary-fixed": "#001551",
+                "surface": "#f9f9ff",
+                "on-secondary-container": "#6d5000",
+                "on-tertiary-fixed-variant": "#314381",
+                "secondary-container": "#ffbf00",
+                "error": "#ba1a1a",
+                "tertiary-fixed-dim": "#b7c4ff",
+                "outline-variant": "#c5c5d4",
+                "primary-fixed-dim": "#b7c4ff",
+                "on-tertiary": "#ffffff",
+                "on-primary-fixed-variant": "#223f9b",
+                "surface-container": "#e7eeff",
+                "surface-variant": "#dae3f6",
+                "surface-container-highest": "#dae3f6",
+                "outline": "#757683",
+                "on-primary": "#ffffff",
+                "primary": "#001a61",
+                "surface-tint": "#3d58b5",
+                "on-tertiary-fixed": "#001551",
+                "on-tertiary-container": "#8d9ee3",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#dce1ff",
+                "surface-container-low": "#f0f3ff",
+                "surface-bright": "#f9f9ff",
+                "primary-fixed": "#dce1ff",
+                "tertiary-container": "#213371",
+                "surface-dim": "#d1daed",
+                "on-error": "#ffffff",
+                "primary-container": "#0a2e8c",
+                "error-container": "#ffdad6",
+                "tertiary": "#051c5b",
+                "inverse-surface": "#28313f",
+                "on-primary-container": "#839cfd",
+                "on-background": "#131c2a",
+                "surface-container-high": "#dfe8fc",
+                "secondary": "#795900"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "container-max": "1280px",
+                "margin-mobile": "20px",
+                "section-gap": "80px",
+                "margin-desktop": "64px",
+                "stack-lg": "32px",
+                "gutter": "24px",
+                "stack-sm": "8px",
+                "stack-md": "16px"
+            },
+            "fontFamily": {
+                "headline-md": ["Figtree"],
+                "body-lg": ["Figtree"],
+                "headline-sm": ["Figtree"],
+                "display-lg-mobile": ["Figtree"],
+                "body-md": ["Figtree"],
+                "display-lg": ["Figtree"],
+                "data-value": ["IBM Plex Mono"],
+                "data-label": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .star-active {
+            font-variation-settings: 'FILL' 1;
+            color: #ffbf00;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0a2e8c;
+            border-radius: 10px;
+        }
+        .feedback-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feedback-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(6, 29, 92, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline h-20">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">
+            Africaine des Finances
+        </div>
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-colors font-data-label text-data-label" href="#">Wealth</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-all" data-icon="notifications">notifications</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior financial executive, dressed in a sharp navy suit against a clean, architectural office background. The lighting is soft and corporate, highlighting trust and authority. The overall aesthetic is clean, minimalist, and high-end, aligned with institutional prestige." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqOZ22aGiaEVGS7aCbi8sc86sDB00egeVblARTwb3KIlSYJVXQIim4ACFsirFZ7wwu3JAGZL26ZQ5pd2mlgZIdOCdUwXAo0RPvktsgol7nZS6EpfVwU3ku2gYQnL9Zqp2ZggLURoMs-Io3bB9KS9IvtYxySaJ_aeAcmltvNOG8oNtPLX8B_VYUMlOAFe5vvuboDEveGo1JEYJKTcHSiOMOOuthdDdhfnCcCZlKpvji-VaKPCXk5zhZ18Gve1y6lTL_iZ9Eg86R2Q"/>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-section-gap">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Context & Summary -->
+<div class="lg:col-span-4 space-y-stack-lg">
+<div class="p-stack-lg bg-surface-container-lowest border border-outline-variant rounded-xl feedback-card">
+<div class="inline-flex items-center px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs font-bold mb-stack-md">
+                        FORMATION TERMINÉE
+                    </div>
+<h1 class="font-headline-md text-headline-md text-primary mb-stack-sm">Marchés Financiers Africains &amp; Stratégies d'Investissement</h1>
+<p class="text-on-surface-variant font-body-md mb-stack-lg">Félicitations pour avoir complété ce cursus. Votre avis est essentiel pour maintenir l'excellence de nos programmes institutionnels.</p>
+<div class="space-y-stack-md pt-stack-md border-t border-outline-variant">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<div>
+<p class="text-xs text-outline font-bold uppercase tracking-wider">Formateur</p>
+<p class="font-body-md font-semibold">Dr. Amadou Kouyaté</p>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+<div>
+<p class="text-xs text-outline font-bold uppercase tracking-wider">Période</p>
+<p class="font-body-md font-semibold">12 Oct — 15 Nov 2023</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-xl h-48 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="An abstract, high-contrast photograph of a modern glass skyscraper reflecting a clear blue sky. The composition is dynamic and architectural, suggesting growth, transparency, and the high-stakes world of African finance. The color palette is dominated by deep blues and crisp whites, echoing the brand's primary colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBmC63e9y4bY9q0zpCO2KCtTUkqUkMefUNsNVCEFQgen-fH4La62qZvmGpk23ECdibmLHC1Lm6RwssjKUVkgMDkaPbNlM6CFYwoay35dL-XHj1famgLB3trAdZUsHbDIMGGTvcd6SR539dEeLpbu3s_kYdS42DmeAishyzmyPttoL-gQaBT11RbIwl-fetPU0u-DpBS83uNr0Vp89o2c3RhKIVkskSlqsjRRoqERj3ipYuOawIPSvF9IYVkXozwQlq5e1yDW0QEA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-stack-md">
+<p class="text-white font-headline-sm italic">"La connaissance est le meilleur investissement."</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Evaluation Form -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg feedback-card">
+<form class="space-y-section-gap">
+<!-- Global Rating Section -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-stack-sm">
+<span class="w-2 h-8 bg-secondary rounded-full"></span>
+<h2 class="font-headline-sm text-headline-sm">Note Globale</h2>
+</div>
+<p class="text-on-surface-variant font-body-md">Quelle est votre appréciation générale de cette expérience d'apprentissage ?</p>
+<div class="flex gap-stack-sm" id="star-rating-container">
+<button class="star-btn p-1 group" data-value="1" type="button">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-secondary-container transition-colors" data-icon="star">star</span>
+</button>
+<button class="star-btn p-1 group" data-value="2" type="button">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-secondary-container transition-colors" data-icon="star">star</span>
+</button>
+<button class="star-btn p-1 group" data-value="3" type="button">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-secondary-container transition-colors" data-icon="star">star</span>
+</button>
+<button class="star-btn p-1 group" data-value="4" type="button">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-secondary-container transition-colors" data-icon="star">star</span>
+</button>
+<button class="star-btn p-1 group" data-value="5" type="button">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-secondary-container transition-colors" data-icon="star">star</span>
+</button>
+</div>
+</section>
+<!-- Detailed Criteria -->
+<section class="space-y-stack-lg">
+<div class="flex items-center gap-stack-sm">
+<span class="w-2 h-8 bg-primary rounded-full"></span>
+<h2 class="font-headline-sm text-headline-sm">Critères de Satisfaction</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Contenu -->
+<div class="p-stack-md bg-background rounded-lg border border-outline-variant space-y-stack-sm">
+<label class="font-data-label text-data-label font-bold text-primary uppercase">Qualité du Contenu</label>
+<div class="flex justify-between items-center text-xs text-outline mb-1">
+<span>Insatisfaisant</span>
+<span>Excellent</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range"/>
+</div>
+<!-- Formateur -->
+<div class="p-stack-md bg-background rounded-lg border border-outline-variant space-y-stack-sm">
+<label class="font-data-label text-data-label font-bold text-primary uppercase">Expertise du Formateur</label>
+<div class="flex justify-between items-center text-xs text-outline mb-1">
+<span>Insatisfaisant</span>
+<span>Excellent</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range"/>
+</div>
+<!-- Difficulté -->
+<div class="p-stack-md bg-background rounded-lg border border-outline-variant space-y-stack-sm">
+<label class="font-data-label text-data-label font-bold text-primary uppercase">Niveau de Difficulté</label>
+<div class="flex justify-between items-center text-xs text-outline mb-1">
+<span>Trop Facile</span>
+<span>Trop Difficile</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range"/>
+</div>
+<!-- Supports -->
+<div class="p-stack-md bg-background rounded-lg border border-outline-variant space-y-stack-sm">
+<label class="font-data-label text-data-label font-bold text-primary uppercase">Supports Pédagogiques</label>
+<div class="flex justify-between items-center text-xs text-outline mb-1">
+<span>Insatisfaisant</span>
+<span>Excellent</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range"/>
+</div>
+</div>
+</section>
+<!-- Comments -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-stack-sm">
+<span class="w-2 h-8 bg-primary rounded-full"></span>
+<h2 class="font-headline-sm text-headline-sm">Votre Témoignage</h2>
+</div>
+<textarea class="w-full p-stack-md border border-outline-variant rounded-lg bg-background focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" placeholder="Partagez votre avis sur les points forts et les axes d'amélioration..." rows="5"></textarea>
+</section>
+<!-- Publication Toggle -->
+<section class="flex items-center justify-between p-stack-md bg-surface-container-high rounded-lg">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="public">public</span>
+<div>
+<p class="font-semibold text-on-surface">Autoriser la publication</p>
+<p class="text-sm text-on-surface-variant">Votre témoignage pourra être utilisé de manière anonyme sur notre portail public.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</section>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-gutter justify-end pt-stack-lg border-t border-outline-variant">
+<button class="px-gutter py-stack-md border border-primary text-primary font-bold rounded-lg hover:bg-surface-container-low transition-all" type="button">
+                                Ignorer pour l'instant
+                            </button>
+<button class="px-gutter py-stack-md bg-primary text-white font-bold rounded-lg hover:bg-primary-container shadow-lg transition-all flex items-center justify-center gap-stack-sm" type="submit">
+<span>Envoyer l'évaluation</span>
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-primary/20 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="success-modal">
+<div class="bg-white p-section-gap rounded-2xl shadow-2xl max-w-md w-full text-center space-y-stack-lg border border-outline-variant">
+<div class="w-20 h-20 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-display-lg text-headline-md text-primary">Merci pour votre retour !</h3>
+<p class="text-on-surface-variant">Votre évaluation a été enregistrée avec succès. Elle nous aide à parfaire l'excellence de nos services financiers.</p>
+<button class="w-full py-stack-md bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-all" onclick="window.location.reload()">
+                Retour au tableau de bord
+            </button>
+</div>
+</div>
+<script>
+        // Star Rating Logic
+        const starBtns = document.querySelectorAll('.star-btn');
+        starBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const value = parseInt(btn.dataset.value);
+                starBtns.forEach((s, index) => {
+                    const icon = s.querySelector('.material-symbols-outlined');
+                    if (index < value) {
+                        icon.classList.add('star-active');
+                    } else {
+                        icon.classList.remove('star-active');
+                    }
+                });
+            });
+        });
+
+        // Form Submission Interaction
+        const form = document.querySelector('form');
+        const modal = document.getElementById('success-modal');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        });
+    </script>
+</body></html>

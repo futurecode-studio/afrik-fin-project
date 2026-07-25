@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-surface": "#131c2a",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d1daed",
+                        "surface-container-low": "#f0f3ff",
+                        "outline-variant": "#c5c5d4",
+                        "secondary-container": "#ffbf00",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "tertiary": "#051c5b",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed": "#ffdfa0",
+                        "primary-container": "#0a2e8c",
+                        "primary": "#001a61",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-surface-variant": "#444652",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-highest": "#dae3f6",
+                        "inverse-primary": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "on-secondary-fixed": "#261a00",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "tertiary-container": "#213371",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-variant": "#dae3f6",
+                        "on-secondary-container": "#6d5000",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed": "#dce1ff",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "on-background": "#131c2a",
+                        "surface-bright": "#f9f9ff",
+                        "secondary": "#795900",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#757683",
+                        "on-tertiary-container": "#8d9ee3",
+                        "inverse-surface": "#28313f",
+                        "surface": "#f9f9ff",
+                        "on-primary-fixed": "#001551"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "section-gap": "80px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Figtree"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant h-20">
+<div class="flex items-center gap-stack-lg">
+<span class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</span>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Investments</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors" data-icon="settings">settings</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a high-net-worth individual in a tailored dark navy suit, set against a blurred, minimalist architectural background with soft morning light. The portrait exudes confidence, stability, and corporate prestige, reflecting the premium financial identity of Africaine des Finances with a clean, high-contrast aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtnbAc96vRu2xtaAPTrYRaJrurcFjiWn3DB2acg6OLhCM0ECSxw--xLo740WjH9P7yv8Duthp4j0CEVZUK1epBme8e7Xt5WEtbzZQz33Z6WKih5APls8DETSod6mIgyDuVNb1jdSd0zbXo1lKVFPz9SsTMO5ZawN1TRfZOHUWC3yoULDILPmssfnKseq5o5XbfiyuN_oSt463DXra4NtMmYi5d9bSfGu2PypxPovj6bJh17gqIgO7srlIyIHZiIvjNjH5RiQs6Ew"/>
+</div>
+</div>
+</nav>
+<div class="flex max-w-[1440px] mx-auto min-h-[calc(100vh-80px)]">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full py-stack-lg px-4 gap-stack-md w-64 border-r border-outline-variant sticky top-20">
+<div class="mb-stack-lg px-2">
+<h2 class="font-headline-sm text-headline-sm text-primary">Client Portal</h2>
+<p class="text-sm text-outline">Institutional Excellence</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="analytics">analytics</span>
+<span class="font-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="school">school</span>
+<span class="font-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary" data-icon="description">description</span>
+<span class="font-body-md">Financial Reports</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-lg flex flex-col gap-1 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all text-error" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-gutter md:p-margin-desktop overflow-hidden">
+<!-- Page Header -->
+<header class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Gestion Sous Mandat</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Visualisez la performance de votre portefeuille et gérez votre stratégie d'investissement en collaboration avec nos experts.</p>
+</div>
+<button class="bg-[#FFBF00] text-[#061D5C] px-6 py-3 rounded font-bold hover:bg-[#e6ac00] transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    Ouvrir un nouveau mandat
+                </button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Strategy & Risk Profile -->
+<section class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Current Strategy Card -->
+<div class="col-span-1 border border-outline-variant bg-white p-stack-lg rounded flex flex-col justify-between min-h-[320px]">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<span class="font-data-label text-data-label uppercase text-outline">Profil Actuel</span>
+<span class="bg-[#2EB8731A] text-[#2EB873] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Actif</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Équilibré</h3>
+<p class="text-on-surface-variant mb-stack-md">Recherche d'un équilibre entre sécurité du capital et croissance à long terme à travers une allocation mixte.</p>
+<div class="space-y-stack-sm">
+<div class="flex justify-between text-sm">
+<span class="text-outline">Actions</span>
+<span class="font-data-value text-data-value">55%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 55%"></div>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Obligations</span>
+<span class="font-data-value text-data-value">35%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-secondary-fixed-dim h-1.5 rounded-full" style="width: 35%"></div>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-outline">Liquidités</span>
+<span class="font-data-value text-data-value">10%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-outline-variant h-1.5 rounded-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+<button class="mt-stack-lg w-full border border-primary text-primary py-2.5 rounded font-bold hover:bg-surface-container-low transition-colors">Modifier ma stratégie</button>
+</div>
+<!-- Risk Profile Selection -->
+<div class="col-span-1 border border-outline-variant bg-surface-container-low p-stack-lg rounded">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-stack-md">Changer de profil</h3>
+<div class="space-y-stack-md">
+<label class="block p-4 border border-outline-variant bg-white rounded-lg cursor-pointer hover:border-primary transition-all group">
+<input class="hidden peer" name="risk_profile" type="radio"/>
+<div class="flex justify-between items-center peer-checked:text-primary">
+<div>
+<div class="font-bold">Prudent</div>
+<div class="text-xs text-outline group-hover:text-on-surface-variant">Priorité à la préservation du capital</div>
+</div>
+<span class="material-symbols-outlined text-outline peer-checked:text-primary" data-icon="shield">shield</span>
+</div>
+</label>
+<label class="block p-4 border-2 border-primary bg-white rounded-lg cursor-pointer shadow-sm">
+<input checked="" class="hidden" name="risk_profile" type="radio"/>
+<div class="flex justify-between items-center text-primary">
+<div>
+<div class="font-bold">Équilibré</div>
+<div class="text-xs text-on-surface-variant">Mix entre croissance et stabilité</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="balance" style="font-variation-settings: 'FILL' 1;">balance</span>
+</div>
+</label>
+<label class="block p-4 border border-outline-variant bg-white rounded-lg cursor-pointer hover:border-primary transition-all group">
+<input class="hidden peer" name="risk_profile" type="radio"/>
+<div class="flex justify-between items-center peer-checked:text-primary">
+<div>
+<div class="font-bold">Dynamique</div>
+<div class="text-xs text-outline group-hover:text-on-surface-variant">Recherche de performance maximale</div>
+</div>
+<span class="material-symbols-outlined text-outline peer-checked:text-primary" data-icon="trending_up">trending_up</span>
+</div>
+</label>
+</div>
+<p class="mt-4 text-[11px] text-outline italic">Toute modification de profil nécessite une validation par votre gérant sous 24h.</p>
+</div>
+<!-- Arbitration History -->
+<div class="col-span-1 md:col-span-2 border border-outline-variant bg-white rounded overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant bg-[#EEF3FF] flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary">Historique des Arbitrages</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span> Rapport Complet
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-outline font-data-label text-xs uppercase tracking-wider border-b border-outline-variant">
+<th class="p-4 font-medium">Date</th>
+<th class="p-4 font-medium">Type</th>
+<th class="p-4 font-medium">Actif</th>
+<th class="p-4 font-medium">Quantité</th>
+<th class="p-4 font-medium">Prix</th>
+<th class="p-4 font-medium text-right">Statut</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-data-value text-sm">12 Oct 2023</td>
+<td class="p-4"><span class="text-error font-bold">- Vente</span></td>
+<td class="p-4 text-sm font-medium">TotalEnergies SE</td>
+<td class="p-4 font-data-value text-sm">450 Units</td>
+<td class="p-4 font-data-value text-sm">€58.42</td>
+<td class="p-4 text-right"><span class="bg-[#2EB8731A] text-[#2EB873] px-2 py-0.5 rounded text-[10px] font-bold uppercase">Exécuté</span></td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-data-value text-sm">12 Oct 2023</td>
+<td class="p-4"><span class="text-[#2EB873] font-bold">+ Achat</span></td>
+<td class="p-4 text-sm font-medium">LVMH Moët Hennessy</td>
+<td class="p-4 font-data-value text-sm">12 Units</td>
+<td class="p-4 font-data-value text-sm">€692.10</td>
+<td class="p-4 text-right"><span class="bg-[#2EB8731A] text-[#2EB873] px-2 py-0.5 rounded text-[10px] font-bold uppercase">Exécuté</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-data-value text-sm">08 Oct 2023</td>
+<td class="p-4"><span class="text-[#2EB873] font-bold">+ Achat</span></td>
+<td class="p-4 text-sm font-medium">Bonds US 10Y</td>
+<td class="p-4 font-data-value text-sm">2,500 Units</td>
+<td class="p-4 font-data-value text-sm">$96.15</td>
+<td class="p-4 text-right"><span class="bg-[#2EB8731A] text-[#2EB873] px-2 py-0.5 rounded text-[10px] font-bold uppercase">Exécuté</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Messaging Section -->
+<aside class="col-span-12 lg:col-span-4 flex flex-col h-[720px] border border-outline-variant bg-white rounded overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant bg-primary text-white flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="h-10 w-10 rounded-full border-2 border-[#FFBF00] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a senior investment banker, middle-aged with greying temples, wearing a sophisticated charcoal suit and a crisp white shirt. The background is a high-end corporate office with soft, warm lighting. The image represents expertise, approachability, and financial authority, adhering to a premium institutional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa3dZA-A2x8LG09nrtcQ447dt2bFXd0M058uh02tyL2OUCY9yDyJH0EUs4fY4ssmENieRsK1-J1I6vT2f0C6d6r0lBv-zNlwX53dxpX2L7GDrJl0xkx8WeT9I9-8MJSNzPcmAhIbc_CTd4ci8d80-cQVKEHB9WuAPGDK-NiflLqil_CQfSEOPheIxCF_g8F9R2oAAwxMPDQUKbiKd2-1FZSyIqOALT3cgNQ5_9RdJA4vNucYATJOyll26jPCdhJlKMUeDjPbh51Q"/>
+</div>
+<div>
+<div class="font-bold leading-tight">Moussa Traoré</div>
+<div class="text-[10px] uppercase tracking-widest opacity-80">Gérant de Portefeuille Sénior</div>
+</div>
+</div>
+<span class="flex h-2 w-2 rounded-full bg-green-400"></span>
+</div>
+<!-- Chat Body -->
+<div class="flex-1 p-stack-md overflow-y-auto space-y-stack-md custom-scrollbar bg-surface-container-lowest">
+<div class="flex flex-col items-center py-4">
+<span class="text-[10px] font-data-label text-outline bg-surface-container px-3 py-1 rounded-full">Aujourd'hui</span>
+</div>
+<!-- Manager Message -->
+<div class="flex items-start gap-2 max-w-[85%]">
+<div class="bg-surface-container-high p-3 rounded-lg rounded-tl-none">
+<p class="text-sm text-on-surface">Bonjour M. Diallo, j'ai procédé à un léger rééquilibrage de votre ligne Luxe suite aux derniers résultats trimestriels. Souhaitez-vous en discuter ?</p>
+<span class="text-[10px] text-outline block mt-1">10:24</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-2 ml-auto max-w-[85%]">
+<div class="bg-primary-container text-white p-3 rounded-lg rounded-tr-none">
+<p class="text-sm">Bonjour Moussa, merci pour l'information. Quel est l'impact prévu sur mon exposition globale aux actions ?</p>
+<span class="text-[10px] text-on-primary-container block mt-1">11:05</span>
+</div>
+</div>
+<!-- Manager Message Typing -->
+<div class="flex items-start gap-2 max-w-[85%]">
+<div class="bg-surface-container-high p-3 rounded-lg rounded-tl-none flex items-center gap-1">
+<span class="h-1 w-1 bg-outline rounded-full animate-bounce"></span>
+<span class="h-1 w-1 bg-outline rounded-full animate-bounce delay-100"></span>
+<span class="h-1 w-1 bg-outline rounded-full animate-bounce delay-200"></span>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-stack-md border-t border-outline-variant bg-white">
+<div class="relative flex items-center">
+<input class="w-full border-outline-variant focus:ring-primary focus:border-primary rounded-lg pr-12 text-sm" placeholder="Écrire à votre gérant..." type="text"/>
+<button class="absolute right-2 text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+<div class="flex gap-4 mt-3 px-1">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="attach_file">attach_file</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="videocam">videocam</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="event">event</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+<!-- Performance Overview Section (Asymmetric) -->
+<section class="mt-section-gap grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-5">
+<h2 class="font-display-lg text-display-lg text-primary mb-stack-md">Analyse de Performance</h2>
+<p class="text-body-lg text-on-surface-variant mb-stack-lg">Votre portefeuille a généré une performance annualisée de +8.4% sur les 12 derniers mois, surpassant l'indice de référence de 1.2% grâce à une sélection rigoureuse d'actifs émergents.</p>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="p-4 border-l-4 border-[#2EB873] bg-white shadow-sm">
+<span class="text-xs text-outline font-data-label uppercase">YTD Performance</span>
+<div class="text-2xl font-bold text-[#2EB873]">+12.6%</div>
+</div>
+<div class="p-4 border-l-4 border-primary bg-white shadow-sm">
+<span class="text-xs text-outline font-data-label uppercase">Indice Réf.</span>
+<div class="text-2xl font-bold text-primary">+11.4%</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="aspect-video bg-white border border-outline-variant rounded-xl overflow-hidden p-stack-lg flex flex-col">
+<div class="flex justify-between items-center mb-auto">
+<div class="font-bold text-primary">Evolution Valeur Part</div>
+<div class="flex gap-2">
+<span class="bg-surface-container px-2 py-1 rounded text-[10px] font-bold">1M</span>
+<span class="bg-primary text-white px-2 py-1 rounded text-[10px] font-bold">6M</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[10px] font-bold">1Y</span>
+<span class="bg-surface-container px-2 py-1 rounded text-[10px] font-bold">MAX</span>
+</div>
+</div>
+<!-- Placeholder for a Chart Visual -->
+<div class="flex-1 flex items-end gap-2 px-4 py-8">
+<div class="flex-1 bg-surface-container h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-2/3 rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-1/3 rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container h-3/4 rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-5/6 rounded-t-sm shadow-lg shadow-primary/20"></div>
+<div class="flex-1 bg-primary h-full rounded-t-sm shadow-xl shadow-primary/30 relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-white text-[10px] px-2 py-1 rounded whitespace-nowrap">Current: 1,452.30 FCFA</div>
+</div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary-container opacity-20 rounded-full blur-3xl -z-10"></div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer / Bottom Bar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-outline-variant flex justify-around py-3 px-2 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-outline">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-[10px]">Portfolio</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-outline">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-[10px]">Messages</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-outline">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</div>
+<script>
+        // Micro-interaction for risk profile selection
+        const riskRadios = document.querySelectorAll('input[name="risk_profile"]');
+        riskRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // In a real app, this would trigger a state change or modal
+                console.log('Risk profile changed to:', e.target.parentElement.innerText.split('\n')[0]);
+            });
+        });
+
+        // Simple scroll to bottom for chat
+        const chatBody = document.querySelector('.custom-scrollbar');
+        if(chatBody) {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+    </script>
+</body></html>

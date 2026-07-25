@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/502005973728556936/screens/f5d347eb3fa04486aa833cd6dba7a58c\",\"title\":\"Actualités de mon Portefeuille — Africaine des Finances\",\"screenshot\":{\"name\":\"projects/502005973728556936/files/c6a00ea104e249738a5169fcc23bcac4\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AP1WRLtqskeHEa_gFf7npYO2okFRn3PNJeNJ5MP1GOKXUkJdQLI9T61faG6GHjnydefh0XP7Hc7dnyf7zhVxFIpo7zJrJRUyDauceT04_pcxeqdlymurf4wrjHgd-30M9IAsIgi9oz1St0Z2iCEM9wLNouvCSIxKSM9AAWvvihFVJ1Hg-3-AooY78k_w6ovMjRXjP8chnHX3_X5Zpd8Jhuhv7K6439SZTBvARjoQOOnjvakgC7WaLViswzx1KA\"},\"htmlCode\":{\"name\":\"projects/502005973728556936/files/07a192fb6b914b57940eceee3376207c\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2ZmNGEwMTMzOTg4MjQxZDZiMjFhZjZiOWIwY2JlNGI4EgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"2768\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "2768",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sX2ZmNGEwMTMzOTg4MjQxZDZiMjFhZjZiOWIwY2JlNGI4EgsSBxDq-tXTmQ0YAZIBIgoKcHJvamVjdF9pZBIUQhI1MDIwMDU5NzM3Mjg1NTY5MzY&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/502005973728556936/files/07a192fb6b914b57940eceee3376207c"
+      },
+      "name": "projects/502005973728556936/screens/f5d347eb3fa04486aa833cd6dba7a58c",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AP1WRLtqskeHEa_gFf7npYO2okFRn3PNJeNJ5MP1GOKXUkJdQLI9T61faG6GHjnydefh0XP7Hc7dnyf7zhVxFIpo7zJrJRUyDauceT04_pcxeqdlymurf4wrjHgd-30M9IAsIgi9oz1St0Z2iCEM9wLNouvCSIxKSM9AAWvvihFVJ1Hg-3-AooY78k_w6ovMjRXjP8chnHX3_X5Zpd8Jhuhv7K6439SZTBvARjoQOOnjvakgC7WaLViswzx1KA",
+        "name": "projects/502005973728556936/files/c6a00ea104e249738a5169fcc23bcac4"
+      },
+      "title": "Actualités de mon Portefeuille — Africaine des Finances",
+      "width": "2560"
+    }
+  }
+}

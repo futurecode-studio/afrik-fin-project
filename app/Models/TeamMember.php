@@ -18,11 +18,13 @@ class TeamMember extends Model
         'email',
         'photo',
         'is_active',
+        'is_leadership',
         'order',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_leadership' => 'boolean',
         'order' => 'integer',
     ];
 
@@ -31,12 +33,23 @@ class TeamMember extends Model
         return $query->where('is_active', true)->orderBy('order');
     }
 
+    public function scopeLeadership($query)
+    {
+        return $query->where('is_leadership', true);
+    }
+
     public function getPhotoUrlAttribute()
     {
-        if ($this->photo) {
-            return asset('storage/team/' . $this->photo);
+        if (! $this->photo) {
+            return null;
         }
-        return null;
+
+        // storeAs('team', …) enregistre déjà « team/fichier.ext »
+        $path = str_starts_with($this->photo, 'team/')
+            ? $this->photo
+            : 'team/'.$this->photo;
+
+        return asset('storage/'.$path);
     }
 
     public function getAttributsArrayAttribute()

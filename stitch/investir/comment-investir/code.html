@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comment Investir à la BRVM | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-card:hover .step-number {
+            transform: scale(1.1);
+            background-color: #ffbf00;
+            color: #001a61;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #001a61;
+            border-radius: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c5c5d4",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001551",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "inverse-primary": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "surface": "#f9f9ff",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary": "#001a61",
+                    "secondary": "#795900",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#001551",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary": "#051c5b",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#131c2a",
+                    "tertiary-container": "#213371",
+                    "outline": "#757683",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "surface-container": "#e7eeff",
+                    "on-primary-container": "#839cfd",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-surface": "#131c2a",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "inverse-surface": "#28313f",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] docked full-width top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="text-data-label font-data-label font-bold text-on-primary">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined">language</button>
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined">mail</button>
+<button class="hover:text-secondary-container transition-colors material-symbols-outlined">call</button>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 docked full-width top-10 z-40">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">Africaine des Finances</div>
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-body-md font-body-md" href="#">Markets</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 text-body-md font-body-md" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-body-md font-body-md" href="#">Training</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-body-md font-body-md" href="#">Analysis</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-body-md font-body-md" href="#">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 text-body-md font-body-md" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant font-medium px-4 py-2 hover:text-primary transition-all">Login</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:bg-primary-container transition-all">Commencer à investir</button>
+</div>
+</nav>
+<main class="mt-32">
+<!-- Hero Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto py-16 grid lg:grid-cols-2 gap-12 items-center">
+<div class="animate-fade-in">
+<span class="text-secondary font-data-label text-data-label tracking-widest uppercase mb-4 block">Guide de l'Investisseur</span>
+<h1 class="text-display-lg font-display-lg text-primary mb-6">Comment investir à la BRVM</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8 max-w-xl">
+                    Le marché financier régional de l'UEMOA offre des opportunités de croissance uniques. Suivez notre guide structuré pour bâtir votre patrimoine en toute sécurité.
+                </p>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-primary text-white flex items-center justify-center font-bold text-xs">AD</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary text-white flex items-center justify-center font-bold text-xs">MK</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-tertiary text-white flex items-center justify-center font-bold text-xs">+5k</div>
+</div>
+<span class="text-data-label font-data-label text-on-surface-variant">Rejoint par plus de 5,000 investisseurs cette année</span>
+</div>
+</div>
+<div class="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl animate-fade-in" style="animation-delay: 0.2s">
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+<img class="w-full h-full object-cover" data-alt="A professional and sleek workspace featuring a dual-monitor setup showing real-time stock market data and financial charts of the BRVM. The lighting is soft and golden, highlighting a cup of coffee and a high-end fountain pen on a mahogany desk. The overall mood is serious, prestigious, and successful, aligned with a corporate African financial institution aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYF2bTTC6YiO1R__lbKDDB1xkL5OZV5TQzD3mxGDqRv_FHzLfiznJDI_OHVDjIXQChg0TbcUn36_-0Yoxw_0ISwxiomv2hr22xEhLiWmQvxxHEK0JjyR4uWeS3HQMjWCb1A99rGmclFNRKKIamybTmPVMP1wRODVwSTON4G_9FGFn_EKRv-ZfB_2Z3UxHL9qbrzKpMLkX9W_g-D9jYvpsiAxE2Jq3eELVuvJwJlHF_prEsMmVI5vO--8jb8g13X8BNUCguGgrSFQ"/>
+</div>
+</section>
+<!-- Vertical Guide Process -->
+<section class="bg-surface-container-low py-section-gap">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="text-headline-md font-headline-md text-primary mb-2">Votre parcours d'investisseur</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">7 étapes clés pour passer de novice à actionnaire</p>
+</div>
+<div class="space-y-8 max-w-4xl mx-auto">
+<!-- Step 1 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">01</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Comprendre les produits</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 1 - 2 jours
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Familiarisez-vous avec les Actions (parts d'entreprises) et les Obligations (titres de créance). Identifiez les risques et les rendements potentiels de chaque instrument financier.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Points Clés</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Dividendes vs Intérêts</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Risque de capital</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Documents</span>
+<p class="text-body-md">Brochures d'information BRVM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">02</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Déterminer ses objectifs</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Indéfini
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Définissez votre profil d'investisseur (prudent, équilibré ou dynamique) en fonction de vos projets : retraite, éducation des enfants, ou constitution de capital.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Points Clés</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Horizon de placement</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Capacité d'épargne</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Outils</span>
+<p class="text-body-md">Simulateur de profil d'investisseur</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">03</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Choisir une SGI</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 1 jour
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">La Société de Gestion et d'Intermédiation (SGI) est votre intermédiaire obligatoire. Comparez les tarifs, la qualité de l'interface digitale et le conseil.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Critères</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Frais de courtage</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span> Droits de garde</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Documents</span>
+<p class="text-body-md">Liste officielle des SGI agréées</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">04</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Ouvrir un compte</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 48h - 72h
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Signez votre convention d'ouverture de compte-titres et compte-espèces. C'est l'étape administrative cruciale pour être répertorié au Dépositaire Central / Banque de Règlement.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Pièces Requises</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">description</span> CNI ou Passeport valide</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">description</span> Justificatif de domicile</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">description</span> 2 Photos d'identité</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Action</span>
+<p class="text-body-md">Signature de la convention SGI</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">05</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Alimenter le compte</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Instantané - 24h
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Effectuez votre premier virement ou dépôt par chèque sur votre compte-espèces. C'est ce solde qui vous permettra d'acquérir vos premiers titres.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Canaux</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">account_balance_wallet</span> Virement bancaire</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">account_balance_wallet</span> Mobile Money (selon SGI)</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Important</span>
+<p class="text-body-md">Conserver les preuves de virement</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 6 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">06</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Passer un ordre</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 15 min
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Via l'interface en ligne ou par instruction écrite, achetez les titres sélectionnés. Précisez le type d'ordre (Au marché, à cours limité) et la validité.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Paramètres</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">shopping_cart</span> Code ISIN de la valeur</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">shopping_cart</span> Quantité souhaitée</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Sécurité</span>
+<p class="text-body-md">Validation par code SMS/OTP</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 7 -->
+<div class="step-card group bg-surface p-8 rounded-xl border border-outline-variant hover:border-primary transition-all duration-300 flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="step-number w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-headline-sm font-headline-sm transition-all">07</div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-headline-sm font-headline-sm text-primary">Suivre son portefeuille</h3>
+<span class="bg-surface-variant text-primary px-3 py-1 rounded text-data-label font-data-label flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Permanent
+                                </span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">Analysez les performances, suivez l'actualité des entreprises et réinvestissez vos dividendes pour bénéficier des intérêts composés.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Actions</span>
+<ul class="text-body-md font-body-md space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">insights</span> Lecture des rapports annuels</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-[18px]">insights</span> Arbitrage de portefeuille</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="text-data-label font-data-label text-primary font-bold block mb-2">Outils</span>
+<p class="text-body-md">Application mobile SGI</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto">
+<div class="bg-primary-container rounded-3xl p-12 text-center text-on-primary relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/20 rounded-full -ml-32 -mb-32"></div>
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-6 relative z-10">Prêt à faire fructifier votre épargne ?</h2>
+<p class="text-body-lg font-body-lg text-on-primary/80 mb-10 max-w-2xl mx-auto relative z-10">
+                    Nos conseillers sont disponibles pour vous accompagner dans chacune de ces étapes. Ouvrez votre compte aujourd'hui et commencez à bâtir l'avenir.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-lg font-bold text-headline-sm hover:bg-secondary-fixed transition-all flex items-center justify-center gap-2">
+                        Ouvrir mon compte maintenant <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-on-primary/40 text-on-primary px-8 py-4 rounded-lg font-bold text-headline-sm hover:bg-white/10 transition-all">
+                        Télécharger le guide PDF
+                    </button>
+</div>
+</div>
+</section>
+<!-- FAQ Mini Grid -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 border border-outline-variant rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4">help</span>
+<h4 class="text-headline-sm font-headline-sm mb-2">Quel est le montant minimum ?</h4>
+<p class="text-body-md text-on-surface-variant">Il n'y a pas de minimum légal, mais nous recommandons 50 000 FCFA pour débuter sereinement.</p>
+</div>
+<div class="p-6 border border-outline-variant rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4">security</span>
+<h4 class="text-headline-sm font-headline-sm mb-2">Mon argent est-il en sécurité ?</h4>
+<p class="text-body-md text-on-surface-variant">Le marché est régulé par l'AMF-UMOA, garantissant une protection stricte de vos avoirs.</p>
+</div>
+<div class="p-6 border border-outline-variant rounded-xl">
+<span class="material-symbols-outlined text-primary mb-4">account_balance</span>
+<h4 class="text-headline-sm font-headline-sm mb-2">Comment retirer mes fonds ?</h4>
+<p class="text-body-md text-on-surface-variant">En vendant vos titres, vous récupérez vos fonds sur votre compte-espèces sous 3 jours ouvrés (T+3).</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-4">Africaine des Finances</div>
+<p class="text-body-md text-on-surface-variant mb-6 pr-8">Votre partenaire de confiance pour naviguer sur les marchés financiers d'Afrique de l'Ouest.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-all" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-all" href="#"><span class="material-symbols-outlined">trending_up</span></a>
+</div>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-primary mb-4">Platform</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Markets</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Trading</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Wealth</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-primary mb-4">Learn</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Tutorials</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Webinars</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Analysis</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-primary mb-4">Corporate</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Careers</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Press</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-data-label font-data-label font-bold text-primary mb-4">Legal</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Privacy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Terms</a></li>
+<li><a class="text-on-surface-variant hover:text-primary hover:underline transition-all" href="#">Regulation</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/30 text-center">
+<p class="text-data-label font-data-label text-on-surface-variant">© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</p>
+</div>
+</footer>
+<script>
+        // Simple scroll reveal interaction
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    </script>
+</body></html>

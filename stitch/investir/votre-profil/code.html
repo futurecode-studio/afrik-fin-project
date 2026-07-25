@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        .radial-progress-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c5c5d4",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed": "#001551",
+                        "surface-variant": "#dae3f6",
+                        "surface-container-highest": "#dae3f6",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "inverse-primary": "#b7c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "surface": "#f9f9ff",
+                        "secondary-fixed": "#ffdfa0",
+                        "primary": "#001a61",
+                        "secondary": "#795900",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001551",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-secondary-container": "#6d5000",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "tertiary": "#051c5b",
+                        "on-surface-variant": "#444652",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#0a2e8c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#131c2a",
+                        "tertiary-container": "#213371",
+                        "outline": "#757683",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "surface-container": "#e7eeff",
+                        "on-primary-container": "#839cfd",
+                        "tertiary-fixed": "#dce1ff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-surface": "#131c2a",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "inverse-surface": "#28313f",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-low": "#f0f3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "section-gap": "80px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "data-value": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] docked full-width top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-data-label text-data-label font-bold text-on-primary">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">mail</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">call</span>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20 border-b border-outline-variant dark:border-outline sticky top-10 z-40">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">
+            Africaine des Finances
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">Training</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold pb-1 text-body-md font-body-md" href="#">Analysis</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary transition-colors duration-200 text-body-md font-body-md" href="#">About</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="px-6 py-2 border border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-200 rounded">Login</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-bold hover:bg-primary-container transition-all duration-200 rounded">Commencer à investir</button>
+</div>
+</nav>
+<main class="min-h-screen relative">
+<!-- Subtle Background Animation -->
+
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop py-section-gap">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 mb-8 opacity-60">
+<span class="text-data-label font-data-label">Profil Investisseur</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-data-label font-data-label font-bold">Résultat</span>
+</div>
+<!-- Hero Section: Profile Result -->
+<div class="grid lg:grid-cols-12 gap-12 items-center mb-section-gap">
+<div class="lg:col-span-7">
+<h1 class="font-display-lg text-display-lg text-primary mb-4 leading-tight">Votre Profil : <span class="text-secondary">Équilibré</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-2xl">
+                        Vous recherchez un compromis optimal entre la sécurité de votre capital et la croissance de vos investissements à moyen terme. Vous acceptez une volatilité modérée en échange de perspectives de rendement supérieures à l'épargne classique.
+                    </p>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-stack-md">
+<div class="p-stack-md rounded bg-surface-container border border-outline-variant">
+<span class="text-data-label font-data-label block mb-1">Horizon suggéré</span>
+<span class="text-headline-sm font-headline-sm text-primary">3 - 5 ans</span>
+</div>
+<div class="p-stack-md rounded bg-surface-container border border-outline-variant">
+<span class="text-data-label font-data-label block mb-1">Tolérance au risque</span>
+<span class="text-headline-sm font-headline-sm text-primary">Modérée</span>
+</div>
+<div class="p-stack-md rounded bg-surface-container border border-outline-variant col-span-2 md:col-span-1">
+<span class="text-data-label font-data-label block mb-1">Objectif principal</span>
+<span class="text-headline-sm font-headline-sm text-primary">Valorisation</span>
+</div>
+</div>
+</div>
+<!-- Profile Visualization Component -->
+<div class="lg:col-span-5 flex justify-center">
+<div class="relative w-72 h-72 flex items-center justify-center">
+<!-- Custom Animated Radial Chart -->
+<div class="absolute inset-0 rounded-full border-[12px] border-surface-container-highest"></div>
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-secondary" cx="144" cy="144" fill="transparent" r="132" stroke="currentColor" stroke-dasharray="829.38" stroke-dashoffset="331.75" stroke-width="12"></circle>
+</svg>
+<div class="absolute flex flex-col items-center animate-float">
+<span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings: 'FILL' 1;">balance</span>
+<span class="font-data-label text-data-label mt-2 uppercase tracking-widest text-primary">Score: 65/100</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Deep Dive Content -->
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
+<!-- Vigilance Points -->
+<div class="glass-card p-stack-lg rounded-xl flex flex-col h-full">
+<div class="flex items-center gap-stack-md mb-6 text-error">
+<span class="material-symbols-outlined">warning</span>
+<h3 class="font-headline-sm text-headline-sm">Points de Vigilance</h3>
+</div>
+<ul class="space-y-4 flex-grow">
+<li class="flex gap-stack-md">
+<span class="material-symbols-outlined text-primary shrink-0">check_circle</span>
+<p class="text-body-md">Évitez de réagir émotionnellement aux fluctuations de marché de court terme (volatilité 5-10%).</p>
+</li>
+<li class="flex gap-stack-md">
+<span class="material-symbols-outlined text-primary shrink-0">check_circle</span>
+<p class="text-body-md">Assurez-vous de conserver une épargne de précaution disponible pour vos besoins immédiats.</p>
+</li>
+<li class="flex gap-stack-md">
+<span class="material-symbols-outlined text-primary shrink-0">check_circle</span>
+<p class="text-body-md">Le risque de perte en capital existe, bien que limité par la diversification.</p>
+</li>
+</ul>
+</div>
+<!-- Recommended Asset Types -->
+<div class="glass-card p-stack-lg rounded-xl flex flex-col h-full">
+<div class="flex items-center gap-stack-md mb-6 text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<h3 class="font-headline-sm text-headline-sm">Allocation Cible</h3>
+</div>
+<div class="space-y-6 flex-grow">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-body-md font-bold">Obligations &amp; TCN</span>
+<span class="font-data-value text-data-value">50%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 50%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-body-md font-bold">Actions Zone UMOA</span>
+<span class="font-data-value text-data-value">30%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 30%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-body-md font-bold">Immobilier / OPCVM</span>
+<span class="font-data-value text-data-value">20%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container" style="width: 20%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA & Advisor -->
+<div class="bg-primary p-stack-lg rounded-xl text-on-primary flex flex-col h-full shadow-lg">
+<h3 class="font-headline-sm text-headline-sm mb-4">Passer à l'action</h3>
+<p class="text-body-md opacity-80 mb-8">
+                        Nos conseillers en gestion de patrimoine sont à votre disposition pour affiner cette stratégie et construire votre portefeuille sur mesure.
+                    </p>
+<div class="flex items-center gap-stack-md mb-8">
+<div class="w-12 h-12 rounded-full border-2 border-on-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional financial advisor portrait, smiling, professional business attire, high-end corporate office background, soft studio lighting, focused and trustworthy expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-37-qBby5EXrur5S1AQ7857CaCz4OWC5CRn8wV7tUVrGOEfWu9sqbUCfZycy4fF4PzlDoyMasOM_DpD3ABcBbUgPA3B6AorUbetmzqmrFUh58NFS5oPeerUE3KSZcm08S2pxbAj9VI9NvprfUgNjrvX6WuQlWdcp338UcZfYXORaNtr2JswdNKLagHL7Dj6_mvWuYrIVJHx3-dPNBSvAAOE-dQDXTU3lbsAKn8AUN9TTIanl_IF36rSUxmCbcSqBVWQULCmvwqw"/>
+</div>
+<div>
+<p class="text-body-md font-bold">Conseiller dédié</p>
+<p class="text-xs opacity-60">Expert en Marchés Financiers</p>
+</div>
+</div>
+<div class="mt-auto space-y-stack-md">
+<button class="w-full py-4 bg-secondary text-on-secondary font-bold rounded flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">calendar_today</span>
+                            Prendre RDV
+                        </button>
+<button class="w-full py-4 bg-transparent border border-on-primary/30 text-on-primary font-bold rounded flex items-center justify-center gap-2 hover:bg-on-primary/10 transition-all">
+<span class="material-symbols-outlined">download</span>
+                            Télécharger le profil (PDF)
+                        </button>
+</div>
+</div>
+</div>
+<!-- Disclaimer -->
+<footer class="mt-section-gap border-t border-outline-variant pt-8">
+<div class="flex flex-col md:flex-row gap-stack-lg items-start">
+<span class="material-symbols-outlined text-outline text-3xl">info</span>
+<div class="space-y-4">
+<p class="text-data-label font-data-label text-on-surface-variant max-w-4xl leading-relaxed italic">
+                            MENTION LÉGALE : Les résultats affichés sont basés exclusivement sur les réponses que vous avez fournies au questionnaire. Ce profil d'investisseur est une indication de votre tolérance au risque et de vos objectifs financiers à titre informatif. Il ne constitue en aucun cas une recommandation d'achat, une offre de vente ou une sollicitation d'investissement pour des produits financiers spécifiques. Africaine des Finances décline toute responsabilité quant à l'adéquation de ce profil avec votre situation patrimoniale réelle si les informations fournies étaient inexactes ou incomplètes.
+                        </p>
+<p class="text-data-label font-data-label text-outline uppercase tracking-widest">
+                            Société agréée par l'Autorité des Marchés Financiers de l'UMOA (AMF-UMOA)
+                        </p>
+</div>
+</div>
+</footer>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface text-on-surface dark:text-inverse-on-surface border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-inverse-primary mb-4">Africaine des Finances</div>
+<p class="text-body-md text-on-surface-variant mb-6 pr-8">L'excellence financière au service de l'émergence africaine. Partenaire de vos investissements sur les marchés de l'UMOA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">trending_up</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">verified</span>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4">Platform</h4>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:text-primary hover:underline" href="#">Markets</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Analysis</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Indices</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Resources</h4>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:text-primary hover:underline" href="#">Training</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Library</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Glossary</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Legal</h4>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:text-primary hover:underline" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Cookies</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Contact</h4>
+<ul class="space-y-2 text-data-label font-data-label text-on-surface-variant">
+<li><a class="hover:text-primary hover:underline" href="#">Support</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Help Center</a></li>
+<li><a class="hover:text-primary hover:underline" href="#">Offices</a></li>
+</ul>
+</div>
+</div>
+<div class="px-margin-desktop py-6 border-t border-outline-variant text-center md:text-left">
+<p class="text-data-label font-data-label text-on-surface-variant">© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</p>
+</div>
+</footer>
+<script>
+        // Micro-interaction for radial chart animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const circle = document.querySelector('circle');
+            if (circle) {
+                // Trigger animation after a slight delay
+                setTimeout(() => {
+                    circle.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1)';
+                    circle.style.strokeDashoffset = '331.75'; // Matches CSS dashoffset for initial view
+                }, 500);
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Conseil en Investissement - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "tertiary-fixed": "#dce1ff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-container-low": "#f0f3ff",
+                    "secondary-container": "#ffbf00",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-secondary-container": "#6d5000",
+                    "inverse-surface": "#28313f",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "tertiary": "#051c5b",
+                    "background": "#f9f9ff",
+                    "on-background": "#131c2a",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "outline": "#757683",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-container-highest": "#dae3f6",
+                    "secondary-fixed": "#ffdfa0",
+                    "inverse-primary": "#b7c4ff",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "surface-variant": "#dae3f6",
+                    "outline-variant": "#c5c5d4",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#795900",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "primary": "#001a61",
+                    "primary-container": "#0a2e8c",
+                    "surface-tint": "#3d58b5",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#213371",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px",
+                    "section-gap": "80px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+        .premium-shadow {
+            box-shadow: 0 20px 40px -15px rgba(6, 29, 92, 0.04);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-stack-lg">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+<div class="hidden md:flex gap-stack-md ml-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Markets</a>
+<a class="text-primary font-bold transition-colors cursor-pointer" href="#">Invest</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Training</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Analysis</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">account_balance</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80">account_circle</span>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative w-full min-h-[716px] flex items-center overflow-hidden bg-primary px-margin-desktop">
+
+<div class="relative z-10 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-data-label font-data-label">AMF-UMOA Certified</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-primary mb-6">Conseil en Investissement Stratégique</h1>
+<p class="font-body-lg text-body-lg text-on-primary/80 mb-stack-lg leading-relaxed">
+                    Maximisez votre patrimoine grâce à une expertise institutionnelle ancrée dans les réalités du marché financier ouest-africain. Un accompagnement sur mesure pour sécuriser votre avenir.
+                </p>
+<div class="flex gap-4">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-lg font-bold hover:bg-secondary-fixed transition-all premium-shadow active:scale-95">Prendre rendez-vous</button>
+<button class="border border-on-primary text-on-primary px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-all">Consulter la brochure</button>
+</div>
+</div>
+</section>
+<!-- Problem & Target Bento -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto">
+<div class="bento-grid">
+<!-- Problème traité -->
+<div class="col-span-12 md:col-span-7 bg-surface-container-low border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-4">warning_amber</span>
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Naviguer dans la complexité</h2>
+<p class="text-on-surface-variant mb-6 leading-relaxed">
+                            Dans un environnement économique volatil, l'absence de stratégie structurée peut éroder votre capital. Nous adressons les défis de la diversification, de la gestion du risque de change et de l'optimisation fiscale au sein de la zone UMOA.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-white border border-outline-variant rounded-full text-data-label font-data-label text-primary">Volatilité de marché</span>
+<span class="px-4 py-2 bg-white border border-outline-variant rounded-full text-data-label font-data-label text-primary">Inflation</span>
+<span class="px-4 py-2 bg-white border border-outline-variant rounded-full text-data-label font-data-label text-primary">Régulation complexe</span>
+</div>
+</div>
+<!-- Public concerné -->
+<div class="col-span-12 md:col-span-5 bg-primary text-on-primary p-stack-lg rounded-xl relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-cover bg-center" data-alt="A professional aerial view of a modern African financial district with sleek glass skyscrapers and clean streets, captured during the golden hour to evoke success, stability, and growth. The lighting is warm and authoritative, reflecting the premium institutional identity of a leading financial firm." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBhLSTZyuuWlsYa0Da25sdGWnthhZPSGxcSSnEME4l-zx20wGm7APKKPNBBnwP_hqL5GxfLZ0N9rMSd_cQr1QYd9MdLWtDCTmqdPMYDHJfEvj1NmVMpHcJNhkFSxhm23RcfVMEuJgwtmGTnCpOi2JOgCypvh87zQl35Ab9-vwQMsNAd5klqgGM2-F22yu_FcAvyVIYI1aWUiWER9BI6yzTvEbxdYCR3m2SwS8BjDLfRvyThRLx1bbUdTZwjCnxA35RAfbv6sRlJvg')"></div>
+<div class="relative z-10 h-full flex flex-col">
+<h3 class="font-headline-sm text-headline-sm mb-6">À qui s'adresse ce service ?</h3>
+<ul class="space-y-4 flex-grow">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">check_circle</span>
+<span>Investisseurs Institutionnels</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">check_circle</span>
+<span>High Net Worth Individuals (HNWI)</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container">check_circle</span>
+<span>Dirigeants de Groupes Privés</span>
+</li>
+</ul>
+<div class="mt-8 pt-6 border-t border-white/10">
+<p class="text-sm font-data-label opacity-70 italic text-center">Engagement minimal : 50 000 000 FCFA</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Prestations Incluses -->
+<section class="bg-surface-container py-section-gap px-margin-desktop">
+<div class="max-w-container-max mx-auto text-center mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Prestations incluses</h2>
+<div class="h-1 w-20 bg-secondary-container mx-auto"></div>
+</div>
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-stack-lg rounded-xl premium-shadow hover:-translate-y-2 transition-all duration-300">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">analytics</span>
+<h4 class="font-headline-sm text-headline-sm mb-3">Audit de Portefeuille</h4>
+<p class="text-on-surface-variant">Analyse exhaustive de vos actifs actuels pour identifier les poches d'inefficacité et les opportunités cachées.</p>
+</div>
+<div class="glass-card p-stack-lg rounded-xl premium-shadow hover:-translate-y-2 transition-all duration-300 border-primary/20">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">strategy</span>
+<h4 class="font-headline-sm text-headline-sm mb-3">Allocation Tactique</h4>
+<p class="text-on-surface-variant">Construction d'une stratégie d'investissement dynamique corrélée à vos objectifs de rendement et de risque.</p>
+</div>
+<div class="glass-card p-stack-lg rounded-xl premium-shadow hover:-translate-y-2 transition-all duration-300">
+<span class="material-symbols-outlined text-primary mb-4 text-3xl">gavel</span>
+<h4 class="font-headline-sm text-headline-sm mb-3">Veille Réglementaire</h4>
+<p class="text-on-surface-variant">Surveillance continue des évolutions fiscales et juridiques pour optimiser la transmission et la détention.</p>
+</div>
+</div>
+</section>
+<!-- Méthodologie -->
+<section class="py-section-gap px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row gap-stack-lg items-center">
+<div class="w-full md:w-1/2">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Notre Méthodologie "Elite-Trust"</h2>
+<div class="space-y-8">
+<div class="flex gap-4">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">1</div>
+<div>
+<h5 class="font-headline-sm text-sm mb-1 uppercase tracking-wider text-secondary">Immersion</h5>
+<p class="text-on-surface-variant">Compréhension profonde de votre vision patrimoniale et de vos contraintes spécifiques.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">2</div>
+<div>
+<h5 class="font-headline-sm text-sm mb-1 uppercase tracking-wider text-secondary">Modélisation</h5>
+<p class="text-on-surface-variant">Simulation de scénarios financiers basés sur des algorithmes propriétaires exclusifs.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-none w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">3</div>
+<div>
+<h5 class="font-headline-sm text-sm mb-1 uppercase tracking-wider text-secondary">Exécution &amp; Suivi</h5>
+<p class="text-on-surface-variant">Mise en œuvre des recommandations et reporting trimestriel haute fidélité.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-auto object-cover" data-alt="A high-contrast macro photograph of professional hands reviewing complex financial charts and leather-bound reports on a dark mahogany desk. The lighting is dramatic, focused only on the data points, symbolizing precision and deep expertise in a corporate banking environment. The palette is dominated by deep navy blues and warm wooden tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDProEJ-iZn2x5S5udbymIxgS87THoPhsGoVR1zPX_GV59LzWYXrLUqFHIByTQvc3WD-VMYSnOphkthepGI4Lcio1K1V1crtDH7ltukWFhZKEz-yD9Gnn3E8OFOkyvs2uB_kF3ntulW_Qcv7ek3ayLNpegGHgpZInTahp6Q0YvOKpgOUH2PkDbcsbNgL-5Uov_jSwnhztHg9Zw4OHLdIkO2nem9pCD2Ywa8bcSLas3uQofEVJPEPtvbsaedZNHnCJHrk2HN7-rH_w"/>
+</div>
+</div>
+</section>
+<!-- Experts Section -->
+<section class="bg-surface-container-high py-section-gap px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-lg text-center">Vos Experts Dédiés</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Expert 1 -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant text-center hover:shadow-lg transition-all">
+<div class="w-24 h-24 rounded-full mx-auto mb-4 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior financial advisor, a woman of African descent in her late 40s, wearing a tailored navy suit. She radiates confidence and approachability, posed against a soft-focus office background with warm lighting. The image style is clean, corporate, and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6J9mQUJ5vUt2Xm2ufqDmqXkfZzcS_9R-QLjl5Uj_zgwdZDbFughNjvKrU-pIzZu-SUYRmZgZz4CKliZi_gyRfsDnP_Ep-jELmCBDUeBE_80OYAWtaSdJEM4WHfmyFVgKy8BOqH3ur3nMGWXfZm3fy5sffLzpEgNh_CoKGD_QS78cpGXHS5F0ALivY9hd4msVC0MphAJiYByAbkkzP-awlwwtlW-abOATMNRYwGEkXWPMdZ4-_TzeAs8Up1KsGyfBXoaeruVnc7A"/>
+</div>
+<h4 class="font-headline-sm text-lg text-primary">Fatou Diop</h4>
+<p class="text-data-label text-secondary mb-3">Directrice Conseil</p>
+<p class="text-sm text-on-surface-variant">Ex-Goldman Sachs, 15 ans d'expérience sur les marchés émergents.</p>
+</div>
+<!-- Expert 2 -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant text-center hover:shadow-lg transition-all">
+<div class="w-24 h-24 rounded-full mx-auto mb-4 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a male investment strategist in his 50s, wearing a charcoal grey suit and white shirt. He has a distinguished appearance with graying temples, looking directly at the camera with an expression of integrity. The lighting is professional studio lighting with a neutral gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOBSn-ytKR1VqkkMNF6YEIfRI3pqMGcEprumYlw8oqD-EGWhjZ9ZtL8GsM1qjv6ObX5u31oRPaug3I2tvMjZg9A6IxuP3Xypb7XACTxyPrTGH6I0lRY7NOpAF6yoWMIOvvVtcdC11R09Ldaos57Zb4yvR2oqvx2UYYfyKBZSxUPwHGnt9_XcM_p8u9_3hKT50fKesl7uK3filbRnt0r6B5KpUti0j1I7LLJOMp0JrWItmyNjzoUPOozkVERwtcDpH70XKAJRlfGw"/>
+</div>
+<h4 class="font-headline-sm text-lg text-primary">Jean-Marc Tano</h4>
+<p class="text-data-label text-secondary mb-3">Analyste Senior</p>
+<p class="text-sm text-on-surface-variant">Spécialiste Obligations et Titres de Créances Négociables (TCN).</p>
+</div>
+<!-- Expert 3 -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant text-center hover:shadow-lg transition-all">
+<div class="w-24 h-24 rounded-full mx-auto mb-4 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young female quantitative analyst, looking smart and focused. She is wearing a modern business-casual blazer. The background is a bright, airy office with subtle glass reflections, maintaining a clean light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-QxukE2ISatO9-CuJMDeK-SYCvRpX6vG0g-A65d8j6z4sJSUsKmCN6XcwgoJhZ_VwV9uvKBH44FREQzdVOur1ZGF3CTts_aHlF67KGGYtcKkYjE-O1fMkVgECxL7HVPXZFsC7aYTXNa5uoJcMkvZfJYTFcHW_AcSbpIGLb3jH-bTHGLtCwZOWxtE7Ysypu8RSC0oUadiYSiFO9EjBDZ8YOWRBL_mnNYfUOBgQTMQY52q6639VLUBWlMNXUlCns2wV47d2Sc46uA"/>
+</div>
+<h4 class="font-headline-sm text-lg text-primary">Aminata Sarr</h4>
+<p class="text-data-label text-secondary mb-3">Stratège Quantitatif</p>
+<p class="text-sm text-on-surface-variant">Experte en modélisation de risques et intelligence de marché.</p>
+</div>
+<!-- Expert 4 -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant text-center hover:shadow-lg transition-all">
+<div class="w-24 h-24 rounded-full mx-auto mb-4 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a mature male financial lawyer, wearing glasses and a formal suit. He has a calm and authoritative presence. The setting is a library-like office with soft warm lighting, emphasizing wisdom and legal security." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtlVB057Ivngnw2WIQ6WkQ0NUHBM6B_tN1Z8h543409-Xuae4Zk-YwUvVAfgo2T0NRDf-fxSOMZLh8rLSuQv8b9nb8SOPwdRQy3xPjsJNQY1I7OHcV1McLv3b6x36puziSeCFPUauWfQjNoM599ItlTGdXxsTJES948Xh25hk26GFBVHdxGBzAYW796DNAUISisI9zh_awVyuWwUejpMWjGRGQASR2AGTkGidNswB6xcBi4TfVlMRKiJIiCawRD718I6G8pkTBsw"/>
+</div>
+<h4 class="font-headline-sm text-lg text-primary">Dr. Koffi Mensah</h4>
+<p class="text-data-label text-secondary mb-3">Expert Fiscalité</p>
+<p class="text-sm text-on-surface-variant">Ancien régulateur, assure la conformité totale de vos investissements.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-gap px-margin-desktop">
+<div class="max-w-4xl mx-auto glass-card p-stack-lg rounded-2xl flex flex-col md:flex-row items-center gap-stack-lg text-center md:text-left">
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Prêt à transformer votre stratégie ?</h3>
+<p class="text-on-surface-variant">Réservez une session de diagnostic gratuite de 30 minutes avec l'un de nos conseillers experts.</p>
+</div>
+<button class="flex-none bg-primary text-on-primary px-10 py-5 rounded-lg font-bold hover:bg-primary-container transition-all active:scale-95 shadow-xl">Prendre rendez-vous</button>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md bg-primary text-on-primary">
+<div class="w-full max-w-container-max flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8 border-b border-white/10 pb-8">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</span>
+<p class="mt-2 text-on-primary/60 max-w-sm">Le partenaire de confiance pour votre souveraineté financière en Afrique de l'Ouest.</p>
+</div>
+<div class="flex flex-wrap gap-stack-md">
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Legal Notice</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+<p class="text-on-primary/60 text-sm">© 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.</p>
+</footer>
+<script>
+        // Micro-interaction for hover effects on glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

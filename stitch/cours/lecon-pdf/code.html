@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "primary": "#001a61",
+                    "on-surface-variant": "#444652",
+                    "surface-container-low": "#f0f3ff",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-surface": "#28313f",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed": "#dce1ff",
+                    "surface-container-highest": "#dae3f6",
+                    "tertiary-container": "#213371",
+                    "tertiary": "#051c5b",
+                    "secondary-fixed": "#ffdfa0",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#839cfd",
+                    "background": "#f9f9ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary": "#795900",
+                    "on-secondary-container": "#6d5000",
+                    "surface-tint": "#3d58b5",
+                    "outline": "#757683",
+                    "on-background": "#131c2a",
+                    "inverse-on-surface": "#ebf1ff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "outline-variant": "#c5c5d4",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001551",
+                    "on-tertiary-fixed": "#001551",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "primary-container": "#0a2e8c",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"]
+            },
+            "fontSize": {
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #131c2a;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pdf-canvas-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .pdf-canvas-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .pdf-canvas-container::-webkit-scrollbar-thumb {
+            background: #c5c5d4;
+            border-radius: 4px;
+        }
+        .sidebar-right-transition {
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .active-tab-indicator {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background-color: #001a61;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest dark:bg-inverse-surface h-16 border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-stack-lg">
+<span class="font-display-lg text-display-lg text-primary dark:text-primary-fixed leading-none">Heritage Academy</span>
+<nav class="hidden md:flex gap-gutter ml-stack-lg h-full items-center">
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-bold h-full flex items-center" href="#">My Courses</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-80" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex gap-stack-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer p-2 hover:bg-surface-variant rounded-full transition-all">notifications</span>
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer p-2 hover:bg-surface-variant rounded-full transition-all">help</span>
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer p-2 hover:bg-surface-variant rounded-full transition-all">settings</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a high-net-worth individual in a tailored dark blue suit, looking confidently at the camera against a blurred architectural background of a modern financial district. The lighting is sophisticated, with soft directional light emphasizing professional success and reliability, maintaining the premium corporate aesthetic of Heritage Financial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6wkvOJThG9ZdlNTrzjmMmJ4oF3ddtOWcKcSv8u7ixc5FId-LN6Bz3tKuX9l9I0XsRJdk2q5t_LZIDcwtCSVTQ1AI6DdKWNQg_CbqNbKuCY6KvQdGCK_31P3eQfL4w6akgPZUK6g3OGhyxE4hpBq_i5_8gy1wyEfeBujE0aLx6K2jT6LHXXGlWcpptCKCE1OVn26MXnrPf5nlMGGJxKunWmUCiwySzXMUtsrPo8ovOCMTM6EQDu4_RXMyKgRAxdNg9QVLxlW9oyw"/>
+</div>
+</div>
+</header>
+<main class="flex h-[calc(100vh-64px)] overflow-hidden">
+<!-- SideNavBar (Course Curriculum) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-80 flex flex-col z-40 bg-surface-container-low dark:bg-surface-container-high border-r border-outline-variant dark:border-outline">
+<div class="p-stack-lg border-b border-outline-variant">
+<div class="flex items-center gap-stack-md mb-stack-sm">
+<img class="w-10 h-10 rounded-full border border-primary-fixed" data-alt="An elegant avatar of a senior financial advisor, wearing a crisp white shirt and professional glasses, set against a soft grey background. The style is clean, corporate, and minimalist, conveying deep institutional expertise and academic authority consistent with a premier African financial institution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbEiFrcWkGdIRR-zfSGnNjAGOzH3Trq3oekpg3xP5TAakFf20BOpfhBiYKKfwuscVOWrxtgZ9s38ppKRdzz2Fo7ed_RJPd2xdz_qXQezXRF9QX7r6PSLBF9BwnBri_inzI0hCwx043MRz40kJfxG8QPsluNAoUgz5u9da228jn39QjIIvHQs36pG2iKdZewfTc3Y9IdX6ry6uQMm9WBLBPgTy9OnRp2OBllfueBDcIGGvBR53wH6FyDOzMhvsV0PFzDhZJK099OA"/>
+<div>
+<h2 class="font-headline-md text-headline-sm text-primary leading-tight">Wealth Management 101</h2>
+<p class="text-sm text-on-surface-variant">65% Complete</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-2">
+<div class="bg-primary h-full rounded-full w-[65%]"></div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-stack-md">
+<div class="px-2 space-y-1">
+<!-- Nav Item 1 -->
+<div class="group flex items-center transition-all duration-200 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 cursor-pointer p-3 rounded-r-full">
+<span class="material-symbols-outlined mr-3">play_circle</span>
+<span class="font-body-md text-body-md">Introduction</span>
+<span class="material-symbols-outlined ml-auto text-sm text-secondary">check_circle</span>
+</div>
+<!-- Nav Item 2 (Active) -->
+<div class="group flex items-center transition-all duration-200 bg-primary-container dark:bg-primary-fixed-dim text-on-primary-container dark:text-on-primary-fixed rounded-r-full font-bold p-3">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-body-md text-body-md">Market Fundamentals</span>
+<span class="material-symbols-outlined ml-auto text-sm">description</span>
+</div>
+<!-- Nav Item 3 -->
+<div class="group flex items-center transition-all duration-200 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 cursor-pointer p-3 rounded-r-full">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md text-body-md">Risk Assessment</span>
+</div>
+<!-- Nav Item 4 -->
+<div class="group flex items-center transition-all duration-200 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 cursor-pointer p-3 rounded-r-full">
+<span class="material-symbols-outlined mr-3">verified_user</span>
+<span class="font-body-md text-body-md">Financial Ethics</span>
+</div>
+<!-- Nav Item 5 -->
+<div class="group flex items-center transition-all duration-200 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant/50 cursor-pointer p-3 rounded-r-full">
+<span class="material-symbols-outlined mr-3">workspace_premium</span>
+<span class="font-body-md text-body-md">Final Certification</span>
+</div>
+</div>
+</nav>
+<div class="p-stack-lg bg-surface-container border-t border-outline-variant">
+<div class="flex gap-4 mb-4">
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Resources</span>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">contact_support</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Support</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-colors shadow-sm">
+                    Continue Learning
+                </button>
+</div>
+</aside>
+<!-- Main Content (PDF Viewer) -->
+<section class="ml-80 flex-1 flex flex-col bg-surface overflow-hidden">
+<!-- Viewer Toolbar -->
+<div class="h-14 bg-surface-container-lowest border-b border-outline-variant px-stack-lg flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-sm text-headline-sm text-primary">Leçon 2.4 : Cadre Réglementaire.pdf</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[12px] font-bold text-on-surface-variant">DOC</span>
+</div>
+<div class="flex items-center gap-gutter">
+<!-- Pagination Controls -->
+<div class="flex items-center bg-surface-container rounded-lg px-2 py-1">
+<button class="material-symbols-outlined p-1 hover:bg-surface-variant rounded transition-all">chevron_left</button>
+<div class="mx-3 flex items-center gap-2">
+<input class="w-10 h-7 text-center border border-outline-variant rounded bg-surface-container-lowest text-sm font-data-value" type="text" value="12"/>
+<span class="text-sm text-on-surface-variant font-medium">sur 48</span>
+</div>
+<button class="material-symbols-outlined p-1 hover:bg-surface-variant rounded transition-all">chevron_right</button>
+</div>
+<!-- Viewer Actions -->
+<div class="flex items-center gap-2 border-l border-outline-variant pl-gutter">
+<button class="material-symbols-outlined p-2 hover:bg-surface-variant rounded transition-all" title="Zoom Arrière">zoom_out</button>
+<span class="text-sm font-data-value w-12 text-center text-on-surface">100%</span>
+<button class="material-symbols-outlined p-2 hover:bg-surface-variant rounded transition-all" title="Zoom Avant">zoom_in</button>
+</div>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-gutter">
+<button class="material-symbols-outlined p-2 hover:bg-surface-variant rounded transition-all" title="Plein écran">fullscreen</button>
+<button class="flex items-center gap-2 bg-secondary text-on-secondary px-4 py-2 rounded font-bold hover:bg-on-secondary-fixed-variant transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+<span class="text-sm">Télécharger</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PDF Scrollable Canvas -->
+<div class="flex-1 bg-surface-container-low p-stack-lg overflow-y-auto pdf-canvas-container flex justify-center">
+<div class="max-w-4xl w-full flex flex-col gap-stack-lg items-center pb-20">
+<!-- PDF Page Representation -->
+<div class="bg-white shadow-xl min-h-[1100px] w-full p-16 border border-outline-variant relative group transition-transform duration-500 hover:scale-[1.005]">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-primary/10"></div>
+<div class="flex justify-between items-start mb-16">
+<div class="w-32 h-12 bg-surface-container rounded flex items-center justify-center grayscale opacity-50">
+<span class="font-display-lg text-sm text-primary opacity-30">HERITAGE ACADEMY</span>
+</div>
+<div class="text-right">
+<span class="font-data-label text-data-label text-outline uppercase tracking-widest">Confidential / Internal</span>
+</div>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-8 border-b-2 border-primary-container pb-4">Analyse des Marchés de Capitaux Africains</h1>
+<div class="space-y-6 text-on-surface-variant leading-relaxed font-body-lg">
+<p>Le développement des marchés de capitaux en Afrique représente l'un des piliers fondamentaux de la croissance économique durable du continent. Ce document explore les mécanismes sophistiqués qui régissent les échanges transfrontaliers et les cadres prudentiels nécessaires à la protection des actifs institutionnels.</p>
+<h3 class="font-headline-sm text-headline-sm text-primary mt-12">1. Structure du Marché Primaire</h3>
+<p>La mobilisation de l'épargne domestique via des émissions de titres d'État et d'obligations d'entreprises nécessite une infrastructure robuste. Les bourses de valeurs telles que la BRVM ou la Nairobi Securities Exchange ont implémenté des standards internationaux pour attirer les investisseurs étrangers.</p>
+<div class="my-10 bg-surface-container-low border border-outline-variant p-6 rounded-lg">
+<div class="flex justify-between items-center mb-6">
+<span class="font-headline-sm text-sm text-primary">Indice de Croissance Annuelle (Projection)</span>
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<div class="h-48 w-full flex items-end gap-4 px-4">
+<div class="bg-primary/20 w-full h-[40%] rounded-t transition-all hover:bg-primary" title="2021: 4.2%"></div>
+<div class="bg-primary/20 w-full h-[55%] rounded-t transition-all hover:bg-primary" title="2022: 5.8%"></div>
+<div class="bg-primary/20 w-full h-[48%] rounded-t transition-all hover:bg-primary" title="2023: 5.1%"></div>
+<div class="bg-primary/20 w-full h-[72%] rounded-t transition-all hover:bg-primary" title="2024: 7.6%"></div>
+<div class="bg-primary w-full h-[85%] rounded-t shadow-lg" title="2025: 8.9%"></div>
+</div>
+<div class="flex justify-between text-[10px] font-data-label text-outline mt-4">
+<span>2021</span><span>2022</span><span>2023</span><span>2024</span><span class="font-bold text-primary">2025 (EST)</span>
+</div>
+</div>
+<p>La gestion des risques et l'éthique financière sont indissociables de la performance à long terme. Chaque transaction doit être auditée selon les protocoles de conformité les plus stricts...</p>
+</div>
+<div class="absolute bottom-16 right-16">
+<span class="font-data-label text-data-label text-outline">Page 12 / 48</span>
+</div>
+</div>
+<!-- Next Page Teaser -->
+<div class="bg-white/50 w-full h-20 border-t border-outline-variant flex items-center justify-center">
+<span class="text-sm font-medium text-outline-variant">Chargement de la page suivante...</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar (Resources & Notes) -->
+<aside class="w-80 h-full border-l border-outline-variant bg-surface-container-lowest flex flex-col sidebar-right-transition shrink-0 z-40">
+<!-- Tabs -->
+<div class="flex border-b border-outline-variant relative h-12">
+<button class="flex-1 flex items-center justify-center gap-2 text-sm font-bold text-primary transition-all" id="tab-resources" onclick="switchTab('resources')">
+<span class="material-symbols-outlined text-[18px]">attachment</span>
+                    Ressources
+                </button>
+<button class="flex-1 flex items-center justify-center gap-2 text-sm font-bold text-on-surface-variant transition-all" id="tab-notes" onclick="switchTab('notes')">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+                    Notes
+                </button>
+<div class="active-tab-indicator w-1/2" id="active-indicator"></div>
+</div>
+<!-- Tab Content: Resources -->
+<div class="flex-1 overflow-y-auto p-stack-md block" id="content-resources">
+<h4 class="text-[12px] font-bold uppercase tracking-widest text-outline mb-4">Annexes du chapitre</h4>
+<div class="space-y-3">
+<div class="p-3 border border-outline-variant rounded-lg hover:border-primary cursor-pointer transition-all bg-white group">
+<div class="flex items-start gap-3">
+<div class="bg-surface-container p-2 rounded text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface group-hover:text-primary leading-tight">Lexique des termes boursiers</p>
+<p class="text-[11px] text-on-surface-variant mt-1">PDF • 1.2 MB</p>
+</div>
+</div>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg hover:border-primary cursor-pointer transition-all bg-white group">
+<div class="flex items-start gap-3">
+<div class="bg-surface-container p-2 rounded text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">table_chart</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface group-hover:text-primary leading-tight">Matrice des risques sectoriels</p>
+<p class="text-[11px] text-on-surface-variant mt-1">XLSX • 450 KB</p>
+</div>
+</div>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg hover:border-primary cursor-pointer transition-all bg-white group">
+<div class="flex items-start gap-3">
+<div class="bg-surface-container p-2 rounded text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">open_in_new</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface group-hover:text-primary leading-tight">Rapport de la Banque Centrale</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Lien externe</p>
+</div>
+</div>
+</div>
+</div>
+<h4 class="text-[12px] font-bold uppercase tracking-widest text-outline mt-8 mb-4">Aide &amp; Support</h4>
+<div class="p-4 bg-primary-container text-on-primary-container rounded-lg">
+<p class="text-sm font-medium mb-3">Une question sur ce document ?</p>
+<button class="w-full bg-white text-primary text-sm font-bold py-2 rounded shadow-sm hover:bg-surface transition-colors">
+                        Contacter un instructeur
+                    </button>
+</div>
+</div>
+<!-- Tab Content: Notes -->
+<div class="flex-1 overflow-y-auto p-stack-md hidden" id="content-notes">
+<div class="flex flex-col h-full">
+<div class="mb-4 flex items-center justify-between">
+<h4 class="text-[12px] font-bold uppercase tracking-widest text-outline">Vos Notes Personnelles</h4>
+<button class="material-symbols-outlined text-primary hover:bg-surface-container rounded p-1">sync</button>
+</div>
+<textarea class="flex-1 w-full bg-surface-container-low border-outline-variant rounded-lg p-4 font-body-md text-sm focus:ring-2 focus:ring-primary focus:border-transparent resize-none leading-relaxed" placeholder="Commencez à saisir vos notes pour cette leçon..."></textarea>
+<div class="mt-4 pt-4 border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary font-bold py-3 rounded shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                            Enregistrer les notes
+                        </button>
+<p class="text-[10px] text-center text-on-surface-variant mt-2">Dernière sauvegarde : Il y a 2 minutes</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Interactive Footer -->
+<footer class="fixed bottom-0 left-80 right-0 h-16 bg-surface-container-highest flex items-center justify-between px-stack-lg z-50 border-t border-outline-variant">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">keyboard_double_arrow_left</span>
+<span class="text-sm font-medium text-on-surface-variant cursor-pointer hover:text-primary transition-colors">Précédent : Évolution du PIB</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-sm font-medium text-on-surface-variant">Progression du chapitre : 75%</span>
+<div class="w-32 h-2 bg-surface-variant rounded-full">
+<div class="w-3/4 h-full bg-secondary rounded-full"></div>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-8 py-2 rounded font-bold hover:bg-primary-container transition-all flex items-center gap-2 shadow-lg">
+<span>Marquer comme terminé</span>
+<span class="material-symbols-outlined">task_alt</span>
+</button>
+</footer>
+<script>
+        function switchTab(tab) {
+            const resourcesBtn = document.getElementById('tab-resources');
+            const notesBtn = document.getElementById('tab-notes');
+            const resourcesContent = document.getElementById('content-resources');
+            const notesContent = document.getElementById('content-notes');
+            const indicator = document.getElementById('active-indicator');
+
+            if (tab === 'resources') {
+                resourcesBtn.classList.add('text-primary');
+                resourcesBtn.classList.remove('text-on-surface-variant');
+                notesBtn.classList.add('text-on-surface-variant');
+                notesBtn.classList.remove('text-primary');
+                
+                resourcesContent.classList.remove('hidden');
+                resourcesContent.classList.add('block');
+                notesContent.classList.add('hidden');
+                notesContent.classList.remove('block');
+                
+                indicator.style.left = '0';
+            } else {
+                notesBtn.classList.add('text-primary');
+                notesBtn.classList.remove('text-on-surface-variant');
+                resourcesBtn.classList.add('text-on-surface-variant');
+                resourcesBtn.classList.remove('text-primary');
+                
+                notesContent.classList.remove('hidden');
+                notesContent.classList.add('block');
+                resourcesContent.classList.add('hidden');
+                resourcesContent.classList.remove('block');
+                
+                indicator.style.left = '50%';
+            }
+        }
+    </script>
+</body></html>

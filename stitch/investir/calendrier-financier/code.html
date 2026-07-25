@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calendrier Financier - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+    </style>
+<!-- [PREDICTED_TAILWIND_CONFIG_HERE] -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c5c5d4",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed": "#001551",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "inverse-primary": "#b7c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "surface": "#f9f9ff",
+                    "secondary-fixed": "#ffdfa0",
+                    "primary": "#001a61",
+                    "secondary": "#795900",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed": "#001551",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-secondary-container": "#6d5000",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary": "#051c5b",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "secondary-container": "#ffbf00",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#131c2a",
+                    "tertiary-container": "#213371",
+                    "outline": "#757683",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "surface-container": "#e7eeff",
+                    "on-primary-container": "#839cfd",
+                    "tertiary-fixed": "#dce1ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-surface": "#131c2a",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-tint": "#3d58b5",
+                    "inverse-surface": "#28313f",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-container-low": "#f0f3ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary flex justify-between items-center w-full px-margin-desktop h-10 text-[12px] docked full-width top-0 z-50">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-data-label font-data-label font-bold text-on-primary">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-stack-lg">
+<button class="text-on-primary/80 hover:text-secondary-container transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">language</span>
+                FR
+            </button>
+<button class="text-on-primary/80 hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+</button>
+<button class="text-on-primary/80 hover:text-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">call</span>
+</button>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-10 z-40 border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-extrabold text-primary">Africaine des Finances</div>
+<div class="hidden lg:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Markets</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Invest</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Training</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1" href="#">Analysis</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="text-on-surface font-medium hover:text-primary">Login</button>
+<button class="bg-primary text-on-primary px-6 py-3 font-bold rounded-lg hover:bg-primary-container transition-all active:opacity-80">Commencer à investir</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-stack-md">
+<div>
+<h1 class="text-display-lg font-display-lg text-primary mb-2">Calendrier Financier</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Restez informé des rendez-vous majeurs des marchés financiers de l'UEMOA. Assemblées, dividendes et formations stratégiques.</p>
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-xl border border-outline-variant">
+<button class="px-6 py-2 rounded-lg bg-primary text-on-primary font-bold transition-all shadow-sm" id="view-calendar">Calendrier</button>
+<button class="px-6 py-2 rounded-lg text-on-surface-variant hover:text-primary font-medium transition-all" id="view-list">Liste</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="lg:col-span-3 space-y-stack-lg">
+<div class="glass-card p-stack-md rounded-xl">
+<h3 class="text-headline-sm font-headline-sm mb-stack-md">Filtres</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md group-hover:text-primary transition-colors">Tous les événements</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<div class="event-dot bg-primary"></div>
+<span class="text-body-md group-hover:text-primary transition-colors">Assemblées Générales</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<div class="event-dot bg-secondary-container"></div>
+<span class="text-body-md group-hover:text-primary transition-colors">Paiements Dividendes</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-tertiary focus:ring-tertiary" type="checkbox"/>
+<div class="event-dot bg-tertiary-container"></div>
+<span class="text-body-md group-hover:text-primary transition-colors">Publications Résultats</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-error focus:ring-error" type="checkbox"/>
+<div class="event-dot bg-error"></div>
+<span class="text-body-md group-hover:text-primary transition-colors">Émissions Obligataires</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-surface-tint focus:ring-surface-tint" type="checkbox"/>
+<div class="event-dot bg-surface-tint"></div>
+<span class="text-body-md group-hover:text-primary transition-colors">Sessions Formation</span>
+</label>
+</div>
+</div>
+<div class="relative h-64 rounded-xl overflow-hidden shadow-sm group">
+<div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/20 transition-all z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Professional financial dashboard showing real-time market data charts and global economic trends in a modern high-key office environment. The lighting is crisp and the aesthetic is clean and corporate blue tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFLN4VLrdg1FtU1l0O26H-zdiy0UV5BAYf9yC-6JjqlI6IZYnkQQoUM-HuYo1fbcuIlzAKVskm8tiBCjgxSDbe1UunRgN5jnhhuNRvtAAhVDAd4D6wuVTY37qPmLYbydFu0yLtrFnkkAPmIgVFfzNJqarn3ZyOPGryFStL99mTjhTgj6NTVl6BfsydH_Hngcq0Klc9KXQTiA1dNd4aF9LuGs2ittoY7cXJM05n3jl68HqZjWcYaJfiyHW_5CtCu6k3mv25H-wP4w')"></div>
+<div class="absolute inset-0 z-20 p-stack-md flex flex-col justify-end">
+<span class="text-data-label font-data-label text-secondary-container mb-1">PROCHAINE FORMATION</span>
+<h4 class="text-headline-sm font-headline-sm text-on-primary">Analyse Fondamentale BRVM</h4>
+<p class="text-on-primary/80 text-sm mt-2">Inscriptions ouvertes - Session Nov 2024</p>
+</div>
+</div>
+</aside>
+<!-- Main Calendar View -->
+<section class="lg:col-span-9">
+<div class="glass-card rounded-xl overflow-hidden">
+<!-- Calendar Header -->
+<div class="bg-surface-container flex items-center justify-between px-stack-md py-4 border-b border-outline-variant">
+<div class="flex items-center gap-stack-md">
+<h2 class="text-headline-md font-headline-md">Novembre 2024</h2>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-dim rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 hover:bg-surface-dim rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<button class="bg-surface-container-highest px-4 py-2 text-data-label font-data-label rounded-lg border border-outline-variant hover:bg-surface-dim transition-colors">
+                            Aujourd'hui
+                        </button>
+</div>
+<!-- Days Header -->
+<div class="calendar-grid border-b border-outline-variant bg-surface-container-low">
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">LUN</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">MAR</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">MER</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">JEU</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">VEN</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant border-r border-outline-variant">SAM</div>
+<div class="p-4 text-center text-data-label font-data-label text-on-surface-variant">DIM</div>
+</div>
+<!-- Calendar Body -->
+<div class="calendar-grid grid-rows-5">
+<!-- Empty cells for start of month -->
+<div class="min-h-[140px] p-2 border-r border-b border-outline-variant bg-surface-bright/50"></div>
+<div class="min-h-[140px] p-2 border-r border-b border-outline-variant bg-surface-bright/50"></div>
+<div class="min-h-[140px] p-2 border-r border-b border-outline-variant bg-surface-bright/50"></div>
+<div class="min-h-[140px] p-2 border-r border-b border-outline-variant bg-surface-bright/50"></div>
+<!-- Real Days -->
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors group relative">
+<span class="text-data-value font-data-value text-on-surface-variant">01</span>
+<div class="mt-2 space-y-1">
+<div class="text-[10px] bg-tertiary-container/10 text-tertiary px-2 py-1 rounded border border-tertiary-container/30 truncate font-bold">SONATEL - T3</div>
+</div>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors bg-surface-container-low">
+<span class="text-data-value font-data-value text-on-surface-variant">02</span>
+</div>
+<div class="min-h-[140px] p-3 border-b border-outline-variant hover:bg-surface-container transition-colors bg-surface-container-low">
+<span class="text-data-value font-data-value text-on-surface-variant">03</span>
+</div>
+<!-- Row 2 -->
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors">
+<span class="text-data-value font-data-value text-on-surface-variant">04</span>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors">
+<span class="text-data-value font-data-value text-on-surface-variant">05</span>
+<div class="mt-2 space-y-1">
+<div class="text-[10px] bg-primary/10 text-primary px-2 py-1 rounded border border-primary/30 truncate font-bold">AG Coris Bank</div>
+</div>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors">
+<span class="text-data-value font-data-value text-on-surface-variant">06</span>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors">
+<span class="text-data-value font-data-value text-on-surface-variant">07</span>
+<div class="mt-2 space-y-1">
+<div class="text-[10px] bg-secondary-container/20 text-secondary px-2 py-1 rounded border border-secondary-container/50 truncate font-bold">Dividend Total CI</div>
+</div>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors bg-primary-container text-on-primary-container ring-2 ring-primary">
+<span class="text-data-value font-data-value">08</span>
+<div class="mt-2 space-y-1">
+<div class="text-[10px] bg-on-primary-container/20 text-white px-2 py-1 rounded border border-white/30 truncate font-bold">TPBF 6.30% 2024</div>
+<div class="text-[10px] bg-surface-tint/30 text-white px-2 py-1 rounded border border-white/30 truncate font-bold">Webinaire IPO</div>
+</div>
+</div>
+<div class="min-h-[140px] p-3 border-r border-b border-outline-variant hover:bg-surface-container transition-colors bg-surface-container-low">
+<span class="text-data-value font-data-value text-on-surface-variant">09</span>
+</div>
+<div class="min-h-[140px] p-3 border-b border-outline-variant hover:bg-surface-container transition-colors bg-surface-container-low">
+<span class="text-data-value font-data-value text-on-surface-variant">10</span>
+</div>
+<!-- More rows would continue here -->
+</div>
+</div>
+<!-- Upcoming Details (Asymmetric Layout Element) -->
+<div class="mt-stack-lg grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="bg-primary-container text-on-primary-container p-stack-lg rounded-xl flex items-center justify-between overflow-hidden relative group">
+<div class="relative z-10">
+<h4 class="text-headline-sm font-headline-sm mb-2">Focus Investisseur</h4>
+<p class="text-body-md opacity-90 mb-4">Ne manquez pas la clôture des souscriptions pour l'emprunt d'État Trésor Public du Mali.</p>
+<button class="bg-secondary-container text-on-secondary-fixed px-6 py-2 font-bold rounded-lg hover:scale-105 transition-transform">Consulter la note</button>
+</div>
+<span class="material-symbols-outlined text-[120px] absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">trending_up</span>
+</div>
+<div class="glass-card p-stack-lg rounded-xl">
+<div class="flex items-center gap-stack-md mb-stack-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">payments</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm">Dividendes à venir</h4>
+</div>
+<ul class="space-y-4">
+<li class="flex justify-between items-center border-b border-outline-variant pb-2">
+<div>
+<p class="font-bold text-primary">BOA BENIN</p>
+<p class="text-sm text-on-surface-variant">Date de détachement: 15 Nov</p>
+</div>
+<div class="text-right">
+<p class="font-data-value text-secondary">420 FCFA</p>
+<p class="text-xs text-on-surface-variant">Net/Action</p>
+</div>
+</li>
+<li class="flex justify-between items-center">
+<div>
+<p class="font-bold text-primary">ONATEL BF</p>
+<p class="text-sm text-on-surface-variant">Date de détachement: 22 Nov</p>
+</div>
+<div class="text-right">
+<p class="font-data-value text-secondary">315 FCFA</p>
+<p class="text-xs text-on-surface-variant">Net/Action</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest mt-section-gap border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="text-headline-sm font-headline-sm font-bold text-primary mb-4">Africaine des Finances</div>
+<p class="text-body-md text-on-surface-variant mb-6">Expertise financière au service de la prospérité africaine. Société d'intermédiation agréée par l'AMF-UMOA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">qr_code_2</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">info</span>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-4">Platform</h5>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline hover:text-primary" href="#">Markets</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Invest</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Learn</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-4">Resources</h5>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline hover:text-primary" href="#">Analysis</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Reports</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Help Center</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-4">Legal</h5>
+<ul class="space-y-2 text-on-surface-variant text-sm">
+<li><a class="hover:underline hover:text-primary" href="#">Privacy</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Terms</a></li>
+<li><a class="hover:underline hover:text-primary" href="#">Regulatory</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-primary mb-4">Contact</h5>
+<p class="text-on-surface-variant text-sm">Avenue Terrasson de Fougères, Dakar, Sénégal</p>
+<p class="text-primary font-bold mt-2">+221 33 800 00 00</p>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/30 text-center text-data-label font-data-label text-on-surface-variant">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.
+        </div>
+</footer>
+<script>
+        // Simple view switcher
+        const btnCalendar = document.getElementById('view-calendar');
+        const btnList = document.getElementById('view-list');
+
+        btnCalendar.addEventListener('click', () => {
+            btnCalendar.className = "px-6 py-2 rounded-lg bg-primary text-on-primary font-bold transition-all shadow-sm";
+            btnList.className = "px-6 py-2 rounded-lg text-on-surface-variant hover:text-primary font-medium transition-all";
+        });
+
+        btnList.addEventListener('click', () => {
+            btnList.className = "px-6 py-2 rounded-lg bg-primary text-on-primary font-bold transition-all shadow-sm";
+            btnCalendar.className = "px-6 py-2 rounded-lg text-on-surface-variant hover:text-primary font-medium transition-all";
+        });
+
+        // Interactive hover effects for calendar days
+        document.querySelectorAll('.calendar-grid > div').forEach(day => {
+            day.addEventListener('mouseenter', () => {
+                if(!day.classList.contains('bg-primary-container')) {
+                    day.style.transform = 'translateY(-2px)';
+                    day.style.boxShadow = '0 10px 20px -10px rgba(6, 29, 92, 0.1)';
+                }
+            });
+            day.addEventListener('mouseleave', () => {
+                day.style.transform = 'translateY(0)';
+                day.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body></html>

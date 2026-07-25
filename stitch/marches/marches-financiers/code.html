@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #DADFE7;
+        }
+        .data-grid-cols {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0A2E8C;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#131c2a",
+                        "outline": "#757683",
+                        "secondary": "#795900",
+                        "surface-container": "#e7eeff",
+                        "surface-container-low": "#f0f3ff",
+                        "on-tertiary-fixed": "#001551",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "primary-container": "#0a2e8c",
+                        "surface-dim": "#d1daed",
+                        "tertiary": "#051c5b",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dce1ff",
+                        "surface-variant": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary": "#001a61",
+                        "outline-variant": "#c5c5d4",
+                        "surface-container-high": "#dfe8fc",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-highest": "#dae3f6",
+                        "on-surface": "#131c2a",
+                        "surface-bright": "#f9f9ff",
+                        "error": "#ba1a1a",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#b7c4ff",
+                        "inverse-surface": "#28313f",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#839cfd",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-surface-variant": "#444652",
+                        "on-primary-fixed": "#001551",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#6d5000",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-tint": "#3d58b5",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#213371",
+                        "tertiary-fixed": "#dce1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-sm": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-primary text-on-primary h-10 flex justify-between items-center px-margin-desktop z-50 sticky top-0">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="text-data-label font-bold uppercase tracking-wider">AMF-UMOA AA/2022-03</span>
+</div>
+<div class="flex items-center gap-gutter">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">mail</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-container transition-colors">call</span>
+</div>
+</header>
+<!-- TopNavBar -->
+<nav class="bg-surface border-b border-outline-variant h-20 flex items-center">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="text-headline-md font-extrabold text-primary tracking-tight">
+                Africaine des Finances
+            </div>
+<div class="hidden lg:flex items-center gap-stack-lg">
+<a class="text-primary border-b-2 border-primary font-bold pb-1 text-data-label font-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Invest</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Training</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Analysis</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors text-data-label font-data-label" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-gutter">
+<button class="text-primary font-bold text-data-label">Login</button>
+<button class="bg-primary text-on-primary px-stack-md py-2 font-bold text-data-label rounded-lg hover:bg-tertiary transition-all shadow-sm">Commencer à investir</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Hero Market Info -->
+<section class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary">Marchés financiers</h1>
+<div class="flex items-center gap-stack-sm mt-2">
+<span class="text-on-surface-variant font-data-label text-data-label">Dernière mise à jour : 24 Mai 2024, 15:30 GMT</span>
+<span class="w-1.5 h-1.5 bg-[#2EB873] rounded-full animate-pulse"></span>
+<span class="text-on-surface-variant/60 font-data-label text-[12px] italic">Données différées de 15 min</span>
+</div>
+</div>
+<div class="flex gap-stack-sm">
+<button class="flex items-center gap-2 border border-outline-variant px-4 py-2 rounded hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="text-data-label font-bold">Filtres</span>
+</button>
+<button class="flex items-center gap-2 border border-outline-variant px-4 py-2 rounded hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="text-data-label font-bold">Rapport Hebdo</span>
+</button>
+</div>
+</section>
+<!-- Market Quick Overview Cards -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter mb-section-gap">
+<!-- BRVM Composite -->
+<div class="bg-white border border-outline-variant p-stack-md rounded shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<p class="text-on-surface-variant font-data-label text-data-label uppercase tracking-tighter">BRVM Composite</p>
+<span class="text-[#2EB873] font-bold font-data-label">+1.45%</span>
+</div>
+<h3 class="text-headline-sm font-data-value text-primary">214.82 pts</h3>
+<div class="w-full h-10 mt-2 bg-surface-container-low/50 rounded overflow-hidden">
+<!-- Sparkline Micro -->
+<div class="h-full w-full opacity-30 flex items-end">
+<div class="bg-[#2EB873] w-1/6 h-[30%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[45%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[35%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[60%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[80%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[95%]"></div>
+</div>
+</div>
+</div>
+<!-- BRVM 30 -->
+<div class="bg-white border border-outline-variant p-stack-md rounded shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<p class="text-on-surface-variant font-data-label text-data-label uppercase tracking-tighter">BRVM 30</p>
+<span class="text-[#2EB873] font-bold font-data-label">+0.82%</span>
+</div>
+<h3 class="text-headline-sm font-data-value text-primary">108.15 pts</h3>
+<div class="w-full h-10 mt-2 bg-surface-container-low/50 rounded overflow-hidden">
+<div class="h-full w-full opacity-30 flex items-end">
+<div class="bg-[#2EB873] w-1/6 h-[50%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[40%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[55%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[45%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[70%]"></div>
+<div class="bg-[#2EB873] w-1/6 h-[85%]"></div>
+</div>
+</div>
+</div>
+<!-- Market Cap -->
+<div class="bg-white border border-outline-variant p-stack-md rounded shadow-sm hover:shadow-md transition-shadow">
+<p class="text-on-surface-variant font-data-label text-data-label uppercase tracking-tighter mb-2">Market Cap (Actions)</p>
+<h3 class="text-headline-sm font-data-value text-primary">7 982.4 Md</h3>
+<p class="text-on-surface-variant/60 font-data-label text-[12px] mt-2">FCFA XOF</p>
+</div>
+<!-- Volume -->
+<div class="bg-white border border-outline-variant p-stack-md rounded shadow-sm hover:shadow-md transition-shadow">
+<p class="text-on-surface-variant font-data-label text-data-label uppercase tracking-tighter mb-2">Volume échangé</p>
+<h3 class="text-headline-sm font-data-value text-primary">852.1 M</h3>
+<p class="text-on-surface-variant/60 font-data-label text-[12px] mt-2">Titres transigés</p>
+</div>
+<!-- Gainers/Losers -->
+<div class="bg-white border border-outline-variant p-stack-md rounded shadow-sm hover:shadow-md transition-shadow">
+<p class="text-on-surface-variant font-data-label text-data-label uppercase tracking-tighter mb-2">Avancées / Déclins</p>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex flex-col">
+<span class="text-[#2EB873] font-bold font-data-value text-lg">24</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant/60">Hausse</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-error font-bold font-data-value text-lg">12</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant/60">Baisse</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-on-surface font-bold font-data-value text-lg">10</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant/60">Stable</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Market Chart and Financial Calendar Bento Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-section-gap">
+<div class="lg:col-span-2 bg-white border border-outline-variant rounded p-stack-lg relative overflow-hidden">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="text-headline-sm text-primary">Performance BRVM Composite</h2>
+<div class="flex bg-surface-container-low p-1 rounded">
+<button class="px-3 py-1 text-data-label font-bold text-primary bg-white shadow-sm rounded">1D</button>
+<button class="px-3 py-1 text-data-label font-medium text-on-surface-variant hover:text-primary">1W</button>
+<button class="px-3 py-1 text-data-label font-medium text-on-surface-variant hover:text-primary">1M</button>
+<button class="px-3 py-1 text-data-label font-medium text-on-surface-variant hover:text-primary">1Y</button>
+<button class="px-3 py-1 text-data-label font-medium text-on-surface-variant hover:text-primary">MAX</button>
+</div>
+</div>
+<div class="h-80 w-full flex items-end justify-between px-2 pt-10">
+<!-- Placeholder for Chart using styled bars -->
+<div class="w-2 bg-primary/10 rounded-t h-1/2"></div>
+<div class="w-2 bg-primary/10 rounded-t h-[55%]"></div>
+<div class="w-2 bg-primary/10 rounded-t h-[48%]"></div>
+<div class="w-2 bg-primary/20 rounded-t h-[60%]"></div>
+<div class="w-2 bg-primary/30 rounded-t h-[65%]"></div>
+<div class="w-2 bg-primary/40 rounded-t h-[58%]"></div>
+<div class="w-2 bg-primary/50 rounded-t h-[72%]"></div>
+<div class="w-2 bg-primary/60 rounded-t h-[85%]"></div>
+<div class="w-2 bg-primary/70 rounded-t h-[80%]"></div>
+<div class="w-2 bg-primary rounded-t h-[95%]"></div>
+<div class="w-2 bg-secondary-container rounded-t h-[92%]"></div>
+<div class="w-2 bg-secondary-container/80 rounded-t h-[88%]"></div>
+<div class="w-2 bg-secondary-container/60 rounded-t h-[80%]"></div>
+<div class="w-2 bg-primary/80 rounded-t h-[85%]"></div>
+<div class="w-2 bg-primary rounded-t h-[95%]"></div>
+<div class="w-2 bg-[#2EB873] rounded-t h-full"></div>
+</div>
+<div class="absolute bottom-4 left-stack-lg right-stack-lg flex justify-between text-[11px] font-data-label text-on-surface-variant/40">
+<span>09:00</span>
+<span>11:00</span>
+<span>13:00</span>
+<span>15:00</span>
+</div>
+</div>
+<!-- Financial Calendar Snippet -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-stack-md flex flex-col">
+<div class="flex items-center gap-2 mb-stack-md border-b border-outline-variant/30 pb-2">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+<h2 class="text-data-label font-bold text-primary uppercase tracking-wider">Calendrier Financier</h2>
+</div>
+<div class="space-y-stack-md flex-1">
+<div class="flex gap-4 items-start group cursor-pointer">
+<div class="flex flex-col items-center bg-white p-2 rounded shadow-sm min-w-[50px]">
+<span class="text-[10px] font-bold text-on-surface-variant/60 uppercase">MAI</span>
+<span class="text-lg font-bold text-primary leading-none">28</span>
+</div>
+<div class="flex-1">
+<h4 class="text-data-label font-bold text-on-surface group-hover:text-primary transition-colors">Publication Résultats Q1</h4>
+<p class="text-[12px] text-on-surface-variant">SONATEL (SN)</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group cursor-pointer">
+<div class="flex flex-col items-center bg-white p-2 rounded shadow-sm min-w-[50px]">
+<span class="text-[10px] font-bold text-on-surface-variant/60 uppercase">MAI</span>
+<span class="text-lg font-bold text-primary leading-none">30</span>
+</div>
+<div class="flex-1">
+<h4 class="text-data-label font-bold text-on-surface group-hover:text-primary transition-colors">Paiement Dividendes</h4>
+<p class="text-[12px] text-on-surface-variant">BOA CI</p>
+</div>
+</div>
+<div class="flex gap-4 items-start group cursor-pointer opacity-60">
+<div class="flex flex-col items-center bg-white p-2 rounded shadow-sm min-w-[50px]">
+<span class="text-[10px] font-bold text-on-surface-variant/60 uppercase">JUIN</span>
+<span class="text-lg font-bold text-primary leading-none">05</span>
+</div>
+<div class="flex-1">
+<h4 class="text-data-label font-bold text-on-surface group-hover:text-primary transition-colors">Assemblée Générale</h4>
+<p class="text-[12px] text-on-surface-variant">ORAGROUP</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full text-center py-2 border-t border-outline-variant/30 text-primary font-bold text-data-label hover:underline">Voir tout le calendrier</button>
+</div>
+</section>
+<!-- Data Tables Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg mb-section-gap">
+<!-- Top Gainers -->
+<div class="bg-white border border-outline-variant rounded overflow-hidden">
+<div class="bg-surface-container-low px-stack-md py-3 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2EB873]">trending_up</span>
+<h3 class="text-data-label font-bold text-on-surface uppercase">Top Hausses</h3>
+</div>
+<a class="text-[12px] text-primary font-bold" href="#">Tout voir</a>
+</div>
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low/50 text-on-surface-variant/70 border-b border-outline-variant/30">
+<th class="px-4 py-2 font-bold text-[11px] uppercase">Valeur</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Dernier</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Var %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">SOLIBRA CI</td>
+<td class="px-4 py-3 text-right font-data-value">85 000</td>
+<td class="px-4 py-3 text-right font-bold text-[#2EB873]">+7.45%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">NESTLE CI</td>
+<td class="px-4 py-3 text-right font-data-value">7 200</td>
+<td class="px-4 py-3 text-right font-bold text-[#2EB873]">+6.98%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">SITAB CI</td>
+<td class="px-4 py-3 text-right font-data-value">6 450</td>
+<td class="px-4 py-3 text-right font-bold text-[#2EB873]">+5.22%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">BERNABE CI</td>
+<td class="px-4 py-3 text-right font-data-value">1 380</td>
+<td class="px-4 py-3 text-right font-bold text-[#2EB873]">+4.15%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Top Losers -->
+<div class="bg-white border border-outline-variant rounded overflow-hidden">
+<div class="bg-surface-container-low px-stack-md py-3 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error">trending_down</span>
+<h3 class="text-data-label font-bold text-on-surface uppercase">Top Baisses</h3>
+</div>
+<a class="text-[12px] text-primary font-bold" href="#">Tout voir</a>
+</div>
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low/50 text-on-surface-variant/70 border-b border-outline-variant/30">
+<th class="px-4 py-2 font-bold text-[11px] uppercase">Valeur</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Dernier</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Var %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">VIVO ENERGY CI</td>
+<td class="px-4 py-3 text-right font-data-value">790</td>
+<td class="px-4 py-3 text-right font-bold text-error">-7.50%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">UNIWAX CI</td>
+<td class="px-4 py-3 text-right font-data-value">520</td>
+<td class="px-4 py-3 text-right font-bold text-error">-6.31%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">TOTAL CI</td>
+<td class="px-4 py-3 text-right font-data-value">2 150</td>
+<td class="px-4 py-3 text-right font-bold text-error">-4.44%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/20 transition-colors cursor-pointer">
+<td class="px-4 py-3 font-bold text-on-surface">CFAO CI</td>
+<td class="px-4 py-3 text-right font-data-value">785</td>
+<td class="px-4 py-3 text-right font-bold text-error">-3.09%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Highest Market Caps -->
+<div class="bg-white border border-outline-variant rounded overflow-hidden">
+<div class="bg-surface-container-low px-stack-md py-3 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<h3 class="text-data-label font-bold text-on-surface uppercase">Capitalisations</h3>
+</div>
+<a class="text-[12px] text-primary font-bold" href="#">Tout voir</a>
+</div>
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low/50 text-on-surface-variant/70 border-b border-outline-variant/30">
+<th class="px-4 py-2 font-bold text-[11px] uppercase">Société</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Cap. (Md)</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Poids %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">SONATEL SN</td>
+<td class="px-4 py-3 text-right font-data-value">1 750.0</td>
+<td class="px-4 py-3 text-right font-bold text-primary">21.9%</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">ECOBANK ETI</td>
+<td class="px-4 py-3 text-right font-data-value">545.2</td>
+<td class="px-4 py-3 text-right font-bold text-primary">6.8%</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">ORAGROUP TG</td>
+<td class="px-4 py-3 text-right font-data-value">412.8</td>
+<td class="px-4 py-3 text-right font-bold text-primary">5.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Most Traded -->
+<div class="bg-white border border-outline-variant rounded overflow-hidden">
+<div class="bg-surface-container-low px-stack-md py-3 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">swap_horiz</span>
+<h3 class="text-data-label font-bold text-on-surface uppercase">Plus Actifs</h3>
+</div>
+<a class="text-[12px] text-primary font-bold" href="#">Tout voir</a>
+</div>
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-surface-container-low/50 text-on-surface-variant/70 border-b border-outline-variant/30">
+<th class="px-4 py-2 font-bold text-[11px] uppercase">Valeur</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Volume</th>
+<th class="px-4 py-2 font-bold text-[11px] uppercase text-right">Valeur (M)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">ECOBANK ETI</td>
+<td class="px-4 py-3 text-right font-data-value">452 120</td>
+<td class="px-4 py-3 text-right font-bold text-primary">8.5</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">ONATEL BF</td>
+<td class="px-4 py-3 text-right font-data-value">128 450</td>
+<td class="px-4 py-3 text-right font-bold text-primary">2.4</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-bold text-on-surface">BOA CI</td>
+<td class="px-4 py-3 text-right font-data-value">85 000</td>
+<td class="px-4 py-3 text-right font-bold text-primary">1.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Market News Section -->
+<section class="mb-section-gap">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="text-headline-md text-primary">Actualités des Marchés</h2>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                    Flux d'actualités complet
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="group cursor-pointer">
+<div class="h-48 rounded overflow-hidden mb-4 border border-outline-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="High-resolution photograph of a modern financial trading floor in a West African capital, featuring multiple computer screens with glowing stock market charts. The lighting is bright and professional with a color palette of deep blues and vibrant greens. Soft focused traders are visible in the background, conveying a sense of busy yet orderly financial activity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsHB7dZ19DzmD8aqUmKNGOYR2dNbi9w3cxqRx5kFRXl7uuo3973_wR3NeGTi8xsKHoB7y_YNfa5PBODGsPrLD6hg0B6GkZi7W6rmcCBZSAYe7I0h23_uLqAapRxLemsXqNY2tsgwEbxIeKWE80pYHuuH2dgIpp161i64nFWyrr3BvVwKO0NCpR4lZXQA6Ld22RWynLW_XCTFexHIPaMgQ56f41S588kxOfwjoIU9RbZcPIpudj-XBSyvrVjFzoiJTYsl0ccRIRcA"/>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary-fixed px-2 py-0.5 rounded">Marchés Actions</span>
+<h3 class="text-headline-sm text-on-surface mt-2 group-hover:text-primary transition-colors leading-tight">La BRVM clôture en hausse portée par les valeurs bancaires</h3>
+<p class="text-on-surface-variant text-body-md mt-2 line-clamp-2">L'indice Composite gagne 1.45% à la fermeture ce vendredi, stimulé par les performances exceptionnelles de Société Générale CI et BOA...</p>
+<div class="flex items-center gap-2 mt-4 text-[12px] text-on-surface-variant/60 font-data-label">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        Il y a 2 heures
+                    </div>
+</div>
+<div class="group cursor-pointer">
+<div class="h-48 rounded overflow-hidden mb-4 border border-outline-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic close-up of a premium gold bar with an engraved serial number reflecting soft studio lights. The background is a minimalist, dark blue textured surface that enhances the prestige and security of the asset. The composition is clean and focused, reflecting a high-end investment atmosphere with professional studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo3WIm8zXPY8-a1TCYfw-dVyNdQzvCkjd54FUfU4vBKbnmHliCF_Yh7KACSiNpDvxGs0WThzZz-3h8ySJ7P8eFijz6JAvYAWCiBzqvo7nnFUGvPAame0yh1a7I1y29YZ0qEn_oI6rEiaSO0_9bNtAr0vlt2jx08MQjcR_R1RXzGOVRTbT-H_9251SagldVry56k92-tSIBWFUvzLjPapnENfI0S5gBp2T8IZzGWBCM1FN25wpaxdjis07B6CpaKKddtoKxa6fkyA"/>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary-fixed px-2 py-0.5 rounded">Matières Premières</span>
+<h3 class="text-headline-sm text-on-surface mt-2 group-hover:text-primary transition-colors leading-tight">L'Or atteint des sommets face à l'inflation régionale</h3>
+<p class="text-on-surface-variant text-body-md mt-2 line-clamp-2">Les investisseurs se tournent massivement vers les valeurs refuges alors que les pressions inflationnistes persistent dans l'UEMOA...</p>
+<div class="flex items-center gap-2 mt-4 text-[12px] text-on-surface-variant/60 font-data-label">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        Il y a 4 heures
+                    </div>
+</div>
+<div class="group cursor-pointer">
+<div class="h-48 rounded overflow-hidden mb-4 border border-outline-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated digital dashboard showing complex financial analytics on a sleek tablet screen. The image features high-contrast graphics in primary blue and gold, placed on a mahogany desk within a high-tier corporate office. Warm evening light enters through a large window, creating a serene and authoritative professional environment for wealth management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJdV5W9lygeRdLSgvbar2QM5qdxwtQiC04XJT50mT7V1ciGgRSUQBRY3ABK8fSq1-qnFUWf11xMwyEsJERiP8GlgfJ_2ITypJp56UngDNSt_EBJ4KZJoNqpQRwYoOeBfO8SZ31G6Dhyd5Sy0QKYM8q5sXB-Gskn2N-NoDxGBNVv4fonFkT1MEBAw_hsy9NNcYzZfPZT9DctfUEVHO4KHc0EavtVzWETAz4QJ3do34QTPmTdd5EQjaJ6aTWSrPdjem5exeyMAr9pA"/>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary-fixed px-2 py-0.5 rounded">Réglementation</span>
+<h3 class="text-headline-sm text-on-surface mt-2 group-hover:text-primary transition-colors leading-tight">Nouvelles directives de l'AMF-UMOA pour les SGI</h3>
+<p class="text-on-surface-variant text-body-md mt-2 line-clamp-2">Le régulateur annonce un durcissement des règles de conformité pour renforcer la protection des épargnants sur le marché financier régional...</p>
+<div class="flex items-center gap-2 mt-4 text-[12px] text-on-surface-variant/60 font-data-label">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                        Il y a 6 heures
+                    </div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant pt-section-gap pb-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-stack-lg mb-section-gap">
+<div class="col-span-2 lg:col-span-2">
+<div class="text-headline-sm font-bold text-primary mb-stack-md">Africaine des Finances</div>
+<p class="text-on-surface-variant text-body-md mb-stack-md max-w-xs">Votre partenaire de confiance pour l'investissement et la gestion d'actifs sur les marchés financiers de l'UEMOA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">qr_code_2</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">language</span>
+</div>
+</div>
+<div>
+<h4 class="text-data-label font-bold text-on-surface mb-4 uppercase">Platform</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Investir</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Marchés</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Analyse</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-data-label font-bold text-on-surface mb-4 uppercase">Learn</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Formation</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Webinaires</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-data-label font-bold text-on-surface mb-4 uppercase">Resources</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Rapports</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Glossaire</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-data-label font-bold text-on-surface mb-4 uppercase">Contact</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Support</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Bureaux</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all text-body-md" href="#">Media</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 pt-stack-md flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-data-label text-on-surface-variant/60">© 2024 Africaine des Finances. Licensed by AMF-UMOA AA/2022-03.</p>
+<div class="flex gap-stack-lg">
+<a class="text-data-label text-on-surface-variant/60 hover:text-primary" href="#">Legal</a>
+<a class="text-data-label text-on-surface-variant/60 hover:text-primary" href="#">Confidentialité</a>
+<a class="text-data-label text-on-surface-variant/60 hover:text-primary" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Simple Hover Interactivity Script -->
+<script>
+        document.querySelectorAll('table tr').forEach(row => {
+            row.addEventListener('click', () => {
+                const stockName = row.querySelector('td:first-child')?.innerText;
+                if(stockName) {
+                    console.log(`Navigating to details for ${stockName}`);
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Poser une question au formateur | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed": "#001551",
+                    "surface": "#f9f9ff",
+                    "on-secondary-container": "#6d5000",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "secondary-container": "#ffbf00",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "surface-container": "#e7eeff",
+                    "surface-variant": "#dae3f6",
+                    "surface-container-highest": "#dae3f6",
+                    "outline": "#757683",
+                    "on-primary": "#ffffff",
+                    "primary": "#001a61",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary-fixed": "#001551",
+                    "on-tertiary-container": "#8d9ee3",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dce1ff",
+                    "tertiary-container": "#213371",
+                    "surface-dim": "#d1daed",
+                    "on-error": "#ffffff",
+                    "primary-container": "#0a2e8c",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#051c5b",
+                    "inverse-surface": "#28313f",
+                    "on-primary-container": "#839cfd",
+                    "on-background": "#131c2a",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary": "#795900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg-mobile": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .form-focus-ring:focus {
+            outline: none;
+            border-color: #001a61;
+            box-shadow: 0 0 0 2px rgba(10, 46, 140, 0.1);
+        }
+        .drop-zone-active {
+            background-color: #EEF3FF;
+            border-color: #001a61;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant py-4">
+<div class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">settings</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a corporate executive in business attire, looking confident and approachable. The background is a soft, neutral grey within a high-end financial office environment. The lighting is bright and professional, following the clean, prestigious aesthetic of the Africaine des Finances brand with sharp focus and high clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFVstigM94i5L_Oxj94d4zYdrDJPN79tSSExYGtLvl7yW37PPH9WcFxlmVQLDSoikrEctnNdsb81-McVytVk-OO-qZUeIk70sNQZy1TVcAY-b5LlLLBNglVgDCJQ_4NcFLTp88YVR_hItLSortqqqq9HZRTX3zJXP1ADpH2O1CiF_03iyLWhLVI7dX4Rby1ROcFFrsZ6XPvFpmwBPTTIu5Ox3QCLUeCdK5-_dWpuWwdEe93yp7t1CeNC61Cq7ktK0wvly62ggKjA"/>
+</div>
+</div>
+</nav>
+<div class="flex max-w-container-max mx-auto">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-screen w-64 sticky top-16 py-stack-lg px-4 gap-stack-md border-r border-outline-variant bg-surface-container">
+<div class="mb-8">
+<h2 class="font-headline-sm text-headline-sm text-primary">Client Portal</h2>
+<p class="text-on-surface-variant text-xs uppercase tracking-wider font-semibold">Institutional Excellence</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-body-md text-body-md">Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">analytics</span>
+<span class="font-body-md text-body-md">Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">description</span>
+<span class="font-body-md text-body-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">admin_panel_settings</span>
+<span class="font-body-md text-body-md">Administration</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow min-h-screen px-4 md:px-margin-desktop py-stack-lg">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-8 text-on-surface-variant font-data-label text-data-label">
+<a class="hover:text-primary" href="#">Academy</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary" href="#">Mes Formations</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Poser une question</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Form Section -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-8">
+<header class="mb-8">
+<h1 class="font-headline-md text-headline-md text-primary mb-2">Contacter votre formateur</h1>
+<p class="text-on-surface-variant">Besoin de précisions sur un concept ? Posez votre question directement à l'expert en charge de votre formation. Vous recevrez une réponse sous 24 à 48 heures ouvrées.</p>
+</header>
+<form class="space-y-6" id="contact-form">
+<!-- Course Selection -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="space-y-2">
+<label class="font-data-label text-data-label text-on-surface-variant block" for="course">Formation concernée</label>
+<div class="relative">
+<select class="w-full h-12 px-4 bg-background border border-outline-variant rounded-lg font-body-md text-on-surface appearance-none form-focus-ring cursor-pointer" id="course" required="">
+<option disabled="" selected="" value="">Sélectionner une formation</option>
+<option value="1">Analyse des Marchés Émergents Africains</option>
+<option value="2">Gestion de Portefeuille Institutionnel</option>
+<option value="3">Réglementation Financière OHADA</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-data-label text-data-label text-on-surface-variant block" for="lesson">Leçon spécifique (Optionnel)</label>
+<div class="relative">
+<select class="w-full h-12 px-4 bg-background border border-outline-variant rounded-lg font-body-md text-on-surface appearance-none form-focus-ring cursor-pointer" id="lesson">
+<option selected="" value="">Toute la formation</option>
+<option value="1.1">Module 1 : Dynamiques de croissance</option>
+<option value="1.2">Module 2 : Risque Souverain</option>
+<option value="1.3">Étude de Cas : Zone UEMOA</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Question Content -->
+<div class="space-y-2">
+<label class="font-data-label text-data-label text-on-surface-variant block" for="subject">Objet de la question</label>
+<input class="w-full h-12 px-4 bg-background border border-outline-variant rounded-lg font-body-md text-on-surface form-focus-ring" id="subject" placeholder="Ex: Précisions sur le calcul du ratio de solvabilité" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-data-label text-data-label text-on-surface-variant block" for="message">Votre question détaillée</label>
+<textarea class="w-full p-4 bg-background border border-outline-variant rounded-lg font-body-md text-on-surface form-focus-ring resize-none" id="message" placeholder="Décrivez votre interrogation avec le plus de précisions possible..." required="" rows="6"></textarea>
+</div>
+<!-- Upload Zone -->
+<div class="space-y-2">
+<label class="font-data-label text-data-label text-on-surface-variant block">Pièces jointes (Captures d'écran, schémas, documents)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center gap-2 hover:border-primary transition-colors cursor-pointer bg-background" id="drop-zone">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">upload_file</span>
+<p class="font-body-md text-on-surface">Glissez-déposez vos fichiers ici ou <span class="text-primary font-bold">parcourez</span></p>
+<p class="text-xs text-on-surface-variant">Formats acceptés : PDF, JPG, PNG (Max 5MB)</p>
+<input class="hidden" id="file-input" multiple="" type="file"/>
+</div>
+<div class="flex flex-wrap gap-2 mt-3" id="file-list"></div>
+</div>
+<!-- Action -->
+<div class="flex items-center justify-end gap-4 pt-4">
+<button class="px-6 py-3 text-primary border border-primary rounded-lg font-bold hover:bg-primary-fixed transition-colors" type="button">Annuler</button>
+<button class="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-container transition-colors flex items-center gap-2" id="submit-btn" type="submit">
+                                    Envoyer la question
+                                    <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Right: Information & Context -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Formateur Card -->
+<div class="bg-surface-container-high border border-outline-variant rounded-lg p-6">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Votre Expert</h3>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A portrait of a senior African financial analyst with grey-flecked hair, wearing a sharp navy blue suit and gold tie. The setting is a prestigious high-rise office in Lagos or Nairobi, with a blurred cityscape through the window. The aesthetic is authoritative, professional, and sophisticated, matching the institutional premium style of Africaine des Finances." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaY72yv-kvNC_3oeZoEowKz--j4MLWP6JkMNXax3d4yV4iBOcKdV5bzgQkMNU4SmolQip4jkN7ZYyk6TCkURUR-1Vfqb9ZzeTgrFEE5BR6BSFOjDC11BZzctSanaBqOgw8mMMpchVp8XO_UfHRrkSxJuMnXv0GH47Jxgq9kyI9PkC0Rw3UyqUUomQyLqS0Qo8sKXL0rNunyE4pyoe_HjhhYuWOhg87yWubgL2gK_pAop0S7OgYBdjL5t6l0MayDVigDXkOD_1_Yw"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Dr. Amadou Kouyaté</p>
+<p class="text-sm text-on-surface-variant">Analyste Senior CFA</p>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant italic mb-4">"Je m'engage à apporter des réponses précises et contextualisées à chaque étudiant pour garantir une maîtrise parfaite des mécanismes financiers."</p>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-data-label">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            Actuellement en ligne
+                        </div>
+</div>
+<!-- Guidelines -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+<h3 class="font-data-label text-data-label text-primary font-bold mb-4 uppercase tracking-wider">Conseils d'envoi</h3>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<p class="text-sm text-on-surface-variant">Soyez spécifique : citez le numéro du slide ou de la minute de la vidéo.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<p class="text-sm text-on-surface-variant">Utilisez des captures d'écran pour illustrer vos questions techniques.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<p class="text-sm text-on-surface-variant">Consultez la FAQ avant d'envoyer, votre réponse s'y trouve peut-être déjà.</p>
+</li>
+</ul>
+</div>
+<!-- Quick Link -->
+<a class="block bg-primary p-6 rounded-lg text-white group hover:bg-primary-container transition-all" href="#">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-3xl opacity-80">forum</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-1">Forum d'Entraide</h4>
+<p class="text-primary-fixed text-sm">Discutez avec les autres 450 étudiants inscrits à cette formation.</p>
+</a>
+</div>
+</div>
+</main>
+</div>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" id="success-modal">
+<div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-10 text-center shadow-2xl border border-outline-variant transform scale-95 transition-transform duration-300">
+<div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-5xl text-green-600" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-3">Question envoyée !</h2>
+<p class="text-on-surface-variant mb-8">Votre message a bien été transmis au Dr. Amadou Kouyaté. Une notification vous sera envoyée dès qu'une réponse sera disponible.</p>
+<button class="w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-primary-container transition-colors" onclick="closeModal()">
+                Retour à la formation
+            </button>
+<button class="mt-4 text-sm text-on-surface-variant hover:text-primary transition-colors" onclick="closeModal()">Fermer cette fenêtre</button>
+</div>
+</div>
+<script>
+        // Form interactivity
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const modal = document.getElementById('success-modal');
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+
+        // Handle File Upload Visuals
+        dropZone.addEventListener('click', () => fileInput.click());
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drop-zone-active');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drop-zone-active');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drop-zone-active');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', () => {
+            handleFiles(fileInput.files);
+        });
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                const chip = document.createElement('div');
+                chip.className = 'flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant rounded-full text-sm text-on-surface-variant';
+                chip.innerHTML = `
+                    <span class="material-symbols-outlined text-sm">attachment</span>
+                    <span class="truncate max-w-[150px]">${file.name}</span>
+                    <button type="button" class="material-symbols-outlined text-sm hover:text-error" onclick="this.parentElement.remove()">close</button>
+                `;
+                fileList.appendChild(chip);
+            });
+        }
+
+        // Handle Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="animate-spin material-symbols-outlined">progress_activity</span> Envoi en cours...`;
+
+            // Simulate API call
+            setTimeout(() => {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('div').classList.remove('scale-95');
+                }, 10);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `Envoyer la question <span class="material-symbols-outlined text-sm">send</span>`;
+            }, 1200);
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                form.reset();
+                fileList.innerHTML = '';
+            }, 300);
+        }
+
+        // Micro-interaction for Select inputs
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function() {
+                this.classList.add('font-bold');
+                this.classList.add('text-primary');
+            });
+        });
+    </script>
+</body></html>

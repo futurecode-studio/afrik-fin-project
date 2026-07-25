@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&family=IBM+Plex+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .success-glow {
+            box-shadow: 0 0 40px rgba(46, 184, 115, 0.1);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b7c4ff",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-error-container": "#93000a",
+                        "primary": "#001a61",
+                        "on-surface-variant": "#444652",
+                        "surface-container-low": "#f0f3ff",
+                        "surface": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "on-secondary-fixed": "#261a00",
+                        "inverse-surface": "#28313f",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "secondary-container": "#ffbf00",
+                        "primary-fixed": "#dce1ff",
+                        "surface-container-highest": "#dae3f6",
+                        "tertiary-container": "#213371",
+                        "tertiary": "#051c5b",
+                        "secondary-fixed": "#ffdfa0",
+                        "tertiary-fixed": "#dce1ff",
+                        "surface-container": "#e7eeff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#839cfd",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "secondary": "#795900",
+                        "on-secondary-container": "#6d5000",
+                        "surface-tint": "#3d58b5",
+                        "outline": "#757683",
+                        "on-background": "#131c2a",
+                        "inverse-on-surface": "#ebf1ff",
+                        "error": "#ba1a1a",
+                        "on-surface": "#131c2a",
+                        "outline-variant": "#c5c5d4",
+                        "surface-variant": "#dae3f6",
+                        "surface-container-high": "#dfe8fc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001551",
+                        "on-tertiary-fixed": "#001551",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "primary-container": "#0a2e8c",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#5c4300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "data-label": ["IBM Plex Mono"],
+                        "body-lg": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "data-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "data-value": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-margin-desktop bg-surface-container-lowest h-16 border-b border-outline-variant">
+<div class="flex items-center gap-stack-lg">
+<span class="font-display-lg text-display-lg text-primary">Heritage Academy</span>
+<nav class="hidden md:flex gap-stack-lg ml-12">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="#">My Courses</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Library</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex gap-stack-sm mr-4">
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">notifications</button>
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">help</button>
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-variant transition-colors">settings</button>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged financial executive in a crisp navy suit, set against a clean, architectural office backdrop. The lighting is bright and authoritative, reflecting the premium corporate aesthetic of a high-end African financial institution. The image is clear, polished, and exudes stability and professional excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7hX_eEeL_K9jtuRzjo0EtB8rUkS6IhyfHwXg_lUVKnNg2h9jigjP5rLLsgC6nuFvkzRJ4rDQl5Y2ZWriCjvZJCZ55zghQdwhuklMgr7w0wJ3ifSuQSjYW_OqozPt1SC6BVCMhwkwaKcljD4UvY0iZLTUXhd0cffT7qPnA18NdGKIusJ4G8VB3S8ZbEOfZBuy8DMZj7nIZ1wvfhwxlAxwiCFWSEYhOobA1fAKHfc33lqxSpS-SOMVj-GhHXdrakRDN27DFQov0PQ"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-80 flex flex-col z-40 bg-surface-container-low border-r border-outline-variant overflow-y-auto">
+<div class="p-stack-lg">
+<div class="flex items-center gap-stack-md mb-stack-lg">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary leading-tight">Wealth Management 101</h3>
+<p class="text-on-surface-variant text-sm">65% Complete</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mb-stack-lg">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined mr-3">play_circle</span>
+<span class="font-body-md">Introduction</span>
+</div>
+<div class="flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-body-md">Market Fundamentals</span>
+</div>
+<div class="flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md">Risk Assessment</span>
+</div>
+<div class="flex items-center p-3 bg-primary-container text-on-primary-container rounded-r-full font-bold">
+<span class="material-symbols-outlined mr-3">verified_user</span>
+<span class="font-body-md">Financial Ethics</span>
+</div>
+<div class="flex items-center p-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined mr-3">workspace_premium</span>
+<span class="font-body-md">Final Certification</span>
+</div>
+</nav>
+<div class="p-stack-lg border-t border-outline-variant bg-surface-container">
+<div class="flex items-center p-2 text-on-surface-variant hover:text-primary transition-all cursor-pointer mb-2">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="font-data-label text-data-label">Resources</span>
+</div>
+<div class="flex items-center p-2 text-on-surface-variant hover:text-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined mr-3">contact_support</span>
+<span class="font-data-label text-data-label">Support</span>
+</div>
+</div>
+</aside>
+<!-- Main Content (The Canvas) -->
+<main class="flex-1 ml-80 p-margin-desktop flex flex-col items-center justify-center">
+<div class="max-w-4xl w-full">
+<!-- Success Illustration & Status -->
+<div class="text-center mb-section-gap">
+<div class="relative inline-block mb-stack-lg">
+<div class="w-32 h-32 bg-primary/5 rounded-full flex items-center justify-center animate-float success-glow">
+<span class="material-symbols-outlined text-[64px] text-secondary" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-white rounded-full p-1 border border-outline-variant">
+<span class="material-symbols-outlined text-secondary text-2xl">check_circle</span>
+</div>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Exercice envoyé</h1>
+<div class="inline-flex items-center px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-bold text-sm tracking-wide uppercase">
+                        En attente de correction
+                    </div>
+</div>
+<!-- Bento Style Recap Card -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Date Section -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col justify-between">
+<div>
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">DATE D'ENVOI</p>
+<p class="font-headline-sm text-headline-sm text-primary">24 Juillet 2026</p>
+</div>
+<span class="material-symbols-outlined text-primary/20 text-4xl self-end">calendar_today</span>
+</div>
+<!-- File Section -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<div class="w-14 h-14 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-data-label text-data-label text-on-surface-variant mb-1">FICHIER JOINT</p>
+<p class="font-headline-sm text-headline-sm text-primary">Ethique_Financiere_M1_Dupont.pdf</p>
+<p class="text-on-surface-variant text-sm">2.4 MB • Prêt pour examen</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<button class="flex items-center justify-center gap-2 px-4 py-2 border border-primary text-primary rounded font-bold hover:bg-surface-container-low transition-all active:opacity-80">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                Voir ma réponse
+                            </button>
+<button class="flex items-center justify-center gap-2 px-4 py-2 text-on-surface-variant hover:text-primary transition-all active:opacity-80">
+<span class="material-symbols-outlined text-sm">cached</span>
+                                Remplacer le fichier
+                            </button>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="mt-section-gap flex flex-col items-center gap-stack-lg">
+<p class="text-on-surface-variant max-w-lg text-center">
+                        Votre exercice a été transmis avec succès à l'équipe pédagogique. Vous recevrez une notification dès que votre correcteur aura validé votre travail. Vous pouvez d'ores et déjà poursuivre votre formation.
+                    </p>
+<button class="bg-primary text-on-primary px-12 py-4 rounded-lg font-bold text-headline-sm hover:bg-primary-container transition-all flex items-center gap-stack-md shadow-lg shadow-primary/10 active:opacity-90">
+                        Continuer le cours
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-highest border-t border-outline-variant mt-auto">
+<div class="flex flex-col gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">Heritage Academy</span>
+<p class="font-data-label text-data-label text-on-surface-variant">© 2024 Heritage Financial Institution. All rights reserved.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary underline" href="#">Privacy Policy</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary underline" href="#">Terms of Service</a>
+<a class="font-data-label text-data-label text-on-surface-variant hover:text-primary underline" href="#">Support</a>
+</div>
+</footer>
+<script>
+        // Micro-interaction for primary button
+        const mainCta = document.querySelector('button.bg-primary');
+        mainCta.addEventListener('mouseenter', () => {
+            mainCta.querySelector('.material-symbols-outlined').style.transform = 'translateX(5px)';
+            mainCta.querySelector('.material-symbols-outlined').style.transition = 'transform 0.2s ease-out';
+        });
+        mainCta.addEventListener('mouseleave', () => {
+            mainCta.querySelector('.material-symbols-outlined').style.transform = 'translateX(0px)';
+        });
+    </script>
+</body></html>

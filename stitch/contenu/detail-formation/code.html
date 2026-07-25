@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Les bases de la BRVM | Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "on-surface": "#131c2a",
+                    "on-surface-variant": "#444652",
+                    "tertiary-fixed": "#dce1ff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "surface-container-low": "#f0f3ff",
+                    "secondary-container": "#ffbf00",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-container-high": "#dfe8fc",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-secondary-container": "#6d5000",
+                    "inverse-surface": "#28313f",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "tertiary": "#051c5b",
+                    "background": "#f9f9ff",
+                    "on-background": "#131c2a",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#001551",
+                    "on-primary-container": "#839cfd",
+                    "outline": "#757683",
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "surface-container-highest": "#dae3f6",
+                    "secondary-fixed": "#ffdfa0",
+                    "inverse-primary": "#b7c4ff",
+                    "on-secondary-fixed": "#261a00",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-container": "#8d9ee3",
+                    "surface-variant": "#dae3f6",
+                    "outline-variant": "#c5c5d4",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "surface-container": "#e7eeff",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#795900",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "primary": "#001a61",
+                    "primary-container": "#0a2e8c",
+                    "surface-tint": "#3d58b5",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#213371",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "64px",
+                    "section-gap": "80px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-md": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "body-lg": ["Figtree"],
+                    "headline-sm": ["Figtree"],
+                    "display-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-shadow {
+            box-shadow: 0 20px 40px -15px rgba(6, 29, 92, 0.04);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #001a61 0%, #0a2e8c 100%);
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Africaine des Finances</span>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Invest</a>
+<a class="text-primary font-bold transition-colors cursor-pointer active:opacity-80" href="#">Training</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Analysis</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">About</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-16 pb-section-gap">
+<!-- Hero Section -->
+<section class="hero-gradient relative py-section-gap overflow-hidden">
+
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10 grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-7 flex flex-col gap-stack-md text-on-primary">
+<div class="inline-flex items-center gap-2 bg-secondary-container/20 text-secondary-container px-3 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm" data-icon="school">school</span>
+<span class="font-data-label text-data-label uppercase tracking-wider">Formation Certifiante</span>
+</div>
+<h1 class="font-display-lg text-display-lg leading-tight">Les bases de la BRVM : Maîtriser l'investissement régional</h1>
+<p class="font-body-lg text-body-lg text-on-primary/80 max-w-2xl">
+                        Apprenez à naviguer sur le marché boursier de l'UEMOA. De la compréhension des indices boursiers à l'analyse de vos premiers titres, devenez un investisseur averti.
+                    </p>
+<div class="flex flex-wrap gap-stack-lg mt-stack-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="schedule">schedule</span>
+<div>
+<p class="font-data-label text-data-label text-on-primary/60">Durée</p>
+<p class="font-data-value text-data-value">12 Heures (Online)</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="payments">payments</span>
+<div>
+<p class="font-data-label text-data-label text-on-primary/60">Prix</p>
+<p class="font-data-value text-data-value">150.000 FCFA</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="verified">verified</span>
+<div>
+<p class="font-data-label text-data-label text-on-primary/60">Accréditation</p>
+<p class="font-data-value text-data-value">Certificat AMF-UMOA</p>
+</div>
+</div>
+</div>
+<div class="mt-stack-lg">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-lg font-bold hover:bg-secondary-fixed-dim transition-all active:scale-95 shadow-lg shadow-secondary-container/20">
+                            S'inscrire à la formation
+                        </button>
+</div>
+</div>
+<div class="md:col-span-5 hidden md:block">
+<div class="relative group">
+<div class="absolute -inset-4 bg-secondary-container/10 rounded-xl blur-2xl group-hover:bg-secondary-container/20 transition-all"></div>
+<img class="relative w-full aspect-square object-cover rounded-xl border border-outline-variant/30 premium-shadow" data-alt="A professional and sleek digital educational visual representing financial growth at the BRVM stock exchange. The image features a stylized dashboard with glowing blue and gold trend lines, institutional architecture of a stock exchange in the background with a soft focus. The overall atmosphere is prestigious, using the Africaine des Finances primary blue and gold palette, shot in high-definition minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZfisEQ57l4PVqxqAV6BCauHLVn9T-gJ-2qmT8e9J9_VVbh0Z7coFLrWiahTYvUD2rW2PBr6TxR8cKVGMdxV2OJULWQ04CErN2LQg3-m7ATkpC2mEteMR-WMzq6Loh6Rm83Fx4fgsDePd1d7mAErlYQIe2DIwkSj4mMnvfXuGEx6Nt8XvxtynGpdFfCryqxvsLWRooWUYdd_NjX282Pdgpej4IPg73hOPNfsPrJAqT2E8kO_DQVLdHaOOX4-u59Rf4L_EpDHwHkQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid -->
+<section class="max-w-container-max mx-auto px-margin-desktop mt-section-gap">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-section-gap">
+<!-- Main Content Column -->
+<div class="lg:col-span-8 flex flex-col gap-section-gap">
+<!-- Objectifs -->
+<div class="flex flex-col gap-stack-lg" id="objectives">
+<div class="flex items-center gap-4">
+<div class="h-10 w-1 bg-primary"></div>
+<h2 class="font-headline-md text-headline-md text-primary">Objectifs d'apprentissage</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="p-stack-md bg-surface border border-outline-variant rounded-lg flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-on-surface-variant">Comprendre le fonctionnement et l'organisation du marché financier régional de l'UMOA.</p>
+</div>
+<div class="p-stack-md bg-surface border border-outline-variant rounded-lg flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-on-surface-variant">Maîtriser les mécanismes de passation d'ordres et de règlement-livraison.</p>
+</div>
+<div class="p-stack-md bg-surface border border-outline-variant rounded-lg flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-on-surface-variant">Savoir lire et interpréter les indices BRVM 10, BRVM Composite et BRVM Prestige.</p>
+</div>
+<div class="p-stack-md bg-surface border border-outline-variant rounded-lg flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="check_circle">check_circle</span>
+<p class="text-on-surface-variant">Identifier les critères de sélection pour bâtir un portefeuille de titres équilibré.</p>
+</div>
+</div>
+</div>
+<!-- Programme -->
+<div class="flex flex-col gap-stack-lg" id="curriculum">
+<div class="flex items-center gap-4">
+<div class="h-10 w-1 bg-primary"></div>
+<h2 class="font-headline-md text-headline-md text-primary">Programme de la formation</h2>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Module 1 -->
+<details class="group bg-surface border border-outline-variant rounded-lg overflow-hidden" open="">
+<summary class="flex justify-between items-center p-stack-md cursor-pointer hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-4">
+<span class="font-data-label text-data-label bg-primary text-on-primary w-8 h-8 flex items-center justify-center rounded">01</span>
+<span class="font-headline-sm text-headline-sm text-primary">Introduction au Marché Financier Régional</span>
+</div>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-stack-md border-t border-outline-variant bg-surface-bright text-on-surface-variant flex flex-col gap-2">
+<p>• Historique et rôle de la BRVM dans l'économie de l'UEMOA.</p>
+<p>• Les acteurs clés : AMF-UMOA, BRVM, DC/BR, SGI et SGO.</p>
+<p>• Les différents compartiments du marché boursier.</p>
+</div>
+</details>
+<!-- Module 2 -->
+<details class="group bg-surface border border-outline-variant rounded-lg overflow-hidden">
+<summary class="flex justify-between items-center p-stack-md cursor-pointer hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-4">
+<span class="font-data-label text-data-label bg-primary text-on-primary w-8 h-8 flex items-center justify-center rounded">02</span>
+<span class="font-headline-sm text-headline-sm text-primary">Les Instruments Financiers à la BRVM</span>
+</div>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-stack-md border-t border-outline-variant bg-surface-bright text-on-surface-variant flex flex-col gap-2">
+<p>• Analyse approfondie des actions et des obligations.</p>
+<p>• Comprendre les droits de souscription et les dividendes.</p>
+<p>• Introduction aux fonds communs de placement (FCP).</p>
+</div>
+</details>
+<!-- Module 3 -->
+<details class="group bg-surface border border-outline-variant rounded-lg overflow-hidden">
+<summary class="flex justify-between items-center p-stack-md cursor-pointer hover:bg-surface-container-low transition-colors list-none">
+<div class="flex items-center gap-4">
+<span class="font-data-label text-data-label bg-primary text-on-primary w-8 h-8 flex items-center justify-center rounded">03</span>
+<span class="font-headline-sm text-headline-sm text-primary">Pratique de l'Investissement Boursier</span>
+</div>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-stack-md border-t border-outline-variant bg-surface-bright text-on-surface-variant flex flex-col gap-2">
+<p>• Comment ouvrir un compte-titres auprès d'une SGI.</p>
+<p>• Stratégies de passage d'ordres : prix du marché, cours limité.</p>
+<p>• Analyse des bulletins officiels de la cote (BOC).</p>
+</div>
+</details>
+</div>
+</div>
+<!-- Certification -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-stack-lg flex flex-col md:flex-row items-center gap-stack-lg">
+<div class="w-32 h-32 flex-shrink-0 bg-white rounded-full flex items-center justify-center border-4 border-secondary-container">
+<span class="material-symbols-outlined text-5xl text-secondary-container" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex flex-col gap-2 text-center md:text-left">
+<h3 class="font-headline-sm text-headline-sm text-primary">Certification Reconnue</h3>
+<p class="text-on-surface-variant">À l'issue de cette formation, vous passerez un examen pour obtenir le Certificat d'Investisseur Régional, reconnu par l'Africaine des Finances et validé selon les standards de l'AMF-UMOA. Un atout majeur pour votre crédibilité financière.</p>
+</div>
+</div>
+</div>
+<!-- Sidebar Column -->
+<aside class="lg:col-span-4 flex flex-col gap-stack-lg">
+<!-- Formateur Card -->
+<div class="bg-surface border border-outline-variant rounded-xl p-stack-lg premium-shadow sticky top-24">
+<div class="flex flex-col gap-stack-md">
+<div class="flex items-center gap-4">
+<img class="w-16 h-16 rounded-full object-cover border-2 border-primary-container" data-alt="A professional headshot of a senior financial analyst in a dark navy blue suit. The man has a dignified, expert look, standing in a brightly lit modern office with clean architectural lines. The lighting is soft and professional, emphasizing expertise and reliability. The color scheme aligns with corporate institutional tones, featuring deep blues and crisp whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsnw83JnfuOjC4bOyC8ifFpQjgNnpsC_9qsavjhcMPeBa_3-1SkSFoh80uruloeuOfdOkDrMtGM23ghD5BLIwd1wbd4UK1xaW9Xg2GY8_0yBvq6lpHRlMEmgZOA8PxPuQ2qcMUBIshwS1vTTZ0gn726Hd6QwZuXYjiB61C62O3QPCe-ZI1QJb587jqOAwB_meUb3wCbYSc4F7EfWqKSoD44JaNhug-e55PaPLsTJZRLieyo5g-S0bUlZ6csnwAGt1P8dDFU2-ktg"/>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Dr. Malik Traoré</h4>
+<p class="text-on-surface-variant font-data-label text-data-label">Chef Analyste Senior</p>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm italic">
+                                "Avec plus de 15 ans d'expérience sur les marchés africains, ma mission est de démocratiser l'accès à la bourse régionale pour les particuliers."
+                            </p>
+<hr class="border-outline-variant"/>
+<div class="flex flex-col gap-3">
+<h5 class="font-bold text-primary text-sm uppercase tracking-wide">Détails pratiques</h5>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Prochaine session</span>
+<span class="font-bold text-primary">12 Janvier 2024</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Places restantes</span>
+<span class="font-bold text-secondary">8 / 25</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Format</span>
+<span class="font-bold text-primary">Vidéoconférence live</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-bold hover:bg-primary-container transition-all active:scale-95 mt-2">
+                                Réserver ma place
+                            </button>
+<p class="text-[11px] text-center text-on-surface-variant">Paiement sécurisé via Carte ou Mobile Money</p>
+</div>
+</div>
+<!-- Related Info -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-stack-md flex flex-col gap-4">
+<h4 class="font-bold text-primary">Besoin d'aide ?</h4>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="call">call</span>
+<span class="text-sm">+225 27 22 00 00 00</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+<span class="text-sm">support@africainefinances.com</span>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md">
+<div class="flex flex-col items-center gap-stack-sm mb-stack-md">
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</span>
+<p class="text-on-primary/60 text-sm max-w-md text-center">Partenaire de confiance pour vos investissements stratégiques en Afrique de l'Ouest. Certifié par l'AMF-UMOA.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-stack-lg">
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Legal Notice</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Contact Support</a>
+</div>
+<div class="mt-stack-lg pt-stack-lg border-t border-on-primary/10 w-full text-center">
+<p class="text-on-primary/60 text-sm">© 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Smooth reveal for accordion details
+        document.querySelectorAll('details').forEach((el) => {
+          const summary = el.querySelector('summary');
+          const content = el.querySelector('div');
+
+          summary.addEventListener('click', (e) => {
+            if (el.open) {
+              e.preventDefault();
+              content.style.opacity = '0';
+              setTimeout(() => {
+                el.open = false;
+              }, 200);
+            } else {
+              content.style.opacity = '0';
+              setTimeout(() => {
+                content.style.opacity = '1';
+                content.style.transition = 'opacity 0.3s ease';
+              }, 10);
+            }
+          });
+        });
+    </script>
+</body></html>

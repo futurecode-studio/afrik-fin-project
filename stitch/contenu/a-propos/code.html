@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #DADFE7;
+        }
+        .stats-gradient {
+            background: linear-gradient(135deg, #001a61 0%, #0a2e8c 100%);
+        }
+        body {
+            font-family: 'Figtree', sans-serif;
+            scroll-behavior: smooth;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-surface": "#131c2a",
+                        "on-surface-variant": "#444652",
+                        "tertiary-fixed": "#dce1ff",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#ffbf00",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-secondary-container": "#6d5000",
+                        "inverse-surface": "#28313f",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "tertiary": "#051c5b",
+                        "background": "#f9f9ff",
+                        "on-background": "#131c2a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001551",
+                        "on-primary-container": "#839cfd",
+                        "outline": "#757683",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "surface-container-highest": "#dae3f6",
+                        "secondary-fixed": "#ffdfa0",
+                        "inverse-primary": "#b7c4ff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-dim": "#d1daed",
+                        "on-tertiary-container": "#8d9ee3",
+                        "surface-variant": "#dae3f6",
+                        "outline-variant": "#c5c5d4",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "surface-container": "#e7eeff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#795900",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "primary": "#001a61",
+                        "primary-container": "#0a2e8c",
+                        "surface-tint": "#3d58b5",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "on-primary-fixed": "#001551",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#213371",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"],
+                        "body-md": ["Figtree"],
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "display-lg": ["Figtree"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-desktop h-16 w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            Africaine des Finances
+        </div>
+<nav class="hidden md:flex gap-stack-lg items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Markets</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Invest</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md cursor-pointer active:opacity-80" href="#">Training</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold font-body-md text-body-md cursor-pointer active:opacity-80" href="#">About</a>
+</nav>
+<div class="flex items-center gap-stack-md text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined cursor-pointer active:opacity-80" data-icon="account_balance">account_balance</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-80" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-80" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative h-[614px] flex items-center overflow-hidden bg-primary-container">
+<div class="absolute inset-0 opacity-40">
+<div class="w-full h-full" data-alt="A grand, architectural view of a modern financial district in an African metropolis. The image features tall glass skyscrapers reflecting a golden sunset, symbolizing prosperity and institutional strength. The lighting is warm and dramatic, highlighting the sleek lines of contemporary urban planning with a sense of authoritative calm and visionary progress." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0WOQ2wWDKLru2s0w3hK9mpB9egfSBNVLeLrJu2BgT_WD37BhJtZNMlv3KAdLgtO4L741CZt58yFT4NtGeZhhB4bBPH6HM8EEdC-VfILM2mHjJkgHdF4KLRZW1PQ4mHsQiLHSuzKN49TXj5ibZaQisi3EkcQm7TairHht10GFA-9r_h-jsK1YWgO66oIAvKUArripTmLVL5V4dm_MROR5OPbK-ld3j9oyj3NYzxdOCkm3a_HoKplcG34cZ8T4GU2NLiBiEvfDgTQ')"></div>
+</div>
+
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full text-on-primary">
+<h1 class="font-display-lg text-display-lg mb-stack-sm max-w-2xl">Bâtir l'Avenir de la Finance Africaine</h1>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-xl">Institution de référence agréée par l'AMF-UMOA, nous accompagnons les investisseurs et les institutions dans la gestion de leur patrimoine avec rigueur et excellence.</p>
+</div>
+</section>
+<!-- Mission & Vision - Bento Layout -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Mission -->
+<div class="md:col-span-7 p-stack-lg border border-outline-variant bg-surface-container-lowest flex flex-col justify-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-stack-md" data-icon="track_changes">track_changes</span>
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md">Notre Mission</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Démocratiser l'accès aux marchés financiers ouest-africains en fournissant des solutions d'investissement innovantes et sécurisées. Nous nous engageons à transformer l'épargne locale en moteur de croissance économique durable pour toute la région UMOA.
+                    </p>
+</div>
+<!-- Image Side -->
+<div class="md:col-span-5 h-64 md:h-auto overflow-hidden">
+<div class="w-full h-full object-cover" data-alt="A professional high-end photograph of a focused financial advisor presenting a digital chart to a diverse group of investors in a sophisticated boardroom. The lighting is professional and cool, emphasizing a high-stakes yet calm corporate environment. The background shows blurred cityscapes, reinforcing the institutional and prestigious theme." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsExjk_Ha9C4bqI8HbnPYlwKWTz5emcV8KHHrEnYdyQvoaRs9_c9sYOj9PpPZ8kwLCi3YMYDcGk4SdgDxnEemGMVTLqQE2vVJRtEhGVJ85Grk3CZOdy5IxslQoXmM5BEWgtkyRaF_R57hXQX3qXhwd0sQkKn1WM-b5_dPTf3YYvN0ZxyAVeC4CWtwLAdT1xhiswGLg69ONm5VE_fmL6qUVPGXGvNg5zjfvZKgQnG1tw8_U_O_gukNxZ21F1F6Wi9NRdsIwaHi-1g')"></div>
+</div>
+<!-- Vision -->
+<div class="md:col-span-4 h-64 md:h-auto overflow-hidden">
+<div class="w-full h-full object-cover" data-alt="An abstract visual representation of global connectivity and data flow using thin glowing blue lines on a deep navy background. The style is minimalist and high-tech, representing the digital transformation of financial services. The mood is forward-looking, stable, and intellectually sophisticated." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMgG4m1tuaw_7YGJvOVT02u5NKw0fcYRmT8dIuXjPVqfpQwSV0s0ITVkEY_5GGMV6fvzSZXkXtiMZVCBNNJA8Odu4cQby8aPC6C_Oda90HUPAR9hZybXuxEJRGcWu1v8CLxCsiI0lDdTF8Odsz2Gjq5Pa-QRSxzod32svOvnoKgczxyiyCTbUDPG7NXj0woMCd7QfYw1LFEnKk3mSb7FgtXsqx1mOns7fbjXnqjSLkmcPbNS76_TXnj_5csZEpd92yJZXg5viflw')"></div>
+</div>
+<div class="md:col-span-8 p-stack-lg border border-outline-variant bg-primary text-on-primary flex flex-col justify-center">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-stack-md" data-icon="visibility">visibility</span>
+<h2 class="font-headline-md text-headline-md mb-stack-md">Notre Vision</h2>
+<p class="font-body-md text-body-md text-on-primary/80 leading-relaxed">
+                        Devenir le partenaire financier de confiance numéro un en Afrique de l'Ouest, reconnu pour notre expertise technique, notre intégrité absolue et notre capacité à anticiper les mutations des marchés mondiaux.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Key Numbers Section -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-lg">Africaine des Finances en chiffres</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="p-stack-lg bg-surface-container-lowest border border-outline-variant">
+<div class="font-data-value text-4xl text-primary mb-stack-sm" id="stat-1">0</div>
+<div class="font-data-label text-on-surface-variant uppercase tracking-wider">Milliards FCFA Sous Gestion</div>
+</div>
+<div class="p-stack-lg bg-surface-container-lowest border border-outline-variant">
+<div class="font-data-value text-4xl text-primary mb-stack-sm" id="stat-2">0</div>
+<div class="font-data-label text-on-surface-variant uppercase tracking-wider">Clients Institutionnels</div>
+</div>
+<div class="p-stack-lg bg-surface-container-lowest border border-outline-variant">
+<div class="font-data-value text-4xl text-primary mb-stack-sm" id="stat-3">0</div>
+<div class="font-data-label text-on-surface-variant uppercase tracking-wider">Années d'Expertise</div>
+</div>
+<div class="p-stack-lg bg-surface-container-lowest border border-outline-variant">
+<div class="font-data-value text-4xl text-primary mb-stack-sm" id="stat-4">0</div>
+<div class="font-data-label text-on-surface-variant uppercase tracking-wider">Certifications AMF</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Leadership Team -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Équipe Dirigeante</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Une expertise multidisciplinaire au service de votre patrimoine.</p>
+</div>
+<button class="hidden md:block border border-primary text-primary px-stack-md py-stack-sm hover:bg-primary hover:text-on-primary transition-all font-body-md text-body-md">
+                    Gouvernance Complète
+                </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Leader 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container mb-stack-md overflow-hidden relative">
+<div class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional studio portrait of a senior African male executive in a perfectly tailored charcoal grey suit. He exudes confidence and wisdom, standing against a clean, minimal white background. The lighting is soft and flattering, creating a premium institutional feel that inspires trust and authority." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1Npsn0nLg42fifVZNeVdxfBWU8Z6uJNBCPDA-xwBJ3CJcUyb_UfB4ydJTiE0A2M-d0QfQAmW-6Ux85Ose62aUa9RwUrJgX7eLX93DkbepmCuZ9W4xAllHebvNFkDU9qDhj81iBs_udEl4Pd0jumqBT4NVurb3cvIPw7Zso8oDi789-DIMJgPFgmTY7r-2_s6bpOXegeGTSDU5ufpZ7L_7x6_YzG9G-ezIgcB3aoI2ZDl2gWSM-6imhEwS46FHP8iXsLTZO9dpVA')"></div>
+<div class="absolute bottom-0 left-0 right-0 p-stack-md bg-gradient-to-t from-primary/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform">
+<p class="text-on-primary font-body-md text-sm italic">"L'intégrité est la pierre angulaire de toute transaction financière."</p>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Amadou Diallo</h3>
+<p class="font-data-label text-primary">Directeur Général</p>
+</div>
+<!-- Leader 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container mb-stack-md overflow-hidden relative">
+<div class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional studio portrait of an elegant African female executive in business attire. She has a bright, confident smile and poised posture, representing leadership and intelligence. The lighting is sophisticated, with subtle shadows that add depth and a high-end corporate aesthetic. Minimalist white studio background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhqyVwxzccMtcVuql8N-V-vD7VQ2GNnyagzxrx5rbOpsmAO7n4ymabhvskIXxeJfHf0lDnWzEtYh_zuPPbHoGuxFYoL--mJqdrb0DHYQNac88nO0Jjx2pwcsGuy0WOU4xOv0qT135UZSP7cjBQcgzNYnYOdyVEsI-x6_78Jx1xvtNwGEAWQI-ID7jOkV5W2MndggtRiED32PwA8RReuFlIGC0_uyE-eg5ct_30uEdJQYF2YiDpfYZkY94wS7BDysw9q5LG9rjRRA')"></div>
+<div class="absolute bottom-0 left-0 right-0 p-stack-md bg-gradient-to-t from-primary/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform">
+<p class="text-on-primary font-body-md text-sm italic">"L'innovation technologique doit servir la stabilité financière."</p>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fatou Sow</h3>
+<p class="font-data-label text-primary">Directrice de l'Analyse</p>
+</div>
+<!-- Leader 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container mb-stack-md overflow-hidden relative">
+<div class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional studio portrait of a mature African male executive with grey hair, wearing a sharp blue business suit. He looks thoughtful and experienced, symbolizing long-term stability and strategic vision. The photography uses high-key lighting for a clean, prestigious, and institutional look." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLcRjOtOTQC7o-JX7F3lzv8o92u6pWGpOXE3pxM5WSaJ3e1dIcIIR8QgSypW7_E5ESsl1jDaT1nXGIsIlNutwMxn28w4dIZ4DCRIDe_HIcUjOhC4-jp4pwPxshK_uWisnS0jl1zywhpqlTmxMyWWxub-GizRbUgeeHUJrI7a06FE_VhnBZs_Zbb9SI6Sj8RhnB2_aPqBUMfVEOph81YdertyZx5oKxk6mssgVFU4exckEsOXAoEOJqy-G68t3DitHj2xSn-cAHlA')"></div>
+<div class="absolute bottom-0 left-0 right-0 p-stack-md bg-gradient-to-t from-primary/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform">
+<p class="text-on-primary font-body-md text-sm italic">"Gérer le risque, c'est avant tout comprendre l'avenir."</p>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Koffi Mensah</h3>
+<p class="font-data-label text-primary">Directeur Conformité</p>
+</div>
+</div>
+</section>
+<!-- Institutional Trust Banner -->
+<section class="bg-primary py-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-stack-md text-on-primary">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-4xl text-secondary-container" data-icon="verified_user">verified_user</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm">Agrément AMF-UMOA N° SGI/2023-01</h4>
+<p class="font-body-md text-body-md opacity-80">Conformité totale avec les régulations financières régionales.</p>
+</div>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-stack-lg py-stack-sm rounded-full font-bold hover:scale-105 transition-transform active:scale-95">
+                    Consulter les Rapports
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-desktop flex flex-col items-center gap-stack-md bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary">Africaine des Finances</div>
+<div class="flex flex-wrap justify-center gap-stack-md">
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Legal Notice</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Regulatory Disclosure</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:text-secondary-container transition-colors font-body-md text-body-md cursor-pointer" href="#">Contact Support</a>
+</div>
+<p class="font-body-md text-body-md text-center max-w-2xl opacity-60">
+            © 2024 Africaine des Finances. Licensed by AMF-UMOA. All rights reserved.
+        </p>
+</footer>
+<script>
+        // Simple counter animation for stats
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger animation when scrolled into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue(document.getElementById("stat-1"), 0, 450, 2000);
+                    animateValue(document.getElementById("stat-2"), 0, 120, 2000);
+                    animateValue(document.getElementById("stat-3"), 0, 15, 2000);
+                    animateValue(document.getElementById("stat-4"), 0, 8, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById("stat-1").parentElement.parentElement);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.replace('bg-surface', 'bg-surface/95');
+                header.style.backdropFilter = 'blur(8px)';
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.replace('bg-surface/95', 'bg-surface');
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body></html>

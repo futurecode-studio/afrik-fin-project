@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comparateur Multi-Actifs | Africaine des Finances</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b7c4ff",
+                    "tertiary-fixed": "#dce1ff",
+                    "surface-container": "#e7eeff",
+                    "secondary-fixed": "#ffdfa0",
+                    "surface-tint": "#3d58b5",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#444652",
+                    "on-primary-container": "#839cfd",
+                    "surface-container-high": "#dfe8fc",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#213371",
+                    "inverse-primary": "#b7c4ff",
+                    "on-primary-fixed-variant": "#223f9b",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "outline-variant": "#c5c5d4",
+                    "inverse-on-surface": "#ebf1ff",
+                    "outline": "#757683",
+                    "surface-container-highest": "#dae3f6",
+                    "on-background": "#131c2a",
+                    "error-container": "#ffdad6",
+                    "secondary": "#795900",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#001551",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-variant": "#dae3f6",
+                    "on-secondary-fixed": "#261a00",
+                    "primary-fixed": "#dce1ff",
+                    "on-secondary-container": "#6d5000",
+                    "tertiary": "#051c5b",
+                    "on-tertiary-fixed": "#001551",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d1daed",
+                    "on-tertiary-fixed-variant": "#314381",
+                    "primary": "#001a61",
+                    "on-tertiary-container": "#8d9ee3",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#28313f",
+                    "primary-container": "#0a2e8c",
+                    "background": "#f9f9ff",
+                    "on-surface": "#131c2a",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "surface": "#f9f9ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-desktop": "64px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Figtree"],
+                    "headline-md": ["Figtree"],
+                    "data-value": ["IBM Plex Mono"],
+                    "display-lg-mobile": ["Figtree"],
+                    "display-lg": ["Figtree"],
+                    "body-md": ["Figtree"],
+                    "data-label": ["IBM Plex Mono"],
+                    "body-lg": ["Figtree"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .asset-card-active {
+            border-color: #001a61;
+            background-color: #f0f3ff;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c5c5d4; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #757683; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="font-headline-md text-headline-md font-extrabold text-primary">Africaine des Finances</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Marchés</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="#">Investissements</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Compte Client</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Rapports</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Actualités</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<button class="px-5 py-2 text-primary border border-primary font-bold rounded-lg hover:bg-primary-container hover:text-white transition-all scale-95 active:opacity-80">Contact</button>
+<button class="px-5 py-2 bg-primary-container text-white font-bold rounded-lg hover:bg-primary transition-all scale-95 active:opacity-80">Espace Client</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-desktop py-stack-lg space-y-section-gap">
+<!-- Header Section -->
+<section class="space-y-stack-md">
+<h1 class="font-display-lg text-display-lg text-primary">Comparateur de Performance Multi-Actifs</h1>
+<p class="text-body-lg text-on-surface-variant max-w-3xl">Analysez et comparez jusqu'à 4 actifs financiers en temps réel. Visualisez les corrélations, la volatilité et les rendements cumulés pour optimiser votre stratégie d'investissement.</p>
+</section>
+<!-- Tool Section: Selection & Charts -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Panel: Asset Selection -->
+<div class="lg:col-span-4 space-y-stack-md sticky top-28">
+<div class="bg-white border border-outline-variant p-stack-lg rounded-xl shadow-sm">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-primary">Sélection des Actifs</h2>
+<span class="bg-surface-container text-primary px-3 py-1 rounded-full text-xs font-bold" id="asset-count">2/4</span>
+</div>
+<div class="space-y-stack-md" id="asset-selectors">
+<!-- Asset Item 1 -->
+<div class="p-4 border-2 border-primary bg-surface-container-low rounded-lg relative group transition-all">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-xs font-bold uppercase text-primary mb-1 block">Action</span>
+<h3 class="font-bold text-on-surface">Sonatel (SN)</h3>
+<p class="text-sm text-on-surface-variant">BRVM: SNTS</p>
+</div>
+<div class="w-3 h-3 rounded-full bg-blue-600"></div>
+</div>
+</div>
+<!-- Asset Item 2 -->
+<div class="p-4 border border-outline-variant bg-white rounded-lg relative group hover:border-primary transition-all">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-xs font-bold uppercase text-secondary mb-1 block">FCP</span>
+<h3 class="font-bold text-on-surface">Emergence Rendement</h3>
+<p class="text-sm text-on-surface-variant">ISIN: SN001293</p>
+</div>
+<div class="w-3 h-3 rounded-full bg-amber-500"></div>
+</div>
+</div>
+<!-- Asset Item Empty / Add -->
+<button class="w-full py-6 border-2 border-dashed border-outline-variant rounded-lg flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container hover:border-primary transition-all group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">add_circle</span>
+<span class="text-sm font-medium">Ajouter un actif</span>
+</button>
+</div>
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant">
+<label class="block text-sm font-bold text-on-surface-variant mb-2">Période d'analyse</label>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-1 text-xs border border-outline font-bold rounded hover:bg-primary-container hover:text-white transition-colors">1M</button>
+<button class="py-1 text-xs border border-outline font-bold rounded hover:bg-primary-container hover:text-white transition-colors">6M</button>
+<button class="py-1 text-xs bg-primary-container text-white font-bold rounded">1A</button>
+<button class="py-1 text-xs border border-outline font-bold rounded hover:bg-primary-container hover:text-white transition-colors">5A</button>
+</div>
+</div>
+</div>
+<div class="bg-tertiary-container text-on-tertiary-container p-stack-md rounded-xl flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-sm leading-snug">Les données de performance incluent les dividendes réinvestis et sont nettes de frais de gestion.</p>
+</div>
+</div>
+<!-- Right Panel: Visualizations -->
+<div class="lg:col-span-8 space-y-stack-lg">
+<!-- Main Chart Card -->
+<div class="bg-white border border-outline-variant rounded-xl p-stack-lg shadow-sm h-[500px] flex flex-col">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-primary">Performance Cumulée (%)</h2>
+<div class="flex gap-stack-md">
+<button class="flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-base">download</span> PDF
+                            </button>
+<button class="flex items-center gap-1 text-sm text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-base">share</span> Partager
+                            </button>
+</div>
+</div>
+<div class="flex-grow relative">
+<canvas id="performanceChart"></canvas>
+</div>
+</div>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<!-- Comparison Table -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm md:col-span-2">
+<div class="px-stack-lg py-4 border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-bold text-primary">Indicateurs de Risque et Rendement</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant text-xs uppercase tracking-wider font-bold">
+<th class="px-stack-lg py-4">Métrique</th>
+<th class="px-stack-lg py-4 border-l border-outline-variant">Sonatel (SN)</th>
+<th class="px-stack-lg py-4 border-l border-outline-variant">Emergence Rend.</th>
+<th class="px-stack-lg py-4 border-l border-outline-variant">Différentiel</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-stack-lg py-4 font-bold text-on-surface-variant">Rendement Annuel</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">+12.4%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">+8.1%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value text-primary">+4.3%</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-stack-lg py-4 font-bold text-on-surface-variant">Volatilité (1an)</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">18.2%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">4.5%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value text-error">+13.7%</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-stack-lg py-4 font-bold text-on-surface-variant">Ratio de Sharpe</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">0.68</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">1.12</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value text-error">-0.44</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-stack-lg py-4 font-bold text-on-surface-variant">Frais Annuels</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">0.00%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">1.25%</td>
+<td class="px-stack-lg py-4 font-data-value text-data-value">-1.25%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Market Context Card -->
+<div class="bg-white border border-outline-variant rounded-xl p-stack-lg shadow-sm">
+<h3 class="font-bold text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">trending_up</span> Perspective de Marché
+                        </h3>
+<p class="text-sm text-on-surface-variant mb-stack-md">L'analyse montre une décorrélation significative entre l'action Sonatel et le FCP Emergence Rendement (Corrélation: 0.24). Cela suggère un fort potentiel de diversification pour votre portefeuille.</p>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary uppercase">Conseil Expert</p>
+<p class="text-sm font-medium">Rééquilibrez trimestriellement.</p>
+</div>
+</div>
+</div>
+<!-- Risk Profile Card -->
+<div class="bg-white border border-outline-variant rounded-xl p-stack-lg shadow-sm">
+<h3 class="font-bold text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-error">warning</span> Profil de Risque
+                        </h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>Niveau de Risque Global</span>
+<span>Modéré (4/7)</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-green-500 w-1/7"></div>
+<div class="h-full bg-green-400 w-1/7"></div>
+<div class="h-full bg-yellow-400 w-1/7"></div>
+<div class="h-full bg-yellow-500 w-1/7 border-r-2 border-white"></div>
+<div class="h-full bg-surface-container-highest flex-grow"></div>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant italic leading-relaxed">Ce profil est basé sur la volatilité historique pondérée des actifs sélectionnés. Performances passées ne préjugent pas des performances futures.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-primary rounded-2xl p-stack-lg md:p-12 text-center text-white relative overflow-hidden">
+
+<div class="relative z-10 space-y-stack-md max-w-2xl mx-auto">
+<h2 class="font-display-lg text-headline-md md:text-display-lg">Prêt à optimiser votre stratégie ?</h2>
+<p class="text-body-lg opacity-90">Nos conseillers en gestion de patrimoine vous accompagnent pour construire le portefeuille qui répond à vos objectifs financiers.</p>
+<div class="pt-4 flex flex-col sm:flex-row justify-center gap-4">
+<button class="px-8 py-4 bg-secondary-container text-primary font-bold rounded-lg hover:bg-secondary-fixed transition-all shadow-lg">Prendre rendez-vous</button>
+<button class="px-8 py-4 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all">Télécharger l'analyse complète</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background dark:bg-background mt-auto py-stack-lg border-t border-outline-variant">
+<div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto text-surface">
+<div class="space-y-stack-md">
+<div class="font-headline-sm text-headline-sm text-secondary-container">Africaine des Finances</div>
+<p class="text-sm opacity-70">L'excellence financière au service du développement panafricain. Institution agréée par les autorités monétaires.</p>
+</div>
+<div class="space-y-stack-sm">
+<h4 class="font-bold text-secondary-container mb-2">Services</h4>
+<ul class="space-y-2 opacity-80 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Wealth Management</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Asset Management</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Investment Banking</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Private Banking</a></li>
+</ul>
+</div>
+<div class="space-y-stack-sm">
+<h4 class="font-bold text-secondary-container mb-2">Institutionnel</h4>
+<ul class="space-y-2 opacity-80 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Gouvernance</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">CSR</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Carrières</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Investisseurs</a></li>
+</ul>
+</div>
+<div class="space-y-stack-sm">
+<h4 class="font-bold text-secondary-container mb-2">Légal</h4>
+<ul class="space-y-2 opacity-80 text-sm">
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Mentions Légales</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Politique de Confidentialité</a></li>
+<li><a class="hover:text-secondary-fixed transition-colors" href="#">Sécurité</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-4 border-t border-white/10 text-xs text-surface opacity-50 text-center">
+            © 2024 Africaine des Finances. Institution Financière Agrée. Tous droits réservés.
+        </div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Artificial data for the chart
+            const labels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
+            const dataSonatel = [100, 105, 103, 112, 118, 115, 121, 128, 125, 132, 138, 142];
+            const dataFCP = [100, 101, 102.5, 103, 104.2, 105, 105.8, 106.5, 107.2, 108.5, 109.8, 111];
+
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sonatel (SN)',
+                        data: dataSonatel,
+                        borderColor: '#2563eb', // Blue-600
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#2563eb',
+                        fill: true
+                    }, {
+                        label: 'Emergence Rendement',
+                        data: dataFCP,
+                        borderColor: '#f59e0b', // Amber-500
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#f59e0b',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // Using custom legend/sidebar
+                        },
+                        tooltip: {
+                            backgroundColor: '#131c2a',
+                            titleFont: { family: 'Figtree', weight: 'bold' },
+                            bodyFont: { family: 'IBM Plex Mono' },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#e7eeff'
+                            },
+                            ticks: {
+                                font: { family: 'IBM Plex Mono', size: 12 },
+                                callback: function(value) { return value + '%'; }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: { family: 'Figtree', weight: '600' }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Micro-interactions for asset selector (visual only)
+            document.querySelectorAll('#asset-selectors > div').forEach(el => {
+                el.addEventListener('click', function() {
+                    // This logic would normally update the chart visibility
+                    this.classList.toggle('opacity-50');
+                });
+            });
+        });
+    </script>
+</body></html>

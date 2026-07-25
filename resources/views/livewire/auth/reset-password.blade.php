@@ -16,11 +16,6 @@
                 </div>
                 <div class="p-6 pt-0">
                     <!-- Session Status -->
-                    @if (session('message'))
-                        <div class="mb-4 p-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded-md">
-                            {{ session('message') }}
-                        </div>
-                    @endif
 
                     @if (session('status'))
                         <div class="mb-4 p-4 text-sm text-blue-700 bg-blue-50 border border-blue-200 rounded-md">

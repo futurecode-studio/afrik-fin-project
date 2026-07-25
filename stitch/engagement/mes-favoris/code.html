@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Favoris - Africaine des Finances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for institutional feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DADFE7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #757683;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "on-surface": "#131c2a",
+                        "on-surface-variant": "#444652",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b7c4ff",
+                        "on-primary-fixed": "#001551",
+                        "surface": "#f9f9ff",
+                        "on-secondary-container": "#6d5000",
+                        "on-tertiary-fixed-variant": "#314381",
+                        "secondary-container": "#ffbf00",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#b7c4ff",
+                        "outline-variant": "#c5c5d4",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#223f9b",
+                        "surface-container": "#e7eeff",
+                        "surface-variant": "#dae3f6",
+                        "surface-container-highest": "#dae3f6",
+                        "outline": "#757683",
+                        "on-primary": "#ffffff",
+                        "primary": "#001a61",
+                        "surface-tint": "#3d58b5",
+                        "on-tertiary-fixed": "#001551",
+                        "on-tertiary-container": "#8d9ee3",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#dce1ff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#dce1ff",
+                        "tertiary-container": "#213371",
+                        "surface-dim": "#d1daed",
+                        "on-error": "#ffffff",
+                        "primary-container": "#0a2e8c",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#051c5b",
+                        "inverse-surface": "#28313f",
+                        "on-primary-container": "#839cfd",
+                        "on-background": "#131c2a",
+                        "surface-container-high": "#dfe8fc",
+                        "secondary": "#795900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "section-gap": "80px",
+                        "margin-desktop": "64px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Figtree"],
+                        "body-lg": ["Figtree"],
+                        "headline-sm": ["Figtree"],
+                        "display-lg-mobile": ["Figtree"],
+                        "body-md": ["Figtree"],
+                        "display-lg": ["Figtree"],
+                        "data-value": ["IBM Plex Mono"],
+                        "data-label": ["IBM Plex Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-value": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "data-label": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-primary">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto bg-surface border-b border-outline-variant h-20">
+<div class="flex items-center gap-8">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Africaine des Finances</h1>
+<nav class="hidden md:flex items-center gap-6 h-20">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Markets</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Investments</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-data-label text-data-label" href="#">Academy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Wealth</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-data-label text-data-label" href="#">Back-office</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center gap-2 mr-4">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+<button class="hidden lg:flex items-center justify-center px-6 py-2 border border-primary text-primary font-bold rounded-lg hover:bg-surface-container-low transition-colors">Support</button>
+<button class="hidden lg:flex items-center justify-center px-6 py-2 bg-primary-container text-on-primary-container font-bold rounded-lg hover:opacity-80 transition-opacity">Invest Now</button>
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior financial executive of African descent, wearing a dark navy tailored suit. The lighting is soft and corporate, set against a blurred high-end office background with warm wooden accents. The style is clean, premium, and authoritative, reflecting a high-trust financial environment with a minimalist light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2PeM7RYOtGhbpzYQ7Ux_v3x_TtOHPglaWg0xervKGvzbndxmoxz8eXEMDKDbmR9nkihM5zBDk50WUAFu5Wl2FWbpkLNImNHA_YY8Jm_UWTDKDxtvZ5iUy2A6VD4h012PETn51axff45BxQvWYoJVgvko0al6rmmwX8eRqLLEzdtIvje6tFL12Lz0LsHUZQR5ppSAIHf96YYwCTYWETDT6EzUuJ4kNoVWmxMksseYbE6jvBVED1DHXOJ6ul901ZDIMIISoTYgQpw"/>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-80px)] w-64 sticky top-20 py-stack-lg px-4 gap-stack-md bg-surface-container border-r border-outline-variant">
+<div class="mb-4 px-2">
+<h2 class="font-headline-sm text-headline-sm text-primary">Client Portal</h2>
+<p class="text-on-surface-variant text-sm">Institutional Excellence</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Market Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span>Investment Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg scale-95 transition-transform font-body-md" href="#">
+<span class="material-symbols-outlined active-tab-indicator">school</span>
+<span>Academy Courses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>Administration</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 pt-4 border-t border-outline-variant">
+<button class="w-full mb-4 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-container transition-colors shadow-sm">Open New Account</button>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg font-body-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-margin-desktop bg-background">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-stack-sm text-on-surface-variant font-data-label text-data-label">
+<a class="hover:text-primary transition-colors" href="#">Academy</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Mes favoris</span>
+</nav>
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-stack-md mb-stack-lg">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Mes Favoris</h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">
+                        Retrouvez toutes vos leçons, vidéos et ressources enregistrées pour perfectionner vos stratégies financières.
+                    </p>
+</div>
+<div class="flex gap-stack-sm">
+<div class="relative">
+<input class="w-64 pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-container/20 transition-all font-body-md" placeholder="Rechercher dans mes favoris..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline">search</span>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors font-body-md">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Filtrer</span>
+</button>
+</div>
+</div>
+<!-- Bento / Masonry-style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1: Video -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic overhead shot of a stock market trading floor with multiple glowing monitors displaying complex financial charts and candlestick patterns. The color palette is dominated by deep blues and vibrant gold highlights. The scene conveys high-stakes decision-making and precision, captured in a clean, modern style consistent with premium financial institution aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZbj4lby9arCgBOJY9deLhthdGviDU2KH1PdcE9MNgfbS7qMcyIGnjerXpUMX7xM4e4rNZgsjcNCmIwFe2lgTMxQqw1ptV9ZNZ0vYlCM2NOd-IJjKfPFwW3UFfW5DKvM5-f0d_lXojPTrRnWTlBo_Cy7Rl47xHNojq5LxJ0_9UfylXUHstVjWM8O7btfpwELj0SknIY0K50TvBXkiX1j_Ldit_KJFsA3lcTJ3SylAMfzNyqlDeH3QoPorkJVNbiN2krk7BpZiOiA"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Video</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Marchés Emergents • Module 3</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Analyse Technique Avancée : Les Moyennes Mobiles</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">12 Oct 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Interactive Lesson -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist architectural shot of a modern financial skyscraper's glass facade, reflecting a clear blue sky. The composition is highly geometric and clean, utilizing a palette of silver, white, and primary blue. The lighting is crisp and optimistic, emphasizing structural stability and high-end corporate elegance in a professional light-mode setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1TeYa-DJ4O261xBA7Ns3m3JuXYJMUUzCGnmHdzzNfpVfRC9yulgNOaQVvXZQWhUoSwoSTwVwN6u4rxuwnWsUIzzIRzb0ZqQ1ihaybBKOlar04fe9fSHofNqkBMDRzqMl2FnhJdFHwJT7TZlbOfVLkC3h5XScbAKLFlAPNDR4LYY82NnIwIPVD4JhEPeIDW2HyFgsyWDJQ_CpLJg_KRPeE37p416WxVe9Xj5H9hNJV_P8xz4xIz7mof3RvUsj6cfYpqabJBrDYIw"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Lesson</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Wealth Management • Module 1</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Optimisation Fiscale pour Institutionnels Africains</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">08 Oct 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 3: PDF Report -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high flex items-center justify-center">
+<div class="absolute inset-0 bg-surface-container-low opacity-50"></div>
+<div class="relative flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-6xl mb-2">description</span>
+<span class="text-[10px] font-data-label text-on-surface-variant bg-white px-2 py-0.5 rounded border border-outline-variant">PDF • 4.2 MB</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Report</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Macro-économie • Q4 Analysis</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Perspectives de croissance UEMOA 2024</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">25 Sep 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Audio / Podcast -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional podcast recording setup in a minimalist, high-end studio. A sleek silver condenser microphone stands on a wooden desk next to professional headphones. The background is a soft-focus office with large windows overlooking a city skyline. The lighting is warm and inviting yet professional, creating a sense of authoritative thought leadership in a modern financial context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUPsLyD93RufWh_UAnCWq7p3gsIex40d4JWvaOyIhDcyBh53ejpqqENBYRvdrJCv5qM0a77nwaGPWU-tuRj6ENYwkKCz2Jevh2cj8SBsdBAPC9FdxqLjqpIgEt6s3rSszcKSkraXpNmGFiFMEY_3LFHumZGjCz-Yg8hGP9LsBV9Solyevc9Zxm-9Kjh1qwHRaIYU1mceEhq5hnJaCt-VLRsOGhg1qmFzfhWZqjarKWvfrpBb3Kgfp-0aZEXutEUrkuJu-g7lxZoA"/>
+<div class="absolute inset-0 bg-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-secondary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Audio</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Back-office • Insights</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">L'IA dans la Gestion des Risques Bancaires</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">22 Sep 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 5: Infographic -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, abstract data visualization showing interconnected nodes and flowing lines of light, representing global financial connectivity. The background is a crisp white with subtle blue and grey accents. The visual style is high-tech, precise, and sophisticated, mirroring the clarity of high-quality financial data reporting for institutional clients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFSSNkVhObUge-il6MjuXuYBF7HA6kUtSrkS3TKyMc5KiFNSb_aSjjZokytQkd-qCySZ-txCBTuxzZfwAPVpwtJ41iw2TJCatImNicioHElLrNZZmwS1CN-XrNHkT9HzpM5kK1n0dU_v_ebzyFdoXmympQJUxJfTSSFt1vy8QkxeFaLli5ujVZ0L5kKkYqjtK_SzurVYzmq8-5YkIIScKJ7mHmBSbfBrQAUW4WThSw7HEudYnydfSnnw6z87kr8P9EQnrisViPVw"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Infographic</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Academy • Outils</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Checklist: Evaluation de Portefeuille Actions</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">15 Sep 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 6: Market Update -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional close-up of a tablet screen displaying real-time currency exchange rates and interactive gold price charts. The device rests on a polished marble surface, catching reflections of soft office lighting. The aesthetic is clean, luxurious, and focused on real-time financial accuracy, utilizing a palette of deep blues, whites, and subtle golden highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXNiCH8UKtRp0yu9StKIHTcMys85Kif2gTbJwPO8uz-7KH8qf76BEASp5IwZscdsKmOjZdx80sOG3g5S8Pfc0Z82PRwySDPH7IMeUK7T_i0bynf1IOcAKjSscr-1G3-Ze2MobtLljIwDiy-i6wCUIy1duOXeXoZeIQ9OaU0Z0Z5T7Em69urebtQ9Y2bL6UMg_nbf51oBcXNtIa6kDSWBjWV3xVT4ngaldLXQXHBJW3p6BQYLIJ8QIAlyaJNiqLRw6m9fqCRVaDWw"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-primary text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Briefing</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Markets • Daily</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Impact de la politique de la FED sur le Franc CFA</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">10 Sep 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Card 7: Masterclass -->
+<div class="group flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_20px_40px_-12px_rgba(6,29,92,0.08)] transition-all duration-300">
+<div class="relative h-48 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-end auditorium setting during a financial keynote presentation. The speaker is shown as a silhouette against a massive projection screen displaying a world map with financial growth hotspots in Africa. The atmosphere is prestigious, intellectual, and focused on institutional excellence, with deep blue lighting and crisp white text overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVs7FrS_NaXDzSns4FKAmk8M089VbSuzbqcoIneVtvr13MH270-hISMvlSE5bzb4n6uVmLhkrlOfxS8XZrhSDMpwJsGNKxs6l6gsrJyqSm8GdwnSm9GVNXztQbVwmQAm9AB7p2Co-g15yLxsz5Ec-Xx6NSfckuXkeqrbIyIYlhcrBa9eGC6pnu9FgDeKK2moZp6gZvst2VTrQiW6JA1_N1vicRq4o_id6-6GRCavxT6WlR3GQZHFEnWV1or1IbUc4oqhge2lmGVA"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider rounded-full shadow-sm">Premium</span>
+</div>
+<div class="absolute bottom-3 right-3">
+<button class="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm text-primary rounded-full hover:bg-error hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<span class="text-data-label font-data-label text-on-surface-variant mb-2">Wealth • Masterclass</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4 line-clamp-2">Investir dans le Private Equity en Afrique de l'Ouest</h3>
+<div class="mt-auto pt-4 border-t border-outline-variant flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-data-label text-outline uppercase tracking-tight">Ajouté le</span>
+<span class="text-data-value font-data-value text-on-surface">02 Sep 2023</span>
+</div>
+<button class="px-5 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary-container transition-colors">Ouvrir</button>
+</div>
+</div>
+</div>
+<!-- Add New Placeholder -->
+<div class="group flex flex-col items-center justify-center bg-surface-container border-2 border-dashed border-outline-variant rounded-xl p-8 hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-surface flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary text-center">Ajouter un favori</p>
+<p class="text-body-md text-on-surface-variant text-center mt-2">Enregistrez une ressource depuis l'Academy</p>
+</div>
+</div>
+<!-- Empty State Illustration (hidden by default) -->
+<div class="hidden flex-col items-center justify-center py-20 text-center" id="empty-state">
+<div class="w-48 h-48 bg-surface-container rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-outline text-7xl">bookmark_add</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-primary mb-4">Aucun favori pour le moment</h2>
+<p class="text-body-lg text-on-surface-variant max-w-md mb-8">
+                    Parcourez nos modules de formation et enregistrez les leçons qui vous intéressent pour les retrouver facilement ici.
+                </p>
+<button class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-all">Parcourir l'Academy</button>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.innerText === 'bookmark') {
+                icon.parentElement.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const card = this.closest('.group');
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        card.remove();
+                        // Logic to show empty state if all cards removed
+                        if (document.querySelectorAll('.grid > .group').length === 0) {
+                            document.querySelector('.grid').classList.add('hidden');
+                            document.getElementById('empty-state').classList.remove('hidden');
+                            document.getElementById('empty-state').classList.add('flex');
+                        }
+                    }, 300);
+                });
+            }
+        });
+
+        // Search highlight micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.grid > .group').forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body></html>
