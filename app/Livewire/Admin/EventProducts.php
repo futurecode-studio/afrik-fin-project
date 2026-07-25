@@ -10,9 +10,11 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class EventProducts extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public Event $event;
@@ -75,10 +77,8 @@ class EventProducts extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -157,7 +157,7 @@ class EventProducts extends Component
         // Delete removed variants
         $product->variants()->whereNotIn('id', $existingIds)->delete();
 
-        session()->flash('message', $this->editMode ? 'Article modifié avec succès.' : 'Article créé avec succès.');
+        $this->swalSuccess($this->editMode ? 'Article modifié avec succès.' : 'Article créé avec succès.');
         $this->closeModal();
     }
 
@@ -172,7 +172,7 @@ class EventProducts extends Component
         $product = EventProduct::findOrFail($this->productId);
         $product->variants()->delete();
         $product->delete();
-        session()->flash('message', 'Article supprimé avec succès.');
+        $this->swalSuccess('Article supprimé avec succès.');
         $this->showDeleteModal = false;
         $this->productId = null;
     }
@@ -199,7 +199,7 @@ class EventProducts extends Component
     {
         $product = EventProduct::findOrFail($id);
         $product->update(['is_active' => !$product->is_active]);
-        session()->flash('message', 'Visibilité modifiée.');
+        $this->swalSuccess('Visibilité modifiée.');
     }
 
     private function resetForm()

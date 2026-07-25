@@ -5,9 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\Transaction;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Transactions extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -98,15 +100,13 @@ class Transactions extends Component
             $transaction->update(['status' => $status]);
             $this->loadStats();
             
-            session()->flash('success', 'Statut de la transaction mis à jour avec succès.');
+            $this->swalSuccess('Statut de la transaction mis à jour avec succès.');
         }
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->selectedTransaction = null;
-        $this->modalMode = 'view';
     }
 
     public function resetFilters()
@@ -122,7 +122,7 @@ class Transactions extends Component
     public function exportTransactions()
     {
         // TODO: Implémenter l'export CSV/Excel
-        session()->flash('info', 'Fonctionnalité d\'export en cours de développement.');
+        $this->swalInfo('Fonctionnalité d\'export en cours de développement.');
     }
 
     public function render()

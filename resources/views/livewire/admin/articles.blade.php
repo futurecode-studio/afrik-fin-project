@@ -1,26 +1,32 @@
- <div>
+ <div x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
     {{-- Indicateur de chargement Livewire --}}
     <!-- <div wire:loading class="fixed top-0 left-0 right-0 bg-blue-500 text-white text-center py-2 z-50">
         Chargement en cours...
     </div> -->
 
-    <main class="container mx-auto px-4 py-8">
-        {{-- Message de succès --}}
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-                {{ session('message') }}
-            </div>
-        @endif
+    <div class="admin-page space-y-6">
+<div class="flex flex-wrap justify-between items-end gap-4 mb-2">
+        <div>
+            <nav class="flex items-center gap-2 text-[#757683] mb-2 text-xs font-semibold tracking-wider uppercase">
+                <span>Administration</span>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-[#001a61]">CONTENU</span>
+            </nav>
+            <h2 class="text-3xl font-extrabold text-[#001a61] tracking-tight">Gestion des Articles</h2>
+        </div>
+    </div>
 
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+        {{-- Message de succès --}}
+
+        <div class="admin-card">
             <div class="flex flex-col space-y-1.5 p-6">
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-2xl font-semibold leading-none tracking-tight">Liste des Articles</h3>
-                        <p class="text-sm text-muted-foreground">{{ $articles->total() }} article(s) enregistré(s)</p>
+                        <p class="text-sm text-[#757683]">{{ $articles->total() }} article(s) enregistré(s)</p>
                     </div>
-                    <button wire:click="openModal" type="button"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                    <button @click="open = true; $wire.openModal()" type="button"
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 admin-btn-primary  h-11 px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="h-4 w-4 mr-2">
@@ -36,26 +42,26 @@
                 {{-- Barre de recherche --}}
                 <div class="mt-4">
                     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Rechercher par titre, catégorie..."
-                        class="flex h-10 w-full md:w-96 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                        class="flex h-10 w-full md:w-96 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                 </div>
             </div>
 
             <div class="p-6 pt-0">
                 <div class="relative w-full overflow-auto">
-                    <table class="w-full caption-bottom text-sm">
+                    <table class="admin-table w-full caption-bottom text-sm">
                         <thead class="[&_tr]:border-b">
-                            <tr class="border-b transition-colors hover:bg-muted/50">
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Titre</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Catégorie</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Auteur</th>
-                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
-                                <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">Actions</th>
+                            <tr class="border-b transition-colors hover:bg-[#f0f3ff]">
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Titre</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Catégorie</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Statut</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Auteur</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-[#757683]">Date</th>
+                                <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="[&_tr:last-child]:border-0">
                             @forelse($articles as $article)
-                                <tr class="border-b transition-colors hover:bg-muted/50 {{ $article->trashed() ? 'opacity-50' : '' }}">
+                                <tr class="border-b transition-colors hover:bg-[#f0f3ff] {{ $article->trashed() ? 'opacity-50' : '' }}">
                                     <td class="p-4 align-middle">
                                         <div class="font-medium">{{ Str::limit($article->titre, 50) }}</div>
                                         @if($article->trashed())
@@ -68,7 +74,7 @@
                                                 {{ $article->categorie }}
                                             </span>
                                         @else
-                                            <span class="text-muted-foreground">-</span>
+                                            <span class="text-[#757683]">-</span>
                                         @endif
                                     </td>
                                     <td class="p-4 align-middle">
@@ -80,13 +86,13 @@
                                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-800">Archivé</span>
                                         @endif
                                     </td>
-                                    <td class="p-4 align-middle text-sm text-muted-foreground">{{ $article->user->name }}</td>
-                                    <td class="p-4 align-middle text-sm text-muted-foreground">{{ $article->created_at->format('d/m/Y') }}</td>
+                                    <td class="p-4 align-middle text-sm text-[#757683]">{{ $article->user->name }}</td>
+                                    <td class="p-4 align-middle text-sm text-[#757683]">{{ $article->created_at->format('d/m/Y') }}</td>
                                     <td class="p-4 align-middle text-right">
                                         <div class="flex justify-end gap-2">
                                             @if($article->trashed())
                                                 <button type="button" wire:click="restore({{ $article->id }})"
-                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-9 px-3"
                                                     title="Restaurer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
@@ -97,7 +103,7 @@
                                                 </button>
                                             @else
                                                 <button type="button" wire:click="edit({{ $article->id }})"
-                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-9 px-3"
                                                     title="Modifier">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
@@ -105,7 +111,7 @@
                                                     </svg>
                                                 </button>
                                                 <button type="button" wire:click="confirmDelete({{ $article->id }})"
-                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-red-200 bg-background hover:bg-red-50 text-red-600 h-9 px-3"
+                                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-red-200 bg-[#f9f9ff] hover:bg-red-50 text-red-600 h-9 px-3"
                                                     title="Supprimer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                         <path d="M3 6h18"/>
@@ -119,7 +125,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="p-4 text-center text-muted-foreground">
+                                    <td colspan="6" class="p-4 text-center text-[#757683]">
                                         Aucun article trouvé
                                     </td>
                                 </tr>
@@ -134,18 +140,17 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     {{-- Modal Ajout/Modification --}}
-    @if($showModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="closeModal">
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="open = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-2xl font-bold">
                             {{ $editMode ? 'Modifier l\'article' : 'Créer un article' }}
                         </h2>
-                        <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <button @click="open = false" class="text-gray-500 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 6 6 18"/>
                                 <path d="m6 6 12 12"/>
@@ -160,7 +165,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Titre <span class="text-red-500">*</span></label>
                                 <input wire:model.live="titre" type="text"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                                 @error('titre') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -168,7 +173,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Slug (URL)</label>
                                 <input wire:model="slug" type="text"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                     placeholder="genere-automatiquement">
                                 @error('slug') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -218,7 +223,7 @@
                                 {{-- Zone d'édition Quill pour l'extrait --}}
                                 <div
                                     x-ref="quillExtraitEditor"
-                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px]"
+                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px]"
                                 ></div>
 
                                 {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
@@ -285,7 +290,7 @@
                                 {{-- Zone d'édition Quill --}}
                                 <div
                                     x-ref="quillEditor"
-                                    class="flex w-full rounded-md border border-input bg-background text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
+                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
                                 ></div>
 
                                 {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
@@ -304,14 +309,14 @@
                                     type="file"
                                     wire:model="image"  
                                     accept="image/*"
-                                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                    class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                 >
 
                                 {{-- Prévisualisation si une image existe déjà (édition) --}}
                                 @if($editMode && $image_url)
                                     <p class="text-xs text-gray-500 mt-2">Image actuelle :</p>
                                     <img src="{{ $image_url }}" alt="Image actuelle" class="mt-1 h-20 rounded-md object-cover border">
-                                @endif
+                                
 
                                 @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -321,14 +326,14 @@
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Catégorie</label>
                                     <input wire:model="categorie" type="text"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                                         placeholder="Ex: Finance, Bourse, Conseil">
                                     @error('categorie') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Statut <span class="text-red-500">*</span></label>
                                     <select wire:model="statut"
-                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                                         <option value="brouillon">Brouillon</option>
                                         <option value="publie">Publié</option>
                                         <option value="archive">Archivé</option>
@@ -339,12 +344,12 @@
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-                            <button type="button" wire:click="closeModal"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                            <button type="button" @click="open = false"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                                 Annuler
                             </button>
                             <button type="submit"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 admin-btn-primary  h-11 px-6 py-3">
                                 {{ $editMode ? 'Modifier' : 'Créer' }}
                             </button>
                         </div>
@@ -352,18 +357,15 @@
                 </div>
             </div>
         </div>
-    @endif
-
     {{-- Modal Confirmation Suppression --}}
-    @if($showDeleteModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="$set('showDeleteModal', false)">
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="del = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative">
                 <h2 class="text-xl font-bold mb-4">Confirmer la suppression</h2>
                 <p class="text-gray-600 mb-6">Êtes-vous sûr de vouloir supprimer cet article ? Cette action peut être annulée en restaurant l'article.</p>
                 
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteModal', false)"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
+                    <button @click="del = false"
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#c5c5d4] bg-[#f9f9ff] hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                         Annuler
                     </button>
                     <button wire:click="delete"
@@ -373,7 +375,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 </div>
 
 @script

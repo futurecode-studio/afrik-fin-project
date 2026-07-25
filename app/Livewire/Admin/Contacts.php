@@ -5,9 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\Contact;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Contacts extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -33,16 +35,15 @@ class Contacts extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->selectedContact = null;
     }
 
     public function markAsReplied($id)
     {
         $contact = Contact::findOrFail($id);
         $contact->update(['status' => 'replied']);
-        session()->flash('message', 'Message marqué comme répondu.');
+        $this->swalSuccess('Message marqué comme répondu.');
         
         if ($this->selectedContact && $this->selectedContact->id === $id) {
             $this->selectedContact = Contact::findOrFail($id);
@@ -52,7 +53,7 @@ class Contacts extends Component
     public function deleteContact($id)
     {
         Contact::findOrFail($id)->delete();
-        session()->flash('message', 'Message supprimé avec succès.');
+        $this->swalSuccess('Message supprimé avec succès.');
         
         if ($this->selectedContact && $this->selectedContact->id === $id) {
             $this->closeModal();

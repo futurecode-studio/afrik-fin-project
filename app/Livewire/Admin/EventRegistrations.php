@@ -8,9 +8,11 @@ use App\Services\EventRegistrationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class EventRegistrations extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public Event $event;
@@ -42,7 +44,7 @@ class EventRegistrations extends Component
     {
         $registration = EventRegistration::findOrFail($this->registrationId);
         $service->cancel($registration, $this->cancellationReason);
-        session()->flash('message', 'Inscription annulée avec succès. La place a été libérée.');
+        $this->swalSuccess('Inscription annulée avec succès. La place a été libérée.');
         $this->showCancelModal = false;
         $this->registrationId = null;
         $this->cancellationReason = '';
@@ -54,9 +56,9 @@ class EventRegistrations extends Component
         $registration = EventRegistration::findOrFail($id);
         try {
             $service->checkIn($registration, Auth::user(), 'manual');
-            session()->flash('message', 'Présence enregistrée pour ' . $registration->fullName() . '.');
+            $this->swalSuccess('Présence enregistrée pour ' . $registration->fullName() . '.');
         } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+            $this->swalError($e->getMessage());
         }
         $this->dispatch('registration-updated');
     }

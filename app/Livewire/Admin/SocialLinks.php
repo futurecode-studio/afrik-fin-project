@@ -4,9 +4,11 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\SocialLink;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class SocialLinks extends Component
 {
+    use WithSweetAlert;
     public $showModal = false;
     public $showDeleteModal = false;
     public $editMode = false;
@@ -58,10 +60,8 @@ class SocialLinks extends Component
     }
 
     public function closeModal(): void
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit(int $id): void
@@ -91,10 +91,10 @@ class SocialLinks extends Component
 
         if ($this->editMode) {
             SocialLink::findOrFail($this->linkId)->update($data);
-            session()->flash('message', 'Lien modifié avec succès');
+            $this->swalSuccess('Lien modifié avec succès');
         } else {
             SocialLink::create($data);
-            session()->flash('message', 'Lien créé avec succès');
+            $this->swalSuccess('Lien créé avec succès');
         }
 
         $this->showModal = false;
@@ -112,7 +112,7 @@ class SocialLinks extends Component
     public function delete(): void
     {
         SocialLink::findOrFail($this->linkId)->delete();
-        session()->flash('message', 'Lien supprimé avec succès');
+        $this->swalSuccess('Lien supprimé avec succès');
         $this->showDeleteModal = false;
         $this->linkId = null;
         cache()->forget('social_links_active');
@@ -123,7 +123,7 @@ class SocialLinks extends Component
         $link = SocialLink::findOrFail($id);
         $link->update(['is_active' => !$link->is_active]);
         $status = $link->is_active ? 'activé' : 'désactivé';
-        session()->flash('message', "Lien $status avec succès");
+        $this->swalSuccess("Lien $status avec succès");
         cache()->forget('social_links_active');
     }
 

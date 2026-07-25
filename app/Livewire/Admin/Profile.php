@@ -6,9 +6,11 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Profile extends Component
 {
+    use WithSweetAlert;
     public $name;
     public $email;
     public $phone;
@@ -85,7 +87,7 @@ class Profile extends Component
             'gender' => $this->gender,
         ]);
 
-        session()->flash('message', 'Profil mis à jour avec succès');
+        $this->swalSuccess('Profil mis à jour avec succès');
     }
 
     public function updatePassword()
@@ -114,7 +116,7 @@ class Profile extends Component
         $this->reset(['current_password', 'password', 'password_confirmation']);
         $this->showPasswordSection = false;
 
-        session()->flash('message', 'Mot de passe modifié avec succès');
+        $this->swalSuccess('Mot de passe modifié avec succès');
     }
 
     public function togglePasswordSection()

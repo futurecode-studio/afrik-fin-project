@@ -6,9 +6,11 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Roles extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -58,10 +60,8 @@ class Roles extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -80,10 +80,10 @@ class Roles extends Component
         if ($this->editMode) {
             $role = Role::findOrFail($this->roleId);
             $role->update(['name' => $this->roleName]);
-            session()->flash('message', 'Rôle modifié avec succès');
+            $this->swalSuccess('Rôle modifié avec succès');
         } else {
             Role::create(['name' => $this->roleName]);
-            session()->flash('message', 'Rôle créé avec succès');
+            $this->swalSuccess('Rôle créé avec succès');
         }
 
         $this->closeModal();
@@ -93,11 +93,11 @@ class Roles extends Component
     {
         $role = Role::findOrFail($id);
         if (in_array($role->name, ['super_admin', 'admin', 'client'])) {
-            session()->flash('error', 'Ce rôle ne peut pas être supprimé');
+            $this->swalError('Ce rôle ne peut pas être supprimé');
             return;
         }
         $role->delete();
-        session()->flash('message', 'Rôle supprimé avec succès');
+        $this->swalSuccess('Rôle supprimé avec succès');
     }
 
     public function managePermissions($id)
@@ -123,7 +123,7 @@ class Roles extends Component
     {
         $role = Role::findOrFail($this->roleId);
         $role->syncPermissions($this->selectedPermissions);
-        session()->flash('message', 'Permissions du rôle mises à jour');
+        $this->swalSuccess('Permissions du rôle mises à jour');
         $this->showPermissionsModal = false;
     }
 

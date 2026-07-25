@@ -5,9 +5,11 @@ namespace App\Livewire\Admin;
 use App\Models\InvestmentAppointment;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Appointments extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -38,12 +40,8 @@ class Appointments extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->appointmentId = null;
-        $this->status = '';
-        $this->confirmed_date = '';
-        $this->admin_notes = '';
     }
 
     public function updateAppointment()
@@ -61,7 +59,7 @@ class Appointments extends Component
             'admin_notes' => $this->admin_notes,
         ]);
 
-        session()->flash('message', 'Rendez-vous mis à jour avec succès.');
+        $this->swalSuccess('Rendez-vous mis à jour avec succès.');
         $this->closeModal();
     }
 
@@ -76,7 +74,7 @@ class Appointments extends Component
         $appointment = InvestmentAppointment::findOrFail($this->appointmentId);
         $appointment->delete();
         
-        session()->flash('message', 'Rendez-vous supprimé avec succès.');
+        $this->swalSuccess('Rendez-vous supprimé avec succès.');
         $this->showDeleteModal = false;
         $this->appointmentId = null;
     }

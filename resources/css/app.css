@@ -1,3 +1,414 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --adf-navy: #001a61;
+        --adf-navy-light: #0a2e8c;
+        --adf-gold: #ffbf00;
+        --adf-ink: #131c2a;
+        --adf-muted: #444652;
+        --adf-soft: #757683;
+        --adf-line: #c5c5d4;
+        --adf-wash: #f9f9ff;
+        --adf-panel: rgba(255, 255, 255, 0.72);
+        --adf-panel-strong: rgba(255, 255, 255, 0.88);
+        --adf-glass-border: rgba(255, 255, 255, 0.45);
+        --adf-shadow: 0 10px 40px rgba(0, 26, 97, 0.08);
+        --adf-shadow-lg: 0 24px 60px rgba(0, 26, 97, 0.14);
+        --adf-radius: 1rem;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    body {
+        color: var(--adf-ink);
+        background-color: var(--adf-wash);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    ::selection {
+        background: rgba(255, 191, 0, 0.35);
+        color: var(--adf-navy);
+    }
+}
+
+@layer components {
+    /* —— Ambient page shells —— */
+    .adf-shell-public {
+        position: relative;
+        min-height: 100vh;
+        overflow-x: clip;
+        background:
+            radial-gradient(1200px 600px at 10% -10%, rgba(255, 191, 0, 0.18), transparent 55%),
+            radial-gradient(900px 500px at 100% 0%, rgba(10, 46, 140, 0.16), transparent 50%),
+            radial-gradient(800px 400px at 50% 100%, rgba(0, 26, 97, 0.08), transparent 60%),
+            linear-gradient(180deg, #f4f6ff 0%, #eef2fb 45%, #f9f9ff 100%);
+        background-attachment: fixed;
+    }
+
+    .adf-shell-public::before {
+        content: "";
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.35;
+        background-image:
+            linear-gradient(rgba(0, 26, 97, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 26, 97, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+    }
+
+    .adf-shell-admin {
+        min-height: 100vh;
+        overflow-x: clip;
+        background:
+            radial-gradient(900px 500px at 100% 0%, rgba(255, 191, 0, 0.12), transparent 55%),
+            radial-gradient(700px 400px at 0% 100%, rgba(10, 46, 140, 0.1), transparent 50%),
+            linear-gradient(165deg, #f3f6ff 0%, #e8eefc 40%, #f9f9ff 100%);
+        background-attachment: fixed;
+    }
+
+    .adf-shell-client {
+        min-height: 100vh;
+        overflow-x: clip;
+        background:
+            radial-gradient(800px 420px at 0% 0%, rgba(0, 26, 97, 0.12), transparent 55%),
+            radial-gradient(700px 380px at 100% 20%, rgba(255, 191, 0, 0.14), transparent 50%),
+            linear-gradient(180deg, #f5f7ff 0%, #eef2fb 50%, #f9f9ff 100%);
+        background-attachment: fixed;
+    }
+
+    /* —— Glass surfaces —— */
+    .adf-glass {
+        background: var(--adf-panel);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid var(--adf-glass-border);
+        box-shadow: var(--adf-shadow);
+    }
+
+    .adf-glass-strong {
+        background: var(--adf-panel-strong);
+        backdrop-filter: blur(22px) saturate(180%);
+        -webkit-backdrop-filter: blur(22px) saturate(180%);
+        border: 1px solid rgba(197, 197, 212, 0.55);
+        box-shadow: var(--adf-shadow);
+    }
+
+    .adf-glass-dark {
+        background: rgba(0, 26, 97, 0.78);
+        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 48px rgba(0, 10, 40, 0.28);
+    }
+
+    .adf-glass-nav {
+        background: rgba(249, 249, 255, 0.78);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border-bottom: 1px solid rgba(197, 197, 212, 0.55);
+        box-shadow: 0 8px 32px rgba(0, 26, 97, 0.06);
+    }
+
+    .adf-card {
+        @apply rounded-2xl transition-all duration-300 ease-out;
+        background: var(--adf-panel);
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
+        border: 1px solid rgba(197, 197, 212, 0.55);
+        box-shadow: var(--adf-shadow);
+    }
+
+    .adf-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(0, 26, 97, 0.22);
+        box-shadow: var(--adf-shadow-lg);
+    }
+
+    .adf-card-static {
+        @apply rounded-2xl;
+        background: var(--adf-panel);
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
+        border: 1px solid rgba(197, 197, 212, 0.55);
+        box-shadow: var(--adf-shadow);
+    }
+
+    .adf-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 font-bold text-white rounded-xl px-5 py-2.5 transition-all duration-300;
+        background: linear-gradient(135deg, #001a61 0%, #0a2e8c 100%);
+        box-shadow: 0 8px 24px rgba(0, 26, 97, 0.25);
+    }
+
+    .adf-btn-primary:hover {
+        transform: translateY(-1px) scale(1.01);
+        box-shadow: 0 12px 28px rgba(0, 26, 97, 0.35);
+        filter: brightness(1.05);
+    }
+
+    .adf-btn-gold {
+        @apply inline-flex items-center justify-center gap-2 font-bold rounded-xl px-5 py-2.5 transition-all duration-300;
+        background: linear-gradient(135deg, #ffbf00 0%, #ffd24d 100%);
+        color: #261a00;
+        box-shadow: 0 8px 24px rgba(255, 191, 0, 0.35);
+    }
+
+    .adf-btn-gold:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+    }
+
+    .adf-chip {
+        @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(197, 197, 212, 0.6);
+        backdrop-filter: blur(8px);
+    }
+
+    /* Admin overrides keep Stitch class names working */
+    .admin-card {
+        background: rgba(255, 255, 255, 0.78) !important;
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
+        border: 1px solid rgba(197, 197, 212, 0.55) !important;
+        border-radius: 1rem !important;
+        box-shadow: var(--adf-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .admin-card:hover {
+        box-shadow: var(--adf-shadow-lg);
+        border-color: rgba(0, 26, 97, 0.18) !important;
+    }
+
+    .admin-btn-primary {
+        background: linear-gradient(135deg, #001a61 0%, #0a2e8c 100%) !important;
+        color: #fff !important;
+        border-radius: 0.75rem !important;
+        font-weight: 700 !important;
+        box-shadow: 0 8px 20px rgba(0, 26, 97, 0.22);
+        transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .admin-btn-primary:hover {
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(0, 26, 97, 0.3);
+    }
+
+    .admin-input {
+        background: rgba(249, 249, 255, 0.85) !important;
+        border-color: rgba(197, 197, 212, 0.8) !important;
+        border-radius: 0.65rem !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .admin-input:focus {
+        border-color: #001a61 !important;
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(0, 26, 97, 0.12) !important;
+        background: #fff !important;
+    }
+
+    .admin-table thead tr {
+        background: rgba(238, 243, 255, 0.9) !important;
+    }
+}
+
+@layer utilities {
+    .adf-ticker-wrap {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .adf-ticker {
+        display: inline-flex;
+        animation: adf-ticker 40s linear infinite;
+        padding-left: 100%;
+    }
+
+    .adf-reveal {
+        animation: adf-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .adf-reveal-delay-1 { animation-delay: 0.08s; }
+    .adf-reveal-delay-2 { animation-delay: 0.16s; }
+    .adf-reveal-delay-3 { animation-delay: 0.24s; }
+    .adf-reveal-delay-4 { animation-delay: 0.32s; }
+
+    .adf-float {
+        animation: adf-float 6s ease-in-out infinite;
+    }
+
+    .adf-shimmer {
+        background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+        background-size: 200% 100%;
+        animation: adf-shimmer 2.8s linear infinite;
+    }
+
+    .adf-glow-gold {
+        box-shadow: 0 0 0 1px rgba(255, 191, 0, 0.25), 0 0 28px rgba(255, 191, 0, 0.18);
+    }
+
+    .adf-link-underline {
+        background-image: linear-gradient(var(--adf-gold), var(--adf-gold));
+        background-size: 0% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size 0.3s ease, color 0.2s ease;
+    }
+
+    .adf-link-underline:hover {
+        background-size: 100% 2px;
+        color: var(--adf-navy);
+    }
+
+    @keyframes adf-ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @keyframes adf-rise {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes adf-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+
+    @keyframes adf-shimmer {
+        to { background-position: -200% 0; }
+    }
+
+    @keyframes adf-pulse-soft {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        50% { opacity: 0.9; transform: scale(1.04); }
+    }
+
+    .adf-orb {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(40px);
+        pointer-events: none;
+        animation: adf-pulse-soft 8s ease-in-out infinite;
+        will-change: transform;
+        contain: paint;
+    }
+}
+
+/* —— Design tokens (ex-shadcn) : fond opaque — sans ça bg-card/bg-background = transparent —— */
+@layer utilities {
+    .bg-card {
+        background-color: #ffffff;
+    }
+    .bg-background {
+        background-color: #ffffff;
+    }
+    .text-card-foreground,
+    .text-foreground {
+        color: #131c2a;
+    }
+    .text-muted-foreground {
+        color: #757683;
+    }
+    .border-border,
+    .border-input {
+        border-color: #c5c5d4;
+    }
+    .bg-accent {
+        background-color: #eef2fc;
+    }
+    .text-accent-foreground {
+        color: #001a61;
+    }
+    .bg-muted {
+        background-color: #f3f5fb;
+    }
+    .text-primary-foreground {
+        color: #ffffff;
+    }
+    .ring-offset-background {
+        --tw-ring-offset-color: #ffffff;
+    }
+}
+
+/* —— Modals : overlay simple, opaque, sans blur (ouverture/fermeture instantanée) —— */
+@layer components {
+    .adf-modal-backdrop {
+        background-color: rgba(19, 28, 42, 0.55) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        transition: none !important;
+    }
+
+    .adf-modal-panel {
+        background-color: #ffffff !important;
+        color: #131c2a;
+        opacity: 1 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 10, 40, 0.35);
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Plus de blur coûteux sur les overlays de modals admin */
+    .fixed.inset-0[class*="backdrop-blur"],
+    .fixed.inset-0 .backdrop-blur-sm,
+    .absolute.inset-0[class*="backdrop-blur"] {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .swal2-container {
+        z-index: 200000 !important;
+    }
+
+    .swal2-popup,
+    .swal2-show {
+        animation: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .adf-reveal,
+    .adf-reveal-delay-1,
+    .adf-reveal-delay-2,
+    .adf-reveal-delay-3,
+    .adf-reveal-delay-4,
+    .adf-float,
+    .adf-shimmer,
+    .adf-orb,
+    .adf-ticker {
+        animation: none !important;
+    }
+
+    .adf-card:hover,
+    .adf-btn-primary:hover,
+    .adf-btn-gold:hover {
+        transform: none !important;
+    }
+}

@@ -1,9 +1,4 @@
-<div>
-    @if (session()->has('message'))
-        <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-            {{ session('message') }}
-        </div>
-    @endif
+<div x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
 
     <main class="container mx-auto px-4 py-8">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -13,7 +8,7 @@
                         <h3 class="text-2xl font-semibold leading-none tracking-tight">Liste des Membres de l'Équipe</h3>
                         <p class="text-sm text-muted-foreground">{{ $members->total() }} membre(s) enregistré(s)</p>
                     </div>
-                    <button wire:click="openModal" type="button"
+                    <button @click="open = true; $wire.openModal()" type="button"
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -43,6 +38,7 @@
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Poste</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Email</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Statut</th>
+                                <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Dirigeant</th>
                                 <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Ordre</th>
                                 <th class="h-12 px-4 align-middle font-medium text-muted-foreground text-right">Actions</th>
                             </tr>
@@ -71,6 +67,13 @@
                                         <button wire:click="toggleActive({{ $member->id }})" type="button"
                                             class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold {{ $member->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
                                             {{ $member->is_active ? 'Actif' : 'Inactif' }}
+                                        </button>
+                                    </td>
+                                    <td class="p-4 align-middle">
+                                        <button wire:click="toggleLeadership({{ $member->id }})" type="button"
+                                            class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold {{ $member->is_leadership ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600' }}"
+                                            title="Afficher sur la page À propos (Équipe dirigeante)">
+                                            {{ $member->is_leadership ? 'Oui' : 'Non' }}
                                         </button>
                                     </td>
                                     <td class="p-4 align-middle text-sm text-muted-foreground">{{ $member->order }}</td>
@@ -115,14 +118,13 @@
         </div>
     </main>
 
-    @if($showModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 bg-black/50" wire:click="closeModal"></div>
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 bg-black/50" @click="open = false"></div>
             
-            <div class="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-background p-6 shadow-lg">
+            <div class="relative z-10 adf-modal-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-lg border border-[#c5c5d4]">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-xl font-semibold">{{ $editMode ? 'Modifier le membre' : 'Ajouter un membre' }}</h3>
-                    <button wire:click="closeModal" type="button" class="text-muted-foreground hover:text-foreground">
+                    <button @click="open = false" type="button" class="text-muted-foreground hover:text-foreground">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"/>
                             <path d="m6 6 12 12"/>
@@ -184,7 +186,7 @@
                                     <img src="{{ '/storage/' . $photo_url }}" alt="Photo actuelle" class="w-20 h-20 object-cover rounded-full border">
                                     <p class="text-xs text-gray-500 mt-1">Photo actuelle</p>
                                 </div>
-                            @endif
+                            
                         </div>
 
                         <div>
@@ -202,6 +204,10 @@
                                     <input wire:model="is_active" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
                                     <span class="text-sm">Actif</span>
                                 </label>
+                                <label class="flex items-center gap-2 cursor-pointer mt-2">
+                                    <input wire:model="is_leadership" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
+                                    <span class="text-sm">Équipe dirigeante (page À propos)</span>
+                                </label>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Ordre d'affichage</label>
@@ -213,7 +219,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3 mt-6">
-                        <button wire:click="closeModal" type="button"
+                        <button @click="open = false" type="button"
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                             Annuler
                         </button>
@@ -225,18 +231,15 @@
                 </form>
             </div>
         </div>
-    @endif
-
-    @if($showDeleteModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 bg-black/50" wire:click="$set('showDeleteModal', false)"></div>
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 bg-black/50" @click="del = false"></div>
             
-            <div class="relative z-10 w-full max-w-md rounded-lg bg-background p-6 shadow-lg">
+            <div class="relative z-10 adf-modal-panel w-full max-w-md rounded-lg bg-white p-6 shadow-lg border border-[#c5c5d4]">
                 <h3 class="text-lg font-semibold mb-2">Confirmer la suppression</h3>
                 <p class="text-muted-foreground mb-6">Êtes-vous sûr de vouloir supprimer ce membre ? Cette action est irréversible.</p>
                 
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteModal', false)" type="button"
+                    <button @click="del = false" type="button"
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                         Annuler
                     </button>
@@ -247,7 +250,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 
     @push('scripts')
         <script>

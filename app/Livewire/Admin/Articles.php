@@ -8,9 +8,11 @@ use Livewire\WithFileUploads;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Articles extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public $search = '';
@@ -87,10 +89,8 @@ class Articles extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -144,10 +144,10 @@ class Articles extends Component
                 unset($articleData['published_at']);
             }
             $article->update($articleData);
-            session()->flash('message', 'Article modifié avec succès');
+            $this->swalSuccess('Article modifié avec succès');
         } else {
             Article::create($articleData);
-            session()->flash('message', 'Article créé avec succès');
+            $this->swalSuccess('Article créé avec succès');
         }
 
         // Fermer la modale et réinitialiser
@@ -171,7 +171,7 @@ class Articles extends Component
         $article = Article::findOrFail($this->articleId);
         $article->delete();
         
-        session()->flash('message', 'Article supprimé avec succès');
+        $this->swalSuccess('Article supprimé avec succès');
         $this->showDeleteModal = false;
         $this->articleId = null;
         
@@ -183,7 +183,7 @@ class Articles extends Component
         $article = Article::withTrashed()->findOrFail($id);
         $article->restore();
         
-        session()->flash('message', 'Article restauré avec succès');
+        $this->swalSuccess('Article restauré avec succès');
         
         $this->dispatch('article-saved');
     }

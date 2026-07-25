@@ -1,32 +1,37 @@
-<div>
+<div class="admin-page space-y-6" x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
+    <div class="flex flex-wrap justify-between items-end gap-4 mb-2">
+        <div>
+            <nav class="flex items-center gap-2 text-[#757683] mb-2 text-xs font-semibold tracking-wider uppercase">
+                <span>Administration</span>
+                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                <span class="text-[#001a61]">CANDIDATURES</span>
+            </nav>
+            <h2 class="text-3xl font-extrabold text-[#001a61] tracking-tight">Gestion des Candidatures</h2>
+        </div>
+    </div>
+
     {{-- Indicateur de chargement Livewire --}}
-    <div wire:loading class="fixed top-0 left-0 right-0 bg-blue-500 text-white text-center py-2 z-50">
+    <div wire:loading class="fixed top-0 left-0 right-0 bg-[#001a61] text-white text-center py-2 z-50">
         Chargement en cours...
     </div>
 
-    <main class="container mx-auto px-4 py-8">
         {{-- Message de succès --}}
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-                {{ session('message') }}
-            </div>
-        @endif
 
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+        <div class="admin-card">
             <div class="flex flex-col space-y-1.5 p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold leading-none tracking-tight">Candidatures</h3>
-                        <p class="text-sm text-muted-foreground">{{ $applications->total() }} candidature(s) reçue(s)</p>
+                        <h3 class="text-xl font-bold text-[#001a61]">Candidatures</h3>
+                        <p class="text-sm text-[#757683]">{{ $applications->total() }} candidature(s) reçue(s)</p>
                     </div>
                 </div>
 
                 {{-- Barre de recherche et filtres --}}
                 <div class="mt-4 flex flex-col md:flex-row gap-4">
                     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Rechercher par nom, email, poste..."
-                        class="flex h-10 w-full md:w-96 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                        class="flex h-10 w-full md:w-96 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm focus:border-[#001a61] outline-none">
                     <select wire:model.live="filterStatus"
-                        class="flex h-10 w-full md:w-48 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                        class="flex h-10 w-full md:w-48 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm focus:border-[#001a61] outline-none">
                         <option value="">Tous les statuts</option>
                         <option value="pending">En attente</option>
                         <option value="reviewing">En examen</option>
@@ -124,19 +129,19 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     {{-- Modal Détails --}}
     @if($showModal)
         @php
             $application = \App\Models\JobApplication::find($applicationId);
         @endphp
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="closeModal">
+        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="open = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-2xl font-bold">Détails de la candidature</h2>
-                        <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <button @click="open = false" class="text-gray-500 hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 6 6 18"/>
                                 <path d="m6 6 12 12"/>
@@ -249,7 +254,7 @@
                                     </div>
 
                                     <div class="flex justify-end gap-3">
-                                        <button type="button" wire:click="closeModal"
+                                        <button type="button" @click="open = false"
                                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                                             Annuler
                                         </button>
@@ -265,17 +270,14 @@
                 </div>
             </div>
         </div>
-    @endif
-
     {{-- Modal Confirmation Suppression --}}
-    @if($showDeleteModal)
-        <div class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" wire:click.self="$set('showDeleteModal', false)">
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="del = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative">
                 <h2 class="text-xl font-bold mb-4">Confirmer la suppression</h2>
                 <p class="text-gray-600 mb-6">Êtes-vous sûr de vouloir supprimer cette candidature ? Cette action est irréversible.</p>
                 
                 <div class="flex justify-end gap-3">
-                    <button wire:click="$set('showDeleteModal', false)"
+                    <button @click="del = false"
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 py-3">
                         Annuler
                     </button>
@@ -286,5 +288,5 @@
                 </div>
             </div>
         </div>
-    @endif
+    
 </div>

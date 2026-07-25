@@ -9,9 +9,11 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Events extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public $search = '';
@@ -106,11 +108,8 @@ class Events extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
-        $this->dispatch('event-modal-closed');
     }
 
     public function edit($id)
@@ -194,7 +193,7 @@ class Events extends Component
             ]);
         }
 
-        session()->flash('message', $this->editMode ? 'Événement modifié avec succès.' : 'Événement créé avec succès.');
+        $this->swalSuccess($this->editMode ? 'Événement modifié avec succès.' : 'Événement créé avec succès.');
 
         $this->closeModal();
         $this->dispatch('event-saved');
@@ -209,7 +208,7 @@ class Events extends Component
     public function delete()
     {
         Event::findOrFail($this->eventId)->delete();
-        session()->flash('message', 'Événement supprimé avec succès.');
+        $this->swalSuccess('Événement supprimé avec succès.');
         $this->showDeleteModal = false;
         $this->eventId = null;
         $this->dispatch('event-saved');
@@ -219,7 +218,7 @@ class Events extends Component
     {
         $event = Event::withTrashed()->findOrFail($id);
         $event->restore();
-        session()->flash('message', 'Événement restauré avec succès.');
+        $this->swalSuccess('Événement restauré avec succès.');
         $this->dispatch('event-saved');
     }
 
@@ -231,14 +230,14 @@ class Events extends Component
         $clone->status = 'draft';
         $clone->registration_count = 0;
         $clone->save();
-        session()->flash('message', 'Événement dupliqué avec succès.');
+        $this->swalSuccess('Événement dupliqué avec succès.');
     }
 
     public function toggleFeatured($id)
     {
         $event = Event::findOrFail($id);
         $event->update(['is_featured' => !$event->is_featured]);
-        session()->flash('message', 'Mise en avant modifiée.');
+        $this->swalSuccess('Mise en avant modifiée.');
     }
 
     public function removeGalleryImage($galleryId)
@@ -247,7 +246,7 @@ class Events extends Component
         if ($gallery) {
             $gallery->delete();
             $this->existingGallery = array_values(array_filter($this->existingGallery, fn($g) => $g['id'] != $galleryId));
-            session()->flash('message', 'Image supprimée.');
+            $this->swalSuccess('Image supprimée.');
         }
     }
 

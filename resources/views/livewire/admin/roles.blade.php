@@ -1,14 +1,4 @@
-<div>
-    @if (session()->has('message'))
-        <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
-            {{ session('message') }}
-        </div>
-    @endif
-    @if (session()->has('error'))
-        <div class="mb-4 rounded-lg bg-red-50 p-4 text-red-800 border border-red-200">
-            {{ session('error') }}
-        </div>
-    @endif
+<div x-data="{ open: @entangle('showModal').live }">
 
     <main class="container mx-auto px-4 py-8">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -18,7 +8,7 @@
                         <h3 class="text-2xl font-semibold leading-none tracking-tight">Rôles et Permissions</h3>
                         <p class="text-sm text-muted-foreground">{{ $roles->total() }} rôle(s) enregistré(s)</p>
                     </div>
-                    <button wire:click="openModal" type="button"
+                    <button @click="open = true; $wire.openModal()" type="button"
                         class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-11 px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2">
                             <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
@@ -116,11 +106,10 @@
     </main>
 
     {{-- Modal Create/Edit Role --}}
-    @if($showModal)
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 bg-black/50" wire:click="closeModal"></div>
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 bg-black/50" @click="open = false"></div>
             
-            <div class="relative z-10 w-full max-w-md rounded-lg bg-background p-6 shadow-lg">
+            <div class="relative z-10 adf-modal-panel w-full max-w-md rounded-lg bg-white p-6 shadow-lg border border-[#c5c5d4]">
                 <h3 class="text-xl font-semibold mb-4">{{ $editMode ? 'Modifier le rôle' : 'Créer un rôle' }}</h3>
                 
                 <form wire:submit="save">
@@ -134,7 +123,7 @@
                     </div>
 
                     <div class="flex justify-end gap-3 mt-6">
-                        <button wire:click="closeModal" type="button"
+                        <button @click="open = false" type="button"
                             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                             Annuler
                         </button>
@@ -146,14 +135,14 @@
                 </form>
             </div>
         </div>
-    @endif
+    
 
     {{-- Modal Permissions --}}
     @if($showPermissionsModal)
         <div class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-black/50" wire:click="$set('showPermissionsModal', false)"></div>
             
-            <div class="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-background p-6 shadow-lg">
+            <div class="relative z-10 adf-modal-panel w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-lg border border-[#c5c5d4]">
                 <h3 class="text-xl font-semibold mb-2">Permissions: {{ $roleName }}</h3>
                 <p class="text-sm text-muted-foreground mb-4">Cochez les permissions à attribuer à ce rôle</p>
                 
@@ -186,5 +175,4 @@
                 </div>
             </div>
         </div>
-    @endif
 </div>

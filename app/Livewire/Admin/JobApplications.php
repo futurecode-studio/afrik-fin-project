@@ -6,9 +6,11 @@ use App\Models\JobApplication;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class JobApplications extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -36,11 +38,8 @@ class JobApplications extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->applicationId = null;
-        $this->admin_notes = '';
-        $this->status = '';
     }
 
     public function updateApplication()
@@ -53,7 +52,7 @@ class JobApplications extends Component
             'reviewed_at' => now(),
         ]);
 
-        session()->flash('message', 'Candidature mise à jour avec succès.');
+        $this->swalSuccess('Candidature mise à jour avec succès.');
         $this->closeModal();
     }
 
@@ -79,7 +78,7 @@ class JobApplications extends Component
         
         $application->delete();
         
-        session()->flash('message', 'Candidature supprimée avec succès.');
+        $this->swalSuccess('Candidature supprimée avec succès.');
         $this->showDeleteModal = false;
         $this->applicationId = null;
     }
@@ -106,7 +105,7 @@ class JobApplications extends Component
         return view('livewire.admin.job-applications', [
             'applications' => $applications,
         ])
-            ->extends('layouts.admin', ['title' => 'Candidatures'])
+            ->extends('layouts.admin', ['title' => 'Gestion des Candidatures'])
             ->section('content');
     }
 }

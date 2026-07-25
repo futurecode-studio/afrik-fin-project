@@ -1,22 +1,22 @@
-<div>
-    <div class="container mx-auto px-4 py-8">
-        <div class="flex items-center justify-between mb-6">
+<div x-data="{ open: @entangle('showModal').live, del: @entangle('showDeleteModal').live }">
+    <div class="p-6 lg:p-8 space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div>
-                <h1 class="text-2xl font-bold">Boutique événement</h1>
-                <p class="text-sm text-muted-foreground">{{ $event->title }}</p>
+                <nav class="flex items-center gap-2 text-[#757683] mb-2 text-xs font-semibold tracking-wider uppercase flex-wrap">
+                    <a href="{{ route('admin.events') }}" class="hover:text-[#001a61]" wire:navigate.hover>Événements</a>
+                    <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    <span class="text-[#001a61]">{{ Str::limit($event->title, 40) }}</span>
+                </nav>
+                <h1 class="text-2xl font-extrabold text-[#001a61]">Boutique événement</h1>
+                <p class="text-sm text-[#444652] mt-1">{{ $event->title }}</p>
             </div>
-            <div class="flex items-center gap-3">
-                <a href="{{ route('admin.events') }}" class="px-4 py-2 border border-border rounded-lg text-sm hover:bg-muted transition-colors">Retour aux événements</a>
-                <button wire:click="openModal" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light transition-colors text-sm font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-                    Nouvel article
-                </button>
-            </div>
+            <button @click="open = true; $wire.openModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#001a61] text-white text-sm font-bold hover:bg-[#0a2e8c]">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                Nouvel article boutique
+            </button>
         </div>
 
-        @if (session()->has('message'))
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">{{ session('message') }}</div>
-        @endif
+        @include('livewire.admin.partials.event-admin-nav', ['event' => $event])
 
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
@@ -89,13 +89,12 @@
     </div>
 
     <!-- Modal Article -->
-    @if($showModal)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeModal"></div>
-        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-border">
+    <div x-show="open" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/60" @click="open = false"></div>
+        <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-[#c5c5d4]">
             <div class="p-6 border-b border-border flex items-center justify-between">
                 <h2 class="text-xl font-bold">{{ $editMode ? 'Modifier' : 'Créer' }} un article</h2>
-                <button wire:click="closeModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                <button @click="open = false" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <div class="p-6 space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,7 +121,7 @@
                         <input type="file" wire:model="image" accept="image/*" class="w-full text-sm">
                         @if($image_url)
                             <img src="{{ asset('storage/'.$image_url) }}" class="mt-2 h-20 rounded-lg object-cover border border-border">
-                        @endif
+                        
                     </div>
                 </div>
 
@@ -157,24 +156,21 @@
                 </div>
             </div>
             <div class="p-6 border-t border-border flex justify-end gap-3">
-                <button wire:click="closeModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted transition-colors">Annuler</button>
+                <button @click="open = false" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted transition-colors">Annuler</button>
                 <button wire:click="save" class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light transition-colors font-medium">Enregistrer</button>
             </div>
         </div>
     </div>
-    @endif
-
-    @if($showDeleteModal)
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="$set('showDeleteModal', false)"></div>
-        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-md border border-border p-6">
+    <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="fixed inset-0 bg-black/60" @click="del = false"></div>
+        <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl w-full max-w-md border border-[#c5c5d4] p-6">
             <h3 class="text-lg font-bold mb-2">Confirmer la suppression</h3>
             <p class="text-sm text-muted-foreground mb-6">Cet article et ses variantes seront supprimés définitivement.</p>
             <div class="flex justify-end gap-3">
-                <button wire:click="$set('showDeleteModal', false)" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
+                <button @click="del = false" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
                 <button wire:click="delete" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Supprimer</button>
             </div>
         </div>
     </div>
-    @endif
+    
 </div>

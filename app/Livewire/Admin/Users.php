@@ -6,9 +6,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Users extends Component
 {
+    use WithSweetAlert;
     use WithPagination;
 
     public $search = '';
@@ -82,10 +84,8 @@ class Users extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -134,11 +134,11 @@ class Users extends Component
             $user = User::findOrFail($this->userId);
             $user->update($userData);
             $user->syncRoles($this->role);
-            session()->flash('message', 'Utilisateur modifié avec succès');
+            $this->swalSuccess('Utilisateur modifié avec succès');
         } else {
             $user = User::create($userData);
             $user->assignRole($this->role);
-            session()->flash('message', 'Utilisateur créé avec succès');
+            $this->swalSuccess('Utilisateur créé avec succès');
             $this->resetPage(); // Retour à la première page
         }
 
@@ -158,7 +158,7 @@ class Users extends Component
         $user->delete();
         $this->dispatch('user-saved'); // Événement pour actualisation
         
-        session()->flash('message', 'Utilisateur supprimé avec succès');
+        $this->swalSuccess('Utilisateur supprimé avec succès');
         $this->showDeleteModal = false;
         $this->userId = null;
     }
@@ -168,7 +168,7 @@ class Users extends Component
         $user = User::withTrashed()->findOrFail($id);
         $user->restore();
         
-        session()->flash('message', 'Utilisateur restauré avec succès');
+        $this->swalSuccess('Utilisateur restauré avec succès');
         $this->dispatch('user-saved'); // Événement pour actualisation
     }
 

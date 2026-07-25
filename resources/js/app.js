@@ -3,12 +3,13 @@ import './bootstrap';
 // Styles pour l'éditeur riche (Quill)
 import 'quill/dist/quill.snow.css';
 
-// Quill sera utilisé dans certaines vues (initialisé via Alpine)
+// Quill (utilisé dans certaines vues admin)
 import Quill from 'quill';
 window.Quill = Quill;
 
-import Alpine from 'alpinejs';
+// SweetAlert2 — toasts / modals (admin, client, public)
+import './sweetalert';
 
-window.Alpine = Alpine;
-
-Alpine.start();
+// IMPORTANT: ne pas importer/démarrer Alpine ici.
+// Livewire 3 embarque déjà Alpine via @livewireScripts.
+// Un second Alpine.start() casse wire:submit (spinner puis silence).

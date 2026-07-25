@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\RateLimiter;
  */
 trait HandlesInvestmentAppointment
 {
+    use WithSweetAlert;
     public $name = '';
     public $email = '';
     public $phone = '';
@@ -74,7 +75,7 @@ trait HandlesInvestmentAppointment
         $throttleKey = "appointment:{$investmentType}:" . (Auth::id() ?: request()->ip());
         if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
             $seconds = RateLimiter::availableIn($throttleKey);
-            session()->flash('error', "Trop de demandes. Réessayez dans {$seconds} secondes.");
+            $this->swalError("Trop de demandes. Réessayez dans {$seconds} secondes.");
             return false;
         }
         RateLimiter::hit($throttleKey, 600);
@@ -105,7 +106,7 @@ trait HandlesInvestmentAppointment
             ]);
         }
 
-        session()->flash('success', 'Votre demande de rendez-vous a été envoyée avec succès ! Nous vous contacterons bientôt.');
+        $this->swalSuccess('Votre demande de rendez-vous a été envoyée avec succès ! Nous vous contacterons bientôt.');
         $this->reset(['company', 'message']);
         return true;
     }

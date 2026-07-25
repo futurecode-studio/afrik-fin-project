@@ -7,9 +7,11 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\TeamMember;
 use Illuminate\Support\Str;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class TeamMembers extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public $search = '';
@@ -27,6 +29,7 @@ class TeamMembers extends Component
     public $photo;
     public $photo_url;
     public $is_active = true;
+    public $is_leadership = false;
     public $order = 0;
 
     protected $paginationTheme = 'tailwind';
@@ -43,6 +46,7 @@ class TeamMembers extends Component
             'photo' => 'nullable|image|max:2048',
             'photo_url' => 'nullable|string|max:255',
             'is_active' => 'boolean',
+            'is_leadership' => 'boolean',
             'order' => 'nullable|integer|min:0',
         ];
     }
@@ -72,8 +76,8 @@ class TeamMembers extends Component
     public function render()
     {
         $members = TeamMember::when($this->search, function ($query) {
-            $query->where('nom', 'like', '%' . $this->search . '%')
-                 ->orWhere('poste', 'like', '%' . $this->search . '%');
+            $query->where('nom', 'like', '%'.$this->search.'%')
+                ->orWhere('poste', 'like', '%'.$this->search.'%');
         })->orderBy('order')->paginate(10);
 
         return view('livewire.admin.team-members', [
@@ -91,16 +95,14 @@ class TeamMembers extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
     {
         $member = TeamMember::findOrFail($id);
-        
+
         $this->memberId = $member->id;
         $this->nom = $member->nom;
         $this->poste = $member->poste;
@@ -110,8 +112,9 @@ class TeamMembers extends Component
         $this->email = $member->email;
         $this->photo_url = $member->photo;
         $this->is_active = $member->is_active;
+        $this->is_leadership = (bool) $member->is_leadership;
         $this->order = $member->order;
-        
+
         $this->editMode = true;
         $this->showModal = true;
     }
@@ -123,7 +126,7 @@ class TeamMembers extends Component
         $photoPath = $this->photo_url;
 
         if ($this->photo) {
-            $filename = Str::slug($this->nom) . '-' . time() . '.' . $this->photo->getClientOriginalExtension();
+            $filename = Str::slug($this->nom).'-'.time().'.'.$this->photo->getClientOriginalExtension();
             $photoPath = $this->photo->storeAs('team', $filename, 'public');
         }
 
@@ -136,26 +139,27 @@ class TeamMembers extends Component
             'email' => $this->email,
             'photo' => $photoPath,
             'is_active' => $this->is_active,
+            'is_leadership' => $this->is_leadership,
             'order' => $this->order ?? 0,
         ];
 
         if ($this->editMode) {
             $member = TeamMember::findOrFail($this->memberId);
-            if (!$this->photo) {
+            if (! $this->photo) {
                 unset($memberData['photo']);
             }
             $member->update($memberData);
-            session()->flash('message', 'Membre modifié avec succès');
+            $this->swalSuccess('Membre modifié avec succès');
         } else {
             TeamMember::create($memberData);
-            session()->flash('message', 'Membre créé avec succès');
+            $this->swalSuccess('Membre créé avec succès');
         }
 
         $this->showModal = false;
         $this->resetForm();
         $this->resetValidation();
         $this->resetPage();
-        
+
         $this->dispatch('member-saved');
     }
 
@@ -168,27 +172,41 @@ class TeamMembers extends Component
     public function delete()
     {
         $member = TeamMember::findOrFail($this->memberId);
-        
-        if ($member->photo && \Storage::disk('public')->exists('team/' . $member->photo)) {
-            \Storage::disk('public')->delete('team/' . $member->photo);
+
+        if ($member->photo) {
+            $path = str_starts_with($member->photo, 'team/')
+                ? $member->photo
+                : 'team/'.$member->photo;
+            if (\Storage::disk('public')->exists($path)) {
+                \Storage::disk('public')->delete($path);
+            }
         }
-        
+
         $member->delete();
-        
-        session()->flash('message', 'Membre supprimé avec succès');
+
+        $this->swalSuccess('Membre supprimé avec succès');
         $this->showDeleteModal = false;
         $this->memberId = null;
-        
+
         $this->dispatch('member-saved');
     }
 
     public function toggleActive($id)
     {
         $member = TeamMember::findOrFail($id);
-        $member->update(['is_active' => !$member->is_active]);
-        
+        $member->update(['is_active' => ! $member->is_active]);
+
         $status = $member->is_active ? 'activé' : 'désactivé';
-        session()->flash('message', 'Membre ' . $status . ' avec succès');
+        $this->swalSuccess('Membre '.$status.' avec succès');
+    }
+
+    public function toggleLeadership($id)
+    {
+        $member = TeamMember::findOrFail($id);
+        $member->update(['is_leadership' => ! $member->is_leadership]);
+
+        $status = $member->is_leadership ? 'ajouté à l’équipe dirigeante' : 'retiré de l’équipe dirigeante';
+        $this->swalSuccess('Membre '.$status);
     }
 
     public function resetForm()
@@ -203,6 +221,7 @@ class TeamMembers extends Component
         $this->photo = null;
         $this->photo_url = '';
         $this->is_active = true;
+        $this->is_leadership = false;
         $this->order = 0;
     }
 }

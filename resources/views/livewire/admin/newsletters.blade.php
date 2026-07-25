@@ -1,9 +1,4 @@
 <main class="container mx-auto px-4 py-8">
-    @if (session()->has('message'))
-        <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-            {{ session('message') }}
-        </div>
-    @endif
 
     <div dir="ltr" data-orientation="horizontal">
         <!-- Onglets -->

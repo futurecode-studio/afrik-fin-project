@@ -7,9 +7,11 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Partner;
 use Illuminate\Support\Str;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Partners extends Component
 {
+    use WithSweetAlert;
     use WithPagination, WithFileUploads;
 
     public $search = '';
@@ -102,10 +104,8 @@ class Partners extends Component
     }
 
     public function closeModal()
-    {
+{
         $this->showModal = false;
-        $this->resetForm();
-        $this->resetValidation();
     }
 
     public function edit($id)
@@ -156,10 +156,10 @@ class Partners extends Component
                 unset($partnerData['logo']);
             }
             $partner->update($partnerData);
-            session()->flash('message', 'Partenaire modifié avec succès');
+            $this->swalSuccess('Partenaire modifié avec succès');
         } else {
             Partner::create($partnerData);
-            session()->flash('message', 'Partenaire créé avec succès');
+            $this->swalSuccess('Partenaire créé avec succès');
         }
 
         $this->showModal = false;
@@ -186,7 +186,7 @@ class Partners extends Component
         
         $partner->delete();
         
-        session()->flash('message', 'Partenaire supprimé avec succès');
+        $this->swalSuccess('Partenaire supprimé avec succès');
         $this->showDeleteModal = false;
         $this->partnerId = null;
         
@@ -199,7 +199,7 @@ class Partners extends Component
         $partner->update(['is_active' => !$partner->is_active]);
         
         $status = $partner->is_active ? 'activé' : 'désactivé';
-        session()->flash('message', 'Partenaire ' . $status . ' avec succès');
+        $this->swalSuccess('Partenaire ' . $status . ' avec succès');
     }
 
     public function resetForm()
