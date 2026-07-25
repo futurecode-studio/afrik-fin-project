@@ -6,7 +6,7 @@
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" wire:click="closeModal"></div>
 
         <!-- Modal -->
-        <div class="relative bg-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
+        <div class="relative adf-modal-panel bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
                 <!-- Header -->
                 <div class="bg-primary px-6 py-4">
                     <div class="flex items-center justify-between">
@@ -128,13 +128,6 @@
     @endif
 
     <!-- Messages -->
-    @if (session()->has('success'))
-        <div class="container mx-auto px-4 pt-4">
-            <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
 
     @if ($errorMessage)
         <div class="container mx-auto px-4 pt-4">

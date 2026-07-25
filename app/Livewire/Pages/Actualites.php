@@ -16,7 +16,7 @@ class Actualites extends Component
         return view('livewire.pages.actualites', [
             'articles' => $articles
         ])
-            ->extends('layouts.site', ['title' => 'Actualités Financières'])
+            ->extends('layouts.site', ['title' => 'Actualités des Marchés — Africaine des Finances'])
             ->section('content');
     }
 }

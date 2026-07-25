@@ -4,12 +4,15 @@ namespace App\Livewire\Pages;
 
 use App\Models\Formation;
 use App\Models\Enrollment;
+use App\Services\FormationCartService;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Formations extends Component
 {
+    use WithSweetAlert;
     public $showPaymentModal = false;
     public $selectedFormation = null;
     public $paymentProvider = 'kkiapay';
@@ -22,12 +25,23 @@ class Formations extends Component
 
     protected $listeners = ['paymentSuccess' => 'handlePaymentSuccess'];
 
+    public function addToCart(int $formationId, FormationCartService $cart): void
+    {
+        if (! Formation::publie()->whereKey($formationId)->exists()) {
+            $this->swalError('Formation introuvable.');
+
+            return;
+        }
+        $cart->add($formationId);
+        $this->swalSuccess('Formation ajoutée au panier.');
+    }
+
     public function openPaymentModal($formationId)
     {
         $this->selectedFormation = Formation::find($formationId);
         
         if (!$this->selectedFormation) {
-            session()->flash('error', 'Formation non trouvée.');
+            $this->swalError('Formation non trouvée.');
             return;
         }
 
@@ -46,7 +60,7 @@ class Formations extends Component
 
         // Vérifier si déjà inscrit
         if (Auth::user()->isEnrolledIn($this->selectedFormation)) {
-            session()->flash('info', 'Vous êtes déjà inscrit à cette formation.');
+            $this->swalInfo('Vous êtes déjà inscrit à cette formation.');
             return;
         }
 
@@ -62,7 +76,7 @@ class Formations extends Component
     public function enrollFree()
     {
         if (!Auth::check()) {
-            session()->flash('info', 'Veuillez vous connecter pour vous inscrire à cette formation.');
+            $this->swalInfo('Veuillez vous connecter pour vous inscrire à cette formation.');
             return $this->redirect(route('connexion'), navigate: true);
         }
 
@@ -70,9 +84,9 @@ class Formations extends Component
         $result = $paymentService->enrollForFree(Auth::user(), $this->selectedFormation);
 
         if ($result['success']) {
-            session()->flash('success', $result['message']);
+            $this->swalSuccess($result['message']);
         } else {
-            session()->flash('error', $result['message'] ?? 'Une erreur est survenue.');
+            $this->swalError($result['message'] ?? 'Une erreur est survenue.');
         }
 
         $this->closePaymentModal();
@@ -81,12 +95,12 @@ class Formations extends Component
     public function initiatePayment()
     {
         if (!Auth::check()) {
-            session()->flash('error', 'Veuillez vous connecter.');
+            $this->swalError('Veuillez vous connecter.');
             return;
         }
 
         if (!$this->selectedFormation) {
-            session()->flash('error', 'Veuillez sélectionner une formation.');
+            $this->swalError('Veuillez sélectionner une formation.');
             return;
         }
 
@@ -99,7 +113,7 @@ class Formations extends Component
         );
 
         if (!$result['success']) {
-            session()->flash('error', $result['message']);
+            $this->swalError($result['message']);
             return;
         }
 
@@ -126,9 +140,9 @@ class Formations extends Component
         }
 
         if ($result['success']) {
-            session()->flash('success', 'Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
+            $this->swalSuccess('Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
         } else {
-            session()->flash('error', $result['message'] ?? 'Le paiement a échoué.');
+            $this->swalError($result['message'] ?? 'Le paiement a échoué.');
         }
 
         $this->closePaymentModal();

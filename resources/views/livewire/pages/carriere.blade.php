@@ -88,18 +88,6 @@
                     <p class="text-lg text-muted-foreground">Remplissez le formulaire ci-dessous et joignez votre CV</p>
                 </div>
 
-                @if (session()->has('success'))
-                    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                            <p class="font-medium">{{ session('success') }}</p>
-                        </div>
-                    </div>
-                @endif
-
                 <div class="bg-card rounded-xl border border-border shadow-sm p-8">
                     <form wire:submit.prevent="submit">
                         <div class="space-y-6">

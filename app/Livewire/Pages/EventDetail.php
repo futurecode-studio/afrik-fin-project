@@ -6,9 +6,11 @@ use App\Models\Event;
 use App\Services\EventRegistrationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class EventDetail extends Component
 {
+    use WithSweetAlert;
     public Event $event;
     public $selectedTicketTypeId = null;
     public $showRegistrationModal = false;
@@ -61,7 +63,7 @@ class EventDetail extends Component
     public function openRegistrationModal()
     {
         if (!$this->event->isRegistrationOpen()) {
-            session()->flash('error', 'Les inscriptions sont fermées pour cet événement.');
+            $this->swalError('Les inscriptions sont fermées pour cet événement.');
             return;
         }
 
@@ -111,7 +113,7 @@ class EventDetail extends Component
 
         $variant = \App\Models\EventProductVariant::with('product')->find($this->selectedVariantId);
         if (!$variant || !$variant->isAvailable($this->productQuantity)) {
-            session()->flash('error', 'Stock insuffisant pour cette variante.');
+            $this->swalError('Stock insuffisant pour cette variante.');
             return;
         }
 
@@ -189,12 +191,12 @@ class EventDetail extends Component
                     'registration_id' => $registration->id,
                 ]);
             } else {
-                session()->flash('success', 'Inscription confirmée ! <a href="' . route('event.ticket.public', $registration->qr_code) . '" class="underline font-bold">Télécharger mon ticket</a>');
+                $this->swalSuccess('Inscription confirmée ! <a href="' . route('event.ticket.public', $registration->qr_code) . '" class="underline font-bold">Télécharger mon ticket</a>');
             }
 
             $this->showRegistrationModal = false;
         } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+            $this->swalError($e->getMessage());
         }
     }
 

@@ -69,7 +69,7 @@ class InvestirFcp extends Component
     {
         app(MutualFundsApiService::class)->clearCache();
         $this->loadFunds();
-        session()->flash('success', 'Données Sikafinance actualisées avec succès.');
+        $this->swalSuccess('Données Sikafinance actualisées avec succès.');
     }
 
     public function filterByCategory(string $category): void

@@ -4,9 +4,11 @@ namespace App\Livewire\Pages;
 
 use App\Models\Contact as ContactModel;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Contact extends Component
 {
+    use WithSweetAlert;
     public $first_name = '';
     public $last_name = '';
     public $email = '';
@@ -50,12 +52,12 @@ class Contact extends Component
                 'status' => 'new',
             ]);
 
-            session()->flash('success', 'Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+            $this->swalSuccess('Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
             
             // Réinitialiser le formulaire
             $this->reset(['first_name', 'last_name', 'email', 'phone', 'subject', 'message']);
         } catch (\Exception $e) {
-            session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+            $this->swalError('Une erreur est survenue. Veuillez réessayer.');
         }
     }
 

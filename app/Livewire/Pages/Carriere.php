@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Carriere extends Component
 {
+    use WithSweetAlert;
     use WithFileUploads;
 
     public $first_name = '';
@@ -87,7 +89,7 @@ class Carriere extends Component
             'status' => 'pending',
         ]);
 
-        session()->flash('success', 'Votre candidature a été envoyée avec succès ! Nous vous contacterons bientôt.');
+        $this->swalSuccess('Votre candidature a été envoyée avec succès ! Nous vous contacterons bientôt.');
 
         $this->reset(['position_applied', 'cover_letter', 'cv', 'linkedin_url', 'portfolio_url', 
                       'years_of_experience', 'education_level', 'current_company', 'expected_salary']);

@@ -2,14 +2,17 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\SiteService;
 use Livewire\Component;
 
 class Services extends Component
 {
     public function render()
     {
-        return view('livewire.pages.services')
-            ->extends('layouts.site', ['title' => 'Services'])
+        $services = SiteService::active()->get();
+
+        return view('livewire.pages.services', compact('services'))
+            ->extends('layouts.site', ['title' => 'Nos Services — Africaine des Finances'])
             ->section('content');
     }
 }

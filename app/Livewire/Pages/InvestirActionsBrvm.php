@@ -277,7 +277,7 @@ class InvestirActionsBrvm extends Component
         $this->brvmService->refreshData();
         $this->loadData();
         $this->loadChartData();
-        session()->flash('success', 'Données actualisées avec succès.');
+        $this->swalSuccess('Données actualisées avec succès.');
     }
 
     public function showStockDetails(string $symbol)

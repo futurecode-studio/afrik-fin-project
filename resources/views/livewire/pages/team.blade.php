@@ -33,8 +33,8 @@
                     @foreach($members as $member)
                         <div class="bg-card rounded-xl border border-border overflow-hidden hover:shadow-elegant hover:border-primary/30 transition-smooth group">
                             <div class="aspect-square overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5 relative">
-                                @if($member->photo)
-                                    <img src="{{ $member->photo ? '/storage/' . $member->photo : '' }}" alt="{{ $member->nom }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                @if($member->photo_url)
+                                    <img src="{{ $member->photo_url }}" alt="{{ $member->nom }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-24 h-24 text-muted-foreground/30">

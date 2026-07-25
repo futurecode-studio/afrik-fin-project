@@ -6,9 +6,11 @@ use App\Services\BRVMScraperService;
 use App\Models\Stock;
 use Livewire\Component;
 use Carbon\Carbon;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Bourse extends Component
 {
+    use WithSweetAlert;
     public $stocks = [];
     public $allStocks = [];
     public $indices = [];
@@ -58,7 +60,7 @@ class Bourse extends Component
         $this->errorMessage = null;
 
         try {
-            // Charger les données depuis RichBourse/BRVM.org ou la base de données
+            // Données locales (sync Mansa via market:sync-brvm)
             $this->allStocks = $this->brvmService->getStocks();
             $this->indices = $this->brvmService->getIndices();
             $this->lastUpdate = now()->format('d/m/Y à H:i');
@@ -258,7 +260,7 @@ class Bourse extends Component
         $this->brvmService->refreshData();
         $this->loadData();
         $this->loadChartData();
-        session()->flash('success', 'Données actualisées avec succès.');
+        $this->swalSuccess('Données actualisées avec succès.');
     }
 
     /**

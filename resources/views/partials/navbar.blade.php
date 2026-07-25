@@ -1,0 +1,168 @@
+{{-- TopAppBar + glass nav --}}
+<div x-data="{ mobileOpen: false }" class="sticky top-0 z-50">
+    <header
+        class="bg-[#001a61]/95 backdrop-blur-md text-white flex justify-between items-center w-full px-5 lg:px-16 h-10 text-[12px] border-b border-white/10">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-[#ffbf00]">verified_user</span>
+            <span class="font-bold tracking-wide">AMF-UMOA AA/2022-03</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button type="button" class="hover:text-[#ffbf00] transition-colors flex items-center gap-1" aria-label="Langue">
+                <span class="material-symbols-outlined text-[16px]">language</span>
+                <span class="font-medium">FR</span>
+            </button>
+            <a href="mailto:african.finances@gmail.com" class="hover:text-[#ffbf00] transition-colors" aria-label="Email">
+                <span class="material-symbols-outlined text-[16px]">mail</span>
+            </a>
+            <a href="tel:+2290144217889" class="hover:text-[#ffbf00] transition-colors" aria-label="Téléphone">
+                <span class="material-symbols-outlined text-[16px]">call</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="adf-glass-nav w-full">
+        <div class="flex justify-between items-center w-full px-5 lg:px-16 max-w-[1280px] mx-auto h-20">
+            <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
+                <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances"
+                    class="h-10 w-auto object-contain transition duration-300 group-hover:scale-105 group-hover:drop-shadow-md" />
+                <span class="text-xl lg:text-2xl font-extrabold text-[#001a61] leading-tight hidden sm:block">
+                    Africaine des Finances
+                </span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="{{ route('search') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('search') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}"
+                    title="Recherche" aria-label="Recherche">
+                    <span class="material-symbols-outlined text-[22px] align-middle">search</span>
+                </a>
+                <a href="{{ route('marches.index') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('marches.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Marchés
+                </a>
+
+                <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                    <button type="button"
+                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('investir.*', 'marches.*') ? 'text-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                        Investir
+                        <span class="material-symbols-outlined text-[18px] transition-transform"
+                            :class="open ? 'rotate-180' : ''">expand_more</span>
+                    </button>
+                    <div x-show="open" x-cloak
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                        class="absolute left-0 mt-3 w-72 adf-glass-strong rounded-2xl overflow-hidden z-50 shadow-glass-lg">
+                        <a href="{{ route('investir.hub') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Investir — Hub</a>
+                        <a href="{{ route('investir.comment') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Comment investir</a>
+                        <a href="{{ route('investir.profil-test') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Test profil</a>
+                        <a href="{{ route('investir.opcvm') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">FCP / OPCVM</a>
+                        <a href="{{ route('marches.index') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Marchés financiers</a>
+                        <a href="{{ route('marches.cotations') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Cotations Actions</a>
+                        <a href="{{ route('marches.carte') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Carte du marché</a>
+                        <a href="{{ route('marches.calendrier') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Calendrier financier</a>
+                        <a href="{{ route('investir.partenaires') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Partenaires agréés</a>
+                    </div>
+                </div>
+
+                <a href="{{ route('formations') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('formations*', 'formation-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Formations
+                </a>
+                <a href="{{ route('actualites') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('actualites*', 'actualite-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Analyses
+                </a>
+                <a href="{{ route('about') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('about') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    À propos
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="{{ route('panier') }}" class="relative p-2 rounded hover:bg-[#e7eeff] transition" aria-label="Panier">
+                    <span class="material-symbols-outlined text-[26px] text-[#001a61]">shopping_cart</span>
+                    @php $cartCount = app(\App\Services\FormationCartService::class)->count(); @endphp
+                    @if ($cartCount > 0)
+                        <span class="absolute -top-0.5 -right-0.5 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-[#ffbf00] text-[#001a61] text-[10px] font-bold flex items-center justify-center">{{ $cartCount }}</span>
+                    @endif
+                </a>
+                <div class="hidden lg:flex items-center gap-3">
+                    @auth
+                        <a href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('client.dashboard') }}"
+                            class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-3 py-2">
+                            {{ Auth::user()->isAdmin() ? 'Administration' : 'Mon Espace' }}
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-3 py-2">
+                                Déconnexion
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('connexion') }}"
+                            class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-4 py-2">
+                            Connexion
+                        </a>
+                        <a href="{{ route('investir.hub') }}"
+                            class="adf-btn-primary text-base whitespace-nowrap px-5 py-3">
+                            Commencer à investir
+                        </a>
+                    @endauth
+                </div>
+
+                <button type="button" class="lg:hidden p-2 rounded hover:bg-[#e7eeff] transition"
+                    @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()"
+                    aria-label="Menu">
+                    <span class="material-symbols-outlined text-[28px] text-[#001a61]"
+                        x-text="mobileOpen ? 'close' : 'menu'"></span>
+                </button>
+            </div>
+        </div>
+
+        {{-- Mobile menu --}}
+        <div x-show="mobileOpen" x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            class="lg:hidden border-t border-[#c5c5d4]/60 adf-glass-strong px-5 py-4 space-y-1">
+            <a href="{{ route('search') }}" class="block py-3 text-[#131c2a] font-medium">Recherche</a>
+            <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
+            <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
+            <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>
+            <a href="{{ route('marches.index') }}" class="block py-3 text-[#131c2a] font-medium">Marchés</a>
+            <a href="{{ route('marches.cotations') }}" class="block py-3 pl-4 text-[#444652]">Cotations</a>
+            <a href="{{ route('marches.carte') }}" class="block py-3 pl-4 text-[#444652]">Carte du marché</a>
+            <a href="{{ route('marches.calendrier') }}" class="block py-3 pl-4 text-[#444652]">Calendrier</a>
+            <a href="{{ route('investir.partenaires') }}" class="block py-3 pl-4 text-[#444652]">Partenaires</a>
+            <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>
+            <a href="{{ route('actualites') }}" class="block py-3 text-[#131c2a] font-medium">Analyses</a>
+            <a href="{{ route('about') }}" class="block py-3 text-[#131c2a] font-medium">À propos</a>
+            <a href="{{ route('contact') }}" class="block py-3 text-[#131c2a] font-medium">Contact</a>
+            <div class="pt-3 border-t border-[#c5c5d4] space-y-2">
+                @auth
+                    <a href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : route('client.dashboard') }}"
+                        class="block py-3 font-medium text-[#001a61]">
+                        {{ Auth::user()->isAdmin() ? 'Administration' : 'Mon Espace' }}
+                    </a>
+                @else
+                    <a href="{{ route('connexion') }}" class="block py-3 font-medium text-[#444652]">Connexion</a>
+                    <a href="{{ route('investir.hub') }}"
+                        class="block text-center bg-[#0a2e8c] text-white font-bold px-5 py-3 rounded">
+                        Commencer à investir
+                    </a>
+                @endauth
+            </div>
+        </div>
+    </nav>
+</div>

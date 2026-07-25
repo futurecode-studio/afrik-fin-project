@@ -28,7 +28,7 @@
              @close-modal.window="document.body.style.overflow = ''"
              aria-labelledby="bond-modal-title" role="dialog" aria-modal="true">
             <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeModal"></div>
-            <div class="relative bg-card rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-border">
+            <div class="relative adf-modal-panel bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-border">
                 <div class="sticky top-0 bg-card border-b border-border p-5 flex items-start justify-between z-10">
                     <div class="pr-4">
                         <div class="flex items-center gap-2 mb-1">
@@ -229,19 +229,6 @@
     </div>
 
     {{-- Session success / error ───────────────────────────────────── --}}
-    @if(session()->has('success'))
-        <div class="container mx-auto px-4 mt-4">
-            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-sm flex items-center gap-2">
-                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
-    @if(session()->has('error'))
-        <div class="container mx-auto px-4 mt-4">
-            <div class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">{{ session('error') }}</div>
-        </div>
-    @endif
 
     {{-- Résumé du marché ──────────────────────────────────────────── --}}
     <section class="py-10">

@@ -4,12 +4,15 @@ namespace App\Livewire\Pages;
 
 use App\Models\Formation;
 use App\Models\Enrollment;
+use App\Services\FormationCartService;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class FormationDetail extends Component
 {
+    use WithSweetAlert;
     public $formation;
     public $showPaymentModal = false;
     public $paymentProvider = 'kkiapay';
@@ -32,6 +35,17 @@ class FormationDetail extends Component
             $this->enrollment = Auth::user()->getEnrollment($this->formation);
             $this->isEnrolled = $this->enrollment && $this->enrollment->isActive();
         }
+
+        $providers = app(PaymentService::class)->availablePaymentProviders();
+        if ($providers !== [] && ! in_array($this->paymentProvider, $providers, true)) {
+            $this->paymentProvider = $providers[0];
+        }
+    }
+
+    public function addToCart(FormationCartService $cart): void
+    {
+        $cart->add((int) $this->formation->id);
+        $this->swalSuccess('Formation ajoutée au panier.');
     }
 
     public function openPaymentModal()
@@ -48,7 +62,7 @@ class FormationDetail extends Component
         }
 
         if ($this->isEnrolled) {
-            session()->flash('info', 'Vous êtes déjà inscrit à cette formation.');
+            $this->swalInfo('Vous êtes déjà inscrit à cette formation.');
             return;
         }
 
@@ -74,9 +88,9 @@ class FormationDetail extends Component
         if ($result['success']) {
             $this->isEnrolled = true;
             $this->enrollment = $result['enrollment'];
-            session()->flash('success', $result['message']);
+            $this->swalSuccess($result['message']);
         } else {
-            session()->flash('error', $result['message'] ?? 'Une erreur est survenue.');
+            $this->swalError($result['message'] ?? 'Une erreur est survenue.');
         }
 
         $this->closePaymentModal();
@@ -85,11 +99,16 @@ class FormationDetail extends Component
     public function initiatePayment()
     {
         if (!Auth::check()) {
-            session()->flash('error', 'Veuillez vous connecter.');
+            $this->swalError('Veuillez vous connecter.');
             return;
         }
 
         $paymentService = app(PaymentService::class);
+        if (! $paymentService->isProviderReady($this->paymentProvider)) {
+            $this->swalError('Ce moyen de paiement n’est pas configuré. Contactez l’administrateur.');
+            return;
+        }
+
         $result = $paymentService->initiatePayment(
             Auth::user(),
             $this->formation,
@@ -98,7 +117,7 @@ class FormationDetail extends Component
         );
 
         if (!$result['success']) {
-            session()->flash('error', $result['message']);
+            $this->swalError($result['message']);
             return;
         }
 
@@ -126,17 +145,33 @@ class FormationDetail extends Component
         if ($result['success']) {
             $this->isEnrolled = true;
             $this->enrollment = $result['enrollment'];
-            session()->flash('success', 'Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
+            $this->swalSuccess('Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
         } else {
-            session()->flash('error', $result['message'] ?? 'Le paiement a échoué.');
+            $this->swalError($result['message'] ?? 'Le paiement a échoué.');
         }
 
         $this->closePaymentModal();
     }
+
+    public function accessCourse()
+    {
+        if (! Auth::check() || ! $this->isEnrolled) {
+            return $this->openPaymentModal();
+        }
+
+        return $this->redirect(route('client.formation', $this->formation->slug), navigate: true);
+    }
     
     public function render()
     {
-        return view('livewire.pages.formation-detail')
+        $lessonsCount = $this->formation->modules->sum(fn ($m) => $m->lessons->count());
+        $studentsCount = $this->formation->enrollments()->whereIn('status', ['active', 'completed'])->count();
+
+        return view('livewire.pages.formation-detail', [
+            'paymentProviders' => app(PaymentService::class)->availablePaymentProviders(),
+            'lessonsCount' => $lessonsCount,
+            'studentsCount' => $studentsCount,
+        ])
             ->extends('layouts.site', ['title' => $this->formation->titre])
             ->section('content');
     }

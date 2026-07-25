@@ -60,14 +60,6 @@ class PaymentController extends Controller
     }
 
     /**
-     * Page de succès de paiement
-     */
-    public function success(Request $request)
-    {
-        return redirect()->route('formations')->with('success', 'Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
-    }
-
-    /**
      * Page d'annulation de paiement
      */
     public function cancel(Request $request)

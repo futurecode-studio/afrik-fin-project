@@ -45,7 +45,7 @@
                             </div>
                             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                                 @foreach($group as $partner)
-                                    <a href="{{ $partner->website ?: '#' }}" {{ $partner->website ? 'target="_blank" rel="noopener noreferrer"' : '' }}
+                                    <a href="{{ route('partenaires.show', $partner->id) }}"
                                         class="bg-card rounded-xl border border-border p-6 hover:shadow-elegant hover:border-primary/30 transition-smooth group flex flex-col items-center justify-center gap-3 min-h-[100px]">
                                         @if($partner->logo)
                                             <img src="{{ asset('storage/' . $partner->logo) }}" alt="{{ $partner->nom }}"

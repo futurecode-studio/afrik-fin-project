@@ -2,14 +2,19 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\TeamMember;
 use Livewire\Component;
 
 class About extends Component
 {
     public function render()
     {
-        return view('livewire.pages.about')
-            ->extends('layouts.site', ['title' => 'Accueil'])
+        $members = TeamMember::active()->leadership()->orderBy('order')->get();
+
+        return view('livewire.pages.about', [
+            'members' => $members,
+        ])
+            ->extends('layouts.site', ['title' => 'À propos — Africaine des Finances'])
             ->section('content');
     }
 }

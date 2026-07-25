@@ -1,213 +1,90 @@
-<main class="flex-1 pt-20">
-    <!-- Messages Flash -->
-    @if (session()->has('success'))
-        <div class="fixed top-24 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session()->has('error'))
-        <div class="fixed top-24 right-4 z-50 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if (session()->has('info'))
-        <div class="fixed top-24 right-4 z-50 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg">
-            {{ session('info') }}
-        </div>
-    @endif
+<div class="bg-[#f9f9ff] text-[#131c2a] min-h-screen">
 
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Formations" 
-                 class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Formations <span class="text-secondary">E-Learning</span></h1>
-                <p class="text-lg text-primary-foreground/90 mb-6">Développez vos compétences financières avec nos formations certifiées, conçues par des experts du secteur</p>
-                <div class="flex flex-wrap gap-6 pt-4">
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-5 h-5 text-secondary">
-                            <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
-                            <circle cx="12" cy="8" r="6"></circle>
-                        </svg>
-                        <span>Certifications reconnues</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5 text-secondary">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        <span>Plus de 500 étudiants</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5 text-secondary">
-                            <path d="M12 7v14"></path>
-                            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
-                        </svg>
-                        <span>Accès à vie</span>
-                    </div>
+    <section class="bg-[#001a61] text-white">
+        <div class="max-w-[1280px] mx-auto px-5 lg:px-16 py-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <p class="text-sm font-semibold tracking-widest uppercase text-[#ffbf00] mb-3">Catalogue</p>
+                    <h1 class="text-3xl md:text-5xl font-extrabold">Excellence académique &amp; financière</h1>
+                    <p class="mt-4 text-white/80 max-w-2xl">Formations e-learning conçues pour maîtriser les marchés UEMOA.</p>
                 </div>
+                <a href="{{ route('panier') }}" class="inline-flex items-center gap-2 border border-white/30 px-4 py-2 rounded font-bold hover:bg-white/10">
+                    <span class="material-symbols-outlined">shopping_cart</span> Panier
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Filtres -->
-    <section class="py-8 border-b border-border">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap gap-4 items-center">
-                <!-- Recherche -->
-                <div class="flex-1 min-w-[200px]">
-                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Rechercher une formation..." 
-                        class="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
-                </div>
-                
-                <!-- Filtre par niveau -->
-                <select wire:model.live="filterNiveau" class="px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Tous les niveaux</option>
-                    <option value="debutant">Débutant</option>
-                    <option value="intermediaire">Intermédiaire</option>
-                    <option value="avance">Avancé</option>
-                </select>
-                
-                <!-- Filtre par type -->
-                <select wire:model.live="filterType" class="px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Toutes les formations</option>
-                    <option value="gratuit">Gratuites</option>
-                    <option value="payant">Payantes</option>
-                </select>
-            </div>
+    <section class="max-w-[1280px] mx-auto px-5 lg:px-16 py-8">
+        <div class="bg-white border border-[#c5c5d4] rounded-xl p-4 flex flex-col md:flex-row gap-3">
+            <input type="search" wire:model.live.debounce.300ms="search" placeholder="Rechercher une formation…"
+                class="flex-1 rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+            <select wire:model.live="filterNiveau" class="rounded-lg border-[#c5c5d4]">
+                <option value="">Tous les niveaux</option>
+                <option value="debutant">Débutant</option>
+                <option value="intermediaire">Intermédiaire</option>
+                <option value="avance">Avancé</option>
+            </select>
+            <select wire:model.live="filterType" class="rounded-lg border-[#c5c5d4]">
+                <option value="">Toutes</option>
+                <option value="gratuit">Gratuites</option>
+                <option value="payant">Payantes</option>
+            </select>
         </div>
     </section>
 
-    <!-- Liste des formations -->
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            @if($formations->isEmpty())
-                <div class="text-center py-12">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-muted-foreground">
-                        <path d="M12 7v14"></path>
-                        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
-                    </svg>
-                    <h3 class="text-xl font-semibold mb-2">Aucune formation disponible</h3>
-                    <p class="text-muted-foreground">Revenez bientôt pour découvrir nos nouvelles formations.</p>
-                </div>
-            @else
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach($formations as $formation)
-                        <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border hover:border-primary/30 hover:shadow-elegant transition-smooth group">
-                            <a href="{{ route('formation-detail', $formation->slug) }}">
-                                <div class="relative h-48 overflow-hidden">
-                                    <img src="{{ $formation->image_url ?: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop' }}"
-                                        alt="{{ $formation->titre }}"
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-500">
-                                    <div class="absolute top-4 left-4 flex gap-2">
-                                        <span class="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-semibold rounded-full shadow-glow">
-                                            {{ ucfirst($formation->niveau) }}
-                                        </span>
-                                        @if($formation->isFree())
-                                            <span class="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
-                                                Gratuit
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="p-6 space-y-4">
-                                <a href="{{ route('formation-detail', $formation->slug) }}">
-                                    <h3 class="text-xl font-bold group-hover:text-primary transition-smooth line-clamp-2">
-                                        {{ $formation->titre }}
-                                    </h3>
-                                </a>
-                                <p class="text-muted-foreground leading-relaxed line-clamp-2">
-                                    {{ strip_tags($formation->description_courte) }}
-                                </p>
-                                <div class="grid grid-cols-3 gap-4 py-4 border-y border-border">
-                                    <div class="text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-5 h-5 mx-auto mb-1 text-primary">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg>
-                                        <p class="text-sm font-medium">{{ $formation->duree }}</p>
-                                    </div>
-                                    <div class="text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5 mx-auto mb-1 text-primary">
-                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="9" cy="7" r="4"></circle>
-                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                        </svg>
-                                        <p class="text-sm font-medium">{{ $formation->students_count }} étudiants</p>
-                                    </div>
-                                    <div class="text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5 mx-auto mb-1 text-primary">
-                                            <path d="M12 7v14"></path>
-                                            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
-                                        </svg>
-                                        <p class="text-sm font-medium">{{ $formation->modules_count }} modules</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between pt-2">
-                                    <div>
-                                        <p class="text-sm text-muted-foreground">Prix</p>
-                                        @if($formation->isFree())
-                                            <p class="text-2xl font-bold text-green-500">Gratuit</p>
-                                        @else
-                                            <p class="text-2xl font-bold text-primary">{{ number_format($formation->prix, 0, ',', ' ') }} FCFA</p>
-                                        @endif
-                                    </div>
-                                    @auth
-                                        @if(auth()->user()->isEnrolledIn($formation))
-                                            <a href="{{ route('formation-detail', $formation->slug) }}" 
-                                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium bg-green-500 text-white hover:bg-green-600 transition-smooth h-12 rounded-lg px-6 text-sm">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                                </svg>
-                                                Accéder
-                                            </a>
-                                        @else
-                                            <button wire:click="openPaymentModal({{ $formation->id }})"
-                                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-12 rounded-lg px-6 text-sm">
-                                                S'inscrire
-                                            </button>
-                                        @endif
-                                    @else
-                                        <button wire:click="openPaymentModal({{ $formation->id }})"
-                                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-12 rounded-lg px-6 text-sm">
-                                            S'inscrire
-                                        </button>
-                                    @endauth
-                                </div>
+    <section class="max-w-[1280px] mx-auto px-5 lg:px-16 pb-20">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @forelse ($formations as $formation)
+                <article class="bg-white border border-[#c5c5d4] rounded-xl overflow-hidden flex flex-col hover:border-[#001a61] transition">
+                    <a href="{{ route('formation-detail', $formation->slug) }}" class="block h-44 bg-[#e7eeff]">
+                        @if ($formation->image_url)
+                            <img src="{{ $formation->image_url }}" alt="" class="w-full h-full object-cover">
+                        @endif
+                    </a>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs">
+                            <span class="font-bold text-[#0a2e8c] uppercase">{{ $formation->niveau }}</span>
+                            @if ($formation->isFree())
+                                <span class="px-2 py-0.5 rounded bg-green-100 text-green-800 font-semibold">Gratuit</span>
+                            @endif
+                        </div>
+                        <h2 class="font-bold text-lg text-[#001a61] mt-2">
+                            <a href="{{ route('formation-detail', $formation->slug) }}">{{ $formation->titre }}</a>
+                        </h2>
+                        <p class="text-sm text-[#444652] mt-2 line-clamp-3 flex-1">{{ $formation->description_courte }}</p>
+                        <div class="mt-4 flex items-center justify-between gap-2">
+                            <p class="font-extrabold text-[#001a61]">
+                                @if ($formation->isFree()) Gratuit
+                                @else {{ number_format($formation->prix, 0, ',', ' ') }} FCFA @endif
+                            </p>
+                            <div class="flex gap-2">
+                                <button type="button" wire:click="addToCart({{ $formation->id }})"
+                                    class="text-sm font-bold border border-[#001a61] text-[#001a61] px-3 py-2 rounded hover:bg-[#e7eeff]" title="Ajouter au panier">
+                                    <span class="material-symbols-outlined text-base align-middle">add_shopping_cart</span>
+                                </button>
+                                <button type="button" wire:click="openPaymentModal({{ $formation->id }})"
+                                    class="text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded hover:bg-[#0a2e8c]">
+                                    S’inscrire
+                                </button>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @endif
+                    </div>
+                </article>
+            @empty
+                <p class="col-span-full text-center py-16 text-[#757683]">Aucune formation disponible.</p>
+            @endforelse
         </div>
     </section>
+</div>
 
-    <!-- CTA Section -->
-    <section class="py-16 bg-muted/30">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Prêt à commencer votre <span class="text-primary">formation</span> ?</h2>
-            <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">Rejoignez des centaines d'étudiants qui ont transformé leur carrière grâce à nos formations</p>
-        </div>
-    </section>
-
-    <!-- Modale de paiement -->
-    @if($showPaymentModal && $selectedFormation)
+@if($showPaymentModal && $selectedFormation)
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!-- Overlay -->
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" wire:click="closePaymentModal"></div>
 
         <!-- Modal -->
-        <div class="relative bg-card rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
+        <div class="relative adf-modal-panel bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-lg border border-border">
             <!-- Header -->
             <div class="bg-primary px-6 py-4">
                 <div class="flex items-center justify-between">

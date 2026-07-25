@@ -122,18 +122,6 @@
                             aucune opportunité</p>
                     </div>
 
-                    @if (session()->has('success'))
-                        <div class="mb-6 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    @if (session()->has('error'))
-                        <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
                     <form wire:submit.prevent="subscribe" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>

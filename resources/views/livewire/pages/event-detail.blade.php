@@ -1,6 +1,6 @@
 <main class="flex-1 pt-20">
     <!-- Hero Event -->
-    <section class="relative text-primary-foreground py-16 overflow-hidden" style="background: linear-gradient(135deg, #071F5A 0%, #0A2E8C 60%, #1E4AB8 100%);">
+    <section class="relative text-white py-16 overflow-hidden" style="background: linear-gradient(135deg, #001a61 0%, #0a2e8c 60%, #1E4AB8 100%);">
         <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
             <div class="absolute top-10 left-10 w-72 h-72 bg-secondary/30 rounded-full blur-3xl"></div>
         </div>
@@ -25,12 +25,6 @@
                         </div>
                     </div>
                     <p class="text-lg text-primary-foreground/90 mb-6">{{ $event->description }}</p>
-
-                    @if(session()->has('success'))
-                        <div class="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-emerald-800 text-sm mb-4">
-                            {!! session('success') !!}
-                        </div>
-                    @endif
 
                     @if($event->isRegistrationOpen())
                         @if($isRegistered && Auth::check())
@@ -315,15 +309,12 @@
     @if($showRegistrationModal)
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeRegistrationModal"></div>
-        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border">
+        <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border">
             <div class="p-6 border-b border-border flex items-center justify-between">
                 <h2 class="text-xl font-bold">Inscription</h2>
                 <button wire:click="closeRegistrationModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <div class="p-6 space-y-4">
-                @if(session()->has('error'))
-                    <div class="rounded-lg bg-red-50 p-3 text-sm text-red-800 border border-red-200">{{ session('error') }}</div>
-                @endif
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-1">Prénom *</label>
@@ -386,15 +377,12 @@
     @php $productModal = $event->products->firstWhere('id', $selectedProductId); @endphp
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeProductModal"></div>
-        <div class="relative bg-card rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-border">
+        <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-border">
             <div class="p-6 border-b border-border flex items-center justify-between">
                 <h2 class="text-xl font-bold">Commander — {{ $productModal?->name }}</h2>
                 <button wire:click="closeProductModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <div class="p-6 space-y-4">
-                @if(session()->has('error'))
-                    <div class="rounded-lg bg-red-50 p-3 text-sm text-red-800 border border-red-200">{{ session('error') }}</div>
-                @endif
                 <div class="grid grid-cols-1 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-1">Prénom *</label>

@@ -4,9 +4,11 @@ namespace App\Livewire\Pages;
 
 use App\Models\NewsletterSubscriber;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class Newsletter extends Component
 {
+    use WithSweetAlert;
     public $first_name = '';
     public $last_name = '';
     public $email = '';
@@ -44,13 +46,13 @@ class Newsletter extends Component
                 'subscribed_at' => now(),
             ]);
 
-            session()->flash('success', 'Merci pour votre inscription ! Vous recevrez notre prochaine newsletter.');
+            $this->swalSuccess('Merci pour votre inscription ! Vous recevrez notre prochaine newsletter.');
             
             // Réinitialiser le formulaire
             $this->reset(['first_name', 'last_name', 'email', 'topics', 'consent']);
         } catch (\Exception $e) {
             dd($e);
-            session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+            $this->swalError('Une erreur est survenue. Veuillez réessayer.');
         }
     }
 

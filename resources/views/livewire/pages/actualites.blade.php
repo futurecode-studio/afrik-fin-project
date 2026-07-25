@@ -1,69 +1,53 @@
-<main class="flex-1 pt-20">
-    <section class="relative bg-gradient-hero text-primary-foreground py-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Actualités" 
-                 class="w-full h-full object-cover opacity-20">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-secondary/90"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Actualités <span
-                        class="text-secondary">Financières</span></h1>
-                <p class="text-lg text-primary-foreground/90">Restez informé des dernières tendances,
-                    analyses et opportunités des marchés financiers africains</p>
-            </div>
+<div class="bg-[#f9f9ff] text-[#131c2a] min-h-screen">
+    <section class="bg-[#001a61] text-white">
+        <div class="max-w-[1280px] mx-auto px-5 lg:px-16 py-16">
+            <p class="text-sm font-semibold tracking-widest uppercase text-[#ffbf00] mb-3">Analyses</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold">Actualités des marchés</h1>
+            <p class="mt-3 text-white/80 max-w-2xl">Analyses, décryptages et opportunités sur la BRVM et l’espace UEMOA.</p>
         </div>
     </section>
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                @forelse($articles as $article)
-                <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border hover:border-primary/30 hover:shadow-elegant transition-smooth group">
-                    <a href="{{ route('actualite-detail', $article->slug) }}">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $article->image_url }}"
-                                alt="{{ $article->titre }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-smooth duration-500">
-                            <div class="absolute top-4 left-4">
-                                <span class="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-semibold rounded-full shadow-glow">{{ $article->categorie }}</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="p-6 space-y-4">
-                        <div class="flex items-center gap-4 text-sm text-muted-foreground">
-                            <div class="flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4">
-                                    <path d="M8 2v4"></path>
-                                    <path d="M16 2v4"></path>
-                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                    <path d="M3 10h18"></path>
-                                </svg>
-                                <span>{{ $article->published_at->format('d F Y') }}</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag w-4 h-4">
-                                    <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
-                                    <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
-                                </svg>
-                                <span>{{ $article->categorie }}</span>
-                            </div>
-                        </div>
-                        <a href="{{ route('actualite-detail', $article->slug) }}">
-                            <h2 class="text-2xl font-bold group-hover:text-primary transition-smooth">{{ $article->titre }}</h2>
-                        </a>
-                        <p class="text-muted-foreground leading-relaxed">{{ $article->extrait }}</p>
-                        <p class="text-foreground/80 leading-relaxed">{{ Str::limit(strip_tags($article->contenu), 150) }}</p>
+
+    <section class="max-w-[1280px] mx-auto px-5 lg:px-16 py-12">
+        @php $featured = $articles->first(); $rest = $articles->skip(1); @endphp
+
+        @if ($featured)
+            <a href="{{ route('actualite-detail', $featured->slug) }}"
+                class="grid lg:grid-cols-2 gap-0 bg-white border border-[#c5c5d4] rounded-2xl overflow-hidden hover:border-[#001a61] transition mb-10">
+                <div class="min-h-[240px] bg-[#e7eeff]">
+                    @if ($featured->image_url)
+                        <img src="{{ $featured->image_url }}" alt="" class="w-full h-full object-cover min-h-[240px]">
+                    @endif
+                </div>
+                <div class="p-6 lg:p-10 flex flex-col justify-center">
+                    <span class="text-xs font-bold uppercase tracking-wide text-[#0a2e8c]">{{ $featured->categorie }}</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-[#001a61] mt-2">{{ $featured->titre }}</h2>
+                    <p class="text-[#444652] mt-3 line-clamp-3">{{ $featured->extrait }}</p>
+                    <p class="text-sm text-[#757683] mt-4">{{ optional($featured->published_at)->format('d/m/Y') }}</p>
+                </div>
+            </a>
+        @endif
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @forelse ($rest as $article)
+                <a href="{{ route('actualite-detail', $article->slug) }}"
+                    class="bg-white border border-[#c5c5d4] rounded-xl overflow-hidden hover:border-[#001a61] transition block">
+                    <div class="h-44 bg-[#e7eeff]">
+                        @if ($article->image_url)
+                            <img src="{{ $article->image_url }}" alt="" class="w-full h-full object-cover">
+                        @endif
                     </div>
-                </div>
-                @empty
-                <div class="col-span-2 text-center py-12">
-                    <p class="text-muted-foreground">Aucun article disponible pour le moment.</p>
-                </div>
-                @endforelse
-            </div>
+                    <div class="p-5">
+                        <span class="text-xs font-bold text-[#0a2e8c]">{{ $article->categorie }}</span>
+                        <h3 class="font-bold text-[#001a61] mt-2 line-clamp-2">{{ $article->titre }}</h3>
+                        <p class="text-sm text-[#444652] mt-2 line-clamp-2">{{ $article->extrait }}</p>
+                        <p class="text-xs text-[#757683] mt-3">{{ optional($article->published_at)->format('d/m/Y') }}</p>
+                    </div>
+                </a>
+            @empty
+                @if (!$featured)
+                    <p class="col-span-full text-center py-16 text-[#757683]">Aucune actualité publiée.</p>
+                @endif
+            @endforelse
         </div>
     </section>
-</main>
+</div>

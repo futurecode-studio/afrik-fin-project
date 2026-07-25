@@ -221,7 +221,7 @@ class InvestirObligations extends Component
         $service->clearCache();
         $stats = $service->syncBonds(false);
         $this->refreshLastSyncAt();
-        session()->flash('success', "Synchronisation UMOA-Titres : {$stats['created']} nouveau(x) · {$stats['updated']} mis à jour.");
+        $this->swalSuccess("Synchronisation UMOA-Titres : {$stats['created']} nouveau(x) · {$stats['updated']} mis à jour.");
     }
 
     public function submit(): void
