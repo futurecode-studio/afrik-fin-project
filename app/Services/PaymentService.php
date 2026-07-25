@@ -144,18 +144,21 @@ class PaymentService
     public function verifyKkiapayTransaction(string $transactionId): bool
     {
         try {
+            $base = rtrim((string) config('services.kkiapay.api_url', 'https://api.kkiapay.me'), '/');
             $response = Http::withHeaders([
-                'x-private-key' => config('services.kkiapay.private_key'),
-            ])->get("https://api.kkiapay.me/api/v1/transactions/status/{$transactionId}");
+                'x-private-key' => (string) config('services.kkiapay.private_key'),
+            ])->get("{$base}/api/v1/transactions/status/{$transactionId}");
 
             if ($response->successful()) {
                 $data = $response->json();
+
                 return ($data['status'] ?? '') === 'SUCCESS';
             }
 
             return false;
         } catch (\Exception $e) {
-            Log::error('KKiaPay verification error: ' . $e->getMessage());
+            Log::error('KKiaPay verification error: '.$e->getMessage());
+
             return false;
         }
     }
@@ -211,9 +214,9 @@ class PaymentService
     {
         try {
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . config('services.fedapay.secret_key'),
+                'Authorization' => 'Bearer '.config('services.fedapay.secret_key'),
                 'Content-Type' => 'application/json',
-            ])->post(config('services.fedapay.api_url') . '/transactions', [
+            ])->post(rtrim((string) config('services.fedapay.api_url'), '/').'/transactions', [
                 'description' => 'Formation: ' . $payment->formation->titre . ' - REF:' . $payment->reference,
                 'amount' => (int) $payment->amount,
                 'currency' => ['iso' => 'XOF'],
@@ -246,5 +249,60 @@ class PaymentService
                 'message' => 'Erreur de connexion au service de paiement',
             ];
         }
+    }
+
+    /**
+     * Vérifier un paiement FeexPay (status par référence / id).
+     */
+    public function verifyFeexpayPayment(string $paymentId): array
+    {
+        try {
+            $base = rtrim((string) config('services.feexpay.api_url', 'https://api.feexpay.me'), '/');
+            $response = Http::withToken((string) config('services.feexpay.api_key'))
+                ->acceptJson()
+                ->get("{$base}/api/transactions/{$paymentId}");
+
+            if ($response->successful()) {
+                return [
+                    'success' => true,
+                    'data' => $response->json(),
+                ];
+            }
+
+            return [
+                'success' => false,
+                'message' => 'Vérification FeexPay échouée',
+                'status' => $response->status(),
+            ];
+        } catch (\Exception $e) {
+            Log::error('FeexPay verify error: '.$e->getMessage());
+
+            return [
+                'success' => false,
+                'message' => 'Erreur de connexion FeexPay',
+            ];
+        }
+    }
+
+    public function isProviderReady(string $provider): bool
+    {
+        return ApiCredentials::isConfigured($provider);
+    }
+
+    /**
+     * Providers de paiement utilisables (clés DB ou .env présentes).
+     *
+     * @return list<string>
+     */
+    public function availablePaymentProviders(): array
+    {
+        $list = [];
+        foreach (['kkiapay', 'fedapay', 'feexpay'] as $provider) {
+            if (ApiCredentials::isConfigured($provider)) {
+                $list[] = $provider;
+            }
+        }
+
+        return $list;
     }
 }

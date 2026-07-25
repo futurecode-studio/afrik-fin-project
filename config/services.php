@@ -33,23 +33,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | BRVM Scraper Configuration
+    | Mansa Markets API (BRVM sync serveur uniquement)
+    |--------------------------------------------------------------------------
+    */
+    'mansa' => [
+        'base_url' => env('MANSA_API_BASE_URL', 'https://mansaapi.com'),
+        'api_key' => env('MANSA_API_KEY'),
+        'timeout' => env('MANSA_TIMEOUT', 20),
+        'cache_ttl' => env('MANSA_CACHE_TTL', 1800),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | BRVM (lecture locale / cache UI)
     |--------------------------------------------------------------------------
     |
-    | Configuration pour le scraping des données BRVM en temps réel
-    | Sources: RichBourse.com, BRVM.org (données africaines gratuites)
+    | Les cotations viennent de Mansa via `php artisan market:sync-brvm`.
+    | Plus de scraping RichBourse / BRVM.org.
     |
     */
 
     'brvm' => [
-        'cache_duration' => env('BRVM_CACHE_DURATION', 900), // 15 minutes en cache (production)
+        'cache_duration' => env('BRVM_CACHE_DURATION', 900),
         'timeout' => env('BRVM_TIMEOUT', 30),
-        'connect_timeout' => env('BRVM_CONNECT_TIMEOUT', 10),
-        'long_cache_duration' => env('BRVM_LONG_CACHE', 86400), // 24h cache for fallback
-        'sources' => [
-            'richbourse' => 'https://www.richbourse.com',
-            'brvm' => 'https://www.brvm.org',
-        ],
     ],
 
     /*
@@ -116,6 +122,25 @@ return [
         'secret_key' => env('FEDAPAY_SECRET_KEY', ''),
         'api_url' => env('FEDAPAY_API_URL', 'https://sandbox-api.fedapay.com/v1'),
         'sandbox' => env('FEDAPAY_SANDBOX', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | FeexPay Payment Gateway
+    |--------------------------------------------------------------------------
+    |
+    | Shop ID + API Token (Bearer) depuis https://app.feexpay.me → Développeur
+    | Docs: https://docs.feexpay.me
+    |
+    */
+
+    'feexpay' => [
+        'shop_id' => env('FEEXPAY_SHOP_ID', ''),
+        'api_key' => env('FEEXPAY_API_KEY', ''),
+        'api_url' => env('FEEXPAY_API_URL', 'https://api.feexpay.me'),
+        'callback_url' => env('FEEXPAY_CALLBACK_URL', ''),
+        'sandbox' => env('FEEXPAY_SANDBOX', true),
+        'mode' => env('FEEXPAY_SANDBOX', true) ? 'SANDBOX' : 'LIVE',
     ],
 
 ];
