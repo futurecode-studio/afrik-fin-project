@@ -1,52 +1,53 @@
-<div class="container mx-auto px-4 py-8 max-w-2xl">
-    <a href="{{ route('client.my-events') }}" class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-        Retour à mes événements
-    </a>
+<div class="max-w-lg mx-auto">
+    <a href="{{ route('client.my-events') }}" class="text-sm font-bold text-[#001a61] hover:underline">← Mes événements</a>
+    <h1 class="text-3xl font-extrabold text-[#001a61] mt-4">Votre billet</h1>
 
-    <div class="rounded-2xl border bg-card p-8 border-border shadow-elegant text-center space-y-6">
-        <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{{ $registration->event->title }}</p>
-            <h1 class="text-2xl font-bold">Ticket d'accès</h1>
+    <div class="mt-8 bg-white border border-[#c5c5d4] rounded-2xl overflow-hidden shadow-sm">
+        <div class="bg-[#001a61] text-white p-6">
+            <p class="text-xs uppercase tracking-widest text-[#ffbf00] font-bold">Africaine des Finances</p>
+            <h2 class="text-xl font-extrabold mt-2">{{ $registration->event->title }}</h2>
+            <p class="text-sm text-white/80 mt-2">
+                {{ optional($registration->event->starts_at)->format('d/m/Y H:i') }}
+                @if ($registration->event->location_name || $registration->event->city)
+                    · {{ $registration->event->location_name ?? $registration->event->city }}
+                @endif
+            </p>
         </div>
-
-        <div class="flex justify-center">
-            <div class="w-48 h-48 bg-white rounded-xl p-3 flex items-center justify-center">
-                {!! QrCode::size(180)->generate($registration->qr_code) !!}
+        <div class="p-6 space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                    <p class="text-[#757683]">Participant</p>
+                    <p class="font-bold text-[#001a61]">{{ $registration->fullName() }}</p>
+                </div>
+                <div>
+                    <p class="text-[#757683]">Type</p>
+                    <p class="font-bold text-[#001a61]">{{ $registration->ticketType->name ?? '—' }}</p>
+                </div>
+                <div>
+                    <p class="text-[#757683]">Statut</p>
+                    <p class="font-bold">{{ $registration->statusLabel() }}</p>
+                </div>
+                <div>
+                    <p class="text-[#757683]">Code</p>
+                    <p class="font-mono text-xs font-bold">{{ $registration->qr_code }}</p>
+                </div>
             </div>
-        </div>
 
-        <div class="space-y-2">
-            <p class="text-2xl font-bold">{{ $registration->fullName() }}</p>
-            <p class="text-muted-foreground">{{ $registration->email }}</p>
-            @if($registration->institution_name)
-                <p class="text-sm font-medium">{{ $registration->institution_name }}</p>
+            @if ($registration->qr_code)
+                <div class="flex justify-center py-4">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={{ urlencode($registration->qr_code) }}"
+                        alt="QR Code" class="rounded-lg border border-[#c5c5d4]">
+                </div>
             @endif
-            @if($registration->ticketType)
-                <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full mt-2">{{ $registration->ticketType->name }}</span>
-            @endif
-        </div>
 
-        <div class="border-t border-border pt-6 grid grid-cols-2 gap-4 text-sm">
-            <div>
-                <p class="text-muted-foreground">Date</p>
-                <p class="font-semibold">{{ $registration->event->starts_at?->format('d/m/Y') }}</p>
-            </div>
-            <div>
-                <p class="text-muted-foreground">Heure</p>
-                <p class="font-semibold">{{ $registration->event->starts_at?->format('H:i') }}</p>
-            </div>
-            <div class="col-span-2">
-                <p class="text-muted-foreground">Lieu</p>
-                <p class="font-semibold">{{ $registration->event->location_name ?? $registration->event->city ?? 'En ligne' }}</p>
-            </div>
-        </div>
-
-        <div class="flex justify-center gap-3 pt-4">
-            <button wire:click="downloadTicket" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary-light transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <button type="button" wire:click="downloadTicket"
+                class="w-full bg-[#001a61] text-white font-bold py-3 rounded hover:bg-[#0a2e8c]">
                 Télécharger le PDF
             </button>
+            <a href="{{ route('event.ticket.public', $registration->qr_code) }}"
+                class="block text-center text-sm font-bold text-[#001a61] hover:underline">
+                Lien public du billet
+            </a>
         </div>
     </div>
 </div>

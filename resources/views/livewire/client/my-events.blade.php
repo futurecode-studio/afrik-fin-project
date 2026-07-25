@@ -1,66 +1,47 @@
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-6">Mes Événements</h1>
+<div>
+    <div class="mb-8">
+        <h1 class="text-3xl font-extrabold text-[#001a61]">Mes événements</h1>
+        <p class="text-[#444652] mt-2">Inscriptions et billets à venir.</p>
+    </div>
 
-    @if (session()->has('success'))
-        <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800 border border-green-200">{{ session('success') }}</div>
-    @endif
-    @if (session()->has('error'))
-        <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200">{{ session('error') }}</div>
-    @endif
-
-    @if($registrations->isEmpty())
-        <div class="rounded-xl border bg-card p-12 text-center border-border">
-            <p class="text-muted-foreground mb-4">Vous n'êtes inscrit à aucun événement pour le moment.</p>
-            <a href="{{ route('events-list') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary-light transition-colors">
-                Découvrir les événements
-            </a>
-        </div>
-    @else
-        <div class="space-y-4">
-            @foreach($registrations as $reg)
-            <div class="rounded-xl border bg-card p-6 border-border hover:border-primary/30 transition-colors">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div class="flex items-start gap-4">
-                        @if($reg->event->featured_image)
-                            <img src="{{ asset('storage/'.$reg->event->featured_image) }}" alt="" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
-                        @else
-                            <div class="w-16 h-16 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted-foreground"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-                            </div>
-                        @endif
-                        <div>
-                            <h3 class="font-bold text-lg">{{ $reg->event->title }}</h3>
-                            <p class="text-sm text-muted-foreground">{{ $reg->event->starts_at?->format('d/m/Y H:i') }} • {{ $reg->event->city ?? $reg->event->location_name }}</p>
-                            <div class="flex items-center gap-2 mt-2">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $reg->statusColorClasses() }}">
-                                    {{ $reg->statusLabel() }}
-                                </span>
-                                @if($reg->ticketType)
-                                    <span class="text-xs text-muted-foreground">{{ $reg->ticketType->name }}</span>
-                                @endif
-                            </div>
-                        </div>
+    <div class="space-y-4">
+        @forelse ($registrations as $reg)
+            <article class="bg-white border border-[#c5c5d4] rounded-xl p-5 flex flex-col md:flex-row md:items-center gap-4">
+                <div class="flex-1 min-w-0">
+                    <div class="flex flex-wrap gap-2 items-center text-xs mb-1">
+                        <span class="font-bold text-[#0a2e8c]">{{ $reg->event->category }}</span>
+                        <span class="px-2 py-0.5 rounded bg-[#e7eeff] text-[#001a61] font-semibold">{{ $reg->statusLabel() }}</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        @if(!in_array($reg->status, ['cancelled','no_show']))
-                            <a href="{{ route('client.event.ticket', $reg->id) }}" class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light transition-colors text-sm font-medium">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-                                Mon ticket
-                            </a>
-                            <button wire:click="downloadTicket({{ $reg->id }})" class="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm hover:bg-muted transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                                PDF
-                            </button>
-                            @if($reg->event->starts_at > now())
-                                <button wire:click="cancelRegistration({{ $reg->id }})" wire:confirm="Êtes-vous sûr de vouloir annuler votre inscription ?" class="inline-flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-                                    Annuler
-                                </button>
-                            @endif
-                        @endif
-                    </div>
+                    <h2 class="font-bold text-lg text-[#001a61]">{{ $reg->event->title }}</h2>
+                    <p class="text-sm text-[#757683] mt-1">
+                        {{ optional($reg->event->starts_at)->format('d/m/Y H:i') }}
+                        @if ($reg->event->city) · {{ $reg->event->city }}@endif
+                        @if ($reg->ticketType) · {{ $reg->ticketType->name }}@endif
+                    </p>
                 </div>
+                <div class="flex flex-wrap gap-2">
+                    @if (!in_array($reg->status, ['cancelled', 'no_show'], true))
+                        <a href="{{ route('client.event.ticket', $reg->id) }}"
+                            class="inline-flex items-center gap-1 bg-[#001a61] text-white font-bold px-4 py-2 rounded text-sm hover:bg-[#0a2e8c]">
+                            <span class="material-symbols-outlined text-base">confirmation_number</span>
+                            Voir le billet
+                        </a>
+                        <button type="button" wire:click="downloadTicket({{ $reg->id }})"
+                            class="inline-flex items-center gap-1 border border-[#001a61] text-[#001a61] font-bold px-4 py-2 rounded text-sm hover:bg-[#e7eeff]">
+                            PDF
+                        </button>
+                        <button type="button" wire:click="cancelRegistration({{ $reg->id }})"
+                            wire:confirm="Annuler cette inscription ?"
+                            class="text-sm font-bold text-red-600 px-2">Annuler</button>
+                    @endif
+                </div>
+            </article>
+        @empty
+            <div class="bg-white border border-dashed border-[#c5c5d4] rounded-xl p-12 text-center">
+                <span class="material-symbols-outlined text-5xl text-[#c5c5d4]">event</span>
+                <p class="mt-4 text-[#444652]">Aucune inscription événement.</p>
+                <a href="{{ route('events-list') }}" class="inline-block mt-4 font-bold text-[#001a61] underline">Voir le calendrier</a>
             </div>
-            @endforeach
-        </div>
-    @endif
+        @endforelse
+    </div>
 </div>

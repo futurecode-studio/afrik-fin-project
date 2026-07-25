@@ -6,9 +6,11 @@ use App\Models\EventRegistration;
 use App\Services\EventRegistrationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Livewire\Concerns\WithSweetAlert;
 
 class MyEvents extends Component
 {
+    use WithSweetAlert;
     public $registrations;
 
     public function mount()
@@ -44,10 +46,10 @@ class MyEvents extends Component
 
         try {
             $service->cancel($registration, 'Annulation par le participant.');
-            session()->flash('success', 'Inscription annulée avec succès.');
+            $this->swalSuccess('Inscription annulée avec succès.');
             $this->loadRegistrations();
         } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+            $this->swalError($e->getMessage());
         }
     }
 

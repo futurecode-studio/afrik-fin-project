@@ -1,107 +1,78 @@
 <div>
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">Mon Profil</h1>
-        <p class="text-gray-500">Gérez vos informations personnelles</p>
+    <div class="mb-8">
+        <h1 class="text-3xl font-extrabold text-[#001a61]">Paramètres du compte</h1>
+        <p class="text-[#444652] mt-2">Gérez vos informations personnelles et votre sécurité.</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Informations personnelles -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Informations personnelles</h2>
-            
-            @if(session('profile_success'))
-                <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
-                    {{ session('profile_success') }}
-                </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+        <section class="bg-white border border-[#c5c5d4] rounded-xl p-6">
+            <h2 class="font-bold text-[#001a61] text-lg mb-4">Profil</h2>
+            @if (session('profile_success'))
+                <div class="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">{{ session('profile_success') }}</div>
             @endif
-
-            <form wire:submit="updateProfile" class="space-y-4">
+            <form wire:submit.prevent="updateProfile" class="space-y-4">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-                    <input type="text" id="name" wire:model="name" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Nom complet</label>
+                    <input wire:model="name" type="text" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('name') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                 </div>
-
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" wire:model="email" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Email</label>
+                    <input wire:model="email" type="email" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('email') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                 </div>
-
                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                    <input type="tel" id="phone" wire:model="phone" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Téléphone</label>
+                    <input wire:model="phone" type="text" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
                 </div>
-
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
-                    <input type="text" id="address" wire:model="address" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('address') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Adresse</label>
+                    <input wire:model="address" type="text" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
                 </div>
-
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">Ville</label>
-                        <input type="text" id="city" wire:model="city" 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        @error('city') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        <label class="text-xs font-semibold text-[#757683]">Ville</label>
+                        <input wire:model="city" type="text" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
                     </div>
                     <div>
-                        <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Pays</label>
-                        <input type="text" id="country" wire:model="country" 
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                        @error('country') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        <label class="text-xs font-semibold text-[#757683]">Pays</label>
+                        <input wire:model="country" type="text" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
                     </div>
                 </div>
-
-                <button type="submit" 
-                        class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium">
-                    Enregistrer les modifications
-                </button>
+                <button type="submit" class="bg-[#001a61] text-white font-bold px-5 py-2.5 rounded hover:bg-[#0a2e8c]">Enregistrer</button>
             </form>
-        </div>
+        </section>
 
-        <!-- Changer le mot de passe -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Changer le mot de passe</h2>
-            
-            @if(session('password_success'))
-                <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
-                    {{ session('password_success') }}
-                </div>
+        <section class="bg-white border border-[#c5c5d4] rounded-xl p-6">
+            <h2 class="font-bold text-[#001a61] text-lg mb-4">Mot de passe</h2>
+            @if (session('password_success'))
+                <div class="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">{{ session('password_success') }}</div>
             @endif
-
-            <form wire:submit="updatePassword" class="space-y-4">
+            <form wire:submit.prevent="updatePassword" class="space-y-4">
                 <div>
-                    <label for="current_password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe actuel</label>
-                    <input type="password" id="current_password" wire:model="current_password" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('current_password') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Mot de passe actuel</label>
+                    <input wire:model="current_password" type="password" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('current_password') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                 </div>
-
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Nouveau mot de passe</label>
-                    <input type="password" id="password" wire:model="password" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                    @error('password') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    <label class="text-xs font-semibold text-[#757683]">Nouveau mot de passe</label>
+                    <input wire:model="password" type="password" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
+                    @error('password') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                 </div>
-
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmer le mot de passe</label>
-                    <input type="password" id="password_confirmation" wire:model="password_confirmation" 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <label class="text-xs font-semibold text-[#757683]">Confirmation</label>
+                    <input wire:model="password_confirmation" type="password" class="mt-1 w-full rounded-lg border-[#c5c5d4] focus:border-[#001a61] focus:ring-[#001a61]">
                 </div>
-
-                <button type="submit" 
-                        class="w-full px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium">
-                    Changer le mot de passe
-                </button>
+                <button type="submit" class="bg-[#001a61] text-white font-bold px-5 py-2.5 rounded hover:bg-[#0a2e8c]">Mettre à jour</button>
             </form>
-        </div>
+
+            <div class="mt-8 pt-6 border-t border-[#c5c5d4]">
+                <h3 class="font-bold text-[#001a61] mb-2">Préférences</h3>
+                <a href="{{ route('client.interests') }}" class="inline-flex items-center gap-2 text-sm font-bold text-[#001a61] hover:underline">
+                    <span class="material-symbols-outlined text-base">interests</span>
+                    Modifier mes intérêts
+                </a>
+            </div>
+        </section>
     </div>
 </div>

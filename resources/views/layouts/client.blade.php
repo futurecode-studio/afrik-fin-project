@@ -4,150 +4,112 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ $title ?? 'Mon Espace' }} - Africaine des Finances</title>
-
-    <!-- Fonts -->
+    <title>{{ $title ?? 'Mon Espace' }} — Africaine des Finances</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <!-- Header -->
-        <header class="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-            <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <a href="{{ route('client.dashboard') }}" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary">
-                            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
-                            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
-                            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
-                            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
-                        </svg>
-                        <h1 class="text-2xl font-bold">Mon Espace</h1>
-                    </a>
+<body class="font-sans antialiased adf-shell-client text-[#131c2a]" x-data="{ sidebarOpen: false }">
+    <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false"
+        class="fixed inset-0 z-40 bg-[#001a61]/35 backdrop-blur-sm lg:hidden"></div>
+
+    <aside
+        class="fixed inset-y-0 left-0 z-50 w-64 adf-glass-strong flex flex-col transition-transform duration-300 ease-soft -translate-x-full lg:translate-x-0 border-r border-white/50"
+        :class="sidebarOpen && '!translate-x-0'">
+        <div class="px-5 py-5 border-b border-[#c5c5d4]/50 flex items-center gap-3 shrink-0">
+            <a href="{{ route('client.dashboard') }}" class="flex items-center gap-2 min-w-0 flex-1">
+                <span class="material-symbols-outlined text-[#001a61] text-3xl">account_balance</span>
+                <div class="min-w-0">
+                    <p class="text-sm font-extrabold text-[#001a61] leading-tight">Africaine des Finances</p>
+                    <p class="text-[11px] text-[#757683]">Espace client</p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <!-- Bouton Retour Dashboard -->
-                    @if(!request()->routeIs('client.dashboard'))
-                        <a href="{{ route('client.dashboard') }}"
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-4 text-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-                                <path d="m12 19-7-7 7-7"></path>
-                                <path d="M19 12H5"></path>
-                            </svg>
-                            Dashboard
-                        </a>
-                    @endif
-                    
-                    <!-- Bouton Retour au Site -->
-                    <a href="{{ route('home') }}"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-4 text-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
-                        Retour au Site
-                    </a>
-                    
-                    <a href="{{ route('client.profile') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">
-                        {{ Auth::user()->name }}
-                    </a>
-                    
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground h-9 rounded-md px-4 text-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg>
-                            Déconnexion
-                        </button>
-                    </form>
-                </div>
+            </a>
+            <button type="button" @click="sidebarOpen = false" class="lg:hidden p-1 rounded hover:bg-[#e7eeff]" aria-label="Fermer">
+                <span class="material-symbols-outlined text-[#001a61]">close</span>
+            </button>
+        </div>
+
+        @php
+            $nav = [
+                ['route' => 'client.dashboard', 'match' => 'client.dashboard', 'label' => 'Tableau de bord', 'icon' => 'dashboard'],
+                ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Mes formations', 'icon' => 'school'],
+                ['route' => 'client.favorites', 'match' => 'client.favorites', 'label' => 'Favoris', 'icon' => 'bookmark'],
+                ['route' => 'client.notes', 'match' => 'client.notes', 'label' => 'Mes notes', 'icon' => 'sticky_note_2'],
+                ['route' => 'client.ask-instructor', 'match' => 'client.ask-instructor', 'label' => 'Formateur', 'icon' => 'contact_support'],
+                ['route' => 'client.learning-history', 'match' => 'client.learning-history', 'label' => 'Historique', 'icon' => 'history_edu'],
+                ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Mes événements', 'icon' => 'event'],
+                ['route' => 'client.watchlist', 'match' => 'client.watchlist', 'label' => 'Liste de suivi', 'icon' => 'visibility'],
+                ['route' => 'client.patrimoine', 'match' => 'client.patrimoine', 'label' => 'Patrimoine', 'icon' => 'account_balance_wallet'],
+                ['route' => 'client.alertes', 'match' => 'client.alertes', 'label' => 'Alertes', 'icon' => 'notifications_active'],
+                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Ordres', 'icon' => 'bolt'],
+                ['route' => 'client.rapport-mensuel', 'match' => 'client.rapport-mensuel', 'label' => 'Rapport', 'icon' => 'description'],
+                ['route' => 'client.vote-ag', 'match' => 'client.vote-ag', 'label' => 'Vote AG', 'icon' => 'how_to_vote'],
+                ['route' => 'client.actualites-portefeuille', 'match' => 'client.actualites-portefeuille', 'label' => 'Actus PF', 'icon' => 'newspaper'],
+                ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificats', 'icon' => 'workspace_premium'],
+                ['route' => 'client.interests', 'match' => 'client.interests', 'label' => 'Intérêts', 'icon' => 'interests'],
+                ['route' => 'client.profile', 'match' => 'client.profile', 'label' => 'Paramètres', 'icon' => 'settings'],
+            ];
+        @endphp
+        <nav class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 space-y-0.5">
+            @foreach ($nav as $item)
+                @php
+                    $active = is_array($item['match'])
+                        ? request()->routeIs(...$item['match'])
+                        : request()->routeIs($item['match']);
+                @endphp
+                <a href="{{ route($item['route']) }}"
+                    @click="sidebarOpen = false"
+                    @class([
+                        'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition',
+                        'bg-[#001a61] text-white shadow-md shadow-[#001a61]/20' => $active,
+                        'text-[#444652] hover:bg-[#e7eeff]/80 hover:text-[#001a61]' => ! $active,
+                    ])>
+                    <span class="material-symbols-outlined text-[20px]">{{ $item['icon'] }}</span>
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
+        </nav>
+
+        <div class="px-4 py-4 border-t border-[#c5c5d4]/50 shrink-0 space-y-2">
+            <p class="text-xs text-[#757683] truncate">{{ Auth::user()->name }}</p>
+            <a href="{{ route('home') }}" class="block text-xs font-semibold text-[#001a61] hover:underline">Retour au site</a>
+        </div>
+    </aside>
+
+    <div class="min-h-screen lg:pl-64 flex flex-col">
+        <header class="sticky top-0 z-30 adf-glass-nav px-4 lg:px-8 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2 min-w-0">
+                <button type="button" @click="sidebarOpen = true"
+                    class="lg:hidden p-2 -ml-1 rounded-xl hover:bg-[#e7eeff]/80 text-[#001a61] transition" aria-label="Menu">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h1 class="text-lg font-extrabold text-[#001a61] truncate">{{ $title ?? 'Mon Espace' }}</h1>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <a href="{{ route('client.profile') }}" class="hidden sm:inline text-sm font-semibold text-[#001a61] truncate max-w-[9rem]">{{ Auth::user()->name }}</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="inline-flex items-center gap-1 text-sm font-bold border border-[#001a61]/30 bg-white/50 backdrop-blur text-[#001a61] px-3 py-1.5 rounded-xl hover:bg-[#e7eeff] transition">
+                        <span class="material-symbols-outlined text-base">logout</span>
+                        <span class="hidden sm:inline">Déconnexion</span>
+                    </button>
+                </form>
             </div>
         </header>
 
-        <!-- Navigation -->
-        <nav class="border-b bg-card/30">
-            <div class="container mx-auto px-4">
-                <div class="flex items-center gap-1 overflow-x-auto py-2">
-                    <a href="{{ route('client.dashboard') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap {{ request()->routeIs('client.dashboard') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="7" height="9"></rect>
-                            <rect x="14" y="3" width="7" height="5"></rect>
-                            <rect x="14" y="12" width="7" height="9"></rect>
-                            <rect x="3" y="16" width="7" height="5"></rect>
-                        </svg>
-                        Tableau de bord
-                    </a>
-
-                    <a href="{{ route('client.formations') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap {{ request()->routeIs('client.formations*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                        </svg>
-                        Mes formations
-                    </a>
-
-                    <a href="{{ route('client.my-events') }}"
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap {{ request()->routeIs('client.my-events*', 'client.event.ticket') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="18" height="18" x="3" y="4" rx="2"/>
-                            <path d="M16 2v4"/>
-                            <path d="M8 2v4"/>
-                            <path d="M3 10h18"/>
-                        </svg>
-                        Mes événements
-                    </a>
-
-                    <a href="{{ route('client.certificates') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap {{ request()->routeIs('client.certificates') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="6"></circle>
-                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-                        </svg>
-                        Mes certificats
-                    </a>
-
-                    <a href="{{ route('client.profile') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap {{ request()->routeIs('client.profile') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        Mon profil
-                    </a>
-
-                    <div class="h-6 w-px bg-border mx-2"></div>
-
-                    <a href="{{ route('formations') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap text-muted-foreground hover:bg-muted hover:text-foreground">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        Explorer les formations
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="container mx-auto px-4 py-8">
+        <main class="flex-1 px-4 lg:px-8 py-8 max-w-[1280px] w-full adf-reveal">
             @yield('content')
         </main>
     </div>
 
     @livewireScripts
+    @include('partials.sweetalert')
     @stack('scripts')
 </body>
 </html>
