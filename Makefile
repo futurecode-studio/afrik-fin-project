@@ -33,6 +33,7 @@ deploy-assets:
 	ssh africaine "set -e; \
 		echo '=== DEPLOY ASSETS ==='; \
 		export PATH=/opt/alt/alt-nodejs20/root/usr/bin:\$$PATH; \
+		export GOMAXPROCS=2; \
 		cd /home/u213525791/domains/africainedesfinances.com/africairedesfinances_core; \
 		npm ci; \
 		npm run build; \
