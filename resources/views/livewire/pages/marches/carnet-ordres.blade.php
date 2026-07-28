@@ -40,6 +40,16 @@
                         <label class="text-sm font-medium">Prix limite (FCFA)</label>
                         <input type="number" wire:model="limit_price" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
                     </div>
+                    <div>
+                        <label class="text-sm font-medium">SGI souhaitée (optionnel)</label>
+                        <select wire:model="partner_id" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
+                            <option value="">Sans préférence — ADF choisit</option>
+                            @foreach ($partners as $p)
+                                <option value="{{ $p->id }}">{{ $p->nom }}</option>
+                            @endforeach
+                        </select>
+                        @error('partner_id')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                    </div>
                     <div class="grid sm:grid-cols-3 gap-3">
                         <div><label class="text-sm font-medium">Nom</label><input wire:model="name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">@error('name')<p class="text-xs text-red-600">{{ $message }}</p>@enderror</div>
                         <div><label class="text-sm font-medium">Email</label><input type="email" wire:model="email" class="w-full mt-1 rounded-lg border-[#c5c5d4]">@error('email')<p class="text-xs text-red-600">{{ $message }}</p>@enderror</div>
@@ -70,9 +80,14 @@
                         <h3 class="font-bold text-[#001a61] mb-3">Mes intentions</h3>
                         <ul class="space-y-2 text-sm">
                             @foreach ($myIntents as $o)
-                                <li class="flex justify-between gap-2">
-                                    <span>{{ strtoupper($o->side) }} {{ $o->stock?->symbol }} × {{ $o->quantity }}</span>
-                                    <span class="text-[#757683]">{{ $o->status }}</span>
+                                <li class="flex flex-col gap-0.5 border-b border-[#e7eeff] pb-2 last:border-0">
+                                    <div class="flex justify-between gap-2">
+                                        <span>{{ strtoupper($o->side) }} {{ $o->stock?->symbol }} × {{ $o->quantity }}</span>
+                                        <span class="text-[#757683]">{{ $o->statusLabel() }}</span>
+                                    </div>
+                                    @if ($o->partner)
+                                        <span class="text-[11px] text-[#0a2e8c]">SGI : {{ $o->partner->nom }}</span>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>

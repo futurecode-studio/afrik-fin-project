@@ -202,7 +202,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">
-                                        Mot de passe @if(!$editMode)<span class="text-red-500">*</span>
+                                        Mot de passe @if(!$editMode)<span class="text-red-500">*</span>@endif
                                     </label>
                                     <input wire:model="password" type="password"
                                         class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">

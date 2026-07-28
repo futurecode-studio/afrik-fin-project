@@ -74,16 +74,17 @@ class RoleAndPermissionSeeder extends Seeder
                 'event_checkin.*',
                 'event_orders.view'
             ],
-            'client' => ['dashboard.view'],
+            'client' => [],
         ];
 
         foreach ($roles as $roleName => $permissions) {
             $role = Role::firstOrCreate(['name' => $roleName]);
-            
+
             if ($permissions === '*') {
-                $role->givePermissionTo(Permission::all());
+                $role->syncPermissions(Permission::all());
             } else {
-                $role->givePermissionTo($permissions);
+                // syncPermissions retire les anciennes (ex. dashboard.view sur client)
+                $role->syncPermissions($permissions);
             }
         }
 

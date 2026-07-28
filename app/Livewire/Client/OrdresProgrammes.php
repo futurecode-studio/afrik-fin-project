@@ -2,23 +2,34 @@
 
 namespace App\Livewire\Client;
 
+use App\Livewire\Concerns\WithSweetAlert;
+use App\Models\Partner;
 use App\Models\ScheduledOrder;
 use App\Services\MarketsDataService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Livewire\Concerns\WithSweetAlert;
 
 class OrdresProgrammes extends Component
 {
     use WithSweetAlert;
+
     public string $symbol = '';
+
     public string $condition_type = 'threshold';
+
     public string $side = 'buy';
+
     public string $quantity = '10';
+
     public string $target_price = '';
+
     public string $stop_loss = '';
+
     public string $take_profit = '';
+
     public bool $protection_active = true;
+
+    public string $partner_id = '';
 
     public function mount(MarketsDataService $markets): void
     {
@@ -31,18 +42,14 @@ class OrdresProgrammes extends Component
         }
     }
 
-    public function updatedSymbol(MarketsDataService $markets): void
-    {
-        $stock = $markets->stockBySymbol($this->symbol);
-        if ($stock) {
-            $this->target_price = (string) $stock->current_price;
-            $this->stop_loss = (string) round($stock->current_price * 0.96, 2);
-            $this->take_profit = (string) round($stock->current_price * 1.05, 2);
-        }
-    }
-
     public function place(MarketsDataService $markets): void
     {
+        if (! feature_enabled('client.ordres')) {
+            $this->swalSuccess('Service bientôt disponible.');
+
+            return;
+        }
+
         $this->validate([
             'symbol' => 'required|string',
             'condition_type' => 'required|in:threshold,oco,trailing,linked',
@@ -51,6 +58,7 @@ class OrdresProgrammes extends Component
             'target_price' => 'nullable|numeric|min:0',
             'stop_loss' => 'nullable|numeric|min:0',
             'take_profit' => 'nullable|numeric|min:0',
+            'partner_id' => 'nullable|exists:partners,id',
         ]);
 
         $stock = $markets->stockBySymbol($this->symbol);
@@ -60,8 +68,18 @@ class OrdresProgrammes extends Component
             return;
         }
 
+        if ($this->partner_id !== '') {
+            $ok = Partner::sgi()->active()->whereKey($this->partner_id)->exists();
+            if (! $ok) {
+                $this->addError('partner_id', 'SGI invalide ou inactive.');
+
+                return;
+            }
+        }
+
         ScheduledOrder::create([
             'user_id' => Auth::id(),
+            'partner_id' => $this->partner_id !== '' ? (int) $this->partner_id : null,
             'stock_id' => $stock->id,
             'condition_type' => $this->condition_type,
             'side' => $this->side,
@@ -71,25 +89,33 @@ class OrdresProgrammes extends Component
             'take_profit' => $this->protection_active && $this->take_profit !== '' ? $this->take_profit : null,
             'protection_active' => $this->protection_active,
             'status' => 'pending',
-            'notes' => 'Intention programmée — exécution via SGI agréée.',
+            'notes' => 'Intention — à relayer vers une SGI (pas d’exécution ADF).',
         ]);
 
-        $this->swalSuccess('Ordre programmé enregistré (intention). L’exécution passe par une SGI.');
-    }
-
-    public function cancelOrder(int $id): void
-    {
-        ScheduledOrder::where('user_id', Auth::id())->where('id', $id)->update(['status' => 'cancelled']);
-        $this->swalSuccess('Ordre annulé.');
+        $this->swalSuccess('Intention enregistrée. Une SGI agréée devra l’exécuter.');
+        $this->partner_id = '';
     }
 
     public function render(MarketsDataService $markets)
     {
+        if (! feature_enabled('client.ordres')) {
+            $stock = $markets->topVolume(1)->first();
+
+            return view('livewire.client.ordres-programmes', compact('stock'))
+                ->extends('layouts.client', ['title' => 'Ordres Programmés'])
+                ->section('content');
+        }
+
         $stocks = $markets->stocks();
         $stock = $markets->stockBySymbol($this->symbol);
-        $orders = ScheduledOrder::with('stock')->where('user_id', Auth::id())->latest()->limit(20)->get();
+        $partners = Partner::sgi()->active()->orderBy('nom')->get();
+        $orders = ScheduledOrder::with(['stock', 'partner'])
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->limit(20)
+            ->get();
 
-        return view('livewire.client.ordres-programmes', compact('stocks', 'stock', 'orders'))
+        return view('livewire.client.ordres-programmes-live', compact('stocks', 'stock', 'orders', 'partners'))
             ->extends('layouts.client', ['title' => 'Ordres Programmés'])
             ->section('content');
     }

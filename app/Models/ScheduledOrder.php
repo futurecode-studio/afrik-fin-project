@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ScheduledOrder extends Model
 {
     protected $fillable = [
-        'user_id', 'stock_id', 'condition_type', 'side', 'quantity',
+        'user_id', 'partner_id', 'stock_id', 'condition_type', 'side', 'quantity',
         'target_price', 'stop_loss', 'take_profit', 'protection_active', 'status', 'notes',
     ];
 
@@ -25,8 +25,25 @@ class ScheduledOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
     public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class);
+    }
+
+    public function statusLabel(): string
+    {
+        return match ($this->status) {
+            'pending' => 'En attente',
+            'relayed' => 'Relayé SGI',
+            'triggered' => 'Déclenché',
+            'done' => 'Traité',
+            'cancelled' => 'Annulé',
+            default => $this->status,
+        };
     }
 }

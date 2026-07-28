@@ -11,11 +11,17 @@
             Actions BRVM, obligations UEMOA et FCP/OPCVM — données de marché réelles pour construire votre parcours.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
+            <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
+                class="bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3 rounded hover:brightness-95 transition inline-flex items-center gap-2">
+                {{ config('services.diaspora_funnel.label') }}
+                <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+            </a>
             <a href="{{ route('investir.profil-test') }}"
                 class="bg-[#001a61] text-white font-bold px-6 py-3 rounded hover:bg-[#0a2e8c] transition">Tester mon profil</a>
             <a href="{{ route('investir.comment') }}"
                 class="border border-[#001a61] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Comment investir</a>
         </div>
+        <p class="mt-3 text-sm text-[#757683]">Vous êtes de la diaspora ? Lancez le diagnostic gratuit (3 min) pour structurer vos investissements en Afrique.</p>
     </section>
 
     <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-12">

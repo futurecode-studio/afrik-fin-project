@@ -16,9 +16,10 @@ deploy-code:
 	ssh africaine "set -e; \
 		echo '=== DEPLOY CODE ==='; \
 		cd /home/u213525791/domains/africainedesfinances.com/africairedesfinances_core; \
-		git remote set-url origin https://github.com/codianselme/afrik-fin-project.git; \
-		git fetch origin master; \
-		git reset --hard origin/master; \
+		git remote set-url origin https://github.com/futurecode-studio/afrik-fin-project.git; \
+		git fetch origin main; \
+		git checkout main 2>/dev/null || git checkout -b main origin/main; \
+		git reset --hard origin/main; \
 		echo '=== DONE CODE ==='"
 
 deploy-composer:

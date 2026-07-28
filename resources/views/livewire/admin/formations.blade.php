@@ -60,7 +60,7 @@
                                 <tr class="border-b transition-colors hover:bg-[#f0f3ff] {{ $formation->trashed() ? 'opacity-50' : '' }}">
                                     <td class="p-4 align-middle">
                                         <div class="font-medium">{{ $formation->titre }}</div>
-                                        <div class="text-sm text-[#757683]">{{ Str::limit($formation->description_courte, 50) }}</div>
+                                        <div class="text-sm text-[#757683]">{{ plain_text($formation->description_courte, 50) }}</div>
                                     </td>
                                     <td class="p-4 align-middle">
                                         <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
@@ -328,7 +328,7 @@
                                 @if($editMode && $image_url)
                                     <p class="text-xs text-gray-500 mt-2">Image actuelle :</p>
                                     <img src="{{ $image_url }}" alt="Image actuelle" class="mt-1 h-20 rounded-md object-cover border">
-                                
+                                @endif
 
                                 @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>

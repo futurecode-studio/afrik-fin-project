@@ -18,23 +18,44 @@ class Partner extends Model
     protected $fillable = [
         'nom',
         'type',
+        'country',
+        'city',
+        'agreement_number',
         'contact',
         'email',
         'website',
         'logo',
         'description',
+        'admin_notes',
         'is_active',
+        'is_featured',
         'order',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_featured' => 'boolean',
         'order' => 'integer',
     ];
 
     public function scopeActive($query)
     {
         return $query->where('is_active', true)->orderBy('order');
+    }
+
+    public function scopeSgi($query)
+    {
+        return $query->where('type', 'SGI');
+    }
+
+    public function scopeSgo($query)
+    {
+        return $query->where('type', 'SGO');
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true);
     }
 
     public function getTypeLabel(): string

@@ -2,18 +2,20 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Article;
 use App\Models\Formation;
 use App\Models\MarketIndexHistory;
 use App\Models\Partner;
 use App\Models\SiteService;
 use App\Models\Stock;
+use App\Services\MarketsDataService;
 use Livewire\Component;
 
 class Home extends Component
 {
     public function render()
     {
-        $data = cache()->remember('home.page.data.v3', 120, function () {
+        $data = cache()->remember('home.page.data.v6', 120, function () {
             $partners = Partner::active()->get();
 
             $formations = Formation::publie()
@@ -23,49 +25,77 @@ class Home extends Component
 
             $siteServices = SiteService::active()->take(6)->get();
 
+            $featuredArticle = Article::featured()
+                ->latest('published_at')
+                ->first();
+
+            $latestArticles = Article::published()
+                ->when($featuredArticle, fn ($q) => $q->where('id', '!=', $featuredArticle->id))
+                ->latest('published_at')
+                ->take(4)
+                ->get();
+
+            // Si aucune mise en avant : prendre le plus récent en hero
+            if (!$featuredArticle) {
+                $featuredArticle = Article::published()->latest('published_at')->first();
+                if ($featuredArticle) {
+                    $latestArticles = Article::published()
+                        ->where('id', '!=', $featuredArticle->id)
+                        ->latest('published_at')
+                        ->take(4)
+                        ->get();
+                }
+            }
+
             $stocks = Stock::query()
                 ->where('is_active', true)
                 ->get(['id', 'symbol', 'company_name', 'current_price', 'variation_percent', 'volume']);
 
-            $topGainers = $stocks->sortByDesc('variation_percent')->take(3)->values();
-            $topLosers = $stocks->sortBy('variation_percent')->take(3)->values();
-            $tickerStocks = $stocks->sortByDesc('volume')->take(8)->values();
+            $topGainers = $stocks->sortByDesc('variation_percent')->take(5)->values();
+            $topLosers = $stocks->sortBy('variation_percent')->take(5)->values();
+            $tickerStocks = $stocks->sortByDesc('volume')->take(12)->values();
             $totalVolume = (int) $stocks->sum('volume');
 
             $indexHistory = MarketIndexHistory::query()
                 ->where('index_name', 'BRVM Composite')
                 ->orderByDesc('snapshot_date')
-                ->take(12)
+                ->take(30)
                 ->get()
                 ->sortBy('snapshot_date')
                 ->values();
 
             $compositeLatest = $indexHistory->last();
+            $compositePrev = $indexHistory->count() > 1 ? $indexHistory[$indexHistory->count() - 2] : null;
 
-            $min = (float) ($indexHistory->min('value') ?: 0);
-            $max = (float) ($indexHistory->max('value') ?: 1);
-            $span = max($max - $min, 0.0001);
+            $chartLabels = $indexHistory->map(fn ($row) => $row->snapshot_date->format('d/m'))->values()->all();
+            $chartValues = $indexHistory->map(fn ($row) => round((float) $row->value, 2))->values()->all();
 
-            $chartPoints = $indexHistory->map(function ($row) use ($min, $span) {
-                return [
-                    'date' => $row->snapshot_date->format('d/m'),
-                    'value' => (float) $row->value,
-                    'variation' => (float) $row->variation_percent,
-                    'height' => (int) round(25 + (((float) $row->value - $min) / $span) * 70),
-                ];
-            })->values();
+            $volumeLeaders = $stocks->sortByDesc('volume')->take(6)->values()->map(fn ($s) => [
+                'symbol' => $s->symbol,
+                'volume' => (int) $s->volume,
+                'variation' => (float) $s->variation_percent,
+                'price' => (float) $s->current_price,
+            ]);
+
+            $marketTreemap = app(MarketsDataService::class)->marketTreemap();
 
             return [
                 'partners' => $partners,
                 'partnersByType' => $partners->groupBy('type'),
                 'formations' => $formations,
                 'siteServices' => $siteServices,
+                'featuredArticle' => $featuredArticle,
+                'latestArticles' => $latestArticles,
                 'topGainers' => $topGainers,
                 'topLosers' => $topLosers,
                 'tickerStocks' => $tickerStocks,
                 'totalVolume' => $totalVolume,
                 'compositeLatest' => $compositeLatest,
-                'chartPoints' => $chartPoints,
+                'compositePrev' => $compositePrev,
+                'chartLabels' => $chartLabels,
+                'chartValues' => $chartValues,
+                'volumeLeaders' => $volumeLeaders,
+                'marketTreemap' => $marketTreemap,
             ];
         });
 

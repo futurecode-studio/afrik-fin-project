@@ -55,7 +55,7 @@
                     <h2 class="text-lg font-bold text-[#001a61]">
                         <a href="{{ route('actualite-detail', $article->slug) }}" class="hover:underline">{{ $article->titre }}</a>
                     </h2>
-                    <p class="text-sm text-[#444652] mt-2 line-clamp-2">{{ $article->extrait }}</p>
+                    <p class="text-sm text-[#444652] mt-2 line-clamp-2">{{ plain_text($article->extrait, 120) }}</p>
                     <p class="text-xs text-[#757683] mt-3">Par {{ $article->user?->name ?? 'Rédaction AF' }}</p>
                 </article>
             @empty

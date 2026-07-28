@@ -43,7 +43,7 @@ class Dashboard extends Component
             : 0;
 
         $this->eventsCount = EventRegistration::where('user_id', $user->id)
-            ->whereIn('status', ['registered', 'confirmed', 'checked_in'])
+            ->whereIn('status', ['confirmed', 'checked_in'])
             ->count();
 
         $this->watchlistCount = $user->watchlistItems()->count();

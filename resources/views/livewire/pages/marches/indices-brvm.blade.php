@@ -8,8 +8,16 @@
 
     <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-10 grid md:grid-cols-2 gap-6">
         @forelse ($indices as $name => $data)
-            @php $latest = $data['latest']; @endphp
-            <div class="bg-white border border-[#c5c5d4] rounded-2xl p-6">
+            @php
+                $latest = $data['latest'];
+                $anchor = match (true) {
+                    str_contains(mb_strtolower($name), 'prestige') => 'brvm-pre',
+                    str_contains(mb_strtolower($name), 'principal') => 'brvm-prn',
+                    str_contains(mb_strtolower($name), '30') => 'brvm-30',
+                    default => 'brvm-c',
+                };
+            @endphp
+            <div id="{{ $anchor }}" class="bg-white border border-[#c5c5d4] rounded-2xl p-6 scroll-mt-28">
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <h2 class="text-xl font-bold text-[#001a61]">{{ $name }}</h2>

@@ -38,7 +38,7 @@
                         <a href="{{ route('partenaires.show', $partner->id) }}" class="hover:underline">{{ $partner->nom }}</a>
                     </h3>
                     @if ($partner->description)
-                        <p class="text-sm text-[#444652] mt-1">{{ $partner->description }}</p>
+                        <p class="text-sm text-[#444652] mt-1">{{ plain_text($partner->description, 160) }}</p>
                     @endif
                     <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#757683]">
                         @if ($partner->contact)<span>{{ $partner->contact }}</span>@endif

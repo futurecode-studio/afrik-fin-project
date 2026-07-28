@@ -3,8 +3,6 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
-    <script src="{{ asset('assets/js/index.js') }}" defer></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Africaine des Finances' }}</title>
@@ -23,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     @livewireStyles
 
     <style>

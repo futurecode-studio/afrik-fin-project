@@ -59,7 +59,7 @@
                                 @endif
                                 
                                 @if($member->description)
-                                    <p class="text-sm text-muted-foreground line-clamp-3">{{ $member->description }}</p>
+                                    <p class="text-sm text-muted-foreground line-clamp-3">{{ plain_text($member->description, 160) }}</p>
                                 @endif
                                 
                                 <div class="flex items-center gap-3 mt-4 pt-4 border-t border-border">

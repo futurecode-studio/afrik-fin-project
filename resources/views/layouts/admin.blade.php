@@ -108,11 +108,14 @@
         class="fixed inset-y-0 left-0 z-50 w-64 adf-glass-dark text-white flex flex-col transition-transform duration-300 ease-soft -translate-x-full lg:translate-x-0"
         :class="sidebarOpen && '!translate-x-0'">
         <div class="px-5 py-5 border-b border-white/10 flex items-center gap-3 shrink-0">
-            <span class="material-symbols-outlined text-[#ffbf00] text-3xl">account_balance</span>
-            <div class="min-w-0 flex-1">
-                <p class="font-extrabold text-sm leading-tight">Africaine des Finances</p>
-                <p class="text-[11px] text-white/60">Administration</p>
-            </div>
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 min-w-0 flex-1">
+                <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances"
+                    class="h-10 w-auto object-contain shrink-0">
+                <div class="min-w-0">
+                    <p class="font-extrabold text-sm leading-tight truncate">Africaine des Finances</p>
+                    <p class="text-[11px] text-white/60">Administration</p>
+                </div>
+            </a>
             <button type="button" @click="sidebarOpen = false" class="lg:hidden p-1 rounded hover:bg-white/10" aria-label="Fermer">
                 <span class="material-symbols-outlined text-xl">close</span>
             </button>
@@ -132,7 +135,6 @@
                         ['route' => 'admin.events', 'match' => ['admin.events', 'admin.event.*'], 'label' => 'Événements', 'icon' => 'event', 'perm' => 'events.view'],
                         ['route' => 'admin.articles', 'match' => 'admin.articles', 'label' => 'Articles', 'icon' => 'newspaper', 'perm' => 'articles.view'],
                         ['route' => 'admin.formations', 'match' => 'admin.formations*', 'label' => 'Formations', 'icon' => 'school', 'perm' => 'formations.view'],
-                        ['route' => 'admin.partners', 'match' => 'admin.partners', 'label' => 'Partenaires', 'icon' => 'handshake', 'perm' => 'partners.view'],
                     ],
                 ],
                 [
@@ -153,6 +155,8 @@
                     'items' => [
                         ['route' => 'admin.stock-data', 'match' => ['admin.stock-data', 'admin.market-advanced'], 'label' => 'Actions BRVM', 'icon' => 'monitoring', 'perm' => 'stock-data.view'],
                         ['route' => 'admin.government-bonds', 'match' => 'admin.government-bonds', 'label' => 'Obligations États', 'icon' => 'account_balance', 'perm' => 'government-bonds.view'],
+                        ['route' => 'admin.sgi-sgo', 'match' => ['admin.sgi-sgo', 'admin.order-intents'], 'label' => 'SGI / SGO', 'icon' => 'account_balance', 'perm' => 'partners.view'],
+                        ['route' => 'admin.partners', 'match' => 'admin.partners', 'label' => 'Partenaires', 'icon' => 'handshake', 'perm' => 'partners.view'],
                     ],
                 ],
                 [

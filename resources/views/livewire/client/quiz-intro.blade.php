@@ -4,7 +4,7 @@
             {{ $quiz->is_final ? 'Session officielle' : 'Évaluation' }}
         </p>
         <h1 class="text-3xl font-extrabold text-[#001a61] mt-4">{{ $quiz->titre }}</h1>
-        <p class="text-[#444652] mt-2">{{ $quiz->description ?? $formation->titre }}</p>
+        <p class="text-[#444652] mt-2">{{ plain_text($quiz->description ?? $formation->titre) }}</p>
 
         <div class="mt-8 grid sm:grid-cols-3 gap-4">
             <div class="rounded-xl bg-[#f0f3ff] p-4">

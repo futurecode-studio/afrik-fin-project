@@ -21,7 +21,7 @@
                 <div class="p-6 lg:p-10 flex flex-col justify-center">
                     <span class="text-xs font-bold uppercase tracking-wide text-[#0a2e8c]">{{ $featured->categorie }}</span>
                     <h2 class="text-2xl md:text-3xl font-extrabold text-[#001a61] mt-2">{{ $featured->titre }}</h2>
-                    <p class="text-[#444652] mt-3 line-clamp-3">{{ $featured->extrait }}</p>
+                    <p class="text-[#444652] mt-3 line-clamp-3">{{ plain_text($featured->extrait, 180) }}</p>
                     <p class="text-sm text-[#757683] mt-4">{{ optional($featured->published_at)->format('d/m/Y') }}</p>
                 </div>
             </a>
@@ -39,7 +39,7 @@
                     <div class="p-5">
                         <span class="text-xs font-bold text-[#0a2e8c]">{{ $article->categorie }}</span>
                         <h3 class="font-bold text-[#001a61] mt-2 line-clamp-2">{{ $article->titre }}</h3>
-                        <p class="text-sm text-[#444652] mt-2 line-clamp-2">{{ $article->extrait }}</p>
+                        <p class="text-sm text-[#444652] mt-2 line-clamp-2">{{ plain_text($article->extrait, 120) }}</p>
                         <p class="text-xs text-[#757683] mt-3">{{ optional($article->published_at)->format('d/m/Y') }}</p>
                     </div>
                 </a>

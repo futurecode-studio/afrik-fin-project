@@ -1,12 +1,6 @@
 @php
     $heroImage = $formation->image_url ?: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&h=900&fit=crop';
-    $short = strip_tags($formation->description_courte ?? '');
-    $providerLabel = match ($paymentProvider) {
-        'kkiapay' => 'KKiaPay',
-        'fedapay' => 'FedaPay',
-        'feexpay' => 'FeexPay',
-        default => 'Paiement',
-    };
+    $short = plain_text($formation->description_courte);
 @endphp
 
 <main class="flex-1">
@@ -129,7 +123,7 @@
                             {!! preg_replace(
                                 '/^\s*<h2[^>]*>\s*À propos de cette formation\s*<\/h2>\s*/iu',
                                 '',
-                                $formation->description_complete,
+                                rich_html($formation->description_complete),
                                 1
                             ) !!}
                         </div>
@@ -162,7 +156,7 @@
                                 <div x-show="open === {{ $index }}" x-collapse x-cloak class="border-t border-[#e7eeff]">
                                     <div class="p-4 lg:px-5 lg:pb-5 bg-[#f9f9ff]/80">
                                         @if ($module->description)
-                                            <p class="text-sm text-[#444652] mb-4">{{ $module->description }}</p>
+                                            <p class="text-sm text-[#444652] mb-4">{{ plain_text($module->description) }}</p>
                                         @endif
                                         @if ($module->lessons->isNotEmpty())
                                             <ul class="space-y-2">
@@ -312,37 +306,15 @@
                     </div>
 
                     @unless ($formation->isFree())
-                        <div>
-                            <p class="text-sm font-bold text-[#001a61] mb-3">Moyen de paiement</p>
-                            <div class="grid grid-cols-2 gap-3">
-                                @foreach ([
-                                    'kkiapay' => ['KK', 'KKiaPay', 'bg-blue-100 text-blue-700'],
-                                    'fedapay' => ['FP', 'FedaPay', 'bg-emerald-100 text-emerald-800'],
-                                    'feexpay' => ['FX', 'FeexPay', 'bg-amber-100 text-amber-900'],
-                                ] as $key => [$abbr, $name, $badge])
-                                    @if (in_array($key, $paymentProviders ?? [], true))
-                                        <label class="cursor-pointer block">
-                                            <input type="radio" wire:model.live="paymentProvider" value="{{ $key }}" class="sr-only peer">
-                                            <div class="rounded-xl border-2 p-3 text-center transition peer-checked:border-[#001a61] peer-checked:bg-[#e7eeff] border-[#c5c5d4] hover:border-[#001a61]/40">
-                                                <span class="inline-flex w-10 h-10 rounded-full {{ $badge }} font-extrabold text-sm items-center justify-center">{{ $abbr }}</span>
-                                                <p class="mt-2 text-sm font-bold text-[#001a61]">{{ $name }}</p>
-                                            </div>
-                                        </label>
-                                    @endif
-                                @endforeach
-                            </div>
-                            @if (($paymentProviders ?? []) === [])
-                                <p class="mt-3 text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-xl p-3">
-                                    Paiement indisponible pour le moment. Contactez le support ou réessayez plus tard.
-                                </p>
-                            @endif
-                        </div>
+                        <x-payment-method-picker />
 
+                        @if ($needsPhone ?? true)
                         <div>
-                            <label for="phone" class="text-sm font-bold text-[#001a61]">Téléphone Mobile Money <span class="font-normal text-[#757683]">(optionnel)</span></label>
+                            <label for="phone" class="text-sm font-bold text-[#001a61]">Téléphone Mobile Money <span class="font-normal text-[#757683]">(recommandé)</span></label>
                             <input type="tel" id="phone" wire:model="phone" placeholder="+229 XX XX XX XX"
                                 class="mt-1.5 w-full rounded-xl border border-[#c5c5d4] px-4 py-3 text-sm focus:ring-2 focus:ring-[#001a61]/20 focus:border-[#001a61]">
                         </div>
+                        @endif
                     @endunless
 
                     <button type="button"
@@ -353,7 +325,8 @@
                             @if ($formation->isFree())
                                 Confirmer l'inscription
                             @else
-                                Payer {{ number_format($formation->prix, 0, ',', ' ') }} FCFA · {{ $providerLabel }}
+                                Payer {{ number_format($formation->prix, 0, ',', ' ') }} FCFA
+                                @if (! empty($methodLabel)) · {{ $methodLabel }}@endif
                             @endif
                         </span>
                         <span wire:loading wire:target="initiatePayment, enrollFree" class="inline-flex items-center gap-2">
@@ -374,83 +347,5 @@
 
 @push('scripts')
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-<script src="https://cdn.kkiapay.me/k.js"></script>
-<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
-<script>
-    document.addEventListener('livewire:init', () => {
-        Livewire.on('openPaymentWidget', (data) => {
-            const paymentData = data[0];
-            if (paymentData.provider === 'kkiapay') {
-                initKkiapayPayment(paymentData);
-            } else if (paymentData.provider === 'fedapay') {
-                initFedapayPayment(paymentData);
-            }
-        });
-    });
-
-    function initKkiapayPayment(data) {
-        try {
-            if (typeof openKkiapayWidget === 'undefined') {
-                alert('Le service de paiement KKiaPay n\'est pas disponible. Veuillez rafraîchir la page.');
-                return;
-            }
-            openKkiapayWidget({
-                amount: data.amount,
-                position: "center",
-                callback: "",
-                data: data.reference,
-                theme: "#001a61",
-                key: "{{ config('services.kkiapay.public_key') }}",
-                sandbox: {{ config('services.kkiapay.sandbox') ? 'true' : 'false' }},
-            });
-            addSuccessListener(response => {
-                Livewire.dispatch('paymentSuccess', [{
-                    transactionId: response.transactionId,
-                    reference: data.reference,
-                    status: 'SUCCESS'
-                }]);
-            });
-        } catch (error) {
-            console.error('Erreur KKiaPay:', error);
-            alert('Erreur lors de l\'ouverture du paiement KKiaPay.');
-        }
-    }
-
-    function initFedapayPayment(data) {
-        try {
-            if (typeof FedaPay === 'undefined') {
-                alert('Le service de paiement FedaPay n\'est pas disponible. Veuillez rafraîchir la page.');
-                return;
-            }
-            const amount = parseInt(data.amount, 10);
-            if (isNaN(amount) || amount <= 0) {
-                alert('Montant invalide.');
-                return;
-            }
-            FedaPay.init({
-                public_key: "{{ config('services.fedapay.public_key') }}",
-                transaction: {
-                    amount: amount,
-                    description: 'Formation: ' + data.formation + ' - REF:' + data.reference
-                },
-                customer: {
-                    email: data.email,
-                    firstname: data.name
-                },
-                onComplete: function(response) {
-                    if (response.reason === 'SUCCESSFUL') {
-                        Livewire.dispatch('paymentSuccess', [{
-                            transactionId: response.id,
-                            reference: data.reference,
-                            status: 'approved'
-                        }]);
-                    }
-                }
-            }).open();
-        } catch (error) {
-            console.error('Erreur FedaPay:', error);
-            alert('Erreur lors de l\'ouverture du paiement FedaPay.');
-        }
-    }
-</script>
+@include('partials.payment-widget-scripts')
 @endpush

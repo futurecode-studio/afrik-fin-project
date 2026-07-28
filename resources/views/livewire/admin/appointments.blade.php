@@ -287,6 +287,8 @@
                 </div>
             </div>
         </div>
+    @endif
+
     {{-- Modal Confirmation Suppression --}}
     <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-[100] bg-black bg-opacity-80 flex items-center justify-center p-4" @click.self="del = false">
             <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative">

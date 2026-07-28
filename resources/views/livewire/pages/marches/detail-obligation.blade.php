@@ -62,7 +62,7 @@
 
                 @if($bond->description)
                     <div class="mt-6 prose prose-sm max-w-none text-[#444652]">
-                        {!! nl2br(e($bond->description)) !!}
+                        {!! nl2br(e(plain_text($bond->description))) !!}
                     </div>
                 @endif
             </div>

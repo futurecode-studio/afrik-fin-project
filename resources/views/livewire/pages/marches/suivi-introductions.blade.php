@@ -18,7 +18,7 @@
                         <p class="text-xs font-semibold uppercase tracking-wider text-[#0a2e8c]">{{ $ipo->getStatusLabel() }} · {{ $ipo->sector ?: 'Secteur n/d' }}</p>
                         <h2 class="text-2xl font-extrabold text-[#001a61] mt-1">{{ $ipo->company_name }}</h2>
                         @if ($ipo->symbol)<p class="font-mono text-sm text-[#757683] mt-1">{{ $ipo->symbol }}</p>@endif
-                        <p class="text-sm text-[#444652] mt-3 max-w-2xl">{{ $ipo->description }}</p>
+                        <p class="text-sm text-[#444652] mt-3 max-w-2xl">{{ plain_text($ipo->description) }}</p>
                         <dl class="mt-4 grid sm:grid-cols-3 gap-3 text-sm">
                             @if ($ipo->offer_price_min || $ipo->offer_price_max)
                                 <div class="p-3 rounded-lg bg-[#f0f3ff]"><dt class="text-xs text-[#757683]">Fourchette</dt><dd class="font-bold text-[#001a61]">{{ number_format($ipo->offer_price_min ?? 0,0,',',' ') }} – {{ number_format($ipo->offer_price_max ?? 0,0,',',' ') }} FCFA</dd></div>

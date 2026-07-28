@@ -31,10 +31,12 @@ class GlobalSearch extends Component
         if (mb_strlen($term) >= 2) {
             $like = '%'.$term.'%';
             $formations = Formation::query()
+                ->publie()
                 ->where(function ($q) use ($like) {
                     $q->where('titre', 'like', $like)
-                        ->orWhere('description', 'like', $like)
-                        ->orWhere('categorie', 'like', $like);
+                        ->orWhere('description_courte', 'like', $like)
+                        ->orWhere('description_complete', 'like', $like)
+                        ->orWhere('niveau', 'like', $like);
                 })
                 ->orderBy('titre')
                 ->limit(12)
@@ -50,11 +52,14 @@ class GlobalSearch extends Component
                 ->get();
 
             $events = Event::query()
+                ->whereIn('status', ['published', 'ongoing'])
                 ->where(function ($q) use ($like) {
                     $q->where('title', 'like', $like)
-                        ->orWhere('description', 'like', $like);
+                        ->orWhere('description', 'like', $like)
+                        ->orWhere('category', 'like', $like)
+                        ->orWhere('city', 'like', $like);
                 })
-                ->latest()
+                ->latest('starts_at')
                 ->limit(8)
                 ->get();
         }

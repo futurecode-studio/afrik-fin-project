@@ -45,7 +45,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="text-xl font-semibold">{{ $quiz->titre }}</h3>
-                            <p class="text-sm text-muted-foreground">{{ $quiz->description }}</p>
+                            <p class="text-sm text-muted-foreground">{{ plain_text($quiz->description) }}</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $quiz->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">

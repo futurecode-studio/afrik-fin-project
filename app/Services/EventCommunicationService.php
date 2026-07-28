@@ -2,20 +2,33 @@
 
 namespace App\Services;
 
+use App\Mail\EventRegistrationConfirmed;
 use App\Models\EventOrder;
 use App\Models\EventRegistration;
 use App\Models\EventWaitlist;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class EventCommunicationService
 {
     /**
-     * Envoyer email confirmation d'inscription.
+     * Envoyer email confirmation d'inscription + ticket PDF / QR.
      */
     public function sendRegistrationConfirmed(EventRegistration $registration): void
     {
-        // Placeholder : implémenter Mailables/Event Mails
-        // Mail::to($registration->email)->send(new EventRegistrationConfirmed($registration));
+        $registration->loadMissing(['event', 'ticketType']);
+
+        if (empty($registration->email)) {
+            Log::warning("EventCommunication: email manquant pour registration #{$registration->id}");
+            return;
+        }
+
+        try {
+            Mail::to($registration->email)->send(new EventRegistrationConfirmed($registration));
+        } catch (\Throwable $e) {
+            Log::error("EventCommunication: échec envoi ticket #{$registration->id} — {$e->getMessage()}");
+            report($e);
+        }
     }
 
     /**
@@ -23,7 +36,7 @@ class EventCommunicationService
      */
     public function sendReminder(EventRegistration $registration, int $daysBefore): void
     {
-        // Mail::to($registration->email)->send(new EventReminder($registration, $daysBefore));
+        // À brancher plus tard (commande EventRemindersCommand)
     }
 
     /**
@@ -31,7 +44,7 @@ class EventCommunicationService
      */
     public function sendWaitlistPromoted(EventWaitlist $waitlist): void
     {
-        // Mail::to($waitlist->email)->send(new EventWaitlistPromoted($waitlist));
+        // À brancher plus tard
     }
 
     /**
@@ -39,7 +52,7 @@ class EventCommunicationService
      */
     public function sendOrderConfirmed(EventOrder $order): void
     {
-        // Mail::to($order->user->email)->send(new EventOrderConfirmed($order));
+        // À brancher plus tard
     }
 
     /**

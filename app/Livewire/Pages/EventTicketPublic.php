@@ -19,16 +19,23 @@ class EventTicketPublic extends Component
 
     public function downloadTicket(EventRegistrationService $service)
     {
+        if ($this->registration->isAwaitingPayment()) {
+            return;
+        }
+
         $pdf = $service->generateTicketPdf($this->registration);
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'ticket-' . $this->registration->event->slug . '.pdf');
+        }, 'ticket-'.$this->registration->event->slug.'.pdf');
     }
 
     public function render()
     {
-        return view('livewire.pages.event-ticket-public')
-            ->extends('layouts.site', ['title' => 'Mon Ticket — ' . $this->registration->event->title])
+        return view('livewire.pages.event-ticket-public', [
+            'awaitingPayment' => $this->registration->isAwaitingPayment(),
+        ])
+            ->extends('layouts.site', ['title' => 'Mon Ticket — '.$this->registration->event->title])
             ->section('content');
     }
 }

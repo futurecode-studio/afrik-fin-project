@@ -9,6 +9,17 @@
                 </nav>
                 <h1 class="text-2xl font-extrabold text-[#001a61]">Inscriptions</h1>
                 <p class="text-sm text-[#444652] mt-1">{{ $event->title }}</p>
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                    <code class="text-xs bg-[#f0f3ff] text-[#001a61] px-2.5 py-1.5 rounded-lg border border-[#c5c5d4]">{{ $event->publicUrl() }}</code>
+                    <button type="button"
+                        onclick="navigator.clipboard.writeText(@js($event->publicUrl())).then(() => window.adfToast && window.adfToast('success', 'Lien public copié'))"
+                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#ffbf00] bg-[#fff8e1] text-[#001a61]">
+                        <span class="material-symbols-outlined text-[16px]">content_copy</span> Copier le lien
+                    </button>
+                    <a href="{{ $event->publicUrl() }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] text-[#001a61] hover:bg-[#e7eeff]">
+                        <span class="material-symbols-outlined text-[16px]">open_in_new</span> Page publique
+                    </a>
+                </div>
             </div>
             <button wire:click="exportCsv" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#c5c5d4] text-sm font-bold text-[#001a61] hover:bg-[#e7eeff]">
                 <span class="material-symbols-outlined text-[18px]">download</span>
@@ -101,6 +112,10 @@
                                 </td>
                                 <td class="px-4 py-3 text-right whitespace-nowrap">
                                     @if (! in_array($reg->status, ['cancelled', 'no_show']))
+                                        @if ($reg->qr_code)
+                                            <a href="{{ route('event.ticket.public', $reg->qr_code) }}" target="_blank" class="text-xs font-bold text-[#001a61] underline mr-2">Ticket</a>
+                                            <button wire:click="resendTicket({{ $reg->id }})" class="text-xs font-bold text-[#0a2e8c] underline mr-2">Renvoyer email</button>
+                                        @endif
                                         @if (! $reg->isCheckedIn())
                                             <button wire:click="checkInManual({{ $reg->id }})" class="text-xs font-bold text-[#001a61] underline mr-2">Émargement</button>
                                         @endif

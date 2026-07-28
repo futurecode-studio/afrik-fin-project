@@ -45,7 +45,7 @@
         <div class="mt-8 grid lg:grid-cols-2 gap-6">
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-6">
                 <h2 class="font-bold text-[#001a61] text-lg mb-3">Description</h2>
-                <p class="text-[#444652] leading-relaxed">{{ $product->description }}</p>
+                <p class="text-[#444652] leading-relaxed">{{ plain_text($product->description) }}</p>
                 <p class="text-sm text-[#757683] mt-4">Sous-jacent : {{ $product->underlying ?? '—' }}</p>
             </div>
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-6 space-y-4">

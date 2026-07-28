@@ -49,12 +49,27 @@ class EventRegistration extends Model
 
     public function scopeConfirmed($query)
     {
-        return $query->whereIn('status', ['registered','confirmed','checked_in']);
+        return $query->whereIn('status', ['confirmed', 'checked_in']);
     }
 
     public function scopeActive($query)
     {
-        return $query->whereNotIn('status', ['cancelled','no_show']);
+        return $query->whereIn('status', ['confirmed', 'checked_in']);
+    }
+
+    public function scopeAwaitingPayment($query)
+    {
+        return $query->whereIn('status', ['pending_payment', 'registered']);
+    }
+
+    public function isConfirmed(): bool
+    {
+        return in_array($this->status, ['confirmed', 'checked_in'], true);
+    }
+
+    public function isAwaitingPayment(): bool
+    {
+        return in_array($this->status, ['pending_payment', 'registered'], true);
     }
 
     public function isCheckedIn(): bool
@@ -64,13 +79,13 @@ class EventRegistration extends Model
 
     public function fullName(): string
     {
-        return trim($this->first_name . ' ' . $this->last_name);
+        return trim($this->first_name.' '.$this->last_name);
     }
 
     public function statusLabel(): string
     {
         return match ($this->status) {
-            'registered' => 'Enregistré',
+            'pending_payment', 'registered' => 'Paiement en attente',
             'confirmed' => 'Confirmé',
             'checked_in' => 'Présent',
             'cancelled' => 'Annulé',
@@ -82,7 +97,7 @@ class EventRegistration extends Model
     public function statusColorClasses(): string
     {
         return match ($this->status) {
-            'registered' => 'bg-blue-100 text-blue-800',
+            'pending_payment', 'registered' => 'bg-amber-100 text-amber-900',
             'confirmed' => 'bg-emerald-100 text-emerald-800',
             'checked_in' => 'bg-primary/10 text-primary',
             'cancelled' => 'bg-red-100 text-red-800',

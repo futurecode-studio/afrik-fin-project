@@ -173,10 +173,33 @@
                     </td>
                 </tr>
             </table>
+
+            @if($registration->event->hasOnlineAccess())
+                <hr class="divider">
+                <div style="text-align: left; background: #e7eeff; border-radius: 10px; padding: 14px; margin-top: 8px;">
+                    <div class="label" style="margin-bottom: 8px; color: #001a61; font-weight: 700;">Accès {{ $registration->event->onlinePlatformLabel() }}</div>
+                    <p style="font-size: 11px; word-break: break-all; margin-bottom: 8px;">
+                        <a href="{{ $registration->event->online_meeting_url }}" style="color: #001a61;">{{ $registration->event->online_meeting_url }}</a>
+                    </p>
+                    @if($registration->event->online_meeting_id)
+                        <p style="font-size: 11px; margin-bottom: 4px;"><strong>ID :</strong> {{ $registration->event->online_meeting_id }}</p>
+                    @endif
+                    @if($registration->event->online_meeting_passcode)
+                        <p style="font-size: 11px; margin-bottom: 4px;"><strong>Code :</strong> {{ $registration->event->online_meeting_passcode }}</p>
+                    @endif
+                    @if($registration->event->online_access_instructions)
+                        <p style="font-size: 10px; color: #555; margin-top: 8px;">{{ $registration->event->online_access_instructions }}</p>
+                    @endif
+                </div>
+            @endif
         </div>
         <div class="footer">
             <strong>Agréé AMF-UMOA N° AA/2022-03</strong><br>
-            Présentez ce ticket à l'entrée. Toute reproduction est interdite.<br>
+            @if($registration->event->hasOnlineAccess())
+                Utilisez le lien de visioconférence ci-dessus le jour J.<br>
+            @else
+                Présentez ce ticket à l'entrée. Toute reproduction est interdite.<br>
+            @endif
             Conservez ce QR code — il est unique et personnel.
         </div>
     </div>

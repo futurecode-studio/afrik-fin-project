@@ -31,6 +31,7 @@ class Articles extends Component
     public $image_url;  // chemin/URL déjà stocké en base
     public $categorie;
     public $statut = 'brouillon';
+    public $is_featured = false;
 
     protected $paginationTheme = 'tailwind';
 
@@ -41,12 +42,13 @@ class Articles extends Component
         $rules = [
             'titre' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . ($this->articleId ?? 'NULL'),
-            'extrait' => 'nullable|string|max:500',
+            'extrait' => 'nullable|string|max:5000',
             'contenu' => 'required|string',
             'image' => $imageRequired . '|image|max:2048',
-            'image_url' => 'nullable|url|max:255',
+            'image_url' => 'nullable|string|max:500',
             'categorie' => 'nullable|string|max:100',
             'statut' => 'required|in:brouillon,publie,archive',
+            'is_featured' => 'boolean',
         ];
 
         return $rules;
@@ -59,10 +61,9 @@ class Articles extends Component
             'titre.max' => 'Le titre ne doit pas dépasser 255 caractères',
             'slug.unique' => 'Ce slug est déjà utilisé',
             'slug.max' => 'Le slug ne doit pas dépasser 255 caractères',
-            'extrait.max' => 'L\'extrait ne doit pas dépasser 500 caractères',
+            'extrait.max' => 'L\'extrait est trop long',
             'contenu.required' => 'Le contenu est obligatoire',
-            'image_url.url' => 'L\'URL de l\'image doit être valide',
-            'image_url.max' => 'L\'URL de l\'image ne doit pas dépasser 255 caractères',
+            'image_url.max' => 'L\'URL de l\'image est trop longue',
             'categorie.max' => 'La catégorie ne doit pas dépasser 100 caractères',
             'statut.required' => 'Le statut est obligatoire',
             'statut.in' => 'Le statut doit être brouillon, publié ou archivé',
@@ -105,6 +106,7 @@ class Articles extends Component
         $this->image_url = $article->image_url;
         $this->categorie = $article->categorie;
         $this->statut = $article->statut;
+        $this->is_featured = (bool) $article->is_featured;
         
         $this->editMode = true;
         $this->showModal = true;
@@ -129,6 +131,7 @@ class Articles extends Component
             'image_url' => $this->image_url,
             'categorie' => $this->categorie,
             'statut'    => $this->statut,
+            'is_featured' => (bool) $this->is_featured,
             'user_id'   => Auth::id(),
         ];
 
@@ -155,6 +158,10 @@ class Articles extends Component
         $this->resetForm();
         $this->resetValidation();
         $this->resetPage();
+
+        cache()->forget('nav.headlines.v1');
+        cache()->forget('home.page.data.v5');
+        cache()->forget('home.page.data.v6');
         
         // Envoyer l'événement pour fermer proprement la modale
         $this->dispatch('article-saved');
@@ -199,6 +206,7 @@ class Articles extends Component
         $this->image_url = '';
         $this->categorie = '';
         $this->statut = 'brouillon';
+        $this->is_featured = false;
     }
 
     public function render()

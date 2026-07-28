@@ -7,22 +7,6 @@ use Livewire\Component;
 
 class Panier extends Component
 {
-    public function increment(int $formationId, FormationCartService $cart): void
-    {
-        $item = collect($cart->items())->firstWhere('formation_id', $formationId);
-        $qty = $item ? (int) $item['quantity'] + 1 : 1;
-        $cart->update($formationId, $qty);
-    }
-
-    public function decrement(int $formationId, FormationCartService $cart): void
-    {
-        $item = collect($cart->items())->firstWhere('formation_id', $formationId);
-        if (! $item) {
-            return;
-        }
-        $cart->update($formationId, (int) $item['quantity'] - 1);
-    }
-
     public function remove(int $formationId, FormationCartService $cart): void
     {
         $cart->remove($formationId);

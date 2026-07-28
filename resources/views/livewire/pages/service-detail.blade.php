@@ -11,10 +11,10 @@
                 <p class="text-lg text-[#444652] mt-3">{{ $service->subtitle }}</p>
             @endif
             @if ($service->excerpt)
-                <p class="mt-6 text-[#444652] leading-relaxed">{{ $service->excerpt }}</p>
+                <p class="mt-6 text-[#444652] leading-relaxed">{{ plain_text($service->excerpt) }}</p>
             @endif
             @if ($service->content)
-                <div class="mt-6 prose prose-slate max-w-none text-[#444652] whitespace-pre-line">{{ $service->content }}</div>
+                <div class="mt-6 prose prose-slate max-w-none text-[#444652]">{!! rich_html($service->content) !!}</div>
             @endif
 
             @if (!empty($service->features))
@@ -55,7 +55,7 @@
                 @foreach ($related as $item)
                     <a href="{{ route('service-detail', $item->slug) }}" class="bg-white border border-[#c5c5d4] rounded-xl p-4 hover:border-[#001a61] block">
                         <p class="font-bold text-[#001a61]">{{ $item->title }}</p>
-                        <p class="text-sm text-[#757683] mt-1 line-clamp-2">{{ $item->excerpt }}</p>
+                        <p class="text-sm text-[#757683] mt-1 line-clamp-2">{{ plain_text($item->excerpt, 120) }}</p>
                     </a>
                 @endforeach
             </div>

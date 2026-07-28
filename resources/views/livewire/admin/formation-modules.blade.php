@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             @if($module->description)
-                                <p class="mt-2 text-sm text-muted-foreground pl-16">{{ Str::limit($module->description, 150) }}</p>
+                                <p class="mt-2 text-sm text-muted-foreground pl-16">{{ plain_text($module->description, 150) }}</p>
                             @endif
                         </div>
                     @empty

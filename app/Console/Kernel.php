@@ -24,6 +24,17 @@ class Kernel extends ConsoleKernel
                 \Log::error('market:sync-brvm : échec de l\'exécution planifiée.');
             });
 
+        // Évalue les alertes clients juste après les fenêtres de sync cotations
+        $schedule->command('market:evaluate-alerts')
+            ->weekdays()
+            ->everyThirtyMinutes()
+            ->between('08:05', '16:35')
+            ->timezone('Africa/Abidjan')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('market:evaluate-alerts : échec de l\'exécution planifiée.');
+            });
+
         // Snapshot indices fin de séance (réutilise Mansa / table market_indices)
         $schedule->command('brvm:snapshot')
             ->weekdays()

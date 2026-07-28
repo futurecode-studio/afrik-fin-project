@@ -18,6 +18,8 @@ class ApiCredentials
     /** @var array<string, array>|null Snapshot config fichier (avant overlay DB) */
     private static ?array $baseConfig = null;
 
+    private static ?bool $tableReady = null;
+
     /**
      * @return array<string, array{
      *   label: string,
@@ -326,10 +328,16 @@ class ApiCredentials
 
     private static function tableReady(): bool
     {
-        try {
-            return Schema::hasTable('api_integrations');
-        } catch (Throwable) {
-            return false;
+        if (self::$tableReady !== null) {
+            return self::$tableReady;
         }
+
+        try {
+            self::$tableReady = Schema::hasTable('api_integrations');
+        } catch (Throwable) {
+            self::$tableReady = false;
+        }
+
+        return self::$tableReady;
     }
 }

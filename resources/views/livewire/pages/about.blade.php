@@ -91,7 +91,7 @@
                                     </div>
                                 @endif
                                 @if ($member->description)
-                                    <p class="text-sm text-[#444652] mt-3 line-clamp-3">{{ $member->description }}</p>
+                                    <p class="text-sm text-[#444652] mt-3 line-clamp-3">{{ plain_text($member->description, 160) }}</p>
                                 @endif
                             </div>
                         </article>

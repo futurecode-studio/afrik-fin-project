@@ -31,13 +31,8 @@
                                     {{ $line->formation->niveau }}
                                     @if ($line->formation->duree) · {{ $line->formation->duree }}@endif
                                 </p>
-                                <div class="mt-3 flex flex-wrap items-center gap-3">
-                                    <div class="inline-flex items-center border border-[#c5c5d4] rounded">
-                                        <button type="button" wire:click="decrement({{ $line->formation->id }})" class="px-3 py-1 font-bold">−</button>
-                                        <span class="px-3 py-1 text-sm">{{ $line->quantity }}</span>
-                                        <button type="button" wire:click="increment({{ $line->formation->id }})" class="px-3 py-1 font-bold">+</button>
-                                    </div>
-                                    <button type="button" wire:click="remove({{ $line->formation->id }})" class="text-sm text-red-600 font-medium">Retirer</button>
+                                <div class="mt-3">
+                                    <button type="button" wire:click="remove({{ $line->formation->id }})" class="text-sm text-red-600 font-medium hover:underline">Retirer</button>
                                 </div>
                             </div>
                             <div class="text-right shrink-0">

@@ -21,12 +21,12 @@ class CheckRole
 
         $user = auth()->user();
 
-        if ($role === 'admin' && !$user->isAdmin()) {
+        if ($role === 'admin' && ! $user->canAccessAdminPanel()) {
             return redirect()->route('client.dashboard')
                 ->with('error', 'Vous n\'avez pas accès à cette section.');
         }
 
-        if ($role === 'client' && !$user->isClient()) {
+        if ($role === 'client' && ! $user->isClient()) {
             return redirect()->route('admin.dashboard')
                 ->with('error', 'Vous n\'avez pas accès à cette section.');
         }

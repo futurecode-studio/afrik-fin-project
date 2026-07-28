@@ -169,11 +169,30 @@ class User extends Authenticatable
     }
 
     /**
-     * Vérifier si l'utilisateur est admin
+     * Vérifier si l'utilisateur est admin (rôle admin / super_admin).
      */
     public function isAdmin(): bool
     {
-        return $this->hasRole('super_admin') || $this->hasRole('admin');
+        return $this->hasRole(['super_admin', 'admin']);
+    }
+
+    /**
+     * Accès au panneau /admin (tous les rôles staff, jamais un client pur).
+     */
+    public function canAccessAdminPanel(): bool
+    {
+        // Au moins un rôle Spatie autre que « client »
+        if ($this->roles()->where('name', '!=', 'client')->exists()) {
+            return true;
+        }
+
+        // Colonne legacy users.role (si pas encore migré vers Spatie)
+        $legacy = $this->attributes['role'] ?? null;
+        if ($legacy && $legacy !== 'client') {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -181,6 +200,10 @@ class User extends Authenticatable
      */
     public function isClient(): bool
     {
-        return $this->hasRole('client');
+        if ($this->hasRole('client') && ! $this->canAccessAdminPanel()) {
+            return true;
+        }
+
+        return ($this->attributes['role'] ?? null) === 'client' && ! $this->canAccessAdminPanel();
     }
 }

@@ -83,7 +83,7 @@
                             @if ($lesson->pdf_url) · <span class="text-orange-700 font-semibold">PDF</span> @endif
                         </p>
                         @if ($lesson->description)
-                            <p class="text-sm text-[#444652] mt-1 line-clamp-2">{{ $lesson->description }}</p>
+                            <p class="text-sm text-[#444652] mt-1 line-clamp-2">{{ plain_text($lesson->description, 160) }}</p>
                         @endif
                     </div>
 

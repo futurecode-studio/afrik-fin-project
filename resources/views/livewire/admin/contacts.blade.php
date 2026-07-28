@@ -79,10 +79,10 @@
                                                 <circle cx="12" cy="12" r="3"/>
                                             </svg>
                                         </button>
-                                        @if($contact->status !== 'replied')
-                                            <button type="button" wire:click="markAsReplied({{ $contact->id }})"
-                                                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-green-200 bg-[#f9f9ff] hover:bg-green-50 text-green-600 h-9 px-3"
-                                                title="Marquer comme répondu">
+                                        @if($contact->status === 'new')
+                                            <button type="button" wire:click="markAsRead({{ $contact->id }})"
+                                                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-blue-200 bg-[#f9f9ff] hover:bg-blue-50 text-blue-700 h-9 px-3"
+                                                title="Marquer comme lu">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M20 6 9 17l-5-5"/>
                                                 </svg>
@@ -186,6 +186,12 @@
                     </div>
 
                     <div class="flex justify-end gap-3 mt-6">
+                        @if($selectedContact->status === 'new')
+                            <button wire:click="markAsRead({{ $selectedContact->id }})"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium border border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100 h-11 px-6 py-3">
+                                Marquer comme lu
+                            </button>
+                        @endif
                         @if($selectedContact->status !== 'replied')
                             <button wire:click="markAsReplied({{ $selectedContact->id }})"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 text-white hover:bg-green-700 h-11 px-6 py-3">

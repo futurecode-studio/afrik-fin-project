@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\GovernmentBond;
+use App\Models\MarketIndex;
 use App\Models\MarketIndexHistory;
 use App\Models\Stock;
 use Illuminate\Support\Collection;
@@ -69,6 +70,115 @@ class MarketsDataService
                 ->orderByDesc('snapshot_date')
                 ->first();
         });
+    }
+
+    /**
+     * Panneau marché navbar : indices + séries historiques + top hausses/baisses.
+     *
+     * @return array{indices: array<int, array>, gainers: array, losers: array}
+     */
+    public function navMarketPanel(): array
+    {
+        $wanted = [
+            'BRVM-C' => [
+                'title' => 'Composite',
+                'aliases' => ['BRVM Composite', 'BRVM Composite Index', 'BRVM-C', 'BRVM-CI', 'BRVM C'],
+                'history' => ['BRVM Composite', 'BRVM Composite Index'],
+            ],
+            'BRVM-30' => [
+                'title' => 'Top 30',
+                'aliases' => ['BRVM 30', 'BRVM-30', 'BRVM30'],
+                'history' => ['BRVM 30', 'BRVM-30'],
+            ],
+            'BRVM-PRE' => [
+                'title' => 'Prestige',
+                'aliases' => ['BRVM Prestige', 'BRVM-PRE', 'BRVM PRE', 'BRVM-Prestige'],
+                'history' => ['BRVM Prestige'],
+            ],
+            'BRVM-PRN' => [
+                'title' => 'Principal',
+                'aliases' => ['BRVM Principal', 'BRVM-PRN', 'BRVM PRN'],
+                'history' => ['BRVM Principal'],
+            ],
+        ];
+
+        $liveByCode = MarketIndex::query()
+            ->where('exchange', 'BRVM')
+            ->get()
+            ->keyBy(fn ($i) => strtoupper((string) $i->code));
+
+        $indices = [];
+        foreach ($wanted as $key => $meta) {
+            $value = null;
+            $variation = null;
+            $historyName = $meta['history'][0];
+
+            foreach ($meta['aliases'] as $alias) {
+                $liveKey = strtoupper($alias);
+                if ($liveByCode->has($liveKey)) {
+                    $row = $liveByCode->get($liveKey);
+                    $value = (float) $row->value;
+                    $variation = (float) ($row->change_percent ?? 0);
+                    break;
+                }
+            }
+
+            $series = collect();
+            foreach ($meta['history'] as $histName) {
+                $rows = MarketIndexHistory::query()
+                    ->where('index_name', $histName)
+                    ->where('snapshot_date', '>=', now()->subDays(200)->toDateString())
+                    ->orderBy('snapshot_date')
+                    ->get(['snapshot_date', 'value', 'variation_percent']);
+
+                if ($rows->count() > $series->count()) {
+                    $series = $rows;
+                    $historyName = $histName;
+                }
+            }
+
+            if ($series->isEmpty() && $value === null) {
+                continue;
+            }
+
+            $latestHist = $series->last();
+            if ($value === null && $latestHist) {
+                $value = (float) $latestHist->value;
+                $variation = (float) ($latestHist->variation_percent ?? 0);
+            }
+
+            $points = $series->map(fn ($r) => [
+                'd' => $r->snapshot_date->format('Y-m-d'),
+                'v' => round((float) $r->value, 2),
+            ])->values()->all();
+
+            $spark = collect($points)->take(-14)->pluck('v')->values()->all();
+
+            $indices[] = [
+                'key' => $key,
+                'label' => $key,
+                'title' => $meta['title'],
+                'db_name' => $historyName,
+                'value' => round((float) $value, 2),
+                'variation' => round((float) $variation, 2),
+                'series' => $points,
+                'spark' => $spark,
+            ];
+        }
+
+        return [
+            'indices' => $indices,
+            'gainers' => $this->topGainers(3)->map(fn ($s) => [
+                'symbol' => $s->symbol,
+                'current_price' => (float) $s->current_price,
+                'variation_percent' => (float) $s->variation_percent,
+            ])->values()->all(),
+            'losers' => $this->topLosers(3)->map(fn ($s) => [
+                'symbol' => $s->symbol,
+                'current_price' => (float) $s->current_price,
+                'variation_percent' => (float) $s->variation_percent,
+            ])->values()->all(),
+        ];
     }
 
     public function indexHistory(string $name, int $days = 30): Collection
@@ -193,6 +303,70 @@ class MarketsDataService
             'sectors' => $sectors,
             'metric' => $metric,
             'total' => array_sum(array_column($sectors, 'total')),
+        ];
+    }
+
+    /**
+     * Données plates pour un treemap type MARKETMAP (taille ≈ poids marché, couleur = variation).
+     *
+     * @param  string  $metric  auto|market_cap|volume|variation
+     * @return array{nodes: array<int, array>, size_label: string, count: int, metric: string}
+     */
+    public function marketTreemap(string $metric = 'auto'): array
+    {
+        $metric = in_array($metric, ['auto', 'market_cap', 'volume', 'variation'], true) ? $metric : 'auto';
+        $stocks = $this->stocks();
+
+        $avgCap = (float) $stocks->avg(fn (Stock $s) => (float) $s->market_cap);
+        $capsLookReal = $avgCap >= 1_000_000_000;
+
+        if ($metric === 'auto') {
+            $metric = $capsLookReal ? 'market_cap' : 'volume';
+        }
+
+        $sizeLabel = match ($metric) {
+            'market_cap' => 'Capitalisation',
+            'variation' => '|Variation|',
+            default => 'Volume échangé (× cours)',
+        };
+
+        $nodes = $stocks->map(function (Stock $s) use ($metric, $capsLookReal) {
+            $cap = (float) $s->market_cap;
+            $turnover = max((float) $s->volume, 1) * max((float) $s->current_price, 1);
+
+            $size = match ($metric) {
+                'market_cap' => ($capsLookReal && $cap >= 1_000_000) ? $cap : $turnover,
+                'variation' => abs((float) $s->variation_percent) + 0.01,
+                default => $turnover,
+            };
+
+            return [
+                'symbol' => $s->symbol,
+                'name' => $s->company_name ?: $s->symbol,
+                'sector' => $s->sector ?: 'Autre',
+                'price' => (float) $s->current_price,
+                'variation' => round((float) $s->variation_percent, 2),
+                'volume' => (int) $s->volume,
+                'market_cap' => $cap,
+                'size' => max($size, 1),
+                'url' => route('marches.action', $s->symbol),
+            ];
+        })
+            ->sortByDesc('size')
+            ->values()
+            ->all();
+
+        $effectiveMetric = $metric;
+        if ($metric === 'market_cap' && ! $capsLookReal) {
+            $effectiveMetric = 'volume';
+            $sizeLabel = 'Volume échangé (× cours)';
+        }
+
+        return [
+            'nodes' => $nodes,
+            'size_label' => $sizeLabel,
+            'count' => count($nodes),
+            'metric' => $effectiveMetric,
         ];
     }
 

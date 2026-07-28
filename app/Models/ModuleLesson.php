@@ -88,10 +88,8 @@ class ModuleLesson extends Model
         }
 
         $raw = (string) $raw;
-        if (preg_match('/<\/?[a-z][\s\S]*>/i', $raw)) {
-            $allowed = '<h1><h2><h3><h4><p><br><ul><ol><li><strong><b><em><i><u><a><span><div><blockquote><code><pre><hr><table><thead><tbody><tr><th><td>';
-
-            return strip_tags($raw, $allowed);
+        if (preg_match('/<\/?[a-z][\s\S]*>/i', $raw) || str_contains($raw, '&lt;')) {
+            return rich_html($raw);
         }
 
         return nl2br(e($raw));

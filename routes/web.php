@@ -32,6 +32,7 @@ Route::get('/formations/{slug}', \App\Livewire\Pages\FormationDetail::class)->na
 // Payment callbacks
 Route::post('/payment/kkiapay/callback', [\App\Http\Controllers\PaymentController::class, 'kkiapayCallback'])->name('payment.kkiapay.callback');
 Route::post('/payment/fedapay/callback', [\App\Http\Controllers\PaymentController::class, 'fedapayCallback'])->name('payment.fedapay.callback');
+Route::match(['get', 'post'], '/payment/feexpay/callback', [\App\Http\Controllers\PaymentController::class, 'feexpayCallback'])->name('payment.feexpay.callback');
 Route::get('/payment/success', \App\Livewire\Pages\PaymentConfirmation::class)->name('payment.success');
 Route::get('/payment/cancel', [\App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.cancel');
 
@@ -96,11 +97,11 @@ Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->na
 Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
 Route::get('/panier', \App\Livewire\Pages\Panier::class)->name('panier');
 
-// Événements publiques
+// Événements publics (routes spécifiques avant {slug})
 Route::get('/evenements', \App\Livewire\Pages\EventsList::class)->name('events-list');
-Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
 Route::get('/evenements/ticket/{qrCode}', \App\Livewire\Pages\EventTicketPublic::class)->name('event.ticket.public');
 Route::get('/evenements/commande/{orderNumber}', \App\Livewire\Pages\EventOrderConfirmation::class)->name('event.order.confirmation');
+Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion')->middleware('guest');
 Route::get('/inscription', \App\Livewire\Auth\Register::class)->name('inscription')->middleware('guest');
@@ -139,16 +140,16 @@ Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->g
     Route::get('/patrimoine', \App\Livewire\Client\Patrimoine::class)->name('patrimoine');
     Route::get('/alertes', \App\Livewire\Client\AlertesMarche::class)->name('alertes');
     Route::get('/ordres-programmes', \App\Livewire\Client\OrdresProgrammes::class)->name('ordres');
-    Route::get('/rapport-mensuel', \App\Livewire\Client\RapportMensuel::class)->name('rapport-mensuel');
     Route::get('/vote-ag', \App\Livewire\Client\VoteAg::class)->name('vote-ag');
+    Route::get('/rapport-mensuel', \App\Livewire\Client\RapportMensuel::class)->name('rapport-mensuel');
     Route::get('/actualites-portefeuille', \App\Livewire\Client\ActualitesPortefeuille::class)->name('actualites-portefeuille');
     Route::get('/evenements', \App\Livewire\Client\MyEvents::class)->name('my-events');
     Route::get('/evenements/{id}/ticket', \App\Livewire\Client\MyEventTicket::class)->name('event.ticket');
 });
 
 // Admin Routes
-Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', \App\Livewire\Pages\Dashboard::class)->name('dashboard');
+Route::middleware(['auth', 'admin.panel'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', \App\Livewire\Pages\Dashboard::class)->name('dashboard')->middleware('permission:dashboard.view');
     Route::get('/profile', \App\Livewire\Admin\Profile::class)->name('profile')->middleware('permission:users.view');
     Route::get('/articles', \App\Livewire\Admin\Articles::class)->name('articles')->middleware('permission:articles.view');
     Route::get('/formations', \App\Livewire\Admin\Formations::class)->name('formations')->middleware('permission:formations.view');
@@ -178,6 +179,8 @@ Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name(
     Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts')->middleware('permission:contacts.view');
     Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics')->middleware('permission:statistics.view');
     Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners')->middleware('permission:partners.view');
+    Route::get('/sgi-sgo', \App\Livewire\Admin\SgiSgoHub::class)->name('sgi-sgo')->middleware('permission:partners.view');
+    Route::get('/order-intents', \App\Livewire\Admin\OrderIntents::class)->name('order-intents')->middleware('permission:partners.view');
     Route::get('/social-links', \App\Livewire\Admin\SocialLinks::class)->name('social-links');
     Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team')->middleware('permission:team.view');
     Route::get('/site-services', \App\Livewire\Admin\SiteServices::class)->name('site-services')->middleware('permission:team.view');
@@ -188,6 +191,10 @@ Route::middleware(['auth', 'permission:dashboard.view'])->prefix('admin')->name(
     // Events Admin
     Route::get('/events', \App\Livewire\Admin\Events::class)->name('events')->middleware('permission:events.view');
     Route::get('/events/{event}/registrations', \App\Livewire\Admin\EventRegistrations::class)->name('event.registrations')->middleware('permission:events.view');
+    Route::get('/events/{event}/program', \App\Livewire\Admin\EventProgram::class)->name('event.program')->middleware('permission:events.view');
+    Route::get('/events/{event}/speakers', \App\Livewire\Admin\EventSpeakers::class)->name('event.speakers')->middleware('permission:events.view');
+    Route::get('/events/{event}/documents', \App\Livewire\Admin\EventDocuments::class)->name('event.documents')->middleware('permission:events.view');
+    Route::get('/events/{event}/tickets', \App\Livewire\Admin\EventTicketTypes::class)->name('event.tickets')->middleware('permission:events.view');
     Route::get('/events/{event}/checkin', \App\Livewire\Admin\EventCheckInManager::class)->name('event.checkin')->middleware('permission:events.view');
     Route::get('/events/{event}/products', \App\Livewire\Admin\EventProducts::class)->name('event.products')->middleware('permission:events.view');
 });

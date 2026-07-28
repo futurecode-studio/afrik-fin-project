@@ -15,7 +15,7 @@ class PaymentService
     /**
      * Créer une inscription en attente et initier le paiement
      */
-    public function initiatePayment(User $user, Formation $formation, string $provider, ?string $phone = null): array
+    public function initiatePayment(User $user, Formation $formation, string $provider, ?string $phone = null, ?string $method = null): array
     {
         // Vérifier si l'utilisateur est déjà inscrit
         if ($user->isEnrolledIn($formation)) {
@@ -260,7 +260,7 @@ class PaymentService
             $base = rtrim((string) config('services.feexpay.api_url', 'https://api.feexpay.me'), '/');
             $response = Http::withToken((string) config('services.feexpay.api_key'))
                 ->acceptJson()
-                ->get("{$base}/api/transactions/{$paymentId}");
+                ->get("{$base}/api/transactions/public/single/status/{$paymentId}");
 
             if ($response->successful()) {
                 return [
@@ -284,25 +284,239 @@ class PaymentService
         }
     }
 
+    public function handleFeexpayCallback(array $data): array
+    {
+        $providerReference = (string) ($data['reference'] ?? $data['transaction_id'] ?? $data['order_id'] ?? $data['payment_id'] ?? '');
+        $callbackInfo = $this->decodeFeexpayCallbackInfo($data['callback_info'] ?? null);
+        $callbackInfo = array_filter(array_merge([
+            'type' => $data['type'] ?? null,
+            'reference' => $data['local_reference'] ?? $data['custom_id'] ?? null,
+            'registration_id' => $data['registration_id'] ?? null,
+            'order_id' => $data['order_id'] ?? null,
+        ], $callbackInfo), fn ($value) => $value !== null && $value !== '');
+        $localReference = (string) ($callbackInfo['reference'] ?? $data['local_reference'] ?? $data['custom_id'] ?? '');
+        $status = strtoupper((string) ($data['status'] ?? $data['responsecode'] ?? $data['responsemsg'] ?? ''));
+
+        if ($status === '' && request()?->isMethod('get')) {
+            $status = 'SUCCESSFUL';
+        }
+
+        $ok = in_array($status, ['SUCCESS', 'SUCCESSFUL', 'APPROVED', 'COMPLETED'], true);
+        $pending = in_array($status, ['PENDING', 'PROCESSING', 'ACCEPTED'], true);
+
+        $payment = null;
+        if ($localReference !== '') {
+            $payment = Payment::where('reference', $localReference)->first();
+        }
+        if (! $payment && $providerReference !== '') {
+            $payment = Payment::where('transaction_id', $providerReference)->first();
+        }
+
+        if (! $payment) {
+            if ($ok && in_array($callbackInfo['type'] ?? null, ['event_registration', 'event_order'], true)) {
+                return [
+                    'success' => true,
+                    'message' => 'Paiement événement confirmé',
+                    'callback_info' => $callbackInfo,
+                    'reference' => $localReference,
+                    'provider_reference' => $providerReference,
+                    'status' => $status,
+                ];
+            }
+
+            return [
+                'success' => false,
+                'pending' => $pending,
+                'message' => 'Paiement non trouvé',
+                'callback_info' => $callbackInfo,
+                'reference' => $localReference,
+                'provider_reference' => $providerReference,
+                'status' => $status,
+            ];
+        }
+
+        if ($ok) {
+            $payment->markAsCompleted($providerReference ?: $payment->transaction_id, $data);
+
+            return [
+                'success' => true,
+                'message' => 'Paiement confirmé avec succès',
+                'payment' => $payment,
+                'enrollment' => $payment->enrollment,
+                'callback_info' => $callbackInfo,
+                'status' => $status,
+            ];
+        }
+
+        if ($pending) {
+            $payment->update(['provider_response' => $data]);
+
+            return [
+                'success' => false,
+                'pending' => true,
+                'message' => 'Paiement en attente',
+                'payment' => $payment,
+                'callback_info' => $callbackInfo,
+                'status' => $status,
+            ];
+        }
+
+        $payment->markAsFailed($data['reason'] ?? $data['message'] ?? 'Paiement échoué', $data);
+
+        return [
+            'success' => false,
+            'message' => 'Paiement échoué',
+            'payment' => $payment,
+            'callback_info' => $callbackInfo,
+            'status' => $status,
+        ];
+    }
+
     public function isProviderReady(string $provider): bool
     {
         return ApiCredentials::isConfigured($provider);
     }
 
     /**
-     * Providers de paiement utilisables (clés DB ou .env présentes).
+     * Providers de paiement configurés (clés DB ou .env présentes).
+     * Ordre : primary puis fallback puis autres.
      *
      * @return list<string>
      */
     public function availablePaymentProviders(): array
     {
+        $preferred = array_filter([
+            config('services.payments.primary', 'fedapay'),
+            config('services.payments.fallback', 'kkiapay'),
+            'feexpay',
+        ]);
+
         $list = [];
-        foreach (['kkiapay', 'fedapay', 'feexpay'] as $provider) {
-            if (ApiCredentials::isConfigured($provider)) {
+        foreach (array_unique($preferred) as $provider) {
+            if ($this->isProviderReady((string) $provider)) {
+                $list[] = (string) $provider;
+            }
+        }
+
+        foreach (['fedapay', 'kkiapay', 'feexpay'] as $provider) {
+            if (! in_array($provider, $list, true) && $this->isProviderReady($provider)) {
                 $list[] = $provider;
             }
         }
 
         return $list;
+    }
+
+    /**
+     * Providers qui peuvent réellement être ouverts par le widget frontend actuel.
+     *
+     * @return list<string>
+     */
+    public function availableWidgetProviders(): array
+    {
+        return array_values(array_filter(
+            $this->availablePaymentProviders(),
+            fn (string $provider) => in_array($provider, ['fedapay', 'kkiapay', 'feexpay'], true)
+        ));
+    }
+
+    /**
+     * Moyen de paiement visibles côté client (pas les agrégateurs).
+     *
+     * @return array<string, array{label: string, hint: string, icon: string, needs_phone: bool}>
+     */
+    public function customerPaymentMethods(): array
+    {
+        return [
+            'mtn' => [
+                'label' => 'MTN MoMo',
+                'hint' => 'Mobile Money',
+                'icon' => 'MTN',
+                'needs_phone' => true,
+            ],
+            'moov' => [
+                'label' => 'Moov Money',
+                'hint' => 'Mobile Money',
+                'icon' => 'MOOV',
+                'needs_phone' => true,
+            ],
+            'celtiis' => [
+                'label' => 'Celtiis Cash',
+                'hint' => 'Mobile Money',
+                'icon' => 'CEL',
+                'needs_phone' => true,
+            ],
+            'card' => [
+                'label' => 'Carte bancaire',
+                'hint' => 'Visa / Mastercard',
+                'icon' => 'CB',
+                'needs_phone' => false,
+            ],
+        ];
+    }
+
+    public function customerMethodLabel(?string $method): string
+    {
+        $methods = $this->customerPaymentMethods();
+
+        return $methods[$method]['label'] ?? 'Paiement sécurisé';
+    }
+
+    /**
+     * Résout la passerelle à utiliser (FedaPay par défaut, KKiaPay en secours).
+     */
+    public function resolveGateway(): ?string
+    {
+        $primary = (string) config('services.payments.primary', 'fedapay');
+        if (in_array($primary, ['fedapay', 'kkiapay', 'feexpay'], true) && $this->isProviderReady($primary)) {
+            return $primary;
+        }
+
+        $fallback = (string) config('services.payments.fallback', 'kkiapay');
+        if (in_array($fallback, ['fedapay', 'kkiapay', 'feexpay'], true) && $this->isProviderReady($fallback)) {
+            return $fallback;
+        }
+
+        $available = $this->availableWidgetProviders();
+
+        return $available[0] ?? null;
+    }
+
+    public function fallbackGateway(?string $current = null): ?string
+    {
+        $current = $current ?: $this->resolveGateway();
+        $fallback = (string) config('services.payments.fallback', 'kkiapay');
+
+        if ($fallback !== $current && in_array($fallback, ['fedapay', 'kkiapay', 'feexpay'], true) && $this->isProviderReady($fallback)) {
+            return $fallback;
+        }
+
+        foreach ($this->availableWidgetProviders() as $provider) {
+            if ($provider !== $current) {
+                return $provider;
+            }
+        }
+
+        return null;
+    }
+
+    public function paymentsAvailable(): bool
+    {
+        return $this->resolveGateway() !== null;
+    }
+
+    private function decodeFeexpayCallbackInfo(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (! is_string($value) || $value === '') {
+            return [];
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
     }
 }

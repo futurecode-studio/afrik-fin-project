@@ -16,9 +16,20 @@ class CheckPermission
 
         $user = auth()->user();
 
-        // Super admin and admin have full access
-        if ($user->hasRole('super_admin') || $user->hasRole('admin')) {
+        // Super admin and admin have full access inside the panel
+        if ($user->hasRole(['super_admin', 'admin'])) {
             return $next($request);
+        }
+
+        // Clients (or anyone without staff role) never pass permission checks on /admin
+        if (! $user->canAccessAdminPanel()) {
+            if (\Illuminate\Support\Facades\Route::has('client.dashboard')) {
+                return redirect()
+                    ->route('client.dashboard')
+                    ->with('error', 'Vous n\'avez pas accès à l\'administration.');
+            }
+
+            abort(403, 'Vous n\'avez pas accès à l\'administration.');
         }
 
         // If no permission required, allow access

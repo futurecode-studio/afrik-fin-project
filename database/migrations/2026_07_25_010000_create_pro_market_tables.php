@@ -47,45 +47,6 @@ return new class extends Migration
             });
         }
 
-        if (! Schema::hasTable('ag_meetings')) {
-            Schema::create('ag_meetings', function (Blueprint $table) {
-                $table->id();
-                $table->foreignId('stock_id')->nullable()->constrained()->nullOnDelete();
-                $table->string('company_name');
-                $table->string('title');
-                $table->dateTime('closes_at')->nullable();
-                $table->string('location')->nullable();
-                $table->unsignedInteger('quorum_percent')->nullable();
-                $table->string('report_url')->nullable();
-                $table->boolean('is_published')->default(true);
-                $table->timestamps();
-            });
-        }
-
-        if (! Schema::hasTable('ag_resolutions')) {
-            Schema::create('ag_resolutions', function (Blueprint $table) {
-                $table->id();
-                $table->foreignId('ag_meeting_id')->constrained('ag_meetings')->cascadeOnDelete();
-                $table->unsignedSmallInteger('number')->default(1);
-                $table->string('title');
-                $table->string('kind', 40)->default('ordinaire'); // ordinaire, extraordinaire
-                $table->text('description')->nullable();
-                $table->unsignedSmallInteger('sort_order')->default(0);
-                $table->timestamps();
-            });
-        }
-
-        if (! Schema::hasTable('ag_votes')) {
-            Schema::create('ag_votes', function (Blueprint $table) {
-                $table->id();
-                $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-                $table->foreignId('ag_resolution_id')->constrained('ag_resolutions')->cascadeOnDelete();
-                $table->string('choice', 20); // pour, contre, abstention
-                $table->timestamps();
-                $table->unique(['user_id', 'ag_resolution_id']);
-            });
-        }
-
         if (! Schema::hasTable('structured_products')) {
             Schema::create('structured_products', function (Blueprint $table) {
                 $table->id();
@@ -190,9 +151,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('ag_votes');
-        Schema::dropIfExists('ag_resolutions');
-        Schema::dropIfExists('ag_meetings');
         Schema::dropIfExists('scheduled_orders');
         Schema::dropIfExists('market_alerts');
         Schema::dropIfExists('structured_products');

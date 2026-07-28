@@ -186,7 +186,7 @@
                                     <img src="{{ '/storage/' . $photo_url }}" alt="Photo actuelle" class="w-20 h-20 object-cover rounded-full border">
                                     <p class="text-xs text-gray-500 mt-1">Photo actuelle</p>
                                 </div>
-                            
+                            @endif
                         </div>
 
                         <div>

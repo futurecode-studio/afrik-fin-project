@@ -15,8 +15,11 @@ class Event extends Model
         'title', 'slug', 'description', 'content', 'category', 'event_type',
         'starts_at', 'ends_at', 'registration_opens_at', 'registration_closes_at',
         'location_name', 'location_lat', 'location_lng', 'location_address',
-        'city', 'country', 'capacity', 'registration_count', 'featured_image',
-        'seo_title', 'seo_description', 'is_featured', 'status', 'created_by',
+        'city', 'country',
+        'online_platform', 'online_meeting_url', 'online_meeting_id',
+        'online_meeting_passcode', 'online_access_instructions',
+        'capacity', 'registration_count', 'featured_image',
+        'seo_title', 'seo_description', 'is_featured', 'is_paid', 'status', 'created_by',
     ];
 
     protected $casts = [
@@ -27,6 +30,7 @@ class Event extends Model
         'location_lat' => 'decimal:8',
         'location_lng' => 'decimal:8',
         'is_featured' => 'boolean',
+        'is_paid' => 'boolean',
         'capacity' => 'integer',
         'registration_count' => 'integer',
     ];
@@ -116,18 +120,174 @@ class Event extends Model
 
     public function isRegistrationOpen(): bool
     {
-        if (!in_array($this->status, ['published','ongoing'])) return false;
+        if (! in_array($this->status, ['published', 'ongoing'], true)) {
+            return false;
+        }
+
         $now = now();
-        if ($this->registration_opens_at && $now->lt($this->registration_opens_at)) return false;
-        if ($this->registration_closes_at && $now->gt($this->registration_closes_at)) return false;
-        if ($this->capacity > 0 && $this->registration_count >= $this->capacity) return false;
+
+        // Événement déjà terminé (ou démarré sans date de fin) → inscriptions fermées
+        if ($this->ends_at && $now->gte($this->ends_at)) {
+            return false;
+        }
+        if (! $this->ends_at && $this->starts_at && $now->gte($this->starts_at)) {
+            return false;
+        }
+
+        if ($this->registration_opens_at && $now->lt($this->registration_opens_at)) {
+            return false;
+        }
+
+        // Fenêtre d'inscription fermée, ou à défaut fermeture au démarrage de l'événement
+        if ($this->registration_closes_at) {
+            if ($now->gt($this->registration_closes_at)) {
+                return false;
+            }
+        } elseif ($this->starts_at && $now->gte($this->starts_at)) {
+            return false;
+        }
+
+        if ($this->capacity > 0 && $this->registration_count >= $this->capacity) {
+            return false;
+        }
+
         return true;
+    }
+
+    public function isPast(): bool
+    {
+        if ($this->ends_at) {
+            return $this->ends_at->isPast();
+        }
+
+        return (bool) ($this->starts_at && $this->starts_at->isPast());
+    }
+
+    public function registrationStatusLabel(): string
+    {
+        if ($this->isPast() || in_array($this->status, ['completed', 'cancelled', 'archived'], true)) {
+            return 'Terminé';
+        }
+
+        if ($this->isRegistrationOpen()) {
+            return 'Ouvert';
+        }
+
+        return 'Fermé';
+    }
+
+    /**
+     * L’événement propose des types de billets (gratuits et/ou payants).
+     */
+    public function isOnlineOrHybrid(): bool
+    {
+        return in_array($this->event_type, ['online', 'hybrid'], true);
+    }
+
+    public function hasOnlineAccess(): bool
+    {
+        return $this->isOnlineOrHybrid() && filled($this->online_meeting_url);
+    }
+
+    public function onlinePlatformLabel(): string
+    {
+        return match ($this->online_platform) {
+            'zoom' => 'Zoom',
+            'teams' => 'Microsoft Teams',
+            'meet' => 'Google Meet',
+            'other' => 'Visioconférence',
+            default => $this->online_platform ? Str::title($this->online_platform) : 'En ligne',
+        };
+    }
+
+    public function usesTickets(): bool
+    {
+        return (bool) $this->is_paid;
+    }
+
+    /**
+     * Inscription avec choix de billet (billets actifs configurés).
+     */
+    public function requiresTicketSelection(): bool
+    {
+        return $this->usesTickets() && $this->ticketTypes()->where('is_active', true)->exists();
+    }
+
+    public function activeTicketTypes()
+    {
+        return $this->ticketTypes()->where('is_active', true);
+    }
+
+    public function hasFreeTickets(): bool
+    {
+        return $this->ticketTypes()->where('is_active', true)->where('price', '<=', 0)->exists();
+    }
+
+    public function hasPaidTickets(): bool
+    {
+        return $this->ticketTypes()->where('is_active', true)->where('price', '>', 0)->exists();
+    }
+
+    /**
+     * Mode tarifaire : none | free | paid | hybrid
+     */
+    public function pricingMode(): string
+    {
+        if (!$this->usesTickets()) {
+            return 'free';
+        }
+
+        $hasFree = $this->hasFreeTickets();
+        $hasPaid = $this->hasPaidTickets();
+
+        if ($hasFree && $hasPaid) {
+            return 'hybrid';
+        }
+        if ($hasPaid) {
+            return 'paid';
+        }
+        if ($hasFree) {
+            return 'free';
+        }
+
+        return 'none';
+    }
+
+    public function pricingLabel(): string
+    {
+        return match ($this->pricingMode()) {
+            'hybrid' => 'Hybride',
+            'paid' => 'Payant',
+            'free' => 'Gratuit',
+            'none' => 'Billets à configurer',
+            default => 'Gratuit',
+        };
+    }
+
+    public function pricingBadgeClasses(): string
+    {
+        return match ($this->pricingMode()) {
+            'hybrid' => 'bg-[#eef3ff] text-[#001a61] border border-[#001a61]/30',
+            'paid' => 'bg-[#fff8e1] text-[#7a5c00]',
+            'none' => 'bg-amber-50 text-amber-800',
+            default => 'bg-emerald-50 text-emerald-800',
+        };
     }
 
     public function seatsRemaining(): int
     {
         if ($this->capacity <= 0) return PHP_INT_MAX;
         return max(0, $this->capacity - $this->registration_count);
+    }
+
+    public function publicUrl(): string
+    {
+        return route('event-detail', $this->slug);
+    }
+
+    public function ticketUrl(string $qrCode): string
+    {
+        return route('event.ticket.public', $qrCode);
     }
 
     public function statusLabel(): string

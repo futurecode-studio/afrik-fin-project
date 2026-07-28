@@ -20,24 +20,20 @@ class FormationCartService
 
     public function count(): int
     {
-        return collect($this->items())->sum('quantity');
+        return count($this->items());
     }
 
     public function add(int $formationId, int $quantity = 1): void
     {
-        $quantity = max(1, $quantity);
         $items = $this->items();
 
-        foreach ($items as &$item) {
+        foreach ($items as $item) {
             if ((int) $item['formation_id'] === $formationId) {
-                $item['quantity'] = (int) $item['quantity'] + $quantity;
-                session([self::SESSION_KEY => array_values($items)]);
-
-                return;
+                return; // déjà au panier — 1 inscription max par formation
             }
         }
 
-        $items[] = ['formation_id' => $formationId, 'quantity' => $quantity];
+        $items[] = ['formation_id' => $formationId, 'quantity' => 1];
         session([self::SESSION_KEY => $items]);
     }
 
@@ -49,10 +45,11 @@ class FormationCartService
             return;
         }
 
+        // Quantité forcée à 1 (une inscription = une place)
         $items = $this->items();
         foreach ($items as &$item) {
             if ((int) $item['formation_id'] === $formationId) {
-                $item['quantity'] = $quantity;
+                $item['quantity'] = 1;
                 session([self::SESSION_KEY => array_values($items)]);
 
                 return;
@@ -92,14 +89,14 @@ class FormationCartService
                 if (! $formation) {
                     return null;
                 }
-                $qty = (int) $item['quantity'];
+                $qty = 1;
                 $unit = $formation->isFree() ? 0.0 : (float) $formation->prix;
 
                 return (object) [
                     'formation' => $formation,
                     'quantity' => $qty,
                     'unit_price' => $unit,
-                    'line_total' => $unit * $qty,
+                    'line_total' => $unit,
                 ];
             })
             ->filter()

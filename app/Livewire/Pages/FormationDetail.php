@@ -2,26 +2,31 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Concerns\WithCustomerPayment;
+use App\Livewire\Concerns\WithSweetAlert;
 use App\Models\Formation;
-use App\Models\Enrollment;
 use App\Services\FormationCartService;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Livewire\Concerns\WithSweetAlert;
 
 class FormationDetail extends Component
 {
+    use WithCustomerPayment;
     use WithSweetAlert;
+
     public $formation;
+
     public $showPaymentModal = false;
-    public $paymentProvider = 'kkiapay';
+
     public $phone = '';
+
     public $isEnrolled = false;
+
     public $enrollment = null;
 
     protected $listeners = ['paymentSuccess' => 'handlePaymentSuccess'];
-    
+
     public function mount($slug = null)
     {
         $this->formation = Formation::where('slug', $slug)
@@ -30,16 +35,12 @@ class FormationDetail extends Component
             ->with(['modules.lessons', 'user'])
             ->firstOrFail();
 
-        // Vérifier si l'utilisateur est inscrit
         if (Auth::check()) {
             $this->enrollment = Auth::user()->getEnrollment($this->formation);
             $this->isEnrolled = $this->enrollment && $this->enrollment->isActive();
         }
 
-        $providers = app(PaymentService::class)->availablePaymentProviders();
-        if ($providers !== [] && ! in_array($this->paymentProvider, $providers, true)) {
-            $this->paymentProvider = $providers[0];
-        }
+        $this->resolvePaymentGateway();
     }
 
     public function addToCart(FormationCartService $cart): void
@@ -50,19 +51,21 @@ class FormationDetail extends Component
 
     public function openPaymentModal()
     {
-        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             session(['intended_formation' => $this->formation->id]);
+
             return $this->redirect(route('connexion'), navigate: true);
         }
 
         if ($this->formation->isFree()) {
             $this->enrollFree();
+
             return;
         }
 
         if ($this->isEnrolled) {
             $this->swalInfo('Vous êtes déjà inscrit à cette formation.');
+
             return;
         }
 
@@ -72,13 +75,16 @@ class FormationDetail extends Component
     public function closePaymentModal()
     {
         $this->showPaymentModal = false;
-        $this->reset(['paymentProvider', 'phone']);
+        $this->phone = '';
+        $this->paymentMethod = 'mtn';
+        $this->resolvePaymentGateway();
     }
 
     public function enrollFree()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             session(['intended_formation' => $this->formation->id]);
+
             return $this->redirect(route('connexion'), navigate: true);
         }
 
@@ -98,53 +104,68 @@ class FormationDetail extends Component
 
     public function initiatePayment()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             $this->swalError('Veuillez vous connecter.');
+
             return;
         }
 
         $paymentService = app(PaymentService::class);
-        if (! $paymentService->isProviderReady($this->paymentProvider)) {
-            $this->swalError('Ce moyen de paiement n’est pas configuré. Contactez l’administrateur.');
+        $gateway = $this->resolvePaymentGateway();
+        if (! $gateway) {
+            $this->swalError('Paiement temporairement indisponible. Réessayez plus tard.');
+
             return;
         }
 
         $result = $paymentService->initiatePayment(
             Auth::user(),
             $this->formation,
-            $this->paymentProvider,
-            $this->phone
+            $gateway,
+            $this->phone ?: null,
+            $this->paymentMethod
         );
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             $this->swalError($result['message']);
+
             return;
         }
 
-        $this->dispatch('openPaymentWidget', [
-            'provider' => $this->paymentProvider,
+        $this->dispatch('openPaymentWidget', array_merge($this->paymentWidgetMeta(), [
             'amount' => (int) $result['amount'],
             'reference' => $result['reference'],
             'email' => Auth::user()->email,
             'name' => Auth::user()->name,
             'phone' => $this->phone,
             'formation' => $this->formation->titre,
-        ]);
+            'callback_info' => [
+                'type' => 'formation',
+                'reference' => $result['reference'],
+                'payment_id' => $result['payment']->id ?? null,
+                'enrollment_id' => $result['enrollment']->id ?? null,
+                'formation_id' => $this->formation->id,
+                'user_id' => Auth::id(),
+            ],
+        ]));
     }
 
-    public function handlePaymentSuccess($data)
+    public function handlePaymentSuccess($payload)
     {
-        $paymentService = app(PaymentService::class);
+        $data = is_array($payload) && isset($payload[0]) ? $payload[0] : $payload;
+        $status = strtoupper((string) ($data['status'] ?? $data['reason'] ?? ''));
+        if (! in_array($status, ['SUCCESS', 'SUCCESSFUL', 'APPROVED', 'COMPLETED'], true)) {
+            $this->swalError('Paiement non validé. Vous n’êtes pas inscrit à la formation.');
 
-        if ($this->paymentProvider === 'kkiapay') {
-            $result = $paymentService->handleKkiapayCallback($data);
-        } else {
-            $result = $paymentService->handleFedapayCallback($data);
+            return;
         }
+
+        $paymentService = app(PaymentService::class);
+        $result = $this->handleGatewayCallback(is_array($data) ? $data : [], $paymentService);
 
         if ($result['success']) {
             $this->isEnrolled = true;
-            $this->enrollment = $result['enrollment'];
+            $this->enrollment = $result['enrollment'] ?? null;
             $this->swalSuccess('Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
         } else {
             $this->swalError($result['message'] ?? 'Le paiement a échoué.');
@@ -161,14 +182,18 @@ class FormationDetail extends Component
 
         return $this->redirect(route('client.formation', $this->formation->slug), navigate: true);
     }
-    
+
     public function render()
     {
         $lessonsCount = $this->formation->modules->sum(fn ($m) => $m->lessons->count());
         $studentsCount = $this->formation->enrollments()->whereIn('status', ['active', 'completed'])->count();
+        $paymentService = app(PaymentService::class);
 
         return view('livewire.pages.formation-detail', [
-            'paymentProviders' => app(PaymentService::class)->availablePaymentProviders(),
+            'paymentMethods' => $paymentService->customerPaymentMethods(),
+            'paymentsReady' => $paymentService->paymentsAvailable(),
+            'methodLabel' => $paymentService->customerMethodLabel($this->paymentMethod),
+            'needsPhone' => $this->paymentMethodNeedsPhone(),
             'lessonsCount' => $lessonsCount,
             'studentsCount' => $studentsCount,
         ])

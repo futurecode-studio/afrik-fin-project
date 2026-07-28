@@ -145,7 +145,7 @@
         <div class="rounded-xl bg-[#e7eeff] border border-[#c5c5d4] p-5">
             <p class="text-xs font-bold uppercase text-[#0a2e8c] flex items-center gap-1"><span class="material-symbols-outlined text-base">history_edu</span> Évaluation</p>
             <h3 class="font-extrabold text-[#001a61] text-lg mt-1">{{ $lesson->titre }}</h3>
-            <div class="mt-3 text-sm text-[#444652] whitespace-pre-line">{{ $lesson->consigne ?? $lesson->description ?? $lesson->contenu ?? 'Suivez les consignes du formateur et déposez votre travail.' }}</div>
+            <div class="mt-3 text-sm text-[#444652]">{{ plain_text($lesson->consigne ?? $lesson->description ?? $lesson->contenu ?? 'Suivez les consignes du formateur et déposez votre travail.') }}</div>
         </div>
 
         @if ($submission)

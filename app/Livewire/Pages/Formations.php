@@ -2,24 +2,30 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Concerns\WithCustomerPayment;
+use App\Livewire\Concerns\WithSweetAlert;
 use App\Models\Formation;
-use App\Models\Enrollment;
 use App\Services\FormationCartService;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Livewire\Concerns\WithSweetAlert;
 
 class Formations extends Component
 {
+    use WithCustomerPayment;
     use WithSweetAlert;
+
     public $showPaymentModal = false;
+
     public $selectedFormation = null;
-    public $paymentProvider = 'kkiapay';
+
     public $phone = '';
+
     public $search = '';
+
     public $filterNiveau = '';
-    public $filterType = ''; // 'gratuit' ou 'payant'
+
+    public $filterType = '';
 
     protected $queryString = ['search', 'filterNiveau', 'filterType'];
 
@@ -39,44 +45,49 @@ class Formations extends Component
     public function openPaymentModal($formationId)
     {
         $this->selectedFormation = Formation::find($formationId);
-        
-        if (!$this->selectedFormation) {
+
+        if (! $this->selectedFormation) {
             $this->swalError('Formation non trouvée.');
+
             return;
         }
 
-        // Si l'utilisateur n'est pas connecté, rediriger vers la connexion
-        if (!Auth::check()) {
-            // Stocker l'ID de la formation pour après connexion
+        if (! Auth::check()) {
             session(['intended_formation' => $formationId]);
+
             return $this->redirect(route('connexion'), navigate: true);
         }
 
-        // Si la formation est gratuite, inscrire directement
         if ($this->selectedFormation->isFree()) {
             $this->enrollFree();
+
             return;
         }
 
-        // Vérifier si déjà inscrit
         if (Auth::user()->isEnrolledIn($this->selectedFormation)) {
             $this->swalInfo('Vous êtes déjà inscrit à cette formation.');
+
             return;
         }
 
+        $this->resolvePaymentGateway();
         $this->showPaymentModal = true;
     }
 
     public function closePaymentModal()
     {
         $this->showPaymentModal = false;
-        $this->reset(['selectedFormation', 'paymentProvider', 'phone']);
+        $this->selectedFormation = null;
+        $this->phone = '';
+        $this->paymentMethod = 'mtn';
+        $this->resolvePaymentGateway();
     }
 
     public function enrollFree()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             $this->swalInfo('Veuillez vous connecter pour vous inscrire à cette formation.');
+
             return $this->redirect(route('connexion'), navigate: true);
         }
 
@@ -94,50 +105,70 @@ class Formations extends Component
 
     public function initiatePayment()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             $this->swalError('Veuillez vous connecter.');
+
             return;
         }
 
-        if (!$this->selectedFormation) {
+        if (! $this->selectedFormation) {
             $this->swalError('Veuillez sélectionner une formation.');
+
             return;
         }
 
         $paymentService = app(PaymentService::class);
-        $result = $paymentService->initiatePayment(
-            Auth::user(),
-            $this->selectedFormation,
-            $this->paymentProvider,
-            $this->phone
-        );
+        $gateway = $this->resolvePaymentGateway();
+        if (! $gateway) {
+            $this->swalError('Paiement temporairement indisponible. Réessayez plus tard.');
 
-        if (!$result['success']) {
-            $this->swalError($result['message']);
             return;
         }
 
-        // Émettre l'événement pour déclencher le paiement côté client
-        $this->dispatch('openPaymentWidget', [
-            'provider' => $this->paymentProvider,
+        $result = $paymentService->initiatePayment(
+            Auth::user(),
+            $this->selectedFormation,
+            $gateway,
+            $this->phone ?: null,
+            $this->paymentMethod
+        );
+
+        if (! $result['success']) {
+            $this->swalError($result['message']);
+
+            return;
+        }
+
+        $this->dispatch('openPaymentWidget', array_merge($this->paymentWidgetMeta(), [
             'amount' => (int) $result['amount'],
             'reference' => $result['reference'],
             'email' => Auth::user()->email,
             'name' => Auth::user()->name,
             'phone' => $this->phone,
             'formation' => $this->selectedFormation->titre,
-        ]);
+            'callback_info' => [
+                'type' => 'formation',
+                'reference' => $result['reference'],
+                'payment_id' => $result['payment']->id ?? null,
+                'enrollment_id' => $result['enrollment']->id ?? null,
+                'formation_id' => $this->selectedFormation->id,
+                'user_id' => Auth::id(),
+            ],
+        ]));
     }
 
-    public function handlePaymentSuccess($data)
+    public function handlePaymentSuccess($payload)
     {
-        $paymentService = app(PaymentService::class);
-        
-        if ($this->paymentProvider === 'kkiapay') {
-            $result = $paymentService->handleKkiapayCallback($data);
-        } else {
-            $result = $paymentService->handleFedapayCallback($data);
+        $data = is_array($payload) && isset($payload[0]) ? $payload[0] : $payload;
+        $status = strtoupper((string) ($data['status'] ?? $data['reason'] ?? ''));
+        if (! in_array($status, ['SUCCESS', 'SUCCESSFUL', 'APPROVED', 'COMPLETED'], true)) {
+            $this->swalError('Paiement non validé. Vous n’êtes pas inscrit à la formation.');
+
+            return;
         }
+
+        $paymentService = app(PaymentService::class);
+        $result = $this->handleGatewayCallback(is_array($data) ? $data : [], $paymentService);
 
         if ($result['success']) {
             $this->swalSuccess('Paiement réussi ! Vous êtes maintenant inscrit à la formation.');
@@ -153,8 +184,8 @@ class Formations extends Component
         $formations = Formation::publie()
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('titre', 'like', '%' . $this->search . '%')
-                      ->orWhere('description_courte', 'like', '%' . $this->search . '%');
+                    $q->where('titre', 'like', '%'.$this->search.'%')
+                        ->orWhere('description_courte', 'like', '%'.$this->search.'%');
                 });
             })
             ->when($this->filterNiveau, function ($query) {
@@ -169,8 +200,13 @@ class Formations extends Component
             ->orderBy('published_at', 'desc')
             ->get();
 
+        $paymentService = app(PaymentService::class);
+
         return view('livewire.pages.formations', [
             'formations' => $formations,
+            'methodLabel' => $paymentService->customerMethodLabel($this->paymentMethod),
+            'needsPhone' => $this->paymentMethodNeedsPhone(),
+            'paymentsReady' => $paymentService->paymentsAvailable(),
         ])
             ->extends('layouts.site', ['title' => 'Formations'])
             ->section('content');

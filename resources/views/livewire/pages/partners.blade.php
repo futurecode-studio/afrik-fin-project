@@ -54,7 +54,7 @@
                                             <p class="font-semibold text-foreground text-center text-sm group-hover:text-primary transition-colors">{{ $partner->nom }}</p>
                                         @endif
                                         @if($partner->description)
-                                            <p class="text-xs text-muted-foreground text-center line-clamp-2">{{ $partner->description }}</p>
+                                            <p class="text-xs text-muted-foreground text-center line-clamp-2">{{ plain_text($partner->description, 120) }}</p>
                                         @endif
                                     </a>
                                 @endforeach

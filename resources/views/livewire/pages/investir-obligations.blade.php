@@ -155,7 +155,7 @@
                     @if($bond->description)
                         <div>
                             <h4 class="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">Description</h4>
-                            <p class="text-sm text-muted-foreground leading-relaxed">{{ $bond->description }}</p>
+                            <p class="text-sm text-muted-foreground leading-relaxed">{{ plain_text($bond->description) }}</p>
                         </div>
                     @endif
 

@@ -21,6 +21,12 @@ class GestionSousMandat extends Component
 
     public function render()
     {
+        if (! feature_enabled('services.mandat')) {
+            return view('livewire.pages.services.gestion-sous-mandat-soon')
+                ->extends('layouts.site', ['title' => 'Gestion Sous Mandat — Bientôt'])
+                ->section('content');
+        }
+
         return view('livewire.pages.services.gestion-sous-mandat')
             ->extends('layouts.site', ['title' => 'Gestion Sous Mandat — Africaine des Finances'])
             ->section('content');

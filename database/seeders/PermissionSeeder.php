@@ -49,17 +49,16 @@ class PermissionSeeder extends Seeder
             'responsable_formation' => ['dashboard.view', 'formations.*', 'newsletters.*'],
             'chargee_clientele' => ['dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create'],
             'charge_clientele' => ['dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create'],
-            'client' => ['dashboard.view'],
+            'client' => [],
         ];
 
         foreach ($roles as $roleName => $permissions) {
             $role = Role::firstOrCreate(['name' => $roleName]);
             
             if ($permissions === '*') {
-                // Give all permissions
-                $role->givePermissionTo(Permission::all());
+                $role->syncPermissions(Permission::all());
             } else {
-                $role->givePermissionTo($permissions);
+                $role->syncPermissions($permissions);
             }
         }
     }

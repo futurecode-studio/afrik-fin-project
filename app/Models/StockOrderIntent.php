@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class StockOrderIntent extends Model
 {
     protected $fillable = [
-        'user_id', 'stock_id', 'side', 'order_type', 'quantity', 'limit_price',
+        'user_id', 'partner_id', 'stock_id', 'side', 'order_type', 'quantity', 'limit_price',
         'status', 'name', 'email', 'phone', 'notes',
     ];
 
@@ -22,8 +22,24 @@ class StockOrderIntent extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
     public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class);
+    }
+
+    public function statusLabel(): string
+    {
+        return match ($this->status) {
+            'pending' => 'En attente',
+            'relayed' => 'Relayé SGI',
+            'done' => 'Traité',
+            'cancelled' => 'Annulé',
+            default => $this->status,
+        };
     }
 }

@@ -126,6 +126,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Agrégateurs de paiement (résolution backend — jamais exposés au client)
+    |--------------------------------------------------------------------------
+    |
+    | Le front propose opérateurs / carte. Le backend choisit la passerelle :
+    | FedaPay par défaut, KKiaPay en secours si indisponible.
+    |
+    */
+    'payments' => [
+        'primary' => env('PAYMENT_PRIMARY_GATEWAY', 'fedapay'),
+        'fallback' => env('PAYMENT_FALLBACK_GATEWAY', 'kkiapay'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | FeexPay Payment Gateway
     |--------------------------------------------------------------------------
     |
@@ -141,6 +155,16 @@ return [
         'callback_url' => env('FEEXPAY_CALLBACK_URL', ''),
         'sandbox' => env('FEEXPAY_SANDBOX', true),
         'mode' => env('FEEXPAY_SANDBOX', true) ? 'SANDBOX' : 'LIVE',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tunnel commercial diaspora (diagnostic investisseur)
+    |--------------------------------------------------------------------------
+    */
+    'diaspora_funnel' => [
+        'url' => env('DIASPORA_FUNNEL_URL', 'https://africaine-des-finances.vercel.app/#confiance'),
+        'label' => env('DIASPORA_FUNNEL_LABEL', 'Diagnostic diaspora'),
     ],
 
 ];

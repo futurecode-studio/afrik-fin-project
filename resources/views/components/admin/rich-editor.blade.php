@@ -48,7 +48,14 @@
                     if (typeof Quill === 'undefined') console.error('Quill non chargé');
                     return;
                 }
-                this.quill = new Quill(this.$refs.editor, {
+                // Évite les barres d’outils dupliquées si le nœud a déjà été initialisé
+                const host = this.$refs.editor;
+                const parent = host.parentElement;
+                parent?.querySelectorAll(':scope > .ql-toolbar').forEach((el) => el.remove());
+                host.classList.remove('ql-container', 'ql-snow');
+                host.innerHTML = '';
+
+                this.quill = new Quill(host, {
                     theme: 'snow',
                     placeholder: @js($placeholder),
                     modules: { toolbar: @js($toolbar) },

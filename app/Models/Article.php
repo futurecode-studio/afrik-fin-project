@@ -19,12 +19,14 @@ class Article extends Model
         'image_url',
         'categorie',
         'statut',
+        'is_featured',
         'published_at',
         'user_id',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'is_featured' => 'boolean',
     ];
 
     protected static function boot()
@@ -54,5 +56,10 @@ class Article extends Model
         return $query->where('statut', 'publie')
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->published()->where('is_featured', true);
     }
 }

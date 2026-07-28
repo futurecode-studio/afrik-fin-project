@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="mt-6 prose prose-sm max-w-none text-[#444652]">
-                    {!! nl2br(e($partner->description ?: 'Partenaire agréé accompagnant les investisseurs sur les marchés de l’UEMOA.')) !!}
+                    {!! rich_html($partner->description ?: '<p>Partenaire agréé accompagnant les investisseurs sur les marchés de l’UEMOA.</p>') !!}
                 </div>
 
                 <dl class="mt-8 grid sm:grid-cols-2 gap-4 text-sm">

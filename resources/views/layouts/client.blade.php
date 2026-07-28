@@ -23,10 +23,11 @@
         class="fixed inset-y-0 left-0 z-50 w-64 adf-glass-strong flex flex-col transition-transform duration-300 ease-soft -translate-x-full lg:translate-x-0 border-r border-white/50"
         :class="sidebarOpen && '!translate-x-0'">
         <div class="px-5 py-5 border-b border-[#c5c5d4]/50 flex items-center gap-3 shrink-0">
-            <a href="{{ route('client.dashboard') }}" class="flex items-center gap-2 min-w-0 flex-1">
-                <span class="material-symbols-outlined text-[#001a61] text-3xl">account_balance</span>
+            <a href="{{ route('client.dashboard') }}" class="flex items-center gap-3 min-w-0 flex-1">
+                <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances"
+                    class="h-10 w-auto object-contain shrink-0">
                 <div class="min-w-0">
-                    <p class="text-sm font-extrabold text-[#001a61] leading-tight">Africaine des Finances</p>
+                    <p class="text-sm font-extrabold text-[#001a61] leading-tight truncate">Africaine des Finances</p>
                     <p class="text-[11px] text-[#757683]">Espace client</p>
                 </div>
             </a>
@@ -47,9 +48,9 @@
                 ['route' => 'client.watchlist', 'match' => 'client.watchlist', 'label' => 'Liste de suivi', 'icon' => 'visibility'],
                 ['route' => 'client.patrimoine', 'match' => 'client.patrimoine', 'label' => 'Patrimoine', 'icon' => 'account_balance_wallet'],
                 ['route' => 'client.alertes', 'match' => 'client.alertes', 'label' => 'Alertes', 'icon' => 'notifications_active'],
-                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Ordres', 'icon' => 'bolt'],
+                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Ordres', 'icon' => 'bolt', 'soon' => ! feature_enabled('client.ordres')],
                 ['route' => 'client.rapport-mensuel', 'match' => 'client.rapport-mensuel', 'label' => 'Rapport', 'icon' => 'description'],
-                ['route' => 'client.vote-ag', 'match' => 'client.vote-ag', 'label' => 'Vote AG', 'icon' => 'how_to_vote'],
+                ['route' => 'client.vote-ag', 'match' => 'client.vote-ag', 'label' => 'Vote AG', 'icon' => 'how_to_vote', 'soon' => true],
                 ['route' => 'client.actualites-portefeuille', 'match' => 'client.actualites-portefeuille', 'label' => 'Actus PF', 'icon' => 'newspaper'],
                 ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificats', 'icon' => 'workspace_premium'],
                 ['route' => 'client.interests', 'match' => 'client.interests', 'label' => 'Intérêts', 'icon' => 'interests'],
@@ -71,7 +72,14 @@
                         'text-[#444652] hover:bg-[#e7eeff]/80 hover:text-[#001a61]' => ! $active,
                     ])>
                     <span class="material-symbols-outlined text-[20px]">{{ $item['icon'] }}</span>
-                    {{ $item['label'] }}
+                    <span class="flex-1 truncate">{{ $item['label'] }}</span>
+                    @if (! empty($item['soon']))
+                        <span @class([
+                            'text-[9px] font-extrabold uppercase tracking-wide px-1.5 py-0.5 rounded',
+                            'bg-[#ffbf00] text-[#261a00]' => $active,
+                            'bg-[#e7eeff] text-[#001a61]' => ! $active,
+                        ])>Bientôt</span>
+                    @endif
                 </a>
             @endforeach
         </nav>

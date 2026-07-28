@@ -178,129 +178,27 @@
                                 @error('slug') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            {{-- Extrait avec éditeur riche (version simplifiée) --}}
-                            <div
-                                wire:ignore
-                                x-data
-                                x-init="
-                                    let quillExtrait;
+                            <x-admin.rich-editor
+                                wire:key="article-extrait-{{ $articleId ?? 'new' }}-{{ $editMode ? 'e' : 'c' }}-{{ $showModal ? 'open' : 'closed' }}"
+                                model="extrait"
+                                :value="$extrait"
+                                label="Extrait"
+                                placeholder="Résumé court de l’article…"
+                                hint="Version courte pour les listes et aperçus. Gras, listes et liens uniquement."
+                                min-height="120px"
+                                :simple="true"
+                            />
 
-                                    const initQuillExtrait = () => {
-                                        if (quillExtrait) return;
-
-                                        quillExtrait = new Quill($refs.quillExtraitEditor, {
-                                            theme: 'snow',
-                                            placeholder: 'Résumé court de l\'article',
-                                            modules: {
-                                                toolbar: [
-                                                    ['bold', 'italic', 'underline'],
-                                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                                    [{ 'align': [] }],
-                                                    ['clean']
-                                                ]
-                                            }
-                                        });
-
-                                        // Valeur initiale depuis Livewire (create + edit)
-                                        quillExtrait.root.innerHTML = @js($extrait);
-
-                                        // Sync Livewire à chaque changement de contenu
-                                        quillExtrait.on('text-change', function () {
-                                            $wire.set('extrait', quillExtrait.root.innerHTML);
-                                        });
-                                    };
-
-                                    initQuillExtrait();
-
-                                    document.addEventListener('livewire:navigated', () => {
-                                        quillExtrait = null;
-                                        initQuillExtrait();
-                                    });
-                                "
-                            >
-                                <label class="block text-sm font-medium mb-2">Extrait</label>
-
-                                {{-- Zone d'édition Quill pour l'extrait --}}
-                                <div
-                                    x-ref="quillExtraitEditor"
-                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px]"
-                                ></div>
-
-                                {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
-                                <textarea
-                                    wire:model="extrait"
-                                    class="hidden"
-                                ></textarea>
-
-                                @error('extrait') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
-                            {{-- Contenu avec éditeur riche --}}
-                            <div
-                                wire:ignore
-                                x-data
-                                x-init="
-                                    let quill;
-
-                                    const initQuill = () => {
-                                        if (quill) return;
-
-                                        quill = new Quill($refs.quillEditor, {
-                                            theme: 'snow',
-                                            placeholder: 'Contenu complet de l\'article...',
-                                            modules: {
-                                                toolbar: [
-                                                    ['bold', 'italic', 'underline', 'strike'],
-                                                    [{ 'header': 1 }, { 'header': 2 }],
-                                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                                    [{ 'script': 'sub'}, { 'script': 'super' }],
-                                                    [{ 'indent': '-1'}, { 'indent': '+1' }],
-                                                    [{ 'direction': 'rtl' }],
-                                                    [{ 'size': ['small', false, 'large', 'huge'] }],
-                                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                                    [{ 'color': [] }, { 'background': [] }],
-                                                    [{ 'font': [] }],
-                                                    [{ 'align': [] }],
-                                                    ['link', 'image'],
-                                                    ['clean']
-                                                ]
-                                            }
-                                        });
-
-                                        // Valeur initiale depuis Livewire (create + edit)
-                                        quill.root.innerHTML = @js($contenu);
-
-                                        // Sync Livewire à chaque changement de contenu
-                                        quill.on('text-change', function () {
-                                            $wire.set('contenu', quill.root.innerHTML);
-                                        });
-                                    };
-
-                                    initQuill();
-
-                                    // Ré-initialiser proprement après chaque navigation Livewire
-                                    document.addEventListener('livewire:navigated', () => {
-                                        quill = null;
-                                        initQuill();
-                                    });
-                                "
-                            >
-                                <label class="block text-sm font-medium mb-2">Contenu <span class="text-red-500">*</span></label>
-
-                                {{-- Zone d'édition Quill --}}
-                                <div
-                                    x-ref="quillEditor"
-                                    class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[200px]"
-                                ></div>
-
-                                {{-- Champ caché pour garder une valeur en cas de désactivation JS --}}
-                                <textarea
-                                    wire:model="contenu"
-                                    class="hidden"
-                                ></textarea>
-
-                                @error('contenu') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            <x-admin.rich-editor
+                                wire:key="article-contenu-{{ $articleId ?? 'new' }}-{{ $editMode ? 'e' : 'c' }}-{{ $showModal ? 'open' : 'closed' }}"
+                                model="contenu"
+                                :value="$contenu"
+                                label="Contenu"
+                                :required="true"
+                                placeholder="Contenu complet de l’article…"
+                                hint="Gras, titres, listes, liens — le formatage est enregistré automatiquement."
+                                min-height="280px"
+                            />
 
                             {{-- Image (upload de fichier) --}}
                             <div>
@@ -316,7 +214,7 @@
                                 @if($editMode && $image_url)
                                     <p class="text-xs text-gray-500 mt-2">Image actuelle :</p>
                                     <img src="{{ $image_url }}" alt="Image actuelle" class="mt-1 h-20 rounded-md object-cover border">
-                                
+                                @endif
 
                                 @error('image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -340,6 +238,15 @@
                                     </select>
                                     @error('statut') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
+                            </div>
+                            <div class="rounded-xl border border-[#c5c5d4] bg-[#f7f9ff] p-4">
+                                <label class="inline-flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" wire:model="is_featured" class="mt-1 rounded border-[#c5c5d4]">
+                                    <span>
+                                        <span class="block text-sm font-bold text-[#001a61]">Mettre en avant</span>
+                                        <span class="block text-xs text-[#757683] mt-0.5">Affichée en tête sur l’accueil et dans le bandeau Actualités du site.</span>
+                                    </span>
+                                </label>
                             </div>
                         </div>
 

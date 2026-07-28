@@ -37,6 +37,11 @@ class Events extends Component
     public $location_address;
     public $city;
     public $country;
+    public $online_platform = 'zoom';
+    public $online_meeting_url = '';
+    public $online_meeting_id = '';
+    public $online_meeting_passcode = '';
+    public $online_access_instructions = '';
     public $capacity = 0;
     public $featured_image;
     public $featured_image_url = '';
@@ -45,6 +50,7 @@ class Events extends Component
     public $seo_title;
     public $seo_description;
     public $is_featured = false;
+    public $is_paid = false;
     public $status = 'draft';
 
     protected $paginationTheme = 'tailwind';
@@ -66,12 +72,18 @@ class Events extends Component
             'location_address' => 'nullable|string|max:500',
             'city' => 'nullable|string|max:100',
             'country' => 'nullable|string|max:100',
+            'online_platform' => 'nullable|in:zoom,teams,meet,other',
+            'online_meeting_url' => 'nullable|url|max:500',
+            'online_meeting_id' => 'nullable|string|max:100',
+            'online_meeting_passcode' => 'nullable|string|max:100',
+            'online_access_instructions' => 'nullable|string|max:2000',
             'capacity' => 'nullable|integer|min:0',
             'featured_image' => 'nullable|image|max:2048',
             'galleryImages.*' => 'nullable|image|max:2048',
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string|max:500',
             'is_featured' => 'boolean',
+            'is_paid' => 'boolean',
             'status' => 'required|in:draft,published,ongoing,completed,cancelled,archived',
         ];
     }
@@ -130,12 +142,18 @@ class Events extends Component
         $this->location_address = $event->location_address;
         $this->city = $event->city;
         $this->country = $event->country;
+        $this->online_platform = $event->online_platform ?: 'zoom';
+        $this->online_meeting_url = $event->online_meeting_url ?? '';
+        $this->online_meeting_id = $event->online_meeting_id ?? '';
+        $this->online_meeting_passcode = $event->online_meeting_passcode ?? '';
+        $this->online_access_instructions = $event->online_access_instructions ?? '';
         $this->capacity = $event->capacity;
         $this->featured_image_url = $event->featured_image;
         $this->existingGallery = $event->galleries()->orderBy('display_order')->get()->toArray();
         $this->seo_title = $event->seo_title;
         $this->seo_description = $event->seo_description;
         $this->is_featured = $event->is_featured;
+        $this->is_paid = (bool) $event->is_paid;
         $this->status = $event->status;
         $this->editMode = true;
         $this->showModal = true;
@@ -166,11 +184,17 @@ class Events extends Component
             'location_address' => $this->location_address,
             'city' => $this->city,
             'country' => $this->country,
+            'online_platform' => in_array($this->event_type, ['online', 'hybrid'], true) ? ($this->online_platform ?: 'zoom') : null,
+            'online_meeting_url' => in_array($this->event_type, ['online', 'hybrid'], true) ? ($this->online_meeting_url ?: null) : null,
+            'online_meeting_id' => in_array($this->event_type, ['online', 'hybrid'], true) ? ($this->online_meeting_id ?: null) : null,
+            'online_meeting_passcode' => in_array($this->event_type, ['online', 'hybrid'], true) ? ($this->online_meeting_passcode ?: null) : null,
+            'online_access_instructions' => in_array($this->event_type, ['online', 'hybrid'], true) ? ($this->online_access_instructions ?: null) : null,
             'capacity' => (int) ($this->capacity ?? 0),
             'featured_image' => $this->featured_image_url,
             'seo_title' => $this->seo_title,
             'seo_description' => $this->seo_description,
             'is_featured' => (bool) $this->is_featured,
+            'is_paid' => (bool) $this->is_paid,
             'status' => $this->status,
             'created_by' => Auth::id(),
         ];
@@ -230,6 +254,32 @@ class Events extends Component
         $clone->status = 'draft';
         $clone->registration_count = 0;
         $clone->save();
+
+        foreach ($event->ticketTypes as $ticket) {
+            $ticketClone = $ticket->replicate();
+            $ticketClone->event_id = $clone->id;
+            $ticketClone->sold = 0;
+            $ticketClone->save();
+        }
+
+        foreach ($event->programItems as $item) {
+            $copy = $item->replicate();
+            $copy->event_id = $clone->id;
+            $copy->save();
+        }
+
+        foreach ($event->speakers as $speaker) {
+            $copy = $speaker->replicate();
+            $copy->event_id = $clone->id;
+            $copy->save();
+        }
+
+        foreach ($event->documents as $doc) {
+            $copy = $doc->replicate();
+            $copy->event_id = $clone->id;
+            $copy->save();
+        }
+
         $this->swalSuccess('Événement dupliqué avec succès.');
     }
 
@@ -267,6 +317,11 @@ class Events extends Component
         $this->location_address = '';
         $this->city = '';
         $this->country = '';
+        $this->online_platform = 'zoom';
+        $this->online_meeting_url = '';
+        $this->online_meeting_id = '';
+        $this->online_meeting_passcode = '';
+        $this->online_access_instructions = '';
         $this->capacity = 0;
         $this->featured_image = null;
         $this->featured_image_url = '';
@@ -275,6 +330,7 @@ class Events extends Component
         $this->seo_title = '';
         $this->seo_description = '';
         $this->is_featured = false;
+        $this->is_paid = false;
         $this->status = 'draft';
     }
 

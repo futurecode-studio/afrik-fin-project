@@ -42,7 +42,7 @@
                                     @endif
                                     <div>
                                         <p class="font-semibold">{{ $product->name }}</p>
-                                        <p class="text-xs text-muted-foreground line-clamp-1">{{ $product->description }}</p>
+                                        <p class="text-xs text-muted-foreground line-clamp-1">{{ plain_text($product->description, 80) }}</p>
                                     </div>
                                 </div>
                             </td>
@@ -121,7 +121,7 @@
                         <input type="file" wire:model="image" accept="image/*" class="w-full text-sm">
                         @if($image_url)
                             <img src="{{ asset('storage/'.$image_url) }}" class="mt-2 h-20 rounded-lg object-cover border border-border">
-                        
+                        @endif
                     </div>
                 </div>
 

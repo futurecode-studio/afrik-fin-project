@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Event;
 use App\Models\EventRegistration;
+use App\Services\EventCommunicationService;
 use App\Services\EventRegistrationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -61,6 +62,19 @@ class EventRegistrations extends Component
             $this->swalError($e->getMessage());
         }
         $this->dispatch('registration-updated');
+    }
+
+    public function resendTicket($id, EventCommunicationService $comms)
+    {
+        $registration = EventRegistration::where('event_id', $this->event->id)->findOrFail($id);
+
+        if (in_array($registration->status, ['cancelled', 'no_show'], true)) {
+            $this->swalError('Impossible de renvoyer un ticket pour une inscription annulée.');
+            return;
+        }
+
+        $comms->sendRegistrationConfirmed($registration);
+        $this->swalSuccess('Ticket renvoyé à ' . $registration->email . '.');
     }
 
     public function exportCsv()

@@ -57,9 +57,14 @@
                             </td>
                             <td class="p-4">{{ $event->city ?? $event->location_name ?? '-' }}</td>
                             <td class="p-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $event->statusColorClasses() }}">
-                                    {{ $event->statusLabel() }}
-                                </span>
+                                <div class="flex flex-col gap-1">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $event->statusColorClasses() }}">
+                                        {{ $event->statusLabel() }}
+                                    </span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold {{ $event->pricingBadgeClasses() }}">
+                                        {{ $event->pricingLabel() }}
+                                    </span>
+                                </div>
                             </td>
                             <td class="p-4">
                                 <span class="font-semibold">{{ $event->registrations_count }}</span>
@@ -73,6 +78,36 @@
                                         class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
                                         <span class="material-symbols-outlined text-[16px]">group</span> Inscrits
                                     </a>
+                                    <a href="{{ route('admin.event.program', $event) }}"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
+                                        <span class="material-symbols-outlined text-[16px]">schedule</span> Programme
+                                    </a>
+                                    <a href="{{ route('admin.event.speakers', $event) }}"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
+                                        <span class="material-symbols-outlined text-[16px]">record_voice_over</span> Intervenants
+                                    </a>
+                                    <a href="{{ route('admin.event.documents', $event) }}"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
+                                        <span class="material-symbols-outlined text-[16px]">description</span> Docs
+                                    </a>
+                                    @if($event->is_paid)
+                                    <a href="{{ route('admin.event.tickets', $event) }}"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
+                                        <span class="material-symbols-outlined text-[16px]">confirmation_number</span> Billets
+                                    </a>
+                                    @endif
+                                    @if(in_array($event->status, ['published', 'ongoing']))
+                                    <button type="button"
+                                        @click="navigator.clipboard.writeText(@js($event->publicUrl())).then(() => window.adfToast && window.adfToast('success', 'Lien public copié'))"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#ffbf00] bg-[#fff8e1] hover:bg-[#ffefb0] text-[#001a61]"
+                                        title="{{ $event->publicUrl() }}">
+                                        <span class="material-symbols-outlined text-[16px]">link</span> Lien public
+                                    </button>
+                                    <a href="{{ $event->publicUrl() }}" target="_blank" rel="noopener"
+                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]">
+                                        <span class="material-symbols-outlined text-[16px]">open_in_new</span> Voir
+                                    </a>
+                                    @endif
                                     <a href="{{ route('admin.event.checkin', $event) }}"
                                         class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-[#001a61] text-white hover:bg-[#0a2e8c]" wire:navigate.hover>
                                         <span class="material-symbols-outlined text-[16px]">qr_code_scanner</span> Émargement QR
@@ -130,33 +165,24 @@
                         <label class="block text-sm font-medium mb-1">Description courte</label>
                         <textarea wire:model="description" rows="3" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary"></textarea>
                     </div>
-                    <div class="md:col-span-2" wire:ignore x-data="{
-                        editor: null,
-                        initEditor() {
-                            if (this.editor) { tinymce.remove(this.editor); this.editor = null; }
-                            tinymce.init({
-                                selector: '#event-content-editor',
-                                plugins: 'link lists table code',
-                                toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link table | code',
-                                height: 300,
-                                menubar: false,
-                                setup: (ed) => {
-                                    ed.on('change input', () => {
-                                        this.$wire.set('content', ed.getContent());
-                                    });
-                                }
-                            }).then((editors) => {
-                                this.editor = editors[0];
-                                this.editor.setContent(this.$wire.content || '');
-                            });
-                        }
-                    }" x-init="initEditor()" @event-modal-opened.window="initEditor()" @event-modal-closed.window="if (editor) { tinymce.remove(editor); editor = null; }">
-                        <label class="block text-sm font-medium mb-1">Description détaillée</label>
-                        <textarea id="event-content-editor" class="w-full"></textarea>
+                    <div class="md:col-span-2">
+                        <x-admin.rich-editor
+                            wire:key="event-content-{{ $eventId ?? 'new' }}-{{ $editMode ? 'e' : 'c' }}"
+                            model="content"
+                            :value="$content"
+                            label="Description détaillée"
+                            placeholder="Décrivez l’événement : programme, intervenants, infos pratiques…"
+                            hint="Gras, titres, listes, liens — sans code HTML."
+                            min-height="220px"
+                        />
+                    </div>
+                    <div class="md:col-span-2 rounded-xl border border-dashed border-[#c5c5d4] bg-white p-3 text-xs text-[#757683]">
+                        <p class="font-bold text-[#001a61] mb-1">Bloc « Informations » (page publique)</p>
+                        <p>Date, horaires, lieu, adresse, ville, pays et capacité ci-dessus alimentent automatiquement la carte Informations à droite sur la page événement.</p>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Type</label>
-                        <select wire:model="event_type" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
+                        <select wire:model.live="event_type" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
                             <option value="physical">Présentiel</option>
                             <option value="online">En ligne</option>
                             <option value="hybrid">Hybride</option>
@@ -185,7 +211,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Lieu</label>
-                        <input type="text" wire:model="location_name" placeholder="Nom du lieu" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
+                        <input type="text" wire:model="location_name" placeholder="{{ in_array($event_type, ['online','hybrid']) ? 'Ex. Zoom / Live' : 'Nom du lieu' }}" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Adresse</label>
@@ -199,12 +225,55 @@
                         <label class="block text-sm font-medium mb-1">Pays</label>
                         <input type="text" wire:model="country" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
                     </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium mb-1">Image mise en avant</label>
-                        <input type="file" wire:model="featured_image" accept="image/*" class="w-full text-sm">
-                        @if($featured_image_url)
-                            <img src="{{ asset('storage/'.$featured_image_url) }}" class="mt-2 h-20 rounded-lg object-cover">
-                        
+
+                    @if (in_array($event_type, ['online', 'hybrid'], true))
+                    <div class="md:col-span-2 rounded-xl border border-[#001a61]/20 bg-[#e7eeff] p-4 space-y-3">
+                        <div>
+                            <p class="text-sm font-extrabold text-[#001a61]">Accès visioconférence</p>
+                            <p class="text-xs text-[#444652] mt-0.5">Ces infos sont envoyées par e-mail après inscription (et affichées sur le ticket). Elles ne sont pas publiques avant inscription.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Plateforme</label>
+                                <select wire:model="online_platform" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-white focus:ring-2 focus:ring-primary">
+                                    <option value="zoom">Zoom</option>
+                                    <option value="teams">Microsoft Teams</option>
+                                    <option value="meet">Google Meet</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Lien de connexion *</label>
+                                <input type="url" wire:model="online_meeting_url" placeholder="https://zoom.us/j/…" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-white focus:ring-2 focus:ring-primary">
+                                @error('online_meeting_url')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">ID de réunion</label>
+                                <input type="text" wire:model="online_meeting_id" placeholder="Ex. 123 456 7890" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-white focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Code secret / mot de passe</label>
+                                <input type="text" wire:model="online_meeting_passcode" placeholder="Ex. 8aB3cD" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-white focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-1">Instructions d’accès</label>
+                                <textarea wire:model="online_access_instructions" rows="2" placeholder="Ex. Connectez-vous 10 min avant. Micro coupé à l’arrivée." class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-white focus:ring-2 focus:ring-primary"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="md:col-span-2 rounded-xl border border-[#c5c5d4] bg-[#f7f9ff] p-4 space-y-3">
+                        <div>
+                            <label class="block text-sm font-bold text-[#001a61] mb-1">Image de couverture *</label>
+                            <p class="text-xs text-[#757683] mb-2">Grande image affichée sous le titre sur la page publique de l’événement.</p>
+                            <input type="file" wire:model="featured_image" accept="image/*" class="w-full text-sm">
+                            @error('featured_image')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                            @if($featured_image)
+                                <img src="{{ $featured_image->temporaryUrl() }}" class="mt-3 w-full max-h-48 rounded-xl object-cover border border-[#c5c5d4]">
+                            @elseif($featured_image_url)
+                                <img src="{{ asset('storage/'.$featured_image_url) }}" class="mt-3 w-full max-h-48 rounded-xl object-cover border border-[#c5c5d4]">
+                            @endif
+                        </div>
                     </div>
 
                     <!-- Galerie photos -->
@@ -250,6 +319,23 @@
                         <input type="checkbox" wire:model="is_featured" id="is_featured" class="rounded border-[#c5c5d4]">
                         <label for="is_featured" class="text-sm font-medium">Événement mis en avant</label>
                     </div>
+                    <div class="md:col-span-2 rounded-xl border border-[#c5c5d4] bg-[#f7f9ff] p-4">
+                        <label class="inline-flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" wire:model.live="is_paid" id="is_paid" class="mt-1 rounded border-[#c5c5d4]">
+                            <span>
+                                <span class="block text-sm font-bold text-[#001a61]">Types de billets (gratuits et/ou payants)</span>
+                                <span class="block text-xs text-[#757683] mt-0.5">
+                                    Activez pour proposer plusieurs billets sur le même événement (ex. Standard gratuit + VIP payant).
+                                    Désactivé = inscription libre sans choix de billet.
+                                </span>
+                            </span>
+                        </label>
+                        @if($editMode && $is_paid && $eventId)
+                            <a href="{{ route('admin.event.tickets', $eventId) }}" class="inline-flex items-center gap-1 mt-3 text-xs font-bold text-[#001a61] underline" wire:navigate.hover>
+                                Configurer les billets (gratuits / payants) →
+                            </a>
+                        @endif
+                    </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Statut</label>
                         <select wire:model="status" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
@@ -282,7 +368,3 @@
     </div>
     
 </div>
-
-@push('scripts')
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-@endpush

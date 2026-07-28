@@ -5,20 +5,24 @@
             <span class="text-xs font-bold uppercase tracking-wide text-[#0a2e8c]">{{ $article->categorie }}</span>
             <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61] mt-2 leading-tight">{{ $article->titre }}</h1>
             <p class="text-sm text-[#757683] mt-4">
-                {{ optional($article->published_at)->format('d F Y') }}
+                {{ optional($article->published_at)?->locale('fr')->translatedFormat('d F Y') }}
                 · {{ $article->user->name ?? 'Africaine des Finances' }}
             </p>
         </div>
         @if ($article->image_url)
             <div class="mt-8 rounded-2xl overflow-hidden border border-[#c5c5d4] max-h-[420px]">
-                <img src="{{ $article->image_url }}" alt="" class="w-full h-full object-cover">
+                <img src="{{ $article->image_url }}" alt="{{ $article->titre }}" class="w-full h-full object-cover">
             </div>
         @endif
         @if ($article->extrait)
-            <p class="mt-8 text-lg text-[#444652] font-medium leading-relaxed border-l-4 border-[#ffbf00] pl-4">{{ $article->extrait }}</p>
+            <div class="mt-8 text-lg text-[#444652] font-medium leading-relaxed border-l-4 border-[#ffbf00] pl-4 prose prose-slate max-w-none">
+                {!! rich_html($article->extrait) !!}
+            </div>
         @endif
-        <article class="mt-8 prose prose-slate max-w-none text-[#444652] whitespace-pre-line leading-relaxed">
-            {!! nl2br(e($article->contenu)) !!}
+        <article class="adf-article-body mt-8 prose prose-slate max-w-none text-[#444652] leading-relaxed
+            prose-headings:text-[#001a61] prose-a:text-[#001a61] prose-strong:text-[#131c2a]
+            prose-li:marker:text-[#001a61]">
+            {!! rich_html($article->contenu) !!}
         </article>
     </section>
 

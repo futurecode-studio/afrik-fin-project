@@ -11,13 +11,27 @@ class EventProgramItem extends Model
 
     protected $fillable = ['event_id', 'title', 'description', 'starts_at', 'ends_at', 'display_order', 'location_detail'];
 
-    protected $casts = [
-        'starts_at' => 'datetime:H:i',
-        'ends_at' => 'datetime:H:i',
-    ];
-
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function getStartsAtFormattedAttribute(): string
+    {
+        return $this->formatTimeValue($this->attributes['starts_at'] ?? null);
+    }
+
+    public function getEndsAtFormattedAttribute(): string
+    {
+        return $this->formatTimeValue($this->attributes['ends_at'] ?? null);
+    }
+
+    private function formatTimeValue($value): string
+    {
+        if (!$value) {
+            return '';
+        }
+
+        return substr((string) $value, 0, 5);
     }
 }

@@ -13,12 +13,20 @@ class CarteMarche extends Component
 
     public function render(MarketsDataService $markets)
     {
-        $map = $markets->marketMap($this->metric);
+        $metric = in_array($this->metric, ['market_cap', 'volume', 'variation'], true)
+            ? $this->metric
+            : 'market_cap';
+
+        $treemap = $markets->marketTreemap($metric);
+        $map = $markets->marketMap($metric === 'variation' ? 'variation' : ($metric === 'volume' ? 'volume' : 'market_cap'));
 
         return view('livewire.pages.marches.carte-marche', [
-            'map' => $map,
+            'treemap' => $treemap,
+            'sectors' => $map['sectors'] ?? [],
+            'mapTotal' => (float) ($map['total'] ?? 0),
+            'metric' => $metric,
         ])
-            ->extends('layouts.site', ['title' => 'Carte du Marché — Africaine des Finances'])
+            ->extends('layouts.site', ['title' => 'Heatmap BRVM — Africaine des Finances'])
             ->section('content');
     }
 }

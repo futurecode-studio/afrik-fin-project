@@ -8,7 +8,10 @@
                 <span class="material-symbols-outlined text-sm">chevron_right</span>
                 <span class="text-[#001a61]">PARTENAIRES</span>
             </nav>
-            <h2 class="text-3xl font-extrabold text-[#001a61] tracking-tight">Gestion des Partenaires</h2>
+            <h2 class="text-3xl font-extrabold text-[#001a61] tracking-tight">Partenaires SGI / SGO</h2>
+            <p class="text-sm text-[#444652] mt-1">{{ $sgiCount }} SGI · {{ $sgoCount }} SGO —
+                <a href="{{ route('admin.sgi-sgo') }}" class="font-bold text-[#0a2e8c] hover:underline">Hub SGI/SGO</a>
+            </p>
         </div>
     </div>
 
@@ -33,9 +36,15 @@
                     </button>
                 </div>
 
-                <div class="mt-4">
-                    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Rechercher par nom, contact, email..."
+                <div class="mt-4 flex flex-col sm:flex-row gap-3">
+                    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Rechercher par nom, agrément, contact…"
                         class="flex h-10 w-full md:w-96 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
+                    <select wire:model.live="filterType" class="h-10 rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 text-sm">
+                        <option value="">Tous types</option>
+                        <option value="SGI">SGI</option>
+                        <option value="SGO">SGO</option>
+                        <option value="Autre">Autre</option>
+                    </select>
                 </div>
             </div>
 
@@ -157,11 +166,27 @@
                             <label class="block text-sm font-medium mb-2">Catégorie <span class="text-red-500">*</span></label>
                             <select wire:model="type"
                                 class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
-                                <option value="SGO">SGO &mdash; Sociétés de Gestion d&rsquo;OPCVM</option>
-                                <option value="SGI">SGI &mdash; Sociétés de Gestion et d&rsquo;Intermédiation</option>
+                                <option value="SGI">SGI — Sociétés de Gestion et d’Intermédiation</option>
+                                <option value="SGO">SGO — Sociétés de Gestion d’OPCVM</option>
                                 <option value="Autre">Autre</option>
                             </select>
                             @error('type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Pays</label>
+                                <input wire:model="country" type="text" class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm" placeholder="Bénin, Côte d’Ivoire…">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Ville</label>
+                                <input wire:model="city" type="text" class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm" placeholder="Cotonou">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">N° agrément AMF-UMOA</label>
+                            <input wire:model="agreement_number" type="text" class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm" placeholder="Ex. AA/20XX-XX">
                         </div>
 
                         <div>
@@ -199,7 +224,7 @@
                                     <img src="{{ '/storage/' . $logo_url }}" alt="Logo actuel" class="w-20 h-20 object-contain border rounded bg-white p-1">
                                     <p class="text-xs text-gray-500 mt-1">Logo actuel</p>
                                 </div>
-                            
+                            @endif
                         </div>
 
                         <div>
@@ -210,12 +235,23 @@
                             @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
 
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Notes internes (admin)</label>
+                            <textarea wire:model="admin_notes" rows="2"
+                                class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm"
+                                placeholder="Non visible sur le site public…"></textarea>
+                        </div>
+
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Statut</label>
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input wire:model="is_active" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
-                                    <span class="text-sm">Actif</span>
+                                    <span class="text-sm">Actif (publié)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer mt-2">
+                                    <input wire:model="is_featured" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
+                                    <span class="text-sm">Mis en avant</span>
                                 </label>
                             </div>
                             <div>
@@ -240,7 +276,6 @@
                 </form>
             </div>
         </div>
-    @endif
 
     {{-- Modal de confirmation de suppression --}}
     <div x-show="del" x-cloak style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
