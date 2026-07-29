@@ -117,6 +117,12 @@
                 </div>
 
             @elseif ($modalScreen === 'create_step1')
+                @php
+                    $missingContact = $this->missingContactFields();
+                    $showName = in_array('name', $missingContact, true) || $errors->has('contact_name');
+                    $showEmail = in_array('email', $missingContact, true) || $errors->has('contact_email');
+                    $showPhone = in_array('phone', $missingContact, true) || $errors->has('contact_phone');
+                @endphp
                 <div class="rounded-xl bg-[#f0f3ff] border border-[#c5c5d4] p-4 space-y-3 text-sm text-[#444652]">
                     <p>
                         Vous n’avez pas encore de compte chez une SGI. Africaine des Finances peut vous accompagner pour en ouvrir un auprès d’un partenaire agréé.
@@ -128,14 +134,38 @@
                         Préparez dès maintenant les documents listés à l’étape suivante afin d’accélérer le traitement.
                     </p>
                 </div>
-                @error('name')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
-                @error('email')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
-                @error('phone')
-                    <p class="text-xs text-red-600">{{ $message }}</p>
-                    @auth
-                        <a href="{{ route('client.profile') }}" class="text-xs font-bold text-[#0a2e8c] hover:underline inline-block mt-1">Compléter mon profil →</a>
-                    @endauth
-                @enderror
+
+                @if ($showName || $showEmail || $showPhone)
+                    <div class="space-y-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+                        <p class="text-sm font-bold text-amber-950">Complétez les informations manquantes</p>
+                        <p class="text-xs text-amber-900">Elles seront enregistrées sur votre profil pour les prochains échanges.</p>
+
+                        @if ($showName)
+                            <div>
+                                <label class="text-sm font-medium text-[#001a61]">Nom complet *</label>
+                                <input type="text" wire:model="contact_name" class="w-full mt-1 rounded-lg border-[#c5c5d4] bg-white" placeholder="Prénom et nom" autocomplete="name">
+                                @error('contact_name')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                            </div>
+                        @endif
+
+                        @if ($showEmail)
+                            <div>
+                                <label class="text-sm font-medium text-[#001a61]">Email *</label>
+                                <input type="email" wire:model="contact_email" class="w-full mt-1 rounded-lg border-[#c5c5d4] bg-white" placeholder="vous@exemple.com" autocomplete="email">
+                                @error('contact_email')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                            </div>
+                        @endif
+
+                        @if ($showPhone)
+                            <div>
+                                <label class="text-sm font-medium text-[#001a61]">Téléphone *</label>
+                                <input type="tel" wire:model="contact_phone" class="w-full mt-1 rounded-lg border-[#c5c5d4] bg-white" placeholder="+229 XX XX XX XX" autocomplete="tel">
+                                @error('contact_phone')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
                 <div class="flex gap-2 pt-2">
                     <button type="button" wire:click="backToChoice" class="flex-1 py-3 rounded-xl border border-[#c5c5d4] font-bold text-[#001a61]">Retour</button>
                     <button type="button" wire:click="confirmCreateAccount" class="flex-1 py-3 rounded-xl bg-[#001a61] text-white font-bold" wire:loading.attr="disabled">

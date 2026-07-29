@@ -20,11 +20,19 @@ trait WithSgiOrderModal
 
     public string $sgi_account_number = '';
 
+    /** Coordonnées saisies dans le modal (espace client / champs manquants). */
+    public string $contact_name = '';
+
+    public string $contact_email = '';
+
+    public string $contact_phone = '';
+
     public function openOrderModal(): void
     {
         $this->resetErrorBag();
         $this->modalScreen = 'choice';
         $this->sgi_account_number = '';
+        $this->hydrateContactFields();
         $this->showOrderModal = true;
     }
 
@@ -45,6 +53,7 @@ trait WithSgiOrderModal
     public function selectCreateAccount(): void
     {
         $this->resetErrorBag();
+        $this->hydrateContactFields();
         $existing = $this->findOpenAccountRequest();
         $this->modalScreen = $existing ? 'create_step2' : 'create_step1';
     }
@@ -79,6 +88,51 @@ trait WithSgiOrderModal
     }
 
     /**
+     * Champs manquants à afficher dans l’étape 1 (espace client authentifié).
+     *
+     * @return list<string>
+     */
+    public function missingContactFields(): array
+    {
+        if ($this->usesPublicContactFields()) {
+            return [];
+        }
+
+        $missing = [];
+        if (trim($this->contact_name) === '' || mb_strlen(trim($this->contact_name)) < 2) {
+            $missing[] = 'name';
+        }
+        if (trim($this->contact_email) === '' || ! filter_var(trim($this->contact_email), FILTER_VALIDATE_EMAIL)) {
+            $missing[] = 'email';
+        }
+        if (strlen(trim($this->contact_phone)) < 8) {
+            $missing[] = 'phone';
+        }
+
+        return $missing;
+    }
+
+    protected function hydrateContactFields(): void
+    {
+        if ($this->usesPublicContactFields()) {
+            $this->contact_name = property_exists($this, 'name') ? (string) $this->name : '';
+            $this->contact_email = property_exists($this, 'email') ? (string) $this->email : '';
+            $this->contact_phone = property_exists($this, 'phone') ? (string) $this->phone : '';
+
+            return;
+        }
+
+        $user = Auth::user();
+        if (! $user) {
+            return;
+        }
+
+        $this->contact_name = (string) ($user->name ?? '');
+        $this->contact_email = (string) ($user->email ?? '');
+        $this->contact_phone = (string) ($user->phone ?? '');
+    }
+
+    /**
      * @return array{0: string, 1: string, 2: string}
      */
     protected function resolveContactForAccountRequest(): array
@@ -96,18 +150,53 @@ trait WithSgiOrderModal
         $user = Auth::user();
         if (! $user) {
             throw ValidationException::withMessages([
-                'email' => 'Connectez-vous pour continuer.',
+                'contact_email' => 'Connectez-vous pour continuer.',
             ]);
         }
 
-        $phone = (string) ($user->phone ?? '');
-        if (strlen($phone) < 8) {
-            throw ValidationException::withMessages([
-                'phone' => 'Complétez votre téléphone dans votre profil avant de continuer.',
-            ]);
+        // Préremplir uniquement les champs encore vides (ne pas écraser la saisie du modal).
+        if (trim($this->contact_name) === '') {
+            $this->contact_name = (string) ($user->name ?? '');
+        }
+        if (trim($this->contact_email) === '') {
+            $this->contact_email = (string) ($user->email ?? '');
+        }
+        if (trim($this->contact_phone) === '') {
+            $this->contact_phone = (string) ($user->phone ?? '');
         }
 
-        return [$user->name, $user->email, $phone];
+        $this->validate([
+            'contact_name' => 'required|string|min:2|max:255',
+            'contact_email' => 'required|email|max:255',
+            'contact_phone' => 'required|string|min:8|max:30',
+        ], [
+            'contact_name.required' => 'Le nom est requis.',
+            'contact_name.min' => 'Le nom doit contenir au moins 2 caractères.',
+            'contact_email.required' => 'L’email est requis.',
+            'contact_email.email' => 'Adresse email invalide.',
+            'contact_phone.required' => 'Le téléphone est requis.',
+            'contact_phone.min' => 'Le numéro de téléphone semble trop court.',
+        ]);
+
+        $name = trim($this->contact_name);
+        $email = trim($this->contact_email);
+        $phone = trim($this->contact_phone);
+
+        $updates = [];
+        if ($user->name !== $name) {
+            $updates['name'] = $name;
+        }
+        if ($user->email !== $email) {
+            $updates['email'] = $email;
+        }
+        if ((string) ($user->phone ?? '') !== $phone) {
+            $updates['phone'] = $phone;
+        }
+        if ($updates !== []) {
+            $user->update($updates);
+        }
+
+        return [$name, $email, $phone];
     }
 
     /**
