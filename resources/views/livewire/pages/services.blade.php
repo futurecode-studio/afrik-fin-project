@@ -213,9 +213,12 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="{{ route('partenaires') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
-                    Voir les partenaires SGI / SGO
+                <a href="{{ route('ouverture-compte-sgi') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
+                    Demander l’ouverture d’un compte
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+                <a href="{{ route('partenaires') }}" class="mt-3 ml-0 sm:ml-4 inline-flex items-center gap-2 text-sm font-semibold text-[#444652] hover:text-[#001a61] hover:underline">
+                    Voir les partenaires SGI / SGO
                 </a>
             </div>
 

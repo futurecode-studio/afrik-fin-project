@@ -261,7 +261,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-[#001a61] mb-4">Investir</h3>
                 <p class="text-[#444652] mb-6">Passez à l'action avec une plateforme sécurisée et un accompagnement personnalisé par nos conseillers.</p>
-                <a href="{{ route('investir.actions-brvm') }}" class="text-[#001a61] font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                <a href="{{ route('ouverture-compte-sgi') }}" class="text-[#001a61] font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
                     Ouvrir un compte <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
             </div>

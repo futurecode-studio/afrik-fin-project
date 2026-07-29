@@ -12,6 +12,7 @@ class SgiAccountRequest extends Model
         'name',
         'email',
         'phone',
+        'message',
         'source',
         'status',
         'admin_notes',
@@ -44,6 +45,8 @@ class SgiAccountRequest extends Model
         return match ($this->source) {
             'carnet' => 'Carnet d’ordres',
             'ordres' => 'Espace client',
+            'public' => 'Page publique',
+            'guide' => 'Guide bourse',
             default => $this->source,
         };
     }

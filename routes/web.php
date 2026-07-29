@@ -45,6 +45,7 @@ Route::get('/investir/vl-fcp', \App\Livewire\Pages\VlFcp::class)->name('investir
 // Investir (Stitch + données réelles)
 Route::get('/investir', \App\Livewire\Pages\Investir\InvestirHub::class)->name('investir.hub');
 Route::get('/guide-bourse', \App\Livewire\Pages\GuideBourse::class)->name('guide-bourse');
+Route::get('/ouverture-compte-sgi', \App\Livewire\Pages\OuvertureCompteSgi::class)->name('ouverture-compte-sgi');
 Route::get('/investir/comment', \App\Livewire\Pages\Investir\CommentInvestir::class)->name('investir.comment');
 Route::get('/investir/test-profil', \App\Livewire\Pages\Investir\TestProfilInvestisseur::class)->name('investir.profil-test');
 Route::get('/investir/votre-profil', \App\Livewire\Pages\Investir\VotreProfil::class)->name('investir.profil');

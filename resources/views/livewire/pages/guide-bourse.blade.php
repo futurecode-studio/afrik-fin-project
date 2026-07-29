@@ -24,7 +24,7 @@
                     <p class="font-bold mt-2">Outils investisseurs</p>
                     <p class="text-sm text-white/70 mt-1">Calculateurs et profil d’investisseur</p>
                 </a>
-                <a href="{{ route('marches.carnet') }}" class="rounded-xl bg-[#ffbf00] text-[#261a00] hover:brightness-95 p-4 transition">
+                <a href="{{ route('ouverture-compte-sgi') }}" class="rounded-xl bg-[#ffbf00] text-[#261a00] hover:brightness-95 p-4 transition">
                     <span class="material-symbols-outlined">account_balance_wallet</span>
                     <p class="font-extrabold mt-2">Ouvrir un compte</p>
                     <p class="text-sm opacity-80 mt-1">Première étape pour investir via une SGI</p>
@@ -258,7 +258,7 @@
                         't' => 'Ouvrir un compte-titres',
                         'd' => 'Contactez une Société de Gestion et d’Intermédiation (SGI) agréée. Africaine des Finances, apporteur d’affaires agréé AMF-UMOA (AA/2022-03), vous oriente et vous accompagne dans cette démarche.',
                         'cta' => 'Demander une ouverture',
-                        'route' => 'marches.carnet',
+                        'route' => 'ouverture-compte-sgi',
                     ],
                     [
                         'n' => '2',
@@ -386,7 +386,7 @@
                 <a href="{{ route('investir.profil-test') }}" class="inline-flex items-center gap-2 bg-white/10 border border-white/25 font-bold px-5 py-3 rounded-xl hover:bg-white/15 transition">
                     Tester mon profil
                 </a>
-                <a href="{{ route('marches.carnet') }}" class="inline-flex items-center gap-2 bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl hover:bg-[#e7eeff] transition">
+                <a href="{{ route('ouverture-compte-sgi') }}" class="inline-flex items-center gap-2 bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl hover:bg-[#e7eeff] transition">
                     Ouvrir un compte-titres
                 </a>
             </div>

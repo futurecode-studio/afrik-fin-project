@@ -47,10 +47,13 @@
                                     <p class="text-[11px] text-[#757683]">Compte #{{ $req->user_id }}</p>
                                 @endif
                             </td>
-                            <td class="px-4 py-3">
-                                <a href="mailto:{{ $req->email }}" class="text-[#0a2e8c] font-semibold hover:underline block">{{ $req->email }}</a>
-                                <a href="tel:{{ $req->phone }}" class="text-xs text-[#444652] hover:underline">{{ $req->phone }}</a>
-                            </td>
+                                <td class="px-4 py-3">
+                                    <a href="mailto:{{ $req->email }}" class="text-[#0a2e8c] font-semibold hover:underline block">{{ $req->email }}</a>
+                                    <a href="tel:{{ $req->phone }}" class="text-xs text-[#444652] hover:underline">{{ $req->phone }}</a>
+                                    @if ($req->message)
+                                        <p class="text-xs text-[#757683] mt-1 line-clamp-2">{{ $req->message }}</p>
+                                    @endif
+                                </td>
                             <td class="px-4 py-3 text-xs">{{ $req->sourceLabel() }}</td>
                             <td class="px-4 py-3">
                                 <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-[#e7eeff] text-[#001a61]">{{ $req->statusLabel() }}</span>
