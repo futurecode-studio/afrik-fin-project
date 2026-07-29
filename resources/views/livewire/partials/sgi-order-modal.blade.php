@@ -3,16 +3,38 @@
     $modalPartners = $partners ?? collect();
     $requiredDocs = $requiredDocs ?? collect();
 @endphp
+@teleport('body')
 <div
-    x-data="{ open: @entangle('showOrderModal').live }"
+    x-data="{
+        open: @entangle('showOrderModal').live,
+        lockScroll(on) {
+            const html = document.documentElement;
+            const body = document.body;
+            if (on) {
+                const sb = window.innerWidth - html.clientWidth;
+                html.style.overflow = 'hidden';
+                body.style.overflow = 'hidden';
+                if (sb > 0) body.style.paddingRight = sb + 'px';
+            } else {
+                html.style.overflow = '';
+                body.style.overflow = '';
+                body.style.paddingRight = '';
+            }
+        }
+    }"
     x-show="open"
     x-cloak
+    x-effect="lockScroll(open)"
     style="display:none"
-    class="fixed inset-0 z-[80] flex items-center justify-center p-4"
+    class="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+    @keydown.escape.window="if (open) $wire.closeOrderModal()"
 >
-    <div class="fixed inset-0 bg-[#001a61]/55 backdrop-blur-sm" wire:click="closeOrderModal"></div>
+    <div class="absolute inset-0 bg-[#001a61]/60" wire:click="closeOrderModal"></div>
+
     <div
-        class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-2xl border border-[#c5c5d4] shadow-2xl"
+        class="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-2xl border border-[#c5c5d4] shadow-2xl"
         @click.stop
     >
         <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-5 py-4 border-b border-[#e7eeff] bg-white rounded-t-2xl">
@@ -149,3 +171,4 @@
         </div>
     </div>
 </div>
+@endteleport
