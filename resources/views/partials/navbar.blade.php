@@ -80,7 +80,7 @@
 
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                     <button type="button"
-                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('investir.*', 'marches.*') ? 'text-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('investir.*', 'marches.*', 'guide-bourse') ? 'text-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                         Investir
                         <span class="material-symbols-outlined text-[18px] transition-transform"
                             :class="open ? 'rotate-180' : ''">expand_more</span>
@@ -92,6 +92,11 @@
                         class="absolute left-0 mt-3 w-72 adf-glass-strong rounded-2xl overflow-hidden z-50 shadow-glass-lg">
                         <a href="{{ route('investir.hub') }}"
                             class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Investir — Hub</a>
+                        <a href="{{ route('guide-bourse') }}"
+                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
+                            Guide Complet de la Bourse
+                            <span class="block text-[11px] font-medium text-[#757683]">BRVM · actions · obligations · glossaire</span>
+                        </a>
                         <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
                             {{ config('services.diaspora_funnel.label') }}
@@ -185,6 +190,7 @@
             <a href="{{ route('search') }}" class="block py-3 text-[#131c2a] font-medium">Recherche</a>
             <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
             <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
+            <a href="{{ route('guide-bourse') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Guide Complet de la Bourse</a>
             <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                 class="block py-3 pl-4 font-bold text-[#001a61]">{{ config('services.diaspora_funnel.label') }}</a>
             <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>

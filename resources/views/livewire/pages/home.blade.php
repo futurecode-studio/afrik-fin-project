@@ -101,6 +101,50 @@
         </div>
     </section>
 
+    {{-- Guide Complet de la Bourse — mise en avant --}}
+    <section class="px-5 lg:px-16 max-w-[1280px] mx-auto py-12 lg:py-16">
+        <div class="relative overflow-hidden rounded-3xl bg-[#001a61] text-white">
+            <div class="absolute inset-0 opacity-40 pointer-events-none"
+                style="background: radial-gradient(700px 320px at 100% 0%, rgba(255,191,0,.4), transparent 55%);"></div>
+            <div class="relative grid lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+                <div class="lg:col-span-8">
+                    <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Nouveau · Éducation financière</p>
+                    <h2 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl leading-tight">
+                        Guide Complet de la Bourse
+                    </h2>
+                    <p class="mt-4 text-white/80 text-lg max-w-2xl leading-relaxed">
+                        BRVM, actions, obligations, étapes pour investir et glossaire — tout ce qu’il faut savoir
+                        pour démarrer sur les marchés de l’UEMOA.
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="{{ route('guide-bourse') }}"
+                            class="inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3 rounded-xl hover:brightness-95 transition">
+                            Lire le guide
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        </a>
+                        <a href="{{ route('investir.profil-test') }}"
+                            class="inline-flex items-center gap-2 border border-white/30 font-bold px-6 py-3 rounded-xl hover:bg-white/10 transition">
+                            Tester mon profil
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+                    @foreach ([
+                        ['icon' => 'account_balance', 'label' => 'La BRVM'],
+                        ['icon' => 'candlestick_chart', 'label' => 'Actions'],
+                        ['icon' => 'receipt_long', 'label' => 'Obligations'],
+                        ['icon' => 'menu_book', 'label' => 'Glossaire'],
+                    ] as $chip)
+                        <div class="rounded-2xl bg-white/10 border border-white/15 px-4 py-4 text-center">
+                            <span class="material-symbols-outlined text-[#ffbf00]">{{ $chip['icon'] }}</span>
+                            <p class="mt-1 text-sm font-bold">{{ $chip['label'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- Actualités mises en avant --}}
     @if($featuredArticle || ($latestArticles ?? collect())->isNotEmpty())
     <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto">

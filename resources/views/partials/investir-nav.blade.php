@@ -2,6 +2,7 @@
 @php
     $items = [
         ['route' => 'investir.hub', 'label' => 'Investir', 'match' => 'investir.hub'],
+        ['route' => 'guide-bourse', 'label' => 'Guide bourse', 'match' => 'guide-bourse'],
         ['route' => 'investir.comment', 'label' => 'Comment investir', 'match' => 'investir.comment'],
         ['route' => 'investir.profil-test', 'label' => 'Test profil', 'match' => ['investir.profil-test', 'investir.profil']],
         ['route' => 'investir.opcvm', 'label' => 'FCP / OPCVM', 'match' => ['investir.opcvm', 'investir.fcp-detail', 'investir.vl']],

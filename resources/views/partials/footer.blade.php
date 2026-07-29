@@ -42,6 +42,7 @@
                 <h5 class="font-bold text-[#001a61] mb-6">Liens Rapides</h5>
                 <ul class="space-y-3">
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('home') }}">Accueil</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('guide-bourse') }}">Guide Complet de la Bourse</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('formations') }}">Formations</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('events-list') }}">Événements</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.actions-brvm') }}">Investir — Actions BRVM</a></li>
