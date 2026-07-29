@@ -97,6 +97,11 @@
                             Guide Complet de la Bourse
                             <span class="block text-[11px] font-medium text-[#757683]">BRVM · actions · obligations · glossaire</span>
                         </a>
+                        <a href="{{ route('ouverture-compte-sgi') }}"
+                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
+                            Ouvrir un compte SGI
+                            <span class="block text-[11px] font-medium text-[#757683]">Demande d’accompagnement ADF</span>
+                        </a>
                         <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
                             {{ config('services.diaspora_funnel.label') }}
@@ -191,6 +196,7 @@
             <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
             <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
             <a href="{{ route('guide-bourse') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Guide Complet de la Bourse</a>
+            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Ouvrir un compte SGI</a>
             <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                 class="block py-3 pl-4 font-bold text-[#001a61]">{{ config('services.diaspora_funnel.label') }}</a>
             <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>
