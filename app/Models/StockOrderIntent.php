@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class StockOrderIntent extends Model
 {
     protected $fillable = [
-        'user_id', 'partner_id', 'stock_id', 'side', 'order_type', 'quantity', 'limit_price',
+        'user_id', 'partner_id', 'sgi_account_number', 'stock_id', 'side', 'order_type', 'quantity', 'limit_price',
         'status', 'name', 'email', 'phone', 'notes',
     ];
 

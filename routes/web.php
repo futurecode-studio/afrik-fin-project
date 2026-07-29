@@ -140,7 +140,6 @@ Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->g
     Route::get('/patrimoine', \App\Livewire\Client\Patrimoine::class)->name('patrimoine');
     Route::get('/alertes', \App\Livewire\Client\AlertesMarche::class)->name('alertes');
     Route::get('/ordres-programmes', \App\Livewire\Client\OrdresProgrammes::class)->name('ordres');
-    Route::get('/vote-ag', \App\Livewire\Client\VoteAg::class)->name('vote-ag');
     Route::get('/rapport-mensuel', \App\Livewire\Client\RapportMensuel::class)->name('rapport-mensuel');
     Route::get('/actualites-portefeuille', \App\Livewire\Client\ActualitesPortefeuille::class)->name('actualites-portefeuille');
     Route::get('/evenements', \App\Livewire\Client\MyEvents::class)->name('my-events');
@@ -181,6 +180,8 @@ Route::middleware(['auth', 'admin.panel'])->prefix('admin')->name('admin.')->gro
     Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners')->middleware('permission:partners.view');
     Route::get('/sgi-sgo', \App\Livewire\Admin\SgiSgoHub::class)->name('sgi-sgo')->middleware('permission:partners.view');
     Route::get('/order-intents', \App\Livewire\Admin\OrderIntents::class)->name('order-intents')->middleware('permission:partners.view');
+    Route::get('/sgi-account-requests', \App\Livewire\Admin\SgiAccountRequests::class)->name('sgi-account-requests')->middleware('permission:partners.view');
+    Route::get('/sgi-documents', \App\Livewire\Admin\SgiRequiredDocuments::class)->name('sgi-documents')->middleware('permission:partners.view');
     Route::get('/social-links', \App\Livewire\Admin\SocialLinks::class)->name('social-links');
     Route::get('/team', \App\Livewire\Admin\TeamMembers::class)->name('team')->middleware('permission:team.view');
     Route::get('/site-services', \App\Livewire\Admin\SiteServices::class)->name('site-services')->middleware('permission:team.view');

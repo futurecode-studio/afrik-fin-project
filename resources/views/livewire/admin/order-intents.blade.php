@@ -67,7 +67,12 @@
                                         @endif
                                     </p>
                                 </td>
-                                <td class="px-4 py-3 text-xs font-semibold text-[#001a61]">{{ $intent->partner?->nom ?? 'Non précisée' }}</td>
+                                <td class="px-4 py-3 text-xs font-semibold text-[#001a61]">
+                                    {{ $intent->partner?->nom ?? 'Non précisée' }}
+                                    @if ($intent->sgi_account_number)
+                                        <span class="block font-normal text-[#757683]">{{ $intent->sgi_account_number }}</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3">
                                     <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-[#e7eeff] text-[#001a61]">{{ $intent->statusLabel() }}</span>
                                 </td>
@@ -97,7 +102,12 @@
                                         @endif
                                     </p>
                                 </td>
-                                <td class="px-4 py-3 text-xs font-semibold text-[#001a61]">{{ $order->partner?->nom ?? 'Non précisée' }}</td>
+                                <td class="px-4 py-3 text-xs font-semibold text-[#001a61]">
+                                    {{ $order->partner?->nom ?? 'Non précisée' }}
+                                    @if ($order->sgi_account_number)
+                                        <span class="block font-normal text-[#757683]">{{ $order->sgi_account_number }}</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3">
                                     <span class="text-xs font-bold uppercase px-2 py-0.5 rounded bg-[#e7eeff] text-[#001a61]">{{ $order->statusLabel() }}</span>
                                 </td>

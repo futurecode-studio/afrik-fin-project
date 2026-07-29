@@ -155,7 +155,7 @@
                     'items' => [
                         ['route' => 'admin.stock-data', 'match' => ['admin.stock-data', 'admin.market-advanced'], 'label' => 'Actions BRVM', 'icon' => 'monitoring', 'perm' => 'stock-data.view'],
                         ['route' => 'admin.government-bonds', 'match' => 'admin.government-bonds', 'label' => 'Obligations États', 'icon' => 'account_balance', 'perm' => 'government-bonds.view'],
-                        ['route' => 'admin.sgi-sgo', 'match' => ['admin.sgi-sgo', 'admin.order-intents'], 'label' => 'SGI / SGO', 'icon' => 'account_balance', 'perm' => 'partners.view'],
+                        ['route' => 'admin.sgi-sgo', 'match' => ['admin.sgi-sgo', 'admin.order-intents', 'admin.sgi-account-requests', 'admin.sgi-documents'], 'label' => 'SGI / SGO', 'icon' => 'account_balance', 'perm' => 'partners.view'],
                         ['route' => 'admin.partners', 'match' => 'admin.partners', 'label' => 'Partenaires', 'icon' => 'handshake', 'perm' => 'partners.view'],
                     ],
                 ],

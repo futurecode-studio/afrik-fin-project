@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <form wire:submit.prevent="place" class="bg-white border border-[#c5c5d4] rounded-xl p-6 space-y-4">
+        <form wire:submit.prevent="prepareSubmit" class="bg-white border border-[#c5c5d4] rounded-xl p-6 space-y-4">
             <h3 class="font-bold text-[#001a61] text-lg">Nouvelle intention</h3>
             <div>
                 <label class="text-sm font-medium">Type</label>
@@ -48,18 +48,9 @@
             <div>
                 <label class="text-sm font-medium">Prix cible (XOF)</label>
                 <input type="number" step="0.01" wire:model="target_price" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
+                <p class="text-[11px] text-[#757683] mt-1">Utilisé uniquement si vous avez déjà un compte SGI.</p>
             </div>
-            <div>
-                <label class="text-sm font-medium">SGI souhaitée (optionnel)</label>
-                <select wire:model="partner_id" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                    <option value="">— ADF choisira / mise en relation —</option>
-                    @foreach ($partners as $p)
-                        <option value="{{ $p->id }}">{{ $p->nom }}</option>
-                    @endforeach
-                </select>
-                @error('partner_id')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
-            </div>
-            <button type="submit" class="w-full py-3 rounded-xl bg-[#001a61] text-white font-bold">Enregistrer l’intention</button>
+            <button type="submit" class="w-full py-3 rounded-xl bg-[#001a61] text-white font-bold">Continuer</button>
         </form>
     </div>
 
@@ -81,7 +72,12 @@
                         <td class="px-4 py-3">{{ $o->created_at->format('d/m/Y') }}</td>
                         <td class="px-4 py-3 font-semibold">{{ $o->stock?->symbol }}</td>
                         <td class="px-4 py-3">{{ strtoupper($o->side) }} · {{ $o->condition_type }} @ {{ $o->target_price }}</td>
-                        <td class="px-4 py-3 text-xs">{{ $o->partner?->nom ?? '—' }}</td>
+                        <td class="px-4 py-3 text-xs">
+                            {{ $o->partner?->nom ?? '—' }}
+                            @if ($o->sgi_account_number)
+                                <span class="block text-[#757683]">{{ $o->sgi_account_number }}</span>
+                            @endif
+                        </td>
                         <td class="px-4 py-3">{{ $o->statusLabel() }}</td>
                     </tr>
                 @empty
@@ -90,4 +86,6 @@
             </tbody>
         </table>
     </div>
+
+    @include('livewire.partials.sgi-order-modal')
 </div>

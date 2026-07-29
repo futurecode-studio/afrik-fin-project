@@ -50,7 +50,6 @@
                 ['route' => 'client.alertes', 'match' => 'client.alertes', 'label' => 'Alertes', 'icon' => 'notifications_active'],
                 ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Ordres', 'icon' => 'bolt', 'soon' => ! feature_enabled('client.ordres')],
                 ['route' => 'client.rapport-mensuel', 'match' => 'client.rapport-mensuel', 'label' => 'Rapport', 'icon' => 'description'],
-                ['route' => 'client.vote-ag', 'match' => 'client.vote-ag', 'label' => 'Vote AG', 'icon' => 'how_to_vote', 'soon' => true],
                 ['route' => 'client.actualites-portefeuille', 'match' => 'client.actualites-portefeuille', 'label' => 'Actus PF', 'icon' => 'newspaper'],
                 ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificats', 'icon' => 'workspace_premium'],
                 ['route' => 'client.interests', 'match' => 'client.interests', 'label' => 'Intérêts', 'icon' => 'interests'],

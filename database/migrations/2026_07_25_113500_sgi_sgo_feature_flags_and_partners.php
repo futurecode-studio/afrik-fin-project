@@ -52,16 +52,6 @@ return new class extends Migration
                     'updated_at' => $now,
                 ],
                 [
-                    'key' => 'client.vote_ag',
-                    'label' => 'Vote AG / Proxy voting',
-                    'description' => 'Vote par procuration via compte-titres / SGI.',
-                    'enabled' => false,
-                    'group' => 'sgi',
-                    'sort_order' => 20,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ],
-                [
                     'key' => 'marches.carnet',
                     'label' => 'Carnet d’ordres (public)',
                     'description' => 'Intentions d’ordres relayées vers une SGI.',

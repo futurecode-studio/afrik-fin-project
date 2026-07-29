@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Marches;
 
+use App\Livewire\Concerns\WithSgiOrderModal;
 use App\Livewire\Concerns\WithSweetAlert;
 use App\Models\Partner;
 use App\Models\StockOrderIntent;
@@ -16,6 +17,7 @@ use Livewire\Component;
  */
 class CarnetOrdres extends Component
 {
+    use WithSgiOrderModal;
     use WithSweetAlert;
 
     #[Url(as: 'symbol', except: '')]
@@ -64,20 +66,42 @@ class CarnetOrdres extends Component
         }
     }
 
-    public function submit(MarketsDataService $markets): void
+    /**
+     * Ouvre le modal SGI (montants validés uniquement si compte SGI existant).
+     */
+    public function prepareSubmit(): void
     {
         if (! feature_enabled('marches.carnet')) {
             $this->swalSuccess('Service bientôt disponible — contactez une SGI via nos partenaires.');
 
             return;
         }
+
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|min:8|max:30',
+        ]);
+
+        $this->openOrderModal();
+    }
+
+    public function submitWithSgiAccount(MarketsDataService $markets): void
+    {
+        if (! feature_enabled('marches.carnet')) {
+            $this->swalSuccess('Service bientôt disponible.');
+
+            return;
+        }
+
         $this->validate([
             'symbol' => 'required|string',
             'side' => 'required|in:buy,sell',
             'order_type' => 'required|in:limit,market',
             'quantity' => 'required|numeric|min:1',
             'limit_price' => 'nullable|numeric|min:0',
-            'partner_id' => 'nullable|exists:partners,id',
+            'partner_id' => 'required|exists:partners,id',
+            'sgi_account_number' => 'required|string|min:3|max:120',
             'name' => 'required|string|min:2|max:255',
             'email' => 'required|email',
             'phone' => 'required|string|min:8|max:30',
@@ -91,18 +115,17 @@ class CarnetOrdres extends Component
             return;
         }
 
-        if ($this->partner_id !== '') {
-            $ok = Partner::sgi()->active()->whereKey($this->partner_id)->exists();
-            if (! $ok) {
-                $this->addError('partner_id', 'SGI invalide ou inactive.');
+        $ok = Partner::sgi()->active()->whereKey($this->partner_id)->exists();
+        if (! $ok) {
+            $this->addError('partner_id', 'SGI invalide ou inactive.');
 
-                return;
-            }
+            return;
         }
 
         StockOrderIntent::create([
             'user_id' => Auth::id(),
-            'partner_id' => $this->partner_id !== '' ? (int) $this->partner_id : null,
+            'partner_id' => (int) $this->partner_id,
+            'sgi_account_number' => trim($this->sgi_account_number),
             'stock_id' => $stock->id,
             'side' => $this->side,
             'order_type' => $this->order_type,
@@ -115,8 +138,19 @@ class CarnetOrdres extends Component
             'notes' => $this->notes,
         ]);
 
-        $this->swalSuccess('Intention d’ordre enregistrée. Une SGI agréée vous recontactera pour l’exécution — Africaine des Finances n’exécute pas les ordres.');
-        $this->reset('notes');
+        $this->closeOrderModal();
+        $this->swalSuccess('Intention d’ordre enregistrée. Votre SGI sera contactée pour l’exécution — Africaine des Finances n’exécute pas les ordres.');
+        $this->reset('notes', 'sgi_account_number', 'partner_id');
+    }
+
+    protected function sgiAccountRequestSource(): string
+    {
+        return 'carnet';
+    }
+
+    protected function usesPublicContactFields(): bool
+    {
+        return true;
     }
 
     public function render(MarketsDataService $markets)
@@ -131,12 +165,13 @@ class CarnetOrdres extends Component
         $stock = $markets->stockBySymbol($this->symbol);
         $book = $stocks->sortByDesc('volume')->take(8)->values();
         $partners = Partner::sgi()->active()->orderBy('nom')->get();
+        $requiredDocs = $this->sgiRequiredDocuments();
 
         $myIntents = Auth::check()
             ? StockOrderIntent::with(['stock', 'partner'])->where('user_id', Auth::id())->latest()->limit(8)->get()
             : collect();
 
-        return view('livewire.pages.marches.carnet-ordres', compact('stocks', 'stock', 'book', 'myIntents', 'partners'))
+        return view('livewire.pages.marches.carnet-ordres', compact('stocks', 'stock', 'book', 'myIntents', 'partners', 'requiredDocs'))
             ->extends('layouts.site', ['title' => 'Carnet d’Ordres Direct — Africaine des Finances'])
             ->section('content');
     }

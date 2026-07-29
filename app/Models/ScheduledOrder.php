@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ScheduledOrder extends Model
 {
     protected $fillable = [
-        'user_id', 'partner_id', 'stock_id', 'condition_type', 'side', 'quantity',
+        'user_id', 'partner_id', 'sgi_account_number', 'stock_id', 'condition_type', 'side', 'quantity',
         'target_price', 'stop_loss', 'take_profit', 'protection_active', 'status', 'notes',
     ];
 

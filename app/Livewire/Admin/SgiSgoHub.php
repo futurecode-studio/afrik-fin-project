@@ -6,6 +6,7 @@ use App\Livewire\Concerns\WithSweetAlert;
 use App\Models\FeatureFlag;
 use App\Models\Partner;
 use App\Models\ScheduledOrder;
+use App\Models\SgiAccountRequest;
 use App\Models\StockOrderIntent;
 use Livewire\Component;
 
@@ -37,6 +38,8 @@ class SgiSgoHub extends Component
             'programmeCount' => ScheduledOrder::count(),
             'pendingOrders' => StockOrderIntent::where('status', 'pending')->count()
                 + ScheduledOrder::where('status', 'pending')->count(),
+            'accountRequests' => SgiAccountRequest::count(),
+            'pendingAccountRequests' => SgiAccountRequest::where('status', 'pending')->count(),
         ])
             ->extends('layouts.admin', ['title' => 'SGI / SGO'])
             ->section('content');

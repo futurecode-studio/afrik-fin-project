@@ -15,7 +15,7 @@
         </a>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
         <div class="bg-white border border-[#c5c5d4] rounded-xl p-4">
             <p class="text-xs uppercase text-[#757683]">SGI</p>
             <p class="text-3xl font-extrabold text-[#001a61] tabular-nums">{{ $sgiCount }}</p>
@@ -33,6 +33,15 @@
             <p class="text-3xl font-extrabold text-[#001a61] tabular-nums">{{ $orderIntents }}</p>
             <p class="text-[11px] text-[#757683] mt-1">{{ $carnetCount }} carnet · {{ $programmeCount }} client · {{ $pendingOrders }} en attente</p>
             <a href="{{ route('admin.order-intents') }}" class="text-xs font-bold text-[#0a2e8c] hover:underline">Gérer les intentions</a>
+        </div>
+        <div class="bg-white border border-[#c5c5d4] rounded-xl p-4">
+            <p class="text-xs uppercase text-[#757683]">Ouvertures compte</p>
+            <p class="text-3xl font-extrabold text-[#001a61] tabular-nums">{{ $accountRequests }}</p>
+            <p class="text-[11px] text-[#757683] mt-1">{{ $pendingAccountRequests }} en attente de contact</p>
+            <div class="flex flex-wrap gap-2 mt-1">
+                <a href="{{ route('admin.sgi-account-requests') }}" class="text-xs font-bold text-[#0a2e8c] hover:underline">Voir les demandes</a>
+                <a href="{{ route('admin.sgi-documents') }}" class="text-xs font-bold text-[#0a2e8c] hover:underline">Documents</a>
+            </div>
         </div>
     </div>
 

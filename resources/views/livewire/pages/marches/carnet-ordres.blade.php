@@ -13,7 +13,7 @@
                         <p class="text-sm text-[#444652] mt-1">{{ number_format($stock->current_price, 0, ',', ' ') }} FCFA · {{ number_format($stock->variation_percent, 2, ',', ' ') }}%</p>
                     </div>
                 @endif
-                <form wire:submit.prevent="submit" class="space-y-4">
+                <form wire:submit.prevent="prepareSubmit" class="space-y-4">
                     <div>
                         <label class="text-sm font-medium">Symbole</label>
                         <select wire:model.live="symbol" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
@@ -39,16 +39,7 @@
                     <div>
                         <label class="text-sm font-medium">Prix limite (FCFA)</label>
                         <input type="number" wire:model="limit_price" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                    </div>
-                    <div>
-                        <label class="text-sm font-medium">SGI souhaitée (optionnel)</label>
-                        <select wire:model="partner_id" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                            <option value="">Sans préférence — ADF choisit</option>
-                            @foreach ($partners as $p)
-                                <option value="{{ $p->id }}">{{ $p->nom }}</option>
-                            @endforeach
-                        </select>
-                        @error('partner_id')<p class="text-xs text-red-600">{{ $message }}</p>@enderror
+                        <p class="text-[11px] text-[#757683] mt-1">Utilisé uniquement si vous avez déjà un compte SGI.</p>
                     </div>
                     <div class="grid sm:grid-cols-3 gap-3">
                         <div><label class="text-sm font-medium">Nom</label><input wire:model="name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">@error('name')<p class="text-xs text-red-600">{{ $message }}</p>@enderror</div>
@@ -59,7 +50,7 @@
                         <label class="text-sm font-medium">Notes</label>
                         <textarea wire:model="notes" rows="3" class="w-full mt-1 rounded-lg border-[#c5c5d4]"></textarea>
                     </div>
-                    <button type="submit" class="w-full py-3 rounded-xl bg-[#001a61] text-white font-bold">Envoyer l’intention d’ordre</button>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#001a61] text-white font-bold">Continuer</button>
                 </form>
             </div>
 
@@ -86,7 +77,7 @@
                                         <span class="text-[#757683]">{{ $o->statusLabel() }}</span>
                                     </div>
                                     @if ($o->partner)
-                                        <span class="text-[11px] text-[#0a2e8c]">SGI : {{ $o->partner->nom }}</span>
+                                        <span class="text-[11px] text-[#0a2e8c]">SGI : {{ $o->partner->nom }}@if($o->sgi_account_number) · {{ $o->sgi_account_number }}@endif</span>
                                     @endif
                                 </li>
                             @endforeach
@@ -96,4 +87,6 @@
             </aside>
         </div>
     </section>
+
+    @include('livewire.partials.sgi-order-modal')
 </div>
