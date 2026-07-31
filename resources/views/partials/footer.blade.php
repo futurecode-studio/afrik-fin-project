@@ -43,7 +43,7 @@
                 <ul class="space-y-3">
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('home') }}">Accueil</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('guide-bourse') }}">Guide Complet de la Bourse</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('ouverture-compte-sgi') }}">Ouvrir un compte SGI</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('ouverture-compte-sgi') }}">Ouvrir un compte titre</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('formations') }}">Formations</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('events-list') }}">Événements</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.actions-brvm') }}">Investir — Actions BRVM</a></li>
@@ -92,8 +92,8 @@
                 </div>
                 <div>
                     <p class="text-xs text-[#757683]">Email</p>
-                    <a href="mailto:african.finances@gmail.com" class="text-sm font-medium text-[#131c2a] hover:text-[#001a61]">
-                        african.finances@gmail.com
+                    <a href="mailto:contact@africainedesfinances.com" class="text-sm font-medium text-[#131c2a] hover:text-[#001a61]">
+                        contact@africainedesfinances.com
                     </a>
                 </div>
             </div>
@@ -103,18 +103,19 @@
                 </div>
                 <div>
                     <p class="text-xs text-[#757683]">Téléphone</p>
-                    <p class="text-sm font-medium">+229 01 44 21 78 89 / 01 66 55 51 21</p>
-                    <p class="text-xs text-[#757683] mt-1">+229 01 44 21 82 09 / 01 48 71 88 51</p>
+                    <p class="text-sm font-medium">+229 01 44 21 82 09 / 01 66 55 51 21</p>
+                    <p class="text-xs text-[#757683] mt-1">+229 01 48 71 88 51</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-start gap-3">
                 <div class="w-10 h-10 bg-[#001a61]/10 rounded-full flex items-center justify-center shrink-0">
                     <span class="material-symbols-outlined text-[#001a61] text-[20px]">location_on</span>
                 </div>
                 <div>
                     <p class="text-xs text-[#757683]">Adresse</p>
                     <p class="text-sm font-medium">Cot Agla c/3881</p>
-                    <p class="text-xs text-[#757683] mt-1">Cotonou, Bénin</p>
+                    <p class="text-xs text-[#757683] mt-1">Agla, 4ème maison à étage après la pharmacie Agla en quittant le stade de l’amitié</p>
+                    <p class="text-xs text-[#757683] mt-0.5">Cotonou, Bénin</p>
                 </div>
             </div>
         </div>

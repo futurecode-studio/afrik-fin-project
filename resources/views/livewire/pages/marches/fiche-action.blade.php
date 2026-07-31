@@ -29,15 +29,16 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-8">
                     @foreach ([
-                        'Ouverture / Préc.' => number_format((float)$stock->previous_price, 0, ',', ' '),
-                        'Plus haut' => number_format((float)$stock->high_price, 0, ',', ' '),
-                        'Plus bas' => number_format((float)$stock->low_price, 0, ',', ' '),
-                        'Volume' => number_format((int)$stock->volume, 0, ',', ' '),
+                        'Ouverture' => $stock->formatMoney($stock->effectiveOpen()),
+                        'Clôture préc.' => $stock->formatMoney($stock->previous_price !== null ? (float) $stock->previous_price : null),
+                        'Plus haut' => $stock->formatMoney($stock->effectiveHigh()),
+                        'Plus bas' => $stock->formatMoney($stock->effectiveLow()),
+                        'Volume' => number_format((int) $stock->volume, 0, ',', ' '),
                     ] as $label => $val)
                         <div class="bg-[#f0f3ff] rounded-xl p-4">
-                            <p class="text-xs uppercase text-[#757683]">{{ $label }}</p>
+                            <p class="text-xs uppercase tracking-wide text-[#757683]">{{ $label }}</p>
                             <p class="text-lg font-bold text-[#001a61] mt-1">{{ $val }}</p>
                         </div>
                     @endforeach

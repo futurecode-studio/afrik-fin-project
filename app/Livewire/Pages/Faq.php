@@ -26,7 +26,7 @@ class Faq extends Component
             ['cat' => 'formations', 'q' => 'Comment obtenir mon certificat de formation ?', 'a' => 'Après validation des modules et du quiz, le certificat est disponible dans Espace client → Certificats.'],
             ['cat' => 'investissements', 'q' => 'Comment investir sur la BRVM via la plateforme ?', 'a' => 'Passez le test profil, choisissez un partenaire agréé, puis demandez une mise en relation. Les ordres sont exécutés par la SGI.'],
             ['cat' => 'inscriptions', 'q' => 'J’ai oublié mon mot de passe, que faire ?', 'a' => 'Utilisez « Mot de passe oublié » sur la page de connexion. Si le mail n’arrive pas, ouvrez un ticket support.'],
-            ['cat' => 'securite', 'q' => 'Comment signaler une activité suspecte ?', 'a' => 'Ouvrez un ticket Priorité Haute (catégorie Sécurité) ou écrivez à african.finances@gmail.com.'],
+            ['cat' => 'securite', 'q' => 'Comment signaler une activité suspecte ?', 'a' => 'Ouvrez un ticket Priorité Haute (catégorie Sécurité) ou écrivez à contact@africainedesfinances.com.'],
         ];
 
         $q = mb_strtolower(trim($this->search));

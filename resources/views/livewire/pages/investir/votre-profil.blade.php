@@ -2,14 +2,14 @@
     @include('partials.investir-nav')
 
     <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pt-12 pb-8">
-        <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c] mb-3">Profil investisseur</p>
+        <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c] mb-3">Diagnostic</p>
         <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61]">
-            Votre profil : <span style="color: {{ $profile['color'] }}">{{ $profile['label'] }}</span>
+            Votre diagnostic : <span style="color: {{ $profile['color'] }}">{{ $profile['label'] }}</span>
         </h1>
         <p class="mt-3 text-[#444652] max-w-2xl">{{ $profile['description'] }}</p>
         <p class="mt-2 text-sm text-[#757683]">Score {{ $profile['score'] }} / {{ $profile['max_score'] }}</p>
         <button type="button" wire:click="remake" class="mt-4 text-sm font-bold text-[#001a61] hover:underline">
-            Refaire le test
+            Refaire le diagnostic
         </button>
     </section>
 

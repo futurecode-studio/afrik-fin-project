@@ -58,9 +58,9 @@
                     <div class="rounded-lg bg-[#f0f3ff] p-3">
                         <p class="text-xs text-[#757683]">Ouverture / Haut / Bas</p>
                         <p class="text-sm font-bold text-[#001a61]">
-                            {{ number_format($stock->open ?? $stock->current_price ?? 0, 0, ',', ' ') }} /
-                            {{ number_format($stock->high ?? $stock->current_price ?? 0, 0, ',', ' ') }} /
-                            {{ number_format($stock->low ?? $stock->current_price ?? 0, 0, ',', ' ') }}
+                            {{ $stock->formatMoney($stock->effectiveOpen()) }} /
+                            {{ $stock->formatMoney($stock->effectiveHigh()) }} /
+                            {{ $stock->formatMoney($stock->effectiveLow()) }}
                         </p>
                     </div>
                     <div class="rounded-lg bg-[#f0f3ff] p-3">

@@ -70,8 +70,8 @@
         
         <p>Si vous avez des questions, n'hésitez pas à nous contacter :</p>
         <ul style="list-style: none; padding: 0;">
-            <li>📧 Email : african.finances@gmail.com</li>
-            <li>📱 Téléphone : +229 01 44 21 78 89 / 01 66 55 51 21</li>
+            <li>📧 Email : contact@africainedesfinances.com</li>
+            <li>📱 Téléphone : +229 01 44 21 82 09 / 01 66 55 51 21</li>
         </ul>
         
         <p style="margin-top: 30px;">Cordialement,<br><strong>L'équipe Africaine des Finances</strong></p>

@@ -32,6 +32,107 @@ class MarketsDataService
             ?? Stock::query()->where('is_active', true)->where('symbol', $symbol)->first();
     }
 
+    /**
+     * Enrichit open/high/low depuis Mansa (détail ticker) si absents en base.
+     * 1 appel API max, mis en cache 30 min.
+     */
+    public function enrichStockSessionLevels(Stock $stock): Stock
+    {
+        $needsHigh = $stock->high_price === null || (float) $stock->high_price <= 0;
+        $needsLow = $stock->low_price === null || (float) $stock->low_price <= 0;
+        $needsOpen = $stock->open_price === null || (float) $stock->open_price <= 0;
+
+        if (! $needsHigh && ! $needsLow && ! $needsOpen) {
+            return $stock;
+        }
+
+        // Fallback immédiat hors API : dérive depuis les cours déjà connus
+        $derivedHigh = $stock->effectiveHigh();
+        $derivedLow = $stock->effectiveLow();
+        $dirty = false;
+
+        if ($needsHigh && $derivedHigh !== null) {
+            $stock->high_price = $derivedHigh;
+            $dirty = true;
+            $needsHigh = false;
+        }
+        if ($needsLow && $derivedLow !== null) {
+            $stock->low_price = $derivedLow;
+            $dirty = true;
+            $needsLow = false;
+        }
+        if ($needsOpen && $stock->current_price !== null && (float) $stock->current_price > 0) {
+            $stock->open_price = (float) $stock->current_price;
+            $dirty = true;
+        }
+
+        if ($dirty) {
+            $stock->save();
+            cache()->forget('markets.stocks.active');
+        }
+
+        if ((! $needsHigh && ! $needsLow) || ! filled(config('services.mansa.api_key'))) {
+            return $stock->fresh() ?? $stock;
+        }
+
+        $cacheKey = 'mansa.stock.ohlc.'.$stock->symbol;
+        $quote = cache()->remember($cacheKey, 1800, function () use ($stock) {
+            try {
+                $payload = app(\App\Services\Mansa\MansaMarketsClient::class)
+                    ->stock('BRVM', $stock->symbol);
+                $data = $payload['data'] ?? $payload;
+
+                return is_array($data) ? $data : null;
+            } catch (\Throwable $e) {
+                return null;
+            }
+        });
+
+        if (! is_array($quote)) {
+            return $stock->fresh() ?? $stock;
+        }
+
+        $high = $this->numFromQuote($quote, ['high', 'high_price', 'day_high', 'dayHigh']);
+        $low = $this->numFromQuote($quote, ['low', 'low_price', 'day_low', 'dayLow']);
+        $open = $this->numFromQuote($quote, ['open', 'open_price', 'day_open']);
+
+        $updated = false;
+        if ($high !== null && ($stock->high_price === null || (float) $stock->high_price <= 0 || $high > (float) $stock->high_price)) {
+            $stock->high_price = $high;
+            $updated = true;
+        }
+        if ($low !== null && ($stock->low_price === null || (float) $stock->low_price <= 0 || $low < (float) $stock->low_price)) {
+            $stock->low_price = $low;
+            $updated = true;
+        }
+        if ($open !== null && ($stock->open_price === null || (float) $stock->open_price <= 0)) {
+            $stock->open_price = $open;
+            $updated = true;
+        }
+
+        if ($updated) {
+            $stock->save();
+            cache()->forget('markets.stocks.active');
+        }
+
+        return $stock->fresh() ?? $stock;
+    }
+
+    private function numFromQuote(array $quote, array $keys): ?float
+    {
+        foreach ($keys as $key) {
+            if (! array_key_exists($key, $quote) || $quote[$key] === null || $quote[$key] === '') {
+                continue;
+            }
+            $v = (float) $quote[$key];
+            if ($v > 0) {
+                return $v;
+            }
+        }
+
+        return null;
+    }
+
     public function topGainers(int $limit = 10): Collection
     {
         return $this->stocks()->sortByDesc('variation_percent')->take($limit)->values();

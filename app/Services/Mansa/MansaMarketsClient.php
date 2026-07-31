@@ -50,6 +50,16 @@ class MansaMarketsClient
         ];
     }
 
+    /**
+     * Détail d’un titre (peut inclure open / high / low selon le feed Mansa).
+     */
+    public function stock(string $exchange, string $ticker): array
+    {
+        $ticker = rawurlencode(strtoupper(trim($ticker)));
+
+        return $this->get("/api/v1/markets/exchanges/{$exchange}/stocks/{$ticker}");
+    }
+
     public function indices(string $exchange = 'BRVM'): array
     {
         return $this->get("/api/v1/markets/exchanges/{$exchange}/indices");

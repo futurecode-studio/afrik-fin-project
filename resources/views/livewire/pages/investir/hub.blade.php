@@ -19,7 +19,7 @@
             <a href="{{ route('guide-bourse') }}"
                 class="bg-[#001a61] text-white font-bold px-6 py-3 rounded hover:bg-[#0a2e8c] transition">Guide Complet de la Bourse</a>
             <a href="{{ route('investir.profil-test') }}"
-                class="border border-[#001a61] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Tester mon profil</a>
+                class="border border-[#001a61] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Lancer le diagnostic</a>
             <a href="{{ route('investir.comment') }}"
                 class="border border-[#c5c5d4] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Comment investir</a>
         </div>

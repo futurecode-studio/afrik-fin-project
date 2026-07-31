@@ -51,6 +51,8 @@ class FicheAction extends Component
 
         abort_unless($stock, 404);
 
+        $stock = $markets->enrichStockSessionLevels($stock);
+
         $peers = $markets->stocks()
             ->where('sector', $stock->sector)
             ->where('symbol', '!=', $stock->symbol)

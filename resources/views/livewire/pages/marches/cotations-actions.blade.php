@@ -54,9 +54,9 @@
                                 {{ $s->variation_percent >= 0 ? '+' : '' }}{{ number_format((float)$s->variation_percent, 2) }}%
                             </td>
                             <td class="px-3 py-3">{{ number_format((int)$s->volume, 0, ',', ' ') }}</td>
-                            <td class="px-3 py-3">{{ number_format((float)$s->market_cap, 0, ',', ' ') }}</td>
-                            <td class="px-3 py-3">{{ number_format((float)$s->high_price, 0, ',', ' ') }}</td>
-                            <td class="px-3 py-3">{{ number_format((float)$s->low_price, 0, ',', ' ') }}</td>
+                            <td class="px-3 py-3">{{ $s->formatMoney($s->market_cap !== null ? (float) $s->market_cap : null) }}</td>
+                            <td class="px-3 py-3">{{ $s->formatMoney($s->effectiveHigh()) }}</td>
+                            <td class="px-3 py-3">{{ $s->formatMoney($s->effectiveLow()) }}</td>
                             <td class="px-3 py-3">
                                 <a href="{{ route('marches.action', $s->symbol) }}" class="text-[#001a61] font-bold hover:underline">Fiche</a>
                             </td>

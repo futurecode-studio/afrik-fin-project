@@ -22,7 +22,7 @@
                 <a href="{{ route('outils.interets-composes') }}" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 p-4 transition">
                     <span class="material-symbols-outlined text-[#ffbf00]">calculate</span>
                     <p class="font-bold mt-2">Outils investisseurs</p>
-                    <p class="text-sm text-white/70 mt-1">Calculateurs et profil d’investisseur</p>
+                    <p class="text-sm text-white/70 mt-1">Calculateurs et diagnostic investisseur</p>
                 </a>
                 <a href="{{ route('ouverture-compte-sgi') }}" class="rounded-xl bg-[#ffbf00] text-[#261a00] hover:brightness-95 p-4 transition">
                     <span class="material-symbols-outlined">account_balance_wallet</span>
@@ -262,9 +262,9 @@
                     ],
                     [
                         'n' => '2',
-                        't' => 'Définir votre profil d’investisseur',
+                        't' => 'Découvrez votre diagnostic',
                         'd' => 'Évaluez votre tolérance au risque, vos objectifs et votre horizon : prudent (obligations / grandes valeurs), équilibré (mix), ou dynamique (actions à potentiel).',
-                        'cta' => 'Passer le test profil',
+                        'cta' => 'Lancer le diagnostic',
                         'route' => 'investir.profil-test',
                     ],
                     [
@@ -384,7 +384,7 @@
                     Voir les formations
                 </a>
                 <a href="{{ route('investir.profil-test') }}" class="inline-flex items-center gap-2 bg-white/10 border border-white/25 font-bold px-5 py-3 rounded-xl hover:bg-white/15 transition">
-                    Tester mon profil
+                    Lancer le diagnostic
                 </a>
                 <a href="{{ route('ouverture-compte-sgi') }}" class="inline-flex items-center gap-2 bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl hover:bg-[#e7eeff] transition">
                     Ouvrir un compte-titres

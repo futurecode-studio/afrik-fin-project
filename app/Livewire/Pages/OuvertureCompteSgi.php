@@ -84,7 +84,7 @@ class OuvertureCompteSgi extends Component
         return view('livewire.pages.ouverture-compte-sgi', [
             'documents' => SgiRequiredDocument::active()->get(),
         ])
-            ->extends('layouts.site', ['title' => 'Ouvrir un compte-titres SGI — Africaine des Finances'])
+            ->extends('layouts.site', ['title' => 'Ouvrir un compte titre — Africaine des Finances'])
             ->section('content');
     }
 }

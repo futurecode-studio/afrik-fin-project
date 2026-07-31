@@ -15,7 +15,7 @@ class TeamMemberSeeder extends Seeder
                 'poste' => 'Directeur Général',
                 'attributs' => 'PhD Finance, Certifié AMF-UMOA, MBA',
                 'description' => 'Fondateur et Directeur Général d\'Africaine des Finances. Plus de 15 ans d\'expérience dans les marchés financiers africains. Ancien analyste à la BRVM.',
-                'contact' => '+229 01 44 21 78 89',
+                'contact' => '+229 01 44 21 82 09',
                 'email' => 'k.annan@africainedesfinances.com',
                 'is_active' => true,
                 'order' => 1,

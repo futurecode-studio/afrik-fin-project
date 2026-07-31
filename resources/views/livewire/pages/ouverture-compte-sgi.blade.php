@@ -3,13 +3,13 @@
         <div class="absolute inset-0 opacity-35 pointer-events-none"
             style="background: radial-gradient(700px 340px at 90% 0%, rgba(255,191,0,.4), transparent 55%);"></div>
         <div class="relative max-w-[1100px] mx-auto px-5 lg:px-8 pt-14 pb-12 lg:pt-18 lg:pb-14">
-            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Compte-titres · SGI</p>
+            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Compte titre · SGI · FCP</p>
             <h1 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl leading-tight">
-                Demander l’ouverture d’un compte chez une SGI
+                Demander l’ouverture d’un compte titre
             </h1>
             <p class="mt-4 text-white/80 text-lg max-w-2xl leading-relaxed">
-                Africaine des Finances (agrément AMF-UMOA AA/2022-03) vous accompagne pour ouvrir un compte-titres
-                auprès d’une Société de Gestion et d’Intermédiation agréée. Remplissez le formulaire :
+                Africaine des Finances (agrément AMF-UMOA AA/2022-03) vous accompagne pour ouvrir un compte titre
+                — actions et obligations via une SGI, ou parts de FCP/OPCVM via une SGO. Remplissez le formulaire :
                 une chargée de clientèle vous recontactera.
             </p>
         </div>
@@ -25,7 +25,7 @@
                         </div>
                         <h2 class="text-2xl font-extrabold text-[#001a61]">Demande bien reçue</h2>
                         <p class="text-[#444652] leading-relaxed">
-                            Merci. Votre demande d’ouverture de compte SGI est enregistrée.
+                            Merci. Votre demande d’ouverture de compte titre est enregistrée.
                             Une chargée de clientèle Africaine des Finances vous contactera pour la suite du dossier.
                         </p>
                         <p class="text-sm text-[#444652]">
@@ -75,7 +75,7 @@
 
                         <div class="rounded-xl bg-[#f0f3ff] border border-[#c5c5d4] px-4 py-3 text-sm text-[#444652]">
                             En envoyant ce formulaire, vous acceptez d’être contacté(e) par Africaine des Finances
-                            pour l’ouverture d’un compte-titres via une SGI partenaire agréée.
+                            pour l’ouverture d’un compte titre via un partenaire agréé (SGI ou SGO).
                         </div>
 
                         <button type="submit"
@@ -98,11 +98,11 @@
                         </li>
                         <li class="flex gap-3">
                             <span class="shrink-0 w-7 h-7 rounded-full bg-[#001a61] text-white text-xs font-bold flex items-center justify-center">2</span>
-                            <span>Une chargée de clientèle vous contacte et vous oriente vers une SGI adaptée.</span>
+                            <span>Une chargée de clientèle vous contacte et vous oriente vers une SGI ou une SGO adaptée.</span>
                         </li>
                         <li class="flex gap-3">
                             <span class="shrink-0 w-7 h-7 rounded-full bg-[#001a61] text-white text-xs font-bold flex items-center justify-center">3</span>
-                            <span>Vous fournissez les documents et signez la convention avec la SGI.</span>
+                            <span>Vous fournissez les documents et signez la convention avec l’intermédiaire.</span>
                         </li>
                     </ol>
                 </div>
@@ -130,8 +130,9 @@
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-950">
                     <p class="font-bold">Bon à savoir</p>
                     <p class="mt-1 leading-relaxed">
-                        Africaine des Finances n’exécute pas les ordres de bourse. Les comptes-titres sont tenus
-                        par des SGI agréées ; nous assurons l’orientation et l’accompagnement.
+                        Africaine des Finances n’exécute pas les ordres de bourse. Les comptes titres (actions,
+                        obligations, FCP) sont tenus par des SGI ou SGO agréées ; nous assurons l’orientation et
+                        l’accompagnement.
                     </p>
                 </div>
             </aside>

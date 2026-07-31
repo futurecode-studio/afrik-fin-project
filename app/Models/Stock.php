@@ -94,4 +94,62 @@ class Stock extends Model
         }
         return number_format($this->market_cap, 0) . 'M';
     }
+
+    /**
+     * Plus haut de séance utilisable (> 0), sinon dérivé des cours connus.
+     */
+    public function effectiveHigh(): ?float
+    {
+        if ($this->high_price !== null && (float) $this->high_price > 0) {
+            return (float) $this->high_price;
+        }
+
+        return $this->derivedSessionExtreme(true);
+    }
+
+    /**
+     * Plus bas de séance utilisable (> 0), sinon dérivé des cours connus.
+     */
+    public function effectiveLow(): ?float
+    {
+        if ($this->low_price !== null && (float) $this->low_price > 0) {
+            return (float) $this->low_price;
+        }
+
+        return $this->derivedSessionExtreme(false);
+    }
+
+    public function effectiveOpen(): ?float
+    {
+        if ($this->open_price !== null && (float) $this->open_price > 0) {
+            return (float) $this->open_price;
+        }
+
+        return null;
+    }
+
+    public function formatMoney(?float $value, int $decimals = 0): string
+    {
+        if ($value === null || $value <= 0) {
+            return '—';
+        }
+
+        return number_format($value, $decimals, ',', ' ');
+    }
+
+    private function derivedSessionExtreme(bool $high): ?float
+    {
+        $points = [];
+        foreach ([$this->current_price, $this->previous_price, $this->open_price] as $v) {
+            if ($v !== null && (float) $v > 0) {
+                $points[] = (float) $v;
+            }
+        }
+
+        if ($points === []) {
+            return null;
+        }
+
+        return $high ? max($points) : min($points);
+    }
 }

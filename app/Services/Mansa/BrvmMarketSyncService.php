@@ -48,7 +48,7 @@ class BrvmMarketSyncService
                     continue;
                 }
 
-                $price = $this->num($item['price'] ?? null);
+                $price = $this->num($item['price'] ?? $item['close'] ?? $item['last'] ?? null);
                 $change = $this->num($item['change'] ?? null);
                 $changePct = $this->num($item['change_pct'] ?? $item['change_percent'] ?? null);
                 $volume = (int) ($item['volume'] ?? 0);
@@ -57,26 +57,61 @@ class BrvmMarketSyncService
                     ? Carbon::parse($item['scraped_at'])
                     : $sourceUpdatedAt;
 
+                $apiOpen = $this->num($item['open'] ?? $item['open_price'] ?? $item['day_open'] ?? null);
+                $apiHigh = $this->num($item['high'] ?? $item['high_price'] ?? $item['day_high'] ?? $item['dayHigh'] ?? null);
+                $apiLow = $this->num($item['low'] ?? $item['low_price'] ?? $item['day_low'] ?? $item['dayLow'] ?? null);
+                $marketCap = $this->num($item['market_cap'] ?? $item['marketCap'] ?? null);
+                $sector = isset($item['sector']) && is_string($item['sector']) && $item['sector'] !== ''
+                    ? $item['sector']
+                    : null;
+
                 $previous = null;
                 if ($price !== null && $change !== null) {
                     $previous = $price - $change;
+                } else {
+                    $previous = $this->num($item['previous_close'] ?? $item['previous_price'] ?? $item['prev_close'] ?? null);
+                }
+
+                $existing = Stock::query()
+                    ->where('symbol', $ticker)
+                    ->where('exchange', 'BRVM')
+                    ->first();
+
+                [$open, $high, $low] = $this->resolveSessionOhlc(
+                    $existing,
+                    $price,
+                    $apiOpen,
+                    $apiHigh,
+                    $apiLow,
+                    $scrapedAt
+                );
+
+                $payload = [
+                    'company_name' => $name,
+                    'currency' => $currency,
+                    'current_price' => $price ?? 0,
+                    'previous_price' => $previous,
+                    'change_amount' => $change,
+                    'variation_percent' => $changePct ?? 0,
+                    'volume' => $volume,
+                    'open_price' => $open,
+                    'high_price' => $high,
+                    'low_price' => $low,
+                    'is_active' => true,
+                    'source' => 'mansa',
+                    'source_updated_at' => $scrapedAt,
+                    'last_updated' => now(),
+                ];
+                if ($marketCap !== null) {
+                    $payload['market_cap'] = $marketCap;
+                }
+                if ($sector !== null) {
+                    $payload['sector'] = $sector;
                 }
 
                 $stock = Stock::updateOrCreate(
                     ['symbol' => $ticker, 'exchange' => 'BRVM'],
-                    [
-                        'company_name' => $name,
-                        'currency' => $currency,
-                        'current_price' => $price ?? 0,
-                        'previous_price' => $previous,
-                        'change_amount' => $change,
-                        'variation_percent' => $changePct ?? 0,
-                        'volume' => $volume,
-                        'is_active' => true,
-                        'source' => 'mansa',
-                        'source_updated_at' => $scrapedAt,
-                        'last_updated' => now(),
-                    ]
+                    $payload
                 );
 
                 $seen[] = $stock->id;
@@ -86,9 +121,9 @@ class BrvmMarketSyncService
                     StockPrice::create([
                         'stock_id' => $stock->id,
                         'price' => $price ?? 0,
-                        'open' => $stock->open_price,
-                        'high' => $stock->high_price,
-                        'low' => $stock->low_price,
+                        'open' => $open,
+                        'high' => $high,
+                        'low' => $low,
                         'volume' => $volume,
                         'change_amount' => $change,
                         'change_percent' => $changePct,
@@ -205,6 +240,81 @@ class BrvmMarketSyncService
         return (float) $last->price !== (float) $price
             || (int) $last->volume !== $volume
             || (float) ($last->change_percent ?? 0) !== (float) ($changePct ?? 0);
+    }
+
+    /**
+     * Calcule open / high / low de séance.
+     * Mansa liste souvent sans OHLC → on suit le plus haut / plus bas observés sur la journée.
+     *
+     * @return array{0:?float,1:?float,2:?float}
+     */
+    private function resolveSessionOhlc(
+        ?Stock $existing,
+        ?float $price,
+        ?float $apiOpen,
+        ?float $apiHigh,
+        ?float $apiLow,
+        Carbon $scrapedAt
+    ): array {
+        $tz = 'Africa/Abidjan';
+        $sameDay = $existing
+            && $existing->source_updated_at
+            && $existing->source_updated_at->timezone($tz)->isSameDay($scrapedAt->copy()->timezone($tz));
+
+        $open = $apiOpen;
+        if ($open === null) {
+            if ($sameDay && $existing->open_price !== null && (float) $existing->open_price > 0) {
+                $open = (float) $existing->open_price;
+            } else {
+                $open = $price;
+            }
+        }
+
+        $high = $apiHigh;
+        $low = $apiLow;
+
+        if ($high === null || $low === null) {
+            $observed = [];
+            if ($price !== null) {
+                $observed[] = $price;
+            }
+            if ($open !== null) {
+                $observed[] = $open;
+            }
+            if ($sameDay && $existing) {
+                if ($existing->high_price !== null && (float) $existing->high_price > 0) {
+                    $observed[] = (float) $existing->high_price;
+                }
+                if ($existing->low_price !== null && (float) $existing->low_price > 0) {
+                    $observed[] = (float) $existing->low_price;
+                }
+                if ($existing->current_price !== null && (float) $existing->current_price > 0) {
+                    $observed[] = (float) $existing->current_price;
+                }
+
+                // Complète avec l’historique de la journée si dispo
+                $dayStart = $scrapedAt->copy()->timezone($tz)->startOfDay();
+                $dayEnd = $scrapedAt->copy()->timezone($tz)->endOfDay();
+                $hist = StockPrice::query()
+                    ->where('stock_id', $existing->id)
+                    ->whereBetween('recorded_at', [$dayStart, $dayEnd])
+                    ->selectRaw('MAX(price) as max_p, MIN(price) as min_p')
+                    ->first();
+                if ($hist && $hist->max_p !== null) {
+                    $observed[] = (float) $hist->max_p;
+                }
+                if ($hist && $hist->min_p !== null) {
+                    $observed[] = (float) $hist->min_p;
+                }
+            }
+
+            if ($observed !== []) {
+                $high = $high ?? max($observed);
+                $low = $low ?? min($observed);
+            }
+        }
+
+        return [$open, $high, $low];
     }
 
     private function flushCaches(): void

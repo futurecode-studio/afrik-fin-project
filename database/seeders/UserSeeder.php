@@ -22,14 +22,14 @@ class UserSeeder extends Seeder
                 'name' => 'Administrateur Principal',
                 'email' => 'contact@africainedesfinances.com',
                 'password' => 'contact@africainedesfinances.com',
-                'phone' => '+229 01 44 21 78 89',
+                'phone' => '+229 01 44 21 82 09',
                 'role' => 'admin',
             ],
             [
                 'name' => 'Dr. Kofi Annan',
                 'email' => 'k.annan@africainedesfinances.com',
                 'password' => 'k.annan@africainedesfinances.com',
-                'phone' => '+229 01 44 21 78 89',
+                'phone' => '+229 01 44 21 82 09',
                 'role' => 'directeur_general',
             ],
             [

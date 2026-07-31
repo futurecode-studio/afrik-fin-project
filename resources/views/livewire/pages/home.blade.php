@@ -113,8 +113,8 @@
                         Guide Complet de la Bourse
                     </h2>
                     <p class="mt-4 text-white/80 text-lg max-w-2xl leading-relaxed">
-                        BRVM, actions, obligations, étapes pour investir et glossaire — tout ce qu’il faut savoir
-                        pour démarrer sur les marchés de l’UEMOA.
+                        BRVM, actions, obligations, FCP… — tout ce qu’il faut savoir
+                        pour démarrer sur le marché de l’UEMOA.
                     </p>
                     <div class="mt-6 flex flex-wrap gap-3">
                         <a href="{{ route('guide-bourse') }}"
@@ -124,7 +124,7 @@
                         </a>
                         <a href="{{ route('investir.profil-test') }}"
                             class="inline-flex items-center gap-2 border border-white/30 font-bold px-6 py-3 rounded-xl hover:bg-white/10 transition">
-                            Tester mon profil
+                            Lancer le diagnostic
                         </a>
                     </div>
                 </div>

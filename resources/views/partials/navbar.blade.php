@@ -11,12 +11,37 @@
                     <span class="material-symbols-outlined text-[15px]">language</span>
                     <span class="font-medium">FR</span>
                 </button>
-                <a href="mailto:african.finances@gmail.com" class="hover:text-[#ffbf00] transition-colors" aria-label="Email">
+                <a href="mailto:contact@africainedesfinances.com" class="hover:text-[#ffbf00] transition-colors" aria-label="Email">
                     <span class="material-symbols-outlined text-[15px]">mail</span>
                 </a>
-                <a href="tel:+2290144217889" class="hover:text-[#ffbf00] transition-colors" aria-label="Téléphone">
-                    <span class="material-symbols-outlined text-[15px]">call</span>
-                </a>
+                <div class="relative" x-data="{ phoneOpen: false }" @keydown.escape.window="phoneOpen = false">
+                    <button type="button" @click="phoneOpen = !phoneOpen"
+                        class="hover:text-[#ffbf00] transition-colors flex items-center"
+                        :aria-expanded="phoneOpen.toString()"
+                        aria-label="Téléphone"
+                        aria-haspopup="true">
+                        <span class="material-symbols-outlined text-[15px]">call</span>
+                    </button>
+                    <div x-show="phoneOpen" x-cloak @click.outside="phoneOpen = false"
+                        x-transition.opacity.duration.150ms
+                        class="absolute right-0 top-full mt-2 z-[60] w-64 rounded-xl bg-white text-[#131c2a] shadow-lg border border-[#c5c5d4] p-3 text-left">
+                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#757683] mb-2">Nous appeler</p>
+                        <div class="space-y-1.5">
+                            <a href="tel:+2290144218209" class="block rounded-lg px-2.5 py-2 hover:bg-[#e7eeff] transition">
+                                <span class="block text-[11px] text-[#757683]">Principal</span>
+                                <span class="text-sm font-bold text-[#001a61]">+229 01 44 21 82 09</span>
+                            </a>
+                            <a href="tel:+2290166555121" class="block rounded-lg px-2.5 py-2 hover:bg-[#e7eeff] transition">
+                                <span class="block text-[11px] text-[#757683]">Mobile</span>
+                                <span class="text-sm font-bold text-[#001a61]">+229 01 66 55 51 21</span>
+                            </a>
+                            <a href="tel:+2290148718851" class="block rounded-lg px-2.5 py-2 hover:bg-[#e7eeff] transition">
+                                <span class="block text-[11px] text-[#757683]">Ligne 2</span>
+                                <span class="text-sm font-bold text-[#001a61]">+229 01 48 71 88 51</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -99,8 +124,8 @@
                         </a>
                         <a href="{{ route('ouverture-compte-sgi') }}"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            Ouvrir un compte SGI
-                            <span class="block text-[11px] font-medium text-[#757683]">Demande d’accompagnement ADF</span>
+                            Ouvrir un compte titre
+                            <span class="block text-[11px] font-medium text-[#757683]">SGI · FCP · accompagnement ADF</span>
                         </a>
                         <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
@@ -110,7 +135,7 @@
                         <a href="{{ route('investir.comment') }}"
                             class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Comment investir</a>
                         <a href="{{ route('investir.profil-test') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Test profil</a>
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Diagnostic</a>
                         <a href="{{ route('investir.opcvm') }}"
                             class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">FCP / OPCVM</a>
                         <a href="{{ route('marches.index') }}"
@@ -196,7 +221,7 @@
             <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
             <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
             <a href="{{ route('guide-bourse') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Guide Complet de la Bourse</a>
-            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Ouvrir un compte SGI</a>
+            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Ouvrir un compte titre</a>
             <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                 class="block py-3 pl-4 font-bold text-[#001a61]">{{ config('services.diaspora_funnel.label') }}</a>
             <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>
