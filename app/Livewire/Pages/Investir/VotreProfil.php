@@ -36,7 +36,7 @@ class VotreProfil extends Component
                     'allocation' => [],
                 ],
                 'suggested' => [],
-            ])->extends('layouts.site', ['title' => 'Votre diagnostic'])->section('content');
+            ])->extends('layouts.site', ['title' => 'Votre profil investisseur'])->section('content');
         }
 
         $suggested = [];
@@ -60,7 +60,7 @@ class VotreProfil extends Component
             'profile' => $profile,
             'suggested' => $suggested,
         ])
-            ->extends('layouts.site', ['title' => 'Votre diagnostic — Africaine des Finances'])
+            ->extends('layouts.site', ['title' => 'Votre profil investisseur — Africaine des Finances'])
             ->section('content');
     }
 }

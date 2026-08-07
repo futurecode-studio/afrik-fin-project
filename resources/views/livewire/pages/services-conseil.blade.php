@@ -45,7 +45,7 @@
                           class="lucide lucide-check w-4 h-4 text-primary">
                           <path d="M20 6 9 17l-5-5"></path>
                         </svg></div>
-                      <p class="text-foreground leading-relaxed">Diagnostic patrimonial complet et gratuit</p>
+                      <p class="text-foreground leading-relaxed">Analyse patrimoniale complète et gratuite</p>
                     </div>
                     <div class="flex items-start gap-3">
                       <div

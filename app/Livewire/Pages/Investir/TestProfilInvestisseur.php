@@ -60,7 +60,7 @@ class TestProfilInvestisseur extends Component
             'progress' => $progress,
             'stepNumber' => $this->step + 1,
         ])
-            ->extends('layouts.site', ['title' => 'Découvrez votre diagnostic — Africaine des Finances'])
+            ->extends('layouts.site', ['title' => 'Découvrez votre profil investisseur — Africaine des Finances'])
             ->section('content');
     }
 }

@@ -19,11 +19,11 @@
             <a href="{{ route('guide-bourse') }}"
                 class="bg-[#001a61] text-white font-bold px-6 py-3 rounded hover:bg-[#0a2e8c] transition">Guide Complet de la Bourse</a>
             <a href="{{ route('investir.profil-test') }}"
-                class="border border-[#001a61] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Lancer le diagnostic</a>
+                class="border border-[#001a61] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Évaluer mon profil</a>
             <a href="{{ route('investir.comment') }}"
                 class="border border-[#c5c5d4] text-[#001a61] font-bold px-6 py-3 rounded hover:bg-[#e7eeff] transition">Comment investir</a>
         </div>
-        <p class="mt-3 text-sm text-[#757683]">Vous êtes de la diaspora ? Lancez le diagnostic gratuit (3 min) pour structurer vos investissements en Afrique.</p>
+        <p class="mt-3 text-sm text-[#757683]">Vous êtes de la diaspora ? Évaluez votre profil investisseur en quelques minutes pour structurer vos investissements en Afrique.</p>
     </section>
 
     <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-12">

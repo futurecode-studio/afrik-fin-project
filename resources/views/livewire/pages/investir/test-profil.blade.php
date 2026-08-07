@@ -2,8 +2,8 @@
     @include('partials.investir-nav')
 
     <section class="px-5 lg:px-16 max-w-[720px] mx-auto pt-12 pb-20">
-        <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c] mb-3">Diagnostic</p>
-        <h1 class="text-3xl font-extrabold text-[#001a61]">Découvrez votre diagnostic</h1>
+        <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c] mb-3">Profil investisseur</p>
+        <h1 class="text-3xl font-extrabold text-[#001a61]">Découvrez votre profil investisseur</h1>
         <p class="mt-2 text-[#444652]">{{ $total }} questions pour estimer votre profil — résultat stocké sur cet appareil.</p>
 
         <div class="mt-6 h-2 bg-[#e7eeff] rounded-full overflow-hidden">

@@ -11,10 +11,10 @@ class CommentInvestir extends Component
         $steps = [
             [
                 'n' => '01',
-                'title' => 'Découvrez votre diagnostic',
+                'title' => 'Découvrez votre profil investisseur',
                 'text' => 'Évaluez votre horizon, vos objectifs et votre tolérance au risque.',
                 'route' => 'investir.profil-test',
-                'cta' => 'Lancer le diagnostic',
+                'cta' => 'Évaluer mon profil',
                 'icon' => 'psychology',
             ],
             [

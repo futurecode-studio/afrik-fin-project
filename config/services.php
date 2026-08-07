@@ -159,12 +159,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Tunnel commercial diaspora (diagnostic investisseur)
+    | Tunnel commercial profil investisseur
     |--------------------------------------------------------------------------
     */
     'diaspora_funnel' => [
         'url' => env('DIASPORA_FUNNEL_URL', 'https://africaine-des-finances.vercel.app/#confiance'),
-        'label' => env('DIASPORA_FUNNEL_LABEL', 'Diagnostic diaspora'),
+        'label' => env('DIASPORA_FUNNEL_LABEL', 'Profil investisseur'),
     ],
 
 ];

@@ -124,7 +124,7 @@
                         </a>
                         <a href="{{ route('investir.profil-test') }}"
                             class="inline-flex items-center gap-2 border border-white/30 font-bold px-6 py-3 rounded-xl hover:bg-white/10 transition">
-                            Lancer le diagnostic
+                            Évaluer mon profil
                         </a>
                     </div>
                 </div>
@@ -421,7 +421,7 @@
                 @php
                     $steps = [
                         ['n' => '1', 'title' => 'Ouverture', 'text' => 'Créez votre compte en quelques minutes.', 'accent' => true],
-                        ['n' => '2', 'title' => 'Diagnostic', 'text' => 'Définissez votre profil de risque avec un conseiller.'],
+                        ['n' => '2', 'title' => 'Profil investisseur', 'text' => 'Définissez votre profil de risque avec un conseiller.'],
                         ['n' => '3', 'title' => 'Alimentation', 'text' => 'Effectuez votre premier dépôt sécurisé.'],
                         ['n' => '4', 'title' => 'Allocation', 'text' => 'Choisissez vos titres (Actions/Obligations).'],
                         ['n' => '5', 'title' => 'Suivi', 'text' => 'Gérez vos investissements via votre espace.'],

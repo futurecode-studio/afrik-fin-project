@@ -130,12 +130,12 @@
                         <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
                             {{ config('services.diaspora_funnel.label') }}
-                            <span class="block text-[11px] font-medium text-[#757683]">Tunnel diaspora · diagnostic gratuit</span>
+                            <span class="block text-[11px] font-medium text-[#757683]">Évaluer votre profil · accompagnement ADF</span>
                         </a>
                         <a href="{{ route('investir.comment') }}"
                             class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Comment investir</a>
                         <a href="{{ route('investir.profil-test') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Diagnostic</a>
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Profil investisseur</a>
                         <a href="{{ route('investir.opcvm') }}"
                             class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">FCP / OPCVM</a>
                         <a href="{{ route('marches.index') }}"
