@@ -72,7 +72,7 @@
                                     <td class="p-4 align-middle">
                                         <button wire:click="toggleLeadership({{ $member->id }})" type="button"
                                             class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold {{ $member->is_leadership ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600' }}"
-                                            title="Afficher sur la page À propos (Équipe dirigeante)">
+                                            title="Marquer comme membre de l'équipe dirigeante">
                                             {{ $member->is_leadership ? 'Oui' : 'Non' }}
                                         </button>
                                     </td>
@@ -206,7 +206,7 @@
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer mt-2">
                                     <input wire:model="is_leadership" type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
-                                    <span class="text-sm">Équipe dirigeante (page À propos)</span>
+                                    <span class="text-sm">Équipe dirigeante</span>
                                 </label>
                             </div>
                             <div>

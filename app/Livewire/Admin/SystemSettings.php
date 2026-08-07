@@ -12,7 +12,7 @@ class SystemSettings extends Component
     public function render()
     {
         $cards = [
-            ['title' => 'Équipe', 'desc' => 'Dirigeants & collaborateurs (page À propos)', 'route' => 'admin.team', 'icon' => 'badge'],
+            ['title' => 'Équipe', 'desc' => 'Dirigeants & collaborateurs', 'route' => 'admin.team', 'icon' => 'badge'],
             ['title' => 'Services du site', 'desc' => 'Offre publiée sur /services', 'route' => 'admin.site-services', 'icon' => 'widgets'],
             ['title' => 'Réseaux sociaux', 'desc' => 'Liens footer / partage', 'route' => 'admin.social-links', 'icon' => 'share'],
             ['title' => 'Rôles & permissions', 'desc' => 'Contrôle d’accès admin', 'route' => 'admin.roles', 'icon' => 'admin_panel_settings'],

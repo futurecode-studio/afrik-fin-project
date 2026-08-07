@@ -163,10 +163,6 @@
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('actualites*', 'actualite-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                     Actualités
                 </a>
-                <a href="{{ route('about') }}"
-                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('about') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    À propos
-                </a>
             </div>
 
             <div class="flex items-center gap-3 shrink-0">
@@ -234,7 +230,6 @@
             <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>
             <a href="{{ route('events-list') }}" class="block py-3 text-[#131c2a] font-medium">Événements</a>
             <a href="{{ route('actualites') }}" class="block py-3 text-[#131c2a] font-medium">Actualités</a>
-            <a href="{{ route('about') }}" class="block py-3 text-[#131c2a] font-medium">À propos</a>
             <a href="{{ route('contact') }}" class="block py-3 text-[#131c2a] font-medium">Contact</a>
             <div class="pt-3 border-t border-[#c5c5d4] space-y-2">
                 @auth

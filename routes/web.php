@@ -77,7 +77,6 @@ Route::get('/marches/certificats/{slug}', \App\Livewire\Pages\Marches\DetailCert
 Route::get('/marches/analyse-pro', \App\Livewire\Pages\Marches\AnalyseGraphiquePro::class)->name('marches.analyse-pro');
 Route::get('/marches/analyse-pro/{symbol}', \App\Livewire\Pages\Marches\AnalyseGraphiquePro::class)->name('marches.analyse-pro.symbol');
 
-Route::get('/about', \App\Livewire\Pages\About::class)->name('about');
 Route::get('/carriere', \App\Livewire\Pages\Carriere::class)->name('carriere');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
 Route::get('/contact', \App\Livewire\Pages\Contact::class)->name('contact');

@@ -113,8 +113,8 @@
                 </div>
                 <div>
                     <p class="text-xs text-[#757683]">Adresse</p>
-                    <p class="text-sm font-medium">Cot Agla c/3881</p>
-                    <p class="text-xs text-[#757683] mt-1">Agla, 4ème maison à étage après la pharmacie Agla en quittant le stade de l’amitié</p>
+                    <p class="text-sm font-medium">Fidjrossè Hlazounto, lot 3990, parcelle g</p>
+                    <p class="text-xs text-[#757683] mt-1">Fin des pavés du CEG l’Entente</p>
                     <p class="text-xs text-[#757683] mt-0.5">Cotonou, Bénin</p>
                 </div>
             </div>
