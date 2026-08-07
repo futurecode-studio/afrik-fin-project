@@ -80,7 +80,7 @@
     <nav class="adf-glass-nav w-full">
         <div class="flex justify-between items-center w-full px-5 lg:px-16 max-w-[1280px] mx-auto h-20">
             <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
-                <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances"
+                <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances"
                     class="h-10 w-auto object-contain transition duration-300 group-hover:scale-105 group-hover:drop-shadow-md" />
                 <span class="text-xl lg:text-2xl font-extrabold text-[#001a61] leading-tight hidden sm:block">
                     Africaine des Finances

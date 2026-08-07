@@ -24,7 +24,7 @@
         :class="sidebarOpen && '!translate-x-0'">
         <div class="px-5 py-5 border-b border-[#c5c5d4]/50 flex items-center gap-3 shrink-0">
             <a href="{{ route('client.dashboard') }}" class="flex items-center gap-3 min-w-0 flex-1">
-                <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances"
+                <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances"
                     class="h-10 w-auto object-contain shrink-0">
                 <div class="min-w-0">
                     <p class="text-sm font-extrabold text-[#001a61] leading-tight truncate">Africaine des Finances</p>

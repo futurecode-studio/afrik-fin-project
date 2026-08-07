@@ -13,7 +13,7 @@
             {{-- Brand --}}
             <div class="lg:col-span-4 space-y-4">
                 <div class="flex items-center gap-3">
-                    <img src="{{ asset('assets/logo.png') }}" alt="Africaine des Finances" class="h-10 w-auto object-contain">
+                    <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances" class="h-10 w-auto object-contain">
                     <span class="text-xl font-bold text-[#001a61]">Africaine des Finances</span>
                 </div>
                 <p class="text-base text-[#444652] max-w-sm leading-relaxed">
