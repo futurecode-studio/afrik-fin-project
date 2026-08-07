@@ -93,6 +93,13 @@ class Team extends Component
                 'image' => 'assets/images/team/micheline.jpeg',
             ],
             [
+                'name' => 'Flora HESSOU',
+                'role' => 'Conseillère clientèle',
+                'bio' => 'Passionnée par la finance et l\'investissement, Flora HESSOU conseille, oriente et accompagne les particuliers et les institutionnels dans la gestion de leur trésorerie et la construction d\'un patrimoine solide.',
+                'tags' => ['Finance', 'Investissement', 'Patrimoine'],
+                'image' => 'assets/images/team/flora.jpeg',
+            ],
+            [
                 'name' => 'Donantin Rogatien Bij-Or AHOLOU',
                 'role' => 'Conseiller financier',
                 'bio' => 'Diplômé de l\'ENA du Bénin en Administration du Travail et de la Sécurité Sociale, Donantin Rogatien Bij-Or AHOLOU a développé une solide culture financière dans la microfinance avant de se spécialiser dans l\'accompagnement sur le marché financier régional de l\'UEMOA.',
