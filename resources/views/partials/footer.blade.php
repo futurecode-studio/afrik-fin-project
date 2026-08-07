@@ -48,7 +48,7 @@
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('events-list') }}">Événements</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.actions-brvm') }}">Investir — Actions BRVM</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('partenaires') }}">Partenaires</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('team') }}">Équipe</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('team') }}">À propos</a></li>
                 </ul>
             </div>
 

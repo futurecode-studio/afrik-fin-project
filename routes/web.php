@@ -95,7 +95,8 @@ Route::get('/outils/performance-fcp', \App\Livewire\Pages\Outils\AnalysePerforma
 Route::get('/mise-en-relation', \App\Livewire\Pages\MiseEnRelation::class)->name('mise-en-relation');
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->name('partenaires.show');
-Route::get('/equipe', \App\Livewire\Pages\Team::class)->name('team');
+Route::redirect('/equipe', '/a-propos', 301);
+Route::get('/a-propos', \App\Livewire\Pages\Team::class)->name('team');
 Route::get('/panier', \App\Livewire\Pages\Panier::class)->name('panier');
 
 // Événements publics (routes spécifiques avant {slug})
