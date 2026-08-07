@@ -100,6 +100,13 @@ class Team extends Component
                 'image' => 'assets/images/team/flora.jpeg',
             ],
             [
+                'name' => 'Morel AGONSANOU',
+                'role' => 'Conseiller financier',
+                'bio' => 'Conseiller financier chez Africaine des Finances, Morel AGONSANOU offre un accompagnement personnalisé en épargne, investissement et gestion de patrimoine sur le Marché Financier Régional BRVM via les SGI et SGO.',
+                'tags' => ['Épargne', 'BRVM', 'Gestion de patrimoine'],
+                'image' => 'assets/images/team/morel.jpeg',
+            ],
+            [
                 'name' => 'Donantin Rogatien Bij-Or AHOLOU',
                 'role' => 'Conseiller financier',
                 'bio' => 'Diplômé de l\'ENA du Bénin en Administration du Travail et de la Sécurité Sociale, Donantin Rogatien Bij-Or AHOLOU a développé une solide culture financière dans la microfinance avant de se spécialiser dans l\'accompagnement sur le marché financier régional de l\'UEMOA.',
