@@ -713,7 +713,7 @@
             {{-- Barre de progression autoplay --}}
             <div class="mt-5 h-0.5 w-full bg-white/10 rounded-full overflow-hidden">
                 <div class="h-full bg-[#ffbf00] origin-left"
-                    :style="`width:${progress}%`; transition: width 80ms linear;"></div>
+                    :style="`width: ${progress}%; transition: width 80ms linear;`"></div>
             </div>
         </div>
     </section>

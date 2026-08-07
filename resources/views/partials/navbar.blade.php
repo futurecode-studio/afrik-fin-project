@@ -165,7 +165,7 @@
                 </a>
                 <a href="{{ route('team') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('team') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    À propos
+                    <span class="whitespace-nowrap">À propos</span>
                 </a>
             </div>
 

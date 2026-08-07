@@ -38,9 +38,13 @@ deploy-assets:
 		npm ci; \
 		npm run build; \
 		mkdir -p /home/u213525791/domains/africainedesfinances.com/public_html/build; \
+		mkdir -p /home/u213525791/domains/africainedesfinances.com/public_html/assets; \
 		rsync -a --delete \
 			/home/u213525791/domains/africainedesfinances.com/africairedesfinances_core/public/build/ \
 			/home/u213525791/domains/africainedesfinances.com/public_html/build/; \
+		rsync -a \
+			/home/u213525791/domains/africainedesfinances.com/africairedesfinances_core/public/assets/ \
+			/home/u213525791/domains/africainedesfinances.com/public_html/assets/; \
 		echo '=== DONE ASSETS ==='"
 
 deploy-migrate:
