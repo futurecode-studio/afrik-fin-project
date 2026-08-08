@@ -555,44 +555,52 @@
     @php
         $testimonials = [
             [
-                'quote' => "Grâce aux formations de Africaine des Finances, j'ai pu diversifier mon portefeuille et générer des rendements constants. L'équipe est professionnelle et toujours disponible.",
-                'name' => 'Koffi Mensah',
-                'role' => 'Investisseur privé',
-                'city' => "Abidjan, Côte d'Ivoire",
-                'seed' => 'Koffi',
-                'tag' => 'Formations',
-            ],
-            [
-                'quote' => "Les analyses de marché BRVM sont précises et m'ont aidée à prendre des décisions stratégiques pour mon entreprise. Un service incontournable pour tout professionnel de la finance.",
-                'name' => 'Aminata Diallo',
-                'role' => 'Directrice Financière',
-                'city' => 'Dakar, Sénégal',
-                'seed' => 'Aminata',
-                'tag' => 'Analyses',
-            ],
-            [
-                'quote' => "Le service de conseil en investissement m'a permis d'optimiser mes placements. Les conseillers sont compétents et comprennent parfaitement les spécificités du marché africain.",
-                'name' => 'Jean-Pierre Kouassi',
+                'quote' => "Grâce à Africaine des Finances, j'ai enfin compris le fonctionnement de la BRVM. L'équipe m'a accompagné dans l'ouverture de mon compte-titres et le choix de mes premiers investissements. Un service professionnel et rassurant.",
+                'name' => 'Jean-Baptiste K.',
                 'role' => 'Entrepreneur',
-                'city' => 'Lomé, Togo',
-                'seed' => 'Jean',
-                'tag' => 'Conseil',
+                'city' => 'Cotonou',
+                'seed' => 'JeanBaptiste',
+                'tag' => 'BRVM',
             ],
             [
-                'quote' => "La plateforme est claire, les cotations BRVM sont à jour, et le suivi personnalisé change vraiment la donne pour un investisseur particulier comme moi.",
-                'name' => 'Fatou Bamba',
+                'quote' => "Je recherchais une solution pour faire fructifier mon épargne sur le long terme. Les conseillers m'ont orientée vers des FCP adaptés à mon profil. Je recommande leur accompagnement pour leur pédagogie et leur disponibilité.",
+                'name' => 'Clarisse A.',
                 'role' => 'Cadre bancaire',
-                'city' => 'Abidjan, Côte d\'Ivoire',
-                'seed' => 'Fatou',
-                'tag' => 'Marchés',
+                'city' => '',
+                'seed' => 'Clarisse',
+                'tag' => 'FCP',
             ],
             [
-                'quote' => "J’ai commencé sans expérience boursière. En quelques mois, j’ai compris les indices, les volumes et les opportunités UEMOA grâce à leur pédagogie.",
-                'name' => 'Ibrahim Sow',
-                'role' => 'Jeune investisseur',
-                'city' => 'Ouagadougou, Burkina Faso',
-                'seed' => 'Ibrahim',
-                'tag' => 'Académie',
+                'quote' => "L'accompagnement est personnalisé et les explications sont claires. Aujourd'hui, je diversifie mon patrimoine entre actions, obligations et FCP en toute confiance.",
+                'name' => 'Marcel D.',
+                'role' => "Chef d'entreprise",
+                'city' => '',
+                'seed' => 'Marcel',
+                'tag' => 'Patrimoine',
+            ],
+            [
+                'quote' => "J'apprécie particulièrement le suivi régulier et les conseils adaptés aux évolutions du marché. Africaine des Finances m'a permis de commencer à investir sereinement sur la BRVM.",
+                'name' => 'Aïcha S.',
+                'role' => 'Pharmacienne',
+                'city' => '',
+                'seed' => 'Aicha',
+                'tag' => 'Accompagnement',
+            ],
+            [
+                'quote' => "Je pensais que la bourse était réservée aux grandes fortunes. L'équipe m'a montré qu'il est possible d'investir progressivement selon ses moyens. Une excellente expérience.",
+                'name' => 'Rodrigue T.',
+                'role' => 'Salarié',
+                'city' => '',
+                'seed' => 'Rodrigue',
+                'tag' => 'Pédagogie',
+            ],
+            [
+                'quote' => "Professionnalisme, transparence et réactivité. J'ai été accompagnée à chaque étape de mon projet d'investissement. Je recommande Africaine des Finances à toute personne souhaitant préparer son avenir financier.",
+                'name' => 'Nadège M.',
+                'role' => 'Commerçante',
+                'city' => '',
+                'seed' => 'Nadege',
+                'tag' => 'Confiance',
             ],
         ];
     @endphp
@@ -663,7 +671,7 @@
                             >
                             <div>
                                 <p class="font-extrabold text-lg leading-tight" x-text="t.name"></p>
-                                <p class="text-sm text-white/70" x-text="t.role + ' · ' + t.city"></p>
+                                <p class="text-sm text-white/70" x-text="t.city ? (t.role + ' · ' + t.city) : t.role"></p>
                             </div>
                         </div>
                     </div>
@@ -846,14 +854,14 @@
                     datasets: [{
                         label: 'BRVM Composite',
                         data: values,
-                        borderColor: '#001a61',
+                        borderColor: up ? '#16a34a' : '#dc2626',
                         backgroundColor: (ctx) => {
                             const {chart} = ctx;
                             const {ctx: c, chartArea} = chart;
-                            if (!chartArea) return 'rgba(0,26,97,0.12)';
+                            if (!chartArea) return up ? 'rgba(22,163,74,0.12)' : 'rgba(220,38,38,0.12)';
                             const g = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-                            g.addColorStop(0, up ? 'rgba(0,26,97,0.28)' : 'rgba(220,38,38,0.18)');
-                            g.addColorStop(1, 'rgba(0,26,97,0)');
+                            g.addColorStop(0, up ? 'rgba(22,163,74,0.28)' : 'rgba(220,38,38,0.18)');
+                            g.addColorStop(1, 'rgba(22,163,74,0)');
                             return g;
                         },
                         borderWidth: 2.5,
@@ -908,7 +916,7 @@
                     datasets: [{
                         label: 'Volume',
                         data: volumeLeaders.map(s => s.volume),
-                        backgroundColor: volumeLeaders.map(s => s.variation >= 0 ? 'rgba(0,26,97,0.85)' : 'rgba(220,38,38,0.7)'),
+                        backgroundColor: volumeLeaders.map(s => s.variation >= 0 ? 'rgba(22,163,74,0.85)' : 'rgba(220,38,38,0.7)'),
                         borderRadius: 8,
                         maxBarThickness: 72,
                         categoryPercentage: 0.7,

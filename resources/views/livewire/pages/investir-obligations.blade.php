@@ -476,8 +476,8 @@
                         <li class="flex items-start gap-3">
                             <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs shrink-0">3</span>
                             <div>
-                                <a href="https://www.crepmf.org" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">CREPMF</a>
-                                <span class="text-muted-foreground"> — Conseil Régional de l'Épargne Publique et des Marchés Financiers (autorité de régulation)</span>
+                                <a href="https://www.amf-umoa.org" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">AMF-UMOA</a>
+                                <span class="text-muted-foreground"> — Autorité des Marchés Financiers de l'UMOA (autorité de régulation)</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
@@ -530,7 +530,7 @@
                         <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.71-3L13.71 4a2 2 0 00-3.42 0L3.22 16a2 2 0 001.71 3z"/></svg>
                         <div class="text-sm text-amber-900">
                             <strong class="block mb-1">Avertissement risques</strong>
-                            Tout investissement comporte des risques : défaut souverain, risque de taux, risque de liquidité sur le marché secondaire, inflation. Les performances passées ne préjugent pas des performances futures. Pour toute décision, consultez une <strong>SGI agréée par le CREPMF</strong> et vérifiez les informations sur <a href="https://www.umoatitres.org" target="_blank" rel="noopener noreferrer" class="underline font-medium">umoatitres.org</a>.
+                            Tout investissement comporte des risques : défaut souverain, risque de taux, risque de liquidité sur le marché secondaire, inflation. Les performances passées ne préjugent pas des performances futures. Pour toute décision, consultez une <strong>SGI agréée par l’AMF-UMOA</strong> et vérifiez les informations sur <a href="https://www.umoatitres.org" target="_blank" rel="noopener noreferrer" class="underline font-medium">umoatitres.org</a>.
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@
                             'current_price' => 'Cours',
                             'variation_percent' => 'Var. %',
                             'volume' => 'Volume',
-                            'market_cap' => 'Capit.',
+                            'market_cap' => 'Cap. (Mrd)',
                             'high_price' => 'Plus Haut',
                             'low_price' => 'Plus Bas',
                         ] as $col => $label)
@@ -54,7 +54,7 @@
                                 {{ $s->variation_percent >= 0 ? '+' : '' }}{{ number_format((float)$s->variation_percent, 2) }}%
                             </td>
                             <td class="px-3 py-3">{{ number_format((int)$s->volume, 0, ',', ' ') }}</td>
-                            <td class="px-3 py-3">{{ $s->formatMoney($s->market_cap !== null ? (float) $s->market_cap : null) }}</td>
+                            <td class="px-3 py-3 tabular-nums">{{ \App\Models\Stock::formatCapMrd($s->market_cap) }}</td>
                             <td class="px-3 py-3">{{ $s->formatMoney($s->effectiveHigh()) }}</td>
                             <td class="px-3 py-3">{{ $s->formatMoney($s->effectiveLow()) }}</td>
                             <td class="px-3 py-3">

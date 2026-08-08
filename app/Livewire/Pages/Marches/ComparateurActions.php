@@ -109,7 +109,7 @@ class ComparateurActions extends Component
                 'current_price' => 'Cours (FCFA)',
                 'variation_percent' => 'Variation %',
                 'volume' => 'Volume',
-                'market_cap' => 'Cap. (M FCFA)',
+                'market_cap' => 'Cap. (Mrd FCFA)',
                 'high_price' => 'Plus haut',
                 'low_price' => 'Plus bas',
                 'sector' => 'Secteur',

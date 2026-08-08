@@ -10,7 +10,12 @@
                     <div>
                         <p class="text-xs uppercase tracking-wider text-[#757683]">Titre sélectionné</p>
                         <h2 class="text-xl font-extrabold text-[#001a61]">{{ $stock->company_name }} ({{ $stock->symbol }})</h2>
-                        <p class="text-sm text-[#444652] mt-1">{{ number_format($stock->current_price, 0, ',', ' ') }} FCFA · {{ number_format($stock->variation_percent, 2, ',', ' ') }}%</p>
+                        <p class="text-sm text-[#444652] mt-1">
+                            {{ number_format($stock->current_price, 0, ',', ' ') }} FCFA ·
+                            <span class="font-semibold {{ $stock->variation_percent >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                                {{ $stock->variation_percent >= 0 ? '+' : '' }}{{ number_format($stock->variation_percent, 2, ',', ' ') }}%
+                            </span>
+                        </p>
                     </div>
                 @endif
                 <form wire:submit.prevent="prepareSubmit" class="space-y-4">

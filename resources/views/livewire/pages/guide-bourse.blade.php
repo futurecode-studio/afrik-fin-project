@@ -109,7 +109,7 @@
                 @foreach ([
                     ['icon' => 'location_on', 't' => 'Siège social', 'd' => 'Abidjan, Côte d’Ivoire — la BRVM centralise les transactions boursières de la zone UEMOA depuis 1998.'],
                     ['icon' => 'public', 't' => 'Marché unique', 'd' => 'Un marché intégré permettant aux entreprises des 8 pays d’accéder à un bassin d’investisseurs plus large.'],
-                    ['icon' => 'gavel', 't' => 'Régulation', 'd' => 'Supervisée par l’AMF-UMOA (ex-CREPMF), qui garantit la sécurité et la transparence des transactions.'],
+                    ['icon' => 'gavel', 't' => 'Régulation', 'd' => 'Supervisée par l’Autorité des Marchés Financiers de l’UMOA (AMF-UMOA), qui garantit la sécurité et la transparence des transactions.'],
                     ['icon' => 'monitoring', 't' => 'Indices boursiers', 'd' => 'BRVM Composite et BRVM 30 mesurent la performance globale du marché et des valeurs les plus actives.'],
                 ] as $item)
                     <div class="bg-white border border-[#c5c5d4] rounded-2xl p-5 flex gap-4">

@@ -41,8 +41,8 @@
             </div>
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-5">
                 <p class="text-xs uppercase tracking-wide text-[#757683]">Cap. boursière</p>
-                <p class="text-2xl font-bold text-[#001a61] mt-1">{{ number_format($totalMarketCap, 0, ',', ' ') }}</p>
-                <p class="text-sm text-[#757683] mt-1">M FCFA (estim.)</p>
+                <p class="text-2xl font-bold text-[#001a61] mt-1">{{ \App\Models\Stock::formatCapMrd($totalMarketCap) }}</p>
+                <p class="text-sm text-[#757683] mt-1">Mrd FCFA (estim.)</p>
             </div>
         </div>
     </section>
@@ -53,10 +53,8 @@
                 <h2 class="text-xl font-bold text-[#001a61]">Performance BRVM Composite</h2>
                 <a href="{{ route('marches.indices') }}" class="text-sm font-bold text-[#001a61]">Voir indices →</a>
             </div>
-            <div class="h-48 flex items-end gap-1">
-                @foreach ($chartBars as $h)
-                    <div class="bg-[#001a61]/20 hover:bg-[#001a61] transition-all w-full rounded-t-sm" style="height: {{ $h }}%"></div>
-                @endforeach
+            <div class="relative h-56">
+                <canvas id="marketsCompositeChart" class="w-full h-full" aria-label="Évolution du BRVM Composite"></canvas>
             </div>
         </div>
 
@@ -105,6 +103,7 @@
                         <th class="text-left px-4 py-3">Société</th>
                         <th class="text-right px-4 py-3">Cours</th>
                         <th class="text-right px-4 py-3">Var. %</th>
+                        <th class="text-right px-4 py-3">Cap. (Mrd)</th>
                         <th class="text-right px-4 py-3">Volume</th>
                     </tr>
                 </thead>
@@ -117,6 +116,7 @@
                             <td class="px-4 py-3 text-right {{ $s->variation_percent >= 0 ? 'text-green-600' : 'text-red-600' }}">
                                 {{ $s->variation_percent >= 0 ? '+' : '' }}{{ number_format((float)$s->variation_percent, 2) }}%
                             </td>
+                            <td class="px-4 py-3 text-right tabular-nums font-semibold">{{ \App\Models\Stock::formatCapMrd($s->market_cap) }}</td>
                             <td class="px-4 py-3 text-right">{{ number_format((int)$s->volume, 0, ',', ' ') }}</td>
                         </tr>
                     @endforeach
@@ -125,3 +125,44 @@
         </div>
     </section>
 </div>
+
+@push('scripts')
+<script>
+(() => {
+    const data = @json($chartData);
+    const canvas = document.getElementById('marketsCompositeChart');
+    if (!canvas || typeof Chart === 'undefined' || !data.values?.length) return;
+    new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'BRVM Composite',
+                data: data.values,
+                borderColor: '#001a61',
+                backgroundColor: 'rgba(0, 26, 97, 0.10)',
+                borderWidth: 2.5,
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                pointHoverBackgroundColor: '#ffbf00',
+                tension: 0.3,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: item => ' ' + Number(item.raw).toLocaleString('fr-FR') + ' pts' } }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { maxTicksLimit: 6 } },
+                y: { grid: { color: 'rgba(197,197,212,0.4)' }, ticks: { maxTicksLimit: 5 } }
+            }
+        }
+    });
+})();
+</script>
+@endpush

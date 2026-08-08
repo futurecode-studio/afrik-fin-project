@@ -41,7 +41,7 @@ class ArticleCompleteSeeder extends Seeder
 <li>Togo</li>
 </ul>
 
-<p class="mb-4">Son siège social est situé à <strong>Abidjan, en Côte d\'Ivoire</strong>. La BRVM est régulée par le Conseil Régional de l\'Épargne Publique et des Marchés Financiers (CREPMF).</p>
+<p class="mb-4">Son siège social est situé à <strong>Abidjan, en Côte d\'Ivoire</strong>. La BRVM est régulée par l\'Autorité des Marchés Financiers de l\'UMOA (AMF-UMOA).</p>
 
 <h2 class="text-2xl font-bold mt-8 mb-4">Les indices de la BRVM</h2>
 <p class="mb-4">La BRVM dispose de deux indices principaux :</p>
@@ -86,7 +86,7 @@ class ArticleCompleteSeeder extends Seeder
 <li>Fiscalité avantageuse sur les plus-values dans plusieurs pays</li>
 </ul>
 
-<p class="mb-4"><em>Sources : BRVM (brvm.org), CREPMF, Banque Centrale des États de l\'Afrique de l\'Ouest (BCEAO)</em></p>',
+<p class="mb-4"><em>Sources : BRVM (brvm.org), AMF-UMOA, Banque Centrale des États de l\'Afrique de l\'Ouest (BCEAO)</em></p>',
                 'image_url' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
                 'categorie' => 'Éducation',
                 'statut' => 'publie',
@@ -158,10 +158,10 @@ class ArticleCompleteSeeder extends Seeder
                 'titre' => 'Comment ouvrir un compte-titres à la BRVM : Guide pratique',
                 'slug' => 'comment-ouvrir-compte-titres-brvm-guide-pratique',
                 'extrait' => 'Les étapes concrètes pour ouvrir un compte-titres et commencer à investir sur la Bourse Régionale des Valeurs Mobilières.',
-                'contenu' => '<p class="text-lg mb-6">Pour investir sur la BRVM, vous devez obligatoirement passer par une Société de Gestion et d\'Intermédiation (SGI) agréée par le CREPMF. Voici le guide complet.</p>
+                'contenu' => '<p class="text-lg mb-6">Pour investir sur la BRVM, vous devez obligatoirement passer par une Société de Gestion et d\'Intermédiation (SGI) agréée par l\'AMF-UMOA. Voici le guide complet.</p>
 
 <h2 class="text-2xl font-bold mt-8 mb-4">Qu\'est-ce qu\'une SGI ?</h2>
-<p class="mb-4">Les Sociétés de Gestion et d\'Intermédiation (SGI) sont les seuls intermédiaires habilités à exécuter des ordres de bourse sur la BRVM. Elles sont agréées et supervisées par le <strong>Conseil Régional de l\'Épargne Publique et des Marchés Financiers (CREPMF)</strong>.</p>
+<p class="mb-4">Les Sociétés de Gestion et d\'Intermédiation (SGI) sont les seuls intermédiaires habilités à exécuter des ordres de bourse sur la BRVM. Elles sont agréées et supervisées par l\'<strong>Autorité des Marchés Financiers de l\'UMOA (AMF-UMOA)</strong>.</p>
 
 <p class="mb-4">Il existe actuellement <strong>25 SGI agréées</strong> réparties dans les 8 pays de l\'UEMOA.</p>
 
@@ -230,7 +230,7 @@ class ArticleCompleteSeeder extends Seeder
 <li>Commencer à passer vos ordres</li>
 </ol>
 
-<p class="mb-4"><em>Sources : CREPMF (crepmf.org), BRVM (brvm.org)</em></p>',
+<p class="mb-4"><em>Sources : AMF-UMOA (amf-umoa.org), BRVM (brvm.org)</em></p>',
                 'image_url' => 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=1200&h=600&fit=crop',
                 'categorie' => 'Formation',
                 'statut' => 'publie',
@@ -395,7 +395,7 @@ class ArticleCompleteSeeder extends Seeder
 
 <p class="mb-4"><strong>Cours</strong> : Prix auquel s\'échange une action sur le marché.</p>
 
-<p class="mb-4"><strong>CREPMF</strong> : Conseil Régional de l\'Épargne Publique et des Marchés Financiers. Autorité de régulation du marché financier de l\'UEMOA.</p>
+<p class="mb-4"><strong>AMF-UMOA</strong> : Autorité des Marchés Financiers de l\'UMOA. Autorité de régulation du marché financier régional.</p>
 
 <p class="mb-4"><strong>Dividende</strong> : Part des bénéfices distribuée aux actionnaires.</p>
 
@@ -449,7 +449,7 @@ class ArticleCompleteSeeder extends Seeder
 <li><strong>NTLC</strong> : Nestlé Côte d\'Ivoire</li>
 </ul>
 
-<p class="mb-4"><em>Sources : BRVM (brvm.org), CREPMF (crepmf.org)</em></p>',
+<p class="mb-4"><em>Sources : BRVM (brvm.org), AMF-UMOA (amf-umoa.org)</em></p>',
                 'image_url' => 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=600&fit=crop',
                 'categorie' => 'Éducation',
                 'statut' => 'publie',

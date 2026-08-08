@@ -237,14 +237,14 @@ window.navMarketPanel = function (payload) {
                     datasets: [{
                         label: this.active?.label || 'Indice',
                         data: values,
-                        borderColor: up ? '#001a61' : '#b91c1c',
+                        borderColor: up ? '#16a34a' : '#dc2626',
                         backgroundColor: (ctx) => {
                             const { chart } = ctx;
                             const { ctx: c, chartArea } = chart;
-                            if (!chartArea) return 'rgba(0,26,97,0.08)';
+                            if (!chartArea) return up ? 'rgba(22,163,74,0.08)' : 'rgba(220,38,38,0.08)';
                             const g = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-                            g.addColorStop(0, up ? 'rgba(0,26,97,0.22)' : 'rgba(185,28,28,0.16)');
-                            g.addColorStop(1, 'rgba(0,26,97,0)');
+                            g.addColorStop(0, up ? 'rgba(22,163,74,0.22)' : 'rgba(220,38,38,0.16)');
+                            g.addColorStop(1, 'rgba(22,163,74,0)');
                             return g;
                         },
                         borderWidth: 2,

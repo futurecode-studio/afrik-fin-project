@@ -11,10 +11,15 @@ class IndicesBrvm extends Component
     {
         $names = $markets->indexNames();
         $indices = $names->mapWithKeys(function ($name) use ($markets) {
+            $history = $markets->indexHistory($name, 30);
+
             return [$name => [
                 'latest' => $markets->indexLatest($name),
-                'history' => $markets->indexHistory($name, 30),
-                'bars' => $markets->chartBarsFromHistory($markets->indexHistory($name, 30)),
+                'history' => $history,
+                'chart' => [
+                    'labels' => $history->map(fn ($row) => $row->snapshot_date->format('d/m'))->values()->all(),
+                    'values' => $history->map(fn ($row) => round((float) $row->value, 2))->values()->all(),
+                ],
             ]];
         });
 

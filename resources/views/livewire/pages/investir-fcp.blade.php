@@ -392,7 +392,7 @@
                 <div class="text-center mb-10">
                     <h2 class="text-2xl md:text-3xl font-bold mb-3">Comment fonctionnent ces données ?</h2>
                     <p class="text-muted-foreground max-w-2xl mx-auto">
-                        Toutes les valeurs liquidatives (VL) affichées proviennent de <strong>Sikafinance</strong>, qui centralise les publications officielles des sociétés de gestion agréées par le CREPMF. Aucune saisie manuelle, aucune donnée simulée.
+                        Toutes les valeurs liquidatives (VL) affichées proviennent de <strong>Sikafinance</strong>, qui centralise les publications officielles des sociétés de gestion agréées par l’AMF-UMOA. Aucune saisie manuelle, aucune donnée simulée.
                     </p>
                 </div>
 
@@ -404,7 +404,7 @@
                         <span class="text-xs font-bold text-primary uppercase tracking-wide">Étape 1</span>
                         <h3 class="font-bold text-foreground mt-1 mb-2">Publication par les SGO</h3>
                         <p class="text-sm text-muted-foreground">
-                            Chaque société de gestion d'OPCVM (SGO) calcule quotidiennement ou hebdomadairement la valeur liquidative de ses FCP et la publie auprès du CREPMF.
+                            Chaque société de gestion d'OPCVM (SGO) calcule quotidiennement ou hebdomadairement la valeur liquidative de ses FCP et la publie auprès de l’AMF-UMOA.
                         </p>
                     </div>
                     <div class="rounded-lg border border-border bg-card p-6">
@@ -445,8 +445,8 @@
                         <li class="flex items-start gap-3">
                             <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs shrink-0">2</span>
                             <div>
-                                <a href="https://www.crepmf.org" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">CREPMF</a>
-                                <span class="text-muted-foreground"> — Conseil Régional de l'Épargne Publique et des Marchés Financiers, agrée et supervise les SGO</span>
+                                <a href="https://www.amf-umoa.org" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline">AMF-UMOA</a>
+                                <span class="text-muted-foreground"> — Autorité des Marchés Financiers de l'UMOA, agrée et supervise les SGO</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
@@ -490,7 +490,7 @@
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                         </div>
                         <h3 class="text-xl font-bold mb-2">Gestion professionnelle</h3>
-                        <p class="text-muted-foreground text-sm">Des sociétés de gestion agréées par le CREPMF pilotent vos placements selon une politique d'investissement définie.</p>
+                        <p class="text-muted-foreground text-sm">Des sociétés de gestion agréées par l’AMF-UMOA pilotent vos placements selon une politique d'investissement définie.</p>
                     </div>
                     <div class="bg-card rounded-xl p-6 border border-border">
                         <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
@@ -507,7 +507,7 @@
                         <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.71-3L13.71 4a2 2 0 00-3.42 0L3.22 16a2 2 0 001.71 3z"/></svg>
                         <div class="text-sm text-amber-900">
                             <strong class="block mb-1">Avertissement risques</strong>
-                            La valeur liquidative d'un FCP fluctue avec les marchés financiers. Les performances passées ne préjugent pas des performances futures. Des frais de souscription, de gestion et parfois de rachat s'appliquent selon le fonds. Consultez toujours le <strong>DICI</strong> (document d'information clé) avant toute souscription, et adressez-vous à une <strong>SGI agréée par le CREPMF</strong>.
+                            La valeur liquidative d'un FCP fluctue avec les marchés financiers. Les performances passées ne préjugent pas des performances futures. Des frais de souscription, de gestion et parfois de rachat s'appliquent selon le fonds. Consultez toujours le <strong>DICI</strong> (document d'information clé) avant toute souscription, et adressez-vous à une <strong>SGI agréée par l’AMF-UMOA</strong>.
                         </div>
                     </div>
                 </div>

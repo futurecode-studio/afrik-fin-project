@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Stock;
+use App\Services\BrvmSharesCatalog;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Livewire\Concerns\WithSweetAlert;
@@ -25,6 +26,7 @@ class StockData extends Component
     public $previous_price = '';
     public $volume = 0;
     public $market_cap = '';
+    public $shares_outstanding = '';
     public $sector = '';
     public $high_price = '';
     public $low_price = '';
@@ -37,6 +39,7 @@ class StockData extends Component
         'previous_price' => 'nullable|numeric|min:0',
         'volume' => 'nullable|integer|min:0',
         'market_cap' => 'nullable|numeric|min:0',
+        'shares_outstanding' => 'nullable|integer|min:0',
         'sector' => 'nullable|string|max:100',
         'high_price' => 'nullable|numeric|min:0',
         'low_price' => 'nullable|numeric|min:0',
@@ -73,6 +76,7 @@ class StockData extends Component
         $this->previous_price = $stock->previous_price;
         $this->volume = $stock->volume;
         $this->market_cap = $stock->market_cap;
+        $this->shares_outstanding = $stock->shares_outstanding;
         $this->sector = $stock->sector;
         $this->high_price = $stock->high_price;
         $this->low_price = $stock->low_price;
@@ -91,13 +95,24 @@ class StockData extends Component
         $this->validate();
 
         try {
+            $shares = $this->shares_outstanding !== '' ? (int) $this->shares_outstanding : null;
+            $marketCap = $this->market_cap !== '' ? $this->market_cap : null;
+            if ($shares && (float) $this->current_price > 0) {
+                $computed = app(BrvmSharesCatalog::class)
+                    ->marketCapMillions($shares, (float) $this->current_price);
+                if ($computed !== null) {
+                    $marketCap = $computed;
+                }
+            }
+
             $data = [
                 'symbol' => strtoupper($this->symbol),
                 'company_name' => $this->company_name,
                 'current_price' => $this->current_price,
                 'previous_price' => $this->previous_price,
                 'volume' => $this->volume ?? 0,
-                'market_cap' => $this->market_cap,
+                'market_cap' => $marketCap,
+                'shares_outstanding' => $shares,
                 'sector' => $this->sector,
                 'high_price' => $this->high_price,
                 'low_price' => $this->low_price,
@@ -172,6 +187,7 @@ class StockData extends Component
             'previous_price',
             'volume',
             'market_cap',
+            'shares_outstanding',
             'sector',
             'high_price',
             'low_price',

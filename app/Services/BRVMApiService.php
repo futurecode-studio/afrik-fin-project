@@ -148,8 +148,15 @@ class BRVMApiService
         try {
             foreach ($apiStocks as $stockData) {
                 // Adapter les noms de champs selon le format de l'API
+                $symbol = strtoupper((string) ($stockData['symbol'] ?? $stockData['ticker'] ?? ''));
+                $sector = match ($symbol) {
+                    'BIIC' => 'Finance',
+                    'NTLC' => 'Industrie',
+                    default => $stockData['sector'] ?? $stockData['industry'] ?? null,
+                };
+
                 Stock::updateOrCreate(
-                    ['symbol' => $stockData['symbol'] ?? $stockData['ticker']],
+                    ['symbol' => $symbol],
                     [
                         'company_name' => $stockData['company_name'] ?? $stockData['name'] ?? $stockData['companyName'],
                         'current_price' => $stockData['current_price'] ?? $stockData['price'] ?? $stockData['lastPrice'],
@@ -157,7 +164,7 @@ class BRVMApiService
                         'variation_percent' => $stockData['variation_percent'] ?? $stockData['change_percent'] ?? $stockData['changePercent'] ?? 0,
                         'volume' => $stockData['volume'] ?? $stockData['tradedVolume'] ?? 0,
                         'market_cap' => $stockData['market_cap'] ?? $stockData['marketCap'] ?? null,
-                        'sector' => $stockData['sector'] ?? $stockData['industry'] ?? null,
+                        'sector' => $sector,
                         'high_price' => $stockData['high_price'] ?? $stockData['high'] ?? $stockData['dayHigh'] ?? null,
                         'low_price' => $stockData['low_price'] ?? $stockData['low'] ?? $stockData['dayLow'] ?? null,
                         'is_active' => true,

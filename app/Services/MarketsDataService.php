@@ -418,8 +418,8 @@ class MarketsDataService
         $metric = in_array($metric, ['auto', 'market_cap', 'volume', 'variation'], true) ? $metric : 'auto';
         $stocks = $this->stocks();
 
-        $avgCap = (float) $stocks->avg(fn (Stock $s) => (float) $s->market_cap);
-        $capsLookReal = $avgCap >= 1_000_000_000;
+        $withCap = $stocks->filter(fn (Stock $s) => (float) $s->market_cap > 0)->count();
+        $capsLookReal = $withCap >= max(5, (int) ceil($stocks->count() * 0.4));
 
         if ($metric === 'auto') {
             $metric = $capsLookReal ? 'market_cap' : 'volume';
@@ -436,7 +436,7 @@ class MarketsDataService
             $turnover = max((float) $s->volume, 1) * max((float) $s->current_price, 1);
 
             $size = match ($metric) {
-                'market_cap' => ($capsLookReal && $cap >= 1_000_000) ? $cap : $turnover,
+                'market_cap' => ($capsLookReal && $cap > 0) ? $cap : $turnover,
                 'variation' => abs((float) $s->variation_percent) + 0.01,
                 default => $turnover,
             };

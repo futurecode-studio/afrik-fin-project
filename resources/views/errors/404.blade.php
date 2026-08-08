@@ -29,14 +29,8 @@
             <div class="order-2 md:order-1">
                 <div class="relative aspect-square max-w-md mx-auto border border-[#c5c5d4] rounded-xl bg-white/80 backdrop-blur flex flex-col items-center justify-center p-8">
                     <div class="text-[100px] font-extrabold text-[#001a61]/20 leading-none select-none">404</div>
-                    <div class="w-full h-28 flex items-end gap-1 px-2 mt-2">
-                        <div class="flex-1 bg-[#001a61]/20 rounded-t h-[30%]"></div>
-                        <div class="flex-1 bg-[#001a61]/30 rounded-t h-[50%]"></div>
-                        <div class="flex-1 bg-[#001a61]/15 rounded-t h-[20%]"></div>
-                        <div class="flex-1 bg-[#001a61]/40 rounded-t h-[70%]"></div>
-                        <div class="flex-1 bg-red-400/30 rounded-t h-[40%]"></div>
-                        <div class="flex-1 bg-[#ffbf00]/60 rounded-t h-[60%] border-t-2 border-[#ffbf00]"></div>
-                        <div class="flex-1 bg-[#001a61]/20 rounded-t h-[35%]"></div>
+                    <div class="mt-5 flex items-center justify-center text-[#001a61]/35">
+                        <span class="material-symbols-outlined text-[96px]">query_stats</span>
                     </div>
                     <p class="mt-6 text-xs font-semibold tracking-wider uppercase text-[#757683] flex items-center gap-2">
                         <span class="material-symbols-outlined text-[#ffbf00]">trending_down</span>

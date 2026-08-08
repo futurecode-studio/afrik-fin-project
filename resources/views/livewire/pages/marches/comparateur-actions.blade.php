@@ -73,6 +73,8 @@
                                             {{ number_format((int) $s->volume, 0, ',', ' ') }}
                                         @elseif ($field === 'current_price')
                                             {{ number_format((float) $s->current_price, 0, ',', ' ') }}
+                                        @elseif ($field === 'market_cap')
+                                            {{ \App\Models\Stock::formatCapMrd($raw) }}
                                         @elseif (! $hasValue)
                                             <span class="text-[#757683] font-normal">—</span>
                                         @else

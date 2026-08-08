@@ -47,7 +47,7 @@
                             <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Prix</th>
                             <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Variation</th>
                             <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Volume</th>
-                            <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Cap. (M)</th>
+                            <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Cap. (Mrd)</th>
                             <th class="h-12 px-4 align-middle font-medium text-[#757683] text-center">Statut</th>
                             <th class="h-12 px-4 align-middle font-medium text-[#757683] text-right">Actions</th>
                         </tr>
@@ -67,7 +67,7 @@
                             </td>
                             <td class="p-4 text-right">
                                 @if($stock->variation_percent > 0)
-                                    <span class="inline-flex items-center gap-1 text-accent font-semibold">
+                                    <span class="inline-flex items-center gap-1 text-green-600 font-semibold">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
                                             <polyline points="16 7 22 7 22 13"></polyline>
@@ -75,7 +75,7 @@
                                         +{{ number_format($stock->variation_percent, 2) }}%
                                     </span>
                                 @elseif($stock->variation_percent < 0)
-                                    <span class="inline-flex items-center gap-1 text-destructive font-semibold">
+                                    <span class="inline-flex items-center gap-1 text-red-600 font-semibold">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
                                             <polyline points="16 17 22 17 22 11"></polyline>
@@ -90,7 +90,7 @@
                                 {{ number_format($stock->volume) }}
                             </td>
                             <td class="p-4 text-right text-[#757683]">
-                                {{ $stock->market_cap ? number_format($stock->market_cap, 0) : '-' }}
+                                {{ \App\Models\Stock::formatCapMrd($stock->market_cap) }}
                             </td>
                             <td class="p-4 text-center">
                                 <button wire:click="toggleActive({{ $stock->id }})"
@@ -199,11 +199,20 @@
                             @error('volume') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
 
+                        <!-- Actions en circulation -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Nb d'actions</label>
+                            <input wire:model="shares_outstanding" type="number" step="1" placeholder="100000000"
+                                class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                            @error('shares_outstanding') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+
                         <!-- Capitalisation -->
                         <div>
                             <label class="block text-sm font-medium mb-2">Capitalisation (Millions FCFA)</label>
-                            <input wire:model="market_cap" type="number" step="0.01" placeholder="2500"
+                            <input wire:model="market_cap" type="number" step="0.01" placeholder="auto via actions × cours"
                                 class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                            <p class="text-xs text-[#757683] mt-1">Recalculée auto à la sync si nb d'actions connu.</p>
                             @error('market_cap') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
 

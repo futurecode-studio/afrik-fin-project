@@ -94,15 +94,8 @@
                         <div class="bg-muted rounded-lg p-4">
                             <p class="text-sm text-muted-foreground">Capitalisation</p>
                             <p class="text-lg font-semibold text-foreground">
-                                @if(isset($selectedStock['market_cap']) && $selectedStock['market_cap'] > 0)
-                                    @if($selectedStock['market_cap'] >= 1000)
-                                        {{ number_format($selectedStock['market_cap'] / 1000, 2, ',', ' ') }} Mrd FCFA
-                                    @else
-                                        {{ number_format($selectedStock['market_cap'], 0, ',', ' ') }} M FCFA
-                                    @endif
-                                @else
-                                    N/A
-                                @endif
+                                @php $capMrd = \App\Models\Stock::formatCapMrd($selectedStock['market_cap'] ?? null); @endphp
+                                {{ $capMrd === '—' ? 'N/A' : $capMrd.' Mrd FCFA' }}
                             </p>
                         </div>
                     </div>
@@ -232,7 +225,7 @@
                     <div class="space-y-2">
                         <p class="text-sm text-muted-foreground font-medium">{{ $indice['name'] }}</p>
                         <p class="text-3xl font-bold">{{ number_format($indice['value'], 2) }}</p>
-                        <div class="flex items-center gap-1 {{ ($indice['variation_percent'] ?? 0) >= 0 ? 'text-accent' : 'text-destructive' }}">
+                        <div class="flex items-center gap-1 {{ ($indice['variation_percent'] ?? 0) >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             @if(($indice['variation_percent'] ?? 0) >= 0)
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                                     <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
@@ -289,15 +282,15 @@
                     <p class="text-2xl font-bold text-foreground mt-1">{{ number_format($summary['total'], 0, ',', ' ') }}</p>
                 </div>
                 <div class="rounded-lg border bg-card p-4 border-border">
-                    <p class="text-xs text-accent uppercase tracking-wide font-semibold">En hausse</p>
-                    <p class="text-2xl font-bold text-accent mt-1 flex items-center gap-1">
+                    <p class="text-xs text-green-600 uppercase tracking-wide font-semibold">En hausse</p>
+                    <p class="text-2xl font-bold text-green-600 mt-1 flex items-center gap-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                         {{ $summary['up'] }}
                     </p>
                 </div>
                 <div class="rounded-lg border bg-card p-4 border-border">
-                    <p class="text-xs text-destructive uppercase tracking-wide font-semibold">En baisse</p>
-                    <p class="text-2xl font-bold text-destructive mt-1 flex items-center gap-1">
+                    <p class="text-xs text-red-600 uppercase tracking-wide font-semibold">En baisse</p>
+                    <p class="text-2xl font-bold text-red-600 mt-1 flex items-center gap-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"/></svg>
                         {{ $summary['down'] }}
                     </p>
@@ -399,7 +392,7 @@
                                 <p class="font-bold text-primary text-lg">{{ $stock['symbol'] ?? 'N/A' }}</p>
                                 <p class="text-sm text-muted-foreground line-clamp-1">{{ $stock['company_name'] ?? 'N/A' }}</p>
                             </div>
-                            <div class="inline-flex items-center gap-1 px-2 py-1 rounded {{ $variation >= 0 ? 'bg-accent/10 text-accent' : 'bg-destructive/10 text-destructive' }}">
+                            <div class="inline-flex items-center gap-1 px-2 py-1 rounded {{ $variation >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
                                 <span class="font-semibold text-sm">{{ ($variation >= 0 ? '+' : '') . number_format($variation, 2) }}%</span>
                             </div>
                         </div>
@@ -511,22 +504,14 @@
                                 <td class="p-4 text-right text-muted-foreground">
                                     {{ number_format($stock['volume'] ?? 0, 0, ',', ' ') }}
                                 </td>
-                                <td class="p-4 text-right text-muted-foreground">
-                                    @if(isset($stock['market_cap']) && $stock['market_cap'] > 0)
-                                        @if($stock['market_cap'] >= 1000)
-                                            {{ number_format($stock['market_cap'] / 1000, 2, ',', ' ') }} Mrd
-                                        @else
-                                            {{ number_format($stock['market_cap'], 0, ',', ' ') }} M
-                                        @endif
-                                    @else
-                                        -
-                                    @endif
+                                <td class="p-4 text-right text-muted-foreground tabular-nums">
+                                    {{ \App\Models\Stock::formatCapMrd($stock['market_cap'] ?? null) }}
                                 </td>
                                 <td class="p-4 text-right">
                                     @php
                                         $variation = $stock['variation_percent'] ?? 0;
                                     @endphp
-                                    <div class="inline-flex items-center gap-1 px-2 py-1 rounded {{ $variation >= 0 ? 'bg-accent/10 text-accent' : 'bg-destructive/10 text-destructive' }}">
+                                    <div class="inline-flex items-center gap-1 px-2 py-1 rounded {{ $variation >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
                                         @if($variation >= 0)
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3">
                                                 <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
@@ -627,7 +612,7 @@
                         <p class="text-6xl md:text-7xl font-bold text-foreground mb-3 tabular-nums">
                             {{ number_format($currentValue, 2, ',', ' ') }}
                         </p>
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full {{ $isUp ? 'bg-accent/10 text-accent' : 'bg-destructive/10 text-destructive' }} font-semibold text-lg mb-6">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full {{ $isUp ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }} font-semibold text-lg mb-6">
                             @if($isUp)
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                                 +{{ number_format($currentVariation, 2, ',', ' ') }} %

@@ -12,6 +12,10 @@ class MarchesFinanciers extends Component
         $composite = $markets->indexLatest('BRVM Composite');
         $brvm30 = $markets->indexLatest('BRVM 30');
         $history = $markets->indexHistory('BRVM Composite', 30);
+        $chartData = [
+            'labels' => $history->map(fn ($row) => $row->snapshot_date->format('d/m'))->values()->all(),
+            'values' => $history->map(fn ($row) => round((float) $row->value, 2))->values()->all(),
+        ];
 
         return view('livewire.pages.marches.marches-financiers', [
             'stocks' => $markets->stocks(),
@@ -20,7 +24,7 @@ class MarchesFinanciers extends Component
             'byVolume' => $markets->topVolume(5),
             'composite' => $composite,
             'brvm30' => $brvm30,
-            'chartBars' => $markets->chartBarsFromHistory($history),
+            'chartData' => $chartData,
             'totalVolume' => $markets->totalVolume(),
             'totalMarketCap' => $markets->totalMarketCap(),
         ])

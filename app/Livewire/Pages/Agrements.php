@@ -16,7 +16,7 @@ class Agrements extends Component
             ],
             [
                 'title' => 'Conformité marchés régionaux',
-                'ref' => 'BRVM / CREPMF',
+                'ref' => 'BRVM / AMF-UMOA',
                 'body' => 'Alignement des contenus pédagogiques et des outils d’information marché sur les standards régionaux.',
             ],
             [

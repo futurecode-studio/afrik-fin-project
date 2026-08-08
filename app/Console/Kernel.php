@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // Sync BRVM via Mansa (≈30 min freshness) — heures de séance UEMOA
-        // ~2 appels Mansa / run (stocks + indices) → ~30–40 req/jour max
+        // stocks + indices + enrichissement caps (screener / fundamentals manquants)
         $schedule->command('market:sync-brvm')
             ->weekdays()
             ->everyThirtyMinutes()

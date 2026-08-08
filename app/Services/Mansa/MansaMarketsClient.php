@@ -83,6 +83,36 @@ class MansaMarketsClient
         return $this->get('/api/v1/markets/search', $params);
     }
 
+    /**
+     * Fundamentals d’un titre (market cap, secteur, high/low 52 semaines…).
+     */
+    public function fundamentals(string $exchange, string $ticker): array
+    {
+        $ticker = rawurlencode(strtoupper(trim($ticker)));
+
+        return $this->get("/api/v1/markets/exchanges/{$exchange}/stocks/{$ticker}/fundamentals");
+    }
+
+    /**
+     * Screener continental / par place — inclut market_cap pour plusieurs titres.
+     *
+     * @param  array<string, mixed>  $query
+     */
+    public function screener(array $query = []): array
+    {
+        return $this->get('/api/v1/screener', $query);
+    }
+
+    /**
+     * Fiche métriques (~45 champs) — market_cap en devise locale.
+     */
+    public function metrics(string $exchange, string $ticker): array
+    {
+        $ticker = rawurlencode(strtoupper(trim($ticker)));
+
+        return $this->get("/api/v1/metrics/{$exchange}/{$ticker}");
+    }
+
     private function get(string $path, array $query = []): array
     {
         if (! $this->isConfigured()) {

@@ -43,12 +43,10 @@
                     </div>
                 @endif
 
-                <div class="h-56 flex items-end gap-1 px-1">
-                    @foreach ($bars as $h)
-                        <div class="flex-1 rounded-t bg-[#001a61]/80 hover:bg-[#ffbf00] transition" style="height: {{ max(8, $h) }}%"></div>
-                    @endforeach
+                <div class="relative h-64">
+                    <canvas id="stockPriceChart" class="w-full h-full" data-chart='@json($chartData)' aria-label="Historique du cours de {{ $stock?->symbol ?? 'l’action' }}"></canvas>
                 </div>
-                <p class="text-xs text-[#757683] mt-2 text-center">Historique prix ({{ $history->count() }} points) — visualisation indicative</p>
+                <p class="text-xs text-[#757683] mt-2 text-center">Historique du cours ({{ $history->count() }} points)</p>
 
                 <div class="mt-4 grid sm:grid-cols-3 gap-3">
                     <div class="rounded-lg bg-[#f0f3ff] p-3">
@@ -100,3 +98,53 @@
         </div>
     </section>
 </div>
+
+@push('scripts')
+<script>
+(() => {
+    let chart = null;
+    function renderChart() {
+        const canvas = document.getElementById('stockPriceChart');
+        if (!canvas || typeof Chart === 'undefined') return;
+        const data = JSON.parse(canvas.dataset.chart || '{}');
+        if (!data.values?.length) return;
+        if (chart) chart.destroy();
+        chart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: @json($stock?->symbol ?? 'Cours'),
+                data: data.values,
+                borderColor: '#0a2e8c',
+                backgroundColor: 'rgba(10, 46, 140, 0.10)',
+                borderWidth: 2.5,
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                pointHoverBackgroundColor: '#ffbf00',
+                tension: 0.25,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: item => ' ' + Number(item.raw).toLocaleString('fr-FR') + ' FCFA' } }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { maxTicksLimit: 7 } },
+                y: { grid: { color: 'rgba(197,197,212,0.4)' }, ticks: { maxTicksLimit: 5 } }
+            }
+        }
+        });
+    }
+    renderChart();
+    document.addEventListener('livewire:init', () => {
+        Livewire.hook('morph.updated', () => setTimeout(renderChart, 50));
+    }, { once: true });
+})();
+</script>
+@endpush

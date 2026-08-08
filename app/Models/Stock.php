@@ -21,6 +21,7 @@ class Stock extends Model
         'variation_percent',
         'volume',
         'market_cap',
+        'shares_outstanding',
         'sector',
         'high_price',
         'low_price',
@@ -89,22 +90,85 @@ class Stock extends Model
      */
     public function getFormattedMarketCapAttribute(): string
     {
-        if ($this->market_cap >= 1000) {
-            return number_format($this->market_cap / 1000, 1) . 'B';
+        $mrd = self::capToBillions($this->market_cap);
+        if ($mrd === null) {
+            return '—';
         }
-        return number_format($this->market_cap, 0) . 'M';
+
+        return number_format($mrd, $mrd >= 10 ? 1 : 2, ',', ' ').' Mrd';
+    }
+
+    /**
+     * Capitalisation en milliards FCFA (null si absente).
+     * Accepte le stockage historique en millions ou en FCFA absolus.
+     */
+    public static function capToBillions(null|float|int|string $marketCap): ?float
+    {
+        if ($marketCap === null || $marketCap === '') {
+            return null;
+        }
+
+        $cap = (float) $marketCap;
+        if ($cap <= 0) {
+            return null;
+        }
+
+        // FCFA absolus (ex. feed Mansa fundamentals / metrics)
+        if ($cap >= 1_000_000_000) {
+            return $cap / 1_000_000_000;
+        }
+
+        // Stockage métier en millions de FCFA
+        return $cap / 1000;
+    }
+
+    public static function formatCapMrd(null|float|int|string $marketCap, int $decimals = 2): string
+    {
+        $mrd = self::capToBillions($marketCap);
+        if ($mrd === null) {
+            return '—';
+        }
+
+        return number_format($mrd, $decimals, ',', ' ');
+    }
+
+    /**
+     * Normalise une cap brute (FCFA absolus ou millions) vers millions FCFA.
+     */
+    public static function normalizeCapToMillions(null|float|int|string $raw): ?float
+    {
+        if ($raw === null || $raw === '') {
+            return null;
+        }
+
+        $cap = (float) $raw;
+        if ($cap <= 0) {
+            return null;
+        }
+
+        if ($cap >= 1_000_000_000) {
+            return round($cap / 1_000_000, 2);
+        }
+
+        return round($cap, 2);
     }
 
     /**
      * Plus haut de séance utilisable (> 0), sinon dérivé des cours connus.
+     * Prend le max entre high stocké et cours connus (évite les OHLC seed obsolètes).
      */
     public function effectiveHigh(): ?float
     {
+        $candidates = [];
         if ($this->high_price !== null && (float) $this->high_price > 0) {
-            return (float) $this->high_price;
+            $candidates[] = (float) $this->high_price;
+        }
+        $derived = $this->derivedSessionExtreme(true);
+        if ($derived !== null) {
+            $candidates[] = $derived;
         }
 
-        return $this->derivedSessionExtreme(true);
+        return $candidates === [] ? null : max($candidates);
     }
 
     /**
@@ -112,11 +176,16 @@ class Stock extends Model
      */
     public function effectiveLow(): ?float
     {
+        $candidates = [];
         if ($this->low_price !== null && (float) $this->low_price > 0) {
-            return (float) $this->low_price;
+            $candidates[] = (float) $this->low_price;
+        }
+        $derived = $this->derivedSessionExtreme(false);
+        if ($derived !== null) {
+            $candidates[] = $derived;
         }
 
-        return $this->derivedSessionExtreme(false);
+        return $candidates === [] ? null : min($candidates);
     }
 
     public function effectiveOpen(): ?float

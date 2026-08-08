@@ -36,10 +36,8 @@
                         @endif
                     </div>
                 </div>
-                <div class="h-28 flex items-end gap-1">
-                    @foreach ($data['bars'] as $h)
-                        <div class="bg-[#001a61]/20 hover:bg-[#001a61] w-full rounded-t-sm transition-all" style="height: {{ $h }}%"></div>
-                    @endforeach
+                <div class="relative h-44">
+                    <canvas id="indexChart-{{ $loop->index }}" class="w-full h-full" aria-label="Évolution de {{ $name }}"></canvas>
                 </div>
             </div>
         @empty
@@ -81,3 +79,44 @@
         </div>
     </section>
 </div>
+
+@push('scripts')
+<script>
+(() => {
+    const charts = @json($indices->pluck('chart')->values()->all());
+
+    charts.forEach((data, index) => {
+        const canvas = document.getElementById('indexChart-' + index);
+        if (!canvas || typeof Chart === 'undefined' || !data.values?.length) return;
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Indice',
+                    data: data.values,
+                    borderColor: '#001a61',
+                    backgroundColor: 'rgba(0, 26, 97, 0.10)',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 4,
+                    pointHoverBackgroundColor: '#ffbf00',
+                    tension: 0.3,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { maxTicksLimit: 5 } },
+                    y: { grid: { color: 'rgba(197,197,212,0.4)' }, ticks: { maxTicksLimit: 4 } }
+                }
+            }
+        });
+    });
+})();
+</script>
+@endpush

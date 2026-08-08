@@ -155,8 +155,10 @@ window.adfMarketMap = function (payload) {
 
         sizeLine(tip) {
             if (!tip) return '';
-            if (Number(tip.market_cap) >= 1_000_000_000) {
-                return 'Capitalisation: ' + Math.round(tip.market_cap).toLocaleString('fr-FR') + ' FCFA';
+            const cap = Number(tip.market_cap) || 0;
+            if (cap > 0) {
+                const mrd = cap >= 1_000_000_000 ? (cap / 1_000_000_000) : (cap / 1000);
+                return 'Capitalisation: ' + mrd.toLocaleString('fr-FR', { maximumFractionDigits: 2 }) + ' Mrd FCFA';
             }
             return 'Volume: ' + Number(tip.volume || 0).toLocaleString('fr-FR') + ' titres';
         },

@@ -152,11 +152,11 @@
                         <div class="space-y-2">
                             <p class="flex flex-wrap items-center gap-2">
                                 <span class="text-[#757683] text-xs">N° AA/2022-03</span>
-                                <span class="font-bold text-sm">Décision N°CREFMPF/22/143</span>
+                                <span class="font-bold text-sm">Décision N°22/143</span>
                             </p>
                             <p class="flex flex-wrap items-center gap-2">
                                 <span class="text-[#757683] text-xs">Autorité</span>
-                                <span class="font-bold text-sm">AMF-UMOA (ex CREPMF)</span>
+                                <span class="font-bold text-sm">AMF-UMOA</span>
                             </p>
                         </div>
                     </div>

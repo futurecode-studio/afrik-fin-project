@@ -52,7 +52,7 @@ deploy-migrate:
 		echo '=== DEPLOY MIGRATE ==='; \
 		cd /home/u213525791/domains/africainedesfinances.com/africairedesfinances_core; \
 		php artisan migrate --force; \
-		php artisan db:seed --class=StockSeeder --force || true; \
+		php artisan market:sync-brvm --caps-only || true; \
 		echo '=== DONE MIGRATE ==='"
 
 deploy-optimize:

@@ -42,7 +42,10 @@ class AnalyseGraphiquePro extends Component
                     return $row;
                 });
         }
-        $bars = $markets->chartBarsFromHistory($history, (int) min(24, max(8, (int) $this->range / 4)));
+        $chartData = [
+            'labels' => $history->map(fn ($row) => $row->recorded_at->format('d/m'))->values()->all(),
+            'values' => $history->map(fn ($row) => round((float) $row->price, 2))->values()->all(),
+        ];
         $favorites = $markets->topVolume(6);
         $book = $markets->topVolume(8);
 
@@ -51,7 +54,7 @@ class AnalyseGraphiquePro extends Component
         $rsi = $this->approxRsi($closes);
 
         return view('livewire.pages.marches.analyse-graphique-pro', compact(
-            'stocks', 'stock', 'bars', 'favorites', 'book', 'rsi', 'history'
+            'stocks', 'stock', 'chartData', 'favorites', 'book', 'rsi', 'history'
         ))
             ->extends('layouts.site', ['title' => 'Analyse Graphique Pro — Africaine des Finances'])
             ->section('content');

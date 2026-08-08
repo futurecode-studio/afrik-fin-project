@@ -60,7 +60,14 @@
         <aside class="lg:col-span-4 space-y-4">
             <div class="bg-white border border-[#c5c5d4] rounded-2xl p-6">
                 <h3 class="font-bold text-[#001a61] mb-3">Capitalisation</h3>
-                <p class="text-2xl font-extrabold">{{ number_format((float)$stock->market_cap, 0, ',', ' ') }} <span class="text-sm font-medium">M FCFA</span></p>
+                @php $capMrd = \App\Models\Stock::formatCapMrd($stock->market_cap); @endphp
+                <p class="text-2xl font-extrabold">
+                    @if ($capMrd === '—')
+                        —
+                    @else
+                        {{ $capMrd }} <span class="text-sm font-medium">Mrd FCFA</span>
+                    @endif
+                </p>
                 @if($stock->last_updated)
                     <p class="text-xs text-[#757683] mt-2">MAJ {{ $stock->last_updated->format('d/m/Y H:i') }}</p>
                 @endif

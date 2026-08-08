@@ -1,0 +1,19 @@
+{
+  "_comment": "Nombre d'actions en circulation (source pages émetteurs BRVM). Utilisé pour market_cap = shares × cours.",
+  "BICC": 1666667,
+  "BNBC": 331200,
+  "BOAB": 1007268,
+  "BOABF": 1100000,
+  "BOAC": 40000000,
+  "BOAM": 27450000,
+  "BOAN": 20800000,
+  "BOAS": 1200000,
+  "CIEC": 56000000,
+  "ETIT": 18032598730,
+  "FTSC": 3525935,
+  "SDSC": 54435300,
+  "SIVC": 873400,
+  "SNTS": 100000000,
+  "TTLS": 32577700,
+  "UNLC": 1610600
+}

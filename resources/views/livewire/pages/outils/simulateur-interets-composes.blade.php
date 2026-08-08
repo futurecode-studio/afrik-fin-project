@@ -43,11 +43,8 @@
                 </div>
                 <div class="bg-white border border-[#c5c5d4] rounded-xl p-5">
                     <p class="text-sm font-bold text-[#001a61] mb-3">Projection annuelle</p>
-                    <div class="flex items-end gap-1 h-28">
-                        @php $max = max(1, collect($chart)->max('value') ?: 1); @endphp
-                        @foreach ($chart as $bar)
-                            <div class="flex-1 bg-[#0a2e8c]/25 hover:bg-[#ffbf00] rounded-t transition" style="height: {{ max(8, ($bar['value'] / $max) * 100) }}%" title="An {{ $bar['year'] }}: {{ number_format($bar['value'], 0, ',', ' ') }}"></div>
-                        @endforeach
+                    <div class="relative h-56">
+                        <canvas id="compoundGrowthChart" class="w-full h-full" data-chart='@json($chart)' aria-label="Projection annuelle du patrimoine"></canvas>
                     </div>
                 </div>
             </div>
@@ -56,3 +53,53 @@
         <p class="text-xs text-[#757683] mt-8">Simulation pédagogique. Les performances passées ne préjugent pas des performances futures. Pour investir, <a href="{{ route('mise-en-relation') }}" class="text-[#001a61] font-semibold underline">demandez une mise en relation</a>.</p>
     </section>
 </div>
+
+@push('scripts')
+<script>
+(() => {
+    let chart = null;
+    function renderChart() {
+        const canvas = document.getElementById('compoundGrowthChart');
+        if (!canvas || typeof Chart === 'undefined') return;
+        const data = JSON.parse(canvas.dataset.chart || '[]');
+        if (!data.length) return;
+        if (chart) chart.destroy();
+        chart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: data.map(point => 'An ' + point.year),
+            datasets: [{
+                label: 'Patrimoine estimé',
+                data: data.map(point => point.value),
+                borderColor: '#0a2e8c',
+                backgroundColor: 'rgba(10, 46, 140, 0.12)',
+                borderWidth: 2.5,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                pointBackgroundColor: '#ffbf00',
+                tension: 0.3,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: item => ' ' + Number(item.raw).toLocaleString('fr-FR') + ' FCFA' } }
+            },
+            scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(197,197,212,0.4)' }, ticks: { callback: value => Number(value).toLocaleString('fr-FR'), maxTicksLimit: 5 } }
+            }
+        }
+        });
+    }
+    renderChart();
+    document.addEventListener('livewire:init', () => {
+        Livewire.hook('morph.updated', () => setTimeout(renderChart, 50));
+    }, { once: true });
+})();
+</script>
+@endpush

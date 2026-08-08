@@ -14,7 +14,7 @@ class Team extends Component
             'positioning' => 'Le cabinet intervient au croisement de l\'éducation financière, de l\'information de marché et de la mise en relation avec l\'écosystème agréé. Sa démarche consiste à aider les clients à comprendre les produits, mesurer les risques et avancer vers des solutions adaptées à leur profil.',
             'address' => 'Fidjrossè Hlazounto, lot 3990, parcelle g, fin des pavés du CEG l\'Entente, Cotonou, Bénin',
             'legal' => 'RCCM RB/COT/21 B 31296 · IFU 3202113721309 · Agrément AA/2022-03',
-            'approval' => 'Agrément d\'apporteur d\'affaires N° AA/2022-03, décision N° CREFMPF/22/143',
+            'approval' => 'Agrément d\'apporteur d\'affaires N° AA/2022-03, décision N° 22/143 — AMF-UMOA',
         ];
 
         $facts = [
