@@ -21,9 +21,9 @@ class EnsureAdminPanel
         $user = auth()->user();
 
         if (! $user->canAccessAdminPanel()) {
-            if (Route::has('client.dashboard')) {
+            if (Route::has('client.my-events')) {
                 return redirect()
-                    ->route('client.dashboard')
+                    ->route('client.my-events')
                     ->with('error', 'Vous n\'avez pas accès à l\'administration.');
             }
 

@@ -67,8 +67,8 @@
                             @forelse($partners as $partner)
                                 <tr class="border-b transition-colors hover:bg-[#f0f3ff]">
                                     <td class="p-4 align-middle">
-                                        @if($partner->logo)
-                                            <img src="{{ $partner->logo ? '/storage/' . $partner->logo : '' }}" alt="{{ $partner->nom }}" class="w-12 h-12 object-contain rounded border bg-white">
+                                        @if($partner->logo_url)
+                                            <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}" class="w-12 h-12 object-contain rounded border bg-white p-1">
                                         @else
                                             <div class="w-12 h-12 bg-gray-100 rounded flex items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-400">
@@ -214,14 +214,14 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium mb-2">Logo <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-medium mb-2">Logo</label>
                             <input wire:model="logo" type="file" accept="image/*"
                                 class="flex w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#757683] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm">
                             @error('logo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             
                             @if($logo_url)
                                 <div class="mt-2">
-                                    <img src="{{ '/storage/' . $logo_url }}" alt="Logo actuel" class="w-20 h-20 object-contain border rounded bg-white p-1">
+                                    <img src="{{ \App\Models\Partner::urlForLogo($logo_url) }}" alt="Logo actuel" class="w-20 h-20 object-contain border rounded bg-white p-1">
                                     <p class="text-xs text-gray-500 mt-1">Logo actuel</p>
                                 </div>
                             @endif

@@ -43,9 +43,9 @@ class VotreProfil extends Component
         try {
             $all = $funds->getMutualFunds();
             $preferred = match ($profile['type'] ?? '') {
-                'conservateur' => ['Obligations', 'Mixte'],
-                'dynamique' => ['Actions'],
-                default => ['Mixte', 'Actions'],
+                'conservateur' => ['Obligataire', 'Obligataire court terme', 'Monétaire'],
+                'dynamique' => ['Actions', 'Diversifié'],
+                default => ['Diversifié', 'Actions', 'Obligataire'],
             };
             $suggested = array_values(array_filter(
                 $all,

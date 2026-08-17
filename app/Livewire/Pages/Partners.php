@@ -10,6 +10,9 @@ class Partners extends Component
     public function render()
     {
         $partners = Partner::active()->orderBy('order')->get();
+        if ($partners->isEmpty()) {
+            $partners = Partner::catalogCollection();
+        }
         
         return view('livewire.pages.partners', [
             'partners' => $partners,

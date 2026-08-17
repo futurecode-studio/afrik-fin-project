@@ -23,7 +23,7 @@
         class="fixed inset-y-0 left-0 z-50 w-64 adf-glass-strong flex flex-col transition-transform duration-300 ease-soft -translate-x-full lg:translate-x-0 border-r border-white/50"
         :class="sidebarOpen && '!translate-x-0'">
         <div class="px-5 py-5 border-b border-[#c5c5d4]/50 flex items-center gap-3 shrink-0">
-            <a href="{{ route('client.dashboard') }}" class="flex items-center gap-3 min-w-0 flex-1">
+            <a href="{{ route('client.my-events') }}" class="flex items-center gap-3 min-w-0 flex-1">
                 <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances"
                     class="h-10 w-auto object-contain shrink-0">
                 <div class="min-w-0">
@@ -38,22 +38,10 @@
 
         @php
             $nav = [
-                ['route' => 'client.dashboard', 'match' => 'client.dashboard', 'label' => 'Tableau de bord', 'icon' => 'dashboard'],
-                ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Mes formations', 'icon' => 'school'],
-                ['route' => 'client.favorites', 'match' => 'client.favorites', 'label' => 'Favoris', 'icon' => 'bookmark'],
-                ['route' => 'client.notes', 'match' => 'client.notes', 'label' => 'Mes notes', 'icon' => 'sticky_note_2'],
+                ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Événement', 'icon' => 'event'],
+                ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Formation', 'icon' => 'school'],
                 ['route' => 'client.ask-instructor', 'match' => 'client.ask-instructor', 'label' => 'Formateur', 'icon' => 'contact_support'],
-                ['route' => 'client.learning-history', 'match' => 'client.learning-history', 'label' => 'Historique', 'icon' => 'history_edu'],
-                ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Mes événements', 'icon' => 'event'],
-                ['route' => 'client.watchlist', 'match' => 'client.watchlist', 'label' => 'Liste de suivi', 'icon' => 'visibility'],
-                ['route' => 'client.patrimoine', 'match' => 'client.patrimoine', 'label' => 'Patrimoine', 'icon' => 'account_balance_wallet'],
-                ['route' => 'client.alertes', 'match' => 'client.alertes', 'label' => 'Alertes', 'icon' => 'notifications_active'],
-                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Ordres', 'icon' => 'bolt', 'soon' => ! feature_enabled('client.ordres')],
-                ['route' => 'client.rapport-mensuel', 'match' => 'client.rapport-mensuel', 'label' => 'Rapport', 'icon' => 'description'],
-                ['route' => 'client.actualites-portefeuille', 'match' => 'client.actualites-portefeuille', 'label' => 'Actus PF', 'icon' => 'newspaper'],
-                ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificats', 'icon' => 'workspace_premium'],
-                ['route' => 'client.interests', 'match' => 'client.interests', 'label' => 'Intérêts', 'icon' => 'interests'],
-                ['route' => 'client.profile', 'match' => 'client.profile', 'label' => 'Paramètres', 'icon' => 'settings'],
+                ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificat', 'icon' => 'workspace_premium'],
             ];
         @endphp
         <nav class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 space-y-0.5">

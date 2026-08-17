@@ -39,7 +39,7 @@ class ValeursLiquidatives extends Component
             $this->updatedAt = now()->format('d/m/Y H:i');
         } catch (\Throwable) {
             $this->funds = [];
-            $this->error = 'Données Sikafinance indisponibles. Réessayez plus tard.';
+            $this->error = 'Catalogue FCP indisponible. Réessayez plus tard.';
         } finally {
             $this->loading = false;
         }

@@ -53,7 +53,7 @@
             <a href="{{ route('investir.opcvm') }}" class="group bg-white border border-[#c5c5d4] rounded-xl p-6 hover:shadow-md transition">
                 <span class="material-symbols-outlined text-[#001a61] text-3xl">account_balance</span>
                 <h2 class="text-xl font-bold text-[#001a61] mt-3">FCP &amp; OPCVM</h2>
-                <p class="text-[#444652] mt-2 text-sm">Valeurs liquidatives UEMOA via Sikafinance.</p>
+                <p class="text-[#444652] mt-2 text-sm">FCP du Bénin — VL du bulletin officiel BRVM.</p>
                 <span class="inline-flex items-center gap-1 mt-4 text-[#001a61] font-bold text-sm group-hover:gap-2 transition-all">Voir les fonds <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
             </a>
             <a href="{{ route('marches.obligations') }}" class="group bg-white border border-[#c5c5d4] rounded-xl p-6 hover:shadow-md transition">

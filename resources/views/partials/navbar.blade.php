@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        @include('partials.nav-market-strip')
+        {{-- Panneau marché retiré du header : affiché dans le volet Actions de l’accueil --}}
 
         @if(($navHeadlines ?? collect())->isNotEmpty())
             <div class="bg-[#0a2e8c] border-t border-white/10">
@@ -179,7 +179,7 @@
                 </a>
                 <div class="hidden lg:flex items-center gap-3">
                     @auth
-                        <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.dashboard') }}"
+                        <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.my-events') }}"
                             class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-3 py-2">
                             {{ Auth::user()->canAccessAdminPanel() ? 'Administration' : 'Mon Espace' }}
                         </a>
@@ -238,7 +238,7 @@
             <a href="{{ route('contact') }}" class="block py-3 text-[#131c2a] font-medium">Contact</a>
             <div class="pt-3 border-t border-[#c5c5d4] space-y-2">
                 @auth
-                    <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.dashboard') }}"
+                    <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.my-events') }}"
                         class="block py-3 font-medium text-[#001a61]">
                         {{ Auth::user()->canAccessAdminPanel() ? 'Administration' : 'Mon Espace' }}
                     </a>

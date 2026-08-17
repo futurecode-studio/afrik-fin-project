@@ -58,7 +58,7 @@ class InvestirFcp extends Component
             $this->allFunds = $service->getMutualFunds();
             $this->lastUpdated = now()->format('d/m/Y à H:i');
         } catch (\Throwable $e) {
-            $this->error = 'Impossible de récupérer les données Sikafinance pour le moment. Réessayez dans quelques minutes.';
+            $this->error = 'Impossible de charger les FCP pour le moment.';
             $this->allFunds = [];
         } finally {
             $this->isLoading = false;
@@ -69,7 +69,7 @@ class InvestirFcp extends Component
     {
         app(MutualFundsApiService::class)->clearCache();
         $this->loadFunds();
-        $this->swalSuccess('Données Sikafinance actualisées avec succès.');
+        $this->swalSuccess('Catalogue FCP actualisé.');
     }
 
     public function filterByCategory(string $category): void

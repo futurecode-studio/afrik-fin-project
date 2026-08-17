@@ -28,7 +28,7 @@ class DetailFcp extends Component
         try {
             $this->fund = app(MutualFundsApiService::class)->getFundById($this->id);
             if (! $this->fund) {
-                $this->error = 'Fonds introuvable ou VL non disponible sur Sikafinance.';
+                $this->error = 'Fonds introuvable.';
             }
         } catch (\Throwable) {
             $this->fund = null;

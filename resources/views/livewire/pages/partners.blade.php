@@ -45,14 +45,16 @@
                             </div>
                             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                                 @foreach($group as $partner)
-                                    <a href="{{ route('partenaires.show', $partner->id) }}"
-                                        class="bg-card rounded-xl border border-border p-6 hover:shadow-elegant hover:border-primary/30 transition-smooth group flex flex-col items-center justify-center gap-3 min-h-[100px]">
-                                        @if($partner->logo)
-                                            <img src="{{ asset('storage/' . $partner->logo) }}" alt="{{ $partner->nom }}"
+                                    @php
+                                        $href = $partner->getKey() ? route('partenaires.show', $partner->id) : route('contact');
+                                    @endphp
+                                    <a href="{{ $href }}"
+                                        class="bg-card rounded-xl border border-border p-6 hover:shadow-elegant hover:border-primary/30 transition-smooth group flex flex-col items-center justify-center gap-3 min-h-[140px]">
+                                        @if($partner->logo_url)
+                                            <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}"
                                                 class="max-h-16 max-w-full object-contain">
-                                        @else
-                                            <p class="font-semibold text-foreground text-center text-sm group-hover:text-primary transition-colors">{{ $partner->nom }}</p>
                                         @endif
+                                        <p class="font-semibold text-foreground text-center text-sm group-hover:text-primary transition-colors">{{ $partner->nom }}</p>
                                         @if($partner->description)
                                             <p class="text-xs text-muted-foreground text-center line-clamp-2">{{ plain_text($partner->description, 120) }}</p>
                                         @endif

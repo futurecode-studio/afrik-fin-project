@@ -22,7 +22,7 @@ class CheckRole
         $user = auth()->user();
 
         if ($role === 'admin' && ! $user->canAccessAdminPanel()) {
-            return redirect()->route('client.dashboard')
+            return redirect()->route('client.my-events')
                 ->with('error', 'Vous n\'avez pas accès à cette section.');
         }
 

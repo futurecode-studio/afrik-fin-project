@@ -51,6 +51,8 @@
         </div>
     </div>
 
+    @include('partials.jeudi-popup')
+
     @livewireScripts
     @include('partials.sweetalert')
     @stack('scripts')

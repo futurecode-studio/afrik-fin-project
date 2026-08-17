@@ -120,6 +120,19 @@
             </div>
         </div>
 
+        <div class="mt-12 pt-10 border-t border-[#c5c5d4]">
+            <p class="text-center text-xs font-extrabold uppercase tracking-[0.18em] text-[#001a61] mb-6">Nos partenaires</p>
+            @include('partials.partner-logos', [
+                'partners' => cache()->remember('footer.partner.logos.v1', 600, function () {
+                    $partners = \App\Models\Partner::active()->get();
+
+                    return $partners->isNotEmpty() ? $partners : \App\Models\Partner::catalogCollection();
+                }),
+                'height' => 'h-10',
+                'linkToList' => true,
+            ])
+        </div>
+
         {{-- Légal + agrément (ancien footer) --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div class="bg-white/50 rounded-lg p-4 border border-[#c5c5d4] hover:border-[#001a61]/30 transition-all">

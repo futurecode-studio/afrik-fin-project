@@ -23,9 +23,9 @@ class CheckPermission
 
         // Clients (or anyone without staff role) never pass permission checks on /admin
         if (! $user->canAccessAdminPanel()) {
-            if (\Illuminate\Support\Facades\Route::has('client.dashboard')) {
+            if (\Illuminate\Support\Facades\Route::has('client.my-events')) {
                 return redirect()
-                    ->route('client.dashboard')
+                    ->route('client.my-events')
                     ->with('error', 'Vous n\'avez pas accès à l\'administration.');
             }
 

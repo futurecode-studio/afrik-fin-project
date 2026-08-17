@@ -180,6 +180,7 @@ Route::middleware(['auth', 'admin.panel'])->prefix('admin')->name('admin.')->gro
     Route::get('/contacts', \App\Livewire\Admin\Contacts::class)->name('contacts')->middleware('permission:contacts.view');
     Route::get('/statistics', \App\Livewire\Admin\Statistics::class)->name('statistics')->middleware('permission:statistics.view');
     Route::get('/partners', \App\Livewire\Admin\Partners::class)->name('partners')->middleware('permission:partners.view');
+    Route::get('/fcps', \App\Livewire\Admin\Funds::class)->name('funds')->middleware('permission:partners.view');
     Route::get('/sgi-sgo', \App\Livewire\Admin\SgiSgoHub::class)->name('sgi-sgo')->middleware('permission:partners.view');
     Route::get('/order-intents', \App\Livewire\Admin\OrderIntents::class)->name('order-intents')->middleware('permission:partners.view');
     Route::get('/sgi-account-requests', \App\Livewire\Admin\SgiAccountRequests::class)->name('sgi-account-requests')->middleware('permission:partners.view');

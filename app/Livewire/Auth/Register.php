@@ -37,8 +37,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        // Onboarding intérêts puis dashboard
-        $this->redirect(route('client.interests'));
+        $this->redirect(route('client.my-events'));
     }
 
     public function render()

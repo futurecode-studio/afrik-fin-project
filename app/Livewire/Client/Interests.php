@@ -46,13 +46,13 @@ class Interests extends Component
         $user->update(['interests_completed_at' => now()]);
 
         $this->swalSuccess('Vos intérêts ont été enregistrés.');
-        $this->redirect(route('client.dashboard'), navigate: true);
+        $this->redirect(route('client.my-events'), navigate: true);
     }
 
     public function skip(): void
     {
         Auth::user()->update(['interests_completed_at' => now()]);
-        $this->redirect(route('client.dashboard'), navigate: true);
+        $this->redirect(route('client.my-events'), navigate: true);
     }
 
     public function render()

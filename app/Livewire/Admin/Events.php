@@ -50,6 +50,7 @@ class Events extends Component
     public $seo_title;
     public $seo_description;
     public $is_featured = false;
+    public $is_jeudi_opportunite = false;
     public $is_paid = false;
     public $status = 'draft';
 
@@ -83,6 +84,7 @@ class Events extends Component
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string|max:500',
             'is_featured' => 'boolean',
+            'is_jeudi_opportunite' => 'boolean',
             'is_paid' => 'boolean',
             'status' => 'required|in:draft,published,ongoing,completed,cancelled,archived',
         ];
@@ -153,6 +155,7 @@ class Events extends Component
         $this->seo_title = $event->seo_title;
         $this->seo_description = $event->seo_description;
         $this->is_featured = $event->is_featured;
+        $this->is_jeudi_opportunite = (bool) $event->is_jeudi_opportunite;
         $this->is_paid = (bool) $event->is_paid;
         $this->status = $event->status;
         $this->editMode = true;
@@ -167,6 +170,14 @@ class Events extends Component
         if ($this->featured_image) {
             $path = $this->featured_image->store('events/featured', 'public');
             $this->featured_image_url = $path;
+        }
+
+        if ($this->is_jeudi_opportunite) {
+            $this->category = $this->category ?: 'Jeudi d’opportunité';
+            if ($this->event_type === 'physical') {
+                $this->event_type = 'online';
+            }
+            $this->is_paid = false;
         }
 
         $data = [
@@ -194,6 +205,7 @@ class Events extends Component
             'seo_title' => $this->seo_title,
             'seo_description' => $this->seo_description,
             'is_featured' => (bool) $this->is_featured,
+            'is_jeudi_opportunite' => (bool) $this->is_jeudi_opportunite,
             'is_paid' => (bool) $this->is_paid,
             'status' => $this->status,
             'created_by' => Auth::id(),
@@ -217,6 +229,8 @@ class Events extends Component
             ]);
         }
 
+        Event::forgetJeudiCaches();
+
         $this->swalSuccess($this->editMode ? 'Événement modifié avec succès.' : 'Événement créé avec succès.');
 
         $this->closeModal();
@@ -232,6 +246,7 @@ class Events extends Component
     public function delete()
     {
         Event::findOrFail($this->eventId)->delete();
+        Event::forgetJeudiCaches();
         $this->swalSuccess('Événement supprimé avec succès.');
         $this->showDeleteModal = false;
         $this->eventId = null;
@@ -330,6 +345,7 @@ class Events extends Component
         $this->seo_title = '';
         $this->seo_description = '';
         $this->is_featured = false;
+        $this->is_jeudi_opportunite = false;
         $this->is_paid = false;
         $this->status = 'draft';
     }

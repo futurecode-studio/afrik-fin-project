@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                 }
 
                 if ($user->isClient()) {
-                    return redirect()->route('client.dashboard');
+                    return redirect()->route('client.my-events');
                 }
 
                 return redirect()->route('home');

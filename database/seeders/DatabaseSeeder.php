@@ -21,6 +21,8 @@ $this->call([
             StockSeeder::class,
             TransactionSeeder::class,
             EventSeeder::class,
+            PartnerSeeder::class,
+            FundSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();

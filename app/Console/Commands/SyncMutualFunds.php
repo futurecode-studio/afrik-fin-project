@@ -5,21 +5,15 @@ namespace App\Console\Commands;
 use App\Services\MutualFundsApiService;
 use Illuminate\Console\Command;
 
-/**
- * Réchauffe le cache des valeurs liquidatives FCP depuis Sikafinance.
- *
- * Usage :
- *   php artisan fcp:sync           Scrape et peuple le cache (invalidé d'abord)
- *   php artisan fcp:sync --list    Scrape puis affiche le tableau
- */
 class SyncMutualFunds extends Command
 {
-    protected $signature = 'fcp:sync {--list : Afficher la liste après synchronisation}';
-    protected $description = 'Synchronise les valeurs liquidatives des FCP UEMOA depuis Sikafinance';
+    protected $signature = 'fcp:sync {--list : Afficher la liste après rechargement}';
+
+    protected $description = 'Recharge le cache des FCP (bulletin BRVM / admin)';
 
     public function handle(MutualFundsApiService $service): int
     {
-        $this->info('► Synchronisation Sikafinance en cours…');
+        $this->info('► Chargement du catalogue FCP (bulletin BRVM / admin)…');
         $start = microtime(true);
 
         $service->clearCache();
@@ -27,18 +21,19 @@ class SyncMutualFunds extends Command
         $elapsed = round(microtime(true) - $start, 1);
 
         if (empty($funds)) {
-            $this->error("Aucun fonds récupéré en {$elapsed}s. Sikafinance est-il accessible ?");
+            $this->error('Aucun FCP dans le catalogue. Vérifiez Admin → FCP / OPCVM.');
+
             return self::FAILURE;
         }
 
-        $this->info("✓ {$elapsed}s · " . count($funds) . ' fonds en cache (' . count($service->getCategories()) . ' catégories)');
+        $this->info("✓ {$elapsed}s · ".count($funds).' fonds en cache ('.count($service->getCategories()).' catégories)');
 
         if ($this->option('list')) {
             $this->table(
-                ['Nom', 'Société', 'Catégorie', 'VL', 'Variation', 'Pays'],
-                array_map(fn($f) => [
-                    substr($f['name'], 0, 30),
-                    substr($f['company'], 0, 25),
+                ['Nom', 'SGO', 'Catégorie', 'VL', 'Var. origine', 'Pays'],
+                array_map(fn ($f) => [
+                    substr($f['name'], 0, 32),
+                    substr($f['company'], 0, 28),
                     $f['category'],
                     $f['nav_value'],
                     $f['variation'],

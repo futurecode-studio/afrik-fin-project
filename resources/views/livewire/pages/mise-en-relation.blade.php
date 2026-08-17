@@ -11,9 +11,14 @@
                     <li class="flex gap-2"><span class="material-symbols-outlined text-[#001a61]">analytics</span> Orientation selon votre profil</li>
                 </ul>
                 @if ($selected)
-                    <div class="mt-8 p-4 rounded-xl border border-[#c5c5d4] bg-white">
-                        <p class="text-xs uppercase tracking-wider text-[#757683]">Partenaire sélectionné</p>
-                        <p class="font-bold text-[#001a61] mt-1">{{ $selected->nom }}</p>
+                    <div class="mt-8 p-4 rounded-xl border border-[#c5c5d4] bg-white flex items-center gap-4">
+                        @if ($selected->logo_url)
+                            <img src="{{ $selected->logo_url }}" alt="{{ $selected->nom }}" class="h-12 w-12 object-contain">
+                        @endif
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-[#757683]">Partenaire sélectionné</p>
+                            <p class="font-bold text-[#001a61] mt-1">{{ $selected->nom }}</p>
+                        </div>
                     </div>
                 @endif
             </div>

@@ -33,7 +33,7 @@ class FcpOpcvm extends Component
             $this->funds = app(MutualFundsApiService::class)->getMutualFunds();
         } catch (\Throwable) {
             $this->funds = [];
-            $this->error = 'Impossible de récupérer les VL Sikafinance pour le moment.';
+            $this->error = 'Impossible de charger les FCP pour le moment.';
         } finally {
             $this->loading = false;
         }

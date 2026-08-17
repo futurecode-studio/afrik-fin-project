@@ -26,7 +26,7 @@
                 <a href="{{ route('client.formations') }}" class="text-sm font-bold text-[#001a61] border-b-2 border-[#ffbf00] pb-0.5">Mes formations</a>
             </div>
             <div class="flex items-center gap-2 sm:gap-3">
-                <a href="{{ route('client.dashboard') }}" class="text-sm font-medium text-[#444652] hover:text-[#001a61] hidden sm:inline transition">Tableau de bord</a>
+                <a href="{{ route('client.formations') }}" class="text-sm font-medium text-[#444652] hover:text-[#001a61] hidden sm:inline transition">Mes formations</a>
                 <a href="{{ route('support.ticket') }}" class="p-2 rounded-xl hover:bg-[#e7eeff]/80 transition" title="Support">
                     <span class="material-symbols-outlined text-[#001a61]">help</span>
                 </a>

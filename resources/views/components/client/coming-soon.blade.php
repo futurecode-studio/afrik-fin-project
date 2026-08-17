@@ -24,7 +24,7 @@
             <p class="mt-3 text-sm text-[#444652] leading-relaxed">{{ $description }}</p>
             {{ $actions ?? '' }}
             <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="{{ route('client.dashboard') }}"
+                <a href="{{ route('client.my-events') }}"
                     class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#001a61] text-white text-sm font-bold hover:bg-[#0a2e8c] transition">
                     <span class="material-symbols-outlined text-base">dashboard</span>
                     Tableau de bord

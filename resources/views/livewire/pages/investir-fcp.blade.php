@@ -87,13 +87,8 @@
 
                     {{-- Traçabilité --}}
                     <div class="border-t border-border pt-4 text-xs text-muted-foreground space-y-1">
-                        <p><strong>Source :</strong>
-                            <a href="{{ $fund['source_url'] }}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">
-                                Sikafinance ↗
-                            </a>
-                            @if(isset($fund['scraped_at'])) · récupéré {{ \Carbon\Carbon::parse($fund['scraped_at'])->diffForHumans() }} @endif
-                        </p>
-                        <p class="italic">Les VL sont publiées par les sociétés de gestion et référencées par Sikafinance. La fréquence de mise à jour dépend du fonds (quotidienne à hebdomadaire).</p>
+                        <p><strong>Source :</strong> {{ $fund['source'] ?? 'Bulletin officiel BRVM' }}</p>
+                        <p class="italic">Les performances passées ne préjugent pas des performances futures. Consultez le DICI auprès de la SGO avant toute souscription.</p>
                     </div>
                 </div>
 
@@ -127,7 +122,7 @@
                     Investir sur les <span class="text-secondary">FCP & OPCVM</span>
                 </h1>
                 <p class="text-lg text-primary-foreground/90 max-w-2xl">
-                    Déléguez la gestion de votre épargne à des professionnels agréés. Valeurs liquidatives suivies en direct depuis Sikafinance.
+                    Déléguez la gestion de votre épargne à des professionnels agréés. FCP du Bénin — VL du bulletin officiel BRVM.
                 </p>
             </div>
         </div>

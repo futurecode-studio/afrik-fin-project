@@ -41,7 +41,7 @@ class Partners extends Component
 
     public function rules()
     {
-        $logoRequired = !$this->editMode && empty($this->logo_url) ? 'required' : 'nullable';
+        $logoRequired = 'nullable';
 
         return [
             'nom' => 'required|string|max:255',

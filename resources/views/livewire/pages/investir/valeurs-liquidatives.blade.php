@@ -7,13 +7,9 @@
                 <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c] mb-3">OPCVM</p>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61]">Valeurs liquidatives</h1>
                 <p class="mt-2 text-[#444652]">
-                    Tableau des VL
-                    @if ($updatedAt)<span class="text-[#757683]"> · maj {{ $updatedAt }}</span>@endif
+                    Tableau des VL — FCP du Bénin, bulletin BRVM 23 juillet 2026
                 </p>
             </div>
-            <button type="button" wire:click="refresh" class="text-sm font-bold bg-[#001a61] text-white px-4 py-2 rounded hover:bg-[#0a2e8c] self-start">
-                Actualiser
-            </button>
         </div>
     </section>
 
@@ -44,8 +40,9 @@
                                 'name' => 'Fonds',
                                 'company' => 'SGO',
                                 'category' => 'Catégorie',
-                                'nav_numeric' => 'VL',
-                                'variation_percentage' => 'Var. %',
+                                'origin_nav' => 'Origine',
+                                'nav_numeric' => 'VL actuelle',
+                                'variation_percentage' => 'Var. origine',
                                 'date' => 'Date',
                             ] as $col => $label)
                                 <th class="text-left px-3 py-3 cursor-pointer select-none" wire:click="sort('{{ $col }}')">
@@ -62,9 +59,10 @@
                                 <td class="px-3 py-3 font-semibold text-[#001a61]">{{ $f['name'] }}</td>
                                 <td class="px-3 py-3 text-[#444652]">{{ $f['company'] }}</td>
                                 <td class="px-3 py-3">{{ $f['category'] }}</td>
+                                <td class="px-3 py-3 tabular-nums">{{ $f['origin_nav_value'] ?? '—' }}</td>
                                 <td class="px-3 py-3 font-medium">{{ $f['nav_value'] }}</td>
-                                <td @class(['px-3 py-3 font-semibold', 'text-green-600' => ($f['variation_percentage'] ?? 0) >= 0, 'text-red-600' => ($f['variation_percentage'] ?? 0) < 0])>
-                                    {{ $f['variation'] ?? '—' }}
+                                <td @class(['px-3 py-3 font-semibold', 'text-[#757683]' => ($f['variation_percentage'] ?? null) === null, 'text-green-600' => ($f['variation_percentage'] ?? null) !== null && $f['variation_percentage'] >= 0, 'text-red-600' => ($f['variation_percentage'] ?? null) !== null && $f['variation_percentage'] < 0])>
+                                    {{ $f['variation'] ?? 'ND' }}
                                 </td>
                                 <td class="px-3 py-3">{{ \Carbon\Carbon::parse($f['date'])->format('d/m/Y') }}</td>
                                 <td class="px-3 py-3">
@@ -72,7 +70,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="7" class="px-4 py-10 text-center text-[#757683]">Aucune VL disponible</td></tr>
+                            <tr><td colspan="8" class="px-4 py-10 text-center text-[#757683]">Aucune VL disponible</td></tr>
                         @endforelse
                     </tbody>
                 </table>

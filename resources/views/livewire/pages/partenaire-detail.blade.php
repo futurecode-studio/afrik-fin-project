@@ -61,10 +61,15 @@
                 @if ($related->isNotEmpty())
                     <div class="bg-white border border-[#c5c5d4] rounded-xl p-5">
                         <h3 class="font-bold text-[#001a61] mb-3">Autres {{ $partner->type }}</h3>
-                        <ul class="space-y-2">
+                        <ul class="space-y-3">
                             @foreach ($related as $r)
                                 <li>
-                                    <a href="{{ route('partenaires.show', $r->id) }}" class="text-sm font-medium text-[#0a2e8c] hover:underline">{{ $r->nom }}</a>
+                                    <a href="{{ route('partenaires.show', $r->id) }}" class="flex items-center gap-3 text-sm font-medium text-[#0a2e8c] hover:underline">
+                                        @if ($r->logo_url)
+                                            <img src="{{ $r->logo_url }}" alt="" class="h-8 w-8 object-contain rounded border border-[#c5c5d4] bg-white p-0.5">
+                                        @endif
+                                        <span>{{ $r->nom }}</span>
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>

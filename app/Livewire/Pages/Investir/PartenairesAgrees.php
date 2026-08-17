@@ -32,6 +32,9 @@ class PartenairesAgrees extends Component
         }
 
         $partners = $query->get();
+        if ($partners->isEmpty() && $this->type === '' && $this->search === '') {
+            $partners = Partner::catalogCollection();
+        }
         $grouped = $partners->groupBy('type');
 
         return view('livewire.pages.investir.partenaires-agrees', [

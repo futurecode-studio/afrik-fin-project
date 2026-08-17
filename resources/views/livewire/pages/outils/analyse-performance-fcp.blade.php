@@ -1,7 +1,7 @@
 <div class="bg-[#f9f9ff] min-h-screen">
     <section class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12">
         <h1 class="text-3xl font-extrabold text-[#001a61]">Analyse Performance FCP</h1>
-        <p class="text-[#444652] mt-2">Données VL réelles (Sikafinance via MutualFundsApiService).</p>
+        <p class="text-[#444652] mt-2">VL d’origine et VL actuelle — bulletin BRVM, éditables dans l’admin.</p>
 
         <div class="mt-6">
             <label class="text-sm font-medium">Fonds</label>
@@ -18,19 +18,23 @@
                 <h2 class="text-2xl font-extrabold text-[#001a61] mt-1">{{ $fund['name'] }}</h2>
                 <p class="text-sm text-[#757683] mt-1">{{ $fund['company'] ?? '' }} @if(!empty($fund['isin'])) · ISIN {{ $fund['isin'] }}@endif</p>
 
-                <div class="mt-6 grid sm:grid-cols-3 gap-4">
+                <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="p-4 rounded-xl bg-[#f0f3ff] border border-[#c5c5d4]">
-                        <p class="text-xs text-[#757683]">Valeur liquidative</p>
-                        <p class="text-2xl font-extrabold text-[#001a61]">{{ isset($fund['nav_numeric']) ? number_format($fund['nav_numeric'], 2, ',', ' ') : (isset($fund['nav']) ? number_format($fund['nav'], 2, ',', ' ') : '—') }}</p>
+                        <p class="text-xs text-[#757683]">VL actuelle</p>
+                        <p class="text-2xl font-extrabold text-[#001a61]">{{ $fund['nav_value'] ?? '—' }}</p>
                     </div>
                     <div class="p-4 rounded-xl bg-[#f0f3ff] border border-[#c5c5d4]">
-                        <p class="text-xs text-[#757683]">Variation</p>
-                        @php $v = $fund['variation_percentage'] ?? $fund['change_percent'] ?? null; @endphp
-                        <p class="text-2xl font-extrabold {{ (float)($v??0) >= 0 ? 'text-green-700' : 'text-red-700' }}">{{ $v !== null ? number_format((float)$v, 2, ',', ' ').'%' : '—' }}</p>
+                        <p class="text-xs text-[#757683]">VL d’origine</p>
+                        <p class="text-2xl font-extrabold text-[#001a61]">{{ $fund['origin_nav_value'] ?? '—' }}</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-[#f0f3ff] border border-[#c5c5d4]">
+                        <p class="text-xs text-[#757683]">Var. origine</p>
+                        @php $v = $fund['variation_percentage'] ?? null; @endphp
+                        <p @class(['text-2xl font-extrabold', 'text-[#757683]' => $v === null, 'text-green-700' => $v !== null && $v >= 0, 'text-red-700' => $v !== null && $v < 0])>{{ $fund['variation'] ?? 'ND' }}</p>
                     </div>
                     <div class="p-4 rounded-xl bg-[#f0f3ff] border border-[#c5c5d4]">
                         <p class="text-xs text-[#757683]">Date VL</p>
-                        <p class="text-lg font-bold text-[#001a61]">{{ $fund['date'] ?? '—' }}</p>
+                        <p class="text-lg font-bold text-[#001a61]">{{ isset($fund['date']) ? \Carbon\Carbon::parse($fund['date'])->format('d/m/Y') : '—' }}</p>
                     </div>
                 </div>
 

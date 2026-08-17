@@ -26,16 +26,20 @@
                 <h2 class="text-lg font-bold text-[#001a61] mt-8 mb-4">{{ $partner->getTypeLabel() }}</h2>
             @endif
             <article class="bg-white border border-[#c5c5d4] rounded-xl p-5 mb-4 flex flex-col sm:flex-row gap-4 items-start">
-                <div class="w-16 h-16 rounded-lg bg-[#e7eeff] flex items-center justify-center overflow-hidden shrink-0">
+                <div class="w-16 h-16 rounded-lg bg-white border border-[#c5c5d4] flex items-center justify-center overflow-hidden shrink-0 p-1">
                     @if ($partner->logo_url)
-                        <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}" class="w-full h-full object-contain p-1">
+                        <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}" class="w-full h-full object-contain">
                     @else
                         <span class="material-symbols-outlined text-[#001a61] text-3xl">business</span>
                     @endif
                 </div>
                 <div class="flex-1 min-w-0">
                     <h3 class="font-bold text-[#001a61] text-lg">
-                        <a href="{{ route('partenaires.show', $partner->id) }}" class="hover:underline">{{ $partner->nom }}</a>
+                        @if ($partner->getKey())
+                            <a href="{{ route('partenaires.show', $partner->id) }}" class="hover:underline">{{ $partner->nom }}</a>
+                        @else
+                            {{ $partner->nom }}
+                        @endif
                     </h3>
                     @if ($partner->description)
                         <p class="text-sm text-[#444652] mt-1">{{ plain_text($partner->description, 160) }}</p>
@@ -46,8 +50,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col gap-2 shrink-0">
-                    <a href="{{ route('partenaires.show', $partner->id) }}"
-                        class="text-sm font-bold text-white bg-[#001a61] px-4 py-2 rounded hover:bg-[#051c5b] transition text-center">Voir la fiche</a>
+                    @if ($partner->getKey())
+                        <a href="{{ route('partenaires.show', $partner->id) }}"
+                            class="text-sm font-bold text-white bg-[#001a61] px-4 py-2 rounded hover:bg-[#051c5b] transition text-center">Voir la fiche</a>
+                    @endif
                     @if ($partner->website)
                         <a href="{{ $partner->website }}" target="_blank" rel="noopener"
                             class="text-sm font-bold text-[#001a61] border border-[#001a61] px-4 py-2 rounded hover:bg-[#e7eeff] transition text-center">Site web</a>

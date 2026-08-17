@@ -48,7 +48,14 @@
                                     @endif
                                     <div>
                                         <p class="font-semibold">{{ $event->title }}</p>
-                                        <p class="text-xs text-[#757683]">{{ $event->category }}</p>
+                                        <div class="flex flex-wrap items-center gap-1 mt-0.5">
+                                            @if ($event->is_jeudi_opportunite)
+                                                <span class="text-[10px] font-extrabold uppercase tracking-wide px-1.5 py-0.5 rounded bg-[#ffbf00] text-[#261a00]">Jeudi d’opportunité</span>
+                                            @endif
+                                            @if ($event->category)
+                                                <p class="text-xs text-[#757683]">{{ $event->category }}</p>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -319,6 +326,18 @@
                         <input type="checkbox" wire:model="is_featured" id="is_featured" class="rounded border-[#c5c5d4]">
                         <label for="is_featured" class="text-sm font-medium">Événement mis en avant</label>
                     </div>
+                    <div class="md:col-span-2 rounded-xl border border-[#ffbf00]/50 bg-[#fff8e1] p-4">
+                        <label class="inline-flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" wire:model.live="is_jeudi_opportunite" id="is_jeudi_opportunite" class="mt-1 rounded border-[#c5c5d4]">
+                            <span>
+                                <span class="block text-sm font-extrabold text-[#001a61]">Jeudi d’opportunité</span>
+                                <span class="block text-xs text-[#444652] mt-0.5">
+                                    Webinaire hebdomadaire gratuit. Une fois publié, un popup s’ouvre automatiquement sur le site public — pas besoin d’envoyer le lien à l’équipe.
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                    @unless($is_jeudi_opportunite)
                     <div class="md:col-span-2 rounded-xl border border-[#c5c5d4] bg-[#f7f9ff] p-4">
                         <label class="inline-flex items-start gap-3 cursor-pointer">
                             <input type="checkbox" wire:model.live="is_paid" id="is_paid" class="mt-1 rounded border-[#c5c5d4]">
@@ -336,6 +355,7 @@
                             </a>
                         @endif
                     </div>
+                    @endunless
                     <div>
                         <label class="block text-sm font-medium mb-1">Statut</label>
                         <select wire:model="status" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">

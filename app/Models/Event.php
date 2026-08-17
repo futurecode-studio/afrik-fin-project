@@ -18,8 +18,8 @@ class Event extends Model
         'city', 'country',
         'online_platform', 'online_meeting_url', 'online_meeting_id',
         'online_meeting_passcode', 'online_access_instructions',
-        'capacity', 'registration_count', 'featured_image',
-        'seo_title', 'seo_description', 'is_featured', 'is_paid', 'status', 'created_by',
+        'capacity', 'registration_count',         'featured_image',
+        'seo_title', 'seo_description', 'is_featured', 'is_jeudi_opportunite', 'is_paid', 'status', 'created_by',
     ];
 
     protected $casts = [
@@ -30,6 +30,7 @@ class Event extends Model
         'location_lat' => 'decimal:8',
         'location_lng' => 'decimal:8',
         'is_featured' => 'boolean',
+        'is_jeudi_opportunite' => 'boolean',
         'is_paid' => 'boolean',
         'capacity' => 'integer',
         'registration_count' => 'integer',
@@ -43,6 +44,15 @@ class Event extends Model
                 $event->slug = Str::slug($event->title);
             }
         });
+        static::saved(fn () => static::forgetJeudiCaches());
+        static::deleted(fn () => static::forgetJeudiCaches());
+    }
+
+    public static function forgetJeudiCaches(): void
+    {
+        cache()->forget('popup.jeudi.v1');
+        cache()->forget('home.page.data.v9');
+        cache()->forget('home.page.data.v10');
     }
 
     public function creator()
@@ -116,6 +126,36 @@ class Event extends Model
     public function scopeUpcoming($query)
     {
         return $query->where('starts_at', '>=', now())->whereIn('status', ['published','ongoing']);
+    }
+
+    public function scopeJeudiOpportunite($query)
+    {
+        return $query->where('is_jeudi_opportunite', true);
+    }
+
+    public static function nextJeudiPopup(): ?self
+    {
+        try {
+            if (! \Illuminate\Support\Facades\Schema::hasColumn('events', 'is_jeudi_opportunite')) {
+                return null;
+            }
+
+            return cache()->remember('popup.jeudi.v1', 60, function () {
+                return static::query()
+                    ->jeudiOpportunite()
+                    ->whereIn('status', ['published', 'ongoing'])
+                    ->where(function ($q) {
+                        $q->where('starts_at', '>=', now()->subHours(2))
+                            ->orWhere(function ($q2) {
+                                $q2->whereNotNull('ends_at')->where('ends_at', '>=', now());
+                            });
+                    })
+                    ->orderBy('starts_at')
+                    ->first();
+            });
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     public function isRegistrationOpen(): bool

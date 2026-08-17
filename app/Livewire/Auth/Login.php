@@ -69,7 +69,7 @@ class Login extends Component
         }
 
         if ($user->isClient()) {
-            $this->redirect(route('client.dashboard'), navigate: false);
+            $this->redirect(route('client.my-events'), navigate: false);
 
             return;
         }

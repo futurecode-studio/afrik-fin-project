@@ -11,38 +11,53 @@
         <section class="px-5 lg:px-16 max-w-[720px] mx-auto pb-20 text-center">
             <h1 class="text-2xl font-extrabold text-[#001a61]">Fonds indisponible</h1>
             <p class="mt-3 text-[#444652]">{{ $error ?? 'Aucune donnée.' }}</p>
-            <button type="button" wire:click="refresh" class="mt-6 font-bold text-[#001a61] underline">Réessayer</button>
         </section>
     @else
-        <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-8">
-            <p class="text-sm font-semibold text-[#0a2e8c]">{{ $fund['category'] }} · {{ $fund['country'] }}</p>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61] mt-2">{{ $fund['name'] }}</h1>
-            <p class="text-[#444652] mt-2">{{ $fund['company'] }} @if(!empty($fund['isin'])) · ISIN {{ $fund['isin'] }}@endif</p>
+        <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-8 flex items-start gap-4">
+            @if (!empty($fund['logo']))
+                <img src="{{ $fund['logo'] }}" alt="" class="w-14 h-14 object-contain bg-white border border-[#c5c5d4] rounded-xl p-1 shrink-0">
+            @endif
+            <div>
+                <p class="text-sm font-semibold text-[#0a2e8c]">{{ $fund['category'] }} · {{ $fund['country'] }}</p>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-[#001a61] mt-2">{{ $fund['name'] }}</h1>
+                <p class="text-[#444652] mt-2">{{ $fund['company'] }}</p>
+            </div>
         </section>
 
         <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-12">
-            <div class="grid sm:grid-cols-3 gap-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white border border-[#c5c5d4] rounded-xl p-6">
-                    <p class="text-sm text-[#757683]">Valeur liquidative</p>
-                    <p class="text-3xl font-extrabold text-[#001a61] mt-2">{{ $fund['nav_value'] }}</p>
+                    <p class="text-sm text-[#757683]">VL actuelle</p>
+                    <p class="text-2xl font-extrabold text-[#001a61] mt-2">{{ $fund['nav_value'] }}</p>
                 </div>
                 <div class="bg-white border border-[#c5c5d4] rounded-xl p-6">
-                    <p class="text-sm text-[#757683]">Variation</p>
-                    <p @class(['text-3xl font-extrabold mt-2', 'text-green-600' => ($fund['variation_percentage'] ?? 0) >= 0, 'text-red-600' => ($fund['variation_percentage'] ?? 0) < 0])>
-                        {{ $fund['variation'] ?? '—' }}
+                    <p class="text-sm text-[#757683]">VL d’origine</p>
+                    <p class="text-2xl font-extrabold text-[#001a61] mt-2">{{ $fund['origin_nav_value'] ?? '—' }}</p>
+                </div>
+                <div class="bg-white border border-[#c5c5d4] rounded-xl p-6">
+                    <p class="text-sm text-[#757683]">Variation depuis l’origine</p>
+                    @php $v = $fund['variation_percentage'] ?? null; @endphp
+                    <p @class(['text-2xl font-extrabold mt-2', 'text-[#757683]' => $v === null, 'text-green-600' => $v !== null && $v >= 0, 'text-red-600' => $v !== null && $v < 0])>
+                        {{ $fund['variation'] ?? 'ND' }}
                     </p>
                 </div>
                 <div class="bg-white border border-[#c5c5d4] rounded-xl p-6">
                     <p class="text-sm text-[#757683]">Date VL</p>
-                    <p class="text-3xl font-extrabold text-[#001a61] mt-2">{{ \Carbon\Carbon::parse($fund['date'])->format('d/m/Y') }}</p>
+                    <p class="text-2xl font-extrabold text-[#001a61] mt-2">{{ \Carbon\Carbon::parse($fund['date'])->format('d/m/Y') }}</p>
                 </div>
             </div>
-            <div class="mt-4 flex flex-wrap gap-3">
-                <button type="button" wire:click="refresh" class="text-sm font-bold border border-[#001a61] text-[#001a61] px-4 py-2 rounded hover:bg-[#e7eeff]">Actualiser</button>
-                @if (!empty($fund['source_url']))
-                    <a href="{{ $fund['source_url'] }}" target="_blank" rel="noopener" class="text-sm font-bold text-[#001a61] hover:underline py-2">Source Sikafinance ↗</a>
+            @if (!empty($fund['source']) || !empty($fund['source_note']))
+                <p class="mt-4 text-xs text-[#757683]">
+                    {{ $fund['source'] ?? '' }}
+                    @if (!empty($fund['source_note'])) — {{ $fund['source_note'] }} @endif
+                </p>
+            @endif
+            <div class="mt-6 flex flex-wrap gap-3">
+                @if (!empty($fund['flyer_url']))
+                    <a href="{{ $fund['flyer_url'] }}" target="_blank" rel="noopener" class="text-sm font-bold border border-[#001a61] text-[#001a61] px-4 py-2 rounded hover:bg-[#e7eeff]">Télécharger le flyer</a>
                 @endif
                 <a href="{{ route('investir.partenaires') }}" class="text-sm font-bold bg-[#001a61] text-white px-4 py-2 rounded hover:bg-[#0a2e8c]">Souscrire via un partenaire</a>
+                <a href="{{ route('mise-en-relation') }}" class="text-sm font-bold text-[#001a61] hover:underline py-2">Demander un accompagnement</a>
             </div>
         </section>
 
