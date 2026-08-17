@@ -52,7 +52,11 @@
                 @if ($i !== 0) x-cloak @endif
             >
                 <img src="{{ $slide['image'] }}" alt="" class="absolute inset-0 w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-[#001a61]/92 via-[#001a61]/70 to-[#001a61]/25"></div>
+                <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+                    <div class="absolute inset-0 bg-black/45"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#001a61]/88 via-[#001a61]/62 to-[#001a61]/50"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#001a61]/80 via-transparent to-[#001a61]/35"></div>
+                </div>
             </div>
         @endforeach
 
@@ -65,10 +69,10 @@
             @foreach ($heroSlides as $i => $slide)
                 <div x-show="active === {{ $i }}" @if ($i !== 0) x-cloak @endif class="max-w-3xl">
                     <p class="text-[#ffbf00] text-xs font-extrabold uppercase tracking-[0.2em] mb-3">Africaine des Finances</p>
-                    <h1 class="text-4xl md:text-5xl lg:text-[52px] lg:leading-[1.1] font-extrabold text-white tracking-tight">
+                    <h1 class="text-4xl md:text-5xl lg:text-[52px] lg:leading-[1.1] font-extrabold text-white tracking-tight [text-shadow:0_2px_24px_rgba(0,26,97,0.65)]">
                         {{ $slide['title'] }}
                     </h1>
-                    <p class="mt-5 text-lg text-white/85 max-w-xl leading-relaxed">{{ $slide['text'] }}</p>
+                    <p class="mt-5 text-lg text-white/90 max-w-xl leading-relaxed [text-shadow:0_1px_12px_rgba(0,26,97,0.7)]">{{ $slide['text'] }}</p>
                 </div>
             @endforeach
 

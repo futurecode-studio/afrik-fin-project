@@ -126,11 +126,6 @@
                                 <span class="inline-flex w-14 h-14 rounded-2xl bg-[#001a61] text-[#ffbf00] items-center justify-center shadow-lg shadow-[#001a61]/20 group-hover:scale-105 transition">
                                     <span class="material-symbols-outlined text-[28px]">{{ $service->icon ?: 'handshake' }}</span>
                                 </span>
-                                @if ($service->price_label)
-                                    <span class="text-xs font-extrabold uppercase tracking-wide px-3 py-1.5 rounded-full bg-[#e7eeff] text-[#001a61]">
-                                        {{ $service->price_label }}
-                                    </span>
-                                @endif
                             </div>
 
                             <h3 class="mt-5 text-2xl font-extrabold text-[#001a61] leading-snug">
@@ -142,17 +137,6 @@
                                 <p class="mt-1 text-sm font-semibold text-[#0a2e8c]">{{ $service->subtitle }}</p>
                             @endif
                             <p class="mt-3 text-[#444652] leading-relaxed">{{ plain_text($service->excerpt, 200) }}</p>
-
-                            @if (! empty($service->features))
-                                <ul class="mt-4 space-y-2">
-                                    @foreach (array_slice($service->features, 0, 5) as $feature)
-                                        <li class="flex gap-2 items-start text-sm text-[#444652]">
-                                            <span class="material-symbols-outlined text-[#0a7a3e] text-[18px] shrink-0 mt-0.5">check_circle</span>
-                                            <span>{{ $feature }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
 
                             <div class="mt-6 flex flex-wrap items-center gap-3">
                                 <a href="{{ $ctaHref }}"

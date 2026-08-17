@@ -16,27 +16,11 @@
             @if ($service->content)
                 <div class="mt-6 prose prose-slate max-w-none text-[#444652]">{!! rich_html($service->content) !!}</div>
             @endif
-
-            @if (!empty($service->features))
-                <h2 class="text-xl font-bold text-[#001a61] mt-10 mb-4">Ce que vous obtenez</h2>
-                <ul class="space-y-3">
-                    @foreach ($service->features as $feature)
-                        <li class="flex gap-3 items-start">
-                            <span class="material-symbols-outlined text-[#0a7a3e] text-xl">check_circle</span>
-                            <span>{{ $feature }}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
         </div>
 
         <aside class="lg:col-span-2">
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-6 sticky top-32">
                 <span class="material-symbols-outlined text-[#001a61] text-4xl">{{ $service->icon ?: 'handshake' }}</span>
-                @if ($service->price_label)
-                    <p class="text-sm text-[#757683] mt-4">Tarif</p>
-                    <p class="text-2xl font-extrabold text-[#001a61]">{{ $service->price_label }}</p>
-                @endif
                 @if ($service->duration_label)
                     <p class="text-sm text-[#444652] mt-2">{{ $service->duration_label }}</p>
                 @endif
