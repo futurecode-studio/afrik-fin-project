@@ -334,24 +334,11 @@
         <div class="grid lg:grid-cols-2 gap-6 mb-8">
             <div class="rounded-3xl bg-[#001a61] text-white p-7 lg:p-8 flex flex-col">
                 <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Hebdomadaire · Gratuit</p>
-                <h3 class="mt-3 text-2xl font-extrabold">Webinaire — Jeudi d’opportunité</h3>
+                <h3 class="mt-3 text-2xl font-extrabold">Webinaire</h3>
                 <p class="mt-3 text-white/80 leading-relaxed flex-1">
                     Une mini-formation chaque semaine pour toucher le marché, comprendre une thématique et oser la prochaine étape.
                 </p>
-                @if ($webinars->isNotEmpty())
-                    <div class="mt-5 space-y-3">
-                        @foreach ($webinars->take(2) as $event)
-                            <a href="{{ route('event-detail', $event->slug) }}" class="block rounded-xl bg-white/10 border border-white/15 px-4 py-3 hover:bg-white/15 transition">
-                                <p class="text-[11px] text-[#ffbf00] font-bold">{{ optional($event->starts_at)->translatedFormat('l d F') }}</p>
-                                <p class="font-bold mt-0.5 line-clamp-1">{{ $event->title }}</p>
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
-                @php
-                    $nextWebinar = $webinars->first(fn ($e) => (bool) $e->is_jeudi_opportunite) ?? $webinars->first();
-                @endphp
-                <a href="{{ $nextWebinar ? route('event-detail', $nextWebinar->slug) : route('events-list', ['filterFormat' => 'online']) }}"
+                <a href="{{ route('events-list', ['filterFormat' => 'online']) }}"
                     class="mt-6 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-5 py-3 rounded-xl hover:brightness-95 transition w-fit">
                     Rejoindre le prochain webinaire
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
