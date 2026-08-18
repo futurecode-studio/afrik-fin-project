@@ -213,9 +213,9 @@ class EventSeeder extends Seeder
                 'online_meeting_passcode' => 'UEMOA26',
                 'online_access_instructions' => 'Accès hybride : salle Hôtel du Lac + Zoom pour les participants à distance.',
                 'capacity' => 120,
-                'is_featured' => true,
+                'is_featured' => false,
                 'is_paid' => true,
-                'status' => 'published',
+                'status' => 'draft',
                 'tickets' => [
                     ['name' => 'Standard', 'description' => 'Accès salle + replay.', 'price' => 15000, 'quantity' => 80],
                     ['name' => 'VIP', 'description' => 'Accès + networking lunch.', 'price' => 35000, 'quantity' => 40],
@@ -239,7 +239,7 @@ class EventSeeder extends Seeder
                 'capacity' => 40,
                 'is_featured' => false,
                 'is_paid' => true,
-                'status' => 'published',
+                'status' => 'draft',
                 'tickets' => [
                     ['name' => 'Participant', 'description' => 'Atelier + supports.', 'price' => 25000, 'quantity' => 40],
                 ],
@@ -290,6 +290,11 @@ class EventSeeder extends Seeder
                 );
             }
         }
+
+        Event::whereIn('slug', [
+            'conference-perspectives-marches-uemoa-2026',
+            'atelier-lecture-comptes-societes-cotees',
+        ])->update(['status' => 'draft', 'is_featured' => false]);
 
         $this->command->info('Event Seeder: Marathon 2026 + catalogue public créés avec succès !');
     }

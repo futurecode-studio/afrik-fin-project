@@ -521,44 +521,45 @@
         </div>
     </section>
 
-    {{-- 7. Événements --}}
+    {{-- 7. Événements — un seul événement mis en avant (Marathon) --}}
     <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="evenements">
         <div class="max-w-[1280px] mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-                <div>
-                    <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Événements</span>
-                    <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">À venir</h2>
-                    <p class="text-[#444652] mt-2 max-w-xl">Rencontres et ateliers pour progresser sur le marché financier régional.</p>
-                </div>
-                <a href="{{ route('events-list') }}" class="text-[#001a61] font-bold inline-flex items-center gap-1">
-                    Tous les événements <span class="material-symbols-outlined">arrow_forward</span>
-                </a>
+            <div class="mb-8">
+                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Événements</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">À venir</h2>
+                <p class="text-[#444652] mt-2 max-w-xl">Rencontres pour progresser sur le marché financier régional.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-5">
-                @forelse ($upcomingEvents as $event)
-                    <a href="{{ route('event-detail', $event->slug) }}"
-                        class="rounded-2xl border border-[#c5c5d4] bg-white overflow-hidden hover:shadow-md transition group">
+            @forelse ($upcomingEvents as $event)
+                <article class="rounded-3xl bg-[#001a61] text-white overflow-hidden">
+                    <div class="grid lg:grid-cols-2">
                         @if ($event->featured_image)
-                            <div class="h-40 overflow-hidden">
+                            <div class="min-h-[240px] lg:min-h-full">
                                 <img src="{{ str_starts_with($event->featured_image, 'http') ? $event->featured_image : asset('storage/'.$event->featured_image) }}"
-                                    alt="" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                    alt="" class="w-full h-full object-cover min-h-[240px] lg:min-h-[360px]">
                             </div>
                         @endif
-                        <div class="p-5">
-                            <p class="text-xs font-bold text-[#0a2e8c] uppercase tracking-wider">
-                                {{ optional($event->starts_at)->format('d/m/Y H:i') }}
+                        <div class="p-7 lg:p-10 flex flex-col {{ $event->featured_image ? '' : 'lg:col-span-2' }}">
+                            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">
+                                {{ $event->category ?: 'Événement phare' }}
                             </p>
-                            <h3 class="mt-2 font-bold text-[#001a61] leading-snug">{{ $event->title }}</h3>
-                            <p class="mt-2 text-sm text-[#444652] line-clamp-2">{{ plain_text($event->description, 110) }}</p>
+                            <h3 class="mt-3 text-3xl md:text-4xl font-extrabold leading-tight">{{ $event->title }}</h3>
+                            <p class="mt-4 text-white/80 leading-relaxed text-base md:text-lg flex-1">
+                                {{ plain_text($event->description, 220) }}
+                            </p>
+                            <a href="{{ route('event-detail', $event->slug) }}"
+                                class="mt-8 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3.5 rounded-xl hover:brightness-95 transition w-fit text-base">
+                                S’inscrire à l’événement
+                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                            </a>
                         </div>
-                    </a>
-                @empty
-                    <div class="md:col-span-3 rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
-                        Aucun événement programmé pour le moment.
                     </div>
-                @endforelse
-            </div>
+                </article>
+            @empty
+                <div class="rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
+                    Aucun événement programmé pour le moment.
+                </div>
+            @endforelse
         </div>
     </section>
 

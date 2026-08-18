@@ -18,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v11', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v12', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -74,8 +74,13 @@ class Home extends Component
             $upcomingEvents = Event::query()
                 ->whereIn('status', ['published', 'ongoing'])
                 ->upcoming()
+                ->where(function ($q) {
+                    $q->where('is_featured', true)
+                        ->orWhere('slug', 'marathon-acteurs-marche-financier-2026');
+                })
+                ->where('event_type', 'physical')
                 ->orderBy('starts_at')
-                ->take(3)
+                ->take(1)
                 ->get();
 
             $webinars = Event::query()
