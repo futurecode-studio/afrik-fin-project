@@ -145,6 +145,10 @@
                             class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-4 py-2">
                             Connexion
                         </a>
+                        <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
+                            class="adf-btn-primary text-base whitespace-nowrap px-5 py-3">
+                            {{ config('services.diaspora_funnel.label') }}
+                        </a>
                     @endauth
                 </div>
 

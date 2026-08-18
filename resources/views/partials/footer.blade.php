@@ -3,6 +3,8 @@
     $socialLinks = cache()->remember('social_links_active', 600, fn () =>
         \App\Models\SocialLink::where('is_active', true)->orderBy('order')->get()
     );
+    $diasporaUrl = config('services.diaspora_funnel.url');
+    $diasporaLabel = config('services.diaspora_funnel.label');
 @endphp
 
 <footer class="relative mt-auto border-t border-white/40 text-[#131c2a] overflow-hidden">
@@ -74,6 +76,11 @@
                     <p><span class="font-semibold text-[#001a61]">Adresse :</span> Fidjrossè Hlazounto, Cotonou</p>
                     <p><span class="font-semibold text-[#001a61]">Agrément :</span> AMF-UMOA AA/2022-03</p>
                 </div>
+
+                <a href="{{ $diasporaUrl }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-4 py-2.5 rounded-xl hover:bg-[#0a2e8c] transition text-sm">
+                    {{ $diasporaLabel }}
+                </a>
             </div>
         </div>
 
