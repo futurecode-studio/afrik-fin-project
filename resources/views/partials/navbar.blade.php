@@ -94,61 +94,10 @@
                     <span class="material-symbols-outlined text-[22px] align-middle">search</span>
                 </a>
 
-                <a href="{{ route('marches.index') }}"
-                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('marches.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    Marchés
-                </a>
-
                 <a href="{{ route('services') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('services', 'services*', 'service-detail', 'services.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                     Services
                 </a>
-
-                <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                    <button type="button"
-                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('investir.*', 'marches.*', 'guide-bourse') ? 'text-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                        Investir
-                        <span class="material-symbols-outlined text-[18px] transition-transform"
-                            :class="open ? 'rotate-180' : ''">expand_more</span>
-                    </button>
-                    <div x-show="open" x-cloak
-                        x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                        class="absolute left-0 mt-3 w-72 adf-glass-strong rounded-2xl overflow-hidden z-50 shadow-glass-lg">
-                        <a href="{{ route('investir.hub') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Investir — Hub</a>
-                        <a href="{{ route('guide-bourse') }}"
-                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            Guide Complet de la Bourse
-                            <span class="block text-[11px] font-medium text-[#757683]">BRVM · actions · obligations · glossaire</span>
-                        </a>
-                        <a href="{{ route('ouverture-compte-sgi') }}"
-                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            Ouvrir un compte titre
-                            <span class="block text-[11px] font-medium text-[#757683]">SGI · FCP · accompagnement ADF</span>
-                        </a>
-                        <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            {{ config('services.diaspora_funnel.label') }}
-                            <span class="block text-[11px] font-medium text-[#757683]">Évaluer votre profil · accompagnement ADF</span>
-                        </a>
-                        <a href="{{ route('investir.comment') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Comment investir</a>
-                        <a href="{{ route('investir.profil-test') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Profil investisseur</a>
-                        <a href="{{ route('investir.opcvm') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">FCP / OPCVM</a>
-                        <a href="{{ route('marches.index') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Marchés financiers</a>
-                        <a href="{{ route('marches.cotations') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Cotations Actions</a>
-                        <a href="{{ route('marches.calendrier') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Calendrier financier</a>
-                        <a href="{{ route('investir.partenaires') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Partenaires agréés</a>
-                    </div>
-                </div>
 
                 <a href="{{ route('formations') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('formations*', 'formation-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
@@ -233,16 +182,6 @@
             class="lg:hidden border-t border-[#c5c5d4]/60 adf-glass-strong px-5 py-4 space-y-1">
             <a href="{{ route('search') }}" class="block py-3 text-[#131c2a] font-medium">Recherche</a>
             <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
-            <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
-            <a href="{{ route('guide-bourse') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Guide Complet de la Bourse</a>
-            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Ouvrir un compte titre</a>
-            <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                class="block py-3 pl-4 font-bold text-[#001a61]">{{ config('services.diaspora_funnel.label') }}</a>
-            <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>
-            <a href="{{ route('marches.index') }}" class="block py-3 text-[#131c2a] font-medium">Marchés</a>
-            <a href="{{ route('marches.cotations') }}" class="block py-3 pl-4 text-[#444652]">Cotations</a>
-            <a href="{{ route('marches.calendrier') }}" class="block py-3 pl-4 text-[#444652]">Calendrier</a>
-            <a href="{{ route('investir.partenaires') }}" class="block py-3 pl-4 text-[#444652]">Partenaires</a>
             <a href="{{ route('services') }}" class="block py-3 text-[#131c2a] font-medium">Services</a>
             <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>
             <a href="{{ route('events-list') }}" class="block py-3 text-[#131c2a] font-medium">Événements</a>

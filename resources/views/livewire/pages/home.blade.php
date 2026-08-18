@@ -195,7 +195,7 @@
             <div class="grid lg:grid-cols-2 gap-6">
                 <div class="bg-white border border-[#c5c5d4] rounded-2xl p-6 space-y-5">
                     <div>
-                        <label class="block text-xs font-semibold tracking-wider uppercase text-[#757683] mb-2">Type de FCP</label>
+                        <label class="block text-xs font-semibold tracking-wider text-[#757683] mb-2">Simulez votre investissement parmi une sélection de nos FCP : Actions 13% prévisionnel, Obligations 6% et Diversifiés 8%.</label>
                         <div class="grid grid-cols-2 gap-2">
                             <button type="button" @click="type = 'Actions'"
                                 :class="type === 'Actions' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
