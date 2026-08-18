@@ -387,8 +387,8 @@
     <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="evenements">
         <div class="max-w-[1280px] mx-auto">
             <div class="mb-8">
-                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Événements</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">À venir</h2>
+                <span class="text-[#0a2e8c] text-base md:text-lg font-extrabold uppercase tracking-[0.18em]">Événements</span>
+                <h2 class="text-2xl md:text-3xl font-medium text-[#131c2a] mt-2">À venir</h2>
                 <p class="text-[#444652] mt-2 max-w-xl">Rencontres pour progresser sur le marché financier régional.</p>
             </div>
 
