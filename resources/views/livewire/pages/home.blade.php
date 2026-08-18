@@ -3,22 +3,30 @@
     @php
         $heroSlides = [
             [
-                'image' => asset('assets/images/hero-01-actionnaire.jpg'),
+                'image' => asset('assets/images/hero-01-actionnaire.png'),
+                'imagePosition' => 'object-cover object-[center_20%] lg:object-right',
+                'overlay' => 'light',
                 'title' => 'Devenez actionnaire en 2 jours',
                 'text' => 'Ouvrez votre compte-titres et accédez aux opportunités de la BRVM avec un accompagnement clair.',
             ],
             [
                 'image' => asset('assets/images/hero-02-epargne.jpg'),
+                'imagePosition' => 'object-cover',
+                'overlay' => 'default',
                 'title' => 'Faites fructifier votre épargne grâce aux opportunités de la BRVM',
                 'text' => 'Actions, obligations et FCP : construisez une stratégie adaptée à votre profil.',
             ],
             [
                 'image' => asset('assets/images/hero-03-patrimoine.jpg'),
+                'imagePosition' => 'object-cover',
+                'overlay' => 'default',
                 'title' => 'Investissez aujourd’hui pour bâtir votre patrimoine de demain',
                 'text' => 'Une approche pédagogique pour transformer l’épargne en capital productif.',
             ],
             [
                 'image' => asset('assets/images/hero-04-equipe.jpg'),
+                'imagePosition' => 'object-cover',
+                'overlay' => 'default',
                 'title' => 'Votre allié financier d’opportunité et de solution',
                 'text' => 'Africaine des Finances — apporteur d’affaires agréé AMF-UMOA.',
             ],
@@ -51,11 +59,17 @@
                 class="absolute inset-0"
                 @if ($i !== 0) x-cloak @endif
             >
-                <img src="{{ $slide['image'] }}" alt="" class="absolute inset-0 w-full h-full object-cover">
+                <img src="{{ $slide['image'] }}" alt="" class="absolute inset-0 w-full h-full {{ $slide['imagePosition'] ?? 'object-cover' }}">
                 <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    <div class="absolute inset-0 bg-black/45"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#001a61]/88 via-[#001a61]/62 to-[#001a61]/50"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#001a61]/80 via-transparent to-[#001a61]/35"></div>
+                    @if (($slide['overlay'] ?? 'default') === 'light')
+                        <div class="absolute inset-0 bg-black/25"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#001a61]/82 via-[#001a61]/45 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#001a61]/55 via-transparent to-[#001a61]/20"></div>
+                    @else
+                        <div class="absolute inset-0 bg-black/45"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#001a61]/88 via-[#001a61]/62 to-[#001a61]/50"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#001a61]/80 via-transparent to-[#001a61]/35"></div>
+                    @endif
                 </div>
             </div>
         @endforeach
