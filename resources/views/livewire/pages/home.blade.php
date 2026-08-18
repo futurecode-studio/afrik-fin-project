@@ -563,7 +563,7 @@
     </section>
 
     {{-- 9. Partenaires --}}
-    <section class="py-16 lg:py-20 bg-white px-5 lg:px-16 max-w-[1280px] mx-auto">
+    <section class="py-16 lg:py-20 bg-white px-5 lg:px-16 max-w-[1280px] mx-auto overflow-hidden">
         <div class="text-center mb-10">
             <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Partenaires</span>
             <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Un écosystème agréé</h2>
