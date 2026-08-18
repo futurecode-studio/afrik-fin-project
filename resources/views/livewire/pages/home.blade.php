@@ -185,7 +185,7 @@
                 <div>
                     <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Outils</span>
                     <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Simulateur de croissance</h2>
-                    <p class="text-[#444652] mt-2 max-w-xl">Projection indicative — FCP Actions 13 % / FCP Obligations 6 % (taux prévisionnels).</p>
+                    <p class="text-[#444652] mt-2 max-w-xl">Projection indicative — hors frais et fiscalité.</p>
                 </div>
                 <a href="{{ route('outils.interets-composes') }}" class="text-[#001a61] font-bold inline-flex items-center gap-1">
                     Version complète <span class="material-symbols-outlined">arrow_forward</span>
@@ -199,10 +199,16 @@
                         <div class="grid grid-cols-2 gap-2">
                             <button type="button" @click="type = 'Actions'"
                                 :class="type === 'Actions' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
-                                class="rounded-lg px-3 py-2.5 text-sm font-bold transition">FCP Actions · 13 %</button>
+                                class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
+                                <span class="block">FCP Actions</span>
+                                <span class="block text-xs font-semibold mt-0.5 opacity-90">13 % prévisionnel</span>
+                            </button>
                             <button type="button" @click="type = 'Obligations'"
                                 :class="type === 'Obligations' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
-                                class="rounded-lg px-3 py-2.5 text-sm font-bold transition">FCP Obligations · 6 %</button>
+                                class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
+                                <span class="block">FCP Obligations</span>
+                                <span class="block text-xs font-semibold mt-0.5 opacity-90">6 % prévisionnel</span>
+                            </button>
                         </div>
                     </div>
                     <div>
