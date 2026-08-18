@@ -3,13 +3,15 @@
     $socialLinks = cache()->remember('social_links_active', 600, fn () =>
         \App\Models\SocialLink::where('is_active', true)->orderBy('order')->get()
     );
+    $diasporaUrl = config('services.diaspora_funnel.url');
+    $diasporaLabel = config('services.diaspora_funnel.label');
 @endphp
 
 <footer class="relative mt-auto border-t border-white/40 text-[#131c2a] overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-[#dae3f6]/90 via-[#e8eefc]/85 to-[#f0f4ff]/90 backdrop-blur-xl"></div>
     <div class="absolute -top-24 -right-16 w-64 h-64 rounded-full bg-[#ffbf00]/15 blur-3xl pointer-events-none"></div>
     <div class="relative px-5 lg:px-16 max-w-[1280px] mx-auto pt-16 lg:pt-20 pb-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {{-- Brand --}}
             <div class="lg:col-span-4 space-y-4">
                 <div class="flex items-center gap-3">
@@ -37,50 +39,92 @@
                 @endif
             </div>
 
-            {{-- Liens rapides --}}
-            <div class="lg:col-span-2">
-                <h5 class="font-bold text-[#001a61] mb-6">Liens Rapides</h5>
+            <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
+            {{-- Navigation principale (alignée navbar) --}}
+            <div>
+                <h5 class="font-bold text-[#001a61] mb-6">Navigation</h5>
                 <ul class="space-y-3">
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('home') }}">Accueil</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('guide-bourse') }}">Guide Complet de la Bourse</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('ouverture-compte-sgi') }}">Ouvrir un compte titre</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.index') }}">Marchés financiers</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services') }}">Services</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('formations') }}">Formations</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('events-list') }}">Événements</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.actions-brvm') }}">Investir — Actions BRVM</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('partenaires') }}">Partenaires</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('actualites') }}">Actualités</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('team') }}">À propos</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('contact') }}">Contact</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('search') }}">Recherche</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('aide') }}">Centre d'aide</a></li>
+                </ul>
+            </div>
+
+            {{-- Investir (menu navbar) --}}
+            <div>
+                <h5 class="font-bold text-[#001a61] mb-6">Investir</h5>
+                <ul class="space-y-3">
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.hub') }}">Investir — Hub</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('guide-bourse') }}">Guide Complet de la Bourse</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('ouverture-compte-sgi') }}">Ouvrir un compte titre</a></li>
+                    <li>
+                        <a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium"
+                            href="{{ $diasporaUrl }}" target="_blank" rel="noopener noreferrer">
+                            {{ $diasporaLabel }}
+                        </a>
+                    </li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.comment') }}">Comment investir</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.profil-test') }}">Profil investisseur</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.opcvm') }}">FCP / OPCVM</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.vl') }}">Valeurs liquidatives</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('investir.partenaires') }}">Partenaires agréés</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('partenaires') }}">Nos partenaires</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('mise-en-relation') }}">Mise en relation</a></li>
+                </ul>
+            </div>
+
+            {{-- Marchés & outils --}}
+            <div>
+                <h5 class="font-bold text-[#001a61] mb-6">Marchés &amp; outils</h5>
+                <ul class="space-y-3">
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.cotations') }}">Cotations actions</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.carte') }}">Carte du marché</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.calendrier') }}">Calendrier financier</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.indices') }}">Indices BRVM</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.obligations') }}">Marché obligataire</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.screener') }}">Screener</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.bibliotheque') }}">Bibliothèque recherche</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.analyse-pro') }}">Graphique Pro</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('outils.frais') }}">Frais &amp; fiscalité</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('outils.interets-composes') }}">Simulateur intérêts composés</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('outils.performance-fcp') }}">Analyse performance FCP</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('faq') }}">FAQ</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('glossaire') }}">Glossaire</a></li>
                 </ul>
             </div>
 
             {{-- Services --}}
-            <div class="lg:col-span-2">
+            <div>
                 <h5 class="font-bold text-[#001a61] mb-6">Services</h5>
                 <ul class="space-y-3">
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-formation') }}">E-Learning Financier</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('actualites') }}">Analyses de Marché</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-conseil') }}">Conseil en Investissement</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-bourse') }}">Données Boursières</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('faq') }}">FAQ</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('glossaire') }}">Glossaire</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('outils.frais') }}">Frais & fiscalité</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-formation') }}">E-Learning financier</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-bourse') }}">Données boursières</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services-conseil') }}">Conseil en investissement</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services.mandat') }}">Gestion sous mandat</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services.institutionnel') }}">Institutionnel</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.screener') }}">Screener</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.bibliotheque') }}">Bibliothèque</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services.institutionnel') }}">Portail institutionnel</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.produits-structures') }}">Produits structurés</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.analyse-pro') }}">Graphique Pro</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('mise-en-relation') }}">Mise en relation</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('contact') }}">Contact</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('carriere') }}">Carrière</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('newsletter') }}">Newsletter</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('certificate.verify.show') }}">Vérifier un certificat</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('support.ticket') }}">Support</a></li>
                 </ul>
             </div>
+            </div>
+        </div>
 
-            {{-- Newsletter --}}
-            <div class="lg:col-span-4 space-y-4">
-                <h5 class="font-bold text-[#001a61] mb-2">Newsletter</h5>
-                <p class="text-sm text-[#444652]">Restez informé des dernières actualités financières</p>
-                <div class="adf-footer-newsletter">
-                    @livewire('newsletter-subscribe')
-                </div>
+        {{-- Newsletter --}}
+        <div class="mt-12 max-w-xl">
+            <h5 class="font-bold text-[#001a61] mb-2">Newsletter</h5>
+            <p class="text-sm text-[#444652]">Restez informé des dernières actualités financières</p>
+            <div class="adf-footer-newsletter">
+                @livewire('newsletter-subscribe')
             </div>
         </div>
 
@@ -171,10 +215,13 @@
             <a href="{{ route('search') }}" class="hover:text-[#001a61] transition-colors">Recherche</a>
             <a href="{{ route('aide') }}" class="hover:text-[#001a61] transition-colors">Aide</a>
             <a href="{{ route('agrements') }}" class="hover:text-[#001a61] transition-colors">Agréments</a>
+            <a href="{{ route('carriere') }}" class="hover:text-[#001a61] transition-colors">Carrière</a>
+            <a href="{{ route('certificate.verify.show') }}" class="hover:text-[#001a61] transition-colors">Certificats</a>
             <a href="{{ route('legal.show', 'mentions-legales') }}" class="hover:text-[#001a61] transition-colors">Mentions</a>
             <a href="{{ route('legal.show', 'confidentialite') }}" class="hover:text-[#001a61] transition-colors">Confidentialité</a>
             <a href="{{ route('legal.show', 'cgu') }}" class="hover:text-[#001a61] transition-colors">CGU</a>
             <a href="{{ route('newsletter') }}" class="hover:text-[#001a61] transition-colors">Newsletter</a>
+            <a href="{{ route('support.ticket') }}" class="hover:text-[#001a61] transition-colors">Support</a>
             <a href="{{ route('contact') }}" class="hover:text-[#001a61] transition-colors">Contact</a>
         </div>
     </div>
