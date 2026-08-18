@@ -258,7 +258,192 @@
         </div>
     </section>
 
-    {{-- 4. Volet Actions — découvrir + CTA + marché dynamique BRVM --}}
+    {{-- 4. Qui sommes-nous — vision, mission, équipe, ce que nous faisons --}}
+    <section class="py-16 lg:py-20 bg-white px-5 lg:px-16" id="qui-sommes-nous">
+        <div class="max-w-[1280px] mx-auto">
+            <div class="mb-10">
+                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Qui sommes-nous</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Africaine des Finances</h2>
+                <p class="text-[#444652] mt-2 max-w-2xl">Cabinet de conseils et d’ingénierie financière, apporteur d’affaires agréé AMF-UMOA sur le marché BRVM.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-10">
+                <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6 lg:p-8">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#0a2e8c]">Vision</p>
+                    <h3 class="mt-2 text-xl font-extrabold text-[#001a61]">Une finance accessible et pédagogique</h3>
+                    <p class="mt-3 text-[#444652] leading-relaxed">
+                        Rapprocher les épargnants du marché financier régional pour bâtir un patrimoine durable, avec clarté et responsabilité.
+                    </p>
+                </article>
+                <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6 lg:p-8">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#0a2e8c]">Mission</p>
+                    <h3 class="mt-2 text-xl font-extrabold text-[#001a61]">Vulgariser et accompagner</h3>
+                    <p class="mt-3 text-[#444652] leading-relaxed">
+                        Vulgariser l’investissement sur le marché financier régional et accompagner particuliers, entreprises, institutions et associations dans leurs projets d’épargne et de valorisation de patrimoine.
+                    </p>
+                </article>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">Ce que nous faisons</h3>
+                <div class="grid md:grid-cols-3 gap-5">
+                    @foreach ($pillars as $pillar)
+                        <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6">
+                            <span class="material-symbols-outlined text-3xl text-[#ffbf00]">{{ $pillar['icon'] }}</span>
+                            <h4 class="mt-3 font-extrabold text-[#001a61]">{{ $pillar['title'] }}</h4>
+                            <p class="mt-2 text-sm text-[#444652] leading-relaxed">{{ $pillar['text'] }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">L’équipe</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    @foreach ($teamPreview as $member)
+                        <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-xl overflow-hidden">
+                            <div class="aspect-[4/3] bg-[#e7eeff] overflow-hidden">
+                                <img src="{{ asset($member['image']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="p-4">
+                                <p class="font-bold text-[#001a61] text-sm leading-snug">{{ $member['name'] }}</p>
+                                <p class="text-xs text-[#757683] mt-1">{{ $member['role'] }}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+                <div class="mt-8">
+                    <a href="{{ route('team') }}"
+                        class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
+                        Nous découvrir
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- 5. Apprendre — Webinaire (hebdo gratuit) + Formation --}}
+    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto" id="apprendre">
+        <div class="mb-8">
+            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Apprendre</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Webinaire & formation</h2>
+            <p class="text-[#444652] mt-2 max-w-xl">Deux portes d’entrée : une rencontre hebdomadaire gratuite, puis des parcours pour aller plus loin.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6 mb-8">
+            <div class="rounded-3xl bg-[#001a61] text-white p-7 lg:p-8 flex flex-col">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Hebdomadaire · Gratuit</p>
+                <h3 class="mt-3 text-2xl font-extrabold">Webinaire — Jeudi d’opportunité</h3>
+                <p class="mt-3 text-white/80 leading-relaxed flex-1">
+                    Une mini-formation chaque semaine pour toucher le marché, comprendre une thématique et oser la prochaine étape.
+                </p>
+                @if ($webinars->isNotEmpty())
+                    <div class="mt-5 space-y-3">
+                        @foreach ($webinars->take(2) as $event)
+                            <a href="{{ route('event-detail', $event->slug) }}" class="block rounded-xl bg-white/10 border border-white/15 px-4 py-3 hover:bg-white/15 transition">
+                                <p class="text-[11px] text-[#ffbf00] font-bold">{{ optional($event->starts_at)->translatedFormat('l d F') }}</p>
+                                <p class="font-bold mt-0.5 line-clamp-1">{{ $event->title }}</p>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+                @php
+                    $nextWebinar = $webinars->first(fn ($e) => (bool) $e->is_jeudi_opportunite) ?? $webinars->first();
+                @endphp
+                <a href="{{ $nextWebinar ? route('event-detail', $nextWebinar->slug) : route('events-list', ['filterFormat' => 'online']) }}"
+                    class="mt-6 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-5 py-3 rounded-xl hover:brightness-95 transition w-fit">
+                    Rejoindre le prochain webinaire
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+
+            <div class="rounded-3xl border border-[#c5c5d4] bg-white p-7 lg:p-8 flex flex-col">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#0a2e8c]">Parcours structurés</p>
+                <h3 class="mt-3 text-2xl font-extrabold text-[#001a61]">Formation</h3>
+                <p class="mt-3 text-[#444652] leading-relaxed flex-1">
+                    Des modules ciblés pour approfondir : BRVM, actions, obligations, FCP — à votre rythme.
+                </p>
+                @if ($formations->isNotEmpty())
+                    <div class="mt-5 space-y-3">
+                        @foreach ($formations->take(2) as $formation)
+                            <a href="{{ route('formation-detail', $formation->slug) }}" class="block rounded-xl border border-[#c5c5d4] bg-[#f9f9ff] px-4 py-3 hover:border-[#001a61]/40 transition">
+                                <p class="font-bold text-[#001a61] line-clamp-1">{{ $formation->titre }}</p>
+                                <p class="text-xs text-[#757683] mt-0.5 line-clamp-1">{{ plain_text($formation->description_courte, 80) }}</p>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+                <a href="{{ route('formations') }}"
+                    class="mt-6 inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0a2e8c] transition w-fit">
+                    Voir les formations
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- 6. Événements — un seul événement mis en avant (Marathon) --}}
+    <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="evenements">
+        <div class="max-w-[1280px] mx-auto">
+            <div class="mb-8">
+                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Événements</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">À venir</h2>
+                <p class="text-[#444652] mt-2 max-w-xl">Rencontres pour progresser sur le marché financier régional.</p>
+            </div>
+
+            @forelse ($upcomingEvents as $event)
+                <article class="rounded-3xl bg-[#001a61] text-white overflow-hidden">
+                    <div class="grid lg:grid-cols-2">
+                        @if ($event->featured_image)
+                            <div class="min-h-[240px] lg:min-h-full">
+                                <img src="{{ str_starts_with($event->featured_image, 'http') ? $event->featured_image : asset('storage/'.$event->featured_image) }}"
+                                    alt="" class="w-full h-full object-cover min-h-[240px] lg:min-h-[360px]">
+                            </div>
+                        @endif
+                        <div class="p-7 lg:p-10 flex flex-col {{ $event->featured_image ? '' : 'lg:col-span-2' }}">
+                            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">
+                                {{ $event->category ?: 'Événement phare' }}
+                            </p>
+                            <h3 class="mt-3 text-3xl md:text-4xl font-extrabold leading-tight">{{ $event->title }}</h3>
+                            <p class="mt-4 text-white/80 leading-relaxed text-base md:text-lg flex-1">
+                                {{ plain_text($event->description, 220) }}
+                            </p>
+                            <a href="{{ route('event-detail', $event->slug) }}"
+                                class="mt-8 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3.5 rounded-xl hover:brightness-95 transition w-fit text-base">
+                                S’inscrire à l’événement
+                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            @empty
+                <div class="rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
+                    Aucun événement programmé pour le moment.
+                </div>
+            @endforelse
+        </div>
+    </section>
+
+    {{-- 7. Valeurs --}}
+    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto">
+        <div class="text-center mb-10">
+            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Valeurs</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Ce qui guide notre accompagnement</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            @foreach ($values as $value)
+                <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-2xl p-6 text-center">
+                    <span class="material-symbols-outlined text-4xl text-[#ffbf00]">{{ $value['icon'] }}</span>
+                    <h3 class="mt-3 text-lg font-extrabold text-[#001a61]">{{ $value['title'] }}</h3>
+                    <p class="mt-2 text-sm text-[#444652] leading-relaxed">{{ $value['text'] }}</p>
+                </article>
+            @endforeach
+        </div>
+    </section>
+
+
+    {{-- 8. Volet Actions — découvrir + CTA + marché dynamique BRVM --}}
     <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto" id="actions">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
@@ -394,190 +579,6 @@
                 </a>
             </div>
         @endif
-    </section>
-
-    {{-- 5. Qui sommes-nous — vision, mission, équipe, ce que nous faisons --}}
-    <section class="py-16 lg:py-20 bg-white px-5 lg:px-16" id="qui-sommes-nous">
-        <div class="max-w-[1280px] mx-auto">
-            <div class="mb-10">
-                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Qui sommes-nous</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Africaine des Finances</h2>
-                <p class="text-[#444652] mt-2 max-w-2xl">Cabinet de conseils et d’ingénierie financière, apporteur d’affaires agréé AMF-UMOA sur le marché BRVM.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-10">
-                <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6 lg:p-8">
-                    <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#0a2e8c]">Vision</p>
-                    <h3 class="mt-2 text-xl font-extrabold text-[#001a61]">Une finance accessible et pédagogique</h3>
-                    <p class="mt-3 text-[#444652] leading-relaxed">
-                        Rapprocher les épargnants du marché financier régional pour bâtir un patrimoine durable, avec clarté et responsabilité.
-                    </p>
-                </article>
-                <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6 lg:p-8">
-                    <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[#0a2e8c]">Mission</p>
-                    <h3 class="mt-2 text-xl font-extrabold text-[#001a61]">Vulgariser et accompagner</h3>
-                    <p class="mt-3 text-[#444652] leading-relaxed">
-                        Vulgariser l’investissement sur le marché financier régional et accompagner particuliers, entreprises, institutions et associations dans leurs projets d’épargne et de valorisation de patrimoine.
-                    </p>
-                </article>
-            </div>
-
-            <div class="mb-12">
-                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">Ce que nous faisons</h3>
-                <div class="grid md:grid-cols-3 gap-5">
-                    @foreach ($pillars as $pillar)
-                        <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6">
-                            <span class="material-symbols-outlined text-3xl text-[#ffbf00]">{{ $pillar['icon'] }}</span>
-                            <h4 class="mt-3 font-extrabold text-[#001a61]">{{ $pillar['title'] }}</h4>
-                            <p class="mt-2 text-sm text-[#444652] leading-relaxed">{{ $pillar['text'] }}</p>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
-
-            <div>
-                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">L’équipe</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    @foreach ($teamPreview as $member)
-                        <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-xl overflow-hidden">
-                            <div class="aspect-[4/3] bg-[#e7eeff] overflow-hidden">
-                                <img src="{{ asset($member['image']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover object-top">
-                            </div>
-                            <div class="p-4">
-                                <p class="font-bold text-[#001a61] text-sm leading-snug">{{ $member['name'] }}</p>
-                                <p class="text-xs text-[#757683] mt-1">{{ $member['role'] }}</p>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-                <div class="mt-8">
-                    <a href="{{ route('team') }}"
-                        class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
-                        Nous découvrir
-                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- 6. Apprendre — Webinaire (hebdo gratuit) + Formation --}}
-    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto" id="apprendre">
-        <div class="mb-8">
-            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Apprendre</span>
-            <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Webinaire & formation</h2>
-            <p class="text-[#444652] mt-2 max-w-xl">Deux portes d’entrée : une rencontre hebdomadaire gratuite, puis des parcours pour aller plus loin.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-6 mb-8">
-            <div class="rounded-3xl bg-[#001a61] text-white p-7 lg:p-8 flex flex-col">
-                <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Hebdomadaire · Gratuit</p>
-                <h3 class="mt-3 text-2xl font-extrabold">Webinaire — Jeudi d’opportunité</h3>
-                <p class="mt-3 text-white/80 leading-relaxed flex-1">
-                    Une mini-formation chaque semaine pour toucher le marché, comprendre une thématique et oser la prochaine étape.
-                </p>
-                @if ($webinars->isNotEmpty())
-                    <div class="mt-5 space-y-3">
-                        @foreach ($webinars->take(2) as $event)
-                            <a href="{{ route('event-detail', $event->slug) }}" class="block rounded-xl bg-white/10 border border-white/15 px-4 py-3 hover:bg-white/15 transition">
-                                <p class="text-[11px] text-[#ffbf00] font-bold">{{ optional($event->starts_at)->translatedFormat('l d F') }}</p>
-                                <p class="font-bold mt-0.5 line-clamp-1">{{ $event->title }}</p>
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
-                @php
-                    $nextWebinar = $webinars->first(fn ($e) => (bool) $e->is_jeudi_opportunite) ?? $webinars->first();
-                @endphp
-                <a href="{{ $nextWebinar ? route('event-detail', $nextWebinar->slug) : route('events-list', ['filterFormat' => 'online']) }}"
-                    class="mt-6 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-5 py-3 rounded-xl hover:brightness-95 transition w-fit">
-                    Rejoindre le prochain webinaire
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </a>
-            </div>
-
-            <div class="rounded-3xl border border-[#c5c5d4] bg-white p-7 lg:p-8 flex flex-col">
-                <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#0a2e8c]">Parcours structurés</p>
-                <h3 class="mt-3 text-2xl font-extrabold text-[#001a61]">Formation</h3>
-                <p class="mt-3 text-[#444652] leading-relaxed flex-1">
-                    Des modules ciblés pour approfondir : BRVM, actions, obligations, FCP — à votre rythme.
-                </p>
-                @if ($formations->isNotEmpty())
-                    <div class="mt-5 space-y-3">
-                        @foreach ($formations->take(2) as $formation)
-                            <a href="{{ route('formation-detail', $formation->slug) }}" class="block rounded-xl border border-[#c5c5d4] bg-[#f9f9ff] px-4 py-3 hover:border-[#001a61]/40 transition">
-                                <p class="font-bold text-[#001a61] line-clamp-1">{{ $formation->titre }}</p>
-                                <p class="text-xs text-[#757683] mt-0.5 line-clamp-1">{{ plain_text($formation->description_courte, 80) }}</p>
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
-                <a href="{{ route('formations') }}"
-                    class="mt-6 inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0a2e8c] transition w-fit">
-                    Voir les formations
-                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    {{-- 7. Événements — un seul événement mis en avant (Marathon) --}}
-    <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="evenements">
-        <div class="max-w-[1280px] mx-auto">
-            <div class="mb-8">
-                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Événements</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">À venir</h2>
-                <p class="text-[#444652] mt-2 max-w-xl">Rencontres pour progresser sur le marché financier régional.</p>
-            </div>
-
-            @forelse ($upcomingEvents as $event)
-                <article class="rounded-3xl bg-[#001a61] text-white overflow-hidden">
-                    <div class="grid lg:grid-cols-2">
-                        @if ($event->featured_image)
-                            <div class="min-h-[240px] lg:min-h-full">
-                                <img src="{{ str_starts_with($event->featured_image, 'http') ? $event->featured_image : asset('storage/'.$event->featured_image) }}"
-                                    alt="" class="w-full h-full object-cover min-h-[240px] lg:min-h-[360px]">
-                            </div>
-                        @endif
-                        <div class="p-7 lg:p-10 flex flex-col {{ $event->featured_image ? '' : 'lg:col-span-2' }}">
-                            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">
-                                {{ $event->category ?: 'Événement phare' }}
-                            </p>
-                            <h3 class="mt-3 text-3xl md:text-4xl font-extrabold leading-tight">{{ $event->title }}</h3>
-                            <p class="mt-4 text-white/80 leading-relaxed text-base md:text-lg flex-1">
-                                {{ plain_text($event->description, 220) }}
-                            </p>
-                            <a href="{{ route('event-detail', $event->slug) }}"
-                                class="mt-8 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3.5 rounded-xl hover:brightness-95 transition w-fit text-base">
-                                S’inscrire à l’événement
-                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-            @empty
-                <div class="rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
-                    Aucun événement programmé pour le moment.
-                </div>
-            @endforelse
-        </div>
-    </section>
-
-    {{-- 8. Valeurs --}}
-    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto">
-        <div class="text-center mb-10">
-            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Valeurs</span>
-            <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Ce qui guide notre accompagnement</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            @foreach ($values as $value)
-                <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-2xl p-6 text-center">
-                    <span class="material-symbols-outlined text-4xl text-[#ffbf00]">{{ $value['icon'] }}</span>
-                    <h3 class="mt-3 text-lg font-extrabold text-[#001a61]">{{ $value['title'] }}</h3>
-                    <p class="mt-2 text-sm text-[#444652] leading-relaxed">{{ $value['text'] }}</p>
-                </article>
-            @endforeach
-        </div>
     </section>
 
     {{-- 9. Partenaires --}}
