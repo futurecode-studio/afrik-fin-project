@@ -297,6 +297,19 @@
                 </div>
             </div>
 
+            <div class="mb-12 rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6">
+                <h3 class="text-lg font-extrabold text-[#001a61]">Valeurs</h3>
+                <p class="mt-2 text-sm text-[#444652]">Une approche simple : pédagogie, transparence et proximité.</p>
+                <div class="mt-4 flex flex-wrap gap-2.5">
+                    @foreach (collect($values)->take(3) as $value)
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-[#c5c5d4] bg-white px-3 py-1.5 text-xs font-semibold text-[#001a61]">
+                            <span class="material-symbols-outlined text-[16px] text-[#ffbf00]">{{ $value['icon'] }}</span>
+                            {{ $value['title'] }}
+                        </span>
+                    @endforeach
+                </div>
+            </div>
+
             <div>
                 <h3 class="text-lg font-extrabold text-[#001a61] mb-5">L’équipe</h3>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -412,25 +425,7 @@
         </div>
     </section>
 
-    {{-- 7. Valeurs --}}
-    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto">
-        <div class="text-center mb-10">
-            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Valeurs</span>
-            <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Ce qui guide notre accompagnement</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            @foreach ($values as $value)
-                <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-2xl p-6 text-center">
-                    <span class="material-symbols-outlined text-4xl text-[#ffbf00]">{{ $value['icon'] }}</span>
-                    <h3 class="mt-3 text-lg font-extrabold text-[#001a61]">{{ $value['title'] }}</h3>
-                    <p class="mt-2 text-sm text-[#444652] leading-relaxed">{{ $value['text'] }}</p>
-                </article>
-            @endforeach
-        </div>
-    </section>
-
-
-    {{-- 9. Partenaires --}}
+    {{-- 7. Partenaires --}}
     <section class="py-16 lg:py-20 bg-white px-5 lg:px-16 max-w-[1280px] mx-auto overflow-hidden">
         <div class="text-center mb-10">
             <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Partenaires</span>
