@@ -167,7 +167,7 @@
                 versement: 50000,
                 annees: 10,
                 type: 'Actions',
-                rates: { Actions: 13, Obligations: 6 },
+                rates: { Actions: 13, Obligations: 6, Diversifies: 8 },
                 get rate() { return this.rates[this.type] || 7; },
                 get months() { return Math.max(0, this.annees) * 12; },
                 get invested() { return Math.max(0, this.capital) + Math.max(0, this.versement) * this.months; },
@@ -196,7 +196,7 @@
                 <div class="bg-white border border-[#c5c5d4] rounded-2xl p-6 space-y-5">
                     <div>
                         <label class="block text-xs font-semibold tracking-wider text-[#757683] mb-2">Simulez votre investissement parmi une sélection de nos FCP : Actions 13% prévisionnel, Obligations 6% et Diversifiés 8%.</label>
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <button type="button" @click="type = 'Actions'"
                                 :class="type === 'Actions' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
                                 class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
@@ -208,6 +208,12 @@
                                 class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
                                 <span class="block">FCP Obligations</span>
                                 <span class="block text-xs font-semibold mt-0.5 opacity-90">6 %</span>
+                            </button>
+                            <button type="button" @click="type = 'Diversifies'"
+                                :class="type === 'Diversifies' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
+                                class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
+                                <span class="block">FCP Diversifiés</span>
+                                <span class="block text-xs font-semibold mt-0.5 opacity-90">8 %</span>
                             </button>
                         </div>
                     </div>

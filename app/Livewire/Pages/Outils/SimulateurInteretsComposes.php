@@ -18,12 +18,14 @@ class SimulateurInteretsComposes extends Component
     private const INDICATIVE_RATES = [
         'Actions' => 13.0,
         'Obligations' => 6.0,
+        'Diversifies' => 8.0,
     ];
 
     /** @var array<string, string> */
     private const TYPE_DESCRIPTIONS = [
         'Actions' => 'FCP Actions : profil dynamique, volatilité et potentiel plus élevés.',
         'Obligations' => 'FCP Obligations : profil prudent, rendement indicatif plus modéré.',
+        'Diversifies' => 'FCP Diversifiés : profil équilibré entre actions et obligations.',
     ];
 
     public function render()
