@@ -44,7 +44,7 @@
                 <p class="text-[#757683]">Le lien est peut-être obsolète, ou la ressource n’existe plus. Revenez à l’accueil ou explorez nos outils.</p>
                 <div class="flex flex-wrap gap-3 pt-2">
                     <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#001a61] text-white font-bold">Retour à l’accueil</a>
-                    <a href="{{ route('guide-bourse') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[#001a61] text-[#001a61] font-bold">Guide</a>
+                    <a href="{{ route('marches.index') }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[#001a61] text-[#001a61] font-bold">Marchés</a>
                     <a href="{{ route('faq') }}" class="inline-flex items-center gap-2 px-4 py-3 text-[#0a2e8c] font-semibold">FAQ</a>
                 </div>
             </div>

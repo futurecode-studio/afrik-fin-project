@@ -34,7 +34,7 @@
                     <div class="bg-white border border-[#c5c5d4] rounded-xl p-4"><p class="text-xs text-[#757683]">TVA</p><p class="font-bold text-[#001a61]">{{ number_format($tva,0,',',' ') }}</p></div>
                     <div class="bg-white border border-[#c5c5d4] rounded-xl p-4"><p class="text-xs text-[#757683]">Montant net op.</p><p class="font-bold text-[#001a61]">{{ number_format($net,0,',',' ') }}</p></div>
                 </div>
-                <p class="text-xs text-[#757683]">Outil pédagogique. Pour un chiffrage contractuel, <a href="{{ route('contact') }}" class="underline font-semibold text-[#001a61]">contactez-nous</a>.</p>
+                <p class="text-xs text-[#757683]">Outil pédagogique. Pour un chiffrage contractuel, <a href="{{ route('mise-en-relation') }}" class="underline font-semibold text-[#001a61]">demandez une mise en relation</a>.</p>
             </div>
         </div>
     </section>

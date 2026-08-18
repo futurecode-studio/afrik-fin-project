@@ -177,7 +177,7 @@
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <div class="adf-scroll" data-adf-reveal>
                 <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#0a2e8c]">Épargne &amp; investissement</p>
-                <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-[#001a61] tracking-tight">Épargne et investissement</h2>
+                <h2 class="mt-2 text-3xl md:text-4xl font-extrabold text-[#001a61] tracking-tight">Ouvrir un compte titre</h2>
                 <p class="mt-3 text-[#444652] text-lg leading-relaxed">
                     Épargnez à votre rythme selon votre capacité — actions, obligations et OPCVM via nos partenaires SGI agréés.
                 </p>
@@ -189,8 +189,8 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="{{ route('contact') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
-                    Nous contacter
+                <a href="{{ route('mise-en-relation') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
+                    Demander l’ouverture d’un compte
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </a>
                 <a href="{{ route('partenaires') }}" class="mt-3 ml-0 sm:ml-4 inline-flex items-center gap-2 text-sm font-semibold text-[#444652] hover:text-[#001a61] hover:underline">

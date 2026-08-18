@@ -38,8 +38,8 @@ Route::get('/payment/cancel', [\App\Http\Controllers\PaymentController::class, '
 
 Route::get('/guide-bourse', \App\Livewire\Pages\GuideBourse::class)->name('guide-bourse');
 
-// Marchés / Investir retirés du site public — anciennes URLs redirigées
-$retiredToHome = [
+// Investir (hub / parcours profil CI) — pages retirées du site public
+$retiredInvestir = [
     'investir.actions-brvm' => '/investir/actions-brvm',
     'investir.obligations' => '/investir/obligations',
     'investir.fcp' => '/investir/fcp',
@@ -51,36 +51,37 @@ $retiredToHome = [
     'investir.partenaires' => '/investir/partenaires-agrees',
     'investir.opcvm' => '/investir/opcvm',
     'investir.vl' => '/investir/valeurs-liquidatives',
-    'marches.index' => '/marches',
-    'marches.cotations' => '/marches/cotations',
-    'marches.palmares' => '/marches/palmares',
-    'marches.comparateur' => '/marches/comparateur',
-    'marches.indices' => '/marches/indices',
-    'marches.obligations' => '/marches/obligations',
-    'marches.calendrier' => '/marches/calendrier',
-    'marches.recherche' => '/marches/recherche',
-    'marches.screener' => '/marches/screener',
-    'marches.secteurs' => '/marches/secteurs',
-    'marches.introductions' => '/marches/introductions',
-    'marches.carnet' => '/marches/carnet-ordres',
-    'marches.bibliotheque' => '/marches/bibliotheque',
-    'marches.comparateur-multi' => '/marches/comparateur-multi',
-    'marches.produits-structures' => '/marches/produits-structures',
-    'marches.analyse-pro' => '/marches/analyse-pro',
 ];
-foreach ($retiredToHome as $name => $uri) {
+foreach ($retiredInvestir as $name => $uri) {
     Route::redirect($uri, '/', 301)->name($name);
 }
 
-Route::redirect('/ouverture-compte-sgi', '/contact', 301)->name('ouverture-compte-sgi');
+Route::redirect('/ouverture-compte-sgi', '/mise-en-relation', 301)->name('ouverture-compte-sgi');
 Route::permanentRedirect('/investir/fcp/{id}', '/')->name('investir.fcp-detail');
-Route::permanentRedirect('/marches/obligations/{id}', '/')->name('marches.obligation');
-Route::permanentRedirect('/marches/actions/{symbol}', '/')->name('marches.action');
-Route::permanentRedirect('/marches/certificats/{slug}', '/')->name('marches.certificat');
-Route::permanentRedirect('/marches/analyse-pro/{symbol}', '/')->name('marches.analyse-pro.symbol');
-Route::redirect('/marches/carte', '/', 301);
 Route::permanentRedirect('/investir/{any}', '/')->where('any', '.*');
-Route::permanentRedirect('/marches/{any}', '/')->where('any', '.*');
+
+// Marchés financiers
+Route::get('/marches', \App\Livewire\Pages\Marches\MarchesFinanciers::class)->name('marches.index');
+Route::get('/marches/cotations', \App\Livewire\Pages\Marches\CotationsActions::class)->name('marches.cotations');
+Route::get('/marches/palmares', \App\Livewire\Pages\Marches\PalmaresActions::class)->name('marches.palmares');
+Route::get('/marches/comparateur', \App\Livewire\Pages\Marches\ComparateurActions::class)->name('marches.comparateur');
+Route::get('/marches/indices', \App\Livewire\Pages\Marches\IndicesBrvm::class)->name('marches.indices');
+Route::get('/marches/obligations', \App\Livewire\Pages\Marches\MarcheObligataire::class)->name('marches.obligations');
+Route::get('/marches/obligations/{id}', \App\Livewire\Pages\Marches\DetailObligation::class)->name('marches.obligation');
+Route::redirect('/marches/carte', '/marches', 301);
+Route::get('/marches/calendrier', \App\Livewire\Pages\Marches\CalendrierFinancier::class)->name('marches.calendrier');
+Route::get('/marches/recherche', \App\Livewire\Pages\Marches\RechercheMarches::class)->name('marches.recherche');
+Route::get('/marches/actions/{symbol}', \App\Livewire\Pages\Marches\FicheAction::class)->name('marches.action');
+Route::get('/marches/screener', \App\Livewire\Pages\Marches\ScreenerInvestissement::class)->name('marches.screener');
+Route::get('/marches/secteurs', \App\Livewire\Pages\Marches\RapportSectoriel::class)->name('marches.secteurs');
+Route::get('/marches/introductions', \App\Livewire\Pages\Marches\SuiviIntroductions::class)->name('marches.introductions');
+Route::get('/marches/carnet-ordres', \App\Livewire\Pages\Marches\CarnetOrdres::class)->name('marches.carnet');
+Route::get('/marches/bibliotheque', \App\Livewire\Pages\Marches\BibliothequeRecherche::class)->name('marches.bibliotheque');
+Route::get('/marches/comparateur-multi', \App\Livewire\Pages\Marches\ComparateurMultiActifs::class)->name('marches.comparateur-multi');
+Route::get('/marches/produits-structures', \App\Livewire\Pages\Marches\ProduitsStructures::class)->name('marches.produits-structures');
+Route::get('/marches/certificats/{slug}', \App\Livewire\Pages\Marches\DetailCertificat::class)->name('marches.certificat');
+Route::get('/marches/analyse-pro', \App\Livewire\Pages\Marches\AnalyseGraphiquePro::class)->name('marches.analyse-pro');
+Route::get('/marches/analyse-pro/{symbol}', \App\Livewire\Pages\Marches\AnalyseGraphiquePro::class)->name('marches.analyse-pro.symbol');
 
 Route::get('/carriere', \App\Livewire\Pages\Carriere::class)->name('carriere');
 Route::get('/newsletter', \App\Livewire\Pages\Newsletter::class)->name('newsletter');
@@ -97,7 +98,7 @@ Route::get('/outils/interets-composes', \App\Livewire\Pages\Outils\SimulateurInt
 Route::get('/outils/rendement-obligataire', \App\Livewire\Pages\Outils\SimulateurObligataire::class)->name('outils.rendement-obligataire');
 Route::get('/outils/frais-fiscalite', \App\Livewire\Pages\Outils\EstimateurFraisFiscalite::class)->name('outils.frais');
 Route::get('/outils/performance-fcp', \App\Livewire\Pages\Outils\AnalysePerformanceFcp::class)->name('outils.performance-fcp');
-Route::redirect('/mise-en-relation', '/contact', 301)->name('mise-en-relation');
+Route::get('/mise-en-relation', \App\Livewire\Pages\MiseEnRelation::class)->name('mise-en-relation');
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->name('partenaires.show');
 Route::redirect('/equipe', '/a-propos', 301);
