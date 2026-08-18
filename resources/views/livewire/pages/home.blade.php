@@ -60,15 +60,14 @@
             </div>
         @endforeach
 
-        <div class="relative z-10 max-w-[1280px] mx-auto px-5 lg:px-16 min-h-[78vh] lg:min-h-[88vh] flex flex-col justify-center py-24">
-            <div class="bg-[#ffbf00] text-[#261a00] inline-flex items-center px-3 py-1 rounded-full gap-2 w-fit mb-6">
+        <div class="relative z-10 max-w-[1280px] mx-auto px-5 lg:px-16 min-h-[78vh] lg:min-h-[88vh] flex flex-col pt-28 lg:pt-36 pb-16 lg:pb-20">
+            <div class="bg-[#ffbf00] text-[#261a00] inline-flex items-center px-3 py-1 rounded-full gap-2 w-fit mb-8 lg:mb-10">
                 <span class="material-symbols-outlined text-[18px]">verified_user</span>
                 <span class="text-sm font-bold tracking-wide">Agrément AMF-UMOA AA/2022-03</span>
             </div>
 
             @foreach ($heroSlides as $i => $slide)
                 <div x-show="active === {{ $i }}" @if ($i !== 0) x-cloak @endif class="max-w-3xl">
-                    <p class="text-[#ffbf00] text-xs font-extrabold uppercase tracking-[0.2em] mb-3">Africaine des Finances</p>
                     <h1 class="text-4xl md:text-5xl lg:text-[52px] lg:leading-[1.1] font-extrabold text-white tracking-tight [text-shadow:0_2px_24px_rgba(0,26,97,0.65)]">
                         {{ $slide['title'] }}
                     </h1>
