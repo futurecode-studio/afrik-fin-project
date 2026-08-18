@@ -50,11 +50,11 @@
 
             <aside class="lg:col-span-2 space-y-4">
                 <div class="bg-[#001a61] text-white rounded-xl p-6">
-                    <h2 class="text-xl font-extrabold">Prêt à investir dans votre avenir ?</h2>
-                    <p class="text-white/75 text-sm mt-2">Demandez une mise en relation avec {{ $partner->nom }}.</p>
-                    <a href="{{ route('mise-en-relation', ['partner' => $partner->id]) }}"
+                    <h2 class="text-xl font-extrabold">Besoin d’un accompagnement ?</h2>
+                    <p class="text-white/75 text-sm mt-2">Contactez Africaine des Finances au sujet de {{ $partner->nom }}.</p>
+                    <a href="{{ route('contact') }}"
                         class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#ffbf00] text-[#261a00] font-bold">
-                        Demander une mise en relation
+                        Nous contacter
                         <span class="material-symbols-outlined text-base">arrow_forward</span>
                     </a>
                 </div>

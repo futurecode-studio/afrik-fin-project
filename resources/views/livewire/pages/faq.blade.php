@@ -1,6 +1,6 @@
 <div class="bg-[#f9f9ff] min-h-[70vh]">
     <section class="max-w-[900px] mx-auto px-5 lg:px-8 py-16 lg:py-24">
-        <p class="text-xs font-semibold tracking-widest uppercase text-[#0a2e8c]">Centre d’aide</p>
+        <p class="text-xs font-semibold tracking-widest uppercase text-[#0a2e8c]">Questions fréquentes</p>
         <h1 class="text-4xl lg:text-5xl font-extrabold text-[#001a61] mt-2 tracking-tight">Comment pouvons-nous vous aider ?</h1>
         <div class="mt-8 relative max-w-xl">
             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#757683]">search</span>

@@ -113,6 +113,10 @@
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('team') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                     <span class="whitespace-nowrap">À propos</span>
                 </a>
+                <a href="{{ route('contact') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('contact') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Contact
+                </a>
             </div>
 
             <div class="flex items-center gap-3 shrink-0">

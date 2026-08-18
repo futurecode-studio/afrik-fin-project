@@ -63,9 +63,9 @@
                         class="inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-5 py-3 rounded-xl hover:brightness-95 transition">
                         S’inscrire
                     </a>
-                    <a href="{{ route('mise-en-relation') }}"
+                    <a href="{{ route('contact') }}"
                         class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
-                        Être accompagné
+                        Nous contacter
                     </a>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <p class="text-xs text-[#757683] mt-8">Simulation pédagogique. Pour investir, <a href="{{ route('mise-en-relation') }}" class="text-[#001a61] font-semibold underline">demandez une mise en relation</a>.</p>
+        <p class="text-xs text-[#757683] mt-8">Simulation pédagogique. Pour un accompagnement, <a href="{{ route('contact') }}" class="text-[#001a61] font-semibold underline">contactez-nous</a>.</p>
     </section>
 </div>
 

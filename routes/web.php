@@ -72,7 +72,7 @@ foreach ($retiredToHome as $name => $uri) {
     Route::redirect($uri, '/', 301)->name($name);
 }
 
-Route::redirect('/ouverture-compte-sgi', '/mise-en-relation', 301)->name('ouverture-compte-sgi');
+Route::redirect('/ouverture-compte-sgi', '/contact', 301)->name('ouverture-compte-sgi');
 Route::permanentRedirect('/investir/fcp/{id}', '/')->name('investir.fcp-detail');
 Route::permanentRedirect('/marches/obligations/{id}', '/')->name('marches.obligation');
 Route::permanentRedirect('/marches/actions/{symbol}', '/')->name('marches.action');
@@ -97,7 +97,7 @@ Route::get('/outils/interets-composes', \App\Livewire\Pages\Outils\SimulateurInt
 Route::get('/outils/rendement-obligataire', \App\Livewire\Pages\Outils\SimulateurObligataire::class)->name('outils.rendement-obligataire');
 Route::get('/outils/frais-fiscalite', \App\Livewire\Pages\Outils\EstimateurFraisFiscalite::class)->name('outils.frais');
 Route::get('/outils/performance-fcp', \App\Livewire\Pages\Outils\AnalysePerformanceFcp::class)->name('outils.performance-fcp');
-Route::get('/mise-en-relation', \App\Livewire\Pages\MiseEnRelation::class)->name('mise-en-relation');
+Route::redirect('/mise-en-relation', '/contact', 301)->name('mise-en-relation');
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->name('partenaires.show');
 Route::redirect('/equipe', '/a-propos', 301);

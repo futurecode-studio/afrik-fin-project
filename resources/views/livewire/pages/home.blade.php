@@ -214,9 +214,9 @@
                             S’inscrire
                             <span class="material-symbols-outlined text-[18px]">person_add</span>
                         </a>
-                        <a href="{{ route('mise-en-relation') }}"
+                        <a href="{{ route('contact') }}"
                             class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
-                            Être accompagné
+                            Nous contacter
                         </a>
                     </div>
                     <p class="text-xs text-[#757683]">Simulation pédagogique. Les performances passées ne préjugent pas des performances futures.</p>
