@@ -396,8 +396,6 @@
         @endif
     </section>
 
-    @include('partials.home-marketmap')
-
     {{-- 5. Qui sommes-nous — vision, mission, équipe, ce que nous faisons --}}
     <section class="py-16 lg:py-20 bg-white px-5 lg:px-16" id="qui-sommes-nous">
         <div class="max-w-[1280px] mx-auto">

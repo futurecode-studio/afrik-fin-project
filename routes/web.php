@@ -62,7 +62,7 @@ Route::get('/marches/comparateur', \App\Livewire\Pages\Marches\ComparateurAction
 Route::get('/marches/indices', \App\Livewire\Pages\Marches\IndicesBrvm::class)->name('marches.indices');
 Route::get('/marches/obligations', \App\Livewire\Pages\Marches\MarcheObligataire::class)->name('marches.obligations');
 Route::get('/marches/obligations/{id}', \App\Livewire\Pages\Marches\DetailObligation::class)->name('marches.obligation');
-Route::get('/marches/carte', \App\Livewire\Pages\Marches\CarteMarche::class)->name('marches.carte');
+Route::redirect('/marches/carte', '/marches', 301);
 Route::get('/marches/calendrier', \App\Livewire\Pages\Marches\CalendrierFinancier::class)->name('marches.calendrier');
 Route::get('/marches/recherche', \App\Livewire\Pages\Marches\RechercheMarches::class)->name('marches.recherche');
 Route::get('/marches/actions/{symbol}', \App\Livewire\Pages\Marches\FicheAction::class)->name('marches.action');

@@ -8,7 +8,6 @@ use App\Models\Formation;
 use App\Models\MarketIndexHistory;
 use App\Models\Partner;
 use App\Models\Stock;
-use App\Services\MarketsDataService;
 use Livewire\Component;
 
 class Home extends Component
@@ -19,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v10', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v11', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -109,7 +108,6 @@ class Home extends Component
                 'compositeLatest' => $compositeLatest,
                 'chartLabels' => $chartLabels,
                 'chartValues' => $chartValues,
-                'marketTreemap' => app(MarketsDataService::class)->marketTreemap(),
                 'upcomingEvents' => $upcomingEvents,
                 'webinars' => $webinars,
                 'teamPreview' => $teamPreview,

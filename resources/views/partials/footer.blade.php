@@ -85,7 +85,6 @@
                 <h5 class="font-bold text-[#001a61] mb-6">Marchés &amp; outils</h5>
                 <ul class="space-y-3">
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.cotations') }}">Cotations actions</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.carte') }}">Carte du marché</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.calendrier') }}">Calendrier financier</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.indices') }}">Indices BRVM</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.obligations') }}">Marché obligataire</a></li>

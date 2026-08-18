@@ -7,7 +7,6 @@
         ['route' => 'marches.comparateur', 'label' => 'Comparateur', 'match' => 'marches.comparateur'],
         ['route' => 'marches.indices', 'label' => 'Indices', 'match' => 'marches.indices'],
         ['route' => 'marches.obligations', 'label' => 'Obligations', 'match' => ['marches.obligations', 'marches.obligation']],
-        ['route' => 'marches.carte', 'label' => 'Heatmap', 'match' => 'marches.carte'],
         ['route' => 'marches.screener', 'label' => 'Screener', 'match' => 'marches.screener'],
         ['route' => 'marches.secteurs', 'label' => 'Secteurs', 'match' => 'marches.secteurs'],
         ['route' => 'marches.introductions', 'label' => 'IPO', 'match' => 'marches.introductions'],

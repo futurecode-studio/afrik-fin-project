@@ -6,7 +6,6 @@
         ['route' => 'investir.comment', 'label' => 'Comment investir', 'match' => 'investir.comment'],
         ['route' => 'investir.profil-test', 'label' => 'Profil investisseur', 'match' => ['investir.profil-test', 'investir.profil']],
         ['route' => 'investir.opcvm', 'label' => 'FCP / OPCVM', 'match' => ['investir.opcvm', 'investir.fcp-detail', 'investir.vl']],
-        ['route' => 'marches.carte', 'label' => 'Carte marché', 'match' => 'marches.carte'],
         ['route' => 'marches.calendrier', 'label' => 'Calendrier', 'match' => 'marches.calendrier'],
         ['route' => 'investir.partenaires', 'label' => 'Partenaires', 'match' => 'investir.partenaires'],
     ];
