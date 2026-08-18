@@ -22,45 +22,6 @@ class Partner extends Model
      * @var array<int, array<string, mixed>>
      */
     public const CATALOG = [
-        ['nom' => 'AASCOT', 'type' => 'SGI', 'logo' => 'assets/images/AASCOT.png', 'order' => 1],
-        [
-            'nom' => 'Africa Bourse',
-            'type' => 'SGI',
-            'logo' => 'assets/images/africa-bourse.png',
-            'website' => 'https://africabourse.com',
-            'description' => 'SGI agréée AMF-UMOA, membre de la BRVM. Intermédiation, conseil et ingénierie financière en UEMOA.',
-            'order' => 2,
-        ],
-        ['nom' => 'AGA', 'type' => 'SGO', 'logo' => 'assets/images/aga.png', 'order' => 3],
-        ['nom' => 'AGI', 'type' => 'SGO', 'logo' => 'assets/images/agi.png', 'order' => 4],
-        ['nom' => 'BOA', 'type' => 'SGI', 'logo' => 'assets/images/boa.png', 'order' => 5],
-        ['nom' => 'BFS', 'type' => 'SGI', 'logo' => 'assets/images/bfs.png', 'order' => 6],
-        ['nom' => 'NSIA', 'type' => 'SGO', 'logo' => 'assets/images/nsia.png', 'order' => 7],
-        ['nom' => 'Saphir', 'type' => 'SGO', 'logo' => 'assets/images/saphir.png', 'order' => 8],
-        ['nom' => 'SOAGA', 'type' => 'SGO', 'logo' => 'assets/images/soaga.png', 'order' => 9],
-        ['nom' => 'UCA', 'type' => 'SGI', 'logo' => 'assets/images/uca.png', 'order' => 10],
-        [
-            'nom' => 'Africabourse Asset Management',
-            'type' => 'SGO',
-            'logo' => 'assets/images/africabource-asset-managment.png',
-            'website' => 'https://africabourse-am.com',
-            'country' => 'Bénin',
-            'city' => 'Cotonou',
-            'agreement_number' => 'SG/2012-03',
-            'description' => 'Société de gestion d’OPCVM agréée AMF-UMOA. Conception et gestion de FCP sur le marché financier régional.',
-            'order' => 11,
-        ],
-        [
-            'nom' => 'Africatitrisation',
-            'type' => 'Autre',
-            'logo' => 'assets/images/africaboursetitrisation.jpeg',
-            'website' => 'https://africabourse.com',
-            'country' => 'Côte d’Ivoire',
-            'city' => 'Abidjan',
-            'agreement_number' => 'AMF-UMOA 099-2025',
-            'description' => 'Société de gestion de fonds communs de titrisation de créances (SG-FCTC) agréée AMF-UMOA.',
-            'order' => 12,
-        ],
         [
             'nom' => 'BRVM',
             'type' => 'Autre',
@@ -69,8 +30,43 @@ class Partner extends Model
             'country' => 'Côte d’Ivoire',
             'city' => 'Abidjan',
             'description' => 'Bourse Régionale des Valeurs Mobilières de l’UEMOA. Place de cotation des actions et obligations de la zone.',
-            'order' => 13,
+            'order' => 1,
         ],
+        [
+            'nom' => 'Apicassur',
+            'type' => 'SGI',
+            'logo' => 'assets/images/africa-bourse.png',
+            'website' => 'https://africabourse.com',
+            'aliases' => ['Africa Bourse', 'Africabourse'],
+            'description' => 'SGI agréée AMF-UMOA, membre de la BRVM. Intermédiation, conseil et ingénierie financière en UEMOA.',
+            'order' => 2,
+        ],
+        [
+            'nom' => 'AAM',
+            'type' => 'SGO',
+            'logo' => 'assets/images/africabource-asset-managment.png',
+            'website' => 'https://africabourse-am.com',
+            'country' => 'Bénin',
+            'city' => 'Cotonou',
+            'agreement_number' => 'SG/2012-03',
+            'aliases' => ['Africabourse Asset Management', 'Africa Bourse Asset Management'],
+            'description' => 'Africabourse Asset Management. Société de gestion d’OPCVM agréée AMF-UMOA.',
+            'order' => 3,
+        ],
+        [
+            'nom' => 'AAT',
+            'type' => 'Autre',
+            'logo' => 'assets/images/africaboursetitrisation.jpeg',
+            'website' => 'https://africabourse.com',
+            'country' => 'Côte d’Ivoire',
+            'city' => 'Abidjan',
+            'agreement_number' => 'AMF-UMOA 099-2025',
+            'aliases' => ['Africatitrisation', 'Africa Titrisation'],
+            'description' => 'Africatitrisation. Société de gestion de fonds communs de titrisation de créances (SG-FCTC).',
+            'order' => 4,
+        ],
+        ['nom' => 'SOAGA', 'type' => 'SGO', 'logo' => 'assets/images/soaga.png', 'order' => 5],
+        ['nom' => 'NSIA', 'type' => 'SGO', 'logo' => 'assets/images/nsia.png', 'order' => 6],
         [
             'nom' => 'SGI Bénin',
             'type' => 'SGI',
@@ -80,6 +76,19 @@ class Partner extends Model
             'city' => 'Cotonou',
             'agreement_number' => '15/12/001/97',
             'description' => 'Société de Gestion et d’Intermédiation de droit béninois, pionnière du marché financier régional depuis 1997.',
+            'order' => 7,
+        ],
+        ['nom' => 'Saphir', 'type' => 'SGO', 'logo' => 'assets/images/saphir.png', 'order' => 8],
+        ['nom' => 'AGI', 'type' => 'SGO', 'logo' => 'assets/images/agi.png', 'order' => 9],
+        ['nom' => 'AGA', 'type' => 'SGO', 'logo' => 'assets/images/aga.png', 'order' => 10],
+        ['nom' => 'UCA', 'type' => 'SGI', 'logo' => 'assets/images/uca.png', 'order' => 11],
+        ['nom' => 'BFS', 'type' => 'SGI', 'logo' => 'assets/images/bfs.png', 'order' => 12],
+        ['nom' => 'BOA', 'type' => 'SGI', 'logo' => 'assets/images/boa.png', 'order' => 13],
+        [
+            'nom' => 'ASCOT',
+            'type' => 'SGI',
+            'logo' => 'assets/images/AASCOT.png',
+            'aliases' => ['AASCOT'],
             'order' => 14,
         ],
     ];
@@ -172,15 +181,21 @@ class Partner extends Model
         $needle = self::normalizeName($name);
 
         foreach (self::CATALOG as $entry) {
-            if (self::normalizeName($entry['nom']) === $needle) {
-                return $entry['logo'];
+            $names = array_merge([$entry['nom']], $entry['aliases'] ?? []);
+            foreach ($names as $name) {
+                if (self::normalizeName($name) === $needle) {
+                    return $entry['logo'];
+                }
             }
         }
 
         foreach (self::CATALOG as $entry) {
-            $label = self::normalizeName($entry['nom']);
-            if ($label !== '' && (str_contains($needle, $label) || str_contains($label, $needle))) {
-                return $entry['logo'];
+            $names = array_merge([$entry['nom']], $entry['aliases'] ?? []);
+            foreach ($names as $name) {
+                $label = self::normalizeName($name);
+                if ($label !== '' && (str_contains($needle, $label) || str_contains($label, $needle))) {
+                    return $entry['logo'];
+                }
             }
         }
 

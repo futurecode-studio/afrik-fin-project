@@ -22,9 +22,6 @@
 
     <section class="px-5 lg:px-16 max-w-[1280px] mx-auto pb-20">
         @forelse ($partners as $partner)
-            @if ($loop->first || ($partners[$loop->index - 1]->type ?? null) !== $partner->type)
-                <h2 class="text-lg font-bold text-[#001a61] mt-8 mb-4">{{ $partner->getTypeLabel() }}</h2>
-            @endif
             <article class="bg-white border border-[#c5c5d4] rounded-xl p-5 mb-4 flex flex-col sm:flex-row gap-4 items-start">
                 <div class="w-16 h-16 rounded-lg bg-white border border-[#c5c5d4] flex items-center justify-center overflow-hidden shrink-0 p-1">
                     @if ($partner->logo_url)

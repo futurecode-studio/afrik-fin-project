@@ -9,6 +9,20 @@ class PartnerSeeder extends Seeder
 {
     public function run(): void
     {
+        $renames = [
+            'AASCOT' => 'ASCOT',
+            'Africa Bourse' => 'Apicassur',
+            'Africabourse' => 'Apicassur',
+            'Africabourse Asset Management' => 'AAM',
+            'Africa Bourse Asset Management' => 'AAM',
+            'Africatitrisation' => 'AAT',
+            'Africa Titrisation' => 'AAT',
+        ];
+
+        foreach ($renames as $oldName => $newName) {
+            Partner::query()->where('nom', $oldName)->update(['nom' => $newName]);
+        }
+
         foreach (Partner::CATALOG as $entry) {
             Partner::query()->updateOrCreate(
                 ['nom' => $entry['nom']],
@@ -26,6 +40,12 @@ class PartnerSeeder extends Seeder
                 ]
             );
         }
+
+        $keep = collect(Partner::CATALOG)->pluck('nom')->all();
+        Partner::query()->whereNotIn('nom', $keep)->update([
+            'is_active' => false,
+            'is_featured' => false,
+        ]);
 
         Partner::query()->each(function (Partner $partner) {
             $logo = Partner::catalogLogoForName($partner->nom);

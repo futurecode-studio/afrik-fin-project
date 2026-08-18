@@ -28,42 +28,24 @@
                     <p class="text-muted-foreground">Aucun partenaire n'est enregistré pour le moment.</p>
                 </div>
             @else
-                @php
-                    $partnersByType = $partners->groupBy('type');
-                    $typeLabels = \App\Models\Partner::TYPES;
-                    $orderedTypes = array_keys($typeLabels);
-                @endphp
-
-                @foreach($orderedTypes as $typeKey)
-                    @if($partnersByType->has($typeKey))
-                        @php $group = $partnersByType->get($typeKey); @endphp
-                        <div class="mb-16 last:mb-0">
-                            <div class="flex items-center gap-4 mb-8">
-                                <span class="h-px flex-1 bg-border"></span>
-                                <h2 class="text-lg font-bold text-secondary whitespace-nowrap">{{ $typeLabels[$typeKey] }}</h2>
-                                <span class="h-px flex-1 bg-border"></span>
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                                @foreach($group as $partner)
-                                    @php
-                                        $href = $partner->getKey() ? route('partenaires.show', $partner->id) : route('contact');
-                                    @endphp
-                                    <a href="{{ $href }}"
-                                        class="bg-card rounded-xl border border-border p-6 hover:shadow-elegant hover:border-primary/30 transition-smooth group flex flex-col items-center justify-center gap-3 min-h-[140px]">
-                                        @if($partner->logo_url)
-                                            <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}"
-                                                class="max-h-16 max-w-full object-contain">
-                                        @endif
-                                        <p class="font-semibold text-foreground text-center text-sm group-hover:text-primary transition-colors">{{ $partner->nom }}</p>
-                                        @if($partner->description)
-                                            <p class="text-xs text-muted-foreground text-center line-clamp-2">{{ plain_text($partner->description, 120) }}</p>
-                                        @endif
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    @foreach($partners as $partner)
+                        @php
+                            $href = $partner->getKey() ? route('partenaires.show', $partner->id) : route('contact');
+                        @endphp
+                        <a href="{{ $href }}"
+                            class="bg-card rounded-xl border border-border p-6 hover:shadow-elegant hover:border-primary/30 transition-smooth group flex flex-col items-center justify-center gap-3 min-h-[140px]">
+                            @if($partner->logo_url)
+                                <img src="{{ $partner->logo_url }}" alt="{{ $partner->nom }}"
+                                    class="max-h-16 max-w-full object-contain">
+                            @endif
+                            <p class="font-semibold text-foreground text-center text-sm group-hover:text-primary transition-colors">{{ $partner->nom }}</p>
+                            @if($partner->description)
+                                <p class="text-xs text-muted-foreground text-center line-clamp-2">{{ plain_text($partner->description, 120) }}</p>
+                            @endif
+                        </a>
+                    @endforeach
+                </div>
             @endif
         </div>
     </section>
