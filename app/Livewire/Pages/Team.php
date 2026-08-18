@@ -113,6 +113,13 @@ class Team extends Component
                 'tags' => ['Conseil financier', 'Microfinance', 'Patrimoine'],
                 'image' => 'assets/images/team/donatin.JPG',
             ],
+            [
+                'name' => 'Angélique OKANA',
+                'role' => 'Chargée de clientèle',
+                'bio' => 'Conseil et accompagnement en investissement boursier. J’accompagne les investisseurs dans leurs décisions et opérations sur le marché de la BRVM, avec une approche personnalisée, professionnelle et orientée vers leurs objectifs.',
+                'tags' => ['Clientèle', 'Conseil', 'Investissement boursier'],
+                'image' => 'assets/images/team/angelique.jpeg',
+            ],
         ];
         
         return view('livewire.pages.team', [
