@@ -95,9 +95,9 @@
                     Voir les formations
                     <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </a>
-                <a href="{{ route('contact') }}"
+                <a href="{{ route('mise-en-relation') }}"
                     class="border border-white/40 text-white font-bold px-7 py-3.5 rounded-lg hover:bg-white/10 transition-all inline-flex items-center gap-2">
-                    Nous contacter
+                    Ouvrir un compte-titres
                 </a>
             </div>
 
