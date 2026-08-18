@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('investment_appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-            $table->enum('investment_type', ['actions_brvm', 'obligations', 'fcp'])->comment('Type d\'investissement: actions BRVM, obligations d\'états, ou fonds communs de placement');
+            $table->enum('investment_type', ['actions_brvm', 'obligations', 'fcp', 'gestion_mandat', 'institutionnel', 'mise_en_relation'])->comment('Type de demande');
             $table->string('name');
             $table->string('email');
             $table->string('phone');

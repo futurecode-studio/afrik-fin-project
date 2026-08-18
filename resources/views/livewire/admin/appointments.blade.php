@@ -70,6 +70,9 @@
                         <option value="actions_brvm">Actions BRVM</option>
                         <option value="obligations">Obligations d'États</option>
                         <option value="fcp">FCP</option>
+                        <option value="gestion_mandat">Gestion sous mandat</option>
+                        <option value="institutionnel">Portail institutionnel</option>
+                        <option value="mise_en_relation">Mise en relation</option>
                     </select>
                 </div>
             </div>
