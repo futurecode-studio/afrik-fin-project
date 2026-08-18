@@ -98,6 +98,10 @@
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('services', 'services*', 'service-detail', 'services.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                     Services
                 </a>
+                <a href="{{ route('guide-bourse') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('guide-bourse') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Guide
+                </a>
 
                 <a href="{{ route('formations') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('formations*', 'formation-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
@@ -183,6 +187,7 @@
             <a href="{{ route('search') }}" class="block py-3 text-[#131c2a] font-medium">Recherche</a>
             <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
             <a href="{{ route('services') }}" class="block py-3 text-[#131c2a] font-medium">Services</a>
+            <a href="{{ route('guide-bourse') }}" class="block py-3 text-[#131c2a] font-medium">Guide</a>
             <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>
             <a href="{{ route('events-list') }}" class="block py-3 text-[#131c2a] font-medium">Événements</a>
             <a href="{{ route('actualites') }}" class="block py-3 text-[#131c2a] font-medium">Actualités</a>

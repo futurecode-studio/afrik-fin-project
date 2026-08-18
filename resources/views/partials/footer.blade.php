@@ -63,6 +63,7 @@
                 <h5 class="font-bold text-[#001a61]">Outils</h5>
                 <ul class="space-y-3 text-sm">
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('search') }}">Recherche</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('guide-bourse') }}">Guide</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('outils.interets-composes') }}">Simulateur intérêts composés</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('aide') }}">Centre d'aide</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('support.ticket') }}">Support</a></li>
