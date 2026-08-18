@@ -12,7 +12,7 @@
     <div class="absolute -top-24 -right-16 w-64 h-64 rounded-full bg-[#ffbf00]/15 blur-3xl pointer-events-none"></div>
 
     <div class="relative px-5 lg:px-16 max-w-[1280px] mx-auto pt-14 lg:pt-16 pb-10">
-        <div class="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+        <div class="grid gap-10 lg:grid-cols-[1.2fr_0.9fr_0.9fr_0.9fr]">
             <div class="space-y-5">
                 <div class="flex items-center gap-3">
                     <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances" class="h-10 w-auto object-contain">
@@ -22,6 +22,12 @@
                 <p class="text-sm md:text-base text-[#444652] max-w-md leading-relaxed">
                     Éducation financière, accompagnement à l'investissement et mise en relation avec l'écosystème agréé AMF-UMOA.
                 </p>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="{{ route('guide-bourse') }}" class="inline-flex items-center rounded-full border border-[#c5c5d4] bg-white px-4 py-2 text-sm font-semibold text-[#001a61] hover:border-[#001a61]/40 transition">Guide Bourse</a>
+                    <a href="{{ route('formations') }}" class="inline-flex items-center rounded-full border border-[#c5c5d4] bg-white px-4 py-2 text-sm font-semibold text-[#001a61] hover:border-[#001a61]/40 transition">Formations</a>
+                    <a href="{{ route('contact') }}" class="inline-flex items-center rounded-full border border-[#c5c5d4] bg-white px-4 py-2 text-sm font-semibold text-[#001a61] hover:border-[#001a61]/40 transition">Contact</a>
+                </div>
 
                 @if ($socialLinks->isNotEmpty())
                     <div class="flex flex-wrap gap-3 pt-1">
@@ -38,6 +44,46 @@
                         @endforeach
                     </div>
                 @endif
+            </div>
+
+            <div>
+                <h5 class="font-bold text-[#001a61] mb-4">Navigation</h5>
+                <ul class="space-y-3 text-sm">
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('home') }}">Accueil</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.index') }}">Marchés</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('services') }}">Services</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('formations') }}">Formations</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('events-list') }}">Événements</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('actualites') }}">Actualités</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('team') }}">À propos</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="font-bold text-[#001a61] mb-4">Investir</h5>
+                <ul class="space-y-3 text-sm">
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('investir.hub') }}">Investir — Hub</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('guide-bourse') }}">Guide Complet de la Bourse</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('ouverture-compte-sgi') }}">Ouvrir un compte titre</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('investir.comment') }}">Comment investir</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('investir.profil-test') }}">Profil investisseur</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('investir.opcvm') }}">FCP / OPCVM</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('investir.partenaires') }}">Partenaires agréés</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h5 class="font-bold text-[#001a61]">Marchés & outils</h5>
+                <ul class="space-y-3 text-sm">
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.cotations') }}">Cotations actions</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.indices') }}">Indices BRVM</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.calendrier') }}">Calendrier financier</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('search') }}">Recherche</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('outils.interets-composes') }}">Simulateur intérêts composés</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('aide') }}">Centre d'aide</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('support.ticket') }}">Support</a></li>
+                </ul>
             </div>
 
             <div class="space-y-4">
@@ -60,7 +106,6 @@
             <p class="text-sm text-[#757683]">© {{ date('Y') }} Africaine des Finances. Tous droits réservés.</p>
             <div class="flex flex-wrap gap-4 text-sm">
                 <a href="{{ route('home') }}" class="text-[#444652] hover:text-[#001a61] transition">Accueil</a>
-                <a href="{{ route('contact') }}" class="text-[#444652] hover:text-[#001a61] transition">Contact</a>
                 <a href="{{ route('legal.show', 'mentions-legales') }}" class="text-[#444652] hover:text-[#001a61] transition">Mentions légales</a>
                 <a href="{{ route('legal.show', 'politique-de-confidentialite') }}" class="text-[#444652] hover:text-[#001a61] transition">Confidentialité</a>
                 <a href="{{ route('support.ticket') }}" class="text-[#444652] hover:text-[#001a61] transition">Support</a>

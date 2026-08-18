@@ -207,7 +207,7 @@
                                 :class="type === 'Obligations' ? 'bg-[#001a61] text-white' : 'bg-[#f9f9ff] text-[#001a61] border border-[#c5c5d4]'"
                                 class="rounded-lg px-3 py-2.5 text-sm font-bold transition text-left">
                                 <span class="block">FCP Obligations</span>
-                                <span class="block text-xs font-semibold mt-0.5 opacity-90">6 % prévisionnel</span>
+                                <span class="block text-xs font-semibold mt-0.5 opacity-90">6 %</span>
                             </button>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
                     <label class="block text-xs font-semibold tracking-wider uppercase text-[#757683] mb-1">Type de FCP</label>
                     <select wire:model.live="fcpType" class="w-full rounded-lg border border-[#c5c5d4] px-3 py-2.5 bg-[#f9f9ff] focus:border-[#001a61] outline-none">
                         @foreach ($availableTypes as $type)
-                            <option value="{{ $type }}">FCP {{ $type }} — {{ number_format($rates[$type] ?? 0, 0) }} % prévisionnel</option>
+                            <option value="{{ $type }}">FCP {{ $type }} — {{ number_format($rates[$type] ?? 0, 0) }} %{{ $type === 'Actions' ? ' prévisionnel' : '' }}</option>
                         @endforeach
                     </select>
                     <p class="mt-2 text-xs text-[#757683]">{{ $typeDescription }} Taux prévisionnel : {{ number_format($typeRate, 0, ',', ' ') }} % / an.</p>
@@ -74,7 +74,7 @@
         <div class="mt-8 bg-white border border-[#c5c5d4] rounded-xl p-5">
             <h2 class="text-lg font-bold text-[#001a61] mb-3">Lecture de la simulation</h2>
             <div class="space-y-3 text-sm text-[#444652]">
-                <p>Le simulateur utilise des taux prévisionnels par classe d’actifs : <strong>FCP Actions 13 % prévisionnel</strong> et <strong>FCP Obligations 6 % prévisionnel</strong>.</p>
+                <p>Le simulateur utilise des taux indicatifs par classe d’actifs : <strong>FCP Actions 13 % prévisionnel</strong> et <strong>FCP Obligations 6 %</strong>.</p>
                 <p>Ces taux sont indicatifs et ne correspondent pas aux fonds d’une SGO particulière. Africaine des Finances travaille avec plusieurs partenaires agréés.</p>
                 <p>Les performances passées ne préjugent pas des performances futures. Consultez toujours la documentation officielle du fonds avant toute souscription.</p>
             </div>
