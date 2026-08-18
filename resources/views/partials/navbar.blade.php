@@ -88,10 +88,6 @@
             </a>
 
             <div class="hidden lg:flex items-center gap-8">
-                <a href="{{ route('marches.index') }}"
-                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('marches.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    Marchés
-                </a>
                 <a href="{{ route('services') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('services', 'services*', 'service-detail', 'services.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
                     Services
@@ -182,7 +178,6 @@
             x-transition:enter-start="opacity-0 -translate-y-2"
             x-transition:enter-end="opacity-100 translate-y-0"
             class="lg:hidden border-t border-[#c5c5d4]/60 adf-glass-strong px-5 py-4 space-y-1">
-            <a href="{{ route('marches.index') }}" class="block py-3 text-[#131c2a] font-medium">Marchés</a>
             <a href="{{ route('services') }}" class="block py-3 text-[#131c2a] font-medium">Services</a>
             <a href="{{ route('guide-bourse') }}" class="block py-3 text-[#131c2a] font-medium">Guide</a>
             <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>

@@ -48,7 +48,6 @@
                 <h5 class="font-bold text-[#001a61] mb-4">Navigation</h5>
                 <ul class="space-y-3 text-sm">
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('home') }}">Accueil</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.index') }}">Marchés</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('services') }}">Services</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('formations') }}">Formations</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('events-list') }}">Événements</a></li>
@@ -62,7 +61,6 @@
                 <h5 class="font-bold text-[#001a61]">Outils</h5>
                 <ul class="space-y-3 text-sm">
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('guide-bourse') }}">Guide</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('marches.index') }}">Marchés</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('mise-en-relation') }}">Mise en relation</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('outils.interets-composes') }}">Simulateur intérêts composés</a></li>
                 </ul>
