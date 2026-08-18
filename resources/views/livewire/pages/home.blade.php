@@ -444,8 +444,8 @@
     <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16 max-w-[1280px] mx-auto">
         <div class="flex flex-col md:flex-row justify-between md:items-end gap-4 mb-8">
             <div>
-                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Actualités</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">Pour aller plus loin</h2>
+                <span class="text-[#001a61] text-xs font-semibold uppercase tracking-[0.22em]">Pour aller plus loin</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#001a61] mt-2">Actualités</h2>
             </div>
             <a href="{{ route('actualites') }}" class="text-[#001a61] font-bold flex items-center gap-2">
                 Toutes les actualités <span class="material-symbols-outlined">arrow_forward</span>
@@ -454,9 +454,15 @@
         <div class="grid md:grid-cols-3 gap-5">
             @foreach (($featuredArticle ? collect([$featuredArticle])->merge($latestArticles) : $latestArticles)->take(3) as $article)
                 <a href="{{ route('actualite-detail', $article->slug) }}"
-                    class="rounded-2xl border border-[#c5c5d4] bg-white p-5 hover:shadow-md transition group">
-                    <p class="text-[11px] font-bold text-[#0a2e8c] uppercase tracking-wider">{{ $article->categorie ?: 'Analyse' }}</p>
-                    <h3 class="mt-2 font-bold text-[#001a61] group-hover:underline line-clamp-2">{{ $article->titre }}</h3>
+                    class="rounded-3xl border border-[#c5c5d4] bg-white p-6 md:p-7 min-h-[220px] flex flex-col justify-between hover:border-[#001a61]/30 hover:shadow-lg transition group">
+                    <div>
+                        <p class="text-[11px] font-bold text-[#0a2e8c] uppercase tracking-[0.18em]">{{ $article->categorie ?: 'Analyse' }}</p>
+                        <h3 class="mt-4 text-xl md:text-2xl font-extrabold leading-snug text-[#001a61] group-hover:underline line-clamp-3">{{ $article->titre }}</h3>
+                    </div>
+                    <span class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#001a61]">
+                        Lire l’actualité
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </span>
                 </a>
             @endforeach
         </div>
