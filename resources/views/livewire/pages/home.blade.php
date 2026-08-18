@@ -95,9 +95,9 @@
                     Voir les formations
                     <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </a>
-                <a href="{{ route('mise-en-relation') }}"
+                <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
                     class="border border-white/40 text-white font-bold px-7 py-3.5 rounded-lg hover:bg-white/10 transition-all inline-flex items-center gap-2">
-                    Ouvrir un compte-titres
+                    {{ config('services.diaspora_funnel.label') }}
                 </a>
             </div>
 
