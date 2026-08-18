@@ -82,31 +82,22 @@
             <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
                 <img src="{{ asset('assets/logo.jpg') }}" alt="Africaine des Finances"
                     class="h-10 w-auto object-contain transition duration-300 group-hover:scale-105 group-hover:drop-shadow-md" />
-                <span class="text-xl lg:text-2xl font-extrabold text-[#001a61] leading-tight hidden sm:block">
+                <span class="text-xl lg:text-2xl font-extrabold text-[#001a61] leading-tight hidden xl:block">
                     Africaine des Finances
                 </span>
             </a>
 
-            <div class="hidden lg:flex items-center gap-8">
+            <div class="hidden lg:flex items-center gap-5 xl:gap-6">
                 <a href="{{ route('search') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('search') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}"
                     title="Recherche" aria-label="Recherche">
                     <span class="material-symbols-outlined text-[22px] align-middle">search</span>
                 </a>
-                <a href="{{ route('marches.index') }}"
-                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('marches.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    Marchés
-                </a>
-
-                <a href="{{ route('services') }}"
-                    class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('services', 'services*', 'service-detail', 'services.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                    Services
-                </a>
 
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                     <button type="button"
-                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('investir.*', 'marches.*', 'guide-bourse') ? 'text-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
-                        Investir
+                        class="text-base font-medium transition-colors duration-200 pb-1 flex items-center gap-1 {{ request()->routeIs('services', 'services*', 'service-detail', 'services.*') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                        Services
                         <span class="material-symbols-outlined text-[18px] transition-transform"
                             :class="open ? 'rotate-180' : ''">expand_more</span>
                     </button>
@@ -115,41 +106,29 @@
                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
                         class="absolute left-0 mt-3 w-72 adf-glass-strong rounded-2xl overflow-hidden z-50 shadow-glass-lg">
-                        <a href="{{ route('investir.hub') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Investir — Hub</a>
-                        <a href="{{ route('guide-bourse') }}"
+                        <a href="{{ route('services') }}"
                             class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            Guide Complet de la Bourse
-                            <span class="block text-[11px] font-medium text-[#757683]">BRVM · actions · obligations · glossaire</span>
+                            Tous nos services
                         </a>
-                        <a href="{{ route('ouverture-compte-sgi') }}"
-                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            Ouvrir un compte titre
-                            <span class="block text-[11px] font-medium text-[#757683]">SGI · FCP · accompagnement ADF</span>
-                        </a>
-                        <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                            class="block px-4 py-3 text-sm font-bold text-[#001a61] hover:bg-[#ffbf00]/25 transition border-b border-[#c5c5d4]/60">
-                            {{ config('services.diaspora_funnel.label') }}
-                            <span class="block text-[11px] font-medium text-[#757683]">Évaluer votre profil · accompagnement ADF</span>
-                        </a>
-                        <a href="{{ route('investir.comment') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Comment investir</a>
-                        <a href="{{ route('investir.profil-test') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Profil investisseur</a>
-                        <a href="{{ route('investir.opcvm') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">FCP / OPCVM</a>
-                        <a href="{{ route('marches.index') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Marchés financiers</a>
-                        <a href="{{ route('marches.cotations') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Cotations Actions</a>
-                        <a href="{{ route('marches.carte') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Carte du marché</a>
-                        <a href="{{ route('marches.calendrier') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Calendrier financier</a>
-                        <a href="{{ route('investir.partenaires') }}"
-                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff] transition">Partenaires agréés</a>
+                        <a href="{{ route('services-formation') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">E-Learning financier</a>
+                        <a href="{{ route('services-bourse') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Données boursières</a>
+                        <a href="{{ route('services-conseil') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Conseil en investissement</a>
+                        <a href="{{ route('services.mandat') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Gestion sous mandat</a>
+                        <a href="{{ route('services.institutionnel') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Portail institutionnel</a>
+                        <a href="{{ route('marches.produits-structures') }}"
+                            class="block px-4 py-3 text-sm text-[#131c2a] hover:bg-[#e7eeff]/80 transition">Produits structurés</a>
                     </div>
                 </div>
+
+                <a href="{{ route('guide-bourse') }}"
+                    class="text-base font-medium transition-colors duration-200 pb-1 whitespace-nowrap {{ request()->routeIs('guide-bourse') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
+                    Guide Bourse
+                </a>
 
                 <a href="{{ route('formations') }}"
                     class="text-base font-medium transition-colors duration-200 pb-1 {{ request()->routeIs('formations*', 'formation-detail') ? 'text-[#001a61] border-b-2 border-[#001a61] font-bold' : 'text-[#444652] hover:text-[#001a61]' }}">
@@ -177,26 +156,27 @@
                         <span class="absolute -top-0.5 -right-0.5 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-[#ffbf00] text-[#001a61] text-[10px] font-bold flex items-center justify-center">{{ $cartCount }}</span>
                     @endif
                 </a>
-                <div class="hidden lg:flex items-center gap-3">
+                <div class="hidden lg:flex items-center gap-2 shrink-0">
                     @auth
                         <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.my-events') }}"
-                            class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-3 py-2">
+                            class="text-[#001a61] font-semibold hover:text-[#0a2e8c] transition-colors text-sm px-3 py-2 whitespace-nowrap">
                             {{ Auth::user()->canAccessAdminPanel() ? 'Administration' : 'Mon Espace' }}
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-3 py-2">
+                                class="inline-flex items-center gap-1.5 border-2 border-[#001a61] text-[#001a61] font-bold rounded-xl px-4 py-2 text-sm hover:bg-[#001a61] hover:text-white transition-all whitespace-nowrap">
                                 Déconnexion
                             </button>
                         </form>
                     @else
                         <a href="{{ route('connexion') }}"
-                            class="text-[#444652] font-medium hover:text-[#001a61] transition-colors text-base px-4 py-2">
+                            class="inline-flex items-center gap-1.5 border-2 border-[#001a61] bg-white/90 text-[#001a61] font-bold rounded-xl px-4 py-2 text-sm hover:bg-[#001a61] hover:text-white transition-all shadow-sm whitespace-nowrap">
+                            <span class="material-symbols-outlined text-[18px]">login</span>
                             Connexion
                         </a>
                         <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                            class="adf-btn-primary text-base whitespace-nowrap px-5 py-3">
+                            class="adf-btn-primary text-sm whitespace-nowrap px-4 py-2.5 shrink-0">
                             {{ config('services.diaspora_funnel.label') }}
                         </a>
                     @endauth
@@ -218,24 +198,17 @@
             x-transition:enter-end="opacity-100 translate-y-0"
             class="lg:hidden border-t border-[#c5c5d4]/60 adf-glass-strong px-5 py-4 space-y-1">
             <a href="{{ route('search') }}" class="block py-3 text-[#131c2a] font-medium">Recherche</a>
-            <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Aide</a>
-            <a href="{{ route('investir.hub') }}" class="block py-3 text-[#131c2a] font-medium">Investir</a>
-            <a href="{{ route('guide-bourse') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Guide Complet de la Bourse</a>
-            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 pl-4 font-bold text-[#001a61]">Ouvrir un compte titre</a>
-            <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                class="block py-3 pl-4 font-bold text-[#001a61]">{{ config('services.diaspora_funnel.label') }}</a>
-            <a href="{{ route('investir.opcvm') }}" class="block py-3 pl-4 text-[#444652]">FCP / OPCVM</a>
-            <a href="{{ route('marches.index') }}" class="block py-3 text-[#131c2a] font-medium">Marchés</a>
-            <a href="{{ route('marches.cotations') }}" class="block py-3 pl-4 text-[#444652]">Cotations</a>
-            <a href="{{ route('marches.carte') }}" class="block py-3 pl-4 text-[#444652]">Carte du marché</a>
-            <a href="{{ route('marches.calendrier') }}" class="block py-3 pl-4 text-[#444652]">Calendrier</a>
-            <a href="{{ route('investir.partenaires') }}" class="block py-3 pl-4 text-[#444652]">Partenaires</a>
             <a href="{{ route('services') }}" class="block py-3 text-[#131c2a] font-medium">Services</a>
+            <a href="{{ route('services-bourse') }}" class="block py-3 pl-4 text-[#444652]">Données boursières</a>
+            <a href="{{ route('services-conseil') }}" class="block py-3 pl-4 text-[#444652]">Conseil en investissement</a>
+            <a href="{{ route('guide-bourse') }}" class="block py-3 font-bold text-[#001a61]">Guide Bourse</a>
+            <a href="{{ route('ouverture-compte-sgi') }}" class="block py-3 font-bold text-[#001a61]">Ouvrir un compte titre</a>
             <a href="{{ route('formations') }}" class="block py-3 text-[#131c2a] font-medium">Formations</a>
             <a href="{{ route('events-list') }}" class="block py-3 text-[#131c2a] font-medium">Événements</a>
             <a href="{{ route('actualites') }}" class="block py-3 text-[#131c2a] font-medium">Actualités</a>
             <a href="{{ route('team') }}" class="block py-3 text-[#131c2a] font-medium">À propos</a>
             <a href="{{ route('contact') }}" class="block py-3 text-[#131c2a] font-medium">Contact</a>
+            <a href="{{ route('aide') }}" class="block py-3 text-[#131c2a] font-medium">Centre d'aide</a>
             <div class="pt-3 border-t border-[#c5c5d4] space-y-2">
                 @auth
                     <a href="{{ Auth::user()->canAccessAdminPanel() ? route('admin.dashboard') : route('client.my-events') }}"
@@ -243,9 +216,13 @@
                         {{ Auth::user()->canAccessAdminPanel() ? 'Administration' : 'Mon Espace' }}
                     </a>
                 @else
-                    <a href="{{ route('connexion') }}" class="block py-3 font-medium text-[#444652]">Connexion</a>
+                    <a href="{{ route('connexion') }}"
+                        class="flex items-center justify-center gap-2 border-2 border-[#001a61] bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl">
+                        <span class="material-symbols-outlined text-[20px]">login</span>
+                        Connexion
+                    </a>
                     <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                        class="block text-center bg-[#0a2e8c] text-white font-bold px-5 py-3 rounded">
+                        class="block text-center adf-btn-primary font-bold px-5 py-3 rounded-xl">
                         {{ config('services.diaspora_funnel.label') }}
                     </a>
                 @endauth

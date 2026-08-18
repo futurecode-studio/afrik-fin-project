@@ -45,8 +45,8 @@
                 <h5 class="font-bold text-[#001a61] mb-6">Navigation</h5>
                 <ul class="space-y-3">
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('home') }}">Accueil</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('marches.index') }}">Marchés financiers</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('services') }}">Services</a></li>
+                    <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('guide-bourse') }}">Guide Bourse</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('formations') }}">Formations</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('events-list') }}">Événements</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] hover:underline transition-all text-sm font-medium" href="{{ route('actualites') }}">Actualités</a></li>
