@@ -74,7 +74,7 @@
                 <h5 class="font-bold text-[#001a61]">Contact</h5>
                 <div class="space-y-3 text-sm text-[#444652]">
                     <p><span class="font-semibold text-[#001a61]">Email :</span> <a href="mailto:contact@africainedesfinances.com" class="hover:text-[#001a61]">contact@africainedesfinances.com</a></p>
-                    <p><span class="font-semibold text-[#001a61]">Téléphone :</span> +229 01 44 21 82 09</p>
+                    <p><span class="font-semibold text-[#001a61]">Téléphone :</span> +229 01 44 21 82 09 / +229 01 66 55 51 21</p>
                     <p><span class="font-semibold text-[#001a61]">Adresse :</span> Fidjrossè Hlazounto, Cotonou</p>
                     <p><span class="font-semibold text-[#001a61]">Agrément :</span> AMF-UMOA AA/2022-03</p>
                 </div>
