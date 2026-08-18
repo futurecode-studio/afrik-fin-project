@@ -13,21 +13,16 @@
                 d’investissement sur le marché boursier de l’UEMOA — avec Africaine des Finances
                 (agrément AMF-UMOA AA/2022-03).
             </p>
-            <div class="mt-8 grid sm:grid-cols-3 gap-3">
+            <div class="mt-8 grid sm:grid-cols-2 gap-3 max-w-xl">
                 <a href="{{ route('formations') }}" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 p-4 transition">
                     <span class="material-symbols-outlined text-[#ffbf00]">school</span>
                     <p class="font-bold mt-2">Formations</p>
                     <p class="text-sm text-white/70 mt-1">Apprenez les bases et l’analyse de marché</p>
                 </a>
-                <a href="{{ route('outils.interets-composes') }}" class="rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 p-4 transition">
-                    <span class="material-symbols-outlined text-[#ffbf00]">calculate</span>
-                    <p class="font-bold mt-2">Outils investisseurs</p>
-                    <p class="text-sm text-white/70 mt-1">Calculateurs et profil investisseur</p>
-                </a>
-                <a href="{{ route('ouverture-compte-sgi') }}" class="rounded-xl bg-[#ffbf00] text-[#261a00] hover:brightness-95 p-4 transition">
-                    <span class="material-symbols-outlined">account_balance_wallet</span>
-                    <p class="font-extrabold mt-2">Ouvrir un compte</p>
-                    <p class="text-sm opacity-80 mt-1">Première étape pour investir via une SGI</p>
+                <a href="{{ route('outils.interets-composes') }}" class="rounded-xl bg-[#ffbf00] text-[#261a00] hover:brightness-95 p-4 transition">
+                    <span class="material-symbols-outlined">calculate</span>
+                    <p class="font-extrabold mt-2">Simulateur</p>
+                    <p class="text-sm opacity-80 mt-1">Projetez la croissance de votre épargne</p>
                 </a>
             </div>
         </div>
@@ -42,7 +37,6 @@
                     ['#brvm', 'La BRVM'],
                     ['#actions', 'Actions'],
                     ['#obligations', 'Obligations'],
-                    ['#investir', 'Comment investir'],
                     ['#conseils', 'Conseils'],
                     ['#glossaire', 'Glossaire'],
                 ] as $link)
@@ -127,7 +121,7 @@
                 <p class="mt-2 leading-relaxed text-white/90">
                     La BRVM fonctionne en Francs CFA (XOF). Les séances de cotation ont lieu du lundi au vendredi,
                     généralement de 8h30 à 15h30 (heure d’Abidjan). Consultez le
-                    <a href="{{ route('marches.calendrier') }}" class="underline font-bold text-[#ffbf00]">calendrier financier</a>
+                    calendrier financier officiel de la BRVM
                     pour les jours fériés et événements.
                 </p>
             </div>
@@ -171,8 +165,8 @@
                     Si le cours monte à 12 000 FCFA, votre portefeuille vaut <strong>1 200 000 FCFA</strong>
                     (plus-value potentielle de 200 000 FCFA, soit 20 %), en plus d’éventuels dividendes.
                 </p>
-                <a href="{{ route('marches.cotations') }}" class="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#001a61] hover:underline">
-                    Voir les cotations BRVM <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <a href="{{ route('contact') }}" class="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#001a61] hover:underline">
+                    Nous contacter <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
             </div>
         </section>
@@ -212,8 +206,8 @@
                     <li><strong>Revenu annuel</strong> : 600 FCFA par obligation</li>
                     <li><strong>Total sur 5 ans</strong> : 3 000 FCFA d’intérêts + 10 000 FCFA de capital = 13 000 FCFA</li>
                 </ul>
-                <a href="{{ route('marches.obligations') }}" class="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#001a61] hover:underline">
-                    Explorer le marché obligataire <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                <a href="{{ route('contact') }}" class="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#001a61] hover:underline">
+                    Nous contacter <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
             </div>
 
@@ -243,66 +237,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </section>
-
-        {{-- Comment investir --}}
-        <section id="investir" class="scroll-mt-40">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-[#001a61]">Comment investir en bourse ?</h2>
-            <p class="mt-2 text-[#444652]">Les étapes pour commencer avec Africaine des Finances</p>
-
-            <div class="mt-8 space-y-5">
-                @foreach ([
-                    [
-                        'n' => '1',
-                        't' => 'Ouvrir un compte-titres',
-                        'd' => 'Contactez une Société de Gestion et d’Intermédiation (SGI) agréée. Africaine des Finances, apporteur d’affaires agréé AMF-UMOA (AA/2022-03), vous oriente et vous accompagne dans cette démarche.',
-                        'cta' => 'Demander une ouverture',
-                        'route' => 'ouverture-compte-sgi',
-                    ],
-                    [
-                        'n' => '2',
-                        't' => 'Découvrez votre profil investisseur',
-                        'd' => 'Évaluez votre tolérance au risque, vos objectifs et votre horizon : prudent (obligations / grandes valeurs), équilibré (mix), ou dynamique (actions à potentiel).',
-                        'cta' => 'Évaluer mon profil',
-                        'route' => 'investir.profil-test',
-                    ],
-                    [
-                        'n' => '3',
-                        't' => 'Analyser les valeurs',
-                        'd' => 'Utilisez cotations, fiches titres, indices et analyses pour comprendre les entreprises avant d’investir.',
-                        'cta' => 'Voir les marchés',
-                        'route' => 'marches.index',
-                    ],
-                    [
-                        'n' => '4',
-                        't' => 'Passer votre intention d’ordre',
-                        'd' => 'Sur la plateforme, enregistrez une intention d’ordre relayée vers une SGI agréée. Africaine des Finances n’exécute pas les ordres elle-même.',
-                        'cta' => 'Carnet d’ordres',
-                        'route' => 'marches.carnet',
-                    ],
-                    [
-                        'n' => '5',
-                        't' => 'Suivre votre portefeuille',
-                        'd' => 'Consultez l’évolution des cours, les actualités et ajustez votre stratégie avec l’appui de nos formations et conseillers.',
-                        'cta' => 'Espace client',
-                        'route' => 'connexion',
-                    ],
-                ] as $step)
-                    <article class="bg-white border border-[#c5c5d4] rounded-2xl p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-5">
-                        <div class="shrink-0 w-12 h-12 rounded-full bg-[#001a61] text-white font-extrabold flex items-center justify-center text-lg">
-                            {{ $step['n'] }}
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-bold text-[#001a61]">{{ $step['t'] }}</h3>
-                            <p class="mt-1 text-sm text-[#444652] leading-relaxed">{{ $step['d'] }}</p>
-                        </div>
-                        <a href="{{ route($step['route']) }}"
-                            class="shrink-0 inline-flex justify-center px-4 py-2.5 rounded-xl bg-[#001a61] text-white text-sm font-bold hover:bg-[#0a2e8c] transition">
-                            {{ $step['cta'] }}
-                        </a>
-                    </article>
-                @endforeach
             </div>
         </section>
 
@@ -356,43 +290,26 @@
             </div>
         </section>
 
-        {{-- Parcours CTA --}}
+        {{-- CTA --}}
         <section class="rounded-3xl bg-[#001a61] text-white p-8 md:p-12">
-            <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#ffbf00]">Parcours Africaine des Finances</p>
+            <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#ffbf00]">Africaine des Finances</p>
             <h2 class="mt-3 text-2xl md:text-3xl font-extrabold max-w-2xl">
-                Votre parcours d’investissement, étape par étape
+                Continuez avec les formations et le simulateur
             </h2>
             <p class="mt-3 text-white/75 max-w-xl">
-                Suivez ces étapes simples pour commencer à investir en toute confiance, avec l’appui d’un apporteur d’affaires agréé.
+                Approfondissez la BRVM à votre rythme, puis contactez l’équipe si vous souhaitez un accompagnement.
             </p>
-            <div class="mt-8 grid md:grid-cols-3 gap-4">
-                <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                    <p class="text-[#ffbf00] font-extrabold text-sm">1 · Apprenez</p>
-                    <p class="mt-2 text-sm text-white/80">Formations, guide et outils pour comprendre la BRVM.</p>
-                </div>
-                <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                    <p class="text-[#ffbf00] font-extrabold text-sm">2 · Ouvrez votre compte</p>
-                    <p class="mt-2 text-sm text-white/80">Compte-titres existant chez une SGI, ou demande d’ouverture via ADF.</p>
-                </div>
-                <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                    <p class="text-[#ffbf00] font-extrabold text-sm">3 · Investissez</p>
-                    <p class="mt-2 text-sm text-white/80">Intentions d’ordres, suivi des marchés et accompagnement conseil.</p>
-                </div>
-            </div>
             <div class="mt-8 flex flex-wrap gap-3">
                 <a href="{{ route('formations') }}" class="inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-5 py-3 rounded-xl hover:brightness-95 transition">
                     Voir les formations
                 </a>
-                <a href="{{ route('investir.profil-test') }}" class="inline-flex items-center gap-2 bg-white/10 border border-white/25 font-bold px-5 py-3 rounded-xl hover:bg-white/15 transition">
-                    Évaluer mon profil
+                <a href="{{ route('outils.interets-composes') }}" class="inline-flex items-center gap-2 bg-white/10 border border-white/25 font-bold px-5 py-3 rounded-xl hover:bg-white/15 transition">
+                    Simulateur
                 </a>
-                <a href="{{ route('ouverture-compte-sgi') }}" class="inline-flex items-center gap-2 bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl hover:bg-[#e7eeff] transition">
-                    Ouvrir un compte-titres
+                <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 bg-white text-[#001a61] font-bold px-5 py-3 rounded-xl hover:bg-[#e7eeff] transition">
+                    Contact
                 </a>
             </div>
-            <p class="mt-6 text-sm text-white/60">
-                Besoin d’aide ? <a href="{{ route('contact') }}" class="text-[#ffbf00] font-bold underline">Contactez notre équipe</a>
-            </p>
         </section>
     </div>
 </div>

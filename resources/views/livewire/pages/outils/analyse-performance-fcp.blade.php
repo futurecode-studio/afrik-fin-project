@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="{{ route('investir.fcp-detail', $fund['id']) }}" class="px-5 py-3 rounded-xl bg-[#001a61] text-white font-bold">Fiche détaillée</a>
+                    <a href="{{ route('mise-en-relation') }}" class="px-5 py-3 rounded-xl bg-[#001a61] text-white font-bold">Être accompagné</a>
                     <a href="{{ route('mise-en-relation') }}" class="px-5 py-3 rounded-xl border border-[#001a61] text-[#001a61] font-bold">Investir via SGI/SGO</a>
                 </div>
             </div>

@@ -27,8 +27,8 @@
             </div>
             <div class="flex items-center gap-2 sm:gap-3">
                 <a href="{{ route('client.formations') }}" class="text-sm font-medium text-[#444652] hover:text-[#001a61] hidden sm:inline transition">Mes formations</a>
-                <a href="{{ route('support.ticket') }}" class="p-2 rounded-xl hover:bg-[#e7eeff]/80 transition" title="Support">
-                    <span class="material-symbols-outlined text-[#001a61]">help</span>
+                <a href="{{ route('contact') }}" class="p-2 rounded-xl hover:bg-[#e7eeff]/80 transition" title="Contact">
+                    <span class="material-symbols-outlined text-[#001a61]">mail</span>
                 </a>
                 <span class="text-sm font-semibold text-[#001a61] truncate max-w-[8rem]">{{ Auth::user()->name }}</span>
             </div>

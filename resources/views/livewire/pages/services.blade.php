@@ -1,7 +1,4 @@
 @php
-    $diasporaUrl = config('services.diaspora_funnel.url');
-    $diasporaLabel = config('services.diaspora_funnel.label');
-
     $expertises = [
         ['icon' => 'handshake', 't' => 'Mise en Relation', 'd' => 'Opérations d’épargne, d’investissement et de levée de fonds sur le marché financier régional (BRVM).'],
         ['icon' => 'functions', 't' => 'Modélisation Financière', 'd' => 'Création de modèles financiers pour la valorisation et l’analyse d’investissements.'],
@@ -63,11 +60,6 @@
                     </a>
                     <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border-2 border-white/40 text-white font-extrabold hover:bg-white hover:text-[#001a61] transition">
                         Nous contacter
-                    </a>
-                    <a href="{{ $diasporaUrl }}" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl adf-glass text-white font-bold hover:bg-white/20 transition">
-                        {{ $diasporaLabel }}
-                        <span class="material-symbols-outlined text-[18px]">open_in_new</span>
                     </a>
                 </div>
             </div>
@@ -197,7 +189,7 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="{{ route('ouverture-compte-sgi') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
+                <a href="{{ route('mise-en-relation') }}" class="mt-6 inline-flex items-center gap-2 font-bold text-[#001a61] hover:underline">
                     Demander l’ouverture d’un compte
                     <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </a>
@@ -278,11 +270,6 @@
                     <a href="{{ route('formations') }}"
                         class="text-center px-6 py-4 rounded-xl border-2 border-white/35 font-extrabold hover:bg-white hover:text-[#001a61] transition inline-flex items-center justify-center gap-2">
                         Voir les formations
-                    </a>
-                    <a href="{{ $diasporaUrl }}" target="_blank" rel="noopener noreferrer"
-                        class="text-center px-6 py-4 rounded-xl adf-glass font-bold hover:bg-white/20 transition inline-flex items-center justify-center gap-2">
-                        {{ $diasporaLabel }}
-                        <span class="material-symbols-outlined text-[18px]">open_in_new</span>
                     </a>
                 </div>
             </div>

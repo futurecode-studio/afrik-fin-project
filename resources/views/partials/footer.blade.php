@@ -3,8 +3,6 @@
     $socialLinks = cache()->remember('social_links_active', 600, fn () =>
         \App\Models\SocialLink::where('is_active', true)->orderBy('order')->get()
     );
-    $diasporaUrl = config('services.diaspora_funnel.url');
-    $diasporaLabel = config('services.diaspora_funnel.label');
 @endphp
 
 <footer class="relative mt-auto border-t border-white/40 text-[#131c2a] overflow-hidden">
@@ -62,11 +60,8 @@
             <div class="space-y-4">
                 <h5 class="font-bold text-[#001a61]">Outils</h5>
                 <ul class="space-y-3 text-sm">
-                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('search') }}">Recherche</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('guide-bourse') }}">Guide</a></li>
                     <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('outils.interets-composes') }}">Simulateur intérêts composés</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('aide') }}">Centre d'aide</a></li>
-                    <li><a class="text-[#444652] hover:text-[#001a61] transition" href="{{ route('support.ticket') }}">Support</a></li>
                 </ul>
             </div>
 
@@ -78,11 +73,6 @@
                     <p><span class="font-semibold text-[#001a61]">Adresse :</span> Fidjrossè Hlazounto, Cotonou</p>
                     <p><span class="font-semibold text-[#001a61]">Agrément :</span> AMF-UMOA AA/2022-03</p>
                 </div>
-
-                <a href="{{ $diasporaUrl }}" target="_blank" rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-4 py-2.5 rounded-xl hover:bg-[#0a2e8c] transition text-sm">
-                    {{ $diasporaLabel }}
-                </a>
             </div>
         </div>
 
@@ -92,7 +82,6 @@
                 <a href="{{ route('home') }}" class="text-[#444652] hover:text-[#001a61] transition">Accueil</a>
                 <a href="{{ route('legal.show', 'mentions-legales') }}" class="text-[#444652] hover:text-[#001a61] transition">Mentions légales</a>
                 <a href="{{ route('legal.show', 'politique-de-confidentialite') }}" class="text-[#444652] hover:text-[#001a61] transition">Confidentialité</a>
-                <a href="{{ route('support.ticket') }}" class="text-[#444652] hover:text-[#001a61] transition">Support</a>
             </div>
         </div>
     </div>

@@ -46,11 +46,10 @@
         <div class="mt-12 p-6 rounded-xl bg-[#e7eeff] border border-[#c5c5d4] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
                 <p class="font-bold text-[#001a61]">Besoin d’une assistance personnalisée ?</p>
-                <p class="text-sm text-[#444652] mt-1">Ouvrez un ticket ou contactez-nous.</p>
+                <p class="text-sm text-[#444652] mt-1">Contactez-nous, notre équipe vous répond.</p>
             </div>
             <div class="flex gap-3">
-                <a href="{{ route('support.ticket') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#001a61] text-white font-bold text-sm">Nouveau ticket</a>
-                <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#001a61] text-[#001a61] font-bold text-sm">Contact</a>
+                <a href="{{ route('contact') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#001a61] text-white font-bold text-sm">Contact</a>
             </div>
         </div>
     </section>

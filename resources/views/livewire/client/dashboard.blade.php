@@ -56,7 +56,7 @@
             </div>
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-5 space-y-3">
                 <h3 class="font-bold text-[#001a61]">Raccourcis</h3>
-                <a href="{{ route('marches.cotations') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">candlestick_chart</span> Cotations BRVM</a>
+                <a href="{{ route('guide-bourse') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">menu_book</span> Guide Bourse</a>
                 <a href="{{ route('client.watchlist') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">visibility</span> Ma liste de suivi</a>
                 <a href="{{ route('events-list') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">event</span> Événements</a>
                 <a href="{{ route('client.profile') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">settings</span> Paramètres</a>

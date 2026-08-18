@@ -29,7 +29,7 @@
                     <span class="material-symbols-outlined text-base">dashboard</span>
                     Tableau de bord
                 </a>
-                <a href="{{ route('investir.partenaires') }}"
+                <a href="{{ route('partenaires') }}"
                     class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-[#c5c5d4] text-[#001a61] text-sm font-bold hover:bg-[#e7eeff] transition">
                     <span class="material-symbols-outlined text-base">handshake</span>
                     Partenaires SGI

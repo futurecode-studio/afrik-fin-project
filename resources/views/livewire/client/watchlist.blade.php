@@ -4,7 +4,7 @@
             <h1 class="text-3xl font-extrabold text-[#001a61]">Ma liste de suivi</h1>
             <p class="text-[#444652] mt-2">Titres BRVM que vous suivez — cours issus de la base.</p>
         </div>
-        <a href="{{ route('marches.cotations') }}" class="text-sm font-bold text-[#001a61] hover:underline">Voir toutes les cotations →</a>
+        <a href="{{ route('guide-bourse') }}" class="text-sm font-bold text-[#001a61] hover:underline">Consulter le guide →</a>
     </div>
 
     <section class="bg-white border border-[#c5c5d4] rounded-xl overflow-hidden mb-10">
@@ -16,7 +16,7 @@
             @if ($s)
                 <div class="flex items-center gap-4 px-5 py-4 border-t border-[#c5c5d4] first:border-0">
                     <div class="flex-1 min-w-0">
-                        <a href="{{ route('marches.action', $s->symbol) }}" class="font-bold text-[#001a61] hover:underline">{{ $s->symbol }}</a>
+                        <span class="font-bold text-[#001a61]">{{ $s->symbol }}</span>
                         <p class="text-sm text-[#757683] truncate">{{ $s->company_name }}</p>
                     </div>
                     <div class="text-right">

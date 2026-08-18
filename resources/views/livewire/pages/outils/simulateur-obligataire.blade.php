@@ -84,6 +84,6 @@
                 </div>
             </div>
         </div>
-        <p class="text-xs text-[#757683] mt-6">Outil pédagogique. Pour les obligations réelles UEMOA, consultez le <a class="underline font-semibold text-[#001a61]" href="{{ route('marches.obligations') }}">marché obligataire</a>.</p>
+        <p class="text-xs text-[#757683] mt-6">Outil pédagogique. Pour investir sur les obligations UEMOA, <a class="underline font-semibold text-[#001a61]" href="{{ route('mise-en-relation') }}">demandez une mise en relation</a>.</p>
     </section>
 </div>

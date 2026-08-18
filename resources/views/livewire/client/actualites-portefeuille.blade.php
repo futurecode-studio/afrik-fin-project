@@ -37,7 +37,7 @@
                 <ul class="space-y-2 text-sm">
                     @foreach ($tickers as $t)
                         <li class="flex justify-between">
-                            <a href="{{ route('marches.action', $t->symbol) }}" class="font-bold text-[#001a61] hover:underline">{{ $t->symbol }}</a>
+                            <span class="font-bold text-[#001a61]">{{ $t->symbol }}</span>
                             <span>{{ number_format($t->current_price, 0, ',', ' ') }}</span>
                         </li>
                     @endforeach

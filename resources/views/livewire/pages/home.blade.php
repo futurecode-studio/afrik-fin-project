@@ -7,7 +7,7 @@
                 'imagePosition' => 'object-cover object-[center_20%] lg:object-right',
                 'overlay' => 'light',
                 'title' => 'Devenez actionnaire en 2 jours',
-                'text' => 'Ouvrez votre compte-titres et accédez aux opportunités de la BRVM avec un accompagnement clair.',
+                'text' => 'Découvrez les opportunités de la BRVM avec un accompagnement clair.',
             ],
             [
                 'image' => asset('assets/images/hero-02-epargne.jpg'),
@@ -90,14 +90,14 @@
             @endforeach
 
             <div class="mt-8 flex flex-wrap gap-3">
-                <a href="{{ route('ouverture-compte-sgi') }}"
+                <a href="{{ route('formations') }}"
                     class="bg-[#ffbf00] text-[#261a00] font-extrabold px-7 py-3.5 rounded-lg hover:brightness-95 transition-all inline-flex items-center gap-2">
-                    Ouvrir un compte-titres
+                    Voir les formations
                     <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                 </a>
-                <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
+                <a href="{{ route('contact') }}"
                     class="border border-white/40 text-white font-bold px-7 py-3.5 rounded-lg hover:bg-white/10 transition-all inline-flex items-center gap-2">
-                    Découvrir mon profil
+                    Nous contacter
                 </a>
             </div>
 
@@ -120,46 +120,7 @@
         </div>
     </section>
 
-    {{-- 2. Diagnostic — Découvrez votre profil investisseur --}}
-    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto" id="diagnostic">
-        <div class="relative overflow-hidden rounded-3xl bg-[#001a61] text-white">
-            <div class="absolute inset-0 opacity-40 pointer-events-none"
-                style="background: radial-gradient(700px 320px at 100% 0%, rgba(255,191,0,.45), transparent 55%);"></div>
-            <div class="relative grid lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
-                <div class="lg:col-span-8">
-                    <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">Diagnostic</p>
-                    <h2 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl leading-tight">
-                        Découvrez votre profil investisseur
-                    </h2>
-                    <p class="mt-4 text-white/80 text-lg max-w-2xl leading-relaxed">
-                        Commencez par vous connaître : risque, objectifs, horizon. Ensuite, les solutions deviennent claires.
-                    </p>
-                    <div class="mt-6 flex flex-wrap gap-3">
-                        <a href="{{ config('services.diaspora_funnel.url') }}" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3 rounded-xl hover:brightness-95 transition">
-                            Découvrir mon profil
-                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="lg:col-span-4 grid gap-3">
-                    @foreach ([
-                        ['icon' => 'psychology', 'label' => 'Profil de risque'],
-                        ['icon' => 'flag', 'label' => 'Objectifs'],
-                        ['icon' => 'schedule', 'label' => 'Horizon'],
-                        ['icon' => 'trending_up', 'label' => 'Allocation'],
-                    ] as $chip)
-                        <div class="rounded-2xl bg-white/10 border border-white/15 px-4 py-3 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[#ffbf00]">{{ $chip['icon'] }}</span>
-                            <p class="text-sm font-bold">{{ $chip['label'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- 3. Simulateur + CTA souscrire / compte FCP --}}
+    {{-- 2. Simulateur + CTA souscrire / compte FCP --}}
     <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="simulateur">
         <div class="max-w-[1280px] mx-auto"
             x-data="{

@@ -1,7 +1,7 @@
 <div class="bg-[#f9f9ff]">
     <section class="max-w-[1100px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
         <nav class="text-xs font-semibold tracking-wider uppercase text-[#757683] mb-6 flex items-center gap-2">
-            <a href="{{ route('investir.partenaires') }}" class="hover:text-[#001a61]">Partenaires</a>
+            <a href="{{ route('partenaires') }}" class="hover:text-[#001a61]">Partenaires</a>
             <span class="material-symbols-outlined text-sm">chevron_right</span>
             <span class="text-[#001a61]">{{ $partner->type }}</span>
         </nav>
