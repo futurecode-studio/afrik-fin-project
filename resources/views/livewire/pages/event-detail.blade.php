@@ -66,6 +66,66 @@
     </section>
     @endif
 
+    <!-- Galerie photos — pleine largeur, visible immédiatement -->
+    @if($event->galleries->isNotEmpty())
+    <section class="py-10 bg-[#0a1a3a]" x-data="{ open: false, activeImg: '', activeCaption: '' }">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#ffbf00]">photo_camera</span>
+                Galerie photos
+            </h2>
+
+            @php $galleryCount = $event->galleries->count(); @endphp
+
+            <div class="grid gap-2 md:gap-3
+                {{ $galleryCount === 1 ? 'grid-cols-1' : '' }}
+                {{ $galleryCount === 2 ? 'grid-cols-2' : '' }}
+                {{ $galleryCount >= 3 ? 'grid-cols-2 md:grid-cols-3' : '' }}
+            ">
+                @foreach($event->galleries as $img)
+                <div
+                    class="relative cursor-pointer rounded-xl overflow-hidden bg-[#1a2a4a] group
+                        {{ $loop->first && $galleryCount >= 3 ? 'col-span-2 row-span-2' : '' }}"
+                    style="height: {{ $loop->first && $galleryCount >= 3 ? 'min(70vh, 560px)' : 'min(40vh, 300px)' }};"
+                    @click="open = true; activeImg = '{{ $img->image_url }}'; activeCaption = '{{ addslashes($img->caption ?? '') }}'"
+                >
+                    <img
+                        src="{{ $img->image_url }}"
+                        alt="{{ $img->caption }}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    >
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg">zoom_in</span>
+                    </div>
+                    @if($img->caption)
+                        <p class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-3">{{ $img->caption }}</p>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div
+            x-show="open"
+            x-transition.opacity.duration.200ms
+            class="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4 gap-3"
+            @click="open = false"
+            style="display: none;"
+        >
+            <button class="absolute top-4 right-4 text-white/70 hover:text-white" @click="open = false">
+                <span class="material-symbols-outlined text-4xl">close</span>
+            </button>
+            <img
+                :src="activeImg"
+                class="max-w-[95vw] max-h-[88vh] object-contain rounded-lg shadow-2xl"
+                @click.stop
+            >
+            <p x-text="activeCaption" class="text-white/70 text-sm text-center max-w-lg" x-show="activeCaption"></p>
+        </div>
+    </section>
+    @endif
+
     <!-- Content -->
     <section class="py-12">
         <div class="container mx-auto px-4">
@@ -107,60 +167,7 @@
                     </div>
                     @endif
 
-                    <!-- Galerie photos -->
-                    @if($event->galleries->isNotEmpty())
-                    <div x-data="{ open: false, activeImg: '', activeCaption: '' }">
-                        <h2 class="text-2xl font-bold mb-5">Galerie photos</h2>
-
-                        @php $galleryCount = $event->galleries->count(); @endphp
-
-                        <div class="grid gap-3
-                            {{ $galleryCount === 1 ? 'grid-cols-1' : '' }}
-                            {{ $galleryCount === 2 ? 'grid-cols-2' : '' }}
-                            {{ $galleryCount >= 3 ? 'grid-cols-2 md:grid-cols-3' : '' }}
-                        ">
-                            @foreach($event->galleries as $img)
-                            <div
-                                class="relative cursor-pointer rounded-xl overflow-hidden bg-[#e7eeff] group
-                                    {{ $loop->first && $galleryCount >= 3 ? 'md:col-span-2 md:row-span-2' : '' }}"
-                                style="height: {{ $loop->first && $galleryCount >= 3 ? '480px' : '260px' }};"
-                                @click="open = true; activeImg = '{{ $img->image_url }}'; activeCaption = '{{ addslashes($img->caption ?? '') }}'"
-                            >
-                                <img
-                                    src="{{ $img->image_url }}"
-                                    alt="{{ $img->caption }}"
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                >
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">zoom_in</span>
-                                </div>
-                                @if($img->caption)
-                                    <p class="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-1">{{ $img->caption }}</p>
-                                @endif
-                            </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Lightbox -->
-                        <div
-                            x-show="open"
-                            x-transition.opacity.duration.200ms
-                            class="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 gap-3"
-                            @click="open = false"
-                            style="display: none;"
-                        >
-                            <button class="absolute top-4 right-4 text-white/70 hover:text-white" @click="open = false">
-                                <span class="material-symbols-outlined text-4xl">close</span>
-                            </button>
-                            <img
-                                :src="activeImg"
-                                class="max-w-[92vw] max-h-[82vh] object-contain rounded-lg shadow-2xl"
-                                @click.stop
-                            >
-                            <p x-text="activeCaption" class="text-white/70 text-sm text-center max-w-lg" x-show="activeCaption"></p>
-                        </div>
-                    </div>
-                    @endif
+                    {{-- Galerie déplacée en pleine largeur au-dessus --}}
 
                     <!-- Documents -->
                     @if($event->documents->isNotEmpty())
