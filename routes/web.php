@@ -82,7 +82,7 @@ foreach ($retiredMarches as $name => $uri) {
     Route::redirect($uri, '/', 301)->name($name);
 }
 Route::permanentRedirect('/marches/obligations/{id}', '/')->name('marches.obligation');
-Route::permanentRedirect('/marches/actions/{symbol}', '/')->name('marches.action');
+Route::get('/marches/actions/{symbol}', \App\Livewire\Pages\Marches\FicheAction::class)->name('marches.action');
 Route::permanentRedirect('/marches/certificats/{slug}', '/')->name('marches.certificat');
 Route::permanentRedirect('/marches/analyse-pro/{symbol}', '/')->name('marches.analyse-pro.symbol');
 Route::redirect('/marches/carte', '/', 301);
