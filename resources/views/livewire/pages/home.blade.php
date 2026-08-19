@@ -279,22 +279,22 @@
 
             <div>
                 <h3 class="text-lg font-extrabold text-[#001a61] mb-5">L’équipe</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     @foreach ($teamPreview as $member)
                         <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-xl overflow-hidden">
-                            <div class="aspect-[4/3] bg-[#e7eeff] overflow-hidden">
+                            <div class="h-32 sm:h-36 md:h-32 lg:h-40 xl:h-44 bg-[#e7eeff] overflow-hidden">
                                 <img src="{{ asset($member['image']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover object-top">
                             </div>
-                            <div class="p-4">
-                                <p class="font-bold text-[#001a61] text-sm leading-snug">{{ $member['name'] }}</p>
-                                <p class="text-xs text-[#757683] mt-1">{{ $member['role'] }}</p>
+                            <div class="p-3 md:p-3.5">
+                                <p class="font-bold text-[#001a61] text-xs sm:text-sm leading-snug">{{ $member['name'] }}</p>
+                                <p class="text-[11px] sm:text-xs text-[#757683] mt-0.5">{{ $member['role'] }}</p>
                             </div>
                         </article>
                     @endforeach
                 </div>
-                <div class="mt-8">
+                <div class="mt-6 md:mt-8">
                     <a href="{{ route('team') }}"
-                        class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
+                        class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-2.5 md:px-6 md:py-3 rounded-xl hover:bg-[#0a2e8c] transition text-sm md:text-base">
                         Nous découvrir
                         <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </a>
@@ -350,45 +350,144 @@
         </div>
     </section>
 
-    {{-- 6. Événements — un seul événement mis en avant (Marathon) --}}
+    {{-- 6. Événements --}}
     <section class="py-16 lg:py-20 bg-[#f0f3ff] px-5 lg:px-16" id="evenements">
         <div class="max-w-[1280px] mx-auto">
-            <div class="mb-8">
-                <span class="text-[#0a2e8c] text-base md:text-lg font-extrabold uppercase tracking-[0.18em]">Événements</span>
-                <h2 class="text-2xl md:text-3xl font-medium text-[#131c2a] mt-2">À venir</h2>
-                <p class="text-[#444652] mt-2 max-w-xl">Rencontres pour progresser sur le marché financier régional.</p>
+            <div class="mb-10">
+                <span class="text-[#0a2e8c] text-sm font-extrabold uppercase tracking-[0.18em]">Événements</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-[#001a61] mt-2">Des rencontres qui font avancer le marché financier régional</h2>
+                <p class="text-[#444652] mt-2 max-w-2xl">Découvrez nos événements, rencontres et initiatives dédiés à l'information, à la formation et au développement des acteurs du marché financier.</p>
             </div>
 
-            @forelse ($upcomingEvents as $event)
-                <article class="rounded-3xl bg-[#001a61] text-white overflow-hidden">
-                    <div class="grid lg:grid-cols-2">
-                        @if ($event->featured_image)
-                            <div class="min-h-[240px] lg:min-h-full">
-                                <img src="{{ str_starts_with($event->featured_image, 'http') ? $event->featured_image : asset('storage/'.$event->featured_image) }}"
-                                    alt="" class="w-full h-full object-cover min-h-[240px] lg:min-h-[360px]">
+            {{-- 6a. Événements réalisés --}}
+            @if ($pastEvents->isNotEmpty())
+                <div class="mb-12">
+                    <h3 class="text-lg font-extrabold text-[#001a61] mb-5 inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#ffbf00]">photo_camera</span>
+                        Événements réalisés
+                    </h3>
+
+                    @foreach ($pastEvents as $pastEvent)
+                        @php
+                            $pastImg = $pastEvent->featured_image
+                                ? (str_starts_with($pastEvent->featured_image, 'http') ? $pastEvent->featured_image : (str_starts_with($pastEvent->featured_image, 'assets/') ? asset($pastEvent->featured_image) : asset('storage/'.$pastEvent->featured_image)))
+                                : ($pastEvent->galleries->first() ? asset($pastEvent->galleries->first()->image_path) : null);
+                        @endphp
+                        <article class="rounded-2xl border border-[#c5c5d4] bg-white overflow-hidden">
+                            <div class="grid lg:grid-cols-5">
+                                <div class="lg:col-span-2 h-64 lg:h-auto min-h-[260px] bg-[#e7eeff] relative overflow-hidden">
+                                    @if ($pastImg)
+                                        <img src="{{ $pastImg }}" alt="{{ $pastEvent->title }}" class="absolute inset-0 w-full h-full object-cover">
+                                    @else
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-7xl text-[#001a61]/30">photo_camera</span>
+                                        </div>
+                                    @endif
+                                    <span class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-[#001a61] text-white text-xs font-extrabold uppercase tracking-wide">
+                                        Terminé
+                                    </span>
+                                </div>
+                                <div class="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
+                                    <h4 class="text-xl lg:text-2xl font-extrabold text-[#001a61]">{{ $pastEvent->title }}</h4>
+                                    <div class="mt-3 flex flex-wrap gap-4 text-sm text-[#757683]">
+                                        <span class="inline-flex items-center gap-1.5">
+                                            <span class="material-symbols-outlined text-base text-[#001a61]">calendar_month</span>
+                                            {{ optional($pastEvent->starts_at)->translatedFormat('j F Y') }}
+                                        </span>
+                                        @if ($pastEvent->city)
+                                            <span class="inline-flex items-center gap-1.5">
+                                                <span class="material-symbols-outlined text-base text-[#001a61]">location_on</span>
+                                                {{ $pastEvent->city }}{{ $pastEvent->country ? ', '.$pastEvent->country : ''}}
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <p class="mt-3 text-[#444652] text-sm leading-relaxed line-clamp-3">{{ plain_text($pastEvent->description, 250) }}</p>
+                                    <a href="{{ route('event-detail', $pastEvent->slug) }}" class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#001a61] hover:underline w-fit">
+                                        Voir les photos
+                                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                    </a>
+                                </div>
                             </div>
-                        @endif
-                        <div class="p-7 lg:p-10 flex flex-col {{ $event->featured_image ? '' : 'lg:col-span-2' }}">
-                            <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">
-                                {{ $event->category ?: 'Événement phare' }}
-                            </p>
-                            <h3 class="mt-3 text-3xl md:text-4xl font-extrabold leading-tight">{{ $event->title }}</h3>
-                            <p class="mt-4 text-white/80 leading-relaxed text-base md:text-lg flex-1">
-                                {{ plain_text($event->description, 220) }}
-                            </p>
-                            <a href="{{ route('event-detail', $event->slug) }}"
-                                class="mt-8 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3.5 rounded-xl hover:brightness-95 transition w-fit text-base">
-                                S’inscrire à l’événement
-                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-            @empty
-                <div class="rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
-                    Aucun événement programmé pour le moment.
+
+                            @if ($pastEvent->galleries->count() > 0)
+                                <div class="border-t border-[#c5c5d4] p-4 lg:p-6 bg-[#f9f9ff]">
+                                    <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+                                        @foreach ($pastEvent->galleries->take(6) as $photo)
+                                            <div class="aspect-[4/3] rounded-lg overflow-hidden bg-[#e7eeff]">
+                                                <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->caption ?? ''  }}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3 text-center">
+                                        <a href="{{ route('event-detail', $pastEvent->slug) }}" class="text-sm font-bold text-[#001a61] hover:underline inline-flex items-center gap-1">
+                                            Voir la galerie
+                                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                        </article>
+                    @endforeach
                 </div>
-            @endforelse
+            @endif
+
+            {{-- 6b. Prochains événements --}}
+            <div>
+                <h3 class="text-lg font-extrabold text-[#001a61] mb-5 inline-flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#ffbf00]">event</span>
+                    Prochains événements
+                </h3>
+
+                @forelse ($upcomingEvents as $event)
+                    <article class="rounded-2xl bg-[#001a61] text-white overflow-hidden">
+                        <div class="grid lg:grid-cols-2">
+                            @if ($event->featured_image)
+                                <div class="min-h-[280px] lg:min-h-full bg-[#0a2e8c]">
+                                    <img src="{{ str_starts_with($event->featured_image, 'http') ? $event->featured_image : (str_starts_with($event->featured_image, 'assets/') ? asset($event->featured_image) : asset('storage/'.$event->featured_image)) }}"
+                                        alt="{{ $event->title }}" class="w-full h-full object-cover min-h-[280px] lg:min-h-[400px]">
+                                </div>
+                            @endif
+                            <div class="p-7 lg:p-10 flex flex-col justify-center {{ $event->featured_image ? ''  : 'lg:col-span-2' }}">
+                                <p class="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#ffbf00]">
+                                    {{ $event->category ?: 'Événement phare' }}
+                                </p>
+                                <h4 class="mt-3 text-2xl md:text-3xl font-extrabold leading-tight">{{ $event->title }}</h4>
+                                <div class="mt-4 flex flex-wrap gap-4 text-sm text-white/70">
+                                    <span class="inline-flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-base text-[#ffbf00]">calendar_month</span>
+                                        {{ optional($event->starts_at)->translatedFormat('l j F Y') }}
+                                    </span>
+                                    @if ($event->city || $event->location_name)
+                                        <span class="inline-flex items-center gap-1.5">
+                                            <span class="material-symbols-outlined text-base text-[#ffbf00]">location_on</span>
+                                            {{ $event->location_name ?? $event->city }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <p class="mt-4 text-white/80 leading-relaxed text-base flex-1">
+                                    {{ plain_text($event->description, 220) }}
+                                </p>
+                                <a href="{{ route('event-detail', $event->slug) }}"
+                                    class="mt-6 inline-flex items-center gap-2 bg-[#ffbf00] text-[#261a00] font-extrabold px-6 py-3.5 rounded-xl hover:brightness-95 transition w-fit text-base">
+                                    S'inscrire à l'événement
+                                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @empty
+                    <div class="rounded-xl border border-dashed border-[#c5c5d4] p-8 text-center text-[#757683] text-sm bg-white">
+                        Aucun événement programmé pour le moment.
+                    </div>
+                @endforelse
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="{{ route('events-list') }}" class="inline-flex items-center gap-2 text-[#001a61] font-bold hover:underline">
+                    Voir tous les événements
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -403,6 +502,97 @@
             <a href="{{ route('partenaires') }}" class="text-[#001a61] font-bold inline-flex items-center gap-1">
                 Tous les partenaires <span class="material-symbols-outlined">arrow_forward</span>
             </a>
+        </div>
+    </section>
+
+    {{-- 8. Actions BRVM — ticker + graphique Composite + top hausse --}}
+    <section class="py-16 lg:py-20 px-5 lg:px-16 max-w-[1280px] mx-auto" id="actions">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">Actions BRVM</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#001a61] mt-2">
+                    {{ $stockCount ?: 47 }} sociétés cotées
+                </h2>
+                <p class="text-[#444652] mt-2 max-w-xl">Découvrez chaque titre, suivez l’évolution du marché, puis passez à l’action.</p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="#actions-marche"
+                    class="border border-[#001a61] text-[#001a61] font-bold px-5 py-2.5 rounded-lg hover:bg-[#e7eeff] transition inline-flex items-center gap-2">
+                    Découvrir
+                    <span class="material-symbols-outlined text-[18px]">search</span>
+                </a>
+                <a href="{{ route('mise-en-relation') }}"
+                    class="bg-[#001a61] text-white font-bold px-5 py-2.5 rounded-lg hover:bg-[#0a2e8c] transition inline-flex items-center gap-2">
+                    Créer un compte-titres
+                    <span class="material-symbols-outlined text-[18px]">account_balance</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-[#001a61] text-white py-3 overflow-hidden rounded-xl mb-6">
+            <div class="adf-ticker-wrap">
+                <div class="adf-ticker flex gap-16 items-center whitespace-nowrap">
+                    @forelse ($tickerStocks as $stock)
+                        <div class="flex items-center gap-4">
+                            <span class="uppercase opacity-70 text-sm font-medium tracking-wide">{{ $stock->symbol }}:</span>
+                            <span class="font-semibold">
+                                {{ number_format((float) $stock->current_price, 0, ',', ' ') }}
+                                @if ($stock->variation_percent >= 0)
+                                    <span class="text-green-400">▲ {{ number_format((float) $stock->variation_percent, 2) }}%</span>
+                                @else
+                                    <span class="text-red-400">▼ {{ number_format(abs((float) $stock->variation_percent), 2) }}%</span>
+                                @endif
+                            </span>
+                        </div>
+                    @empty
+                        <div class="px-8 text-sm opacity-80">Marché BRVM — données en cours de chargement</div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6" id="actions-marche">
+            <div class="lg:col-span-8 bg-[#f0f3ff] border border-[#c5c5d4] rounded-2xl p-6 lg:p-8">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-start gap-4 mb-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-[#001a61]">BRVM Composite</h4>
+                        <p class="text-2xl text-[#131c2a] mt-1 font-semibold">
+                            @if ($compositeLatest)
+                                {{ number_format((float) $compositeLatest->value, 2, ',', ' ') }}
+                                <span class="text-sm font-bold ml-2 {{ $compositeLatest->variation_percent >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                                    {{ $compositeLatest->variation_percent >= 0 ? '+' : '' }}{{ number_format((float) $compositeLatest->variation_percent, 2) }}%
+                                </span>
+                            @else
+                                Indice en cours de chargement
+                            @endif
+                        </p>
+                    </div>
+                </div>
+                @if (! empty($chartLabels) && ! empty($chartValues))
+                    <div class="w-full min-w-0" style="position: relative; height: 260px;">
+                        <canvas id="homeBrvmChart" style="width:100%;height:100%;display:block;" aria-label="Graphique BRVM Composite"></canvas>
+                    </div>
+                @else
+                    <div class="h-52 flex items-center justify-center text-[#757683] text-sm border border-dashed border-[#c5c5d4] rounded-xl bg-white/60">
+                        Historique d’indice indisponible pour le moment
+                    </div>
+                @endif
+            </div>
+            <div class="lg:col-span-4">
+                <div class="bg-[#f0f3ff] border border-[#c5c5d4] rounded-2xl p-6 h-full">
+                    <h4 class="text-sm font-medium text-[#757683] uppercase mb-4 tracking-wide">Top hausse</h4>
+                    <div class="space-y-4">
+                        @forelse ($topGainers as $stock)
+                            <div class="flex justify-between items-center gap-2">
+                                <span class="font-bold text-[#001a61]">{{ $stock->symbol }}</span>
+                                <span class="text-green-600 font-semibold text-sm">+{{ number_format((float) $stock->variation_percent, 2) }}%</span>
+                            </div>
+                        @empty
+                            <p class="text-sm text-[#444652]">Aucune donnée</p>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

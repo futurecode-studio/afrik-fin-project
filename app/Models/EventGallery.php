@@ -24,6 +24,10 @@ class EventGallery extends Model
 
     public function getImageUrlAttribute(): string
     {
+        if (str_starts_with($this->image_path, 'assets/')) {
+            return asset($this->image_path);
+        }
+
         return asset('storage/' . $this->image_path);
     }
 }

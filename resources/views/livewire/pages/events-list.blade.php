@@ -19,10 +19,10 @@
             <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[#0a2e8c]/50 blur-3xl"></div>
         </div>
         <div class="relative max-w-[1280px] mx-auto px-5 lg:px-16 py-14 lg:py-20">
-            <p class="text-sm font-semibold tracking-widest uppercase text-[#ffbf00] mb-3">Agenda</p>
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Nos événements</h1>
+            <p class="text-sm font-semibold tracking-widest uppercase text-[#ffbf00] mb-3">Événements</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Des rencontres qui font avancer le marché financier régional</h1>
             <p class="mt-4 text-white/80 max-w-2xl text-base md:text-lg leading-relaxed">
-                Conférences, webinaires et rencontres pour maîtriser les marchés UEMOA — en présentiel ou en ligne.
+                Découvrez nos événements, rencontres et initiatives dédiés à l'information, à la formation et au développement des acteurs du marché financier.
             </p>
             <div class="mt-8 flex flex-wrap gap-6 text-sm">
                 <div>
@@ -51,7 +51,7 @@
                 <div class="grid lg:grid-cols-5">
                     <div class="lg:col-span-2 h-52 lg:h-auto min-h-[220px] bg-[#e7eeff] relative overflow-hidden">
                         @if ($featured->featured_image)
-                            <img src="{{ Str::startsWith($featured->featured_image, 'http') ? $featured->featured_image : asset('storage/'.$featured->featured_image) }}"
+                            <img src="{{ Str::startsWith($featured->featured_image, 'http') ? $featured->featured_image : (Str::startsWith($featured->featured_image, 'assets/') ? asset($featured->featured_image) : asset('storage/'.$featured->featured_image)) }}"
                                 alt="{{ $featured->title }}"
                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         @else
@@ -166,7 +166,7 @@
                 @php
                     $regLabel = $event->registrationStatusLabel();
                     $img = $event->featured_image
-                        ? (Str::startsWith($event->featured_image, 'http') ? $event->featured_image : asset('storage/'.$event->featured_image))
+                        ? (Str::startsWith($event->featured_image, 'http') ? $event->featured_image : (Str::startsWith($event->featured_image, 'assets/') ? asset($event->featured_image) : asset('storage/'.$event->featured_image)))
                         : null;
                 @endphp
                 <article class="bg-white border border-[#c5c5d4] rounded-xl overflow-hidden flex flex-col hover:border-[#001a61] transition group">
@@ -239,6 +239,80 @@
             @endforelse
         </div>
     </section>
+
+    {{-- Événements réalisés --}}
+    @if ($pastWithGallery->isNotEmpty())
+    <section class="max-w-[1280px] mx-auto px-5 lg:px-16 pb-16">
+        <div class="mb-8">
+            <span class="text-[#001a61] text-sm font-medium uppercase tracking-wider">📸 Événements réalisés</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-[#001a61] mt-2">Retour en images</h2>
+        </div>
+
+        <div class="space-y-10">
+            @foreach ($pastWithGallery as $pastEvent)
+                @php
+                    $featImg = $pastEvent->featured_image
+                        ? (Str::startsWith($pastEvent->featured_image, 'http') ? $pastEvent->featured_image : asset($pastEvent->featured_image))
+                        : ($pastEvent->galleries->first() ? asset($pastEvent->galleries->first()->image_path) : null);
+                @endphp
+                <article class="rounded-2xl border border-[#c5c5d4] bg-white overflow-hidden">
+                    <div class="grid lg:grid-cols-5">
+                        <div class="lg:col-span-2 h-56 lg:h-auto min-h-[240px] bg-[#e7eeff] relative overflow-hidden">
+                            @if ($featImg)
+                                <img src="{{ $featImg }}" alt="{{ $pastEvent->title }}" class="absolute inset-0 w-full h-full object-cover">
+                            @else
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-7xl text-[#001a61]/30">photo_camera</span>
+                                </div>
+                            @endif
+                            <span class="absolute top-4 left-4 px-3 py-1 rounded-md bg-black/60 text-white text-xs font-extrabold uppercase tracking-wide">
+                                Terminé
+                            </span>
+                        </div>
+                        <div class="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
+                            <h3 class="text-xl lg:text-2xl font-extrabold text-[#001a61]">{{ $pastEvent->title }}</h3>
+                            <div class="mt-3 flex flex-wrap gap-4 text-sm text-[#757683]">
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-base text-[#001a61]">calendar_month</span>
+                                    {{ optional($pastEvent->starts_at)->translatedFormat('j F Y') }}
+                                </span>
+                                @if ($pastEvent->city)
+                                    <span class="inline-flex items-center gap-1.5">
+                                        <span class="material-symbols-outlined text-base text-[#001a61]">location_on</span>
+                                        {{ $pastEvent->city }}{{ $pastEvent->country ? ', '.$pastEvent->country : '' }}
+                                    </span>
+                                @endif
+                            </div>
+                            <p class="mt-3 text-[#444652] text-sm leading-relaxed line-clamp-3">{{ plain_text($pastEvent->description, 250) }}</p>
+                            <a href="{{ route('event-detail', $pastEvent->slug) }}" class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#001a61] hover:underline">
+                                Voir les photos →
+                            </a>
+                        </div>
+                    </div>
+
+                    @if ($pastEvent->galleries->count() > 0)
+                        <div class="border-t border-[#c5c5d4] p-4 lg:p-6 bg-[#f9f9ff]">
+                            <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+                                @foreach ($pastEvent->galleries->take(6) as $photo)
+                                    <div class="aspect-[4/3] rounded-lg overflow-hidden bg-[#e7eeff]">
+                                        <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->caption ?? '' }}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                                    </div>
+                                @endforeach
+                            </div>
+                            @if ($pastEvent->galleries->count() > 6)
+                                <div class="mt-3 text-center">
+                                    <a href="{{ route('event-detail', $pastEvent->slug) }}" class="text-sm font-bold text-[#001a61] hover:underline">
+                                        Voir la galerie complète →
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+                </article>
+            @endforeach
+        </div>
+    </section>
+    @endif
 
     {{-- CTA --}}
     <section class="border-t border-[#c5c5d4] bg-white">

@@ -125,9 +125,30 @@ class EventsList extends Component
             'cities' => $cities->count(),
         ];
 
+        $pastWithGallery = Event::query()
+            ->with(['galleries' => fn ($q) => $q->orderBy('display_order')->limit(6)])
+            ->where(function ($q) {
+                $q->whereIn('status', ['completed', 'archived'])
+                    ->orWhere(function ($q2) {
+                        $q2->whereIn('status', ['published', 'ongoing'])
+                            ->where(function ($q3) {
+                                $q3->where(function ($q4) {
+                                    $q4->whereNotNull('ends_at')->where('ends_at', '<', now());
+                                })->orWhere(function ($q4) {
+                                    $q4->whereNull('ends_at')->where('starts_at', '<', now());
+                                });
+                            });
+                    });
+            })
+            ->has('galleries')
+            ->orderByDesc('starts_at')
+            ->take(3)
+            ->get();
+
         return view('livewire.pages.events-list', [
             'events' => $events,
             'featured' => $featured,
+            'pastWithGallery' => $pastWithGallery,
             'categories' => $categories,
             'cities' => $cities,
             'stats' => $stats,

@@ -18,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v12', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v13', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -74,12 +74,26 @@ class Home extends Component
             $upcomingEvents = Event::query()
                 ->whereIn('status', ['published', 'ongoing'])
                 ->upcoming()
-                ->where(function ($q) {
-                    $q->where('is_featured', true)
-                        ->orWhere('slug', 'marathon-acteurs-marche-financier-2026');
-                })
+                ->where('is_featured', true)
                 ->where('event_type', 'physical')
                 ->orderBy('starts_at')
+                ->take(1)
+                ->get();
+
+            $pastEvents = Event::query()
+                ->with(['galleries' => fn ($q) => $q->orderBy('display_order')->limit(6)])
+                ->where(function ($q) {
+                    $q->where('status', 'completed')
+                        ->orWhere(function ($q2) {
+                            $q2->whereIn('status', ['published', 'ongoing'])
+                                ->where(function ($q3) {
+                                    $q3->where(fn ($q4) => $q4->whereNotNull('ends_at')->where('ends_at', '<', now()))
+                                        ->orWhere(fn ($q4) => $q4->whereNull('ends_at')->where('starts_at', '<', now()));
+                                });
+                        });
+                })
+                ->has('galleries')
+                ->orderByDesc('starts_at')
                 ->take(1)
                 ->get();
 
@@ -114,6 +128,7 @@ class Home extends Component
                 'chartLabels' => $chartLabels,
                 'chartValues' => $chartValues,
                 'upcomingEvents' => $upcomingEvents,
+                'pastEvents' => $pastEvents,
                 'webinars' => $webinars,
                 'teamPreview' => $teamPreview,
                 'values' => $values,

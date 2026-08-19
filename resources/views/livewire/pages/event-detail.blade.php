@@ -61,7 +61,7 @@
     @if($event->featured_image)
     <section class="relative -mt-8 z-20 container mx-auto px-4">
         <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 max-h-[480px]">
-            <img src="{{ asset('storage/'.$event->featured_image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
+            <img src="{{ Str::startsWith($event->featured_image, 'http') ? $event->featured_image : (Str::startsWith($event->featured_image, 'assets/') ? asset($event->featured_image) : asset('storage/'.$event->featured_image)) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
         </div>
     </section>
     @endif
