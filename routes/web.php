@@ -72,7 +72,7 @@ Route::get('/marches/introductions', \App\Livewire\Pages\Marches\SuiviIntroducti
 Route::get('/marches/carnet-ordres', \App\Livewire\Pages\Marches\CarnetOrdres::class)->name('marches.carnet');
 Route::get('/marches/bibliotheque', \App\Livewire\Pages\Marches\BibliothequeRecherche::class)->name('marches.bibliotheque');
 Route::get('/marches/comparateur-multi', \App\Livewire\Pages\Marches\ComparateurMultiActifs::class)->name('marches.comparateur-multi');
-Route::get('/marches/produits-structures', \App\Livewire\Pages\Marches\ProduitsStructures::class)->name('marches.produits-structures');
+Route::redirect('/marches/produits-structures', '/marches/palmares', 301)->name('marches.produits-structures');
 Route::get('/marches/analyse-pro', \App\Livewire\Pages\Marches\AnalyseGraphiquePro::class)->name('marches.analyse-pro');
 Route::get('/marches/actions/{symbol}', \App\Livewire\Pages\Marches\FicheAction::class)->name('marches.action');
 Route::get('/marches/obligations/{id}', \App\Livewire\Pages\Marches\DetailObligation::class)->name('marches.obligation');

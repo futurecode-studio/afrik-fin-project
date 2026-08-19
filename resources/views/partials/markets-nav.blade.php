@@ -11,7 +11,6 @@
         ['route' => 'marches.carnet', 'label' => 'Carnet', 'match' => 'marches.carnet'],
         ['route' => 'marches.bibliotheque', 'label' => 'Bibliothèque', 'match' => 'marches.bibliotheque'],
         ['route' => 'marches.comparateur-multi', 'label' => 'Multi-actifs', 'match' => 'marches.comparateur-multi'],
-        ['route' => 'marches.produits-structures', 'label' => 'Structurés', 'match' => ['marches.produits-structures', 'marches.certificat']],
         ['route' => 'marches.analyse-pro', 'label' => 'Graphique Pro', 'match' => 'marches.analyse-pro*'],
     ];
 @endphp
