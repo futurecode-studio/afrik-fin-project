@@ -103,7 +103,7 @@
             x-transition.opacity.duration.200ms
             class="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4 gap-3"
             @click="open = false"
-            style="display: none;"
+            x-cloak
         >
             <button class="absolute top-4 right-4 text-white/70 hover:text-white" @click="open = false">
                 <span class="material-symbols-outlined text-4xl">close</span>
