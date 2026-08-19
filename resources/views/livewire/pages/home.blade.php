@@ -517,7 +517,7 @@
             <div class="adf-ticker-wrap">
                 <div class="adf-ticker flex gap-16 items-center whitespace-nowrap">
                     @forelse ($tickerStocks as $stock)
-                        <div class="flex items-center gap-4">
+                        <a href="{{ route('marches.action', $stock->symbol) }}" class="flex items-center gap-4 hover:opacity-80 transition" wire:navigate>
                             <span class="uppercase opacity-70 text-sm font-medium tracking-wide">{{ $stock->symbol }}:</span>
                             <span class="font-semibold">
                                 {{ number_format((float) $stock->current_price, 0, ',', ' ') }}
@@ -527,7 +527,7 @@
                                     <span class="text-red-400">▼ {{ number_format(abs((float) $stock->variation_percent), 2) }}%</span>
                                 @endif
                             </span>
-                        </div>
+                        </a>
                     @empty
                         <div class="px-8 text-sm opacity-80">Marché BRVM — données en cours de chargement</div>
                     @endforelse
@@ -567,10 +567,10 @@
                     <h4 class="text-sm font-medium text-[#757683] uppercase mb-4 tracking-wide">Top hausse</h4>
                     <div class="space-y-4">
                         @forelse ($topGainers as $stock)
-                            <div class="flex justify-between items-center gap-2">
+                            <a href="{{ route('marches.action', $stock->symbol) }}" class="flex justify-between items-center gap-2 hover:bg-[#e7eeff] rounded-lg px-2 py-1.5 -mx-2 transition" wire:navigate>
                                 <span class="font-bold text-[#001a61]">{{ $stock->symbol }}</span>
                                 <span class="text-green-600 font-semibold text-sm">+{{ number_format((float) $stock->variation_percent, 2) }}%</span>
-                            </div>
+                            </a>
                         @empty
                             <p class="text-sm text-[#444652]">Aucune donnée</p>
                         @endforelse
