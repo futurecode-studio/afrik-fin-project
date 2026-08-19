@@ -109,51 +109,55 @@
 
                     <!-- Galerie photos -->
                     @if($event->galleries->isNotEmpty())
-                    <div x-data="{ current: 0, open: false, activeImg: '', total: {{ $event->galleries->count() }} }">
-                        <h2 class="text-2xl font-bold mb-4">Galerie photos</h2>
-                        <div class="relative">
-                            <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4" id="gallery-slider-{{ $event->id }}">
-                                @foreach($event->galleries as $index => $img)
-                                <div
-                                    class="flex-shrink-0 w-72 h-48 snap-start cursor-pointer rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
-                                    @click="open = true; activeImg = '{{ $img->image_url }}'"
+                    <div x-data="{ open: false, activeImg: '', activeCaption: '' }">
+                        <h2 class="text-2xl font-bold mb-5">Galerie photos</h2>
+
+                        @php $galleryCount = $event->galleries->count(); @endphp
+
+                        <div class="grid gap-3
+                            {{ $galleryCount === 1 ? 'grid-cols-1' : '' }}
+                            {{ $galleryCount === 2 ? 'grid-cols-2' : '' }}
+                            {{ $galleryCount >= 3 ? 'grid-cols-2 md:grid-cols-3' : '' }}
+                        ">
+                            @foreach($event->galleries as $img)
+                            <div
+                                class="relative cursor-pointer rounded-xl overflow-hidden bg-[#e7eeff] group
+                                    {{ $loop->first && $galleryCount >= 3 ? 'md:col-span-2 md:row-span-2' : '' }}"
+                                style="height: {{ $loop->first && $galleryCount >= 3 ? '480px' : '260px' }};"
+                                @click="open = true; activeImg = '{{ $img->image_url }}'; activeCaption = '{{ addslashes($img->caption ?? '') }}'"
+                            >
+                                <img
+                                    src="{{ $img->image_url }}"
+                                    alt="{{ $img->caption }}"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 >
-                                    <img src="{{ $img->image_url }}" alt="{{ $img->caption }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">zoom_in</span>
                                 </div>
-                                @endforeach
+                                @if($img->caption)
+                                    <p class="absolute bottom-0 inset-x-0 bg-black/50 text-white text-xs px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-1">{{ $img->caption }}</p>
+                                @endif
                             </div>
-                            @if($event->galleries->count() > 1)
-                            <button
-                                @click="document.getElementById('gallery-slider-{{ $event->id }}').scrollBy({ left: -300, behavior: 'smooth' })"
-                                class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full shadow flex items-center justify-center text-foreground hover:bg-white"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-                            </button>
-                            <button
-                                @click="document.getElementById('gallery-slider-{{ $event->id }}').scrollBy({ left: 300, behavior: 'smooth' })"
-                                class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full shadow flex items-center justify-center text-foreground hover:bg-white"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                            </button>
-                            @endif
+                            @endforeach
                         </div>
 
-                        <!-- Lightbox / Zoom -->
+                        <!-- Lightbox -->
                         <div
                             x-show="open"
-                            x-transition.opacity.duration.300ms
-                            class="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+                            x-transition.opacity.duration.200ms
+                            class="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 gap-3"
                             @click="open = false"
                             style="display: none;"
                         >
-                            <button class="absolute top-4 right-4 text-white/80 hover:text-white" @click="open = false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                            <button class="absolute top-4 right-4 text-white/70 hover:text-white" @click="open = false">
+                                <span class="material-symbols-outlined text-4xl">close</span>
                             </button>
                             <img
                                 :src="activeImg"
-                                class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                                class="max-w-[92vw] max-h-[82vh] object-contain rounded-lg shadow-2xl"
                                 @click.stop
                             >
+                            <p x-text="activeCaption" class="text-white/70 text-sm text-center max-w-lg" x-show="activeCaption"></p>
                         </div>
                     </div>
                     @endif
