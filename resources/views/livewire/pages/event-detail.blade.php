@@ -75,18 +75,10 @@
                 Galerie photos
             </h2>
 
-            @php $galleryCount = $event->galleries->count(); @endphp
-
-            <div class="grid gap-2 md:gap-3
-                {{ $galleryCount === 1 ? 'grid-cols-1' : '' }}
-                {{ $galleryCount === 2 ? 'grid-cols-2' : '' }}
-                {{ $galleryCount >= 3 ? 'grid-cols-2 md:grid-cols-3' : '' }}
-            ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach($event->galleries as $img)
                 <div
-                    class="relative cursor-pointer rounded-xl overflow-hidden bg-[#1a2a4a] group
-                        {{ $loop->first && $galleryCount >= 3 ? 'col-span-2 row-span-2' : '' }}"
-                    style="height: {{ $loop->first && $galleryCount >= 3 ? 'min(70vh, 560px)' : 'min(40vh, 300px)' }};"
+                    class="relative cursor-pointer rounded-xl overflow-hidden bg-[#1a2a4a] group h-[55vh] sm:h-[45vh] lg:h-[50vh]"
                     @click="open = true; activeImg = '{{ $img->image_url }}'; activeCaption = '{{ addslashes($img->caption ?? '') }}'"
                 >
                     <img
