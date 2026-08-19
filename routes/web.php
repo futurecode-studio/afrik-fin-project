@@ -60,8 +60,8 @@ Route::redirect('/ouverture-compte-sgi', '/demande-mise-en-relation', 301)->name
 Route::permanentRedirect('/investir/fcp/{id}', '/')->name('investir.fcp-detail');
 Route::permanentRedirect('/investir/{any}', '/')->where('any', '.*');
 
-Route::get('/marches', \App\Livewire\Pages\Marches\MarchesFinanciers::class)->name('marches.index');
-Route::get('/marches/cotations', \App\Livewire\Pages\Marches\CotationsActions::class)->name('marches.cotations');
+Route::redirect('/marches', '/marches/palmares', 301)->name('marches.index');
+Route::redirect('/marches/cotations', '/marches/palmares', 301)->name('marches.cotations');
 Route::get('/marches/palmares', \App\Livewire\Pages\Marches\PalmaresActions::class)->name('marches.palmares');
 Route::get('/marches/comparateur', \App\Livewire\Pages\Marches\ComparateurActions::class)->name('marches.comparateur');
 Route::get('/marches/indices', \App\Livewire\Pages\Marches\IndicesBrvm::class)->name('marches.indices');

@@ -1,8 +1,6 @@
 {{-- Sous-navigation Marchés --}}
 @php
     $items = [
-        ['route' => 'marches.index', 'label' => 'Vue d\'ensemble', 'match' => 'marches.index'],
-        ['route' => 'marches.cotations', 'label' => 'Cotations', 'match' => 'marches.cotations'],
         ['route' => 'marches.palmares', 'label' => 'Palmarès', 'match' => 'marches.palmares'],
         ['route' => 'marches.comparateur', 'label' => 'Comparateur', 'match' => 'marches.comparateur'],
         ['route' => 'marches.indices', 'label' => 'Indices', 'match' => 'marches.indices'],
