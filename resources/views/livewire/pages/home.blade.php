@@ -409,23 +409,7 @@
                                 </div>
                             </div>
 
-                            @if ($pastEvent->galleries->count() > 0)
-                                <div class="border-t border-[#c5c5d4] p-4 lg:p-6 bg-[#f9f9ff]">
-                                    <div class="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-                                        @foreach ($pastEvent->galleries->take(6) as $photo)
-                                            <div class="aspect-[4/3] rounded-lg overflow-hidden bg-[#e7eeff]">
-                                                <img src="{{ asset($photo->image_path) }}" alt="{{ $photo->caption ?? ''  }}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="mt-3 text-center">
-                                        <a href="{{ route('event-detail', $pastEvent->slug) }}" class="text-sm font-bold text-[#001a61] hover:underline inline-flex items-center gap-1">
-                                            Voir la galerie
-                                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
+                            {{-- Galerie visible uniquement sur /evenements, pas sur l'accueil --}}
                         </article>
                     @endforeach
                 </div>
