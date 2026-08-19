@@ -252,8 +252,8 @@
             </div>
 
             <div class="mb-12">
-                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">Ce que nous faisons</h3>
-                <div class="grid md:grid-cols-3 gap-5">
+                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">Nos métiers</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     @foreach ($pillars as $pillar)
                         <article class="rounded-2xl border border-[#c5c5d4] bg-[#f9f9ff] p-6">
                             <span class="material-symbols-outlined text-3xl text-[#ffbf00]">{{ $pillar['icon'] }}</span>

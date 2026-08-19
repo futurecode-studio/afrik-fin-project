@@ -18,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v13', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v14', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -191,18 +191,28 @@ class Home extends Component
         return [
             [
                 'icon' => 'school',
-                'title' => 'Former',
-                'text' => 'Parcours et webinaires pour comprendre la bourse, les actions, les obligations et les FCP.',
+                'title' => 'Formation',
+                'text' => 'Initiation à la Bourse et à la BRVM, formation Fidips et parcours structurés pour monter en compétence.',
             ],
             [
-                'icon' => 'candlestick_chart',
-                'title' => 'Informer',
-                'text' => 'Cotations, analyses et repères de marché pour décider avec méthode.',
+                'icon' => 'trending_up',
+                'title' => 'Conseil en investissement',
+                'text' => 'Accompagnement des entreprises et particuliers, structuration financière des projets, gestion et optimisation de portefeuille.',
             ],
             [
-                'icon' => 'handshake',
-                'title' => 'Orienter',
-                'text' => 'Mise en relation avec les SGI et SGO agréées, dans le cadre AMF-UMOA.',
+                'icon' => 'account_balance',
+                'title' => 'Ingénierie financière',
+                'text' => 'Diagnostic financier, accompagnement à la levée de fonds et optimisation de la structure financière.',
+            ],
+            [
+                'icon' => 'groups',
+                'title' => 'Événements et webinaires',
+                'text' => 'Webinaires sur l\'investissement, Marathon des acteurs du marché financier et networking professionnel.',
+            ],
+            [
+                'icon' => 'menu_book',
+                'title' => 'Publications et recherche',
+                'text' => 'Publications sur la BRVM, études sur les entreprises cotées et bulletins officiels de cotation.',
             ],
         ];
     }
