@@ -282,7 +282,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     @foreach ($teamPreview as $member)
                         <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-xl overflow-hidden">
-                            <div class="h-32 sm:h-36 md:h-32 lg:h-40 xl:h-44 bg-[#e7eeff] overflow-hidden">
+                            <div class="h-44 sm:h-48 md:h-44 lg:h-52 xl:h-56 bg-[#e7eeff] overflow-hidden">
                                 <img src="{{ asset($member['image']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover object-top">
                             </div>
                             <div class="p-3 md:p-3.5">
