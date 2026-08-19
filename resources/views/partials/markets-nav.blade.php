@@ -15,8 +15,6 @@
         ['route' => 'marches.comparateur-multi', 'label' => 'Multi-actifs', 'match' => 'marches.comparateur-multi'],
         ['route' => 'marches.produits-structures', 'label' => 'Structurés', 'match' => ['marches.produits-structures', 'marches.certificat']],
         ['route' => 'marches.analyse-pro', 'label' => 'Graphique Pro', 'match' => 'marches.analyse-pro*'],
-        ['route' => 'marches.calendrier', 'label' => 'Calendrier', 'match' => 'marches.calendrier'],
-        ['route' => 'marches.recherche', 'label' => 'Recherche', 'match' => 'marches.recherche'],
     ];
 @endphp
 <nav class="border-b border-[#c5c5d4] bg-white/80 backdrop-blur sticky top-[7.5rem] z-30">
