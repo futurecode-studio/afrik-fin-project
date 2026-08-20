@@ -70,9 +70,6 @@
     @if($event->galleries->isNotEmpty())
     <section
         class="py-10 bg-[#0a1a3a]"
-        x-data="{ open: false, activeImg: '', activeCaption: '' }"
-        x-init="$watch('open', value => { document.documentElement.classList.toggle('overflow-hidden', value); document.body.classList.toggle('overflow-hidden', value); })"
-        @keydown.escape.window="open = false"
     >
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
@@ -82,9 +79,12 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach($event->galleries as $img)
-                <div
-                    class="relative cursor-pointer rounded-xl overflow-hidden bg-[#1a2a4a] group h-[55vh] sm:h-[45vh] lg:h-[50vh]"
-                    @click="open = true; activeImg = '{{ $img->image_url }}'; activeCaption = '{{ addslashes($img->caption ?? '') }}'"
+                <button
+                    type="button"
+                    class="relative block w-full cursor-pointer rounded-xl overflow-hidden bg-[#1a2a4a] group h-[55vh] sm:h-[45vh] lg:h-[50vh] text-left"
+                    data-adf-lightbox-src="{{ $img->image_url }}"
+                    data-adf-lightbox-caption="{{ $img->caption ?? '' }}"
+                    aria-label="Agrandir l'image {{ $img->caption ?: 'de la galerie' }}"
                 >
                     <img
                         src="{{ $img->image_url }}"
@@ -97,45 +97,87 @@
                     @if($img->caption)
                         <p class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-4 py-3">{{ $img->caption }}</p>
                     @endif
-                </div>
+                </button>
                 @endforeach
             </div>
         </div>
-
-        <!-- Lightbox -->
-        <template x-teleport="body">
-            <div
-                x-show="open"
-                x-transition.opacity.duration.200ms
-                class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-3 sm:p-6"
-                style="display: none;"
-                @click="open = false"
-                x-cloak
-            >
-                <button
-                    type="button"
-                    class="fixed right-3 top-3 z-[10000] inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white/80 backdrop-blur hover:text-white"
-                    @click.stop="open = false"
-                    aria-label="Fermer l'image"
-                >
-                    <span class="material-symbols-outlined text-3xl leading-none">close</span>
-                </button>
-                <div class="flex max-h-[100svh] w-full flex-col items-center justify-center gap-3 overflow-hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
-                    <img
-                        :src="activeImg"
-                        class="block max-h-[82svh] max-w-[96vw] rounded-lg object-contain shadow-2xl"
-                        @click.stop
-                    >
-                    <p
-                        x-text="activeCaption"
-                        class="max-w-[92vw] text-center text-sm text-white/80"
-                        x-show="activeCaption"
-                        @click.stop
-                    ></p>
-                </div>
-            </div>
-        </template>
     </section>
+
+    @once
+        @push('scripts')
+            <script>
+                (() => {
+                    const lockPageScroll = (locked) => {
+                        document.documentElement.classList.toggle('overflow-hidden', locked);
+                        document.body.classList.toggle('overflow-hidden', locked);
+                    };
+
+                    const closeLightbox = () => {
+                        document.getElementById('adf-gallery-lightbox')?.remove();
+                        lockPageScroll(false);
+                    };
+
+                    const openLightbox = (src, caption = '') => {
+                        closeLightbox();
+
+                        const lightbox = document.createElement('div');
+                        lightbox.id = 'adf-gallery-lightbox';
+                        lightbox.className = 'fixed inset-0 z-[999999] flex items-center justify-center bg-black/95 px-3 py-14 sm:px-8';
+
+                        const closeButton = document.createElement('button');
+                        closeButton.type = 'button';
+                        closeButton.className = 'fixed right-3 top-3 z-[1000000] inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/85 backdrop-blur hover:bg-white/20 hover:text-white';
+                        closeButton.setAttribute('aria-label', "Fermer l'image");
+
+                        const closeIcon = document.createElement('span');
+                        closeIcon.className = 'material-symbols-outlined text-3xl leading-none';
+                        closeIcon.textContent = 'close';
+                        closeButton.appendChild(closeIcon);
+
+                        const figure = document.createElement('figure');
+                        figure.className = 'm-0 flex h-full w-full flex-col items-center justify-center gap-3';
+
+                        const image = document.createElement('img');
+                        image.src = src;
+                        image.alt = caption;
+                        image.className = 'block max-w-[96vw] rounded-lg object-contain shadow-2xl';
+                        image.style.maxHeight = 'calc(100dvh - 8rem)';
+                        figure.appendChild(image);
+
+                        if (caption) {
+                            const figcaption = document.createElement('figcaption');
+                            figcaption.className = 'max-w-[92vw] text-center text-sm text-white/80';
+                            figcaption.textContent = caption;
+                            figure.appendChild(figcaption);
+                        }
+
+                        lightbox.append(closeButton, figure);
+
+                        lightbox.addEventListener('click', (event) => {
+                            if (event.target === lightbox || event.target.closest('button')) {
+                                closeLightbox();
+                            }
+                        });
+
+                        document.body.appendChild(lightbox);
+                        lockPageScroll(true);
+                    };
+
+                    document.addEventListener('click', (event) => {
+                        const trigger = event.target.closest('[data-adf-lightbox-src]');
+                        if (!trigger) return;
+
+                        event.preventDefault();
+                        openLightbox(trigger.dataset.adfLightboxSrc, trigger.dataset.adfLightboxCaption || '');
+                    });
+
+                    document.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') closeLightbox();
+                    });
+                })();
+            </script>
+        @endpush
+    @endonce
     @endif
 
     <!-- Content -->
