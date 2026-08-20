@@ -15,11 +15,14 @@ class EventRegistration extends Model
         'email', 'phone', 'institution_name', 'job_title', 't_shirt_size',
         'medical_notes', 'emergency_contact_name', 'emergency_contact_phone',
         'status', 'qr_code', 'checked_in_at', 'cancelled_at', 'cancellation_reason', 'source',
+        'reminder_7_days_sent_at', 'reminder_1_day_sent_at',
     ];
 
     protected $casts = [
         'checked_in_at' => 'datetime',
         'cancelled_at' => 'datetime',
+        'reminder_7_days_sent_at' => 'datetime',
+        'reminder_1_day_sent_at' => 'datetime',
     ];
 
     public function event()
