@@ -214,10 +214,6 @@
                             S’inscrire
                             <span class="material-symbols-outlined text-[18px]">person_add</span>
                         </a>
-                        <a href="{{ route('mise-en-relation') }}"
-                            class="inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0a2e8c] transition">
-                            Être accompagné
-                        </a>
                     </div>
                     <p class="text-xs text-[#757683]">Simulation pédagogique. Les performances passées ne préjugent pas des performances futures.</p>
                 </div>
@@ -504,11 +500,6 @@
                     class="border border-[#001a61] text-[#001a61] font-bold px-5 py-2.5 rounded-lg hover:bg-[#e7eeff] transition inline-flex items-center gap-2">
                     Découvrir
                     <span class="material-symbols-outlined text-[18px]">search</span>
-                </a>
-                <a href="{{ route('mise-en-relation') }}"
-                    class="bg-[#001a61] text-white font-bold px-5 py-2.5 rounded-lg hover:bg-[#0a2e8c] transition inline-flex items-center gap-2">
-                    Créer un compte-titres
-                    <span class="material-symbols-outlined text-[18px]">account_balance</span>
                 </a>
             </div>
         </div>
