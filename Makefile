@@ -29,6 +29,7 @@ deploy-code:
 		git fetch origin main; \
 		git checkout main 2>/dev/null || git checkout -b main origin/main; \
 		git reset --hard origin/main; \
+		cp public/.htaccess $(DOCROOT_DIR)/.htaccess; \
 		chmod +x scripts/ensure-vite-build.sh 2>/dev/null || true; \
 		if [ -f scripts/ensure-vite-build.sh ] && [ -f public/build/manifest.json ]; then \
 			./scripts/ensure-vite-build.sh '$(CORE_DIR)' '$(DOCROOT_DIR)'; \
