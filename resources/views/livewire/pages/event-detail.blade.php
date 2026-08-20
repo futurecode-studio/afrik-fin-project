@@ -68,7 +68,12 @@
 
     <!-- Galerie photos — pleine largeur, visible immédiatement -->
     @if($event->galleries->isNotEmpty())
-    <section class="py-10 bg-[#0a1a3a]" x-data="{ open: false, activeImg: '', activeCaption: '' }">
+    <section
+        class="py-10 bg-[#0a1a3a]"
+        x-data="{ open: false, activeImg: '', activeCaption: '' }"
+        x-init="$watch('open', value => { document.documentElement.classList.toggle('overflow-hidden', value); document.body.classList.toggle('overflow-hidden', value); })"
+        @keydown.escape.window="open = false"
+    >
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
                 <span class="material-symbols-outlined text-[#ffbf00]">photo_camera</span>
@@ -98,23 +103,38 @@
         </div>
 
         <!-- Lightbox -->
-        <div
-            x-show="open"
-            x-transition.opacity.duration.200ms
-            class="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-4 gap-3"
-            @click="open = false"
-            x-cloak
-        >
-            <button class="absolute top-4 right-4 text-white/70 hover:text-white" @click="open = false">
-                <span class="material-symbols-outlined text-4xl">close</span>
-            </button>
-            <img
-                :src="activeImg"
-                class="max-w-[95vw] max-h-[88vh] object-contain rounded-lg shadow-2xl"
-                @click.stop
+        <template x-teleport="body">
+            <div
+                x-show="open"
+                x-transition.opacity.duration.200ms
+                class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-3 sm:p-6"
+                style="display: none;"
+                @click="open = false"
+                x-cloak
             >
-            <p x-text="activeCaption" class="text-white/70 text-sm text-center max-w-lg" x-show="activeCaption"></p>
-        </div>
+                <button
+                    type="button"
+                    class="fixed right-3 top-3 z-[10000] inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white/80 backdrop-blur hover:text-white"
+                    @click.stop="open = false"
+                    aria-label="Fermer l'image"
+                >
+                    <span class="material-symbols-outlined text-3xl leading-none">close</span>
+                </button>
+                <div class="flex max-h-[100svh] w-full flex-col items-center justify-center gap-3 overflow-hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+                    <img
+                        :src="activeImg"
+                        class="block max-h-[82svh] max-w-[96vw] rounded-lg object-contain shadow-2xl"
+                        @click.stop
+                    >
+                    <p
+                        x-text="activeCaption"
+                        class="max-w-[92vw] text-center text-sm text-white/80"
+                        x-show="activeCaption"
+                        @click.stop
+                    ></p>
+                </div>
+            </div>
+        </template>
     </section>
     @endif
 
