@@ -4,6 +4,7 @@ namespace App\Livewire\Concerns;
 
 use App\Models\SgiAccountRequest;
 use App\Models\SgiRequiredDocument;
+use App\Services\SgiAccountRequestCommunicationService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -75,7 +76,7 @@ trait WithSgiOrderModal
             return;
         }
 
-        SgiAccountRequest::create([
+        $request = SgiAccountRequest::create([
             'user_id' => Auth::id(),
             'name' => $name,
             'email' => $email,
@@ -83,6 +84,8 @@ trait WithSgiOrderModal
             'source' => $this->sgiAccountRequestSource(),
             'status' => 'pending',
         ]);
+
+        app(SgiAccountRequestCommunicationService::class)->sendNewRequestNotifications($request);
 
         $this->modalScreen = 'create_step2';
     }

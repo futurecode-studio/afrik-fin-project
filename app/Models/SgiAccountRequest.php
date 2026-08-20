@@ -17,10 +17,18 @@ class SgiAccountRequest extends Model
         'status',
         'admin_notes',
         'contacted_at',
+        'client_confirmation_sent_at',
+        'admin_notified_at',
+        'client_reminded_at',
+        'admin_reminded_at',
     ];
 
     protected $casts = [
         'contacted_at' => 'datetime',
+        'client_confirmation_sent_at' => 'datetime',
+        'admin_notified_at' => 'datetime',
+        'client_reminded_at' => 'datetime',
+        'admin_reminded_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

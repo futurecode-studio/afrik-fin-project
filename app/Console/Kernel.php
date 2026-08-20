@@ -75,6 +75,15 @@ class Kernel extends ConsoleKernel
             ->onFailure(function () {
                 \Log::error('event:reminders : échec de l\'exécution planifiée.');
             });
+
+        // Relance des demandes SGI / SGO en attente depuis plus de 48 h.
+        $schedule->command('sgi:account-reminders')
+            ->dailyAt('09:00')
+            ->timezone('Africa/Porto-Novo')
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                \Log::error('sgi:account-reminders : échec de l\'exécution planifiée.');
+            });
     }
 
     /**

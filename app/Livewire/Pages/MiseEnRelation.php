@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use App\Models\Partner;
 use App\Models\SgiAccountRequest;
 use App\Models\SgiRequiredDocument;
+use App\Services\SgiAccountRequestCommunicationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -49,7 +50,7 @@ class MiseEnRelation extends Component
 
         $selectedPartner = $this->selectedPartner();
 
-        SgiAccountRequest::create([
+        $request = SgiAccountRequest::create([
             'user_id' => Auth::id(),
             'name' => trim($this->name),
             'email' => trim($this->email),
@@ -61,6 +62,8 @@ class MiseEnRelation extends Component
                 ? 'Partenaire souhaité : '.$selectedPartner->nom
                 : null,
         ]);
+
+        app(SgiAccountRequestCommunicationService::class)->sendNewRequestNotifications($request);
 
         $this->submitted = true;
     }
