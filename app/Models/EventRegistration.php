@@ -11,7 +11,7 @@ class EventRegistration extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'event_id', 'user_id', 'ticket_type_id', 'first_name', 'last_name',
+        'event_id', 'user_id', 'first_name', 'last_name',
         'email', 'phone', 'institution_name', 'job_title', 't_shirt_size',
         'medical_notes', 'emergency_contact_name', 'emergency_contact_phone',
         'status', 'qr_code', 'checked_in_at', 'cancelled_at', 'cancellation_reason', 'source',
@@ -32,19 +32,9 @@ class EventRegistration extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ticketType()
-    {
-        return $this->belongsTo(EventTicketType::class);
-    }
-
     public function checkIn()
     {
         return $this->hasOne(EventCheckIn::class, 'registration_id');
-    }
-
-    public function order()
-    {
-        return $this->hasOne(EventOrder::class, 'registration_id');
     }
 
     public function scopeConfirmed($query)

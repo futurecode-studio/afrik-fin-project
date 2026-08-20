@@ -151,10 +151,6 @@
                 <p class="institution">{{ $registration->institution_name }}</p>
             @endif
 
-            @if($registration->ticketType)
-                <span class="badge">{{ $registration->ticketType->name }}</span>
-            @endif
-
             <hr class="divider">
 
             <table class="details">

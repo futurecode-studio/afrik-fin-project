@@ -20,8 +20,8 @@
                     <p class="font-bold text-[#001a61]">{{ $registration->fullName() }}</p>
                 </div>
                 <div>
-                    <p class="text-[#757683]">Type</p>
-                    <p class="font-bold text-[#001a61]">{{ $registration->ticketType->name ?? '—' }}</p>
+                    <p class="text-[#757683]">Événement</p>
+                    <p class="font-bold text-[#001a61]">Inscription</p>
                 </div>
                 <div>
                     <p class="text-[#757683]">Statut</p>

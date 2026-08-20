@@ -15,7 +15,7 @@ class RoleAndPermissionSeeder extends Seeder
             'users', 'articles', 'formations', 'partners', 'team', 'roles',
             'stock-data', 'government-bonds', 'transactions', 'appointments',
             'newsletters', 'contacts', 'statistics', 'dashboard',
-            'events', 'event_registrations', 'event_orders', 'event_products', 'event_checkin'
+            'events', 'event_registrations', 'event_checkin'
         ];
 
         $actions = ['view', 'create', 'edit', 'delete'];
@@ -49,7 +49,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'dashboard.view', 'dashboard.*', 'articles.*', 'formations.*',
                 'partners.view', 'partners.create', 'team.view', 'team.create', 'team.edit',
                 'stock-data.view', 'appointments.*', 'newsletters.*', 'statistics.view',
-                'events.*', 'event_registrations.*', 'event_orders.view', 'event_products.view'
+                'events.*', 'event_registrations.*'
             ],
             'analyste_financier' => [
                 'dashboard.view', 'stock-data.view', 'government-bonds.view', 'transactions.view', 'statistics.view'
@@ -65,14 +65,14 @@ class RoleAndPermissionSeeder extends Seeder
                 'events.view',
                 'event_registrations.view', 'event_registrations.create',
                 'event_checkin.*',
-                'event_orders.view'
+                'event_registrations.view'
             ],
             'charge_clientele' => [
                 'dashboard.view', 'partners.view', 'team.view', 'appointments.view', 'appointments.create',
                 'events.view',
                 'event_registrations.view', 'event_registrations.create',
                 'event_checkin.*',
-                'event_orders.view'
+                'event_registrations.view'
             ],
             'client' => [],
         ];

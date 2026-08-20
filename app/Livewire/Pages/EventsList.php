@@ -36,8 +36,7 @@ class EventsList extends Component
 
     public function render()
     {
-        $base = Event::query()
-            ->with(['ticketTypes' => fn ($q) => $q->where('is_active', true)]);
+        $base = Event::query();
 
         if ($this->filterType === 'past') {
             $base->where(function ($q) {

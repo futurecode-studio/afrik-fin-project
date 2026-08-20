@@ -16,7 +16,6 @@
                     <p class="text-sm text-[#757683] mt-1">
                         {{ optional($reg->event->starts_at)->format('d/m/Y H:i') }}
                         @if ($reg->event->city) · {{ $reg->event->city }}@endif
-                        @if ($reg->ticketType) · {{ $reg->ticketType->name }}@endif
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-2">

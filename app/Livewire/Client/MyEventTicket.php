@@ -15,7 +15,7 @@ class MyEventTicket extends Component
     {
         $this->registration = EventRegistration::where('id', $id)
             ->where('user_id', Auth::id())
-            ->with(['event', 'ticketType'])
+            ->with(['event'])
             ->firstOrFail();
     }
 

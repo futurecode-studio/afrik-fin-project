@@ -101,7 +101,6 @@
                     <tr>
                         <th class="text-left px-4 py-3">Nom</th>
                         <th class="text-left px-4 py-3">Email</th>
-                        <th class="text-left px-4 py-3">Billet</th>
                         <th class="text-left px-4 py-3">Statut</th>
                         <th class="px-4 py-3"></th>
                     </tr>
@@ -110,7 +109,6 @@
                     @php
                         $pendingRegs = \App\Models\EventRegistration::where('event_id', $event->id)
                             ->whereNotIn('status', ['cancelled', 'no_show', 'checked_in'])
-                            ->with('ticketType')
                             ->orderBy('last_name')
                             ->limit(100)
                             ->get();
@@ -119,7 +117,6 @@
                         <tr class="border-t border-[#e7eeff]">
                             <td class="px-4 py-3 font-semibold text-[#001a61]">{{ $reg->fullName() }}</td>
                             <td class="px-4 py-3 text-[#757683]">{{ $reg->email }}</td>
-                            <td class="px-4 py-3">{{ $reg->ticketType?->name ?? '—' }}</td>
                             <td class="px-4 py-3">
                                 <span class="inline-flex px-2 py-0.5 rounded-full text-xs {{ $reg->statusColorClasses() }}">{{ $reg->statusLabel() }}</span>
                             </td>
@@ -132,7 +129,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-4 py-8 text-center text-[#757683]">Tous les participants confirmés sont enregistrés.</td>
+                            <td colspan="4" class="px-4 py-8 text-center text-[#757683]">Tous les participants confirmés sont enregistrés.</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -313,17 +313,6 @@ class PaymentService
         }
 
         if (! $payment) {
-            if ($ok && in_array($callbackInfo['type'] ?? null, ['event_registration', 'event_order'], true)) {
-                return [
-                    'success' => true,
-                    'message' => 'Paiement événement confirmé',
-                    'callback_info' => $callbackInfo,
-                    'reference' => $localReference,
-                    'provider_reference' => $providerReference,
-                    'status' => $status,
-                ];
-            }
-
             return [
                 'success' => false,
                 'pending' => $pending,

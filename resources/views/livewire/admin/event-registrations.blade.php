@@ -70,7 +70,6 @@
                         <tr>
                             <th class="text-left px-4 py-3">Participant</th>
                             <th class="text-left px-4 py-3">Institution</th>
-                            <th class="text-left px-4 py-3">Billet</th>
                             <th class="text-left px-4 py-3">T-shirt</th>
                             <th class="text-left px-4 py-3">QR</th>
                             <th class="text-left px-4 py-3">Statut</th>
@@ -89,7 +88,6 @@
                                     {{ $reg->institution_name ?? '—' }}
                                     <br><span class="text-xs text-[#757683]">{{ $reg->job_title ?? '' }}</span>
                                 </td>
-                                <td class="px-4 py-3">{{ $reg->ticketType?->name ?? '—' }}</td>
                                 <td class="px-4 py-3">{{ $reg->t_shirt_size ?? '—' }}</td>
                                 <td class="px-4 py-3">
                                     @if ($reg->qr_code)
@@ -125,7 +123,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-4 py-8 text-center text-[#757683]">Aucune inscription trouvée.</td>
+                                <td colspan="7" class="px-4 py-8 text-center text-[#757683]">Aucune inscription trouvée.</td>
                             </tr>
                         @endforelse
                     </tbody>

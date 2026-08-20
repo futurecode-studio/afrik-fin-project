@@ -60,7 +60,6 @@ class EventCheckInManager extends Component
                 'message' => 'Bienvenue ' . $registration->fullName() . ' !',
                 'participant' => $registration->fullName(),
                 'institution' => $registration->institution_name,
-                'ticket' => $registration->ticketType?->name,
             ];
             $this->lastCheckIn = $registration;
             $this->updateStats();

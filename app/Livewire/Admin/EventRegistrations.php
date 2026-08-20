@@ -125,7 +125,7 @@ class EventRegistrations extends Component
                 });
             })
             ->when($this->statusFilter, fn($q) => $q->where('status', $this->statusFilter))
-            ->with('ticketType', 'checkIn')
+            ->with('checkIn')
             ->orderBy('created_at', 'desc')
             ->paginate(25);
 

@@ -109,7 +109,6 @@ Route::get('/panier', \App\Livewire\Pages\Panier::class)->name('panier');
 // Événements publics (routes spécifiques avant {slug})
 Route::get('/evenements', \App\Livewire\Pages\EventsList::class)->name('events-list');
 Route::get('/evenements/ticket/{qrCode}', \App\Livewire\Pages\EventTicketPublic::class)->name('event.ticket.public');
-Route::get('/evenements/commande/{orderNumber}', \App\Livewire\Pages\EventOrderConfirmation::class)->name('event.order.confirmation');
 Route::get('/evenements/{slug}', \App\Livewire\Pages\EventDetail::class)->name('event-detail');
 
 Route::get('/connexion', \App\Livewire\Auth\Login::class)->name('connexion')->middleware('guest');
@@ -203,11 +202,8 @@ Route::middleware(['auth', 'admin.panel'])->prefix('admin')->name('admin.')->gro
     Route::get('/events', \App\Livewire\Admin\Events::class)->name('events')->middleware('permission:events.view');
     Route::get('/events/{event}/registrations', \App\Livewire\Admin\EventRegistrations::class)->name('event.registrations')->middleware('permission:events.view');
     Route::get('/events/{event}/program', \App\Livewire\Admin\EventProgram::class)->name('event.program')->middleware('permission:events.view');
-    Route::get('/events/{event}/speakers', \App\Livewire\Admin\EventSpeakers::class)->name('event.speakers')->middleware('permission:events.view');
     Route::get('/events/{event}/documents', \App\Livewire\Admin\EventDocuments::class)->name('event.documents')->middleware('permission:events.view');
-    Route::get('/events/{event}/tickets', \App\Livewire\Admin\EventTicketTypes::class)->name('event.tickets')->middleware('permission:events.view');
     Route::get('/events/{event}/checkin', \App\Livewire\Admin\EventCheckInManager::class)->name('event.checkin')->middleware('permission:events.view');
-    Route::get('/events/{event}/products', \App\Livewire\Admin\EventProducts::class)->name('event.products')->middleware('permission:events.view');
 });
 
 require __DIR__.'/auth.php';

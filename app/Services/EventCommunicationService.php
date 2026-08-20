@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Mail\EventRegistrationConfirmed;
-use App\Models\EventOrder;
 use App\Models\EventRegistration;
 use App\Models\EventWaitlist;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +15,7 @@ class EventCommunicationService
      */
     public function sendRegistrationConfirmed(EventRegistration $registration): void
     {
-        $registration->loadMissing(['event', 'ticketType']);
+        $registration->loadMissing(['event']);
 
         if (empty($registration->email)) {
             Log::warning("EventCommunication: email manquant pour registration #{$registration->id}");
@@ -43,14 +42,6 @@ class EventCommunicationService
      * Notifier promotion liste d'attente.
      */
     public function sendWaitlistPromoted(EventWaitlist $waitlist): void
-    {
-        // À brancher plus tard
-    }
-
-    /**
-     * Confirmation commande merchandise.
-     */
-    public function sendOrderConfirmed(EventOrder $order): void
     {
         // À brancher plus tard
     }

@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Event;
 use App\Models\EventCheckIn;
 use App\Models\EventRegistration;
-use App\Models\EventTicketType;
 use App\Models\EventWaitlist;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -19,9 +18,9 @@ class EventRegistrationService
      * Inscrire un utilisateur à un événement.
      * Gère la capacité, la liste d'attente et la génération QR.
      */
-    public function register(?User $user, Event $event, array $data, ?EventTicketType $ticketType = null): EventRegistration
+    public function register(?User $user, Event $event, array $data): EventRegistration
     {
-        return DB::transaction(function () use ($user, $event, $data, $ticketType) {
+        return DB::transaction(function () use ($user, $event, $data) {
             // Vérifier doublon actif (utilisateur connecté) — hors annulations et paiements abandonnés
             if ($user) {
                 $existing = EventRegistration::where('event_id', $event->id)
@@ -61,13 +60,11 @@ class EventRegistrationService
                 throw new \Exception('Les places sont épuisées. Vous avez été ajouté à la liste d\'attente.');
             }
 
-            $isPaid = ($ticketType && (float) $ticketType->price > 0)
-                || ! empty($data['requires_payment']);
+            $isPaid = ! empty($data['requires_payment']);
 
             $registration = EventRegistration::create([
                 'event_id' => $event->id,
                 'user_id' => $user?->id,
-                'ticket_type_id' => $ticketType?->id,
                 'first_name' => $data['first_name'] ?? ($user?->name ?? ''),
                 'last_name' => $data['last_name'] ?? '',
                 'email' => $email,
@@ -87,9 +84,6 @@ class EventRegistrationService
             // Ne consomme la place qu'à la confirmation (gratuit immédiat / payant après paiement)
             if (! $isPaid) {
                 $event->increment('registration_count');
-                if ($ticketType) {
-                    $ticketType->increment('sold');
-                }
             }
 
             return $registration;
@@ -102,7 +96,7 @@ class EventRegistrationService
     public function confirmRegistration(EventRegistration $registration): void
     {
         if (in_array($registration->status, ['confirmed', 'checked_in'], true)) {
-            app(EventCommunicationService::class)->sendRegistrationConfirmed($registration->fresh(['event', 'ticketType']));
+            app(EventCommunicationService::class)->sendRegistrationConfirmed($registration->fresh(['event']));
 
             return;
         }
@@ -118,13 +112,10 @@ class EventRegistrationService
             if ($needsSeat) {
                 $event = $registration->event()->lockForUpdate()->first();
                 $event?->increment('registration_count');
-                if ($registration->ticket_type_id) {
-                    $registration->ticketType()?->lockForUpdate()->increment('sold');
-                }
             }
         });
 
-        app(EventCommunicationService::class)->sendRegistrationConfirmed($registration->fresh(['event', 'ticketType']));
+        app(EventCommunicationService::class)->sendRegistrationConfirmed($registration->fresh(['event']));
     }
 
     /**
@@ -175,10 +166,6 @@ class EventRegistrationService
             if ($seatWasTaken) {
                 $event = $registration->event;
                 $event->decrement('registration_count');
-
-                if ($registration->ticket_type_id) {
-                    $registration->ticketType?->decrement('sold');
-                }
 
                 $this->promoteWaitlist($event);
             }

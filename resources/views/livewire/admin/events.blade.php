@@ -68,9 +68,6 @@
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $event->statusColorClasses() }}">
                                         {{ $event->statusLabel() }}
                                     </span>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold {{ $event->pricingBadgeClasses() }}">
-                                        {{ $event->pricingLabel() }}
-                                    </span>
                                 </div>
                             </td>
                             <td class="p-4">
@@ -89,20 +86,10 @@
                                         class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
                                         <span class="material-symbols-outlined text-[16px]">schedule</span> Programme
                                     </a>
-                                    <a href="{{ route('admin.event.speakers', $event) }}"
-                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
-                                        <span class="material-symbols-outlined text-[16px]">record_voice_over</span> Intervenants
-                                    </a>
                                     <a href="{{ route('admin.event.documents', $event) }}"
                                         class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
                                         <span class="material-symbols-outlined text-[16px]">description</span> Docs
                                     </a>
-                                    @if($event->is_paid)
-                                    <a href="{{ route('admin.event.tickets', $event) }}"
-                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
-                                        <span class="material-symbols-outlined text-[16px]">confirmation_number</span> Billets
-                                    </a>
-                                    @endif
                                     @if(in_array($event->status, ['published', 'ongoing']))
                                     <button type="button"
                                         @click="navigator.clipboard.writeText(@js($event->publicUrl())).then(() => window.adfToast && window.adfToast('success', 'Lien public copié'))"
@@ -118,10 +105,6 @@
                                     <a href="{{ route('admin.event.checkin', $event) }}"
                                         class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-[#001a61] text-white hover:bg-[#0a2e8c]" wire:navigate.hover>
                                         <span class="material-symbols-outlined text-[16px]">qr_code_scanner</span> Émargement QR
-                                    </a>
-                                    <a href="{{ route('admin.event.products', $event) }}"
-                                        class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-[#c5c5d4] hover:bg-[#e7eeff] text-[#001a61]" wire:navigate.hover>
-                                        <span class="material-symbols-outlined text-[16px]">storefront</span> Boutique
                                     </a>
                                     <button wire:click="edit({{ $event->id }})" class="text-sm text-primary hover:underline">Modifier</button>
                                     <button wire:click="duplicate({{ $event->id }})" class="text-sm text-[#757683] hover:text-foreground">Dupliquer</button>
@@ -337,25 +320,6 @@
                             </span>
                         </label>
                     </div>
-                    @unless($is_jeudi_opportunite)
-                    <div class="md:col-span-2 rounded-xl border border-[#c5c5d4] bg-[#f7f9ff] p-4">
-                        <label class="inline-flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" wire:model.live="is_paid" id="is_paid" class="mt-1 rounded border-[#c5c5d4]">
-                            <span>
-                                <span class="block text-sm font-bold text-[#001a61]">Types de billets (gratuits et/ou payants)</span>
-                                <span class="block text-xs text-[#757683] mt-0.5">
-                                    Activez pour proposer plusieurs billets sur le même événement (ex. Standard gratuit + VIP payant).
-                                    Désactivé = inscription libre sans choix de billet.
-                                </span>
-                            </span>
-                        </label>
-                        @if($editMode && $is_paid && $eventId)
-                            <a href="{{ route('admin.event.tickets', $eventId) }}" class="inline-flex items-center gap-1 mt-3 text-xs font-bold text-[#001a61] underline" wire:navigate.hover>
-                                Configurer les billets (gratuits / payants) →
-                            </a>
-                        @endif
-                    </div>
-                    @endunless
                     <div>
                         <label class="block text-sm font-medium mb-1">Statut</label>
                         <select wire:model="status" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">

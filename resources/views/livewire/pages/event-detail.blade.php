@@ -176,28 +176,6 @@
                     </div>
                     @endif
 
-                    <!-- Intervenants -->
-                    @if($event->speakers->isNotEmpty())
-                    <div>
-                        <h2 class="text-2xl font-bold mb-4">Intervenants</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            @foreach($event->speakers as $speaker)
-                            <div class="flex items-center gap-4 p-4 rounded-xl border border-border bg-card">
-                                @if($speaker->photo)
-                                    <img src="{{ asset('storage/'.$speaker->photo) }}" alt="{{ $speaker->name }}" class="w-14 h-14 rounded-full object-cover">
-                                @else
-                                    <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">{{ substr($speaker->name, 0, 1) }}</div>
-                                @endif
-                                <div>
-                                    <p class="font-semibold">{{ $speaker->name }}</p>
-                                    <p class="text-sm text-muted-foreground">{{ $speaker->role }}</p>
-                                    <p class="text-xs text-muted-foreground">{{ $speaker->company }}</p>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
                 </div>
 
                 <!-- Sidebar -->
@@ -251,46 +229,6 @@
                         </div>
                     </div>
 
-                    <!-- Types de billets -->
-                    @if($event->requiresTicketSelection())
-                    <div class="rounded-xl border bg-card p-6 border-border">
-                        <div class="flex items-center justify-between gap-2 mb-4">
-                            <h3 class="font-bold">Tarifs</h3>
-                            @if($event->pricingMode() === 'hybrid')
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#eef3ff] text-[#001a61]">Gratuit + Payant</span>
-                            @endif
-                        </div>
-                        <div class="space-y-3">
-                            @foreach($event->ticketTypes as $tt)
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg bg-muted/50 border border-border {{ (int) $selectedTicketTypeId === (int) $tt->id ? 'ring-2 ring-primary' : '' }}">
-                                <button type="button" wire:click="selectTicket({{ $tt->id }})" class="text-left flex-1">
-                                    <p class="font-semibold text-sm">{{ $tt->name }}</p>
-                                    @if($tt->description)
-                                        <p class="text-xs text-muted-foreground mt-0.5">{{ plain_text($tt->description, 100) }}</p>
-                                    @endif
-                                    <p class="text-xs text-muted-foreground mt-1">{{ $tt->quantity > 0 ? $tt->seatsRemaining() . ' places restantes' : 'Places illimitées' }}</p>
-                                </button>
-                                <div class="flex items-center gap-2 shrink-0">
-                                    @if($tt->price > 0)
-                                        <span class="font-bold text-primary text-sm whitespace-nowrap">{{ number_format($tt->price, 0, ',', ' ') }} FCFA</span>
-                                        <button type="button" wire:click="openRegistrationModal({{ $tt->id }})"
-                                            class="px-3 py-2 rounded-lg bg-[#ffbf00] text-[#261a00] text-xs font-extrabold hover:brightness-95">
-                                            Payer
-                                        </button>
-                                    @else
-                                        <span class="inline-flex px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800">Gratuit</span>
-                                        <button type="button" wire:click="openRegistrationModal({{ $tt->id }})"
-                                            class="px-3 py-2 rounded-lg bg-[#001a61] text-white text-xs font-extrabold hover:bg-[#0a2e8c]">
-                                            S’inscrire
-                                        </button>
-                                    @endif
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
-
                     <!-- Sponsors -->
                     @if($event->sponsors->isNotEmpty())
                     <div class="rounded-xl border bg-card p-6 border-border">
@@ -312,68 +250,13 @@
                         </div>
                     </div>
                     @endif
-
-                    <!-- Boutique événement -->
-                    @if($event->products->isNotEmpty())
-                    <div class="rounded-xl border bg-card p-6 border-border">
-                        <h3 class="font-bold mb-4">Boutique événement</h3>
-                        <div class="space-y-4">
-                            @foreach($event->products as $product)
-                            <div class="p-3 rounded-lg bg-muted/50 border border-border">
-                                @if($product->image_url)
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-32 rounded-lg object-cover mb-3 border border-border">
-                                @endif
-                                <div class="flex items-start justify-between mb-2">
-                                    <div>
-                                        <p class="font-semibold text-sm">{{ $product->name }}</p>
-                                        <p class="text-xs text-muted-foreground mt-0.5">{{ plain_text($product->description, 100) }}</p>
-                                        @if($product->variants->contains(fn($v) => $v->price > 0))
-                                            <div class="flex flex-wrap gap-1 mt-1">
-                                                @foreach($product->variants as $v)
-                                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary">
-                                                        {{ $v->variant_name }}: {{ number_format($v->price ?? $product->price, 0, ',', ' ') }} F
-                                                    </span>
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <span class="font-bold text-primary text-sm whitespace-nowrap ml-2">
-                                        @if($product->variants->contains(fn($v) => $v->price > 0))
-                                            {{ number_format($product->variants->min('price') ?? $product->price, 0, ',', ' ') }} FCFA
-                                        @else
-                                            {{ number_format($product->price, 0, ',', ' ') }} FCFA
-                                        @endif
-                                    </span>
-                                </div>
-                                <button wire:click="openProductModal({{ $product->id }})" class="w-full mt-2 text-center px-3 py-2 bg-[#ffbf00] text-[#261a00] text-sm font-extrabold rounded-lg hover:brightness-95 transition-colors">
-                                    Payer
-                                </button>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Inscription multi-étapes -->
+    <!-- Modal Inscription -->
     @if($showRegistrationModal)
-    @php
-        $steps = [
-            1 => 'Formule',
-            2 => 'Informations',
-            3 => 'Boutique',
-            4 => 'Paiement',
-        ];
-        if ($event->products->isEmpty()) {
-            unset($steps[3]);
-        }
-        if (! $event->requiresTicketSelection() || $event->ticketTypes->count() <= 1) {
-            unset($steps[1]);
-        }
-    @endphp
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeRegistrationModal"></div>
         <div class="relative adf-modal-panel bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[92vh] overflow-y-auto border border-[#c5c5d4]">
@@ -387,274 +270,58 @@
                 </button>
             </div>
 
-            {{-- Stepper --}}
-            <div class="px-5 pt-4 flex flex-wrap gap-2">
-                @foreach ($steps as $n => $label)
-                    <span @class([
-                        'text-[10px] font-bold uppercase px-2.5 py-1 rounded-full border',
-                        'bg-[#001a61] text-white border-[#001a61]' => $regStep === $n,
-                        'bg-[#e7eeff] text-[#001a61] border-[#c5c5d4]' => $regStep > $n,
-                        'bg-white text-[#757683] border-[#c5c5d4]' => $regStep < $n,
-                    ])>{{ $label }}</span>
-                @endforeach
-            </div>
-
             <div class="p-5 space-y-4">
-                {{-- 1. Formule --}}
-                @if ($regStep === 1)
-                    <h3 class="font-bold text-[#001a61]">Choisissez votre formule</h3>
-                    <div class="space-y-2">
-                        @foreach ($event->ticketTypes as $tt)
-                            <label class="flex items-center justify-between gap-3 p-4 rounded-xl border cursor-pointer {{ (int) $selectedTicketTypeId === (int) $tt->id ? 'border-[#001a61] bg-[#e7eeff] ring-1 ring-[#001a61]' : 'border-[#c5c5d4]' }}">
-                                <span class="flex items-start gap-3">
-                                    <input type="radio" wire:model.live="selectedTicketTypeId" value="{{ $tt->id }}" class="mt-1 text-[#001a61]">
-                                    <span>
-                                        <span class="block font-bold text-[#001a61]">{{ $tt->name }}</span>
-                                        @if ($tt->description)
-                                            <span class="block text-xs text-[#757683] mt-0.5">{{ plain_text($tt->description, 140) }}</span>
-                                        @endif
-                                    </span>
-                                </span>
-                                @if ($tt->price > 0)
-                                    <span class="font-extrabold text-[#001a61] whitespace-nowrap">{{ number_format($tt->price, 0, ',', ' ') }} FCFA</span>
-                                @else
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800">Gratuit</span>
-                                @endif
-                            </label>
-                        @endforeach
-                    </div>
-                    @error('selectedTicketTypeId') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
-                @endif
-
-                {{-- 2. Infos --}}
-                @if ($regStep === 2)
-                    <h3 class="font-bold text-[#001a61]">Vos informations</h3>
-                    @if ($selectedTicket)
-                        <p class="text-sm text-[#444652]">Formule : <strong class="text-[#001a61]">{{ $selectedTicket->name }}</strong>
-                            @if ($selectedTicket->price > 0)
-                                — {{ number_format($selectedTicket->price, 0, ',', ' ') }} FCFA
-                            @else
-                                — Gratuit
-                            @endif
-                        </p>
-                    @endif
-                    <div class="grid sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-xs font-bold uppercase text-[#757683]">Prénom *</label>
-                            <input type="text" wire:model="first_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                            @error('first_name') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold uppercase text-[#757683]">Nom *</label>
-                            <input type="text" wire:model="last_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                            @error('last_name') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="text-xs font-bold uppercase text-[#757683]">Email *</label>
-                            <input type="email" wire:model="email" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                            @error('email') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold uppercase text-[#757683]">Téléphone</label>
-                            <input type="tel" wire:model="phone" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold uppercase text-[#757683]">Institution</label>
-                            <input type="text" wire:model="institution_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold uppercase text-[#757683]">Fonction</label>
-                            <input type="text" wire:model="job_title" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="text-xs font-bold uppercase text-[#757683]">Contact d’urgence</label>
-                            <div class="grid grid-cols-2 gap-2 mt-1">
-                                <input type="text" wire:model="emergency_contact_name" placeholder="Nom" class="rounded-lg border-[#c5c5d4]">
-                                <input type="tel" wire:model="emergency_contact_phone" placeholder="Téléphone" class="rounded-lg border-[#c5c5d4]">
-                            </div>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="text-xs font-bold uppercase text-[#757683]">Remarques médicales</label>
-                            <textarea wire:model="medical_notes" rows="2" class="w-full mt-1 rounded-lg border-[#c5c5d4]"></textarea>
-                        </div>
-                    </div>
-                @endif
-
-                {{-- 3. Boutique (facultatif) --}}
-                @if ($regStep === 3)
-                    <h3 class="font-bold text-[#001a61]">Articles boutique <span class="text-xs font-medium text-[#757683]">(facultatif)</span></h3>
-                    <p class="text-sm text-[#444652]">Ajoutez des goodies si vous le souhaitez, puis continuez.</p>
-                    <div class="space-y-3 max-h-64 overflow-y-auto">
-                        @foreach ($event->products as $product)
-                            <div class="rounded-xl border border-[#c5c5d4] p-3">
-                                <p class="font-bold text-sm text-[#001a61]">{{ $product->name }}</p>
-                                <div class="mt-2 space-y-1.5">
-                                    @forelse ($product->variants as $v)
-                                        <div class="flex items-center justify-between gap-2 text-sm">
-                                            <span class="text-[#444652]">{{ $v->variant_name }}@if($v->size) ({{ $v->size }})@endif — {{ number_format($v->effectivePrice(), 0, ',', ' ') }} FCFA</span>
-                                            <button type="button" wire:click="addToCart({{ $v->id }})"
-                                                class="px-2.5 py-1 rounded-lg border border-[#001a61] text-[#001a61] text-xs font-bold hover:bg-[#e7eeff]">
-                                                + Ajouter @if(($cart[$v->id] ?? 0) > 0)({{ $cart[$v->id] }})@endif
-                                            </button>
-                                        </div>
-                                    @empty
-                                        <p class="text-xs text-[#757683]">Aucune variante.</p>
-                                    @endforelse
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    @if (count($cartLines) > 0)
-                        <div class="rounded-lg bg-[#e7eeff] p-3 text-sm">
-                            <p class="font-bold text-[#001a61] mb-1">Panier</p>
-                            @foreach ($cartLines as $line)
-                                <div class="flex justify-between gap-2">
-                                    <span>{{ $line['qty'] }}× {{ $line['name'] }}</span>
-                                    <span class="font-semibold">{{ number_format($line['total'], 0, ',', ' ') }}</span>
-                                </div>
-                                <button type="button" wire:click="removeFromCart({{ $line['variant_id'] }})" class="text-[11px] text-red-600 font-bold">Retirer</button>
-                            @endforeach
-                            <p class="mt-2 font-extrabold text-[#001a61]">Sous-total boutique : {{ number_format($cartTotal, 0, ',', ' ') }} FCFA</p>
-                        </div>
-                    @endif
-                @endif
-
-                {{-- 4. Paiement --}}
-                @if ($regStep === 4)
-                    <h3 class="font-bold text-[#001a61]">Paiement</h3>
-                    <div class="rounded-xl border border-[#c5c5d4] divide-y divide-[#e7eeff] text-sm">
-                        <div class="p-4">
-                            <p class="text-xs uppercase text-[#757683] font-bold">Participant</p>
-                            <p class="font-semibold text-[#001a61]">{{ $first_name }} {{ $last_name }}</p>
-                            <p class="text-[#444652]">{{ $email }}@if($phone) · {{ $phone }}@endif</p>
-                        </div>
-                        <div class="p-4 flex justify-between gap-3">
-                            <div>
-                                <p class="text-xs uppercase text-[#757683] font-bold">Formule</p>
-                                <p class="font-semibold text-[#001a61]">{{ $selectedTicket?->name ?? 'Inscription' }}</p>
-                            </div>
-                            <p class="font-extrabold text-[#001a61] whitespace-nowrap">
-                                @if ($ticketPrice > 0)
-                                    {{ number_format($ticketPrice, 0, ',', ' ') }} FCFA
-                                @else
-                                    Gratuit
-                                @endif
-                            </p>
-                        </div>
-                        @if (count($cartLines) > 0)
-                            <div class="p-4 space-y-2">
-                                <p class="text-xs uppercase text-[#757683] font-bold">Articles boutique</p>
-                                @foreach ($cartLines as $line)
-                                    <div class="flex justify-between gap-2">
-                                        <span>{{ $line['qty'] }}× {{ $line['name'] }}</span>
-                                        <span class="font-semibold">{{ number_format($line['total'], 0, ',', ' ') }} FCFA</span>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                        <div class="p-4 flex justify-between items-center bg-[#f9f9ff]">
-                            <span class="font-extrabold text-[#001a61]">Total à régler</span>
-                            <span class="text-xl font-extrabold text-[#001a61]">{{ number_format($grandTotal, 0, ',', ' ') }} FCFA</span>
-                        </div>
-                    </div>
-                @endif
-            </div>
-
-            <div class="p-5 border-t border-[#c5c5d4] flex flex-wrap justify-between gap-3 sticky bottom-0 bg-white">
-                <button type="button"
-                    @if ($regStep <= 1 || ($regStep === 2 && (! $event->requiresTicketSelection() || $event->ticketTypes->count() <= 1))) disabled @endif
-                    wire:click="prevStep"
-                    class="px-4 py-2 rounded-lg border border-[#c5c5d4] text-sm font-bold text-[#444652] disabled:opacity-40">
-                    Retour
-                </button>
-                <div class="flex gap-2">
-                    <button type="button" wire:click="closeRegistrationModal" class="px-4 py-2 rounded-lg border border-[#c5c5d4] text-sm font-medium">Annuler</button>
-                    @if ($regStep < 4)
-                        <button type="button" wire:click="nextStep"
-                            class="px-5 py-2 rounded-lg bg-[#001a61] text-white text-sm font-extrabold hover:bg-[#0a2e8c]">
-                            Continuer
-                        </button>
-                    @else
-                        <button type="button" wire:click="submitRegistration" wire:loading.attr="disabled"
-                            class="px-5 py-2 rounded-lg bg-[#ffbf00] text-[#261a00] text-sm font-extrabold hover:brightness-95 disabled:opacity-50">
-                            @if ($grandTotal > 0)
-                                Payer {{ number_format($grandTotal, 0, ',', ' ') }} FCFA
-                            @else
-                                Confirmer l’inscription
-                            @endif
-                        </button>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-
-    <!-- Modal Commande Produit -->
-    @if($showProductModal && $selectedProductId)
-    @php $productModal = $event->products->firstWhere('id', $selectedProductId); @endphp
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" wire:click="closeProductModal"></div>
-        <div class="relative adf-modal-panel bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-border">
-            <div class="p-6 border-b border-border flex items-center justify-between">
-                <h2 class="text-xl font-bold">Payer — {{ $productModal?->name }}</h2>
-                <button wire:click="closeProductModal" class="text-muted-foreground hover:text-foreground"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
-            </div>
-            <div class="p-6 space-y-4">
-                <div class="grid grid-cols-1 gap-4">
+                <h3 class="font-bold text-[#001a61]">Vos informations</h3>
+                <div class="grid sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-sm font-medium mb-1">Prénom *</label>
-                        <input type="text" wire:model="productFirstName" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
-                        @error('productFirstName')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                        <label class="text-xs font-bold uppercase text-[#757683]">Prénom *</label>
+                        <input type="text" wire:model="first_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
+                        @error('first_name') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Nom *</label>
-                        <input type="text" wire:model="productLastName" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
-                        @error('productLastName')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                        <label class="text-xs font-bold uppercase text-[#757683]">Nom *</label>
+                        <input type="text" wire:model="last_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
+                        @error('last_name') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="text-xs font-bold uppercase text-[#757683]">Email *</label>
+                        <input type="email" wire:model="email" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
+                        @error('email') <p class="text-xs text-red-600">{{ $message }}</p> @enderror
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Email *</label>
-                        <input type="email" wire:model="productEmail" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
-                        @error('productEmail')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                        <label class="text-xs font-bold uppercase text-[#757683]">Téléphone</label>
+                        <input type="tel" wire:model="phone" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Téléphone</label>
-                        <input type="tel" wire:model="productPhone" placeholder="+229 XX XX XX XX" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                        <label class="text-xs font-bold uppercase text-[#757683]">Institution</label>
+                        <input type="text" wire:model="institution_name" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Variante *</label>
-                        <select wire:model="selectedVariantId" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
-                            <option value="">-- Choisir --</option>
-                            @foreach($productModal->variants as $v)
-                                <option value="{{ $v->id }}">{{ $v->variant_name }} @if($v->price) ({{ number_format($v->price, 0, ',', ' ') }} FCFA) @else ({{ number_format($productModal->price, 0, ',', ' ') }} FCFA) @endif — {{ $v->availableQuantity() }} disp.</option>
-                            @endforeach
-                        </select>
-                        @error('selectedVariantId')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
+                        <label class="text-xs font-bold uppercase text-[#757683]">Fonction</label>
+                        <input type="text" wire:model="job_title" class="w-full mt-1 rounded-lg border-[#c5c5d4]">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Quantité (max 10)</label>
-                        <input type="number" wire:model="productQuantity" min="1" max="10" class="w-full px-3 py-2 border border-border rounded-lg bg-background focus:ring-2 focus:ring-primary">
+                    <div class="sm:col-span-2">
+                        <label class="text-xs font-bold uppercase text-[#757683]">Contact d’urgence</label>
+                        <div class="grid grid-cols-2 gap-2 mt-1">
+                            <input type="text" wire:model="emergency_contact_name" placeholder="Nom" class="rounded-lg border-[#c5c5d4]">
+                            <input type="tel" wire:model="emergency_contact_phone" placeholder="Téléphone" class="rounded-lg border-[#c5c5d4]">
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="text-xs font-bold uppercase text-[#757683]">Remarques médicales</label>
+                        <textarea wire:model="medical_notes" rows="2" class="w-full mt-1 rounded-lg border-[#c5c5d4]"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="p-6 border-t border-border flex justify-end gap-3 items-center">
-                <button wire:click="closeProductModal" class="px-4 py-2 border border-border rounded-lg text-foreground hover:bg-muted">Annuler</button>
-                <button wire:click="submitProductOrder" wire:loading.attr="disabled" class="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-light font-semibold transition-colors disabled:opacity-50 flex items-center gap-2">
-                    @if($selectedVariantId)
-                        @php
-                            $selVar = $productModal->variants->firstWhere('id', $selectedVariantId);
-                            $unit = $selVar->price ?? $productModal->price;
-                            $tot = $unit * $productQuantity;
-                        @endphp
-                        <span>Payer {{ number_format($tot, 0, ',', ' ') }} FCFA</span>
-                    @else
-                        Payer en ligne
-                    @endif
+
+            <div class="p-5 border-t border-[#c5c5d4] flex flex-wrap justify-end gap-3 sticky bottom-0 bg-white">
+                <button type="button" wire:click="closeRegistrationModal" class="px-4 py-2 rounded-lg border border-[#c5c5d4] text-sm font-medium">Annuler</button>
+                <button type="button" wire:click="submitRegistration" wire:loading.attr="disabled"
+                    class="px-5 py-2 rounded-lg bg-[#ffbf00] text-[#261a00] text-sm font-extrabold hover:brightness-95 disabled:opacity-50">
+                    Confirmer l’inscription
                 </button>
             </div>
         </div>
     </div>
     @endif
-
-@include('partials.payment-widget-scripts')
 </main>

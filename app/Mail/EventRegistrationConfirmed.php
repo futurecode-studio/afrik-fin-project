@@ -17,7 +17,7 @@ class EventRegistrationConfirmed extends Mailable
 
     public function __construct(public EventRegistration $registration)
     {
-        $this->registration->loadMissing(['event', 'ticketType']);
+        $this->registration->loadMissing(['event']);
     }
 
     public function envelope(): Envelope

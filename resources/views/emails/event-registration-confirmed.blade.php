@@ -25,9 +25,6 @@
         <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffbf00; text-align: center;">
             <p style="margin: 0 0 12px; font-size: 12px; color: #6b7280;">N° {{ $registration->qr_code }}</p>
             <img src="data:image/svg+xml;base64,{{ $qrSvgBase64 }}" alt="QR Code ticket" width="180" height="180" style="display: block; margin: 0 auto 16px;">
-            @if($registration->ticketType)
-                <p style="margin: 0 0 8px;"><span style="display: inline-block; background: #eef2fc; color: #001a61; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: bold;">{{ $registration->ticketType->name }}</span></p>
-            @endif
             <table style="width: 100%; border-collapse: collapse; margin-top: 12px; text-align: left;">
                 <tr>
                     <td style="padding: 6px 0; color: #6b7280;">Date</td>

@@ -5,11 +5,7 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\EventDocument;
 use App\Models\EventGallery;
-use App\Models\EventProduct;
-use App\Models\EventProductVariant;
 use App\Models\EventProgramItem;
-use App\Models\EventSpeaker;
-use App\Models\EventTicketType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -43,7 +39,6 @@ class EventSeeder extends Seeder
                 'seo_title' => 'Marathon des Acteurs du Marché Financier 2026 | Africaine des Finances',
                 'seo_description' => 'Rejoignez le Marathon des Acteurs du Marché Financier le 20 Juin 2026 à Cotonou. 10 km, fitness, networking et bien-être pour les professionnels de la finance.',
                 'is_featured' => true,
-                'is_paid' => true,
                 'status' => 'published',
                 'created_by' => $admin->id,
             ]
@@ -67,34 +62,6 @@ class EventSeeder extends Seeder
             );
         }
 
-        // Speakers / Intervenants
-        $speakers = [
-            ['name' => 'Coach Sportif Principal', 'role' => 'Coach sportif & échauffement', 'bio' => 'Coach certifié en activité physique et préparation mentale.', 'company' => 'AASCOT BRVM BENIN', 'display_order' => 1],
-            ['name' => 'Nutritionniste UEMOA', 'role' => 'Atelier nutrition', 'bio' => 'Expert en nutrition appliquée aux cadres et professions sédentaires.', 'company' => 'ONG Santé & Nutrition', 'display_order' => 2],
-            ['name' => 'Médecin coordonnateur', 'role' => 'Stand médical & constantes', 'bio' => 'Médecin spécialisé en médecine du sport et prévention cardiovasculaire.', 'company' => 'Centre Médical Partenaire', 'display_order' => 3],
-            ['name' => 'Responsable Bien-être ADF', 'role' => 'Modérateur & networking', 'bio' => 'Chargé du programme bien-être et de la cohésion institutionnelle.', 'company' => 'Africaine des Finances', 'display_order' => 4],
-        ];
-
-        foreach ($speakers as $s) {
-            EventSpeaker::firstOrCreate(
-                ['event_id' => $event->id, 'name' => $s['name']],
-                array_merge($s, ['event_id' => $event->id])
-            );
-        }
-
-        // Types de billets
-        $ticketTypes = [
-            ['name' => 'Marcheur Standard', 'description' => 'Inscription gratuite avec accès au parcours 10 km, échauffement collectif et rafraîchissements.', 'price' => 0, 'quantity' => 150, 'display_order' => 1],
-            ['name' => 'Pack VIP + Kit', 'description' => 'Accès complet + T-shirt officiel + casquette + goodies + priorité stand médical.', 'price' => 10000, 'quantity' => 50, 'display_order' => 2],
-        ];
-
-        foreach ($ticketTypes as $tt) {
-            EventTicketType::firstOrCreate(
-                ['event_id' => $event->id, 'name' => $tt['name']],
-                array_merge($tt, ['event_id' => $event->id])
-            );
-        }
-
         // Documents
         $docs = [
             ['title' => 'Règlement de participation', 'file_type' => 'pdf', 'is_downloadable' => true, 'display_order' => 1],
@@ -111,56 +78,6 @@ class EventSeeder extends Seeder
                     'file_size' => 0,
                 ])
             );
-        }
-
-        // Produits dérivés
-        $products = [
-            [
-                'name' => 'T-shirt Marathon ADF',
-                'description' => 'T-shirt technique respirant 100% polyester, logo ADF sérigraphié.',
-                'price' => 5000,
-                'is_active' => true,
-                'variants' => [
-                    ['variant_name' => 'S', 'size' => 'S', 'price' => 5000, 'stock_quantity' => 30],
-                    ['variant_name' => 'M', 'size' => 'M', 'price' => 5000, 'stock_quantity' => 40],
-                    ['variant_name' => 'L', 'size' => 'L', 'price' => 5500, 'stock_quantity' => 40],
-                    ['variant_name' => 'XL', 'size' => 'XL', 'price' => 5500, 'stock_quantity' => 20],
-                    ['variant_name' => 'XXL', 'size' => 'XXL', 'price' => 6000, 'stock_quantity' => 10],
-                ],
-            ],
-            [
-                'name' => 'Casquette ADF',
-                'description' => 'Casquette snapback brodée logo ADF, ajustable.',
-                'price' => 3500,
-                'is_active' => true,
-                'variants' => [
-                    ['variant_name' => 'Unique', 'size' => 'Unique', 'stock_quantity' => 50],
-                ],
-            ],
-            [
-                'name' => 'Porte-clé ADF',
-                'description' => 'Porte-clé métallique avec logo ADF et numéro d\'édition limitée.',
-                'price' => 1500,
-                'is_active' => true,
-                'variants' => [
-                    ['variant_name' => 'Unique', 'size' => 'Unique', 'stock_quantity' => 100],
-                ],
-            ],
-        ];
-
-        foreach ($products as $p) {
-            $variants = $p['variants'];
-            unset($p['variants']);
-            $product = EventProduct::firstOrCreate(
-                ['event_id' => $event->id, 'name' => $p['name']],
-                array_merge($p, ['event_id' => $event->id])
-            );
-            foreach ($variants as $v) {
-                EventProductVariant::firstOrCreate(
-                    ['product_id' => $product->id, 'variant_name' => $v['variant_name']],
-                    array_merge($v, ['product_id' => $product->id, 'sku' => strtoupper(Str::slug($product->name)) . '-' . $v['variant_name']])
-                );
-            }
         }
 
         // —— Événements complémentaires (catalogue public) ——
@@ -186,11 +103,7 @@ class EventSeeder extends Seeder
                 'online_access_instructions' => 'Connectez-vous 10 minutes avant le début. Micro coupé à l’arrivée.',
                 'capacity' => 300,
                 'is_featured' => false,
-                'is_paid' => false,
                 'status' => 'published',
-                'tickets' => [
-                    ['name' => 'Accès gratuit', 'description' => 'Lien de connexion envoyé par e-mail.', 'price' => 0, 'quantity' => 300],
-                ],
             ],
             [
                 'slug' => 'conference-perspectives-marches-uemoa-2026',
@@ -214,12 +127,7 @@ class EventSeeder extends Seeder
                 'online_access_instructions' => 'Accès hybride : salle Hôtel du Lac + Zoom pour les participants à distance.',
                 'capacity' => 120,
                 'is_featured' => false,
-                'is_paid' => true,
                 'status' => 'draft',
-                'tickets' => [
-                    ['name' => 'Standard', 'description' => 'Accès salle + replay.', 'price' => 15000, 'quantity' => 80],
-                    ['name' => 'VIP', 'description' => 'Accès + networking lunch.', 'price' => 35000, 'quantity' => 40],
-                ],
             ],
             [
                 'slug' => 'atelier-lecture-comptes-societes-cotees',
@@ -238,11 +146,7 @@ class EventSeeder extends Seeder
                 'country' => 'Bénin',
                 'capacity' => 40,
                 'is_featured' => false,
-                'is_paid' => true,
                 'status' => 'draft',
-                'tickets' => [
-                    ['name' => 'Participant', 'description' => 'Atelier + supports.', 'price' => 25000, 'quantity' => 40],
-                ],
             ],
             [
                 'slug' => 'journee-education-financiere-abidjan-2025',
@@ -260,18 +164,12 @@ class EventSeeder extends Seeder
                 'country' => 'Côte d’Ivoire',
                 'capacity' => 500,
                 'is_featured' => false,
-                'is_paid' => false,
                 'status' => 'published',
-                'tickets' => [
-                    ['name' => 'Entrée libre', 'description' => 'Accès gratuit.', 'price' => 0, 'quantity' => 500],
-                ],
             ],
         ];
 
         foreach ($extraEvents as $data) {
-            $tickets = $data['tickets'];
-            unset($data['tickets']);
-            $ev = Event::firstOrCreate(
+            Event::firstOrCreate(
                 ['slug' => $data['slug']],
                 array_merge($data, [
                     'created_by' => $admin->id,
@@ -279,16 +177,6 @@ class EventSeeder extends Seeder
                     'seo_description' => Str::limit(strip_tags($data['description']), 155),
                 ])
             );
-            foreach ($tickets as $i => $tt) {
-                EventTicketType::firstOrCreate(
-                    ['event_id' => $ev->id, 'name' => $tt['name']],
-                    array_merge($tt, [
-                        'event_id' => $ev->id,
-                        'display_order' => $i + 1,
-                        'is_active' => true,
-                    ])
-                );
-            }
         }
 
         Event::whereIn('slug', [

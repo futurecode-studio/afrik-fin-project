@@ -24,10 +24,6 @@
                     @if($registration->institution_name)
                         <p class="text-sm text-muted-foreground mt-1">{{ $registration->institution_name }}</p>
                     @endif
-                    @if($registration->ticketType)
-                        <span class="inline-block mt-3 px-4 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">{{ $registration->ticketType->name }}</span>
-                    @endif
-
                     <div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-border text-sm">
                         <div>
                             <p class="text-muted-foreground">Date</p>

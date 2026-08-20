@@ -69,7 +69,6 @@
                                 <span class="font-bold uppercase text-[#0a2e8c]">{{ $featured->category }}</span>
                             @endif
                             <span class="px-2 py-0.5 rounded bg-[#e7eeff] text-[#001a61] font-semibold">{{ $formatLabel($featured->event_type) }}</span>
-                            <span class="px-2 py-0.5 rounded text-xs font-semibold {{ $featured->pricingBadgeClasses() }}">{{ $featured->pricingLabel() }}</span>
                             @if ($featured->isRegistrationOpen())
                                 <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-semibold">Inscriptions ouvertes</span>
                             @elseif (! $featured->isPast())
@@ -217,7 +216,6 @@
                             </p>
                         </div>
                         <div class="mt-4 pt-4 border-t border-[#c5c5d4] flex items-center justify-between gap-2">
-                            <span class="text-xs font-bold px-2 py-1 rounded {{ $event->pricingBadgeClasses() }}">{{ $event->pricingLabel() }}</span>
                             <a href="{{ route('event-detail', $event->slug) }}"
                                 class="inline-flex items-center gap-1 text-sm font-bold text-[#001a61] hover:text-[#0a2e8c]">
                                 Détails

@@ -4,11 +4,8 @@
         ['route' => 'admin.events', 'params' => [], 'match' => 'admin.events', 'label' => 'Tous les événements', 'icon' => 'event'],
         ['route' => 'admin.event.registrations', 'params' => [$eid], 'match' => 'admin.event.registrations', 'label' => 'Inscrits', 'icon' => 'group'],
         ['route' => 'admin.event.program', 'params' => [$eid], 'match' => 'admin.event.program', 'label' => 'Programme', 'icon' => 'schedule'],
-        ['route' => 'admin.event.speakers', 'params' => [$eid], 'match' => 'admin.event.speakers', 'label' => 'Intervenants', 'icon' => 'record_voice_over'],
         ['route' => 'admin.event.documents', 'params' => [$eid], 'match' => 'admin.event.documents', 'label' => 'Documents', 'icon' => 'description'],
-        ['route' => 'admin.event.tickets', 'params' => [$eid], 'match' => 'admin.event.tickets', 'label' => 'Billets', 'icon' => 'confirmation_number'],
         ['route' => 'admin.event.checkin', 'params' => [$eid], 'match' => 'admin.event.checkin', 'label' => 'Émargement QR', 'icon' => 'qr_code_scanner'],
-        ['route' => 'admin.event.products', 'params' => [$eid], 'match' => 'admin.event.products', 'label' => 'Boutique', 'icon' => 'storefront'],
     ];
 @endphp
 <nav class="flex flex-wrap gap-1 border-b border-[#c5c5d4] mb-6">

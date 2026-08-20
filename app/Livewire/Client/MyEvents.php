@@ -21,7 +21,7 @@ class MyEvents extends Component
     public function loadRegistrations()
     {
         $this->registrations = EventRegistration::where('user_id', Auth::id())
-            ->with(['event', 'ticketType', 'checkIn'])
+            ->with(['event', 'checkIn'])
             ->orderBy('created_at', 'desc')
             ->get();
     }

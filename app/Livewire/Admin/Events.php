@@ -51,7 +51,6 @@ class Events extends Component
     public $seo_description;
     public $is_featured = false;
     public $is_jeudi_opportunite = false;
-    public $is_paid = false;
     public $status = 'draft';
 
     protected $paginationTheme = 'tailwind';
@@ -85,7 +84,6 @@ class Events extends Component
             'seo_description' => 'nullable|string|max:500',
             'is_featured' => 'boolean',
             'is_jeudi_opportunite' => 'boolean',
-            'is_paid' => 'boolean',
             'status' => 'required|in:draft,published,ongoing,completed,cancelled,archived',
         ];
     }
@@ -156,7 +154,6 @@ class Events extends Component
         $this->seo_description = $event->seo_description;
         $this->is_featured = $event->is_featured;
         $this->is_jeudi_opportunite = (bool) $event->is_jeudi_opportunite;
-        $this->is_paid = (bool) $event->is_paid;
         $this->status = $event->status;
         $this->editMode = true;
         $this->showModal = true;
@@ -177,7 +174,6 @@ class Events extends Component
             if ($this->event_type === 'physical') {
                 $this->event_type = 'online';
             }
-            $this->is_paid = false;
         }
 
         $data = [
@@ -206,7 +202,6 @@ class Events extends Component
             'seo_description' => $this->seo_description,
             'is_featured' => (bool) $this->is_featured,
             'is_jeudi_opportunite' => (bool) $this->is_jeudi_opportunite,
-            'is_paid' => (bool) $this->is_paid,
             'status' => $this->status,
             'created_by' => Auth::id(),
         ];
@@ -270,21 +265,8 @@ class Events extends Component
         $clone->registration_count = 0;
         $clone->save();
 
-        foreach ($event->ticketTypes as $ticket) {
-            $ticketClone = $ticket->replicate();
-            $ticketClone->event_id = $clone->id;
-            $ticketClone->sold = 0;
-            $ticketClone->save();
-        }
-
         foreach ($event->programItems as $item) {
             $copy = $item->replicate();
-            $copy->event_id = $clone->id;
-            $copy->save();
-        }
-
-        foreach ($event->speakers as $speaker) {
-            $copy = $speaker->replicate();
             $copy->event_id = $clone->id;
             $copy->save();
         }
@@ -346,7 +328,6 @@ class Events extends Component
         $this->seo_description = '';
         $this->is_featured = false;
         $this->is_jeudi_opportunite = false;
-        $this->is_paid = false;
         $this->status = 'draft';
     }
 

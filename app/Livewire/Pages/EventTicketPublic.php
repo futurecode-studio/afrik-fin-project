@@ -13,7 +13,7 @@ class EventTicketPublic extends Component
     public function mount($qrCode)
     {
         $this->registration = EventRegistration::where('qr_code', $qrCode)
-            ->with(['event', 'ticketType'])
+            ->with(['event'])
             ->firstOrFail();
     }
 
