@@ -30,6 +30,7 @@ deploy-code:
 		git checkout main 2>/dev/null || git checkout -b main origin/main; \
 		git reset --hard origin/main; \
 		cp public/.htaccess $(DOCROOT_DIR)/.htaccess; \
+		cp public/adf-navigation-fix-sw.js $(DOCROOT_DIR)/adf-navigation-fix-sw.js; \
 		chmod +x scripts/ensure-vite-build.sh 2>/dev/null || true; \
 		if [ -f scripts/ensure-vite-build.sh ] && [ -f public/build/manifest.json ]; then \
 			./scripts/ensure-vite-build.sh '$(CORE_DIR)' '$(DOCROOT_DIR)'; \
