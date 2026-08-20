@@ -98,7 +98,12 @@ Route::get('/outils/rendement-obligataire', \App\Livewire\Pages\Outils\Simulateu
 Route::get('/outils/frais-fiscalite', \App\Livewire\Pages\Outils\EstimateurFraisFiscalite::class)->name('outils.frais');
 Route::get('/outils/performance-fcp', \App\Livewire\Pages\Outils\AnalysePerformanceFcp::class)->name('outils.performance-fcp');
 Route::get('/demande-mise-en-relation', \App\Livewire\Pages\MiseEnRelation::class)->name('mise-en-relation');
-Route::redirect('/mise-en-relation', '/demande-mise-en-relation', 301);
+Route::get('/mise-en-relation', function () {
+    return redirect('/demande-mise-en-relation', 302)
+        ->header('Cache-Control', 'no-store, no-cache, max-age=0, must-revalidate')
+        ->header('Pragma', 'no-cache')
+        ->header('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT');
+});
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->name('partenaires.show');
 Route::redirect('/equipe', '/a-propos', 301);
