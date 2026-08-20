@@ -13,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, SoftDeletes;
 
     /**
      * Get the primary role name for display
@@ -21,6 +21,7 @@ class User extends Authenticatable
     public function getPrimaryRoleAttribute(): string
     {
         $roleNames = $this->getRoleNames();
+
         return $roleNames->first() ?? 'Client';
     }
 
@@ -42,6 +43,8 @@ class User extends Authenticatable
         'date_of_birth',
         'gender',
         'avatar',
+        'google_id',
+        'google_avatar',
         'is_active',
         'last_login_at',
         'interests_completed_at',

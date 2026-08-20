@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Client;
 
+use App\Livewire\Concerns\WithSweetAlert;
+use App\Models\Event;
 use App\Models\EventRegistration;
 use App\Services\EventRegistrationService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Livewire\Concerns\WithSweetAlert;
 
 class MyEvents extends Component
 {
     use WithSweetAlert;
+
     public $registrations;
 
     public function mount()
@@ -33,9 +35,10 @@ class MyEvents extends Component
             ->firstOrFail();
 
         $pdf = $service->generateTicketPdf($registration);
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'ticket-' . $registration->event->slug . '.pdf');
+        }, 'ticket-'.$registration->event->slug.'.pdf');
     }
 
     public function cancelRegistration($registrationId, EventRegistrationService $service)
@@ -55,8 +58,20 @@ class MyEvents extends Component
 
     public function render()
     {
-        return view('livewire.client.my-events')
-            ->extends('layouts.client', ['title' => 'Mes Événements'])
+        $upcomingWebinars = Event::query()
+            ->whereIn('status', ['published', 'ongoing'])
+            ->where('starts_at', '>=', now())
+            ->where(function ($query) {
+                $query->whereIn('event_type', ['online', 'hybrid'])
+                    ->orWhere('category', 'like', '%web%')
+                    ->orWhere('title', 'like', '%web%');
+            })
+            ->orderBy('starts_at')
+            ->take(6)
+            ->get();
+
+        return view('livewire.client.my-events', compact('upcomingWebinars'))
+            ->extends('layouts.client', ['title' => 'Mes Webinaires'])
             ->section('content');
     }
 }

@@ -12,8 +12,11 @@ use Livewire\Component;
 class Register extends Component
 {
     public string $name = '';
+
     public string $email = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
 
     /**
@@ -37,7 +40,7 @@ class Register extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('client.my-events'));
+        $this->redirect(route('client.dashboard'));
     }
 
     public function render()

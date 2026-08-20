@@ -38,8 +38,10 @@
 
         @php
             $nav = [
-                ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Événement', 'icon' => 'event'],
-                ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Formation', 'icon' => 'school'],
+                ['route' => 'client.dashboard', 'match' => 'client.dashboard', 'label' => 'Accueil', 'icon' => 'dashboard'],
+                ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Webinaires', 'icon' => 'live_tv'],
+                ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Formations', 'icon' => 'school'],
+                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Souscriptions', 'icon' => 'contract_edit'],
                 ['route' => 'client.ask-instructor', 'match' => 'client.ask-instructor', 'label' => 'Formateur', 'icon' => 'contact_support'],
                 ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificat', 'icon' => 'workspace_premium'],
             ];
@@ -99,6 +101,31 @@
         </header>
 
         <main class="flex-1 px-4 lg:px-8 py-8 max-w-[1280px] w-full adf-reveal">
+            @php
+                $nextClientWebinar = \App\Models\Event::query()
+                    ->whereIn('status', ['published', 'ongoing'])
+                    ->where('starts_at', '>=', now())
+                    ->where(function ($query) {
+                        $query->whereIn('event_type', ['online', 'hybrid'])
+                            ->orWhere('category', 'like', '%web%')
+                            ->orWhere('title', 'like', '%web%');
+                    })
+                    ->orderBy('starts_at')
+                    ->first();
+            @endphp
+            @if ($nextClientWebinar)
+                <a href="{{ route('event-detail', $nextClientWebinar->slug) }}"
+                    class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-[#c5c5d4] bg-white px-4 py-3 hover:border-[#001a61] transition">
+                    <span class="inline-flex items-center gap-2 text-sm text-[#444652]">
+                        <span class="material-symbols-outlined text-[#001a61]">live_tv</span>
+                        <span>
+                            Prochain webinaire :
+                            <strong class="text-[#001a61]">{{ $nextClientWebinar->title }}</strong>
+                        </span>
+                    </span>
+                    <span class="text-xs font-bold text-[#0a2e8c]">{{ $nextClientWebinar->starts_at?->format('d/m/Y H:i') }}</span>
+                </a>
+            @endif
             @yield('content')
         </main>
     </div>

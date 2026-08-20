@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', \App\Livewire\Pages\Home::class)->name('home');
 Route::get('/services', \App\Livewire\Pages\Services::class)->name('services');
 Route::get('/services/formations', \App\Livewire\Pages\ServicesFormation::class)->name('services-formation');
@@ -98,8 +97,8 @@ Route::get('/outils/interets-composes', \App\Livewire\Pages\Outils\SimulateurInt
 Route::get('/outils/rendement-obligataire', \App\Livewire\Pages\Outils\SimulateurObligataire::class)->name('outils.rendement-obligataire');
 Route::get('/outils/frais-fiscalite', \App\Livewire\Pages\Outils\EstimateurFraisFiscalite::class)->name('outils.frais');
 Route::get('/outils/performance-fcp', \App\Livewire\Pages\Outils\AnalysePerformanceFcp::class)->name('outils.performance-fcp');
-Route::redirect('/demande-mise-en-relation', '/', 301)->name('mise-en-relation');
-Route::redirect('/mise-en-relation', '/', 301);
+Route::get('/demande-mise-en-relation', \App\Livewire\Pages\MiseEnRelation::class)->name('mise-en-relation');
+Route::redirect('/mise-en-relation', '/demande-mise-en-relation', 301);
 Route::get('/partenaires', \App\Livewire\Pages\Partners::class)->name('partenaires');
 Route::get('/partenaires/{id}', \App\Livewire\Pages\PartenaireDetail::class)->name('partenaires.show');
 Route::redirect('/equipe', '/a-propos', 301);

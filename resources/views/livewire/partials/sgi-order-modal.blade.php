@@ -39,7 +39,7 @@
     >
         <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-5 py-4 border-b border-[#e7eeff] bg-white rounded-t-2xl">
             <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-[#0a2e8c]">Envoi d’ordre</p>
+                <p class="text-[11px] font-bold uppercase tracking-wider text-[#0a2e8c]">Souscription</p>
                 <h2 class="text-lg font-extrabold text-[#001a61]">
                     @if ($modalScreen === 'choice')
                         Compte chez une SGI ?
@@ -60,7 +60,7 @@
         <div class="p-5 space-y-4">
             @if ($modalScreen === 'choice')
                 <p class="text-sm text-[#444652]">
-                    Africaine des Finances ne détient pas de comptes-titres. Pour relayer votre intention, indiquez si vous avez déjà un compte chez une SGI agréée.
+                    Africaine des Finances ne détient pas de comptes-titres. Pour préparer votre souscription, indiquez si vous avez déjà un compte chez une SGI agréée.
                 </p>
                 <button
                     type="button"
@@ -91,7 +91,7 @@
 
             @elseif ($modalScreen === 'has_account')
                 <p class="text-sm text-[#444652]">
-                    Renseignez la SGI et votre numéro de compte-titres. Votre intention d’ordre sera ensuite enregistrée pour mise en relation.
+                    Renseignez la SGI et votre numéro de compte-titres. Votre demande sera ensuite enregistrée dans le tableau de suivi.
                 </p>
                 <div>
                     <label class="text-sm font-medium">SGI *</label>
@@ -125,7 +125,7 @@
                 @endphp
                 <div class="rounded-xl bg-[#f0f3ff] border border-[#c5c5d4] p-4 space-y-3 text-sm text-[#444652]">
                     <p>
-                        Vous n’avez pas encore de compte chez une SGI. Africaine des Finances peut vous accompagner pour en ouvrir un auprès d’un partenaire agréé.
+                    Vous n’avez pas encore de compte chez une SGI. Africaine des Finances peut vous accompagner pour ouvrir un compte ou finaliser votre dossier auprès d’un partenaire agréé.
                     </p>
                     <p>
                         En confirmant, <strong class="text-[#001a61]">des chargées de clientèle vous contacteront</strong> pour prendre en charge votre dossier. Aucun montant ni ordre n’est demandé à ce stade.

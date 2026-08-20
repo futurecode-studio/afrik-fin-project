@@ -122,7 +122,7 @@ class OrdresProgrammes extends Component
             $stock = $markets->topVolume(1)->first();
 
             return view('livewire.client.ordres-programmes', compact('stock'))
-                ->extends('layouts.client', ['title' => 'Ordres Programmés'])
+                ->extends('layouts.client', ['title' => 'Souscriptions'])
                 ->section('content');
         }
 
@@ -137,7 +137,7 @@ class OrdresProgrammes extends Component
             ->get();
 
         return view('livewire.client.ordres-programmes-live', compact('stocks', 'stock', 'orders', 'partners', 'requiredDocs'))
-            ->extends('layouts.client', ['title' => 'Ordres Programmés'])
+            ->extends('layouts.client', ['title' => 'Souscriptions'])
             ->section('content');
     }
 }

@@ -1,8 +1,26 @@
 <div>
     <div class="mb-8">
-        <h1 class="text-3xl font-extrabold text-[#001a61]">Mes événements</h1>
-        <p class="text-[#444652] mt-2">Inscriptions et billets à venir.</p>
+        <h1 class="text-3xl font-extrabold text-[#001a61]">Mes webinaires et événements</h1>
+        <p class="text-[#444652] mt-2">Vos inscriptions, billets et prochains rendez-vous Africaine des Finances.</p>
     </div>
+
+    <section class="mb-8 bg-white border border-[#c5c5d4] rounded-xl p-5">
+        <div class="flex items-center justify-between gap-3 mb-4">
+            <h2 class="font-bold text-lg text-[#001a61]">Prochains webinaires</h2>
+            <a href="{{ route('events-list', ['filterFormat' => 'online']) }}" class="text-sm font-bold text-[#001a61] hover:underline">Voir le calendrier</a>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+            @forelse ($upcomingWebinars as $event)
+                <a href="{{ route('event-detail', $event->slug) }}" class="rounded-xl border border-[#e7eeff] p-4 hover:border-[#001a61] transition">
+                    <p class="text-xs font-bold text-[#0a2e8c]">{{ $event->starts_at?->format('d/m/Y H:i') }}</p>
+                    <h3 class="mt-1 font-extrabold text-[#001a61] line-clamp-2">{{ $event->title }}</h3>
+                    <p class="mt-2 text-xs text-[#757683]">{{ $event->onlinePlatformLabel() }} · {{ $event->registrationStatusLabel() }}</p>
+                </a>
+            @empty
+                <p class="md:col-span-2 xl:col-span-3 text-sm text-[#757683] py-4">Aucun webinaire programmé pour le moment.</p>
+            @endforelse
+        </div>
+    </section>
 
     <div class="space-y-4">
         @forelse ($registrations as $reg)
