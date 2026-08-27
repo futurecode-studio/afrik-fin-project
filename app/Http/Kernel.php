@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\CheckRole::class,
         'permission' => \App\Http\Middleware\CheckPermission::class,
         'admin.panel' => \App\Http\Middleware\EnsureAdminPanel::class,
+        'feature' => \App\Http\Middleware\EnsureFeatureEnabled::class,
     ];
 }

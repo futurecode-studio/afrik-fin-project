@@ -46,7 +46,9 @@ class Dashboard extends Component
             'eventsCount' => EventRegistration::where('user_id', $user->id)
                 ->whereIn('status', ['confirmed', 'checked_in'])
                 ->count(),
-            'subscriptionsCount' => ScheduledOrder::where('user_id', $user->id)->count(),
+            'subscriptionsCount' => feature_enabled('client.ordres')
+                ? ScheduledOrder::where('user_id', $user->id)->count()
+                : 0,
             'totalProgress' => $totalProgress,
             'nextWebinars' => $nextWebinars,
         ])

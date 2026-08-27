@@ -121,13 +121,13 @@
         </div>
     </section>
 
-    <section class="py-16 lg:py-20">
+    <section class="py-16 lg:py-20" x-data="{ tab: window.location.hash === '#nous-rejoindre' ? 'nous-rejoindre' : 'equipe' }" id="equipe">
         <div class="container mx-auto px-4">
             <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
                 <div>
                     <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#0a2e8c]">L'équipe</p>
                     <h2 class="mt-2 text-3xl font-extrabold text-[#001a61]">Des interlocuteurs identifiés pour accompagner les clients</h2>
-                    <p class="mt-3 text-[#444652] leading-relaxed">La relation client est au centre du dispositif: écouter, expliquer, orienter et suivre. Les profils ci-dessous sont intégrés directement dans le code du site afin que la page À propos ne dépende pas d'un enregistrement backend.</p>
+                    <p class="mt-3 text-[#444652] leading-relaxed">La relation client est au centre du dispositif : écouter, expliquer, orienter et suivre. Découvrez nos conseillers ou envoyez votre candidature pour rejoindre l'aventure.</p>
                 </div>
                 <div class="rounded-lg border border-[#c5c5d4] bg-white p-6">
                     <h3 class="text-lg font-extrabold text-[#001a61]">Domaines couverts</h3>
@@ -139,7 +139,23 @@
                 </div>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="mt-10 inline-flex flex-wrap gap-2 rounded-xl border border-[#c5c5d4] bg-white p-1.5">
+                <button type="button"
+                    @click="tab = 'equipe'; history.replaceState(null, '', '#equipe')"
+                    :class="tab === 'equipe' ? 'bg-[#001a61] text-white' : 'text-[#444652] hover:bg-[#e7eeff] hover:text-[#001a61]'"
+                    class="px-4 py-2.5 rounded-lg text-sm font-bold transition">
+                    L'équipe
+                </button>
+                <button type="button"
+                    @click="tab = 'nous-rejoindre'; history.replaceState(null, '', '#nous-rejoindre')"
+                    :class="tab === 'nous-rejoindre' ? 'bg-[#001a61] text-white' : 'text-[#444652] hover:bg-[#e7eeff] hover:text-[#001a61]'"
+                    class="px-4 py-2.5 rounded-lg text-sm font-bold transition">
+                    Nous rejoindre
+                </button>
+            </div>
+
+            <div x-show="tab === 'equipe'" x-cloak>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 @foreach($members as $member)
                     @php
                         $parts = explode(' ', $member['name']);
@@ -169,6 +185,24 @@
                         </div>
                     </article>
                 @endforeach
+            </div>
+            </div>
+
+            <div x-show="tab === 'nous-rejoindre'" x-cloak id="nous-rejoindre" class="mt-8">
+                <article class="max-w-3xl rounded-2xl border border-[#c5c5d4] bg-white p-8 lg:p-10">
+                    <span class="material-symbols-outlined text-4xl text-[#ffbf00]">groups</span>
+                    <h3 class="mt-4 text-2xl font-extrabold text-[#001a61]">Rejoignez Africaine des Finances</h3>
+                    <p class="mt-3 text-[#444652] leading-relaxed">
+                        Vous souhaitez évoluer dans la finance de marché, la relation client ou l'éducation financière ?
+                        Envoyez votre candidature spontanée ou votre demande de stage à notre équipe Capital Humain.
+                    </p>
+                    <a href="mailto:capital.humain@africainedesfinances.com"
+                        class="mt-6 inline-flex items-center gap-2 bg-[#001a61] text-white font-bold px-6 py-3.5 rounded-xl hover:bg-[#0a2e8c] transition">
+                        <span class="material-symbols-outlined text-[20px]">mail</span>
+                        capital.humain@africainedesfinances.com
+                    </a>
+                    <p class="mt-4 text-sm text-[#757683]">Joignez votre CV et une courte lettre de motivation.</p>
+                </article>
             </div>
         </div>
     </section>

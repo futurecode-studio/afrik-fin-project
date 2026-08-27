@@ -51,13 +51,21 @@
             <aside class="lg:col-span-2 space-y-4">
                 <div class="bg-[#001a61] text-white rounded-xl p-6">
                     <h2 class="text-xl font-extrabold">Prêt à investir dans votre avenir ?</h2>
-                    <p class="text-white/75 text-sm mt-2">Choisissez une souscription directe si vous avez déjà un compte, ou demandez un accompagnement avec {{ $partner->nom }}.</p>
+                    <p class="text-white/75 text-sm mt-2">
+                        @if (feature_enabled('client.ordres'))
+                            Choisissez une souscription directe si vous avez déjà un compte, ou demandez un accompagnement avec {{ $partner->nom }}.
+                        @else
+                            Demandez un accompagnement pour être orienté vers {{ $partner->nom }}.
+                        @endif
+                    </p>
                     @auth
-                        <a href="{{ route('client.ordres') }}"
-                            class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#001a61] font-bold">
-                            Souscription directe
-                            <span class="material-symbols-outlined text-base">contract_edit</span>
-                        </a>
+                        @if (feature_enabled('client.ordres'))
+                            <a href="{{ route('client.ordres') }}"
+                                class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#001a61] font-bold">
+                                Souscription directe
+                                <span class="material-symbols-outlined text-base">contract_edit</span>
+                            </a>
+                        @endif
                     @endauth
                     <a href="{{ route('mise-en-relation', ['partner' => $partner->id]) }}"
                         class="mt-3 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#ffbf00] text-[#261a00] font-bold">

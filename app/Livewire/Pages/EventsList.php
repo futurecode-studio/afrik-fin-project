@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Event;
+use App\Support\Countries;
 use Livewire\Component;
 
 class EventsList extends Component
@@ -11,7 +12,7 @@ class EventsList extends Component
 
     public string $filterCategory = '';
 
-    public string $filterCity = '';
+    public string $filterCountry = '';
 
     public string $filterType = 'upcoming'; // upcoming, past, featured, all
 
@@ -20,7 +21,7 @@ class EventsList extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'filterCategory' => ['except' => ''],
-        'filterCity' => ['except' => ''],
+        'filterCountry' => ['except' => ''],
         'filterType' => ['except' => 'upcoming'],
         'filterFormat' => ['except' => ''],
     ];
@@ -29,7 +30,7 @@ class EventsList extends Component
     {
         $this->search = '';
         $this->filterCategory = '';
-        $this->filterCity = '';
+        $this->filterCountry = '';
         $this->filterType = 'upcoming';
         $this->filterFormat = '';
     }
@@ -80,6 +81,7 @@ class EventsList extends Component
                 $q->where('title', 'like', $like)
                     ->orWhere('description', 'like', $like)
                     ->orWhere('city', 'like', $like)
+                    ->orWhere('country', 'like', $like)
                     ->orWhere('location_name', 'like', $like);
             });
         }
@@ -88,8 +90,8 @@ class EventsList extends Component
             $query->where('category', $this->filterCategory);
         }
 
-        if ($this->filterCity !== '') {
-            $query->where('city', $this->filterCity);
+        if ($this->filterCountry !== '') {
+            $query->where('country', $this->filterCountry);
         }
 
         if ($this->filterFormat !== '') {
@@ -109,19 +111,19 @@ class EventsList extends Component
             ->filter()
             ->values();
 
-        $cities = Event::query()
+        $countries = Event::query()
             ->whereIn('status', ['published', 'ongoing'])
-            ->whereNotNull('city')
+            ->whereNotNull('country')
             ->distinct()
-            ->orderBy('city')
-            ->pluck('city')
+            ->orderBy('country')
+            ->pluck('country')
             ->filter()
             ->values();
 
         $stats = [
             'upcoming' => Event::upcoming()->count(),
             'featured' => Event::featured()->count(),
-            'cities' => $cities->count(),
+            'countries' => $countries->count(),
         ];
 
         $pastWithGallery = Event::query()
@@ -149,7 +151,7 @@ class EventsList extends Component
             'featured' => $featured,
             'pastWithGallery' => $pastWithGallery,
             'categories' => $categories,
-            'cities' => $cities,
+            'countryOptions' => Countries::frenchOptions(),
             'stats' => $stats,
         ])->extends('layouts.site', ['title' => 'Nos événements — Africaine des Finances'])
             ->section('content');

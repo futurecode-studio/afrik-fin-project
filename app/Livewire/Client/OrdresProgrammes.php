@@ -118,14 +118,6 @@ class OrdresProgrammes extends Component
 
     public function render(MarketsDataService $markets)
     {
-        if (! feature_enabled('client.ordres')) {
-            $stock = $markets->topVolume(1)->first();
-
-            return view('livewire.client.ordres-programmes', compact('stock'))
-                ->extends('layouts.client', ['title' => 'Souscriptions'])
-                ->section('content');
-        }
-
         $stocks = $markets->stocks();
         $stock = $markets->stockBySymbol($this->symbol);
         $partners = Partner::sgi()->active()->orderBy('nom')->get();

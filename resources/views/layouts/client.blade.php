@@ -41,10 +41,18 @@
                 ['route' => 'client.dashboard', 'match' => 'client.dashboard', 'label' => 'Accueil', 'icon' => 'dashboard'],
                 ['route' => 'client.my-events', 'match' => ['client.my-events', 'client.event.ticket'], 'label' => 'Webinaires', 'icon' => 'live_tv'],
                 ['route' => 'client.formations', 'match' => ['client.formations', 'client.formation', 'client.formation.*', 'client.quiz.*', 'client.exam.*'], 'label' => 'Formations', 'icon' => 'school'],
-                ['route' => 'client.ordres', 'match' => 'client.ordres', 'label' => 'Souscriptions', 'icon' => 'contract_edit'],
                 ['route' => 'client.ask-instructor', 'match' => 'client.ask-instructor', 'label' => 'Formateur', 'icon' => 'contact_support'],
                 ['route' => 'client.certificates', 'match' => 'client.certificates*', 'label' => 'Certificat', 'icon' => 'workspace_premium'],
             ];
+
+            if (feature_enabled('client.ordres')) {
+                array_splice($nav, 3, 0, [[
+                    'route' => 'client.ordres',
+                    'match' => 'client.ordres',
+                    'label' => 'Souscriptions',
+                    'icon' => 'contract_edit',
+                ]]);
+            }
         @endphp
         <nav class="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 space-y-0.5">
             @foreach ($nav as $item)

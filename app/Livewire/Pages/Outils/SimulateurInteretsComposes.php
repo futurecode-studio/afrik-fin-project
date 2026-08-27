@@ -63,16 +63,8 @@ class SimulateurInteretsComposes extends Component
         $monthlyRate = $this->rateForType($this->fcpType) / 100 / 12;
 
         $value = $capital;
-        $chart = [['year' => 0, 'total' => (int) round($capital)]];
-
         for ($month = 1; $month <= $months; $month++) {
             $value = ($value + $versement) * (1 + $monthlyRate);
-            if ($month % 12 === 0 || $month === $months) {
-                $chart[] = [
-                    'year' => round($month / 12, 1),
-                    'total' => (int) round($value),
-                ];
-            }
         }
 
         $future = (int) round($value);
@@ -81,8 +73,81 @@ class SimulateurInteretsComposes extends Component
             'future' => $future,
             'invested' => (int) round($invested),
             'gain' => (int) round($future - $invested),
-            'chart' => $chart,
+            'chart' => $this->buildVolatileChart($capital, $versement, $months, $monthlyRate, $future),
         ];
+    }
+
+    /**
+     * Courbe avec fluctuations réalistes (montées / baisses) tout en rejoignant la valeur finale.
+     *
+     * @return array<int, array{year: float|int, total: int}>
+     */
+    private function buildVolatileChart(float $capital, float $versement, int $months, float $monthlyRate, int $future): array
+    {
+        if ($months === 0) {
+            return [['year' => 0, 'total' => (int) round($capital)]];
+        }
+
+        $monthlyValues = [(float) $capital];
+        $value = (float) $capital;
+        $volatility = $this->monthlyVolatility($this->fcpType);
+
+        for ($month = 1; $month <= $months; $month++) {
+            $noise = $this->deterministicMonthlyNoise($month);
+            $monthReturn = $monthlyRate + ($noise * $volatility);
+            $value = ($value + $versement) * (1 + $monthReturn);
+            $monthlyValues[] = $value;
+        }
+
+        $stochasticEnd = max($monthlyValues[count($monthlyValues) - 1], 1);
+        $scale = $future / $stochasticEnd;
+
+        $interval = $months <= 24 ? 3 : 6;
+        $chart = [['year' => 0, 'total' => (int) round($capital)]];
+
+        for ($month = 1; $month <= $months; $month++) {
+            if ($month % $interval !== 0 && $month !== $months) {
+                continue;
+            }
+
+            $investedAtPoint = $capital + ($versement * $month);
+            $scaled = (int) round($monthlyValues[$month] * $scale);
+            $scaled = max($scaled, (int) round($investedAtPoint * 0.9));
+
+            $chart[] = [
+                'year' => round($month / 12, 1),
+                'total' => $scaled,
+            ];
+        }
+
+        $chart[count($chart) - 1]['total'] = $future;
+
+        return $chart;
+    }
+
+    private function monthlyVolatility(string $type): float
+    {
+        return match ($type) {
+            'Actions' => 0.05,
+            'Obligations' => 0.015,
+            'Diversifies' => 0.03,
+            default => 0.03,
+        };
+    }
+
+    private function deterministicMonthlyNoise(int $month): float
+    {
+        $seed = crc32(sprintf(
+            '%s|%.2f|%.2f|%d',
+            $this->fcpType,
+            $this->capital,
+            $this->versement,
+            $this->annees
+        ));
+
+        $t = $month + (($seed % 1000) / 1000);
+
+        return (sin($t * 1.73) + (0.5 * sin(($t * 3.29) + 2.1)) + (0.25 * cos(($t * 5.11) + 0.5))) / 1.75;
     }
 
     private function rateForType(string $type): float

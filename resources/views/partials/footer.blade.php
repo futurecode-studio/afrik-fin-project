@@ -7,8 +7,8 @@
     $diasporaLabel = config('services.diaspora_funnel.label');
 @endphp
 
-<footer class="relative mt-auto border-t border-white/40 text-[#131c2a] overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#dae3f6]/90 via-[#e8eefc]/85 to-[#f0f4ff]/90 backdrop-blur-xl"></div>
+<footer class="relative mt-auto border-t border-[#001a61]/10 text-[#131c2a] overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#b8c9eb] via-[#cdd9f2] to-[#e2ebfa] backdrop-blur-md"></div>
     <div class="absolute -top-24 -right-16 w-64 h-64 rounded-full bg-[#ffbf00]/15 blur-3xl pointer-events-none"></div>
 
     <div class="relative px-5 lg:px-16 max-w-[1280px] mx-auto pt-14 lg:pt-16 pb-10">

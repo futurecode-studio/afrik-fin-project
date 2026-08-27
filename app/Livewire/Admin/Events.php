@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Event;
+use App\Support\Countries;
 use App\Models\EventGallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -346,6 +347,7 @@ class Events extends Component
 
         return view('livewire.admin.events', [
             'events' => $events,
+            'countryOptions' => Countries::frenchOptions(),
         ])->extends('layouts.admin', ['title' => 'Gestion des Événements'])->section('content');
     }
 }

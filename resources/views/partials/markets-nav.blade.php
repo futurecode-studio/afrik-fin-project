@@ -1,6 +1,7 @@
 {{-- Sous-navigation Marchés --}}
 @php
     $items = [
+        ['route' => 'marches.cotations', 'label' => 'Cotations', 'match' => ['marches.cotations', 'marches.action']],
         ['route' => 'marches.palmares', 'label' => 'Palmarès', 'match' => 'marches.palmares'],
         ['route' => 'marches.comparateur', 'label' => 'Comparateur', 'match' => 'marches.comparateur'],
         ['route' => 'marches.indices', 'label' => 'Indices', 'match' => 'marches.indices'],
@@ -8,11 +9,17 @@
         ['route' => 'marches.screener', 'label' => 'Screener', 'match' => 'marches.screener'],
         ['route' => 'marches.secteurs', 'label' => 'Secteurs', 'match' => 'marches.secteurs'],
         ['route' => 'marches.introductions', 'label' => 'IPO', 'match' => 'marches.introductions'],
-        ['route' => 'marches.carnet', 'label' => 'Carnet', 'match' => 'marches.carnet'],
+    ];
+
+    if (feature_enabled('marches.carnet')) {
+        $items[] = ['route' => 'marches.carnet', 'label' => 'Carnet', 'match' => 'marches.carnet'];
+    }
+
+    $items = array_merge($items, [
         ['route' => 'marches.bibliotheque', 'label' => 'Bibliothèque', 'match' => 'marches.bibliotheque'],
         ['route' => 'marches.comparateur-multi', 'label' => 'Multi-actifs', 'match' => 'marches.comparateur-multi'],
         ['route' => 'marches.analyse-pro', 'label' => 'Graphique Pro', 'match' => 'marches.analyse-pro*'],
-    ];
+    ]);
 @endphp
 <nav class="border-b border-[#c5c5d4] bg-white/80 backdrop-blur sticky top-[7.5rem] z-30">
     <div class="max-w-[1280px] mx-auto px-5 lg:px-16 overflow-x-auto">

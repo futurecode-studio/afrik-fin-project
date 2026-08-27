@@ -213,7 +213,11 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1">Pays</label>
-                        <input type="text" wire:model="country" class="w-full px-3 py-2 border border-[#c5c5d4] rounded-lg bg-[#f9f9ff] focus:ring-2 focus:ring-primary">
+                        <x-country-search-select
+                            wire:model="country"
+                            :countries="$countryOptions"
+                            placeholder="Sélectionner un pays"
+                        />
                     </div>
 
                     @if (in_array($event_type, ['online', 'hybrid'], true))

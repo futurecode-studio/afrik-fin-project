@@ -18,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v14', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v15', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -56,7 +56,6 @@ class Home extends Component
                 ->get(['id', 'symbol', 'company_name', 'current_price', 'variation_percent', 'volume']);
 
             $topGainers = $stocks->sortByDesc('variation_percent')->take(5)->values();
-            $topLosers = $stocks->sortBy('variation_percent')->take(5)->values();
             $tickerStocks = $stocks->sortByDesc('volume')->take(12)->values();
 
             $indexHistory = MarketIndexHistory::query()
@@ -122,7 +121,6 @@ class Home extends Component
                 'stocks' => $stocks,
                 'tickerStocks' => $tickerStocks,
                 'topGainers' => $topGainers,
-                'topLosers' => $topLosers,
                 'stockCount' => $stocks->count(),
                 'compositeLatest' => $compositeLatest,
                 'chartLabels' => $chartLabels,
@@ -192,7 +190,7 @@ class Home extends Component
             [
                 'icon' => 'school',
                 'title' => 'Formation',
-                'text' => 'Initiation à la Bourse et à la BRVM, formation Fidips et parcours structurés pour monter en compétence.',
+                'text' => 'Initiation à la Bourse et à la BRVM, formation Fidix et parcours structurés pour monter en compétence.',
             ],
             [
                 'icon' => 'trending_up',

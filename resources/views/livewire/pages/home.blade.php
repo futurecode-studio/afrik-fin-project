@@ -274,7 +274,14 @@
             </div>
 
             <div>
-                <h3 class="text-lg font-extrabold text-[#001a61] mb-5">L’équipe</h3>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+                    <h3 class="text-lg font-extrabold text-[#001a61]">L’équipe</h3>
+                    <a href="{{ route('team') }}#nous-rejoindre"
+                        class="inline-flex items-center gap-1.5 text-sm font-bold text-[#0a2e8c] hover:underline w-fit">
+                        Nous rejoindre
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     @foreach ($teamPreview as $member)
                         <article class="bg-[#f9f9ff] border border-[#c5c5d4] rounded-xl overflow-hidden">
@@ -496,10 +503,16 @@
                 <p class="text-[#444652] mt-2 max-w-xl">Découvrez chaque titre, suivez l’évolution du marché, puis passez à l’action.</p>
             </div>
             <div class="flex flex-wrap gap-3">
-                <a href="#actions-marche"
-                    class="border border-[#001a61] text-[#001a61] font-bold px-5 py-2.5 rounded-lg hover:bg-[#e7eeff] transition inline-flex items-center gap-2">
-                    Découvrir
-                    <span class="material-symbols-outlined text-[18px]">search</span>
+                <a href="{{ route('marches.cotations') }}"
+                    class="border border-[#001a61] text-[#001a61] font-bold px-5 py-2.5 rounded-lg hover:bg-[#e7eeff] transition inline-flex items-center gap-2"
+                    wire:navigate>
+                    Voir les {{ $stockCount ?: 47 }} cotations
+                    <span class="material-symbols-outlined text-[18px]">table_rows</span>
+                </a>
+                <a href="{{ route('mise-en-relation') }}"
+                    class="bg-[#001a61] text-white font-bold px-5 py-2.5 rounded-lg hover:bg-[#0a2e8c] transition inline-flex items-center gap-2">
+                    Créer un compte-titres
+                    <span class="material-symbols-outlined text-[18px]">account_balance</span>
                 </a>
             </div>
         </div>
@@ -566,6 +579,10 @@
                             <p class="text-sm text-[#444652]">Aucune donnée</p>
                         @endforelse
                     </div>
+                    <a href="{{ route('marches.palmares') }}" class="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#001a61] hover:underline" wire:navigate>
+                        Voir le palmarès complet
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
                 </div>
             </div>
         </div>

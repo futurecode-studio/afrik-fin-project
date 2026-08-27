@@ -106,7 +106,7 @@
                     borderWidth: 2.5,
                     pointRadius: 0,
                     pointHoverRadius: 4,
-                    tension: 0.35,
+                    tension: 0.05,
                     fill: true,
                 }]
             },

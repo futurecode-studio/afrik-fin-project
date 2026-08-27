@@ -8,13 +8,18 @@
                     Laissez vos coordonnées. Une chargée de clientèle vous contacte pour vous orienter vers une SGI ou SGO et préparer le dossier.
                 </p>
 
-                <div class="mt-8 grid sm:grid-cols-2 gap-4">
-                    <a href="{{ route('client.ordres') }}" class="rounded-xl border border-[#c5c5d4] bg-white p-5 hover:border-[#001a61] transition">
-                        <span class="material-symbols-outlined text-[#001a61]">contract_edit</span>
-                        <h2 class="mt-3 font-extrabold text-[#001a61]">Souscription directe</h2>
-                        <p class="mt-1 text-sm text-[#757683]">Vous avez déjà une SGI : renseignez l’intention et le compte-titres.</p>
-                    </a>
-                    <div class="rounded-xl border border-[#001a61] bg-[#001a61] p-5 text-white">
+                <div class="mt-8 grid sm:grid-cols-{{ feature_enabled('client.ordres') ? '2' : '1' }} gap-4">
+                    @if (feature_enabled('client.ordres'))
+                        <a href="{{ route('client.ordres') }}" class="rounded-xl border border-[#c5c5d4] bg-white p-5 hover:border-[#001a61] transition">
+                            <span class="material-symbols-outlined text-[#001a61]">contract_edit</span>
+                            <h2 class="mt-3 font-extrabold text-[#001a61]">Souscription directe</h2>
+                            <p class="mt-1 text-sm text-[#757683]">Vous avez déjà une SGI : renseignez l’intention et le compte-titres.</p>
+                        </a>
+                    @endif
+                    <div @class([
+                        'rounded-xl border border-[#001a61] bg-[#001a61] p-5 text-white',
+                        'sm:col-span-2' => ! feature_enabled('client.ordres'),
+                    ])>
                         <span class="material-symbols-outlined">support_agent</span>
                         <h2 class="mt-3 font-extrabold">Souscription accompagnée</h2>
                         <p class="mt-1 text-sm text-white/75">Vous voulez être guidé : l’équipe prend le relais.</p>

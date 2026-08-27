@@ -93,7 +93,9 @@
                         @endforeach
                     </ul>
                 </div>
-                <a href="{{ route('marches.carnet') }}" class="block text-center py-3 rounded-xl bg-[#001a61] text-white font-bold text-sm">Ouvrir le carnet d'ordres</a>
+                @if (feature_enabled('marches.carnet'))
+                    <a href="{{ route('marches.carnet') }}" class="block text-center py-3 rounded-xl bg-[#001a61] text-white font-bold text-sm">Ouvrir le carnet d'ordres</a>
+                @endif
             </aside>
         </div>
     </section>

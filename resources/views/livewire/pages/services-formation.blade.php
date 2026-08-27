@@ -109,7 +109,7 @@
                 <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6 sticky top-24 space-y-6">
                   <div>
                     <p class="text-sm text-muted-foreground mb-2">Tarif</p>
-                    <p class="text-2xl font-bold text-primary">À partir de 49,000 FCFA</p>
+                    <p class="text-2xl font-bold text-primary">À partir de 75 000 FCFA</p>
                   </div><a class="block" href="/formations"><button
                       class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary-light shadow-elegant hover:shadow-glow transition-smooth h-14 rounded-lg px-10 text-base w-full">Découvrir
                       les formations</button></a>

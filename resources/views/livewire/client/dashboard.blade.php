@@ -2,10 +2,16 @@
     <div class="mb-8">
         <p class="text-sm font-semibold tracking-widest uppercase text-[#0a2e8c]">Portail client</p>
         <h1 class="text-3xl font-extrabold text-[#001a61] mt-1">Bonjour, {{ Auth::user()->name }}</h1>
-        <p class="text-[#444652] mt-2">Votre activité formations, webinaires et souscriptions.</p>
+        <p class="text-[#444652] mt-2">
+            @if (feature_enabled('client.ordres'))
+                Votre activité formations, webinaires et souscriptions.
+            @else
+                Votre activité formations et webinaires.
+            @endif
+        </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-4 mb-8">
+    <div class="grid md:grid-cols-{{ feature_enabled('client.ordres') ? '3' : '2' }} gap-4 mb-8">
         <a href="{{ route('client.my-events') }}" class="bg-[#001a61] text-white rounded-xl p-5 hover:bg-[#0a2e8c] transition">
             <span class="material-symbols-outlined">live_tv</span>
             <p class="text-sm text-white/75 mt-3">Webinaires</p>
@@ -16,20 +22,30 @@
             <p class="text-sm text-[#757683] mt-3">Formations</p>
             <p class="text-xl font-extrabold text-[#001a61] mt-1">Continuer l’apprentissage</p>
         </a>
-        <a href="{{ route('client.ordres') }}" class="bg-white border border-[#c5c5d4] rounded-xl p-5 hover:border-[#001a61] transition">
-            <span class="material-symbols-outlined text-[#001a61]">contract_edit</span>
-            <p class="text-sm text-[#757683] mt-3">Souscriptions</p>
-            <p class="text-xl font-extrabold text-[#001a61] mt-1">Directe ou accompagnée</p>
-        </a>
+        @if (feature_enabled('client.ordres'))
+            <a href="{{ route('client.ordres') }}" class="bg-white border border-[#c5c5d4] rounded-xl p-5 hover:border-[#001a61] transition">
+                <span class="material-symbols-outlined text-[#001a61]">contract_edit</span>
+                <p class="text-sm text-[#757683] mt-3">Souscriptions</p>
+                <p class="text-xl font-extrabold text-[#001a61] mt-1">Directe ou accompagnée</p>
+            </a>
+        @endif
     </div>
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        @foreach ([
-            ['label' => 'Formations en cours', 'value' => $activeEnrollments->count(), 'icon' => 'school', 'href' => route('client.formations')],
-            ['label' => 'Terminées', 'value' => $completedEnrollments->count(), 'icon' => 'verified', 'href' => route('client.certificates')],
-            ['label' => 'Événements', 'value' => $eventsCount, 'icon' => 'event', 'href' => route('client.my-events')],
-            ['label' => 'Souscriptions suivies', 'value' => $subscriptionsCount, 'icon' => 'contract_edit', 'href' => route('client.ordres')],
-        ] as $kpi)
+        @php
+            $kpis = [
+                ['label' => 'Formations en cours', 'value' => $activeEnrollments->count(), 'icon' => 'school', 'href' => route('client.formations')],
+                ['label' => 'Terminées', 'value' => $completedEnrollments->count(), 'icon' => 'verified', 'href' => route('client.certificates')],
+                ['label' => 'Événements', 'value' => $eventsCount, 'icon' => 'event', 'href' => route('client.my-events')],
+            ];
+
+            if (feature_enabled('client.ordres')) {
+                $kpis[] = ['label' => 'Souscriptions suivies', 'value' => $subscriptionsCount, 'icon' => 'contract_edit', 'href' => route('client.ordres')];
+            } else {
+                $kpis[] = ['label' => 'Certificats', 'value' => $completedEnrollments->count(), 'icon' => 'workspace_premium', 'href' => route('client.certificates')];
+            }
+        @endphp
+        @foreach ($kpis as $kpi)
             <a href="{{ $kpi['href'] }}" class="bg-white border border-[#c5c5d4] rounded-xl p-5 hover:border-[#001a61] transition block">
                 <span class="material-symbols-outlined text-[#001a61]">{{ $kpi['icon'] }}</span>
                 <p class="text-xs text-[#757683] mt-3">{{ $kpi['label'] }}</p>
@@ -91,7 +107,9 @@
             </div>
             <div class="bg-white border border-[#c5c5d4] rounded-xl p-5 space-y-3">
                 <h3 class="font-bold text-[#001a61]">Raccourcis</h3>
-                <a href="{{ route('client.ordres') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">contract_edit</span> Souscription directe</a>
+                @if (feature_enabled('client.ordres'))
+                    <a href="{{ route('client.ordres') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">contract_edit</span> Souscription directe</a>
+                @endif
                 <a href="{{ route('mise-en-relation') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">support_agent</span> Être accompagné</a>
                 <a href="{{ route('events-list') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">event</span> Tous les webinaires</a>
                 <a href="{{ route('client.profile') }}" class="flex items-center gap-2 text-sm text-[#444652] hover:text-[#001a61]"><span class="material-symbols-outlined text-base">settings</span> Paramètres</a>

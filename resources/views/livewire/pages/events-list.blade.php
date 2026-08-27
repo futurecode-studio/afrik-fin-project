@@ -36,8 +36,8 @@
                 </div>
                 <div class="w-px bg-white/20"></div>
                 <div>
-                    <p class="text-2xl font-extrabold text-[#ffbf00] tabular-nums">{{ $stats['cities'] }}</p>
-                    <p class="text-white/70">Villes</p>
+                    <p class="text-2xl font-extrabold text-[#ffbf00] tabular-nums">{{ $stats['countries'] }}</p>
+                    <p class="text-white/70">Pays</p>
                 </div>
             </div>
         </div>
@@ -115,12 +115,13 @@
                         <option value="{{ $cat }}">{{ $cat }}</option>
                     @endforeach
                 </select>
-                <select wire:model.live="filterCity" class="rounded-lg border-[#c5c5d4] lg:w-40">
-                    <option value="">Toutes villes</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city }}">{{ $city }}</option>
-                    @endforeach
-                </select>
+                <div class="lg:w-48">
+                    <x-country-search-select
+                        wire:model.live="filterCountry"
+                        :countries="$countryOptions"
+                        placeholder="Tous les pays"
+                    />
+                </div>
                 <select wire:model.live="filterFormat" class="rounded-lg border-[#c5c5d4] lg:w-40">
                     <option value="">Tous formats</option>
                     <option value="physical">Présentiel</option>
@@ -141,7 +142,7 @@
                         </button>
                     @endforeach
                 </div>
-                @if ($search || $filterCategory || $filterCity || $filterFormat || $filterType !== 'upcoming')
+                @if ($search || $filterCategory || $filterCountry || $filterFormat || $filterType !== 'upcoming')
                     <button type="button" wire:click="clearFilters" class="text-sm font-bold text-[#0a2e8c] hover:underline">
                         Réinitialiser
                     </button>
@@ -212,7 +213,7 @@
                             </p>
                             <p class="inline-flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-sm text-[#001a61]">{{ $formatIcon($event->event_type) }}</span>
-                                {{ $event->city ?? $event->location_name ?? 'En ligne' }}
+                                {{ $event->city ?? $event->location_name ?? 'En ligne' }}@if ($event->country) · {{ $event->country }}@endif
                             </p>
                         </div>
                         <div class="mt-4 pt-4 border-t border-[#c5c5d4] flex items-center justify-between gap-2">

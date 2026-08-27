@@ -59,8 +59,8 @@ Route::redirect('/ouverture-compte-sgi', '/', 301)->name('ouverture-compte-sgi')
 Route::permanentRedirect('/investir/fcp/{id}', '/')->name('investir.fcp-detail');
 Route::permanentRedirect('/investir/{any}', '/')->where('any', '.*');
 
-Route::redirect('/marches', '/marches/palmares', 301)->name('marches.index');
-Route::redirect('/marches/cotations', '/marches/palmares', 301)->name('marches.cotations');
+Route::redirect('/marches', '/marches/cotations', 301)->name('marches.index');
+Route::get('/marches/cotations', \App\Livewire\Pages\Marches\CotationsActions::class)->name('marches.cotations');
 Route::get('/marches/palmares', \App\Livewire\Pages\Marches\PalmaresActions::class)->name('marches.palmares');
 Route::get('/marches/comparateur', \App\Livewire\Pages\Marches\ComparateurActions::class)->name('marches.comparateur');
 Route::get('/marches/indices', \App\Livewire\Pages\Marches\IndicesBrvm::class)->name('marches.indices');
@@ -68,7 +68,7 @@ Route::get('/marches/obligations', \App\Livewire\Pages\Marches\MarcheObligataire
 Route::get('/marches/screener', \App\Livewire\Pages\Marches\ScreenerInvestissement::class)->name('marches.screener');
 Route::get('/marches/secteurs', \App\Livewire\Pages\Marches\RapportSectoriel::class)->name('marches.secteurs');
 Route::get('/marches/introductions', \App\Livewire\Pages\Marches\SuiviIntroductions::class)->name('marches.introductions');
-Route::get('/marches/carnet-ordres', \App\Livewire\Pages\Marches\CarnetOrdres::class)->name('marches.carnet');
+Route::get('/marches/carnet-ordres', \App\Livewire\Pages\Marches\CarnetOrdres::class)->name('marches.carnet')->middleware('feature:marches.carnet');
 Route::get('/marches/bibliotheque', \App\Livewire\Pages\Marches\BibliothequeRecherche::class)->name('marches.bibliotheque');
 Route::get('/marches/comparateur-multi', \App\Livewire\Pages\Marches\ComparateurMultiActifs::class)->name('marches.comparateur-multi');
 Route::redirect('/marches/produits-structures', '/marches/palmares', 301)->name('marches.produits-structures');
@@ -151,7 +151,7 @@ Route::middleware(['auth', 'role:client'])->prefix('client')->name('client.')->g
     Route::get('/liste-suivi', \App\Livewire\Client\Watchlist::class)->name('watchlist');
     Route::get('/patrimoine', \App\Livewire\Client\Patrimoine::class)->name('patrimoine');
     Route::get('/alertes', \App\Livewire\Client\AlertesMarche::class)->name('alertes');
-    Route::get('/ordres-programmes', \App\Livewire\Client\OrdresProgrammes::class)->name('ordres');
+    Route::get('/ordres-programmes', \App\Livewire\Client\OrdresProgrammes::class)->name('ordres')->middleware('feature:client.ordres');
     Route::get('/rapport-mensuel', \App\Livewire\Client\RapportMensuel::class)->name('rapport-mensuel');
     Route::get('/actualites-portefeuille', \App\Livewire\Client\ActualitesPortefeuille::class)->name('actualites-portefeuille');
     Route::get('/evenements', \App\Livewire\Client\MyEvents::class)->name('my-events');
