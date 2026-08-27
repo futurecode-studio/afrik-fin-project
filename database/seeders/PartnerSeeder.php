@@ -10,9 +10,8 @@ class PartnerSeeder extends Seeder
     public function run(): void
     {
         $renames = [
-            'AASCOT' => 'ASCOT',
-            'Africa Bourse' => 'Apicassur',
-            'Africabourse' => 'Apicassur',
+            'Apicassur' => 'Africabourse',
+            'Africa Bourse' => 'Africabourse',
             'Africabourse Asset Management' => 'AAM',
             'Africa Bourse Asset Management' => 'AAM',
             'Africatitrisation' => 'AAT',

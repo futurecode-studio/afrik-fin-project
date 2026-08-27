@@ -18,7 +18,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v15', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v16', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();
@@ -190,7 +190,7 @@ class Home extends Component
             [
                 'icon' => 'school',
                 'title' => 'Formation',
-                'text' => 'Initiation à la Bourse et à la BRVM, formation Fidix et parcours structurés pour monter en compétence.',
+                'text' => 'Initiation à la Bourse et à la BRVM, formation Fidis et parcours structurés pour monter en compétence.',
             ],
             [
                 'icon' => 'trending_up',

@@ -33,11 +33,11 @@ class Partner extends Model
             'order' => 1,
         ],
         [
-            'nom' => 'Apicassur',
+            'nom' => 'Africabourse',
             'type' => 'SGI',
             'logo' => 'assets/images/africa-bourse.png',
             'website' => 'https://africabourse.com',
-            'aliases' => ['Africa Bourse', 'Africabourse'],
+            'aliases' => ['Africa Bourse', 'Apicassur'],
             'description' => 'SGI agréée AMF-UMOA, membre de la BRVM. Intermédiation, conseil et ingénierie financière en UEMOA.',
             'order' => 2,
         ],
@@ -84,13 +84,6 @@ class Partner extends Model
         ['nom' => 'UCA', 'type' => 'SGI', 'logo' => 'assets/images/uca.png', 'order' => 11],
         ['nom' => 'BFS', 'type' => 'SGI', 'logo' => 'assets/images/bfs.png', 'order' => 12],
         ['nom' => 'BOA', 'type' => 'SGI', 'logo' => 'assets/images/boa.png', 'order' => 13],
-        [
-            'nom' => 'ASCOT',
-            'type' => 'SGI',
-            'logo' => 'assets/images/AASCOT.png',
-            'aliases' => ['AASCOT'],
-            'order' => 14,
-        ],
     ];
 
     protected $fillable = [
