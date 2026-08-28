@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Pages;
 
+use App\Support\TeamCatalog;
+
 use App\Models\Article;
 use App\Models\Event;
 use App\Models\Formation;
@@ -144,12 +146,7 @@ class Home extends Component
      */
     private function teamPreview(): array
     {
-        return [
-            ['name' => 'Marc C. Emmanuel EBO', 'role' => 'Directeur général', 'image' => 'assets/images/team/ceo.jpeg'],
-            ['name' => 'Mohamed Fawaz ANGO', 'role' => 'Conseiller financier', 'image' => 'assets/images/team/mohamed.PNG'],
-            ['name' => 'Cyrille Omondoun OGNONDOUN', 'role' => 'Conseiller financier', 'image' => 'assets/images/team/cyrille.jpeg'],
-            ['name' => 'Micheline Gloria HOUNTONDJI', 'role' => 'Conseillère clientèle', 'image' => 'assets/images/team/micheline.jpeg'],
-        ];
+        return TeamCatalog::homePreview();
     }
 
     /**
