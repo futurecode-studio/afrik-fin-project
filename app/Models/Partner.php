@@ -79,7 +79,7 @@ class Partner extends Model
             'order' => 7,
         ],
         ['nom' => 'Saphir', 'type' => 'SGO', 'logo' => 'assets/images/saphir.png', 'order' => 8],
-        ['nom' => 'AGI', 'type' => 'SGO', 'logo' => 'assets/images/agi.png', 'order' => 9],
+        ['nom' => 'AGI', 'type' => 'SGI', 'logo' => 'assets/images/agi.png', 'order' => 9],
         ['nom' => 'AGA', 'type' => 'SGO', 'logo' => 'assets/images/aga.png', 'order' => 10],
         ['nom' => 'UCA', 'type' => 'SGI', 'logo' => 'assets/images/uca.png', 'order' => 11],
         ['nom' => 'BFS', 'type' => 'SGI', 'logo' => 'assets/images/bfs.png', 'order' => 12],
