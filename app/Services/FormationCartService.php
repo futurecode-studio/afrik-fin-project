@@ -25,6 +25,11 @@ class FormationCartService
 
     public function add(int $formationId, int $quantity = 1): void
     {
+        $formation = Formation::publie()->find($formationId);
+        if (! $formation || $formation->isCatalogOnly()) {
+            return;
+        }
+
         $items = $this->items();
 
         foreach ($items as $item) {
@@ -90,7 +95,7 @@ class FormationCartService
                     return null;
                 }
                 $qty = 1;
-                $unit = $formation->isFree() ? 0.0 : (float) $formation->prix;
+                $unit = $formation->isFree() || $formation->isCatalogOnly() ? 0.0 : (float) $formation->prix;
 
                 return (object) [
                     'formation' => $formation,

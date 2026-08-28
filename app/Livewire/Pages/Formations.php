@@ -33,11 +33,19 @@ class Formations extends Component
 
     public function addToCart(int $formationId, FormationCartService $cart): void
     {
-        if (! Formation::publie()->whereKey($formationId)->exists()) {
+        $formation = Formation::publie()->find($formationId);
+        if (! $formation) {
             $this->swalError('Formation introuvable.');
 
             return;
         }
+
+        if ($formation->isCatalogOnly()) {
+            $this->swalInfo('Cette formation est disponible sur catalogue — contactez-nous pour vous inscrire.');
+
+            return;
+        }
+
         $cart->add($formationId);
         $this->swalSuccess('Formation ajoutée au panier.');
     }
@@ -56,6 +64,12 @@ class Formations extends Component
             session(['intended_formation' => $formationId]);
 
             return $this->redirect(route('connexion'), navigate: true);
+        }
+
+        if ($this->selectedFormation->isCatalogOnly()) {
+            $this->swalInfo('Cette formation est disponible sur catalogue — contactez-nous pour vous inscrire.');
+
+            return;
         }
 
         if ($this->selectedFormation->isFree()) {

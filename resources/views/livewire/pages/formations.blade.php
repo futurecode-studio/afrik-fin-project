@@ -54,20 +54,31 @@
                         </h2>
                         <p class="text-sm text-[#444652] mt-2 line-clamp-3 flex-1">{{ plain_text($formation->description_courte, 180) }}</p>
                         <div class="mt-4 flex items-center justify-between gap-2">
-                            <p class="font-extrabold text-[#001a61]">
-                                @if ($formation->isFree()) Gratuit
-                                @else {{ number_format($formation->prix, 0, ',', ' ') }} FCFA @endif
-                            </p>
+                            <p class="font-extrabold text-[#001a61]">{{ $formation->priceDisplay() }}</p>
                             <div class="flex gap-2">
-                                <button type="button" wire:click="addToCart({{ $formation->id }})"
-                                    class="text-sm font-bold border border-[#001a61] text-[#001a61] px-3 py-2 rounded hover:bg-[#e7eeff]" title="Ajouter au panier">
-                                    <span class="material-symbols-outlined text-base align-middle">add_shopping_cart</span>
-                                </button>
-                                <button type="button" wire:click="openPaymentModal({{ $formation->id }})"
-                                    class="text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded hover:bg-[#0a2e8c]">
-                                    S’inscrire
-                                </button>
+                                @if ($formation->isCatalogOnly())
+                                    <a href="{{ route('contact') }}"
+                                        class="text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded hover:bg-[#0a2e8c]">
+                                        Nous contacter
+                                    </a>
+                                @else
+                                    <button type="button" wire:click="addToCart({{ $formation->id }})"
+                                        class="text-sm font-bold border border-[#001a61] text-[#001a61] px-3 py-2 rounded hover:bg-[#e7eeff]" title="Ajouter au panier">
+                                        <span class="material-symbols-outlined text-base align-middle">add_shopping_cart</span>
+                                    </button>
+                                    <button type="button" wire:click="openPaymentModal({{ $formation->id }})"
+                                        class="text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded hover:bg-[#0a2e8c]">
+                                        S’inscrire
+                                    </button>
+                                @endif
                             </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-[#c5c5d4]">
+                            <a href="{{ route('formation-detail', $formation->slug) }}"
+                                class="inline-flex items-center gap-1 text-sm font-bold text-[#001a61] hover:text-[#0a2e8c] group">
+                                Détail
+                                <span class="material-symbols-outlined text-base leading-none group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+                            </a>
                         </div>
                     </div>
                 </article>
@@ -110,9 +121,11 @@
                             class="w-20 h-20 rounded-lg object-cover">
                         <div class="flex-1">
                             <h3 class="font-semibold text-foreground">{{ $selectedFormation->titre }}</h3>
-                            <p class="text-sm text-muted-foreground">{{ $selectedFormation->duree }} • {{ $selectedFormation->modules_count }} modules</p>
+                            <p class="text-sm text-muted-foreground">
+                                @if (filled($selectedFormation->duree)){{ $selectedFormation->duree }} · @endif{{ $selectedFormation->modules_count }} modules
+                            </p>
                             <p class="text-lg font-bold text-primary mt-2">
-                                {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA
+                                {{ $selectedFormation->priceDisplay() }}
                             </p>
                         </div>
                     </div>
@@ -132,7 +145,7 @@
                 <button wire:click="initiatePayment" wire:loading.attr="disabled" wire:target="initiatePayment"
                     class="w-full bg-primary text-primary-foreground font-semibold py-4 rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                     <span wire:loading.remove wire:target="initiatePayment">
-                        Payer {{ number_format($selectedFormation->prix, 0, ',', ' ') }} FCFA
+                        Payer {{ $selectedFormation->priceDisplay() }}
                         @if (! empty($methodLabel)) · {{ $methodLabel }}@endif
                     </span>
                     <span wire:loading wire:target="initiatePayment" class="flex items-center gap-2">

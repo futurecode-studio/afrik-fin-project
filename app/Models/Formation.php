@@ -18,6 +18,7 @@ class Formation extends Model
         'niveau',
         'duree',
         'prix',
+        'price_label',
         'is_free',
         'image_url',
         'statut',
@@ -64,11 +65,48 @@ class Formation extends Model
     }
 
     /**
+     * Formation sans prix fixe en ligne (ex. catalogue partenaire).
+     */
+    public function isCatalogOnly(): bool
+    {
+        return filled($this->price_label);
+    }
+
+    /**
+     * Libellé prix pour l'affichage public.
+     */
+    public function priceDisplay(): string
+    {
+        if ($this->isCatalogOnly()) {
+            return (string) $this->price_label;
+        }
+
+        if ($this->isFree()) {
+            return 'Gratuit';
+        }
+
+        return number_format((float) $this->prix, 0, ',', ' ').' FCFA';
+    }
+
+    /**
      * Vérifier si la formation est gratuite
      */
-    public function isFree()
+    public function isFree(): bool
     {
-        return $this->is_free || $this->prix == 0;
+        return (bool) $this->is_free;
+    }
+
+    public function getImageUrlAttribute(?string $value): ?string
+    {
+        if (! $value) {
+            return null;
+        }
+
+        if (preg_match('#^https?://#i', $value) || str_starts_with($value, '//')) {
+            return $value;
+        }
+
+        return asset(ltrim($value, '/'));
     }
 
     /**
@@ -92,9 +130,7 @@ class Formation extends Model
      */
     public function scopeGratuite($query)
     {
-        return $query->where(function ($q) {
-            $q->where('is_free', true)->orWhere('prix', 0);
-        });
+        return $query->where('is_free', true);
     }
 
     /**
@@ -102,7 +138,9 @@ class Formation extends Model
      */
     public function scopePayante($query)
     {
-        return $query->where('is_free', false)->where('prix', '>', 0);
+        return $query->where('is_free', false)
+            ->whereNull('price_label')
+            ->where('prix', '>', 0);
     }
 
     /**

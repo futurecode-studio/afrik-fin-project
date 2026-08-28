@@ -72,11 +72,14 @@
                     </div>
 
                     <div class="mt-auto pt-5 flex items-center justify-between gap-2">
-                        <a href="{{ route('client.formation.progress', $f->slug) }}" class="text-xs font-bold text-[#757683] hover:text-[#001a61]">Détail</a>
+                        <a href="{{ route('client.formation.progress', $f->slug) }}"
+                            class="inline-flex items-center gap-1 text-xs font-bold text-[#757683] hover:text-[#001a61] group">
+                            Détail
+                            <span class="material-symbols-outlined text-base leading-none group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+                        </a>
                         <a href="{{ route('client.formation', $f->slug) }}"
                             class="inline-flex items-center gap-1 text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded-xl hover:bg-[#0a2e8c]">
                             {{ $row['cta'] }}
-                            <span class="material-symbols-outlined text-base">chevron_right</span>
                         </a>
                     </div>
                 </div>

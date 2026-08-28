@@ -42,7 +42,9 @@
                     @endif
 
                     <div class="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/85">
-                        <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[#ffbf00] text-[20px]">schedule</span>{{ $formation->duree ?: '—' }}</span>
+                        @if (filled($formation->duree))
+                            <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[#ffbf00] text-[20px]">schedule</span>{{ $formation->duree }}</span>
+                        @endif
                         <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[#ffbf00] text-[20px]">view_module</span>{{ $formation->modules->count() }} modules</span>
                         <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[#ffbf00] text-[20px]">menu_book</span>{{ $lessonsCount }} leçons</span>
                         <span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[#ffbf00] text-[20px]">workspace_premium</span>Certificat</span>
@@ -53,7 +55,10 @@
                 <aside class="lg:col-span-5 adf-reveal" style="animation-delay: 120ms">
                     <div class="adf-glass-strong rounded-2xl p-6 lg:p-7 border border-white/40" style="box-shadow: var(--adf-shadow-lg)">
                         <p class="text-xs font-bold uppercase tracking-widest text-[#757683]">Investissement</p>
-                        @if ($formation->isFree())
+                        @if ($formation->isCatalogOnly())
+                            <p class="mt-1 text-3xl font-extrabold text-[#001a61] tracking-tight">{{ $formation->priceDisplay() }}</p>
+                            <p class="mt-2 text-sm text-[#757683]">Tarifs et modalités sur demande auprès de notre équipe.</p>
+                        @elseif ($formation->isFree())
                             <p class="mt-1 text-4xl font-extrabold text-[#001a61]">Gratuit</p>
                         @else
                             <p class="mt-1 text-4xl font-extrabold text-[#001a61] tracking-tight">
@@ -67,6 +72,16 @@
                                 <span class="material-symbols-outlined">play_circle</span>
                                 Continuer le cours
                             </button>
+                        @elseif ($formation->isCatalogOnly())
+                            <a href="{{ route('contact') }}" class="adf-btn-gold w-full mt-5 h-14 text-base inline-flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined">mail</span>
+                                Nous contacter
+                            </a>
+                            <a href="{{ route('formations') }}"
+                                class="mt-3 w-full h-12 rounded-xl border-2 border-[#001a61]/20 text-[#001a61] font-bold hover:bg-[#e7eeff] transition inline-flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                                Retour au catalogue
+                            </a>
                         @else
                             <button type="button" wire:click="openPaymentModal" class="adf-btn-gold w-full mt-5 h-14 text-base">
                                 <span class="material-symbols-outlined">rocket_launch</span>
@@ -236,20 +251,27 @@
                         <span class="material-symbols-outlined">play_circle</span> Continuer le cours
                     </button>
                 @else
-                    <button type="button" wire:click="openPaymentModal" class="adf-btn-gold h-14 px-8 text-base">
-                        <span class="material-symbols-outlined">rocket_launch</span>
-                        @if ($formation->isFree())
-                            Commencer gratuitement
-                        @else
-                            S'inscrire — {{ number_format($formation->prix, 0, ',', ' ') }} FCFA
-                        @endif
-                    </button>
-                    @unless ($formation->isFree())
-                        <button type="button" wire:click="addToCart"
-                            class="h-14 px-6 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
-                            <span class="material-symbols-outlined">add_shopping_cart</span> Panier
+                    @if ($formation->isCatalogOnly())
+                        <a href="{{ route('contact') }}" class="adf-btn-gold h-14 px-8 text-base inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined">mail</span>
+                            Demander le catalogue
+                        </a>
+                    @else
+                        <button type="button" wire:click="openPaymentModal" class="adf-btn-gold h-14 px-8 text-base">
+                            <span class="material-symbols-outlined">rocket_launch</span>
+                            @if ($formation->isFree())
+                                Commencer gratuitement
+                            @else
+                                S'inscrire — {{ number_format($formation->prix, 0, ',', ' ') }} FCFA
+                            @endif
                         </button>
-                    @endunless
+                        @unless ($formation->isFree())
+                            <button type="button" wire:click="addToCart"
+                                class="h-14 px-6 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
+                                <span class="material-symbols-outlined">add_shopping_cart</span> Panier
+                            </button>
+                        @endunless
+                    @endif
                 @endif
             </div>
         </div>
@@ -257,14 +279,11 @@
 
     {{-- Barre CTA mobile sticky --}}
     @unless ($isEnrolled)
+        @unless ($formation->isCatalogOnly())
         <div class="lg:hidden fixed bottom-0 inset-x-0 z-40 adf-glass-strong border-t border-[#c5c5d4]/80 px-4 py-3 safe-pb">
             <div class="flex items-center gap-3 max-w-lg mx-auto">
                 <div class="min-w-0 flex-1">
-                    @if ($formation->isFree())
-                        <p class="font-extrabold text-[#001a61]">Gratuit</p>
-                    @else
-                        <p class="font-extrabold text-[#001a61] truncate">{{ number_format($formation->prix, 0, ',', ' ') }} FCFA</p>
-                    @endif
+                    <p class="font-extrabold text-[#001a61] truncate">{{ $formation->priceDisplay() }}</p>
                     <p class="text-[11px] text-[#757683] truncate">{{ $formation->titre }}</p>
                 </div>
                 <button type="button" wire:click="openPaymentModal" class="adf-btn-gold shrink-0 h-12 px-5">
@@ -273,6 +292,7 @@
             </div>
         </div>
         <div class="lg:hidden h-20"></div>
+        @endunless
     @endunless
 
     {{-- Modale paiement --}}
@@ -298,9 +318,11 @@
                         <img src="{{ $heroImage }}" alt="" class="w-16 h-16 rounded-xl object-cover shrink-0">
                         <div class="min-w-0">
                             <p class="font-bold text-[#001a61] line-clamp-2 text-sm">{{ $formation->titre }}</p>
-                            <p class="text-xs text-[#757683] mt-1">{{ $formation->duree }} · {{ $formation->modules->count() }} modules</p>
+                            <p class="text-xs text-[#757683] mt-1">
+                                @if (filled($formation->duree)){{ $formation->duree }} · @endif{{ $formation->modules->count() }} modules
+                            </p>
                             <p class="text-lg font-extrabold text-[#001a61] mt-1">
-                                {{ $formation->isFree() ? 'Gratuit' : number_format($formation->prix, 0, ',', ' ').' FCFA' }}
+                                {{ $formation->priceDisplay() }}
                             </p>
                         </div>
                     </div>
@@ -325,7 +347,7 @@
                             @if ($formation->isFree())
                                 Confirmer l'inscription
                             @else
-                                Payer {{ number_format($formation->prix, 0, ',', ' ') }} FCFA
+                                Payer {{ $formation->priceDisplay() }}
                                 @if (! empty($methodLabel)) · {{ $methodLabel }}@endif
                             @endif
                         </span>
