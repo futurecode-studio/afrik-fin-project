@@ -78,18 +78,36 @@ class TeamCatalog
         ];
     }
 
+    /** @var list<string> */
+    private const HOME_PREVIEW_NAMES = [
+        'Marc C. Emmanuel EBO',
+        'Mohamed Fawaz ANGO',
+        'Cyrille Omondoun OGNONDOUN',
+        'Micheline Gloria HOUNTONDJI',
+    ];
+
     /**
      * @return array<int, array{name: string, role: string, image: string}>
      */
     public static function homePreview(int $limit = 4): array
     {
-        return collect(self::members())
+        $byName = collect(self::members())->keyBy('name');
+
+        return collect(self::HOME_PREVIEW_NAMES)
             ->take($limit)
-            ->map(fn (array $member) => [
-                'name' => $member['name'],
-                'role' => $member['role'],
-                'image' => $member['image'],
-            ])
+            ->map(function (string $name) use ($byName) {
+                $member = $byName->get($name);
+                if (! $member) {
+                    return null;
+                }
+
+                return [
+                    'name' => $member['name'],
+                    'role' => $member['role'],
+                    'image' => $member['image'],
+                ];
+            })
+            ->filter()
             ->values()
             ->all();
     }

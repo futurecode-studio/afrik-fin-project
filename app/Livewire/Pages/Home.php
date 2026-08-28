@@ -20,7 +20,7 @@ class Home extends Component
         $values = $this->companyValues();
         $pillars = $this->whatWeDo();
 
-        $data = cache()->remember('home.page.data.v16', 120, function () use ($teamPreview, $values, $pillars) {
+        $data = cache()->remember('home.page.data.v17', 120, function () use ($teamPreview, $values, $pillars) {
             $partners = Partner::active()->get();
             if ($partners->isEmpty()) {
                 $partners = Partner::catalogCollection();

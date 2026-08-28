@@ -108,18 +108,6 @@
                                 </li>
                             @endforeach
                         </ul>
-
-                        @if ($formation->user)
-                            <div class="mt-5 pt-5 border-t border-[#c5c5d4]/60 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-[#001a61] text-white flex items-center justify-center font-bold text-sm">
-                                    {{ strtoupper(mb_substr($formation->user->name, 0, 1)) }}
-                                </div>
-                                <div>
-                                    <p class="text-xs text-[#757683]">Formateur</p>
-                                    <p class="font-bold text-[#001a61] text-sm">{{ $formation->user->name }}</p>
-                                </div>
-                            </div>
-                        @endif
                     </div>
                 </aside>
             </div>
