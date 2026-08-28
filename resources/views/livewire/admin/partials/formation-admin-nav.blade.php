@@ -2,6 +2,7 @@
     $fid = $formation->id;
     $items = [
         ['route' => 'admin.formations.show', 'params' => [$fid], 'match' => 'admin.formations.show', 'label' => 'Vue d’ensemble', 'icon' => 'dashboard'],
+        ['route' => 'admin.formations.catalog', 'params' => [$fid], 'match' => 'admin.formations.catalog', 'label' => 'Catalogue', 'icon' => 'collections'],
         ['route' => 'admin.formations.modules', 'params' => [$fid], 'match' => 'admin.formations.modules', 'label' => 'Modules', 'icon' => 'view_module'],
         ['route' => 'admin.formations.learners', 'params' => [$fid], 'match' => ['admin.formations.learners', 'admin.formations.learners.show'], 'label' => 'Apprenants', 'icon' => 'groups'],
     ];

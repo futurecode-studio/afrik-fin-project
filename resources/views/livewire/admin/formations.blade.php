@@ -381,6 +381,14 @@
                                         placeholder="0">
                                     @error('prix') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                                 </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Libellé prix (optionnel)</label>
+                                    <input wire:model="price_label" type="text"
+                                        class="flex h-10 w-full rounded-md border border-[#c5c5d4] bg-[#f9f9ff] px-3 py-2 text-base"
+                                        placeholder="Ex. Voir catalogue">
+                                    <p class="text-xs text-muted-foreground mt-1">Si renseigné, remplace le prix affiché et active le mode catalogue.</p>
+                                    @error('price_label') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
                                 @else
                                 <p class="text-sm text-green-600">Cette formation sera accessible gratuitement.</p>
                                 @endif

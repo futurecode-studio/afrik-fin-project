@@ -73,14 +73,14 @@
                                 Continuer le cours
                             </button>
                         @elseif ($formation->isCatalogOnly())
-                            <a href="{{ route('contact') }}" class="adf-btn-gold w-full mt-5 h-14 text-base inline-flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined">mail</span>
-                                Nous contacter
+                            <a href="{{ route('formation-catalog', $formation->slug) }}" class="adf-btn-gold w-full mt-5 h-14 text-base inline-flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined">collections</span>
+                                Voir le catalogue
                             </a>
-                            <a href="{{ route('formations') }}"
+                            <a href="{{ route('contact') }}"
                                 class="mt-3 w-full h-12 rounded-xl border-2 border-[#001a61]/20 text-[#001a61] font-bold hover:bg-[#e7eeff] transition inline-flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
-                                Retour au catalogue
+                                <span class="material-symbols-outlined text-[20px]">mail</span>
+                                Nous contacter
                             </a>
                         @else
                             <button type="button" wire:click="openPaymentModal" class="adf-btn-gold w-full mt-5 h-14 text-base">
@@ -100,6 +100,7 @@
                             @endunless
                         @endif
 
+                        @unless ($formation->isCatalogOnly())
                         <ul class="mt-6 space-y-2.5 text-sm text-[#444652]">
                             @foreach (['Accès à vie au contenu', 'Support pédagogique 7j/7', 'Certificat vérifiable', 'Mises à jour incluses'] as $perk)
                                 <li class="flex items-center gap-2">
@@ -108,6 +109,7 @@
                                 </li>
                             @endforeach
                         </ul>
+                        @endunless
                     </div>
                 </aside>
             </div>
@@ -240,9 +242,12 @@
                     </button>
                 @else
                     @if ($formation->isCatalogOnly())
-                        <a href="{{ route('contact') }}" class="adf-btn-gold h-14 px-8 text-base inline-flex items-center gap-2">
-                            <span class="material-symbols-outlined">mail</span>
-                            Demander le catalogue
+                        <a href="{{ route('formation-catalog', $formation->slug) }}" class="adf-btn-gold h-14 px-8 text-base inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined">collections</span>
+                            Voir le catalogue
+                        </a>
+                        <a href="{{ route('contact') }}" class="h-14 px-6 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined">mail</span> Nous contacter
                         </a>
                     @else
                         <button type="button" wire:click="openPaymentModal" class="adf-btn-gold h-14 px-8 text-base">

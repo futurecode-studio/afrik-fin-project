@@ -48,6 +48,16 @@ class Formation extends Model
         return $this->hasMany(FormationModule::class)->orderBy('ordre');
     }
 
+    public function catalogItems()
+    {
+        return $this->hasMany(FormationCatalogItem::class)->orderBy('display_order');
+    }
+
+    public function activeCatalogItems()
+    {
+        return $this->catalogItems()->where('is_active', true);
+    }
+
     /**
      * Nombre total de modules
      */

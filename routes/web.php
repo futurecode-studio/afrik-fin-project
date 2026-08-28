@@ -26,6 +26,7 @@ Route::get('/actualites', \App\Livewire\Pages\Actualites::class)->name('actualit
 Route::get('/actualites/{slug}', \App\Livewire\Pages\ActualiteDetail::class)->name('actualite-detail');
 
 Route::get('/formations', \App\Livewire\Pages\Formations::class)->name('formations');
+Route::get('/formations/{slug}/catalogue', \App\Livewire\Pages\FormationCatalog::class)->name('formation-catalog');
 Route::get('/formations/{slug}', \App\Livewire\Pages\FormationDetail::class)->name('formation-detail');
 
 // Payment callbacks
@@ -173,6 +174,7 @@ Route::middleware(['auth', 'admin.panel'])->prefix('admin')->name('admin.')->gro
     Route::get('/academy/questions', \App\Livewire\Admin\QuestionsFormateur::class)->name('academy.questions')->middleware('permission:formations.view');
     Route::get('/academy/apprenants', \App\Livewire\Admin\SuiviApprenants::class)->name('learners')->middleware('permission:formations.view');
     Route::get('/academy/apprenants/{user}', \App\Livewire\Admin\DetailProgressionApprenant::class)->name('learners.show')->middleware('permission:formations.view');
+    Route::get('/formations/{formation}/catalogue', \App\Livewire\Admin\FormationCatalog::class)->name('formations.catalog')->middleware('permission:formations.view');
     Route::get('/formations/{formation}/modules', \App\Livewire\Admin\FormationModules::class)->name('formations.modules')->middleware('permission:formations.view');
     Route::get('/formations/{formation}/modules/{module}/lessons', \App\Livewire\Admin\ModuleLessons::class)->name('formations.modules.lessons')->middleware('permission:formations.view');
     Route::get('/formations/{formation}/modules/{module}/quiz', \App\Livewire\Admin\ModuleQuizManager::class)->name('formations.modules.quiz')->middleware('permission:formations.view');

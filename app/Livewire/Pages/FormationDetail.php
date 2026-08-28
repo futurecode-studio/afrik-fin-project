@@ -32,7 +32,7 @@ class FormationDetail extends Component
         $this->formation = Formation::where('slug', $slug)
             ->orWhere('id', $slug)
             ->publie()
-            ->with(['modules.lessons'])
+            ->with(['modules.lessons', 'activeCatalogItems'])
             ->firstOrFail();
 
         if (Auth::check()) {

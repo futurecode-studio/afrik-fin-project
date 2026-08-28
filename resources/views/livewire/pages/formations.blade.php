@@ -57,9 +57,9 @@
                             <p class="font-extrabold text-[#001a61]">{{ $formation->priceDisplay() }}</p>
                             <div class="flex gap-2">
                                 @if ($formation->isCatalogOnly())
-                                    <a href="{{ route('contact') }}"
+                                    <a href="{{ route('formation-catalog', $formation->slug) }}"
                                         class="text-sm font-bold bg-[#001a61] text-white px-3 py-2 rounded hover:bg-[#0a2e8c]">
-                                        Nous contacter
+                                        Voir le catalogue
                                     </a>
                                 @else
                                     <button type="button" wire:click="addToCart({{ $formation->id }})"

@@ -31,6 +31,7 @@ class Formations extends Component
     public $niveau = 'debutant';
     public $duree;
     public $prix = 0;
+    public $price_label;
     public $is_free = false;
     public $statut = 'brouillon';
 
@@ -48,6 +49,7 @@ class Formations extends Component
             'niveau' => 'required|in:debutant,intermediaire,avance',
             'duree' => 'nullable|string|max:100',
             'prix' => 'required|numeric|min:0',
+            'price_label' => 'nullable|string|max:120',
             'statut' => 'required|in:brouillon,publie,archive',
         ];
 
@@ -112,6 +114,7 @@ class Formations extends Component
         $this->niveau = $formation->niveau;
         $this->duree = $formation->duree;
         $this->prix = $formation->prix;
+        $this->price_label = $formation->price_label;
         $this->is_free = $formation->is_free;
         $this->statut = $formation->statut;
         
@@ -139,6 +142,7 @@ class Formations extends Component
             'niveau'               => $this->niveau,
             'duree'                => $this->duree,
             'prix'                 => $this->is_free ? 0 : $this->prix,
+            'price_label'          => $this->price_label ?: null,
             'is_free'              => $this->is_free,
             'statut'               => $this->statut,
             'user_id'              => Auth::id(),
@@ -212,6 +216,7 @@ class Formations extends Component
         $this->niveau = 'debutant';
         $this->duree = '';
         $this->prix = 0;
+        $this->price_label = '';
         $this->is_free = false;
         $this->statut = 'brouillon';
     }
