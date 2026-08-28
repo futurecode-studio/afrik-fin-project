@@ -167,30 +167,18 @@ class ArticleCompleteSeeder extends Seeder
 
 <h2 class="text-2xl font-bold mt-8 mb-4">Liste des principales SGI par pays</h2>
 
-<h3 class="text-xl font-semibold mt-6 mb-3">Côte d\'Ivoire</h3>
+<h3 class="text-xl font-semibold mt-6 mb-3">Bénin</h3>
 <ul class="list-disc pl-6 mb-4">
-<li>CGF Bourse</li>
-<li>Hudson & Cie</li>
-<li>NSIA Finance</li>
-<li>Atlantique Finance</li>
-<li>BNI Finances</li>
-</ul>
-
-<h3 class="text-xl font-semibold mt-6 mb-3">Sénégal</h3>
-<ul class="list-disc pl-6 mb-4">
-<li>CGF Bourse Sénégal</li>
-<li>Impaxis Securities</li>
+<li>UCA</li>
 <li>Africabourse</li>
-</ul>
-
-<h3 class="text-xl font-semibold mt-6 mb-3">Burkina Faso</h3>
-<ul class="list-disc pl-6 mb-4">
-<li>Coris Bourse</li>
-<li>Fidelis Finance</li>
+<li>SGI Bénin</li>
+<li>BFS</li>
+<li>AGI</li>
+<li>BOA</li>
 </ul>
 
 <h3 class="text-xl font-semibold mt-6 mb-3">Autres pays</h3>
-<p class="mb-4">Des SGI sont également présentes au Bénin, Mali, Niger et Togo.</p>
+<p class="mb-4">Des SGI sont également présentes en Côte d\'Ivoire (CGF Bourse, Hudson &amp; Cie, NSIA Finance, Atlantique Finance, BNI Finances), au Sénégal (CGF Bourse Sénégal, Impaxis Securities), au Burkina Faso (Coris Bourse, Fidelis Finance), au Mali, au Niger et au Togo.</p>
 
 <h2 class="text-2xl font-bold mt-8 mb-4">Documents requis pour l\'ouverture de compte</h2>
 <p class="mb-4">Pour les personnes physiques :</p>
@@ -205,7 +193,7 @@ class ArticleCompleteSeeder extends Seeder
 <h2 class="text-2xl font-bold mt-8 mb-4">Les frais à prévoir</h2>
 <p class="mb-4">Les frais varient selon les SGI mais comprennent généralement :</p>
 <ul class="list-disc pl-6 mb-4">
-<li><strong>Frais d\'ouverture de compte</strong> : Souvent gratuits ou entre 5 000 et 25 000 FCFA</li>
+<li><strong>Frais d\'ouverture de compte</strong> : Gratuit chez la plupart des SGI ; 11 000 FCFA uniquement chez Africabourse</li>
 <li><strong>Commission de courtage</strong> : Entre 0,5% et 1,5% du montant de la transaction</li>
 <li><strong>Droits de garde</strong> : Frais annuels de conservation des titres (0,2% à 0,5% de la valeur du portefeuille)</li>
 <li><strong>Frais de la BRVM</strong> : 0,1% sur chaque transaction</li>
